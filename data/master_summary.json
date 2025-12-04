@@ -1,0 +1,33 @@
+{
+  "3x3": {
+    "n": 3,
+    "num_magic_squares": 8,
+    "total_arrangements": 362880,
+    "magic_constant": 15,
+    "hull_volume": 18.0,
+    "hull_area": 46.27495922579209,
+    "cov_xz": 0.0,
+    "cov_yz": 0.0,
+    "perturbation_proportion_larger": 1.0,
+    "random_cov_xz_mean": 0.017975,
+    "random_cov_xz_std": 0.8390575214936101
+  },
+  "5x5": {
+    "n": 5,
+    "magic_constant": 65,
+    "hull_volume": 276.66666666666663,
+    "hull_area": 309.81549048576267,
+    "cov_xz": 0.0,
+    "cov_yz": 0.0
+  },
+  "4x4": {
+    "n": 4,
+    "num_generated": 8,
+    "essentially_different": 880,
+    "magic_constant": 34,
+    "hull_volume": 95.0,
+    "hull_area": 145.17208715103396,
+    "cov_xz": 0.0,
+    "cov_yz": 0.0
+  }
+}

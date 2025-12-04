@@ -1,0 +1,11 @@
+{
+  "id": "magicGem",
+  "title": "MagicGem",
+  "oneLiner": "Magic gems magic squares framework",
+  "demoUrl": "https://github.com/kylemath/magicGem",
+  "screenshot": "https://raw.githubusercontent.com/kylemath/magicGem/main/screenshot.png",
+  "kind": "project",
+  "categories": [],
+  "tags": [],
+  "status": "published"
+}

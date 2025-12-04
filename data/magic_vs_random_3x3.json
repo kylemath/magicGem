@@ -1,0 +1,24 @@
+{
+  "n": 3,
+  "num_magic_squares": 8,
+  "num_random_samples": 10000,
+  "magic_found_in_random": 0,
+  "estimated_probability": 0.0,
+  "total_arrangements": 362880,
+  "magic": {
+    "mean_hull_volume": 18.0,
+    "mean_hull_area": 46.27495922579209,
+    "mean_cov_xz": 0.0,
+    "mean_cov_yz": 0.0
+  },
+  "random": {
+    "mean_hull_volume": 13.275994266093278,
+    "std_hull_volume": 2.3859283408710965,
+    "mean_hull_area": 40.18031754891814,
+    "std_hull_area": 2.980039124410173,
+    "mean_cov_xz": 0.017975,
+    "std_cov_xz": 0.8390575214936101,
+    "mean_cov_yz": 0.001,
+    "std_cov_yz": 0.8410199908444507
+  }
+}
