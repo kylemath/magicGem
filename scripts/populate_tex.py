@@ -154,23 +154,43 @@ def verify_figures():
     print("\nVerifying figures...")
     
     required_figures = [
-        'figures/fig1_lo_shu.pdf',
-        'figures/fig2_construction.pdf',
-        'figures/fig3_magic_gem_3d.pdf',
-        'figures/fig4_vectors.pdf',
-        'figures/fig5_symmetries.pdf',
-        'figures/fig6_covariance.pdf',
-        'figures/fig7_hull_volume.pdf',
-        'figures/fig8_magic_gem_5x5.pdf',
+        'figures/fig01_lo_shu.pdf',
+        'figures/fig02_construction_3x3.pdf',
+        'figures/fig03_magic_gem_3x3.pdf',
+        'figures/fig04_vectors_3x3.pdf',
+        'figures/fig05_symmetries.pdf',
+        'figures/fig06_covariance_3x3.pdf',
+        'figures/fig07_hull_volume_3x3.pdf',
+        'figures/fig08_magic_square_4x4.pdf',
+        'figures/fig09_construction_4x4.pdf',
+        'figures/fig10_magic_gem_4x4.pdf',
+        'figures/fig11_vectors_4x4.pdf',
+        'figures/fig12_covariance_4x4.pdf',
+        'figures/fig13_hull_volume_4x4.pdf',
+        'figures/fig14_magic_square_5x5.pdf',
+        'figures/fig15_construction_5x5.pdf',
+        'figures/fig16_magic_gem_5x5.pdf',
+        'figures/fig17_vectors_5x5.pdf',
+        'figures/fig18_covariance_5x5.pdf',
+        'figures/fig19_hull_volume_5x5.pdf',
+        'figures/fig20_comparison_all_orders.pdf',
+        'figures/fig21_energy_landscape_n3.pdf',
+        'figures/fig22_perturbation_gaps.pdf',
+        'figures/fig23_scaling_analysis.pdf',
     ]
     
     all_present = True
+    missing_count = 0
     for fig in required_figures:
         if Path(fig).exists():
             print(f"  ✓ {fig}")
         else:
             print(f"  ✗ {fig} MISSING")
             all_present = False
+            missing_count += 1
+    
+    if missing_count > 0:
+        print(f"\n  {missing_count} figures missing - run analysis to generate them")
     
     return all_present
 

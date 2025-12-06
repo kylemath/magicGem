@@ -44,7 +44,10 @@ from src.analysis import (
     analyze_magic_vs_random,
     perturbation_analysis,
     analyze_manifold_structure,
-    save_analysis
+    save_analysis,
+    analyze_exhaustive_n3,
+    analyze_perturbation_isolation,
+    analyze_scaling
 )
 from src.figures import generate_all_figures
 
@@ -222,6 +225,46 @@ def analyze_4x4():
     return None
 
 
+def analyze_energy_landscape():
+    """
+    Comprehensive energy landscape analysis.
+    
+    This includes:
+    1. Exhaustive verification for n=3
+    2. Perturbation isolation analysis
+    3. Scaling analysis across n=3,4,5
+    """
+    print("\n" + "="*50)
+    print("Energy Landscape Analysis")
+    print("="*50)
+    
+    # 1. Exhaustive verification for n=3
+    print("\nExhaustive Verification (n=3):")
+    print("  Testing all 362,880 permutations...")
+    exhaustive = analyze_exhaustive_n3(verbose=True)
+    save_analysis(exhaustive, 'data/exhaustive_n3.json')
+    print(f"  ✓ Saved to data/exhaustive_n3.json")
+    
+    # 2. Perturbation isolation
+    print("\nPerturbation Isolation Analysis:")
+    magic_squares = generate_all_3x3_magic_squares()
+    perturbation = analyze_perturbation_isolation(magic_squares, verbose=True)
+    save_analysis(perturbation, 'data/perturbation_isolation.json')
+    print(f"  ✓ Saved to data/perturbation_isolation.json")
+    
+    # 3. Scaling analysis
+    print("\nScaling Analysis (n=3,4,5):")
+    scaling = analyze_scaling(verbose=True)
+    save_analysis(scaling, 'data/scaling_analysis.json')
+    print(f"  ✓ Saved to data/scaling_analysis.json")
+    
+    return {
+        'exhaustive': exhaustive,
+        'perturbation': perturbation,
+        'scaling': scaling
+    }
+
+
 def main():
     """Run all analyses."""
     print("="*60)
@@ -240,6 +283,9 @@ def main():
     summary_5 = analyze_5x5()
     summary_4 = analyze_4x4()
     
+    # Energy landscape analysis (new)
+    energy_results = analyze_energy_landscape()
+    
     # Generate figures
     print("\n" + "="*50)
     print("Generating Figures")
@@ -251,6 +297,11 @@ def main():
         '3x3': summary_3,
         '5x5': summary_5,
         '4x4': summary_4,
+        'energy_landscape': {
+            'theorem_verified': energy_results['exhaustive']['theorem_verified'],
+            'all_magic_isolated': energy_results['perturbation']['all_isolated'],
+            'min_perturbation_gap': energy_results['perturbation']['overall_min_gap']
+        }
     }
     save_analysis(master_summary, 'data/master_summary.json')
     
@@ -260,6 +311,10 @@ def main():
     print("\nOutput files:")
     print("  - data/*.json (analysis results)")
     print("  - figures/*.pdf (publication figures)")
+    print("\nKey findings:")
+    print(f"  - Zero-covariance theorem verified for n=3: {energy_results['exhaustive']['theorem_verified']}")
+    print(f"  - Magic squares are isolated minima: {energy_results['perturbation']['all_isolated']}")
+    print(f"  - Minimum energy gap: {energy_results['perturbation']['overall_min_gap']:.6f}")
     
     return 0
 

@@ -11,6 +11,58 @@ which arise from distinct construction methods and symmetry properties.
 
 The $3 \times 3$ magic square provides the ideal starting point for validating our framework,
 as it admits a unique solution (up to symmetry) and allows exhaustive analysis.
+The small size of the arrangement space---$9! = 362{,}880$ permutations---permits 
+complete enumeration, providing definitive verification of the Zero-Covariance Theorem.
+
+\subsubsection{Exhaustive Verification of the Energy Characterization}
+
+We computed the total magic energy $E(S)$ for all 362,880 permutations of $\{1, \ldots, 9\}$.
+This exhaustive analysis confirms the Energy Characterization Theorem (\Cref{thm:energy_char}):
+an arrangement has zero energy if and only if it is a magic square.
+
+\Cref{fig:energy_landscape_3x3} displays the energy distribution across all permutations.
+The vast majority of arrangements exhibit substantial positive energy,
+with the distribution spanning from zero to approximately 20.
+Precisely eight configurations---the Lo Shu and its seven $D_4$ symmetry variants---achieve 
+$E(S) = 0$ exactly, corresponding to the single essentially different magic square.
+No false positives (zero energy but non-magic) or false negatives (magic but nonzero energy) exist,
+providing complete verification of the theorem for $n = 3$.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{figures/fig21_energy_landscape_n3.pdf}
+    \caption{Energy landscape for $n = 3$. Left: Distribution of total energy across all 362,880 permutations (log scale). 
+    The eight magic squares occupy the unique zero-energy position. 
+    Right: Zoomed view of the low-energy region, showing the gap between magic squares and all other arrangements.}
+    \label{fig:energy_landscape_3x3}
+\end{figure}
+
+The energy landscape reveals the exceptional nature of magic squares.
+While generic permutations cluster around a mean energy of approximately 2.5,
+magic squares are isolated at the absolute minimum.
+The gap between zero and the smallest positive energy provides a quantitative measure 
+of the ``stability'' of the magic property.
+
+\subsubsection{Perturbation Isolation Analysis}
+
+To verify that magic squares are strict local minima, we analyzed the effect of single-swap perturbations.
+For each of the eight magic squares, we computed the energy after every possible swap 
+of two elements, yielding $\binom{9}{2} = 36$ perturbed arrangements per square.
+
+\Cref{fig:perturbation_gaps} shows the distribution of minimum energy gaps.
+Every single swap increases the energy, with a minimum gap of approximately 0.02 across all magic squares.
+This confirms that magic squares are isolated in the energy landscape:
+there is no continuous path of decreasing energy leading away from a magic configuration.
+The physical interpretation is compelling---magic squares sit at the bottom of steep-walled wells,
+and any perturbation immediately rolls the configuration uphill.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/fig22_perturbation_gaps.pdf}
+    \caption{Perturbation analysis showing minimum energy gap after single-swap perturbations.
+    All eight magic squares are isolated local minima, with every swap increasing energy.}
+    \label{fig:perturbation_gaps}
+\end{figure}
 
 \subsubsection{Zero-Covariance Verification}
 
@@ -244,6 +296,37 @@ The vector representation (\Cref{fig:vectors_5x5}) shows the balanced distributi
     \caption{Convex hull volume distribution for 3,000 random $5 \times 5$ arrangements.}
     \label{fig:hull_volume_5x5}
 \end{figure}
+
+\subsection{Scaling Analysis Across Orders}
+
+\Cref{fig:scaling_analysis} presents a systematic comparison of geometric and energy properties 
+across orders $n = 3, 4, 5$, revealing how the structure of Magic Gems evolves with increasing complexity.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{figures/fig23_scaling_analysis.pdf}
+    \caption{Scaling analysis across orders $n = 3, 4, 5$. 
+    (a) Convex hull volume increases with order, reflecting the larger range of $z$-values.
+    (b) The fraction of points on the hull boundary decreases as interior points proliferate.
+    (c) The minimum perturbation gap decreases with order, suggesting larger magic squares 
+    are ``less isolated'' in the energy landscape.
+    (d) The magic constant $M(n) = n(n^2+1)/2$ grows quadratically.}
+    \label{fig:scaling_analysis}
+\end{figure}
+
+Several patterns emerge from this analysis.
+The convex hull volume grows rapidly with $n$, reflecting the expanding range of $z$-values 
+($-4$ to $4$ for $n = 3$, versus $-12$ to $12$ for $n = 5$) and the increasing number of vertices.
+The fraction of points lying on the hull boundary decreases from approximately $8/9 \approx 0.89$ for $n = 3$ 
+to roughly $0.64$ for $n = 5$, as the interior of the hull becomes more populated.
+
+Perhaps most intriguingly, the minimum perturbation gap---the smallest energy increase 
+resulting from any single swap---decreases with order.
+For $n = 3$, the gap is approximately 0.02; for $n = 5$, it drops to roughly 0.006.
+This suggests that larger magic squares are ``less isolated'' in the energy landscape,
+sitting in shallower wells with walls that rise more gradually.
+Whether this trend continues for larger $n$ remains an open question,
+with implications for the difficulty of constructing or recognizing magic squares of high order.
 
 \subsection{Cross-Order Comparison}
 

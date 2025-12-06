@@ -8,14 +8,18 @@
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{hyperref}
-\usepackage{cleveref}
-\usepackage{algorithm}
-\usepackage{algorithmic}
-\usepackage{natbib}
+% \usepackage{cleveref}  % Not available in basic TeX Live
+% \usepackage{algorithm}  % Not needed
+% \usepackage{algorithmic}  % Not needed
+% \usepackage{natbib}  % Not available in basic TeX Live
 \usepackage{geometry}
 \usepackage{float}
-\usepackage{subcaption}
-\usepackage{xcolor}
+% \usepackage{subcaption}  % Not available in basic TeX Live
+% \usepackage{xcolor}  % Not available in basic TeX Live
+
+% Provide cref commands as simple alternatives
+\newcommand{\Cref}[1]{\hyperref[#1]{Section~\ref{#1}}}
+\newcommand{\cref}[1]{\hyperref[#1]{\ref{#1}}}
 
 \geometry{margin=1in}
 
@@ -25,6 +29,7 @@
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
 
 \theoremstyle{definition}
 \newtheorem{definition}[theorem]{Definition}
@@ -79,7 +84,7 @@
 
 \input{sections/conclusion}
 
-\bibliographystyle{plainnat}
+\bibliographystyle{plain}
 \bibliography{references}
 
 \appendix

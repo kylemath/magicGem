@@ -8,12 +8,17 @@ Key analyses:
 2. Distribution of properties across magic vs non-magic arrangements
 3. Distance metrics between arrangements
 4. Manifold structure exploration
+5. Energy landscape analysis (covariance energy functional)
+6. Exhaustive verification for small orders
+7. Perturbation isolation analysis
 """
 
 import numpy as np
 from typing import List, Dict, Tuple, Optional
 from scipy import stats
 from scipy.spatial.distance import pdist, squareform
+from scipy.spatial import ConvexHull
+from itertools import permutations
 import json
 
 from .magic_squares import (
@@ -22,7 +27,9 @@ from .magic_squares import (
     is_magic_square,
     count_arrangements,
     canonical_form,
-    siamese_method
+    siamese_method,
+    get_canonical_3x3,
+    get_canonical_4x4
 )
 from .magic_gems import (
     square_to_coordinates,
@@ -426,6 +433,337 @@ def load_analysis(filepath: str) -> Dict:
     """Load analysis results from JSON."""
     with open(filepath, 'r') as f:
         return json.load(f)
+
+
+# =============================================================================
+# ENERGY LANDSCAPE ANALYSIS
+# =============================================================================
+
+def compute_covariance_energy(arr: np.ndarray) -> Tuple[float, float, float]:
+    """
+    Compute the covariance energy E(S) = Cov(X,Z)² + Cov(Y,Z)².
+    
+    This is the key energy functional whose zeros characterize semi-magic squares.
+    Magic squares are the arrangements where this "imbalance energy" vanishes.
+    
+    Parameters
+    ----------
+    arr : np.ndarray
+        n×n arrangement of integers
+        
+    Returns
+    -------
+    Tuple[float, float, float]
+        (energy, cov_xz, cov_yz)
+    """
+    coords = square_to_coordinates(arr, center_z=True)
+    x, y, z = coords[:, 0], coords[:, 1], coords[:, 2]
+    
+    # Covariances (means are all zero by construction)
+    cov_xz = np.mean(x * z)
+    cov_yz = np.mean(y * z)
+    
+    return cov_xz**2 + cov_yz**2, cov_xz, cov_yz
+
+
+def compute_diagonal_energy(arr: np.ndarray) -> float:
+    """
+    Compute the diagonal energy measuring deviation of diagonal means from overall mean.
+    
+    E_diag = (mean_main_diag - overall_mean)² + (mean_anti_diag - overall_mean)²
+    
+    Parameters
+    ----------
+    arr : np.ndarray
+        n×n arrangement
+        
+    Returns
+    -------
+    float
+        Diagonal energy value
+    """
+    n = arr.shape[0]
+    overall_mean = (n**2 + 1) / 2
+    
+    main_diag_mean = np.mean([arr[i, i] for i in range(n)])
+    anti_diag_mean = np.mean([arr[i, n-1-i] for i in range(n)])
+    
+    e_main = (main_diag_mean - overall_mean)**2
+    e_anti = (anti_diag_mean - overall_mean)**2
+    
+    return e_main + e_anti
+
+
+def compute_total_magic_energy(arr: np.ndarray) -> float:
+    """
+    Total energy functional: E_total = E_cov + E_diag.
+    
+    Magic squares are exactly the zeros of this functional among permutations.
+    This provides an energy landscape interpretation where magic squares
+    correspond to ground states---configurations of perfect equilibrium.
+    
+    Parameters
+    ----------
+    arr : np.ndarray
+        n×n arrangement
+        
+    Returns
+    -------
+    float
+        Total magic energy
+    """
+    e_cov, _, _ = compute_covariance_energy(arr)
+    e_diag = compute_diagonal_energy(arr)
+    return e_cov + e_diag
+
+
+def single_swap_perturbations(arr: np.ndarray):
+    """
+    Generate all single-swap perturbations of an arrangement.
+    
+    A single swap exchanges two elements at positions (i1,j1) and (i2,j2).
+    
+    Parameters
+    ----------
+    arr : np.ndarray
+        n×n arrangement
+        
+    Yields
+    ------
+    Tuple[np.ndarray, Tuple]
+        (perturbed_arr, ((i1,j1), (i2,j2))) for each swap
+    """
+    n = arr.shape[0]
+    positions = [(i, j) for i in range(n) for j in range(n)]
+    
+    for idx1 in range(len(positions)):
+        for idx2 in range(idx1 + 1, len(positions)):
+            pos1, pos2 = positions[idx1], positions[idx2]
+            perturbed = arr.copy()
+            perturbed[pos1], perturbed[pos2] = perturbed[pos2], perturbed[pos1]
+            yield perturbed, (pos1, pos2)
+
+
+def analyze_exhaustive_n3(verbose: bool = False) -> Dict:
+    """
+    Exhaustive analysis for n=3: verify zero-covariance characterization.
+    
+    Tests ALL 9! = 362,880 permutations to verify that magic squares
+    are exactly the configurations with zero total energy.
+    
+    Parameters
+    ----------
+    verbose : bool
+        Whether to print progress
+        
+    Returns
+    -------
+    Dict
+        Exhaustive verification results including energy distribution
+    """
+    if verbose:
+        print("Running exhaustive analysis for n=3 (362,880 permutations)...")
+    
+    n = 3
+    
+    results = {
+        'total_permutations': 0,
+        'zero_energy_count': 0,
+        'magic_squares_count': 0,
+        'false_positives': 0,
+        'false_negatives': 0,
+        'energy_values': [],
+        'magic_energy_values': [],
+        'theorem_verified': False
+    }
+    
+    # Iterate over all permutations of 1..9
+    for perm in permutations(range(1, n*n + 1)):
+        arr = np.array(perm).reshape(n, n)
+        results['total_permutations'] += 1
+        
+        e_total = compute_total_magic_energy(arr)
+        results['energy_values'].append(e_total)
+        
+        is_magic = is_magic_square(arr)
+        is_zero_energy = e_total < 1e-12
+        
+        if is_zero_energy:
+            results['zero_energy_count'] += 1
+        
+        if is_magic:
+            results['magic_squares_count'] += 1
+            results['magic_energy_values'].append(e_total)
+            if not is_zero_energy:
+                results['false_negatives'] += 1
+        
+        if is_zero_energy and not is_magic:
+            results['false_positives'] += 1
+    
+    # Verify theorem
+    results['theorem_verified'] = (
+        results['magic_squares_count'] == results['zero_energy_count'] and
+        results['false_positives'] == 0 and
+        results['false_negatives'] == 0
+    )
+    
+    # Compute energy distribution statistics
+    energies = np.array(results['energy_values'])
+    results['energy_min'] = float(np.min(energies))
+    results['energy_max'] = float(np.max(energies))
+    results['energy_mean'] = float(np.mean(energies))
+    results['energy_std'] = float(np.std(energies))
+    results['energy_median'] = float(np.median(energies))
+    
+    if verbose:
+        print(f"  Total permutations: {results['total_permutations']:,}")
+        print(f"  Magic squares found: {results['magic_squares_count']}")
+        print(f"  Zero-energy configurations: {results['zero_energy_count']}")
+        print(f"  Theorem verified: {results['theorem_verified']}")
+    
+    return results
+
+
+def analyze_perturbation_isolation(magic_squares: List[np.ndarray], verbose: bool = False) -> Dict:
+    """
+    Perturbation analysis: verify that magic squares are isolated energy minima.
+    
+    For each magic square, compute energy after every possible single swap
+    and verify that all swaps increase energy. This establishes magic squares
+    as strict local minima in the energy landscape.
+    
+    Parameters
+    ----------
+    magic_squares : List[np.ndarray]
+        List of magic squares to analyze
+    verbose : bool
+        Whether to print progress
+        
+    Returns
+    -------
+    Dict
+        Perturbation analysis results including energy gaps
+    """
+    if verbose:
+        print(f"Analyzing perturbation isolation for {len(magic_squares)} magic squares...")
+    
+    results = {
+        'n_squares_tested': 0,
+        'all_isolated': True,
+        'min_energy_gaps': [],
+        'mean_energy_gaps': [],
+        'non_isolated_count': 0
+    }
+    
+    for sq in magic_squares:
+        results['n_squares_tested'] += 1
+        base_energy = compute_total_magic_energy(sq)
+        
+        gaps = []
+        is_isolated = True
+        
+        for perturbed, _ in single_swap_perturbations(sq):
+            pert_energy = compute_total_magic_energy(perturbed)
+            gap = pert_energy - base_energy
+            gaps.append(gap)
+            
+            if gap <= 1e-12:
+                is_isolated = False
+        
+        min_gap = min(gaps)
+        mean_gap = np.mean(gaps)
+        
+        results['min_energy_gaps'].append(min_gap)
+        results['mean_energy_gaps'].append(mean_gap)
+        
+        if not is_isolated:
+            results['all_isolated'] = False
+            results['non_isolated_count'] += 1
+    
+    # Summary statistics
+    results['overall_min_gap'] = float(min(results['min_energy_gaps']))
+    results['overall_mean_min_gap'] = float(np.mean(results['min_energy_gaps']))
+    results['overall_std_min_gap'] = float(np.std(results['min_energy_gaps']))
+    
+    if verbose:
+        print(f"  All isolated: {results['all_isolated']}")
+        print(f"  Minimum energy gap: {results['overall_min_gap']:.6f}")
+    
+    return results
+
+
+def analyze_scaling(verbose: bool = False) -> Dict:
+    """
+    Scaling analysis: compare properties across n = 3, 4, 5.
+    
+    Examines how geometric and energy properties scale with magic square order,
+    providing insight into the structure of the energy landscape at different scales.
+    
+    Parameters
+    ----------
+    verbose : bool
+        Whether to print progress
+        
+    Returns
+    -------
+    Dict
+        Scaling analysis results for each order
+    """
+    if verbose:
+        print("Running scaling analysis for n = 3, 4, 5...")
+    
+    results = {}
+    
+    squares_by_n = {
+        3: get_canonical_3x3(),
+        4: get_canonical_4x4(),
+        5: siamese_method(5)
+    }
+    
+    for n, magic_square in squares_by_n.items():
+        coords = square_to_coordinates(magic_square, center_z=True)
+        e_cov, cov_xz, cov_yz = compute_covariance_energy(magic_square)
+        e_diag = compute_diagonal_energy(magic_square)
+        
+        try:
+            hull = ConvexHull(coords)
+            hull_volume = hull.volume
+            hull_area = hull.area
+            n_vertices = len(hull.vertices)
+        except Exception:
+            hull_volume = hull_area = n_vertices = 0
+        
+        # Compute perturbation gap
+        min_gap = float('inf')
+        gap_count = 0
+        for perturbed, _ in single_swap_perturbations(magic_square):
+            gap = compute_total_magic_energy(perturbed)
+            if gap < min_gap:
+                min_gap = gap
+            gap_count += 1
+        
+        results[n] = {
+            'n': n,
+            'n_points': n**2,
+            'magic_constant': n * (n**2 + 1) // 2,
+            'cov_energy': float(e_cov),
+            'diag_energy': float(e_diag),
+            'total_energy': float(e_cov + e_diag),
+            'cov_xz': float(cov_xz),
+            'cov_yz': float(cov_yz),
+            'hull_volume': float(hull_volume),
+            'hull_area': float(hull_area),
+            'n_hull_vertices': int(n_vertices),
+            'n_interior_points': n**2 - int(n_vertices),
+            'vertex_fraction': float(n_vertices / n**2),
+            'min_perturbation_gap': float(min_gap),
+            'num_possible_swaps': gap_count
+        }
+        
+        if verbose:
+            print(f"  n={n}: energy={e_cov + e_diag:.2e}, gap={min_gap:.4f}, hull_verts={n_vertices}")
+    
+    return results
 
 
 if __name__ == "__main__":

@@ -1,0 +1,53 @@
+{
+  "3": {
+    "n": 3,
+    "n_points": 9,
+    "magic_constant": 15,
+    "cov_energy": 0.0,
+    "diag_energy": 0.0,
+    "total_energy": 0.0,
+    "cov_xz": 0.0,
+    "cov_yz": 0.0,
+    "hull_volume": 18.0,
+    "hull_area": 46.27495922579209,
+    "n_hull_vertices": 8,
+    "n_interior_points": 1,
+    "vertex_fraction": 0.8888888888888888,
+    "min_perturbation_gap": 0.09876543209876543,
+    "num_possible_swaps": 36
+  },
+  "4": {
+    "n": 4,
+    "n_points": 16,
+    "magic_constant": 34,
+    "cov_energy": 0.0,
+    "diag_energy": 0.0,
+    "total_energy": 0.0,
+    "cov_xz": 0.0,
+    "cov_yz": 0.0,
+    "hull_volume": 95.0,
+    "hull_area": 145.17208715103396,
+    "n_hull_vertices": 12,
+    "n_interior_points": 4,
+    "vertex_fraction": 0.75,
+    "min_perturbation_gap": 0.00390625,
+    "num_possible_swaps": 120
+  },
+  "5": {
+    "n": 5,
+    "n_points": 25,
+    "magic_constant": 65,
+    "cov_energy": 0.0,
+    "diag_energy": 0.0,
+    "total_energy": 0.0,
+    "cov_xz": 0.0,
+    "cov_yz": 0.0,
+    "hull_volume": 276.66666666666663,
+    "hull_area": 309.81549048576267,
+    "n_hull_vertices": 12,
+    "n_interior_points": 13,
+    "vertex_fraction": 0.48,
+    "min_perturbation_gap": 0.0032,
+    "num_possible_swaps": 300
+  }
+}

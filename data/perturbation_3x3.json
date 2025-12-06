@@ -1,9 +1,9 @@
 {
   "original_offdiag_norm": 0.0,
   "mean_perturbed_norm": 0.02247602770028828,
-  "std_perturbed_norm": 0.01101615351031067,
+  "std_perturbed_norm": 0.011016153510310673,
   "min_perturbed_norm": 0.0006524988600452988,
-  "max_perturbed_norm": 0.056564563959445424,
+  "max_perturbed_norm": 0.056564563959445445,
   "proportion_larger": 1.0,
   "epsilon": 0.1,
   "num_trials": 1000

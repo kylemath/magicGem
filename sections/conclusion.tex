@@ -4,41 +4,43 @@
 We have introduced Magic Gems, a geometric framework for representing magic squares 
 as three-dimensional polyhedra.
 This framework reveals deep connections between the classical algebraic definition of magic squares
-and concepts from statistics and geometry, opening new avenues for understanding these ancient mathematical objects.
+and concepts from statistics, optimization, and statistical mechanics,
+opening new avenues for understanding these ancient mathematical objects.
 
-Our central theoretical contribution is the Zero-Covariance Theorem, 
-which establishes that an arrangement of integers in a square grid is a magic square 
+Our central theoretical contributions are the Zero-Covariance Theorem and its energy landscape interpretation.
+The theorem establishes that an arrangement of integers in a square grid is a magic square 
 if and only if the covariance between spatial position and assigned value vanishes.
-This characterization transforms the discrete, combinatorial magic property
-into a continuous, statistical condition,
-providing a new lens through which to view the structure of magic squares.
+The energy characterization goes further: 
+magic squares are precisely the ground states of a natural energy functional 
+measuring geometric imbalance.
+These characterizations transform the discrete, combinatorial magic property
+into continuous conditions with physical meaning.
 
-The theorem has several important consequences.
-First, it establishes that all symmetry-equivalent magic squares yield the same Magic Gem,
-providing a canonical geometric representative for each equivalence class under the dihedral group.
-Second, it identifies magic squares as isolated critical points in the covariance landscape,
-with perturbation analysis confirming that any deviation from a magic configuration 
-immediately increases the covariance magnitude.
-Third, it connects magic squares to the physics of rigid bodies through the moment of inertia tensor,
-whose off-diagonal elements vanish for Magic Gems.
+For orders $n = 3$ and $n = 4$, we have provided complete proofs of the Zero-Covariance Theorem,
+verified exhaustively for $n = 3$ through enumeration of all 362,880 permutations.
+The Energy Characterization identifies magic squares as isolated local minima 
+in the covariance landscape, with our perturbation analysis confirming that every single-swap perturbation 
+strictly increases the energy.
+For general $n$, we state the result as a conjecture supported by extensive computational evidence.
 
-Our computational experiments validate these theoretical predictions 
-and explore the structure of the arrangement space for orders three, four, and five.
-The experiments confirm that magic squares achieve exactly zero covariance
-while random arrangements exhibit substantial covariance variation.
-The rarity of magic squares---one in 45,000 for $n = 3$, 
-and astronomically smaller proportions for larger orders---corresponds to their isolation
-as zero-covariance configurations in a landscape dominated by unbalanced arrangements.
+The energy landscape perspective offers the most compelling conceptual insight.
+Magic squares are not merely configurations satisfying arithmetic constraints;
+they are equilibrium states where an imbalance energy vanishes.
+Like stones that have rolled to rest at the bottoms of valleys,
+magic squares occupy the deepest wells in a rugged terrain of arrangements.
+This view connects magic squares to optimization theory, statistical mechanics, and dynamical systems,
+suggesting new algorithmic and theoretical approaches.
 
-The Magic Gem framework suggests several directions for future research.
+The Magic Gem framework opens several directions for future research.
 The geometric classification of magic squares, particularly for $n = 4$ where 880 essentially different squares exist,
 could complement traditional algebraic approaches.
-Extensions to magic hypercubes, semi-magic squares, and other variants would test the generality of our framework.
-And the physical interpretation of Magic Gems as balanced rigid bodies 
-invites exploration of their mechanical properties and potential for tangible realization.
+Extensions to magic hypercubes, semi-magic squares, and pandiagonal squares 
+would test the generality of our energy characterization.
+The scaling behavior of the perturbation gap---observed to decrease with $n$---raises 
+intriguing questions about the structure of large magic squares.
 
 The Lo Shu square has fascinated humanity for nearly five thousand years,
 its balanced arrangement of numbers inspiring mythology, art, and mathematics across cultures.
-By transforming this arrangement of numbers into a three-dimensional object---a gem 
-that balances perfectly on a point, whose very shape encodes the magic property---we 
+By transforming this arrangement into a three-dimensional object---a gem 
+that sits at the bottom of an energy well, whose very shape encodes perfect equilibrium---we 
 hope to have added a new facet to its enduring mathematical beauty.

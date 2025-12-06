@@ -12,9 +12,9 @@
     "mean_cov_yz": 0.0
   },
   "random": {
-    "mean_hull_volume": 13.275994266093278,
+    "mean_hull_volume": 13.275994266093274,
     "std_hull_volume": 2.3859283408710965,
-    "mean_hull_area": 40.18031754891814,
+    "mean_hull_area": 40.18031754891815,
     "std_hull_area": 2.980039124410173,
     "mean_cov_xz": 0.017975,
     "std_cov_xz": 0.8390575214936101,
