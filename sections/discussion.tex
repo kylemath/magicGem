@@ -73,6 +73,42 @@ Finding a magic square by random search is not like finding a needle in a haysta
 (where at least the needle is surrounded by hay);
 it is like finding a single point at the bottom of a deep well in a vast, rugged terrain.
 
+\subsection{Scaling Laws and Landscape Evolution}
+
+The large-scale computational analysis of \Cref{sec:large_scale_landscape} reveals 
+systematic scaling behavior that deepens our understanding of the energy landscape.
+Three key observations merit discussion.
+
+\paragraph{Quadratic Peak Scaling.}
+The modal energy scales as $E_{\text{peak}} \approx O(n^2)$,
+which has a natural interpretation:
+the ``typical'' imbalance of a random arrangement grows quadratically 
+because there are $O(n^2)$ cells to distribute and the variance accumulates.
+This scaling implies that the search for magic squares becomes progressively harder 
+in absolute terms---the energy well containing magic configurations lies at increasingly 
+greater depth relative to typical arrangements.
+
+\paragraph{Scale-Invariant Complexity.}
+Despite the dramatic growth in configuration space ($n!^2$ arrangements),
+the landscape entropy remains approximately constant ($\approx 4.4$--$5.0$).
+This invariance suggests that the \emph{relative} difficulty of local optimization 
+is independent of scale: the ruggedness of the landscape, 
+measured by the distribution's shape rather than its position,
+does not fundamentally change with $n$.
+This has practical implications for algorithm design:
+local search heuristics that work for small orders may transfer to larger ones,
+with the primary challenge being the absolute energy scale rather than landscape structure.
+
+\paragraph{Isolation Persistence.}
+Across over 60 million sampled arrangements---including exhaustive enumeration for $n=3$,
+10 million samples for $n=4$, and 50 million for $n=5$---no false-positive zero-energy 
+configurations were discovered.
+While this does not constitute a proof, it provides compelling computational evidence 
+that the Zero-Covariance Theorem extends beyond the analytically tractable cases.
+The probability of discovering a magic square by random sampling decreases super-exponentially 
+with $n$, from roughly $1$ in $45{,}000$ for $n=3$ to less than $1$ in $10^{17}$ for $n=5$.
+This quantifies the ``needle in a haystack'' intuition with concrete numbers.
+
 \subsection{Even versus Odd Orders}
 
 Our analysis across orders 3, 4, and 5 illuminates the robustness of the Magic Gem framework

@@ -47,7 +47,9 @@ from src.analysis import (
     save_analysis,
     analyze_exhaustive_n3,
     analyze_perturbation_isolation,
-    analyze_scaling
+    analyze_scaling,
+    analyze_large_scale_landscape,
+    compute_landscape_statistics
 )
 from src.figures import generate_all_figures
 
@@ -265,6 +267,70 @@ def analyze_energy_landscape():
     }
 
 
+def analyze_large_scale(n4_samples=100000, n5_samples=100000):
+    """
+    Large-scale energy landscape analysis across orders n=3,4,5.
+    
+    This analysis provides comprehensive sampling of the energy landscape,
+    enabling characterization of how the distribution evolves with order.
+    For full-scale analysis (millions of samples), increase sample counts.
+    
+    Parameters
+    ----------
+    n4_samples : int
+        Number of samples for n=4 (default: 100,000)
+    n5_samples : int
+        Number of samples for n=5 (default: 100,000)
+    """
+    print("\n" + "="*50)
+    print("Large-Scale Energy Landscape Analysis")
+    print("="*50)
+    print(f"  n=3: Exhaustive (362,880)")
+    print(f"  n=4: {n4_samples:,} samples")
+    print(f"  n=5: {n5_samples:,} samples")
+    print("="*50)
+    
+    results = analyze_large_scale_landscape(
+        n3_exhaustive=True,
+        n4_samples=n4_samples,
+        n5_samples=n5_samples,
+        verbose=True
+    )
+    
+    # Save results (without full energy arrays for size)
+    results_summary = {}
+    for n in [3, 4, 5]:
+        r = results[n]
+        results_summary[str(n)] = {
+            'n_samples': r['n_samples'],
+            'magic_count': r['magic_count'],
+            'exhaustive': r.get('exhaustive', False),
+            'stats': r['stats']
+        }
+    
+    save_analysis(results_summary, 'data/large_scale_landscape.json')
+    print(f"\n✓ Saved to data/large_scale_landscape.json")
+    
+    # Print summary comparison
+    print("\n" + "="*50)
+    print("SCALING COMPARISON")
+    print("="*50)
+    print(f"\n{'Statistic':<25} {'n=3':<15} {'n=4':<15} {'n=5':<15}")
+    print("-"*70)
+    
+    for stat in ['mean', 'std', 'peak_energy', 'entropy', 'zero_fraction']:
+        row = f"{stat:<25}"
+        for n in [3, 4, 5]:
+            val = results[n]['stats'][stat]
+            if stat == 'zero_fraction':
+                row += f"{val:<15.2e}"
+            else:
+                row += f"{val:<15.4f}"
+        print(row)
+    
+    return results
+
+
 def main():
     """Run all analyses."""
     print("="*60)
@@ -283,8 +349,12 @@ def main():
     summary_5 = analyze_5x5()
     summary_4 = analyze_4x4()
     
-    # Energy landscape analysis (new)
+    # Energy landscape analysis
     energy_results = analyze_energy_landscape()
+    
+    # Large-scale landscape analysis (reduced samples for quick runs)
+    # For full analysis, use n4_samples=10_000_000, n5_samples=50_000_000
+    large_scale_results = analyze_large_scale(n4_samples=100000, n5_samples=100000)
     
     # Generate figures
     print("\n" + "="*50)
@@ -301,6 +371,14 @@ def main():
             'theorem_verified': energy_results['exhaustive']['theorem_verified'],
             'all_magic_isolated': energy_results['perturbation']['all_isolated'],
             'min_perturbation_gap': energy_results['perturbation']['overall_min_gap']
+        },
+        'large_scale': {
+            'n3_samples': large_scale_results[3]['n_samples'],
+            'n4_samples': large_scale_results[4]['n_samples'],
+            'n5_samples': large_scale_results[5]['n_samples'],
+            'n3_peak_energy': large_scale_results[3]['stats']['peak_energy'],
+            'n4_peak_energy': large_scale_results[4]['stats']['peak_energy'],
+            'n5_peak_energy': large_scale_results[5]['stats']['peak_energy'],
         }
     }
     save_analysis(master_summary, 'data/master_summary.json')
@@ -315,6 +393,10 @@ def main():
     print(f"  - Zero-covariance theorem verified for n=3: {energy_results['exhaustive']['theorem_verified']}")
     print(f"  - Magic squares are isolated minima: {energy_results['perturbation']['all_isolated']}")
     print(f"  - Minimum energy gap: {energy_results['perturbation']['overall_min_gap']:.6f}")
+    print("\nLarge-scale landscape analysis:")
+    print(f"  - n=3 peak energy: {large_scale_results[3]['stats']['peak_energy']:.2f}")
+    print(f"  - n=4 peak energy: {large_scale_results[4]['stats']['peak_energy']:.2f}")
+    print(f"  - n=5 peak energy: {large_scale_results[5]['stats']['peak_energy']:.2f}")
     
     return 0
 

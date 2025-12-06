@@ -766,6 +766,300 @@ def analyze_scaling(verbose: bool = False) -> Dict:
     return results
 
 
+# =============================================================================
+# LARGE-SCALE ENERGY LANDSCAPE ANALYSIS
+# =============================================================================
+
+def compute_covariance_energy_vectorized(arrangements: np.ndarray) -> np.ndarray:
+    """
+    Vectorized computation of covariance energy for multiple arrangements.
+    
+    Optimized for batch processing on modern multi-core hardware.
+    
+    Parameters
+    ----------
+    arrangements : np.ndarray
+        Array of shape (n_samples, n, n) containing arrangements
+        
+    Returns
+    -------
+    np.ndarray
+        Array of shape (n_samples,) containing energies
+    """
+    n_samples, n, _ = arrangements.shape
+    
+    # Create coordinate grids
+    j_coords = np.arange(n) - (n-1)/2  # column coords
+    i_coords = (n-1)/2 - np.arange(n)  # row coords
+    
+    # Value coords (centered)
+    z = arrangements - (n**2 + 1)/2
+    
+    # Compute covariances for all samples at once
+    x_grid = np.tile(j_coords, (n, 1))  # (n, n)
+    y_grid = np.tile(i_coords, (n, 1)).T  # (n, n)
+    
+    # Flatten for each sample
+    x_flat = x_grid.ravel()  # (n²,)
+    y_flat = y_grid.ravel()  # (n²,)
+    z_flat = z.reshape(n_samples, -1)  # (n_samples, n²)
+    
+    # Covariances (means are zero by construction)
+    cov_xz = np.mean(x_flat * z_flat, axis=1)  # (n_samples,)
+    cov_yz = np.mean(y_flat * z_flat, axis=1)  # (n_samples,)
+    
+    return cov_xz**2 + cov_yz**2
+
+
+def compute_total_energy_vectorized(arrangements: np.ndarray) -> np.ndarray:
+    """
+    Compute total energy (covariance + diagonal) for multiple arrangements.
+    
+    Parameters
+    ----------
+    arrangements : np.ndarray
+        Array of shape (n_samples, n, n)
+        
+    Returns
+    -------
+    np.ndarray
+        Array of shape (n_samples,) containing total energies
+    """
+    n_samples, n, _ = arrangements.shape
+    
+    # Covariance energy
+    e_cov = compute_covariance_energy_vectorized(arrangements)
+    
+    # Diagonal energy
+    overall_mean = (n**2 + 1) / 2
+    
+    # Extract diagonals vectorized
+    main_diags = np.array([arr[np.arange(n), np.arange(n)] for arr in arrangements])
+    anti_diags = np.array([arr[np.arange(n), np.arange(n-1, -1, -1)] for arr in arrangements])
+    
+    main_means = np.mean(main_diags, axis=1)
+    anti_means = np.mean(anti_diags, axis=1)
+    
+    e_diag = (main_means - overall_mean)**2 + (anti_means - overall_mean)**2
+    
+    return e_cov + e_diag
+
+
+def generate_random_arrangements_batch(n: int, batch_size: int) -> np.ndarray:
+    """
+    Generate a batch of random arrangements using vectorized shuffle.
+    
+    Parameters
+    ----------
+    n : int
+        Order of the square
+    batch_size : int
+        Number of arrangements to generate
+        
+    Returns
+    -------
+    np.ndarray
+        Array of shape (batch_size, n, n)
+    """
+    base = np.arange(1, n**2 + 1)
+    arrangements = np.array([np.random.permutation(base).reshape(n, n) 
+                            for _ in range(batch_size)])
+    return arrangements
+
+
+def compute_landscape_statistics(energies: np.ndarray, n_bins: int = 200) -> Dict:
+    """
+    Compute detailed statistics of the energy landscape.
+    
+    Parameters
+    ----------
+    energies : np.ndarray
+        Array of energy values
+    n_bins : int
+        Number of histogram bins
+        
+    Returns
+    -------
+    Dict
+        Dictionary containing landscape statistics
+    """
+    hist, bin_edges = np.histogram(energies, bins=n_bins)
+    bin_centers = (bin_edges[:-1] + bin_edges[1:]) / 2
+    
+    # Peak energy (mode)
+    peak_idx = np.argmax(hist)
+    peak_energy = bin_centers[peak_idx]
+    
+    # Entropy of distribution (measure of landscape ruggedness)
+    probs = hist / hist.sum()
+    probs = probs[probs > 0]  # Remove zeros
+    entropy = -np.sum(probs * np.log(probs))
+    
+    return {
+        'min': float(energies.min()),
+        'max': float(energies.max()),
+        'mean': float(energies.mean()),
+        'std': float(energies.std()),
+        'median': float(np.median(energies)),
+        'q25': float(np.percentile(energies, 25)),
+        'q75': float(np.percentile(energies, 75)),
+        'peak_energy': float(peak_energy),
+        'entropy': float(entropy),
+        'zero_fraction': float((energies < 1e-10).sum() / len(energies))
+    }
+
+
+def sample_energy_landscape(n: int, n_samples: int, batch_size: int = 10000, 
+                           seed: int = 42, verbose: bool = False) -> Dict:
+    """
+    Sample the energy landscape for order n.
+    
+    For large-scale analysis of how energy distributions evolve with order.
+    
+    Parameters
+    ----------
+    n : int
+        Order of the magic square
+    n_samples : int
+        Number of samples to generate
+    batch_size : int
+        Batch size for memory efficiency
+    seed : int
+        Random seed for reproducibility
+    verbose : bool
+        Whether to print progress
+        
+    Returns
+    -------
+    Dict
+        Dictionary containing sampled energies and statistics
+    """
+    import time
+    
+    np.random.seed(seed)
+    
+    if verbose:
+        print(f"Sampling n={n} energy landscape ({n_samples:,} samples)...")
+    
+    start_time = time.time()
+    
+    n_batches = (n_samples + batch_size - 1) // batch_size
+    
+    all_energies = []
+    magic_count = 0
+    
+    for batch_idx in range(n_batches):
+        current_batch_size = min(batch_size, n_samples - batch_idx * batch_size)
+        arrangements = generate_random_arrangements_batch(n, current_batch_size)
+        
+        # Compute energies
+        batch_energies = compute_total_energy_vectorized(arrangements)
+        all_energies.extend(batch_energies)
+        
+        # Check for magic squares (very rare, but check near-zero energy)
+        near_zero = batch_energies < 1e-10
+        if np.any(near_zero):
+            for arr in arrangements[near_zero]:
+                if is_magic_square(arr):
+                    magic_count += 1
+        
+        if verbose and (batch_idx + 1) % 100 == 0:
+            pct = 100 * (batch_idx + 1) / n_batches
+            print(f"  Progress: {pct:.1f}%")
+    
+    elapsed = time.time() - start_time
+    energies = np.array(all_energies)
+    
+    if verbose:
+        print(f"  Completed in {elapsed:.1f}s ({n_samples/elapsed:,.0f} samples/sec)")
+        print(f"  Magic squares found: {magic_count}")
+    
+    # Compute statistics
+    stats = compute_landscape_statistics(energies)
+    
+    return {
+        'n': n,
+        'n_samples': len(energies),
+        'energies': energies.tolist(),  # Convert for JSON serialization
+        'magic_count': magic_count,
+        'elapsed_time': elapsed,
+        'samples_per_sec': n_samples / elapsed,
+        'stats': stats
+    }
+
+
+def analyze_large_scale_landscape(n3_exhaustive: bool = True,
+                                  n4_samples: int = 100000,
+                                  n5_samples: int = 100000,
+                                  verbose: bool = True) -> Dict:
+    """
+    Comprehensive large-scale energy landscape analysis across orders.
+    
+    This function performs the analysis described in Section 5.5 of the paper,
+    sampling millions of arrangements to characterize the energy landscape.
+    
+    Parameters
+    ----------
+    n3_exhaustive : bool
+        Whether to use exhaustive enumeration for n=3
+    n4_samples : int
+        Number of samples for n=4
+    n5_samples : int
+        Number of samples for n=5
+    verbose : bool
+        Whether to print progress
+        
+    Returns
+    -------
+    Dict
+        Dictionary containing results for all orders
+    """
+    results = {}
+    
+    # n=3: exhaustive or sampled
+    if n3_exhaustive:
+        if verbose:
+            print("\n[1/3] n=3: Exhaustive enumeration...")
+        r3 = analyze_exhaustive_n3(verbose=verbose)
+        results[3] = {
+            'n': 3,
+            'n_samples': len(r3['energy_values']),
+            'energies': r3['energy_values'],
+            'magic_count': r3['magic_squares_count'],
+            'exhaustive': True,
+            'stats': compute_landscape_statistics(np.array(r3['energy_values']))
+        }
+    else:
+        results[3] = sample_energy_landscape(3, n4_samples, verbose=verbose)
+    
+    # n=4: sampling
+    if verbose:
+        print(f"\n[2/3] n=4: Sampling {n4_samples:,} arrangements...")
+    results[4] = sample_energy_landscape(4, n4_samples, verbose=verbose)
+    
+    # n=5: sampling
+    if verbose:
+        print(f"\n[3/3] n=5: Sampling {n5_samples:,} arrangements...")
+    results[5] = sample_energy_landscape(5, n5_samples, verbose=verbose)
+    
+    # Compare landscapes
+    if verbose:
+        print("\n" + "="*60)
+        print("ENERGY LANDSCAPE COMPARISON")
+        print("="*60)
+        
+        for n in [3, 4, 5]:
+            stats = results[n]['stats']
+            print(f"\nn={n}:")
+            print(f"  Samples: {results[n]['n_samples']:,}")
+            print(f"  Mean energy: {stats['mean']:.4f} ± {stats['std']:.4f}")
+            print(f"  Peak energy (mode): {stats['peak_energy']:.4f}")
+            print(f"  Landscape entropy: {stats['entropy']:.4f}")
+            print(f"  Zero-energy fraction: {stats['zero_fraction']:.2e}")
+    
+    return results
+
+
 if __name__ == "__main__":
     from magic_squares import get_canonical_3x3
     
