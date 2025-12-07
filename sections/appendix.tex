@@ -2,31 +2,28 @@
 \label{sec:appendix}
 
 This appendix provides additional technical details supporting the main text,
-including complete proofs of the Zero-Covariance Theorem for specific orders
-and the statement of the general conjecture.
+including a complete proof of the forward direction of the covariance characterization
+and discussion of the energy functional approach.
 
 \subsection{Proof Strategy Overview}
 
-The Zero-Covariance Theorem admits two complementary proof approaches:
+The Energy Characterization Theorem (\Cref{thm:energy_char}) is established via 
+two complementary approaches:
 
-\textbf{Strategy A (Algebraic):} Direct analysis of the constraint equations, 
-showing that the covariance conditions, combined with integrality and permutation constraints, 
-uniquely determine the magic configuration.
+\textbf{Forward Direction (Algebraic):} Direct proof that magic squares have zero energy,
+following from the algebraic relationship between covariances and line sums.
 
-\textbf{Strategy B (Energy Landscape):} Proof that magic squares are isolated minima 
-of the covariance energy functional, combined with exhaustive verification 
-that these are the only zero-energy configurations.
+\textbf{Converse Direction (Exhaustive Verification):} For $n=3$, exhaustive enumeration 
+of all $362{,}880$ arrangements confirms that only magic squares achieve zero energy.
+For $n \geq 4$, large-scale sampling provides strong computational evidence.
 
-We present Strategy A in detail, as it provides the algebraic foundation,
-and note that Strategy B is confirmed by our computational experiments.
+\subsection{Detailed Proof: Magic Implies Zero Covariance}
 
-\subsection{Complete Proof of the Zero-Covariance Theorem}
+We provide a complete proof of \Cref{prop:magic_implies_zero_cov},
+showing that every magic square has vanishing row and column covariances.
 
-We provide a self-contained proof of \Cref{thm:zero_covariance},
-elaborating on the argument sketched in the main text.
-
-\begin{proof}[Detailed Proof of \Cref{thm:zero_covariance}]
-Let $S = (s_{ij})$ be an $n \times n$ arrangement of $\{1, 2, \ldots, n^2\}$,
+\begin{proof}[Detailed Proof of \Cref{prop:magic_implies_zero_cov}]
+Let $S = (s_{ij})$ be an $n \times n$ magic square,
 and define coordinates as in \Cref{def:gem_coords}:
 \begin{align*}
 x_{ij} &= j - \frac{n-1}{2}, \\
@@ -86,74 +83,84 @@ Let $C_j = \sum_{i=0}^{n-1} s_{ij}$ denote the sum of column $j$. Then
 \sum_{i,j} j \cdot s_{ij} = \sum_{j=0}^{n-1} j \cdot C_j.
 \]
 
-Suppose $S$ is a magic square, so all column sums equal $M(n) = n(n^2+1)/2$.
+Since $S$ is a magic square, all column sums equal $M(n) = n(n^2+1)/2$.
 Then
 \[
 \sum_{j=0}^{n-1} j \cdot C_j = M(n) \sum_{j=0}^{n-1} j = \frac{n(n^2+1)}{2} \cdot \frac{n(n-1)}{2} = \frac{n^2(n-1)(n^2+1)}{4},
 \]
 which exactly equals the second term above. Hence $\Cov(X, Z) = 0$.
 
-\paragraph{Step 4: Converse direction for $n = 3$.}
-Suppose $\Cov(X, Z) = 0$, so $\sum_j j \cdot C_j = n^2(n-1)(n^2+1)/4$.
-Define $\delta_j = C_j - M(n)$, the deviation of column $j$ from the magic sum.
-We have two constraints:
-\begin{enumerate}
-\item $\sum_j \delta_j = 0$ (total sum is fixed)
-\item $\sum_j j \cdot \delta_j = 0$ (from the covariance condition)
-\end{enumerate}
-
-For $n = 3$, these become:
-\begin{align*}
-\delta_0 + \delta_1 + \delta_2 &= 0 \\
-0 \cdot \delta_0 + 1 \cdot \delta_1 + 2 \cdot \delta_2 &= 0
-\end{align*}
-Solving: $\delta_1 = -2\delta_2$ and $\delta_0 = \delta_2$, so $(\delta_0, \delta_1, \delta_2) = t(1, -2, 1)$ for some $t$.
-
-For a permutation of $\{1, \ldots, 9\}$, column sums lie in $[1+2+3, 7+8+9] = [6, 24]$.
-With $M(3) = 15$, we need $\delta_j \in [-9, 9]$.
-For $t = 1$: deviations are $(1, -2, 1)$, giving column sums $(16, 13, 16)$.
-Exhaustive enumeration confirms that no permutation achieves this pattern 
-while also satisfying $\Cov(Y, Z) = 0$.
-The only solutions are $t = 0$, i.e., $\delta_j = 0$ for all $j$.
-
-\paragraph{Step 5: Converse direction for $n = 4$.}
-For $n = 4$, the constraint system has two free parameters.
-Let $\delta = t_1(1, 0, -3, 2) + t_2(0, 1, -2, 1)$.
-The analysis becomes more complex, but computational verification confirms 
-that no non-trivial solution exists among permutations of $\{1, \ldots, 16\}$ 
-that also satisfies both covariance conditions.
-
-The argument for $\Cov(Y, Z) = 0$ implying equal row sums is entirely analogous.
-The diagonal constraints follow from the row and column constraints 
-together with the fixed total sum.
+The argument for $\Cov(Y, Z) = 0$ is entirely analogous, using row sums in place of column sums.
 \end{proof}
 
-\subsection{The Zero-Covariance Conjecture for General $n$}
+\subsection{Why Row and Column Covariances Alone Are Insufficient}
 
-For $n \geq 5$, complete algebraic analysis becomes increasingly complex,
-and exhaustive enumeration is computationally infeasible ($25! \approx 10^{25}$ for $n = 5$).
-We therefore state the general result as a conjecture, supported by computational evidence.
+A natural question is whether the conditions $\Cov(X, Z) = \Cov(Y, Z) = 0$ alone 
+characterize magic squares (or even semi-magic squares with equal row and column sums).
+The answer is negative, and understanding why is instructive.
 
-\begin{conjecture}[Zero-Covariance Characterization---General $n$]
+Let $\delta_j = C_j - M(n)$ denote the deviation of column $j$ from the magic sum.
+The constraint $\Cov(X, Z) = 0$ is equivalent to $\sum_j (j - \frac{n-1}{2}) \delta_j = 0$.
+Combined with the total sum constraint $\sum_j \delta_j = 0$, this leaves an $(n-2)$-dimensional 
+space of possible deviation patterns.
+
+For $n = 3$, the deviation pattern must be $(\delta_0, \delta_1, \delta_2) = t(1, -2, 1)$ for some $t$.
+While the $t = 0$ case corresponds to equal column sums, \emph{non-zero values of $t$ are achievable}:
+exhaustive enumeration reveals 128 arrangements with column sums $(16, 13, 16)$ (i.e., $t = 1$)
+that simultaneously satisfy $\Cov(Y, Z) = 0$.
+
+The total count is 760 arrangements with both $\Cov(X, Z) = \Cov(Y, Z) = 0$,
+of which only 8 are magic squares.
+The remaining 752 arrangements satisfy the row and column covariance conditions 
+but fail to achieve equal row sums, equal column sums, or the diagonal conditions.
+
+\subsection{Energy Characterization Conjecture for General $n$}
+
+For $n \geq 4$, exhaustive enumeration becomes computationally infeasible
+($16! \approx 2 \times 10^{13}$ for $n = 4$, and $25! \approx 10^{25}$ for $n = 5$).
+We therefore state the general result as a conjecture, supported by extensive computational evidence.
+
+\begin{conjecture}[Energy Characterization---General $n$]
 \label{conj:general}
 For all $n \geq 3$, an arrangement $S$ of $\{1, 2, \ldots, n^2\}$ in an $n \times n$ grid 
-is a magic square if and only if:
-\begin{enumerate}
-\item $\Cov(X, Z) = 0$
-\item $\Cov(Y, Z) = 0$
-\item $\bar{z}_{\mathrm{main}} = \bar{z}_{\mathrm{anti}} = 0$
-\end{enumerate}
-Equivalently, $E(S) = 0$ if and only if $S$ is a magic square.
+is a magic square if and only if the total magic energy vanishes:
+\begin{equation}
+E(S) = \Cov(X, Z)^2 + \Cov(Y, Z)^2 + \Cov(D_{\mathrm{main}}, Z)^2 + \Cov(D_{\mathrm{anti}}, Z)^2 = 0.
+\end{equation}
 \end{conjecture}
 
+This formulation is conceptually appealing: magic squares are precisely those arrangements 
+that are simultaneously uncorrelated with all four structural directions of the grid
+(rows, columns, main diagonal, anti-diagonal).
+
+\textbf{Important clarification:} 
+Note that requiring all four covariances to vanish is essential.
+As discussed in \Cref{sec:insufficiency}, the conditions $\Cov(X, Z) = \Cov(Y, Z) = 0$ 
+alone do \emph{not} characterize semi-magic squares---760 non-semi-magic arrangements 
+satisfy these conditions for $n = 3$.
+Only the complete energy functional $E(S) = 0$ characterizes magic squares.
+
 \textbf{Supporting evidence:}
-\begin{itemize}
-\item Proven rigorously for $n = 3$ and $n = 4$ (this paper).
-\item For $n = 5$: All tested magic squares satisfy $E = 0$, 
-and random sampling of $10^6$ permutations found no non-magic arrangements with $E = 0$.
-\item The algebraic structure of the converse proof 
-suggests the pattern continues, though case analysis becomes increasingly complex.
-\end{itemize}
+\begin{enumerate}
+\item \textbf{Proven for $n = 3$:} Exhaustive enumeration of all $362{,}880$ permutations 
+confirms that exactly 8 arrangements have $E(S) = 0$, all of which are magic squares 
+(the Lo Shu and its $D_4$ symmetry variants).
+\item \textbf{Strong evidence for $n = 4$:} All 7,040 known magic squares satisfy $E = 0$ exactly.
+Large-scale random sampling ($6 \times 10^7$ permutations) found zero 
+non-magic arrangements with $E < 10^{-10}$.
+\item \textbf{Strong evidence for $n = 5$:} All constructed magic squares satisfy $E = 0$ exactly. 
+Large-scale random sampling ($4 \times 10^8$ permutations) found zero 
+non-magic arrangements with $E < 10^{-10}$.
+\item \textbf{Total verification:} Over 460 million arrangements tested 
+across $n = 3, 4, 5$ with zero counterexamples observed.
+\end{enumerate}
+
+Note that the sampling approach tests the forward direction robustly 
+(confirming all magic squares have $E = 0$) but can only provide probabilistic evidence 
+for the converse (that all $E = 0$ arrangements are magic).
+Given the extreme rarity of magic squares (probability $\sim 10^{-10}$ for $n=4$ 
+and $\sim 10^{-17}$ for $n=5$), finding a counterexample by random sampling is unlikely 
+even if one existed, making this evidence suggestive but not conclusive.
 
 \subsection{Computational Methods}
 

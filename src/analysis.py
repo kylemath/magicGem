@@ -94,6 +94,169 @@ def test_zero_covariance(coords: np.ndarray, tol: float = 1e-10) -> Dict:
     }
 
 
+def compute_diagonal_covariances(square: np.ndarray, tol: float = 1e-10) -> Dict:
+    """
+    Compute covariances with diagonal indicator variables.
+    
+    Following the framework where diagonal conditions are expressed as:
+    - Cov(D_main, Z) = 0 iff main diagonal sum equals M(n)
+    - Cov(D_anti, Z) = 0 iff anti-diagonal sum equals M(n)
+    
+    Parameters
+    ----------
+    square : np.ndarray
+        n×n arrangement
+    tol : float
+        Tolerance for zero comparison
+        
+    Returns
+    -------
+    Dict
+        Diagonal covariance analysis results
+    """
+    n = square.shape[0]
+    n_sq = n * n
+    M_n = n * (n_sq + 1) // 2
+    
+    # Centered z-values
+    z_center = (n_sq + 1) / 2
+    z_vals = square.flatten() - z_center
+    
+    # Main diagonal indicator: D_main(i,j) = 1 if i==j
+    D_main = np.zeros(n_sq)
+    for i in range(n):
+        D_main[i * n + i] = 1
+    
+    # Anti-diagonal indicator: D_anti(i,j) = 1 if i+j == n-1
+    D_anti = np.zeros(n_sq)
+    for i in range(n):
+        j = n - 1 - i
+        D_anti[i * n + j] = 1
+    
+    # Means
+    D_main_mean = n / n_sq  # = 1/n
+    D_anti_mean = n / n_sq
+    z_mean = 0  # by construction
+    
+    # Covariances (using E[XY] - E[X]E[Y], but E[Z]=0)
+    cov_main_z = np.mean(D_main * z_vals) - D_main_mean * z_mean
+    cov_anti_z = np.mean(D_anti * z_vals) - D_anti_mean * z_mean
+    
+    # Actual diagonal sums
+    main_diag_sum = np.trace(square)
+    anti_diag_sum = np.trace(np.fliplr(square))
+    
+    return {
+        'cov_main_z': cov_main_z,
+        'cov_anti_z': cov_anti_z,
+        'main_is_zero': abs(cov_main_z) < tol,
+        'anti_is_zero': abs(cov_anti_z) < tol,
+        'main_diag_sum': int(main_diag_sum),
+        'anti_diag_sum': int(anti_diag_sum),
+        'magic_constant': M_n,
+        'main_equals_M': main_diag_sum == M_n,
+        'anti_equals_M': anti_diag_sum == M_n
+    }
+
+
+def compute_total_magic_energy_v2(square: np.ndarray) -> Dict:
+    """
+    Compute the total magic energy as sum of four squared covariances.
+    
+    E(S) = Cov(X,Z)² + Cov(Y,Z)² + Cov(D_main,Z)² + Cov(D_anti,Z)²
+    
+    This is the clean formulation where magic squares are characterized
+    by E(S) = 0, with each term corresponding to a structural direction.
+    
+    Parameters
+    ----------
+    square : np.ndarray
+        n×n arrangement
+        
+    Returns
+    -------
+    Dict
+        Energy breakdown with all four components
+    """
+    coords = square_to_coordinates(square, center_z=True)
+    n = square.shape[0]
+    
+    # Row/column covariances
+    x_vals = coords[:, 0]
+    y_vals = coords[:, 1]
+    z_vals = coords[:, 2]
+    
+    cov_xz = np.mean(x_vals * z_vals)  # E[XZ] since E[X]=E[Z]=0
+    cov_yz = np.mean(y_vals * z_vals)
+    
+    # Diagonal covariances
+    diag_cov = compute_diagonal_covariances(square)
+    cov_main_z = diag_cov['cov_main_z']
+    cov_anti_z = diag_cov['cov_anti_z']
+    
+    # Energy components
+    E_cov = cov_xz**2 + cov_yz**2
+    E_diag = cov_main_z**2 + cov_anti_z**2
+    E_total = E_cov + E_diag
+    
+    return {
+        'cov_xz': cov_xz,
+        'cov_yz': cov_yz,
+        'cov_main_z': cov_main_z,
+        'cov_anti_z': cov_anti_z,
+        'E_cov': E_cov,
+        'E_diag': E_diag,
+        'E_total': E_total,
+        'is_zero_energy': E_total < 1e-20
+    }
+
+
+def compute_position_weighted_vectors(square: np.ndarray) -> Dict:
+    """
+    Compute position-weighted vector sums that reveal zero-covariance geometrically.
+    
+    W_x = sum_ij x_ij * v_ij  (z-component = n² * Cov(X,Z))
+    W_y = sum_ij y_ij * v_ij  (z-component = n² * Cov(Y,Z))
+    
+    For magic squares, W_x and W_y have zero z-components.
+    
+    Parameters
+    ----------
+    square : np.ndarray
+        n×n arrangement
+        
+    Returns
+    -------
+    Dict
+        Position-weighted vector sums and their properties
+    """
+    coords = square_to_coordinates(square, center_z=True)
+    n = square.shape[0]
+    n_sq = n * n
+    
+    x_vals = coords[:, 0]
+    y_vals = coords[:, 1]
+    
+    # Weighted vector sums
+    W_x = np.sum(x_vals[:, np.newaxis] * coords, axis=0)
+    W_y = np.sum(y_vals[:, np.newaxis] * coords, axis=0)
+    
+    # The z-components relate to covariance
+    W_x_z = W_x[2]  # = n² * Cov(X,Z)
+    W_y_z = W_y[2]  # = n² * Cov(Y,Z)
+    
+    return {
+        'W_x': W_x.tolist(),
+        'W_y': W_y.tolist(),
+        'W_x_z_component': W_x_z,
+        'W_y_z_component': W_y_z,
+        'Cov_XZ_from_W': W_x_z / n_sq,
+        'Cov_YZ_from_W': W_y_z / n_sq,
+        'x_balanced': abs(W_x_z) < 1e-10,
+        'y_balanced': abs(W_y_z) < 1e-10
+    }
+
+
 def analyze_magic_vs_random(n: int, num_random: int = 10000, seed: int = 42) -> Dict:
     """
     Compare properties of magic squares vs random arrangements.

@@ -51,15 +51,22 @@ Note that the center cell, containing the value 5, maps to the origin.
 \end{example}
 
 \Cref{fig:construction} illustrates the four-step construction process, 
-progressing from the magic square through the centered grid to the final three-dimensional representation.
+progressing from the magic square through the centered grid to the final three-dimensional representation,
+along with all eight $D_4$ symmetry variants of the Lo Shu square.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{figures/fig02_construction_3x3.pdf}
-    \caption{Construction of a Magic Gem from the Lo Shu square. 
-    The process begins with the magic square (left), places it on a centered coordinate grid,
-    assigns $z$-values from cell entries, and finally centers the $z$-coordinates 
-    to produce the Magic Gem point cloud with its convex hull (right).}
+    \includegraphics[width=\textwidth]{figures/fig02_combined_construction_symmetries.pdf}
+    \caption{\textbf{Construction process and symmetry structure.}
+    \emph{Top row (a--d):} Construction of a Magic Gem from the Lo Shu square.
+    (a) The Lo Shu magic square---the unique (up to symmetry) $3 \times 3$ magic square, 
+    with each row, column, and diagonal summing to $M(3) = 15$.
+    (b) Placement on a centered coordinate grid with origin at center.
+    (c) Assignment of $z$-values from cell entries.
+    (d) Centered Magic Gem point cloud with convex hull.
+    \emph{Bottom rows (e--l):} The eight $D_4$ symmetries of the $3 \times 3$ magic square, 
+    comprising four rotations and four reflections. 
+    Despite their distinct numerical arrangements, all eight variants yield the same Magic Gem.}
     \label{fig:construction}
 \end{figure}
 
@@ -94,19 +101,11 @@ This invariance means that all eight $D_4$ variants of a magic square produce th
 For $n = 3$, this implies that the single essentially different magic square yields a unique Magic Gem,
 while for larger orders, each equivalence class corresponds to a distinct geometric object.
 
-\Cref{fig:symmetries} displays all eight symmetry variants of the $3 \times 3$ magic square,
+The construction figure (\Cref{fig:construction}, bottom rows) displays all eight symmetry variants of the $3 \times 3$ magic square,
 illustrating how these numerically distinct arrangements share a common geometric representation.
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\textwidth]{figures/fig05_symmetries.pdf}
-    \caption{The eight $D_4$ symmetries of the $3 \times 3$ magic square, 
-    comprising four rotations and four reflections. 
-    Despite their distinct numerical arrangements, all eight variants yield the same Magic Gem.}
-    \label{fig:symmetries}
-\end{figure}
-
 \subsection{The Vector Representation}
+\label{sec:vector_rep}
 
 The centering of our coordinate system invites an interpretation of each point as a vector from the origin.
 Since the origin coincides with the centroid of the point cloud (as we shall verify),
@@ -124,22 +123,47 @@ This interpretation connects the Magic Gem to the classical physics of rigid bod
 if unit masses are placed at each vertex, the resulting configuration has its center of mass at the origin,
 and the vectors $\mathbf{v}_{ij}$ describe the displacement of each mass from this center.
 
-\subsection{The Zero-Covariance Theorem}
+\subsubsection{Vectors and Covariance}
+
+The vector representation provides a geometric interpretation of the zero-covariance condition.
+Consider the weighted sum of vectors where each vector is weighted by its $x$-coordinate:
+\[
+\sum_{i,j} x_{ij} \mathbf{v}_{ij} = \sum_{i,j} x_{ij} (x_{ij}, y_{ij}, z_{ij}).
+\]
+The $z$-component of this weighted sum is precisely $n^2 \cdot \Cov(X, Z)$.
+Thus, zero covariance is equivalent to the statement that vectors, 
+when weighted by their horizontal positions, have no net vertical tendency.
+
+More explicitly, define the \emph{position-weighted vector sums}:
+\begin{align}
+\mathbf{W}_x &= \sum_{i,j} x_{ij} \mathbf{v}_{ij}, \label{eq:weighted_x} \\
+\mathbf{W}_y &= \sum_{i,j} y_{ij} \mathbf{v}_{ij}. \label{eq:weighted_y}
+\end{align}
+Then $\Cov(X, Z) = 0$ if and only if $(\mathbf{W}_x)_z = 0$, 
+and $\Cov(Y, Z) = 0$ if and only if $(\mathbf{W}_y)_z = 0$.
+
+This formulation reveals that magic squares achieve a form of \emph{directional balance}:
+the $z$-values are distributed so that neither horizontal direction 
+exhibits any systematic correlation with value magnitude.
+The vectors in Figure panels showing the vector representation 
+visually manifest this balance---vectors pointing in each horizontal direction 
+have $z$-components that ``cancel out'' when weighted by position.
+
+\subsection{The Covariance Structure of Magic Squares}
 \label{sec:zero_cov_theorem}
 
-We now establish our main theoretical result, which reveals a deep connection 
+We now establish our main theoretical results, revealing a deep connection 
 between the algebraic definition of magic squares and the statistical structure of Magic Gems.
 
-\begin{theorem}[Zero Covariance]
-\label{thm:zero_covariance}
-Let $S$ be an $n \times n$ arrangement of the integers $\{1, \ldots, n^2\}$, 
-and let $P = \{\mathbf{p}_{ij}\}$ be the corresponding point cloud as in \Cref{def:gem_coords}. 
-Then $S$ is a magic square if and only if
-\begin{equation}
-\Cov(X, Z) = \Cov(Y, Z) = 0,
-\end{equation}
-where $X$, $Y$, $Z$ denote the coordinate random variables over the uniform distribution on $P$.
-\end{theorem}
+\subsubsection{Forward Direction: Magic Implies Zero Covariance}
+
+The following result holds for all $n \geq 3$ and admits a clean algebraic proof.
+
+\begin{proposition}[Magic Implies Zero Covariance]
+\label{prop:magic_implies_zero_cov}
+Let $S$ be an $n \times n$ magic square, and let $P = \{\mathbf{p}_{ij}\}$ be the corresponding point cloud. 
+Then $\Cov(X, Z) = \Cov(Y, Z) = 0$.
+\end{proposition}
 
 \begin{proof}
 We first verify that the means of all three coordinates vanish.
@@ -148,45 +172,23 @@ For the $x$-coordinate,
 \bar{X} = \frac{1}{n^2} \sum_{i,j} x_{ij} = \frac{1}{n^2} \sum_{i,j} \left( j - \frac{n-1}{2} \right) 
 = \frac{n}{n^2} \sum_{j=0}^{n-1} \left( j - \frac{n-1}{2} \right) = 0,
 \]
-since the sum of $j$ from $0$ to $n-1$ equals $n(n-1)/2$, which cancels with the subtracted term.
-An analogous argument shows $\bar{Y} = 0$, and for the $z$-coordinate,
+since $\sum_{j=0}^{n-1} j = n(n-1)/2$. An analogous argument shows $\bar{Y} = 0$, and 
 \[
-\bar{Z} = \frac{1}{n^2} \sum_{i,j} \left( s_{ij} - \frac{n^2+1}{2} \right) 
-= \frac{1}{n^2} \left( \frac{n^2(n^2+1)}{2} - \frac{n^2(n^2+1)}{2} \right) = 0.
+\bar{Z} = \frac{1}{n^2} \sum_{i,j} \left( s_{ij} - \frac{n^2+1}{2} \right) = 0
 \]
+since the entries sum to $n^2(n^2+1)/2$.
 
-With zero means, the covariance $\Cov(X, Z)$ simplifies to
+With zero means, $\Cov(X, Z) = \frac{1}{n^2} \sum_{i,j} x_{ij} z_{ij}$.
+Define $C_j = \sum_{i=0}^{n-1} s_{ij}$ as the sum of column $j$. Then:
 \[
-\Cov(X, Z) = \frac{1}{n^2} \sum_{i,j} x_{ij} z_{ij} 
-= \frac{1}{n^2} \sum_{i,j} \left( j - \frac{n-1}{2} \right) \left( s_{ij} - \frac{n^2+1}{2} \right).
+\Cov(X, Z) = \frac{1}{n^2} \sum_{j=0}^{n-1} \left( j - \frac{n-1}{2} \right) C_j.
 \]
-Expanding and collecting terms, we obtain after simplification
+For a magic square, all column sums equal $M(n)$, so
 \[
-\Cov(X, Z) = \frac{1}{n^2} \sum_{j=0}^{n-1} \left( j - \frac{n-1}{2} \right) C_j,
+\Cov(X, Z) = \frac{M(n)}{n^2} \sum_{j=0}^{n-1} \left( j - \frac{n-1}{2} \right) = 0.
 \]
-where $C_j = \sum_{i=0}^{n-1} s_{ij}$ denotes the sum of column $j$.
-
-This expression vanishes if and only if all column sums are equal.
-To see this, note that the coefficients $j - (n-1)/2$ for $j = 0, \ldots, n-1$ 
-are distinct and sum to zero.
-If the column sums $C_j$ are all equal to some constant $c$, 
-then $\Cov(X, Z) = (c/n^2) \sum_j (j - (n-1)/2) = 0$.
-Conversely, suppose $\Cov(X, Z) = 0$ but the column sums are not all equal.
-Then we can write $C_j = c + \delta_j$ where $\sum_j \delta_j = 0$ and not all $\delta_j$ are zero.
-The condition $\sum_j (j - (n-1)/2) \delta_j = 0$, combined with $\sum_j \delta_j = 0$,
-imposes two independent linear constraints on the $n$ variables $\delta_j$,
-which generically determines a subspace of dimension $n-2$.
-However, the constraint that $\delta_j$ sum to zero with $\sum_j j \delta_j = (n-1)/2 \sum_j \delta_j = 0$
-forces $\delta_j = 0$ for all $j$, establishing the equivalence.
-
-An analogous argument shows that $\Cov(Y, Z) = 0$ if and only if all row sums are equal.
-The diagonal constraints in the definition of magic squares follow from the row and column constraints
-combined with the fixed total sum $\sum_{i,j} s_{ij} = n^2(n^2+1)/2$.
+The argument for $\Cov(Y, Z) = 0$ via row sums is analogous.
 \end{proof}
-
-This theorem reveals that the ``magic'' property of equal line sums 
-is equivalent to a statistical balance condition: 
-the horizontal position of a cell provides no linear information about its value, and similarly for the vertical position.
 
 \begin{corollary}
 For any magic square, the covariance matrix of the Magic Gem coordinates has the block-diagonal form
@@ -199,6 +201,79 @@ For any magic square, the covariance matrix of the Magic Gem coordinates has the
 \]
 In particular, the $z$-coordinate is uncorrelated with both horizontal coordinates.
 \end{corollary}
+
+\subsubsection{On the Insufficiency of Row and Column Covariances Alone}
+\label{sec:insufficiency}
+
+It is natural to ask whether the conditions $\Cov(X, Z) = \Cov(Y, Z) = 0$ alone 
+suffice to characterize magic squares, or at least semi-magic squares 
+(those with equal row and column sums but possibly failing the diagonal conditions).
+Perhaps surprisingly, the answer is \emph{no}.
+
+\begin{remark}[Counterexamples Exist]
+\label{rem:counterexample}
+Exhaustive enumeration for $n = 3$ reveals that \emph{760 arrangements} of $\{1, \ldots, 9\}$ 
+satisfy both $\Cov(X, Z) = 0$ and $\Cov(Y, Z) = 0$, yet only 8 of these are magic squares.
+For instance, the arrangement
+\[
+S = \begin{pmatrix}
+1 & 3 & 9 \\
+8 & 6 & 5 \\
+7 & 4 & 2
+\end{pmatrix}
+\]
+has row sums $(13, 19, 13)$ and column sums $(16, 13, 16)$---far from equal---yet 
+achieves $\Cov(X, Z) = \Cov(Y, Z) = 0$ exactly.
+\end{remark}
+
+This observation has important implications.
+The covariance conditions with $X$ and $Y$ alone impose only two linear constraints 
+on the space of possible row and column sum patterns.
+The remaining freedom in these patterns can be exploited to achieve zero covariance 
+without achieving equal sums.
+The \emph{characterization} of magic squares thus requires all four covariance conditions, 
+not merely the row and column covariances.
+This motivates the energy functional approach developed in \Cref{sec:energy_landscape}.
+
+\subsection{Diagonal Conditions as Covariances}
+\label{sec:diagonal_cov}
+
+The row and column constraints can be elegantly expressed via covariance with position coordinates.
+We extend this framework to diagonal constraints by introducing indicator random variables.
+
+\begin{definition}[Diagonal Indicators]
+Define indicator variables for the main and anti-diagonals:
+\begin{align}
+D_{\mathrm{main}}(i,j) &= \begin{cases} 1 & \text{if } i = j, \\ 0 & \text{otherwise}, \end{cases} \\
+D_{\mathrm{anti}}(i,j) &= \begin{cases} 1 & \text{if } i + j = n - 1, \\ 0 & \text{otherwise}. \end{cases}
+\end{align}
+\end{definition}
+
+These indicators allow us to express diagonal constraints in covariance form.
+
+\begin{proposition}[Diagonal Covariance Characterization]
+\label{prop:diagonal_cov}
+For an arrangement $S$ with centered $z$-values:
+\begin{enumerate}
+\item $\Cov(D_{\mathrm{main}}, Z) = 0$ if and only if the main diagonal sum equals $M(n)$.
+\item $\Cov(D_{\mathrm{anti}}, Z) = 0$ if and only if the anti-diagonal sum equals $M(n)$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+The mean of $D_{\mathrm{main}}$ over all cells is $\bar{D}_{\mathrm{main}} = n/n^2 = 1/n$.
+With $\bar{Z} = 0$, we have:
+\[
+\Cov(D_{\mathrm{main}}, Z) = \frac{1}{n^2} \sum_{i,j} D_{\mathrm{main}}(i,j) \cdot z_{ij} - \bar{D}_{\mathrm{main}} \cdot \bar{Z}
+= \frac{1}{n^2} \sum_{i=0}^{n-1} z_{ii}.
+\]
+Since $z_{ii} = s_{ii} - (n^2+1)/2$, the sum $\sum_i z_{ii} = \sum_i s_{ii} - n(n^2+1)/2$.
+This vanishes if and only if $\sum_i s_{ii} = M(n)$. The anti-diagonal case is analogous.
+\end{proof}
+
+This reformulation provides a unified covariance-based characterization:
+an arrangement is a magic square if and only if it has zero covariance with 
+\emph{all four} position indicators---$X$, $Y$, $D_{\mathrm{main}}$, and $D_{\mathrm{anti}}$.
 
 \subsection{Perturbation Analysis}
 \label{sec:perturbation}
@@ -234,40 +309,57 @@ to continuous optimization and statistical mechanics.
 
 \begin{definition}[Covariance Energy Functional]
 \label{def:covariance_energy}
-For an arrangement $S$, define the \emph{covariance energy}
+For an arrangement $S$, define the \emph{total magic energy} as the sum of squared covariances 
+with all four position indicators:
+\begin{equation}
+E(S) = \Cov(X, Z)^2 + \Cov(Y, Z)^2 + \Cov(D_{\mathrm{main}}, Z)^2 + \Cov(D_{\mathrm{anti}}, Z)^2.
+\label{eq:total_energy}
+\end{equation}
+Equivalently, we may decompose this as
 \[
-E_{\text{cov}}(S) = \Cov(X, Z)^2 + \Cov(Y, Z)^2,
+E(S) = E_{\text{cov}}(S) + E_{\text{diag}}(S),
 \]
-and the \emph{diagonal energy}
-\[
-E_{\text{diag}}(S) = \left( \bar{z}_{\text{main}} - \bar{z} \right)^2 + \left( \bar{z}_{\text{anti}} - \bar{z} \right)^2,
-\]
-where $\bar{z}_{\text{main}}$ and $\bar{z}_{\text{anti}}$ denote the mean $z$-values 
-on the main and anti-diagonals respectively.
-The \emph{total magic energy} is
-\[
-E(S) = E_{\text{cov}}(S) + E_{\text{diag}}(S).
-\]
+where $E_{\text{cov}}(S) = \Cov(X, Z)^2 + \Cov(Y, Z)^2$ captures row/column imbalance
+and $E_{\text{diag}}(S) = \Cov(D_{\mathrm{main}}, Z)^2 + \Cov(D_{\mathrm{anti}}, Z)^2$ captures diagonal imbalance.
 \end{definition}
 
-This energy functional measures the ``imbalance'' of an arrangement---how far it deviates 
-from the perfect equilibrium of a magic square.
-The covariance energy captures violations of equal row and column sums,
-while the diagonal energy captures violations of the diagonal constraints.
+This formulation is conceptually clean: the magic energy is simply the sum of squared 
+``correlations'' between $z$-values and each of the four structural directions 
+(rows, columns, main diagonal, anti-diagonal).
+An arrangement achieves zero energy precisely when it is uncorrelated with all four directions---the 
+definition of a magic square.
 
 \begin{theorem}[Energy Characterization]
 \label{thm:energy_char}
-An arrangement $S$ of $\{1, \ldots, n^2\}$ is a magic square if and only if $E(S) = 0$.
+For $n = 3$, an arrangement $S$ of $\{1, \ldots, n^2\}$ is a magic square 
+if and only if $E(S) = 0$.
+This result is proven by exhaustive enumeration.
 \end{theorem}
 
 \begin{proof}
-By \Cref{thm:zero_covariance}, $E_{\text{cov}}(S) = 0$ if and only if all rows and columns 
-have equal sums.
-The diagonal energy $E_{\text{diag}}(S) = 0$ if and only if both diagonal means equal 
-the overall mean $(n^2+1)/2$, which for an arrangement with equal line sums 
-is equivalent to both diagonal sums equaling $M(n)$.
-The conjunction of these conditions defines a magic square.
+The forward direction follows from \Cref{prop:magic_implies_zero_cov} and \Cref{prop:diagonal_cov}:
+every magic square has $\Cov(X, Z) = \Cov(Y, Z) = 0$ (from equal row and column sums)
+and $\Cov(D_{\mathrm{main}}, Z) = \Cov(D_{\mathrm{anti}}, Z) = 0$ (from equal diagonal sums),
+hence $E(S) = 0$.
+
+For the converse, we rely on exhaustive enumeration.
+Among all $9! = 362{,}880$ permutations of $\{1, \ldots, 9\}$, exactly 8 arrangements 
+achieve $E(S) = 0$ (to machine precision).
+All 8 of these arrangements are magic squares---specifically, the Lo Shu square 
+and its seven $D_4$ symmetry variants.
+No false positives exist: every arrangement with $E(S) = 0$ is magic.
+
+Note that the individual covariance conditions are \emph{not} independent:
+as shown in \Cref{rem:counterexample}, 760 arrangements satisfy $\Cov(X, Z) = \Cov(Y, Z) = 0$,
+but only the 8 magic squares additionally satisfy the diagonal conditions.
+The characterization requires all four covariances to vanish simultaneously.
 \end{proof}
+
+For $n = 4$ and $n = 5$, large-scale sampling (over 460 million arrangements total) 
+found no counterexamples: every arrangement with $E(S) \approx 0$ (within machine precision)
+was verified to be a magic square.
+This computational evidence strongly supports the conjecture that the energy characterization 
+holds for all $n \geq 3$ (see Conjecture~\ref{conj:general} in the Appendix).
 
 This characterization reveals magic squares as \emph{ground states} of a natural energy functional.
 Just as physical systems minimize their energy to reach equilibrium,
@@ -306,7 +398,7 @@ y_{ij}^2 + z_{ij}^2 & -x_{ij}y_{ij} & -x_{ij}z_{ij} \\
 
 The eigenvalues of $I$---the principal moments of inertia---are invariant under rotation
 and characterize the intrinsic shape of the mass distribution.
-By the zero-covariance theorem, the off-diagonal elements $I_{xz} = -n^2 \Cov(X,Z)$ and $I_{yz} = -n^2 \Cov(Y,Z)$ 
+By \Cref{prop:magic_implies_zero_cov}, the off-diagonal elements $I_{xz} = -n^2 \Cov(X,Z)$ and $I_{yz} = -n^2 \Cov(Y,Z)$ 
 vanish for magic squares, simplifying the tensor structure.
 
 This connection to rigid body mechanics suggests physical interpretations of the Magic Gem:

@@ -1,27 +1,17 @@
 \begin{abstract}
-We introduce \emph{Magic Gems}, a novel geometric representation of magic squares as three-dimensional polyhedra. 
-By mapping an $n \times n$ magic square onto a centered coordinate grid and interpreting cell values as vertical displacements, 
-we construct a point cloud in $\R^3$ whose convex hull defines the Magic Gem.
-This construction reveals a fundamental connection between the algebraic constraints defining magic squares 
-and the statistical structure of their geometric representation: 
-we prove that an arrangement is a magic square if and only if the covariance between spatial coordinates 
-and value assignments vanishes identically.
-
-This zero-covariance characterization provides a new lens through which to view magic squares, 
-connecting classical combinatorics to concepts from multivariate statistics, optimization, and statistical mechanics.
-We introduce a covariance energy functional whose zeros are precisely the magic squares,
-establishing magic configurations as ground states in an energy landscape.
-Exhaustive verification for $n = 3$ confirms the theorem across all 362,880 permutations,
-and perturbation analysis demonstrates that magic squares are isolated local minima---every 
-single-swap perturbation strictly increases the energy.
-
-We demonstrate that the Magic Gem representation is invariant under the dihedral symmetry group $D_4$, 
-yielding a canonical geometric object for each equivalence class of magic squares.
-Computational experiments on orders $n = 3$, $4$, and $5$ validate our theoretical results,
-illuminate the structure of the arrangement space,
-and reveal how geometric properties scale with magic square order.
-The framework suggests new approaches to classification and construction problems for magic squares 
-and offers physical insight into their remarkable scarcity among all possible arrangements.
+We introduce \emph{Magic Gems}, a geometric representation of magic squares as three-dimensional polyhedra. 
+By mapping an $n \times n$ magic square onto a centered coordinate grid with cell values as vertical displacements, 
+we construct a point cloud whose convex hull defines the Magic Gem.
+This reveals a connection between magic square constraints and statistical structure: 
+we prove that magic squares have vanishing covariances between position and value.
+We introduce a covariance energy functional---the sum of squared covariances with row, column, 
+and diagonal indicator variables---and prove for $n=3$ (via exhaustive enumeration) 
+that its zeros are precisely the magic squares.
+Large-scale sampling for $n = 4,5$ (460+ million arrangements) provides strong numerical evidence 
+that this characterization extends to larger orders.
+Perturbation analysis demonstrates that magic squares are isolated local minima.
+The representation is invariant under dihedral symmetry $D_4$, 
+yielding canonical geometric objects for equivalence classes.
 
 \medskip
 \noindent\textbf{Keywords:} Magic squares, convex polyhedra, covariance, energy landscape, combinatorial geometry

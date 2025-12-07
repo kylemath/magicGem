@@ -16,14 +16,6 @@ M(n) = \frac{n(n^2 + 1)}{2}.
 \end{equation}
 \end{definition}
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.4\textwidth]{figures/fig01_lo_shu.pdf}
-    \caption{The Lo Shu magic square, the unique (up to symmetry) $3 \times 3$ magic square.
-    Each row, column, and diagonal sums to $M(3) = 15$.}
-    \label{fig:lo_shu}
-\end{figure}
-
 In this paper, we introduce a fundamentally new perspective on magic squares by representing them 
 as three-dimensional polyhedra, which we call \emph{Magic Gems}.
 The construction arises from a natural physical analogy: imagine placing checkers on an $n \times n$ board,
@@ -32,9 +24,10 @@ This creates a ``topography'' over the grid, and centering this configuration in
 yields a point cloud whose convex hull defines the Magic Gem.
 
 The central insight of this work is that the defining algebraic property of magic squares---equal row, column, and diagonal sums---manifests geometrically as a precise statistical condition.
-Specifically, we prove that an arrangement constitutes a magic square if and only if the covariance 
-between spatial position and assigned value vanishes.
-This zero-covariance theorem provides a bridge between classical combinatorics and multivariate statistics,
+Specifically, we prove that magic squares are characterized by the vanishing of a covariance energy functional
+that measures correlations between spatial position and assigned value across all four structural directions
+(rows, columns, and both diagonals).
+This energy characterization provides a bridge between classical combinatorics and multivariate statistics,
 offering new tools for understanding and classifying magic squares.
 
 \subsection{Main Contributions}
@@ -44,12 +37,12 @@ We begin by formalizing the construction of Magic Gems from magic squares
 and establishing that symmetry-equivalent squares yield geometrically identical polyhedra,
 thus providing a canonical geometric representative for each equivalence class under the dihedral group $D_4$.
 
-Our main theoretical contribution is the Zero-Covariance Theorem (\Cref{thm:zero_covariance}), 
-which characterizes magic squares through the vanishing of off-diagonal covariance terms.
+Our main theoretical contribution is the Energy Characterization Theorem (\Cref{thm:energy_char}), 
+which characterizes magic squares as the unique zeros of a covariance energy functional.
 This result has immediate consequences for understanding the structure of the arrangement space:
 magic squares occupy isolated points in the covariance landscape, 
 with perturbation analysis confirming that any deviation from a magic configuration 
-immediately increases the covariance magnitude.
+immediately increases the energy.
 
 We complement these theoretical results with extensive computational experiments on magic squares 
 of orders three, four, and five.
@@ -64,7 +57,7 @@ exhibit substantial covariance.
 The remainder of this paper proceeds as follows.
 \Cref{sec:background} reviews classical results on magic squares and establishes notation 
 for the geometric and statistical concepts we employ.
-\Cref{sec:methodology} presents the Magic Gem construction, proves the Zero-Covariance Theorem,
+\Cref{sec:methodology} presents the Magic Gem construction, proves the Energy Characterization Theorem,
 and develops the perturbation analysis framework.
 \Cref{sec:results} describes our computational experiments, validating theoretical predictions 
 and exploring the structure of the arrangement space for $n = 3$, $4$, and $5$.

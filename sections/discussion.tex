@@ -8,8 +8,8 @@ and identify limitations and directions for future research.
 
 \subsection{The Meaning of Zero Covariance}
 
-The zero-covariance property admits several complementary interpretations 
-that illuminate the structure of magic squares.
+The zero-covariance property of magic squares (\Cref{prop:magic_implies_zero_cov}) 
+admits several complementary interpretations that illuminate their structure.
 
 From a statistical perspective, zero covariance means that position and value are uncorrelated:
 knowing where a cell is located provides no linear information about what number it contains.
@@ -18,11 +18,37 @@ favor any direction from the center, and similarly for the low numbers.
 Random arrangements typically violate this balance, exhibiting positive or negative covariance
 depending on how the high values happen to cluster spatially.
 
+\subsubsection{The Vector Interpretation}
+
+The vector representation of the Magic Gem (\Cref{sec:vector_rep}) provides a particularly 
+intuitive geometric interpretation.
+Each vertex defines a vector $\mathbf{v}_{ij} = (x_{ij}, y_{ij}, z_{ij})$ from the origin.
+The zero-covariance condition states that these vectors, when weighted by their $x$-coordinates, 
+have no net $z$-component:
+\[
+\sum_{i,j} x_{ij} z_{ij} = n^2 \cdot \Cov(X,Z) = 0.
+\]
+
+Geometrically, this means that vectors pointing ``to the right'' (positive $x$) 
+do not systematically point higher or lower than vectors pointing ``to the left'' (negative $x$).
+The magic square achieves perfect directional balance: 
+no horizontal direction predicts vertical tendency.
+
+This interpretation extends to the diagonal conditions. 
+The diagonal covariances $\Cov(D_{\mathrm{main}}, Z)$ and $\Cov(D_{\mathrm{anti}}, Z)$ 
+measure whether diagonal positions predict value.
+For magic squares, all four directional indicators---horizontal position, vertical position, 
+main diagonal membership, and anti-diagonal membership---are uncorrelated with value.
+The magic energy $E(S)$ is simply the sum of squared correlations with these four directions.
+
+\subsubsection{Physical and Algebraic Interpretations}
+
 From a physical perspective, the zero-covariance property implies that the Magic Gem, 
 viewed as a rigid body with masses at its vertices, has a simplified inertia tensor.
-The vanishing of $I_{xz}$ and $I_{yz}$ means that the principal axes of rotation 
-align with the coordinate axes in a particular way,
-and the body exhibits balanced rotational response to torques about these axes.
+The vanishing of $I_{xz} = -n^2 \Cov(X,Z)$ and $I_{yz} = -n^2 \Cov(Y,Z)$ means that 
+the $xz$ and $yz$ products of inertia are zero.
+This implies the $z$-axis is aligned with a principal axis of the inertia tensor,
+simplifying the rotational dynamics about this direction.
 
 From an algebraic perspective, the zero-covariance condition is equivalent to the defining property 
 of magic squares---equal row and column sums---expressed in the language of moments.
@@ -61,10 +87,20 @@ why thermal fluctuations cannot easily create or destroy the magic property.
 The dynamical systems interpretation is equally rich.
 Each magic square defines a basin of attraction in the discrete configuration space,
 though these basins have measure zero.
-The perturbation analysis confirms that there are no ``flat directions'' around magic configurations:
-every perturbation immediately increases the energy, making magic squares strict local minima.
-The depth of these energy wells, quantified by the perturbation gap, provides a measure 
-of the ``stability'' of the magic property against random disturbance.
+The comprehensive perturbation analysis (\Cref{fig:perturbation_gaps}) confirms that 
+there are no ``flat directions'' around magic configurations:
+across 107,388 tested perturbations of 923 magic squares,
+every single swap increases the energy, supporting the conclusion that magic squares are strict local minima.
+
+The perturbation analysis reveals additional structure within the magic square population.
+For $n=3$, all eight magic squares exhibit \emph{exactly the same} minimum perturbation gap 
+($\Delta_3 = 0.0988$), a consequence of the $D_4$ symmetry preserving the embedding geometry.
+More surprisingly, the 880 $n=4$ magic squares cluster into three distinct bands 
+of perturbation resistance, suggesting the existence of geometric subclasses 
+with different stability properties---a novel finding that may correlate 
+with convex hull configurations and merits further investigation.
+The minimum gap scales approximately as $\Delta \propto 1/n^2$,
+quantifying how the energy wells become progressively shallower as order increases.
 
 This energy landscape view also illuminates why magic squares are rare.
 They are not merely unusual configurations among many similar ones, but isolated singularities 
@@ -79,12 +115,13 @@ The large-scale computational analysis of \Cref{sec:large_scale_landscape} revea
 systematic scaling behavior that deepens our understanding of the energy landscape.
 Three key observations merit discussion.
 
-\paragraph{Quadratic Peak Scaling.}
-The modal energy scales as $E_{\text{peak}} \approx O(n^2)$,
-which has a natural interpretation:
+\paragraph{Peak Energy Scaling.}
+The limited data ($n=3,4,5$) suggests the modal energy may scale approximately as $O(n^2)$,
+though with only three data points, this conclusion remains tentative.
+If confirmed, this would have a natural interpretation:
 the ``typical'' imbalance of a random arrangement grows quadratically 
 because there are $O(n^2)$ cells to distribute and the variance accumulates.
-This scaling implies that the search for magic squares becomes progressively harder 
+Such scaling would imply that the search for magic squares becomes progressively harder 
 in absolute terms---the energy well containing magic configurations lies at increasingly 
 greater depth relative to typical arrangements.
 
@@ -100,11 +137,11 @@ local search heuristics that work for small orders may transfer to larger ones,
 with the primary challenge being the absolute energy scale rather than landscape structure.
 
 \paragraph{Isolation Persistence.}
-Across over 60 million sampled arrangements---including exhaustive enumeration for $n=3$,
-10 million samples for $n=4$, and 50 million for $n=5$---no false-positive zero-energy 
+Across over 460 million sampled arrangements---including exhaustive enumeration for $n=3$,
+60 million samples for $n=4$, and 400 million for $n=5$---no false-positive zero-energy 
 configurations were discovered.
 While this does not constitute a proof, it provides compelling computational evidence 
-that the Zero-Covariance Theorem extends beyond the analytically tractable cases.
+that the Energy Characterization Theorem (\Cref{thm:energy_char}) extends beyond the analytically tractable cases.
 The probability of discovering a magic square by random sampling decreases super-exponentially 
 with $n$, from roughly $1$ in $45{,}000$ for $n=3$ to less than $1$ in $10^{17}$ for $n=5$.
 This quantifies the ``needle in a haystack'' intuition with concrete numbers.
@@ -118,12 +155,11 @@ odd orders admit construction via the Siamese method while even orders require d
 odd orders have a central cell that maps to the origin while even orders do not;
 and the symmetry structure of the equivalence classes differs subtly.
 
-Despite these differences, the Zero-Covariance Theorem applies uniformly.
-The $4 \times 4$ case demonstrates that the theorem's validity does not depend on
+Despite these differences, magic squares of all orders exhibit zero covariance (\Cref{prop:magic_implies_zero_cov}).
+The $4 \times 4$ case demonstrates that this property does not depend on
 the existence of a central cell at the origin.
-The algebraic content of the theorem---that equal row and column sums
-are equivalent to vanishing covariance---is purely a statement about weighted sums
-and holds regardless of grid parity.
+The algebraic content---that equal row and column sums imply vanishing covariance---is 
+purely a statement about weighted sums and holds regardless of grid parity.
 
 This universality suggests that Magic Gems capture something fundamental about magic squares
 that transcends the particulars of construction methods or grid geometry.
@@ -157,7 +193,8 @@ that explicitly seek to minimize off-diagonal covariance.
 The Magic Gem framework connects to several existing lines of research on magic squares.
 
 Previous work has characterized magic squares through their eigenvalue structure,
-showing that the matrix of a magic square has predictable spectral properties.
+showing that the matrix of a magic square has predictable spectral properties
+\cite{loly2004eigenproperties, nordgren2012spectral, chan2013eigenvalues}.
 Our covariance characterization is complementary: 
 while eigenvalues describe the linear operator defined by the matrix,
 covariances describe the statistical structure of the associated point cloud.
@@ -217,3 +254,23 @@ an alternative to combinatorial search, though the non-convexity of the landscap
 In recreational mathematics and art, Magic Gems offer a new way to visualize and appreciate magic squares.
 The polyhedra could be 3D-printed as physical objects, 
 their shapes encoding the magic property in tangible form.
+
+\subsection{Algorithmic Implications}
+
+The energy landscape perspective suggests natural algorithmic strategies 
+for magic square generation beyond classical backtracking. 
+Since magic squares are isolated local minima, gradient-based descent in the 
+$E(S)$ objective becomes viable. 
+The challenge lies not in navigating a rugged landscape (entropy is modest and roughly constant at $H \approx 4.4$), 
+but in the sheer breadth of the search space and the rarity of solutions.
+
+Simulated annealing with the covariance energy as a temperature-dependent objective, 
+or basin-hopping methods that leverage the isolation property, merit investigation. 
+If the apparent quadratic scaling of peak energy is confirmed at larger orders, 
+temperature schedules for such algorithms should also scale quadratically with order.
+
+The isolation property (every swap increases energy) suggests that local search 
+from a near-magic configuration could be effective---if such starting points can be found.
+Continuous relaxations of the discrete optimization problem, 
+followed by projection onto the nearest permutation, 
+offer another avenue enabled by the energy landscape framework.

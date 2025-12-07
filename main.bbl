@@ -1,3 +1,18 @@
-\begin{thebibliography}{}
+\begin{thebibliography}{1}
+
+\bibitem{chan2013eigenvalues}
+Heng~Huat Chan and K.~P. Shum.
+\newblock Eigenvalues of magic squares.
+\newblock {\em Linear Algebra and its Applications}, 439(3):590--599, 2013.
+
+\bibitem{loly2004eigenproperties}
+Peter~D. Loly.
+\newblock The eigenproperties of magic squares.
+\newblock {\em Linear Algebra and its Applications}, 382:265--276, 2004.
+
+\bibitem{nordgren2012spectral}
+R.~P. Nordgren.
+\newblock On the spectral analysis of magic squares.
+\newblock {\em Mathematics Magazine}, 85(2):69--74, 2012.
 
 \end{thebibliography}
