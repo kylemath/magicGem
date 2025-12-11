@@ -1,0 +1,11 @@
+{
+  "total": 362880,
+  "row_symmetric": 16416,
+  "col_symmetric": 16416,
+  "both_symmetric": 760,
+  "main_diag_15": 34560,
+  "anti_diag_15": 34560,
+  "both_diag_15": 4224,
+  "all_cov_zero": 8,
+  "magic": 8
+}

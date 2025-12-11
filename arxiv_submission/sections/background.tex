@@ -1,0 +1,102 @@
+\section{Background}
+\label{sec:background}
+
+This section establishes the mathematical foundations for our work, 
+reviewing classical results on magic squares and introducing the geometric and statistical concepts 
+that underpin the Magic Gem framework.
+
+\subsection{Magic Squares: Classical Results}
+
+The enumeration of magic squares reveals a rapid growth in complexity with the order $n$ \cite{trump2012enumeration}.
+For $n = 3$, there exist exactly eight magic squares, all related by rotations and reflections,
+yielding a single essentially different magic square---the Lo Shu.
+The situation changes dramatically for larger orders: 
+$n = 4$ admits 7,040 magic squares forming 880 equivalence classes under the dihedral group,
+while $n = 5$ yields approximately 275 million magic squares comprising roughly 34 million equivalence classes.
+This explosive growth poses significant challenges for enumeration and classification,
+motivating the search for structural insights that transcend explicit construction.
+
+The magic constant $M(n) = n(n^2 + 1)/2$ admits a simple derivation from first principles.
+The sum of all entries equals $\sum_{k=1}^{n^2} k = n^2(n^2 + 1)/2$,
+which must be distributed equally among the $n$ rows, yielding $M(n)$ per row.
+The same argument applies to columns, and the diagonal constraints provide additional structure
+that severely restricts the space of valid configurations.
+
+Classical construction methods provide algorithmic approaches to generating magic squares of various orders \cite{andrews1960magic}.
+The Siamese method, attributed to de la Loubère, constructs magic squares for odd $n$
+by starting in the middle of the top row and moving diagonally up-right,
+wrapping around edges and moving down when blocked.
+For doubly-even orders ($n$ divisible by 4), one fills the grid sequentially 
+and then swaps diagonal elements with their complements.
+Singly-even orders ($n = 4k + 2$) require more sophisticated techniques
+combining quadrant-based construction with targeted transpositions.
+These methods demonstrate that magic squares exist for all $n \geq 3$,
+though they produce only a tiny fraction of all possible magic squares for larger orders.
+
+\subsection{Symmetry and the Dihedral Group}
+
+The dihedral group $D_4$ acts naturally on $n \times n$ grids through rotations and reflections \cite{ahmed2004discovering}.
+This group comprises eight elements: four rotations (by $0^\circ$, $90^\circ$, $180^\circ$, and $270^\circ$) 
+and four reflections (horizontal, vertical, and along both diagonals).
+Since the magic square conditions treat rows, columns, and diagonals symmetrically 
+under these operations, $D_4$ permutes magic squares among themselves.
+
+\begin{proposition}
+If $S$ is a magic square, then $g \cdot S$ is also a magic square for any $g \in D_4$.
+\end{proposition}
+
+\begin{proof}
+The $D_4$ action preserves the set of row sums, column sums, and diagonal sums,
+merely permuting which lines play which roles.
+Since the action also preserves the set of entries $\{1, \ldots, n^2\}$,
+it maps magic squares to magic squares.
+\end{proof}
+
+This symmetry motivates the notion of \emph{essentially different} magic squares:
+two squares are essentially the same if one can be obtained from the other by a $D_4$ transformation.
+For $n = 3$, all eight magic squares form a single equivalence class,
+while larger orders admit multiple classes with distinct structural properties.
+
+\subsection{Convex Hulls and Polyhedra}
+
+The convex hull of a finite point set $P \subset \R^d$ is the smallest convex set containing $P$,
+equivalently characterized as the set of all convex combinations of points in $P$:
+\[
+\text{conv}(P) = \left\{ \sum_{i=1}^{k} \lambda_i p_i : p_i \in P, \lambda_i \geq 0, \sum_i \lambda_i = 1 \right\}.
+\]
+For finite point sets in $\R^3$, the convex hull is a convex polyhedron 
+whose vertices form a subset of the original points.
+The remaining points lie in the interior or on faces of the polyhedron.
+
+Key geometric quantities associated with a convex polyhedron include its volume, 
+surface area, and the number of vertices, edges, and faces.
+These invariants provide a coarse characterization of the polyhedron's shape
+and will serve as descriptors for comparing Magic Gems across different arrangements.
+
+\subsection{Covariance and the Moment of Inertia}
+
+For a discrete collection of points $\{(\mathbf{x}_i)\}_{i=1}^{N}$ with positions $\mathbf{x}_i \in \R^d$,
+the covariance matrix captures the second-order statistical structure:
+\begin{equation}
+\Sigma_{jk} = \frac{1}{N} \sum_{i=1}^{N} (x_{i,j} - \bar{x}_j)(x_{i,k} - \bar{x}_k),
+\end{equation}
+where $\bar{x}_j = \frac{1}{N} \sum_i x_{i,j}$ denotes the mean of the $j$-th coordinate.
+When the point cloud is centered so that $\bar{\mathbf{x}} = \mathbf{0}$, 
+this simplifies to $\Sigma_{jk} = \frac{1}{N} \sum_i x_{i,j} x_{i,k}$.
+
+The diagonal entries $\Sigma_{jj}$ measure the variance along each coordinate axis,
+while the off-diagonal entries $\Sigma_{jk}$ ($j \neq k$) measure the covariance between coordinates.
+A zero off-diagonal entry indicates that the corresponding coordinates are uncorrelated:
+knowing one provides no linear information about the other.
+
+Closely related is the moment of inertia tensor from classical mechanics.
+For point masses $\{(m_i, \mathbf{x}_i)\}$ with positions $\mathbf{x}_i \in \R^3$, 
+the inertia tensor is given by
+\begin{equation}
+I_{jk} = \sum_{i=1}^{N} m_i \left( \|\mathbf{x}_i\|^2 \delta_{jk} - x_{i,j} x_{i,k} \right).
+\end{equation}
+The eigenvalues of $I$, called the principal moments of inertia, 
+characterize the rotational properties of the point configuration
+and are invariant under rigid rotations.
+For equal unit masses, the inertia tensor and covariance matrix are closely related,
+differing by a trace term and sign conventions.

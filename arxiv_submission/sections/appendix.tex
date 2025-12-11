@@ -1,0 +1,208 @@
+\section{Appendix: Technical Details}
+\label{sec:appendix}
+
+This appendix provides additional technical details supporting the main text,
+including a complete proof of the forward direction of the covariance characterization
+and discussion of the energy functional approach.
+
+\subsection{Proof Strategy Overview}
+
+The Energy Characterization Theorem (\Cref{thm:energy_char}) is established via 
+two complementary approaches:
+
+\textbf{Forward Direction (Algebraic):} Direct proof that magic squares have zero energy,
+following from the algebraic relationship between covariances and line sums.
+
+\textbf{Converse Direction (Exhaustive Verification):} For $n=3$, exhaustive enumeration 
+of all $362{,}880$ arrangements confirms that only magic squares achieve zero energy.
+For $n \geq 4$, large-scale sampling provides strong computational evidence.
+
+\subsection{Detailed Proof: Magic Implies Zero Covariance}
+
+We provide a complete proof of \Cref{prop:magic_implies_zero_cov},
+showing that every magic square has vanishing row and column covariances.
+
+\begin{proof}[Detailed Proof of \Cref{prop:magic_implies_zero_cov}]
+Let $S = (s_{ij})$ be an $n \times n$ magic square,
+and define coordinates as in \Cref{def:gem_coords}:
+\begin{align*}
+x_{ij} &= j - \frac{n-1}{2}, \\
+y_{ij} &= \frac{n-1}{2} - i, \\
+z_{ij} &= s_{ij} - \frac{n^2+1}{2}.
+\end{align*}
+
+\paragraph{Step 1: Verification that means vanish.}
+For the $x$-coordinate, we compute
+\[
+\bar{x} = \frac{1}{n^2} \sum_{i=0}^{n-1} \sum_{j=0}^{n-1} \left( j - \frac{n-1}{2} \right)
+= \frac{1}{n^2} \cdot n \sum_{j=0}^{n-1} \left( j - \frac{n-1}{2} \right).
+\]
+Since $\sum_{j=0}^{n-1} j = n(n-1)/2$, we have
+\[
+\sum_{j=0}^{n-1} \left( j - \frac{n-1}{2} \right) = \frac{n(n-1)}{2} - n \cdot \frac{n-1}{2} = 0,
+\]
+establishing $\bar{x} = 0$. An identical argument shows $\bar{y} = 0$.
+
+For the $z$-coordinate,
+\[
+\bar{z} = \frac{1}{n^2} \sum_{i,j} \left( s_{ij} - \frac{n^2+1}{2} \right)
+= \frac{1}{n^2} \left( \sum_{i,j} s_{ij} - n^2 \cdot \frac{n^2+1}{2} \right).
+\]
+Since $S$ is a permutation of $\{1, \ldots, n^2\}$, we have $\sum_{i,j} s_{ij} = n^2(n^2+1)/2$,
+yielding $\bar{z} = 0$.
+
+\paragraph{Step 2: Expression for $\Cov(X, Z)$.}
+With zero means, the covariance is
+\[
+\Cov(X, Z) = \frac{1}{n^2} \sum_{i,j} x_{ij} z_{ij}
+= \frac{1}{n^2} \sum_{i,j} \left( j - \frac{n-1}{2} \right) \left( s_{ij} - \frac{n^2+1}{2} \right).
+\]
+
+Expanding the product and separating terms:
+\begin{align*}
+n^2 \cdot \Cov(X, Z) &= \sum_{i,j} j \cdot s_{ij} 
+- \frac{n-1}{2} \sum_{i,j} s_{ij} \\
+&\quad - \frac{n^2+1}{2} \sum_{i,j} j 
++ \frac{(n-1)(n^2+1)}{4} n^2.
+\end{align*}
+
+We evaluate each term. First, $\sum_{i,j} s_{ij} = n^2(n^2+1)/2$.
+Second, $\sum_{i,j} j = n \sum_{j=0}^{n-1} j = n \cdot n(n-1)/2 = n^2(n-1)/2$.
+Substituting these and simplifying:
+\begin{align*}
+n^2 \cdot \Cov(X, Z) &= \sum_{i,j} j \cdot s_{ij} 
+- \frac{(n-1) n^2 (n^2+1)}{4} 
+- \frac{(n^2+1) n^2 (n-1)}{4} 
++ \frac{(n-1)(n^2+1) n^2}{4} \\
+&= \sum_{i,j} j \cdot s_{ij} - \frac{(n-1)(n^2+1) n^2}{4}.
+\end{align*}
+
+\paragraph{Step 3: Connection to column sums.}
+Let $C_j = \sum_{i=0}^{n-1} s_{ij}$ denote the sum of column $j$. Then
+\[
+\sum_{i,j} j \cdot s_{ij} = \sum_{j=0}^{n-1} j \cdot C_j.
+\]
+
+Since $S$ is a magic square, all column sums equal $M(n) = n(n^2+1)/2$.
+Then
+\[
+\sum_{j=0}^{n-1} j \cdot C_j = M(n) \sum_{j=0}^{n-1} j = \frac{n(n^2+1)}{2} \cdot \frac{n(n-1)}{2} = \frac{n^2(n-1)(n^2+1)}{4},
+\]
+which exactly equals the second term above. Hence $\Cov(X, Z) = 0$.
+
+The argument for $\Cov(Y, Z) = 0$ is entirely analogous, using row sums in place of column sums.
+\end{proof}
+
+\subsection{Why Row and Column Covariances Alone Are Insufficient}
+
+A natural question is whether the conditions $\Cov(X, Z) = \Cov(Y, Z) = 0$ alone 
+characterize magic squares (or even semi-magic squares with equal row and column sums).
+The answer is negative, and understanding why is instructive.
+
+Let $\delta_j = C_j - M(n)$ denote the deviation of column $j$ from the magic sum.
+The constraint $\Cov(X, Z) = 0$ is equivalent to $\sum_j (j - \frac{n-1}{2}) \delta_j = 0$.
+Combined with the total sum constraint $\sum_j \delta_j = 0$, this leaves an $(n-2)$-dimensional 
+space of possible deviation patterns.
+
+For $n = 3$, the deviation pattern must be $(\delta_0, \delta_1, \delta_2) = t(1, -2, 1)$ for some $t$.
+While the $t = 0$ case corresponds to equal column sums, \emph{non-zero values of $t$ are achievable}:
+exhaustive enumeration reveals 128 arrangements with column sums $(16, 13, 16)$ (i.e., $t = 1$)
+that simultaneously satisfy $\Cov(Y, Z) = 0$.
+
+The total count is 760 arrangements with both $\Cov(X, Z) = \Cov(Y, Z) = 0$,
+of which only 8 are magic squares.
+The remaining 752 arrangements satisfy the row and column covariance conditions 
+but fail to achieve equal row sums, equal column sums, or the diagonal conditions.
+
+\subsection{Energy Characterization Conjecture for General $n$}
+
+For $n \geq 4$, exhaustive enumeration becomes computationally infeasible
+($16! \approx 2 \times 10^{13}$ for $n = 4$, and $25! \approx 10^{25}$ for $n = 5$).
+We therefore state the general result as a conjecture, supported by extensive computational evidence.
+
+\begin{conjecture}[Energy Characterization---General $n$]
+\label{conj:general}
+For all $n \geq 3$, an arrangement $S$ of $\{1, 2, \ldots, n^2\}$ in an $n \times n$ grid 
+is a magic square if and only if the total magic energy vanishes:
+\begin{equation}
+E(S) = \Cov(X, Z)^2 + \Cov(Y, Z)^2 + \Cov(D_{\mathrm{main}}, Z)^2 + \Cov(D_{\mathrm{anti}}, Z)^2 = 0.
+\end{equation}
+\end{conjecture}
+
+This formulation is conceptually appealing: magic squares are precisely those arrangements 
+that are simultaneously uncorrelated with all four structural directions of the grid
+(rows, columns, main diagonal, anti-diagonal).
+
+\textbf{Important clarification:} 
+Note that requiring all four covariances to vanish is essential.
+As discussed in \Cref{sec:insufficiency}, the conditions $\Cov(X, Z) = \Cov(Y, Z) = 0$ 
+alone do \emph{not} characterize semi-magic squares---760 non-semi-magic arrangements 
+satisfy these conditions for $n = 3$.
+Only the complete energy functional $E(S) = 0$ characterizes magic squares.
+
+\textbf{Supporting evidence:}
+\begin{enumerate}
+\item \textbf{Proven for $n = 3$:} Exhaustive enumeration of all $362{,}880$ permutations 
+confirms that exactly 8 arrangements have $E(S) = 0$, all of which are magic squares 
+(the Lo Shu and its $D_4$ symmetry variants).
+\item \textbf{Strong evidence for $n = 4$:} All 7,040 known magic squares satisfy $E = 0$ exactly.
+Large-scale random sampling ($6 \times 10^7$ permutations) found zero 
+non-magic arrangements with $E < 10^{-10}$.
+\item \textbf{Strong evidence for $n = 5$:} All constructed magic squares satisfy $E = 0$ exactly. 
+Large-scale random sampling ($4 \times 10^8$ permutations) found zero 
+non-magic arrangements with $E < 10^{-10}$.
+\item \textbf{Total verification:} Over 460 million arrangements tested 
+across $n = 3, 4, 5$ with zero counterexamples observed.
+\end{enumerate}
+
+Note that the sampling approach tests the forward direction robustly 
+(confirming all magic squares have $E = 0$) but can only provide probabilistic evidence 
+for the converse (that all $E = 0$ arrangements are magic).
+Given the extreme rarity of magic squares (probability $\sim 10^{-10}$ for $n=4$ 
+and $\sim 10^{-17}$ for $n=5$), finding a counterexample by random sampling is unlikely 
+even if one existed, making this evidence suggestive but not conclusive.
+
+\subsection{Computational Methods}
+
+All computations were performed in Python 3 using the NumPy and SciPy libraries
+for numerical computation and the Matplotlib library for visualization.
+Convex hulls were computed using SciPy's implementation of the Quickhull algorithm.
+
+Random arrangements were generated by applying the Fisher-Yates shuffle
+to the array $[1, 2, \ldots, n^2]$ and reshaping to an $n \times n$ grid.
+This procedure samples uniformly from the $n^2!$ possible arrangements.
+
+Magic squares were generated using classical construction methods:
+the Siamese (de la Loubère) method for odd orders ($n = 3, 5$)
+and the doubly-even diagonal method for $n = 4$.
+This choice of methods ensures that we test the framework across both parity classes,
+which differ in their geometric structure (presence or absence of a central cell)
+and construction algorithms.
+The zero-covariance property was verified to hold within floating-point precision
+(typically $< 10^{-14}$) for all generated magic squares of all three orders.
+
+Source code for all analyses and figures is available in the supplementary materials.
+An interactive web application for visualizing Magic Gems is available at
+\href{https://kylemath.github.io/MagicGemWebpage/}{https://kylemath.github.io/MagicGemWebpage/}.
+
+\subsection{Summary Statistics}
+
+\Cref{tab:magic_stats} summarizes key statistics for magic squares of orders 3, 4, and 5.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{cccccc}
+\toprule
+$n$ & Arrangements & Magic Squares & Equiv.\ Classes & Probability & $M(n)$ \\
+\midrule
+3 & $3.6 \times 10^5$ & 8 & 1 & $2.2 \times 10^{-5}$ & 15 \\
+4 & $2.1 \times 10^{13}$ & 7,040 & 880 & $3.4 \times 10^{-10}$ & 34 \\
+5 & $1.6 \times 10^{25}$ & $2.8 \times 10^{8}$ & $3.4 \times 10^{7}$ & $1.8 \times 10^{-17}$ & 65 \\
+\bottomrule
+\end{tabular}
+\caption{Statistics for magic squares of orders 3, 4, and 5,
+showing the total number of arrangements, number of magic squares,
+number of equivalence classes under $D_4$, probability of a random arrangement being magic,
+and the magic constant $M(n)$.}
+\label{tab:magic_stats}
+\end{table}

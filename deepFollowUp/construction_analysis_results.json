@@ -1,0 +1,10 @@
+{
+  "covariance_analysis": {
+    "cov_xz_zero": 16416,
+    "cov_yz_zero": 16416,
+    "both_zero": 760,
+    "all_four_zero": 8,
+    "magic": 8
+  },
+  "key_insight": "Covariance conditions form linear constraints that could be used for construction"
+}

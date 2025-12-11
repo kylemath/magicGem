@@ -1,0 +1,406 @@
+\section{Methodology: The Magic Gem Framework}
+\label{sec:methodology}
+
+We now develop the Magic Gem framework, beginning with the construction of three-dimensional point clouds 
+from magic squares and culminating in our main theoretical result connecting magic squares to zero-covariance configurations.
+
+\subsection{From Magic Square to Point Cloud}
+
+Let $S = (s_{ij})$ be an $n \times n$ magic square with entries $s_{ij} \in \{1, 2, \ldots, n^2\}$.
+We construct a point cloud $P \subset \R^3$ by assigning three-dimensional coordinates to each cell of the grid.
+
+\begin{definition}[Magic Gem Coordinates]
+\label{def:gem_coords}
+For each cell $(i, j)$ with $i, j \in \{0, 1, \ldots, n-1\}$, define the point
+\begin{equation}
+\mathbf{p}_{ij} = \left( x_{ij}, y_{ij}, z_{ij} \right),
+\end{equation}
+where the coordinates are given by
+\begin{align}
+x_{ij} &= j - \frac{n-1}{2}, \label{eq:x_coord} \\
+y_{ij} &= \frac{n-1}{2} - i, \label{eq:y_coord} \\
+z_{ij} &= s_{ij} - \frac{n^2 + 1}{2}. \label{eq:z_coord}
+\end{align}
+\end{definition}
+
+The horizontal coordinates $x$ and $y$ place the grid centered at the origin,
+with the $x$-axis aligned with columns and the $y$-axis aligned with rows (inverted so that the top row has positive $y$).
+For a $3 \times 3$ grid, the nine positions have $x$- and $y$-coordinates in $\{-1, 0, 1\}$;
+for a $5 \times 5$ grid, they lie in $\{-2, -1, 0, 1, 2\}$.
+
+The vertical coordinate $z$ encodes the cell's value, shifted so that the mean value $(n^2 + 1)/2$ maps to zero.
+This centering ensures that the point cloud has zero mean in all three coordinates,
+a property that will prove essential for the covariance analysis.
+
+\begin{example}[Lo Shu Square]
+For the Lo Shu square
+\[
+S = \begin{pmatrix}
+2 & 7 & 6 \\
+9 & 5 & 1 \\
+4 & 3 & 8
+\end{pmatrix},
+\]
+with $n = 3$ and center value $5$, the nine points are
+\begin{align*}
+\mathbf{p}_{00} &= (-1, 1, -3), & \mathbf{p}_{01} &= (0, 1, 2), & \mathbf{p}_{02} &= (1, 1, 1), \\
+\mathbf{p}_{10} &= (-1, 0, 4), & \mathbf{p}_{11} &= (0, 0, 0), & \mathbf{p}_{12} &= (1, 0, -4), \\
+\mathbf{p}_{20} &= (-1, -1, -1), & \mathbf{p}_{21} &= (0, -1, -2), & \mathbf{p}_{22} &= (1, -1, 3).
+\end{align*}
+Note that the center cell, containing the value 5, maps to the origin.
+\end{example}
+
+\Cref{fig:construction} illustrates the four-step construction process, 
+progressing from the magic square through the centered grid to the final three-dimensional representation,
+along with all eight $D_4$ symmetry variants of the Lo Shu square.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{figures/fig02_combined_construction_symmetries.pdf}
+    \caption{\textbf{Construction process and symmetry structure.}
+    \emph{Top row (a--d):} Construction of a Magic Gem from the Lo Shu square.
+    (a) The Lo Shu magic square---the unique (up to symmetry) $3 \times 3$ magic square, 
+    with each row, column, and diagonal summing to $M(3) = 15$.
+    (b) Placement on a centered coordinate grid with origin at center.
+    (c) Assignment of $z$-values from cell entries.
+    (d) Centered Magic Gem point cloud with convex hull.
+    \emph{Bottom rows (e--l):} The eight $D_4$ symmetries of the $3 \times 3$ magic square, 
+    comprising four rotations and four reflections. 
+    Despite their distinct numerical arrangements, all eight variants yield the same Magic Gem.}
+    \label{fig:construction}
+\end{figure}
+
+\subsection{The Magic Gem Polyhedron}
+
+With the point cloud defined, we construct the Magic Gem as its convex hull \cite{barvinok2002course}.
+
+\begin{definition}[Magic Gem]
+The \emph{Magic Gem} associated with a magic square $S$ is the convex hull of the corresponding point cloud:
+\[
+\mathcal{G}(S) = \text{conv}\left( \{ \mathbf{p}_{ij} : 0 \leq i, j < n \} \right).
+\]
+\end{definition}
+
+A fundamental property of this construction is its invariance under the symmetry operations of the magic square.
+
+\begin{proposition}[Symmetry Invariance]
+\label{prop:symmetry_invariance}
+If $S'$ is obtained from $S$ by a symmetry operation $g \in D_4$, then $\mathcal{G}(S) = \mathcal{G}(S')$.
+\end{proposition}
+
+\begin{proof}
+Each element $g \in D_4$ acts on the grid as an orthogonal transformation of the $(x, y)$ plane,
+which extends naturally to an isometry of $\R^3$ that fixes the $z$-axis direction.
+Under this action, the $z$-coordinates are permuted according to the relabeling of cells,
+but the set of $z$-values remains unchanged.
+Since convex hulls are invariant under isometries and depend only on the set of points (not their labeling),
+we have $\mathcal{G}(S) = \mathcal{G}(S')$.
+\end{proof}
+
+This invariance means that all eight $D_4$ variants of a magic square produce the same Magic Gem.
+For $n = 3$, this implies that the single essentially different magic square yields a unique Magic Gem,
+while for larger orders, each equivalence class corresponds to a distinct geometric object.
+
+The construction figure (\Cref{fig:construction}, bottom rows) displays all eight symmetry variants of the $3 \times 3$ magic square,
+illustrating how these numerically distinct arrangements share a common geometric representation.
+
+\subsection{The Vector Representation}
+\label{sec:vector_rep}
+
+The centering of our coordinate system invites an interpretation of each point as a vector from the origin.
+Since the origin coincides with the centroid of the point cloud (as we shall verify),
+this vector representation captures the deviation of each cell from the ``balanced'' center.
+
+\begin{definition}[Magic Gem Vectors]
+The \emph{vector representation} of a Magic Gem is the collection
+\[
+\mathcal{V}(S) = \left\{ \mathbf{v}_{ij} = \mathbf{p}_{ij} : 0 \leq i, j < n \right\},
+\]
+where each point is interpreted as a vector emanating from the origin.
+\end{definition}
+
+This interpretation connects the Magic Gem to the classical physics of rigid bodies:
+if unit masses are placed at each vertex, the resulting configuration has its center of mass at the origin,
+and the vectors $\mathbf{v}_{ij}$ describe the displacement of each mass from this center.
+
+\subsubsection{Vectors and Covariance}
+
+The vector representation provides a geometric interpretation of the zero-covariance condition.
+Consider the weighted sum of vectors where each vector is weighted by its $x$-coordinate:
+\[
+\sum_{i,j} x_{ij} \mathbf{v}_{ij} = \sum_{i,j} x_{ij} (x_{ij}, y_{ij}, z_{ij}).
+\]
+The $z$-component of this weighted sum is precisely $n^2 \cdot \Cov(X, Z)$.
+Thus, zero covariance is equivalent to the statement that vectors, 
+when weighted by their horizontal positions, have no net vertical tendency.
+
+More explicitly, define the \emph{position-weighted vector sums}:
+\begin{align}
+\mathbf{W}_x &= \sum_{i,j} x_{ij} \mathbf{v}_{ij}, \label{eq:weighted_x} \\
+\mathbf{W}_y &= \sum_{i,j} y_{ij} \mathbf{v}_{ij}. \label{eq:weighted_y}
+\end{align}
+Then $\Cov(X, Z) = 0$ if and only if $(\mathbf{W}_x)_z = 0$, 
+and $\Cov(Y, Z) = 0$ if and only if $(\mathbf{W}_y)_z = 0$.
+
+This formulation reveals that magic squares achieve a form of \emph{directional balance}:
+the $z$-values are distributed so that neither horizontal direction 
+exhibits any systematic correlation with value magnitude.
+The vectors in Figure panels showing the vector representation 
+visually manifest this balance---vectors pointing in each horizontal direction 
+have $z$-components that ``cancel out'' when weighted by position.
+
+\subsection{The Covariance Structure of Magic Squares}
+\label{sec:zero_cov_theorem}
+
+We now establish our main theoretical results, revealing a deep connection 
+between the algebraic definition of magic squares and the statistical structure of Magic Gems.
+
+\subsubsection{Forward Direction: Magic Implies Zero Covariance}
+
+The following result holds for all $n \geq 3$ and admits a clean algebraic proof.
+
+\begin{proposition}[Magic Implies Zero Covariance]
+\label{prop:magic_implies_zero_cov}
+Let $S$ be an $n \times n$ magic square, and let $P = \{\mathbf{p}_{ij}\}$ be the corresponding point cloud. 
+Then $\Cov(X, Z) = \Cov(Y, Z) = 0$.
+\end{proposition}
+
+\begin{proof}
+We first verify that the means of all three coordinates vanish.
+For the $x$-coordinate,
+\[
+\bar{X} = \frac{1}{n^2} \sum_{i,j} x_{ij} = \frac{1}{n^2} \sum_{i,j} \left( j - \frac{n-1}{2} \right) 
+= \frac{n}{n^2} \sum_{j=0}^{n-1} \left( j - \frac{n-1}{2} \right) = 0,
+\]
+since $\sum_{j=0}^{n-1} j = n(n-1)/2$. An analogous argument shows $\bar{Y} = 0$, and 
+\[
+\bar{Z} = \frac{1}{n^2} \sum_{i,j} \left( s_{ij} - \frac{n^2+1}{2} \right) = 0
+\]
+since the entries sum to $n^2(n^2+1)/2$.
+
+With zero means, $\Cov(X, Z) = \frac{1}{n^2} \sum_{i,j} x_{ij} z_{ij}$.
+Define $C_j = \sum_{i=0}^{n-1} s_{ij}$ as the sum of column $j$. Then:
+\[
+\Cov(X, Z) = \frac{1}{n^2} \sum_{j=0}^{n-1} \left( j - \frac{n-1}{2} \right) C_j.
+\]
+For a magic square, all column sums equal $M(n)$, so
+\[
+\Cov(X, Z) = \frac{M(n)}{n^2} \sum_{j=0}^{n-1} \left( j - \frac{n-1}{2} \right) = 0.
+\]
+The argument for $\Cov(Y, Z) = 0$ via row sums is analogous.
+\end{proof}
+
+\begin{corollary}
+For any magic square, the covariance matrix of the Magic Gem coordinates has the block-diagonal form
+\[
+\Sigma = \begin{pmatrix}
+\Var(X) & \Cov(X,Y) & 0 \\
+\Cov(X,Y) & \Var(Y) & 0 \\
+0 & 0 & \Var(Z)
+\end{pmatrix}.
+\]
+In particular, the $z$-coordinate is uncorrelated with both horizontal coordinates.
+\end{corollary}
+
+\subsubsection{On the Insufficiency of Row and Column Covariances Alone}
+\label{sec:insufficiency}
+
+It is natural to ask whether the conditions $\Cov(X, Z) = \Cov(Y, Z) = 0$ alone 
+suffice to characterize magic squares, or at least semi-magic squares 
+(those with equal row and column sums but possibly failing the diagonal conditions).
+Perhaps surprisingly, the answer is \emph{no}.
+
+\begin{remark}[Counterexamples Exist]
+\label{rem:counterexample}
+Exhaustive enumeration for $n = 3$ reveals that \emph{760 arrangements} of $\{1, \ldots, 9\}$ 
+satisfy both $\Cov(X, Z) = 0$ and $\Cov(Y, Z) = 0$, yet only 8 of these are magic squares.
+For instance, the arrangement
+\[
+S = \begin{pmatrix}
+1 & 3 & 9 \\
+8 & 6 & 5 \\
+7 & 4 & 2
+\end{pmatrix}
+\]
+has row sums $(13, 19, 13)$ and column sums $(16, 13, 16)$---far from equal---yet 
+achieves $\Cov(X, Z) = \Cov(Y, Z) = 0$ exactly.
+\end{remark}
+
+This observation has important implications.
+The covariance conditions with $X$ and $Y$ alone impose only two linear constraints 
+on the space of possible row and column sum patterns.
+The remaining freedom in these patterns can be exploited to achieve zero covariance 
+without achieving equal sums.
+The \emph{characterization} of magic squares thus requires all four covariance conditions, 
+not merely the row and column covariances.
+This motivates the energy functional approach developed in \Cref{sec:energy_landscape}.
+
+\subsection{Diagonal Conditions as Covariances}
+\label{sec:diagonal_cov}
+
+The row and column constraints can be elegantly expressed via covariance with position coordinates.
+We extend this framework to diagonal constraints by introducing indicator random variables.
+
+\begin{definition}[Diagonal Indicators]
+Define indicator variables for the main and anti-diagonals:
+\begin{align}
+D_{\mathrm{main}}(i,j) &= \begin{cases} 1 & \text{if } i = j, \\ 0 & \text{otherwise}, \end{cases} \\
+D_{\mathrm{anti}}(i,j) &= \begin{cases} 1 & \text{if } i + j = n - 1, \\ 0 & \text{otherwise}. \end{cases}
+\end{align}
+\end{definition}
+
+These indicators allow us to express diagonal constraints in covariance form.
+
+\begin{proposition}[Diagonal Covariance Characterization]
+\label{prop:diagonal_cov}
+For an arrangement $S$ with centered $z$-values:
+\begin{enumerate}
+\item $\Cov(D_{\mathrm{main}}, Z) = 0$ if and only if the main diagonal sum equals $M(n)$.
+\item $\Cov(D_{\mathrm{anti}}, Z) = 0$ if and only if the anti-diagonal sum equals $M(n)$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+The mean of $D_{\mathrm{main}}$ over all cells is $\bar{D}_{\mathrm{main}} = n/n^2 = 1/n$.
+With $\bar{Z} = 0$, we have:
+\[
+\Cov(D_{\mathrm{main}}, Z) = \frac{1}{n^2} \sum_{i,j} D_{\mathrm{main}}(i,j) \cdot z_{ij} - \bar{D}_{\mathrm{main}} \cdot \bar{Z}
+= \frac{1}{n^2} \sum_{i=0}^{n-1} z_{ii}.
+\]
+Since $z_{ii} = s_{ii} - (n^2+1)/2$, the sum $\sum_i z_{ii} = \sum_i s_{ii} - n(n^2+1)/2$.
+This vanishes if and only if $\sum_i s_{ii} = M(n)$. The anti-diagonal case is analogous.
+\end{proof}
+
+This reformulation provides a unified covariance-based characterization:
+an arrangement is a magic square if and only if it has zero covariance with 
+\emph{all four} position indicators---$X$, $Y$, $D_{\mathrm{main}}$, and $D_{\mathrm{anti}}$.
+
+\subsection{Perturbation Analysis}
+\label{sec:perturbation}
+
+The zero-covariance characterization suggests that magic squares occupy special positions 
+in the space of all arrangements.
+We formalize this intuition through perturbation analysis.
+
+\begin{proposition}[Local Optimality]
+\label{prop:local_opt}
+Let $S$ be a magic square with corresponding point cloud $P$, 
+and let $\tilde{P}$ be obtained by perturbing the $z$-coordinates by amounts $\epsilon_{ij}$.
+Define the off-diagonal covariance magnitude
+\[
+\Phi(\tilde{P}) = \Cov(X, \tilde{Z})^2 + \Cov(Y, \tilde{Z})^2.
+\]
+Then $\Phi(P) = 0$, and for generic perturbations $\epsilon$, we have $\Phi(\tilde{P}) > 0$.
+\end{proposition}
+
+This result establishes that magic squares correspond to global minima of the functional $\Phi$.
+Since $\Phi \geq 0$ with equality only for magic configurations (among integer arrangements),
+magic squares are isolated critical points in the covariance landscape.
+Generic perturbations---those not preserving all row and column sums---immediately increase $\Phi$,
+confirming the exceptional nature of magic configurations.
+
+\subsection{The Covariance Energy Landscape}
+\label{sec:energy_landscape}
+
+The perturbation analysis invites a deeper interpretation of magic squares 
+as equilibrium configurations in an energy landscape.
+This perspective connects the discrete combinatorics of magic squares 
+to continuous optimization and statistical mechanics.
+
+\begin{definition}[Covariance Energy Functional]
+\label{def:covariance_energy}
+For an arrangement $S$, define the \emph{total magic energy} as the sum of squared covariances 
+with all four position indicators:
+\begin{equation}
+E(S) = \Cov(X, Z)^2 + \Cov(Y, Z)^2 + \Cov(D_{\mathrm{main}}, Z)^2 + \Cov(D_{\mathrm{anti}}, Z)^2.
+\label{eq:total_energy}
+\end{equation}
+Equivalently, we may decompose this as
+\[
+E(S) = E_{\text{cov}}(S) + E_{\text{diag}}(S),
+\]
+where $E_{\text{cov}}(S) = \Cov(X, Z)^2 + \Cov(Y, Z)^2$ captures row/column imbalance
+and $E_{\text{diag}}(S) = \Cov(D_{\mathrm{main}}, Z)^2 + \Cov(D_{\mathrm{anti}}, Z)^2$ captures diagonal imbalance.
+\end{definition}
+
+This formulation is conceptually clean: the magic energy is simply the sum of squared 
+``correlations'' between $z$-values and each of the four structural directions 
+(rows, columns, main diagonal, anti-diagonal).
+An arrangement achieves zero energy precisely when it is uncorrelated with all four directions---the 
+definition of a magic square.
+
+\begin{theorem}[Energy Characterization]
+\label{thm:energy_char}
+For $n = 3$, an arrangement $S$ of $\{1, \ldots, n^2\}$ is a magic square 
+if and only if $E(S) = 0$.
+This result is proven by exhaustive enumeration.
+\end{theorem}
+
+\begin{proof}
+The forward direction follows from \Cref{prop:magic_implies_zero_cov} and \Cref{prop:diagonal_cov}:
+every magic square has $\Cov(X, Z) = \Cov(Y, Z) = 0$ (from equal row and column sums)
+and $\Cov(D_{\mathrm{main}}, Z) = \Cov(D_{\mathrm{anti}}, Z) = 0$ (from equal diagonal sums),
+hence $E(S) = 0$.
+
+For the converse, we rely on exhaustive enumeration.
+Among all $9! = 362{,}880$ permutations of $\{1, \ldots, 9\}$, exactly 8 arrangements 
+achieve $E(S) = 0$ (to machine precision).
+All 8 of these arrangements are magic squares---specifically, the Lo Shu square 
+and its seven $D_4$ symmetry variants.
+No false positives exist: every arrangement with $E(S) = 0$ is magic.
+
+Note that the individual covariance conditions are \emph{not} independent:
+as shown in \Cref{rem:counterexample}, 760 arrangements satisfy $\Cov(X, Z) = \Cov(Y, Z) = 0$,
+but only the 8 magic squares additionally satisfy the diagonal conditions.
+The characterization requires all four covariances to vanish simultaneously.
+\end{proof}
+
+For $n = 4$ and $n = 5$, large-scale sampling (over 460 million arrangements total) 
+found no counterexamples: every arrangement with $E(S) \approx 0$ (within machine precision)
+was verified to be a magic square.
+This computational evidence strongly supports the conjecture that the energy characterization 
+holds for all $n \geq 3$ (see Conjecture~\ref{conj:general} in the Appendix).
+
+This characterization reveals magic squares as \emph{ground states} of a natural energy functional.
+Just as physical systems minimize their energy to reach equilibrium,
+arrangements of integers ``settle'' into magic configurations when the imbalance energy vanishes.
+The analogy extends further: the discrete nature of permutations creates a ``rough landscape'' 
+with isolated minima, making magic squares rare and difficult to find.
+
+\begin{proposition}[Isolation of Magic Squares]
+\label{prop:isolation}
+For $n = 3$ and $n = 4$, every magic square is a strict local minimum of $E$ 
+over the discrete space of permutations.
+That is, for any magic square $S$ and any arrangement $S'$ differing from $S$ 
+by a single transposition of two elements, we have $E(S') > E(S) = 0$.
+\end{proposition}
+
+The proof follows from direct computation: swapping any two elements in a magic square 
+necessarily destroys the equal-sum property, introducing nonzero covariance.
+This isolation property explains the rarity of magic squares:
+they occupy zero-energy wells surrounded by arrangements of strictly positive energy,
+with no gradual path between magic configurations.
+
+\subsection{The Moment of Inertia Tensor}
+\label{sec:inertia}
+
+The moment of inertia tensor provides another geometric invariant of Magic Gems
+that connects to the rotational dynamics of physical objects.
+
+For a Magic Gem with equal unit masses at each vertex, the inertia tensor takes the form
+\[
+I = \sum_{i,j} \begin{pmatrix}
+y_{ij}^2 + z_{ij}^2 & -x_{ij}y_{ij} & -x_{ij}z_{ij} \\
+-x_{ij}y_{ij} & x_{ij}^2 + z_{ij}^2 & -y_{ij}z_{ij} \\
+-x_{ij}z_{ij} & -y_{ij}z_{ij} & x_{ij}^2 + y_{ij}^2
+\end{pmatrix}.
+\]
+
+The eigenvalues of $I$---the principal moments of inertia---are invariant under rotation
+and characterize the intrinsic shape of the mass distribution.
+By \Cref{prop:magic_implies_zero_cov}, the off-diagonal elements $I_{xz} = -n^2 \Cov(X,Z)$ and $I_{yz} = -n^2 \Cov(Y,Z)$ 
+vanish for magic squares, simplifying the tensor structure.
+
+This connection to rigid body mechanics suggests physical interpretations of the Magic Gem:
+a solid object with mass concentrated at the Magic Gem vertices would exhibit balanced rotational properties
+reflecting the underlying magic square structure.

@@ -1,0 +1,688 @@
+{
+  "spectral_n3": {
+    "n": 3,
+    "magic_constant": 15,
+    "max_eigenvalue": 15.000000000000004,
+    "M_is_max_eigenvalue": true,
+    "all_eigenvalues": [
+      15.000000000000004,
+      4.8989794855663575,
+      -4.898979485566362
+    ],
+    "eigenvalue_pairs": [
+      [
+        -4.898979485566362,
+        4.8989794855663575
+      ],
+      [
+        4.8989794855663575,
+        -4.898979485566362
+      ]
+    ],
+    "unpaired_eigenvalues": [],
+    "characteristic_poly_coeffs": [
+      1.0,
+      -15.0,
+      -24.0000000000001,
+      360.0000000000006
+    ],
+    "trace": 15.0,
+    "determinant": -360.00000000000006
+  },
+  "spectral_n4": {
+    "n": 4,
+    "magic_constant": 34,
+    "max_eigenvalue": 34.00000000000003,
+    "M_is_max_eigenvalue": true,
+    "all_eigenvalues": [
+      34.00000000000003,
+      8.944271909999156,
+      -5.801546347934532e-16,
+      -8.94427190999916
+    ],
+    "eigenvalue_pairs": [
+      [
+        8.944271909999156,
+        -8.94427190999916
+      ],
+      [
+        -8.94427190999916,
+        8.944271909999156
+      ]
+    ],
+    "unpaired_eigenvalues": [],
+    "characteristic_poly_coeffs": [
+      1.0,
+      -34.00000000000003,
+      -80.00000000000013,
+      2720.0000000000014,
+      1.5780206066381934e-12
+    ],
+    "trace": 34.0,
+    "determinant": 5.133671265866721e-13
+  },
+  "spectral_n5": {
+    "n": 5,
+    "magic_constant": 65,
+    "max_eigenvalue": 65.00000000000003,
+    "M_is_max_eigenvalue": true,
+    "all_eigenvalues": [
+      65.00000000000003,
+      21.27676547147377,
+      13.126280930709218,
+      -13.126280930709218,
+      -21.27676547147382
+    ],
+    "eigenvalue_pairs": [
+      [
+        -21.27676547147382,
+        21.27676547147377
+      ],
+      [
+        -13.126280930709218,
+        13.126280930709218
+      ],
+      [
+        21.27676547147377,
+        -21.27676547147382
+      ],
+      [
+        13.126280930709218,
+        -13.126280930709218
+      ]
+    ],
+    "unpaired_eigenvalues": [],
+    "characteristic_poly_coeffs": [
+      1.0,
+      -64.99999999999997,
+      -625.0000000000033,
+      40625.00000000001,
+      78000.00000000052,
+      -5070000.000000001
+    ],
+    "trace": 65.0,
+    "determinant": 5069999.999999997
+  },
+  "spectral_n7": {
+    "n": 7,
+    "magic_constant": 175,
+    "max_eigenvalue": 174.99999999999994,
+    "M_is_max_eigenvalue": true,
+    "all_eigenvalues": [
+      174.99999999999994,
+      56.48482668416481,
+      31.08815855992925,
+      25.396668124235582,
+      -25.396668124235564,
+      -31.088158559929226,
+      -56.48482668416479
+    ],
+    "eigenvalue_pairs": [
+      [
+        -56.48482668416479,
+        56.48482668416481
+      ],
+      [
+        -31.088158559929226,
+        31.08815855992925
+      ],
+      [
+        -25.396668124235564,
+        25.396668124235582
+      ],
+      [
+        56.48482668416481,
+        -56.48482668416479
+      ],
+      [
+        25.396668124235582,
+        -25.396668124235564
+      ]
+    ],
+    "unpaired_eigenvalues": [],
+    "characteristic_poly_coeffs": [
+      1.0,
+      -175.0,
+      -4801.99999999999,
+      840350.0000000002,
+      5764800.999999959,
+      -1008840175.0
+    ],
+    "trace": 175.0,
+    "determinant": -348052801599.99963
+  },
+  "cov_theorem_n3": {
+    "n": 3,
+    "empirical_var_x": 0.6666666666666666,
+    "empirical_var_y": 0.6666666666666666,
+    "empirical_var_z": 6.666666666666667,
+    "theoretical_var_z": 6.666666666666667,
+    "theoretical_var_xy": 0.6666666666666666,
+    "var_z_matches_theory": true,
+    "var_xy_matches_theory": true,
+    "cov_eigenvalues": [
+      7.5,
+      0.75,
+      0.75
+    ],
+    "cov_matrix": [
+      [
+        0.75,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.75,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        7.5
+      ]
+    ]
+  },
+  "cov_theorem_n5": {
+    "n": 5,
+    "empirical_var_x": 2.0,
+    "empirical_var_y": 2.0,
+    "empirical_var_z": 52.0,
+    "theoretical_var_z": 52.0,
+    "theoretical_var_xy": 2.0,
+    "var_z_matches_theory": true,
+    "var_xy_matches_theory": true,
+    "cov_eigenvalues": [
+      54.166666666666664,
+      2.083333333333333,
+      2.083333333333333
+    ],
+    "cov_matrix": [
+      [
+        2.083333333333333,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        2.083333333333333,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        54.166666666666664
+      ]
+    ]
+  },
+  "cov_theorem_n7": {
+    "n": 7,
+    "empirical_var_x": 4.0,
+    "empirical_var_y": 4.0,
+    "empirical_var_z": 200.0,
+    "theoretical_var_z": 200.0,
+    "theoretical_var_xy": 4.0,
+    "var_z_matches_theory": true,
+    "var_xy_matches_theory": true,
+    "cov_eigenvalues": [
+      204.16666666666666,
+      4.083333333333333,
+      4.083333333333333
+    ],
+    "cov_matrix": [
+      [
+        4.083333333333333,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        4.083333333333333,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        204.16666666666666
+      ]
+    ]
+  },
+  "moments_n3": {
+    "n": 3,
+    "second_moments": {
+      "E_X2": 0.6666666666666666,
+      "E_Y2": 0.6666666666666666,
+      "E_Z2": 6.666666666666667,
+      "E_XZ": 0.0,
+      "E_YZ": 0.0,
+      "E_XY": 0.0
+    },
+    "third_moments": {
+      "E_X3": 0.0,
+      "E_Y3": 0.0,
+      "E_Z3": 0.0,
+      "E_X2Z": 0.0,
+      "E_Y2Z": 0.0,
+      "E_XYZ": 0.0,
+      "E_XZ2": 0.0,
+      "E_YZ2": 0.0
+    },
+    "fourth_moments": {
+      "E_X4": 0.6666666666666666,
+      "E_Y4": 0.6666666666666666,
+      "E_Z4": 78.66666666666667,
+      "E_X2Y2": 0.4444444444444444,
+      "E_X2Z2": 5.777777777777778,
+      "E_Y2Z2": 3.111111111111111
+    },
+    "kurtosis_z": -1.2300000000000002,
+    "E_X2Z_is_zero": true,
+    "E_Y2Z_is_zero": true,
+    "E_XYZ_is_zero": true
+  },
+  "moments_n5": {
+    "n": 5,
+    "second_moments": {
+      "E_X2": 2.0,
+      "E_Y2": 2.0,
+      "E_Z2": 52.0,
+      "E_XZ": 0.0,
+      "E_YZ": 0.0,
+      "E_XY": 0.0
+    },
+    "third_moments": {
+      "E_X3": 0.0,
+      "E_Y3": 0.0,
+      "E_Z3": 0.0,
+      "E_X2Z": 0.0,
+      "E_Y2Z": 0.0,
+      "E_XYZ": 0.0,
+      "E_XZ2": 0.0,
+      "E_YZ2": 0.0
+    },
+    "fourth_moments": {
+      "E_X4": 6.8,
+      "E_Y4": 6.8,
+      "E_Z4": 4856.8,
+      "E_X2Y2": 4.0,
+      "E_X2Z2": 88.0,
+      "E_Y2Z2": 116.0
+    },
+    "kurtosis_z": -1.2038461538461538,
+    "E_X2Z_is_zero": true,
+    "E_Y2Z_is_zero": true,
+    "E_XYZ_is_zero": true
+  },
+  "d4_rep_n3": {
+    "n": 3,
+    "eigenvalues_D4_invariant": false,
+    "eigenvalue_sets": [
+      [
+        15.000000000000004,
+        4.8989794855663575,
+        -4.898979485566362
+      ],
+      [
+        14.999999999999991,
+        6.402256469584978e-16,
+        6.402256469584978e-16
+      ],
+      [
+        15.000000000000002,
+        -1.740073014680329e-16,
+        -1.740073014680329e-16
+      ],
+      [
+        15.0,
+        4.898979485566363,
+        -4.8989794855663575
+      ]
+    ]
+  },
+  "d4_rep_n5": {
+    "n": 5,
+    "eigenvalues_D4_invariant": false,
+    "eigenvalue_sets": [
+      [
+        65.00000000000003,
+        21.27676547147377,
+        13.126280930709218,
+        -13.126280930709218,
+        -21.27676547147382
+      ],
+      [
+        65.0,
+        2.8035164753976605e-15,
+        2.8035164753976605e-15,
+        1.4224869918721256e-15,
+        1.4224869918721256e-15
+      ],
+      [
+        64.99999999999993,
+        1.297530839000149e-15,
+        1.297530839000149e-15,
+        -2.1814996035393453e-15,
+        -2.1814996035393453e-15
+      ],
+      [
+        65.00000000000007,
+        21.276765471473794,
+        13.126280930709235,
+        -13.126280930709214,
+        -21.276765471473787
+      ]
+    ]
+  },
+  "gap_structure_n3": {
+    "n": 3,
+    "min_gap": 0.024691358024691357,
+    "min_gap_positions": [
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        2
+      ]
+    ],
+    "mean_gap": 0.6378600823045267,
+    "std_gap": 0.7559481483591792,
+    "n_swaps": 36,
+    "same_row_mean": 0.8888888888888888,
+    "same_col_mean": 0.5925925925925927,
+    "diagonal_mean": 0.7818930041152262,
+    "other_mean": 0.41152263374485604,
+    "min_gap_times_n2": 0.2222222222222222,
+    "min_gap_times_n4": 2.0
+  },
+  "gap_structure_n4": {
+    "n": 4,
+    "min_gap": 0.00390625,
+    "min_gap_positions": [
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        2
+      ]
+    ],
+    "mean_gap": 1.1598958333333333,
+    "std_gap": 1.974787919344477,
+    "n_swaps": 120,
+    "same_row_mean": 0.8059895833333334,
+    "same_col_mean": 1.2747395833333333,
+    "diagonal_mean": 2.5677083333333335,
+    "other_mean": 0.9739583333333334,
+    "min_gap_times_n2": 0.0625,
+    "min_gap_times_n4": 1.0
+  },
+  "gap_structure_n5": {
+    "n": 5,
+    "min_gap": 0.0032,
+    "min_gap_positions": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        0
+      ]
+    ],
+    "mean_gap": 1.4562666666666668,
+    "std_gap": 2.327104028577627,
+    "n_swaps": 300,
+    "same_row_mean": 1.0928,
+    "same_col_mean": 1.3039999999999998,
+    "diagonal_mean": 0.5496000000000001,
+    "other_mean": 1.7002666666666666,
+    "min_gap_times_n2": 0.08,
+    "min_gap_times_n4": 2.0
+  },
+  "hull_pattern": {
+    "3": {
+      "n_points": 9,
+      "hull_vertices": 8,
+      "interior_points": 1,
+      "hull_fraction": 0.8888888888888888,
+      "volume": 18.0,
+      "area": 46.27495922579209
+    },
+    "5": {
+      "n_points": 25,
+      "hull_vertices": 12,
+      "interior_points": 13,
+      "hull_fraction": 0.48,
+      "volume": 276.66666666666663,
+      "area": 309.81549048576267
+    },
+    "7": {
+      "n_points": 49,
+      "hull_vertices": 12,
+      "interior_points": 37,
+      "hull_fraction": 0.24489795918367346,
+      "volume": 1320.6666666666667,
+      "area": 953.6907914930522
+    },
+    "9": {
+      "n_points": 81,
+      "hull_vertices": 12,
+      "interior_points": 69,
+      "hull_fraction": 0.14814814814814814,
+      "volume": 4014.0,
+      "area": 2141.5647720581746
+    }
+  },
+  "modular_magic": {
+    "n3_p2": {
+      "n": 3,
+      "p": 2,
+      "M_mod_p": 1,
+      "is_magic_mod_p": true,
+      "actual_magic_sum": 1,
+      "sum_matches_M_mod_p": true
+    },
+    "n3_p3": {
+      "n": 3,
+      "p": 3,
+      "M_mod_p": 0,
+      "is_magic_mod_p": true,
+      "actual_magic_sum": 0,
+      "sum_matches_M_mod_p": true
+    },
+    "n3_p5": {
+      "n": 3,
+      "p": 5,
+      "M_mod_p": 0,
+      "is_magic_mod_p": true,
+      "actual_magic_sum": 0,
+      "sum_matches_M_mod_p": true
+    },
+    "n3_p7": {
+      "n": 3,
+      "p": 7,
+      "M_mod_p": 1,
+      "is_magic_mod_p": true,
+      "actual_magic_sum": 1,
+      "sum_matches_M_mod_p": true
+    },
+    "n3_p11": {
+      "n": 3,
+      "p": 11,
+      "M_mod_p": 4,
+      "is_magic_mod_p": true,
+      "actual_magic_sum": 4,
+      "sum_matches_M_mod_p": true
+    },
+    "n3_p13": {
+      "n": 3,
+      "p": 13,
+      "M_mod_p": 2,
+      "is_magic_mod_p": true,
+      "actual_magic_sum": 2,
+      "sum_matches_M_mod_p": true
+    },
+    "n5_p2": {
+      "n": 5,
+      "p": 2,
+      "M_mod_p": 1,
+      "is_magic_mod_p": true,
+      "actual_magic_sum": 1,
+      "sum_matches_M_mod_p": true
+    },
+    "n5_p3": {
+      "n": 5,
+      "p": 3,
+      "M_mod_p": 2,
+      "is_magic_mod_p": true,
+      "actual_magic_sum": 2,
+      "sum_matches_M_mod_p": true
+    },
+    "n5_p5": {
+      "n": 5,
+      "p": 5,
+      "M_mod_p": 0,
+      "is_magic_mod_p": true,
+      "actual_magic_sum": 0,
+      "sum_matches_M_mod_p": true
+    },
+    "n5_p7": {
+      "n": 5,
+      "p": 7,
+      "M_mod_p": 2,
+      "is_magic_mod_p": true,
+      "actual_magic_sum": 2,
+      "sum_matches_M_mod_p": true
+    },
+    "n5_p11": {
+      "n": 5,
+      "p": 11,
+      "M_mod_p": 10,
+      "is_magic_mod_p": true,
+      "actual_magic_sum": 10,
+      "sum_matches_M_mod_p": true
+    },
+    "n5_p13": {
+      "n": 5,
+      "p": 13,
+      "M_mod_p": 0,
+      "is_magic_mod_p": true,
+      "actual_magic_sum": 0,
+      "sum_matches_M_mod_p": true
+    },
+    "n7_p2": {
+      "n": 7,
+      "p": 2,
+      "M_mod_p": 1,
+      "is_magic_mod_p": true,
+      "actual_magic_sum": 1,
+      "sum_matches_M_mod_p": true
+    },
+    "n7_p3": {
+      "n": 7,
+      "p": 3,
+      "M_mod_p": 1,
+      "is_magic_mod_p": true,
+      "actual_magic_sum": 1,
+      "sum_matches_M_mod_p": true
+    },
+    "n7_p5": {
+      "n": 7,
+      "p": 5,
+      "M_mod_p": 0,
+      "is_magic_mod_p": true,
+      "actual_magic_sum": 0,
+      "sum_matches_M_mod_p": true
+    },
+    "n7_p7": {
+      "n": 7,
+      "p": 7,
+      "M_mod_p": 0,
+      "is_magic_mod_p": true,
+      "actual_magic_sum": 0,
+      "sum_matches_M_mod_p": true
+    },
+    "n7_p11": {
+      "n": 7,
+      "p": 11,
+      "M_mod_p": 10,
+      "is_magic_mod_p": true,
+      "actual_magic_sum": 10,
+      "sum_matches_M_mod_p": true
+    },
+    "n7_p13": {
+      "n": 7,
+      "p": 13,
+      "M_mod_p": 6,
+      "is_magic_mod_p": true,
+      "actual_magic_sum": 6,
+      "sum_matches_M_mod_p": true
+    }
+  },
+  "landscape_topology": {
+    "n": 3,
+    "total_arrangements": 362880,
+    "magic_squares": 8,
+    "local_minima_count": 344,
+    "all_local_minima_are_magic": false,
+    "energy_mean": 1.4814814814814807,
+    "energy_std": 0.8369605558853478,
+    "energy_min": 0.0,
+    "energy_max": 4.444444444444445,
+    "energy_median": 1.3333333333333335,
+    "fraction_near_zero": 2.2045855379188714e-05
+  },
+  "char_poly": {
+    "3": {
+      "magic_constant": 15,
+      "trace": 15.0,
+      "determinant": -360.00000000000006,
+      "char_poly_coeffs": [
+        1.0,
+        -15.0,
+        -24.0000000000001,
+        360.0000000000006
+      ],
+      "leading_coeff": 1.0,
+      "constant_term": 360.0000000000006,
+      "trace_equals_diagonal": true
+    },
+    "5": {
+      "magic_constant": 65,
+      "trace": 65.0,
+      "determinant": 5069999.999999997,
+      "char_poly_coeffs": [
+        1.0,
+        -64.99999999999997,
+        -625.0000000000033,
+        40625.00000000001,
+        78000.00000000052,
+        -5070000.000000001
+      ],
+      "leading_coeff": 1.0,
+      "constant_term": -5070000.000000001,
+      "trace_equals_diagonal": true
+    },
+    "7": {
+      "magic_constant": 175,
+      "trace": 175.0,
+      "determinant": -348052801599.99963,
+      "char_poly_coeffs": [
+        1.0,
+        -175.0,
+        -4801.99999999999,
+        840350.0000000002,
+        5764800.999999959,
+        -1008840175.0,
+        -1988873151.9999847,
+        348052801600.00024
+      ],
+      "leading_coeff": 1.0,
+      "constant_term": 348052801600.00024,
+      "trace_equals_diagonal": true
+    }
+  }
+}

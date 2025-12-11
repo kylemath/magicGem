@@ -1,0 +1,952 @@
+{
+  "spectral_n3": {
+    "eigenvalues": [
+      15.000000000000004,
+      4.8989794855663575,
+      -4.898979485566362
+    ],
+    "has_M_eigenvalue": true,
+    "determinant": -360.00000000000006,
+    "trace": 15,
+    "condition_number": 4.330127018922193,
+    "singular_values": [
+      15.000000000000005,
+      6.928203230275508,
+      3.464101615137756
+    ],
+    "frobenius_norm": 16.881943016134134,
+    "spectral_radius": 15.000000000000004,
+    "eigenvalue_ratio_1_2": 3.06186217847897
+  },
+  "spectral_n4": {
+    "eigenvalues": [
+      34.00000000000003,
+      8.944271909999156,
+      -5.801546347934532e-16,
+      -8.94427190999916
+    ],
+    "has_M_eigenvalue": true,
+    "determinant": 5.133671265866721e-13,
+    "trace": 34,
+    "condition_number": 2.0757575757583176e+16,
+    "singular_values": [
+      34.0,
+      17.888543819998315,
+      4.472135954999582,
+      1.6379562043789767e-15
+    ],
+    "frobenius_norm": 38.67815921162743,
+    "spectral_radius": 34.00000000000003,
+    "eigenvalue_ratio_1_2": 3.8013155617496457
+  },
+  "spectral_n5": {
+    "eigenvalues": [
+      65.00000000000003,
+      21.27676547147377,
+      13.126280930709218,
+      -13.126280930709218,
+      -21.27676547147382
+    ],
+    "has_M_eigenvalue": true,
+    "determinant": 5069999.999999997,
+    "trace": 65,
+    "condition_number": 5.4618224912705235,
+    "singular_values": [
+      64.99999999999999,
+      22.54708868587966,
+      21.687425355202645,
+      13.403565997991494,
+      11.900789544861198
+    ],
+    "frobenius_norm": 74.33034373659252,
+    "spectral_radius": 65.00000000000003,
+    "eigenvalue_ratio_1_2": 3.054975629972837
+  },
+  "cov_spectrum_n3": {
+    "cov_matrix": [
+      [
+        0.75,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.75,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        7.5
+      ]
+    ],
+    "cov_eigenvalues": [
+      7.5,
+      0.75,
+      0.75
+    ],
+    "is_block_diagonal": true,
+    "off_diag_xz": 0.0,
+    "off_diag_yz": 0.0
+  },
+  "cov_spectrum_n4": {
+    "cov_matrix": [
+      [
+        1.3333333333333333,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.3333333333333333,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        22.666666666666668
+      ]
+    ],
+    "cov_eigenvalues": [
+      22.666666666666668,
+      1.3333333333333333,
+      1.3333333333333333
+    ],
+    "is_block_diagonal": true,
+    "off_diag_xz": 0.0,
+    "off_diag_yz": 0.0
+  },
+  "cov_spectrum_n5": {
+    "cov_matrix": [
+      [
+        2.083333333333333,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        2.083333333333333,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        54.166666666666664
+      ]
+    ],
+    "cov_eigenvalues": [
+      54.166666666666664,
+      2.083333333333333,
+      2.083333333333333
+    ],
+    "is_block_diagonal": true,
+    "off_diag_xz": 0.0,
+    "off_diag_yz": 0.0
+  },
+  "graph_n3": {
+    "n_vertices": 9,
+    "max_shared_constraints": 1,
+    "avg_shared_constraints": 0.6666666666666666,
+    "is_regular_graph": false,
+    "vertex_degrees": [
+      6,
+      4,
+      6,
+      4,
+      8,
+      4,
+      6,
+      4,
+      6
+    ]
+  },
+  "graph_n5": {
+    "n_vertices": 25,
+    "max_shared_constraints": 1,
+    "avg_shared_constraints": 0.4,
+    "is_regular_graph": false,
+    "vertex_degrees": [
+      12,
+      8,
+      8,
+      8,
+      12,
+      8,
+      12,
+      8,
+      12,
+      8,
+      8,
+      8,
+      16,
+      8,
+      8,
+      8,
+      12,
+      8,
+      12,
+      8,
+      12,
+      8,
+      8,
+      8,
+      12
+    ]
+  },
+  "modular_n3": {
+    "n": 3,
+    "magic_constant": 15,
+    "magic_constant_factorization": {
+      "3": 1,
+      "5": 1
+    },
+    "mod_2": {
+      "square_mod_p": [
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          0,
+          1,
+          0
+        ]
+      ],
+      "row_sums_mod_p": [
+        1,
+        1,
+        1
+      ],
+      "is_magic_mod_p": true,
+      "M_mod_p": 1
+    },
+    "mod_3": {
+      "square_mod_p": [
+        [
+          2,
+          1,
+          0
+        ],
+        [
+          0,
+          2,
+          1
+        ],
+        [
+          1,
+          0,
+          2
+        ]
+      ],
+      "row_sums_mod_p": [
+        0,
+        0,
+        0
+      ],
+      "is_magic_mod_p": true,
+      "M_mod_p": 0
+    },
+    "mod_5": {
+      "square_mod_p": [
+        [
+          2,
+          2,
+          1
+        ],
+        [
+          4,
+          0,
+          1
+        ],
+        [
+          4,
+          3,
+          3
+        ]
+      ],
+      "row_sums_mod_p": [
+        0,
+        0,
+        0
+      ],
+      "is_magic_mod_p": true,
+      "M_mod_p": 0
+    },
+    "mod_7": {
+      "square_mod_p": [
+        [
+          2,
+          0,
+          6
+        ],
+        [
+          2,
+          5,
+          1
+        ],
+        [
+          4,
+          3,
+          1
+        ]
+      ],
+      "row_sums_mod_p": [
+        1,
+        1,
+        1
+      ],
+      "is_magic_mod_p": true,
+      "M_mod_p": 1
+    },
+    "mod_11": {
+      "square_mod_p": [
+        [
+          2,
+          7,
+          6
+        ],
+        [
+          9,
+          5,
+          1
+        ],
+        [
+          4,
+          3,
+          8
+        ]
+      ],
+      "row_sums_mod_p": [
+        4,
+        4,
+        4
+      ],
+      "is_magic_mod_p": true,
+      "M_mod_p": 4
+    },
+    "qr_pattern_mod_3": [
+      [
+        -1,
+        1,
+        0
+      ],
+      [
+        0,
+        -1,
+        1
+      ],
+      [
+        1,
+        0,
+        -1
+      ]
+    ],
+    "qr_pattern_mod_5": [
+      [
+        -1,
+        -1,
+        1
+      ],
+      [
+        1,
+        0,
+        1
+      ],
+      [
+        1,
+        -1,
+        -1
+      ]
+    ],
+    "qr_pattern_mod_7": [
+      [
+        1,
+        0,
+        -1
+      ],
+      [
+        1,
+        -1,
+        1
+      ],
+      [
+        1,
+        -1,
+        1
+      ]
+    ]
+  },
+  "modular_n5": {
+    "n": 5,
+    "magic_constant": 65,
+    "magic_constant_factorization": {
+      "5": 1,
+      "13": 1
+    },
+    "mod_2": {
+      "square_mod_p": [
+        [
+          1,
+          0,
+          1,
+          0,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          0,
+          1,
+          0,
+          1
+        ]
+      ],
+      "row_sums_mod_p": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "is_magic_mod_p": true,
+      "M_mod_p": 1
+    },
+    "mod_3": {
+      "square_mod_p": [
+        [
+          2,
+          0,
+          1,
+          2,
+          0
+        ],
+        [
+          2,
+          2,
+          1,
+          2,
+          1
+        ],
+        [
+          1,
+          0,
+          1,
+          2,
+          1
+        ],
+        [
+          1,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          1,
+          2,
+          0
+        ]
+      ],
+      "row_sums_mod_p": [
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "is_magic_mod_p": true,
+      "M_mod_p": 2
+    },
+    "mod_5": {
+      "square_mod_p": [
+        [
+          2,
+          4,
+          1,
+          3,
+          0
+        ],
+        [
+          3,
+          0,
+          2,
+          4,
+          1
+        ],
+        [
+          4,
+          1,
+          3,
+          0,
+          2
+        ],
+        [
+          0,
+          2,
+          4,
+          1,
+          3
+        ],
+        [
+          1,
+          3,
+          0,
+          2,
+          4
+        ]
+      ],
+      "row_sums_mod_p": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "is_magic_mod_p": true,
+      "M_mod_p": 0
+    },
+    "mod_7": {
+      "square_mod_p": [
+        [
+          3,
+          3,
+          1,
+          1,
+          1
+        ],
+        [
+          2,
+          5,
+          0,
+          0,
+          2
+        ],
+        [
+          4,
+          6,
+          6,
+          6,
+          1
+        ],
+        [
+          3,
+          5,
+          5,
+          0,
+          3
+        ],
+        [
+          4,
+          4,
+          4,
+          2,
+          2
+        ]
+      ],
+      "row_sums_mod_p": [
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "is_magic_mod_p": true,
+      "M_mod_p": 2
+    },
+    "mod_11": {
+      "square_mod_p": [
+        [
+          6,
+          2,
+          1,
+          8,
+          4
+        ],
+        [
+          1,
+          5,
+          7,
+          3,
+          5
+        ],
+        [
+          4,
+          6,
+          2,
+          9,
+          0
+        ],
+        [
+          10,
+          1,
+          8,
+          10,
+          3
+        ],
+        [
+          0,
+          7,
+          3,
+          2,
+          9
+        ]
+      ],
+      "row_sums_mod_p": [
+        10,
+        10,
+        10,
+        10,
+        10
+      ],
+      "is_magic_mod_p": true,
+      "M_mod_p": 10
+    },
+    "qr_pattern_mod_3": [
+      [
+        -1,
+        0,
+        1,
+        -1,
+        0
+      ],
+      [
+        -1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      [
+        1,
+        0,
+        1,
+        -1,
+        1
+      ],
+      [
+        1,
+        0,
+        1,
+        0,
+        0
+      ],
+      [
+        -1,
+        0,
+        1,
+        -1,
+        0
+      ]
+    ],
+    "qr_pattern_mod_5": [
+      [
+        -1,
+        1,
+        1,
+        -1,
+        0
+      ],
+      [
+        -1,
+        0,
+        -1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        -1,
+        0,
+        -1
+      ],
+      [
+        0,
+        -1,
+        1,
+        1,
+        -1
+      ],
+      [
+        1,
+        -1,
+        0,
+        -1,
+        1
+      ]
+    ],
+    "qr_pattern_mod_7": [
+      [
+        -1,
+        -1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        -1,
+        0,
+        0,
+        1
+      ],
+      [
+        1,
+        -1,
+        -1,
+        -1,
+        1
+      ],
+      [
+        -1,
+        -1,
+        -1,
+        0,
+        -1
+      ],
+      [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    ]
+  },
+  "topology_n3": {
+    "hull_vertices": 8,
+    "hull_faces": 12,
+    "hull_edges": 18,
+    "euler_characteristic": 2,
+    "hull_volume": 18.0,
+    "hull_area": 46.27495922579209,
+    "isoperimetric_ratio": 0.148423371305573,
+    "interior_points": 1
+  },
+  "topology_n4": {
+    "hull_vertices": 12,
+    "hull_faces": 20,
+    "hull_edges": 30,
+    "euler_characteristic": 2,
+    "hull_volume": 95.0,
+    "hull_area": 145.17208715103396,
+    "isoperimetric_ratio": 0.14341655388863117,
+    "interior_points": 4
+  },
+  "topology_n5": {
+    "hull_vertices": 12,
+    "hull_faces": 20,
+    "hull_edges": 30,
+    "euler_characteristic": 2,
+    "hull_volume": 276.66666666666663,
+    "hull_area": 309.81549048576267,
+    "isoperimetric_ratio": 0.13704654675093458,
+    "interior_points": 13
+  },
+  "rigidity_n3": {
+    "n_points": 9,
+    "n_edges": 18,
+    "rigidity_matrix_rank": 18,
+    "required_rank_for_rigidity": 21,
+    "is_infinitesimally_rigid": false,
+    "degrees_of_freedom": 3
+  },
+  "rigidity_n5": {
+    "n_points": 25,
+    "n_edges": 30,
+    "rigidity_matrix_rank": 30,
+    "required_rank_for_rigidity": 69,
+    "is_infinitesimally_rigid": false,
+    "degrees_of_freedom": 39
+  },
+  "birkhoff_n3": {
+    "normalized_row_sums": [
+      1.5,
+      1.5,
+      1.5
+    ],
+    "normalized_col_sums": [
+      1.5,
+      1.5,
+      1.5
+    ],
+    "magic_row_sum": 1.5,
+    "doubly_stochastic_distance": 0.0,
+    "is_row_stochastic_approx": true
+  },
+  "birkhoff_n4": {
+    "normalized_row_sums": [
+      2.0,
+      2.0,
+      2.0,
+      2.0
+    ],
+    "normalized_col_sums": [
+      1.9999999999999998,
+      2.0,
+      2.0,
+      2.0
+    ],
+    "magic_row_sum": 2.0,
+    "doubly_stochastic_distance": 1.1102230246251565e-16,
+    "is_row_stochastic_approx": true
+  },
+  "hull_volume_scaling": {
+    "3": {
+      "hull_volume": 18.0,
+      "n^4": 81,
+      "ratio_to_n4": 0.2222222222222222,
+      "hull_area": 46.27495922579209,
+      "ratio_area_to_n3": 1.7138873787330402
+    },
+    "5": {
+      "hull_volume": 276.66666666666663,
+      "n^4": 625,
+      "ratio_to_n4": 0.4426666666666666,
+      "hull_area": 309.81549048576267,
+      "ratio_area_to_n3": 2.4785239238861014
+    },
+    "7": {
+      "hull_volume": 1320.6666666666667,
+      "n^4": 2401,
+      "ratio_to_n4": 0.5500485908649174,
+      "hull_area": 953.6907914930522,
+      "ratio_area_to_n3": 2.7804396253441754
+    }
+  },
+  "gap_scaling": {
+    "3": {
+      "min_gap": 0.024691358024691357,
+      "n_squared": 9,
+      "gap_times_n2": 0.2222222222222222,
+      "gap_times_n4": 2.0
+    },
+    "5": {
+      "min_gap": 0.0032,
+      "n_squared": 25,
+      "gap_times_n2": 0.08,
+      "gap_times_n4": 2.0
+    },
+    "4": {
+      "min_gap": 0.00390625,
+      "n_squared": 16,
+      "gap_times_n2": 0.0625,
+      "gap_times_n4": 1.0
+    }
+  },
+  "eigenvalue_conjecture": {
+    "3": {
+      "magic_constant": 15,
+      "trace": 15.000000000000007,
+      "diagonal_sum": 15,
+      "eigenvalue_sum": 15.000000000000007,
+      "max_eigenvalue": 15.0,
+      "max_equals_M": true
+    },
+    "4": {
+      "magic_constant": 34,
+      "trace": 34.00000000000003,
+      "diagonal_sum": 34,
+      "eigenvalue_sum": 34.00000000000003,
+      "max_eigenvalue": 34.00000000000003,
+      "max_equals_M": true
+    },
+    "5": {
+      "magic_constant": 65,
+      "trace": 64.99999999999997,
+      "diagonal_sum": 65,
+      "eigenvalue_sum": 64.99999999999997,
+      "max_eigenvalue": 65.00000000000003,
+      "max_equals_M": true
+    }
+  },
+  "enumeration": {
+    "known_counts": {
+      "3": {
+        "total": 8,
+        "classes": 1
+      },
+      "4": {
+        "total": 7040,
+        "classes": 880
+      },
+      "5": {
+        "total": 275305224,
+        "classes": 34413153
+      }
+    },
+    "n3_ratio_to_factorial": 2.2045855379188714e-05,
+    "n3_ratio_classes_to_total": 0.125,
+    "n3_log_total": 2.0794415416798357,
+    "n3_log_factorial": 12.801827480081469,
+    "n4_ratio_to_factorial": 3.3647520420007194e-10,
+    "n4_ratio_classes_to_total": 0.125,
+    "n4_log_total": 8.859363449152088,
+    "n4_log_factorial": 30.671860106080672,
+    "n5_ratio_to_factorial": 1.774879092159331e-17,
+    "n5_ratio_classes_to_total": 0.125,
+    "n5_log_total": 19.433390945595715,
+    "n5_log_factorial": 58.00360522298052,
+    "n3_expected_classes_from_D4": 1.0,
+    "n3_actual_vs_expected_classes": 1.0,
+    "n4_expected_classes_from_D4": 880.0,
+    "n4_actual_vs_expected_classes": 1.0,
+    "n5_expected_classes_from_D4": 34413153.0,
+    "n5_actual_vs_expected_classes": 1.0
+  },
+  "covariance_tensor": {
+    "n3": {
+      "n_squares": 8,
+      "average_covariance_matrix": [
+        [
+          0.75,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.75,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          7.5
+        ]
+      ],
+      "avg_cov_eigenvalues": [
+        0.75,
+        0.75,
+        7.5
+      ]
+    }
+  }
+}
