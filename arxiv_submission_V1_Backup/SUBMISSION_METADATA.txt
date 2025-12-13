@@ -1,0 +1,55 @@
+arXiv Submission Metadata
+==========================
+
+TITLE:
+------
+Magic Gems: A Polyhedral Framework for Magic Squares
+
+AUTHOR:
+-------
+Kyle Elliott Mathewson
+Faculty of Science, University of Alberta
+kyle.mathewson@ualberta.ca
+
+ABSTRACT:
+---------
+We introduce Magic Gems, a geometric representation of magic squares as three-dimensional polyhedra. By mapping an n×n magic square onto a centered coordinate grid with cell values as vertical displacements, we construct a point cloud whose convex hull defines the Magic Gem. Building on prior work connecting magic squares to physical properties such as moment of inertia, this construction reveals an explicit statistical structure: we show that magic squares have vanishing covariances between position and value. We develop a covariance energy functional---the sum of squared covariances with row, column, and diagonal indicator variables---and establish rigorously for n=3 (via exhaustive enumeration) that its zeros correspond precisely to magic squares. Large-scale sampling for n=4,5 (460+ million arrangements) provides strong numerical evidence that this characterization extends to larger orders. Perturbation analysis demonstrates that magic squares are isolated local minima. The representation is invariant under dihedral symmetry D_4, yielding canonical geometric objects for equivalence classes.
+
+KEYWORDS:
+---------
+Magic squares, convex polyhedra, covariance, energy landscape, combinatorial geometry
+
+PRIMARY SUBJECT CLASSIFICATION:
+--------------------------------
+math.CO (Combinatorics)
+
+SECONDARY SUBJECT CLASSIFICATION (OPTIONAL):
+--------------------------------------------
+math.MG (Metric Geometry)
+
+MSC CLASSIFICATION:
+-------------------
+Primary: 05B15 (Magic squares)
+Secondary: 52B11 (Convex polyhedra), 62H20 (Multivariate analysis)
+
+COMMENTS:
+---------
+Connecting Combinatorics, Geometry, and Linear Algebra. 8 figures, ancillary code included. Interactive visualization: https://kylemath.github.io/MagicGemWebpage/
+
+LICENSE:
+--------
+(Choose appropriate license - typically CC-BY or arXiv.org perpetual license)
+
+LANGUAGE:
+---------
+English
+
+NUMBER OF PAGES:
+----------------
+(Will be determined after compilation - check the generated PDF)
+
+SUBMISSION DATE:
+----------------
+(To be filled at time of submission)
+
+

@@ -5,12 +5,14 @@ we construct a point cloud whose convex hull defines the Magic Gem.
 Building on prior work connecting magic squares to physical properties such as moment of inertia,
 this construction reveals an explicit statistical structure: 
 we show that magic squares have vanishing covariances between position and value.
-We develop a covariance energy functional---the sum of squared covariances with row, column, 
-and diagonal indicator variables---and establish rigorously for $n=3$ (via exhaustive enumeration) 
-that its zeros correspond precisely to magic squares.
-Large-scale sampling for $n = 4,5$ (460+ million arrangements) provides strong numerical evidence 
-that this characterization extends to larger orders.
-Perturbation analysis demonstrates that magic squares are isolated local minima.
+We develop a covariance energy functional---the sum of squared covariances with 
+individual row, column, and diagonal indicator variables---and prove that for all $n \geq 3$,
+an arrangement is a magic square if and only if this complete energy vanishes.
+This characterization transforms the classical line-sum definition into a statistical orthogonality condition.
+We also study a simpler ``low-mode'' relaxation using only four aggregate position indicators;
+this coincides with the complete characterization for $n=3$ (verified exhaustively)
+but defines a strictly larger class for $n \geq 4$ (explicit counterexamples computed).
+Perturbation analysis demonstrates that magic squares are isolated local minima in the energy landscape.
 The representation is invariant under dihedral symmetry $D_4$, 
 yielding canonical geometric objects for equivalence classes.
 

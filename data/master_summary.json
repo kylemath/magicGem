@@ -34,5 +34,13 @@
     "theorem_verified": true,
     "all_magic_isolated": true,
     "min_perturbation_gap": 0.09876543209876543
+  },
+  "large_scale": {
+    "n3_samples": 362880,
+    "n4_samples": 100000,
+    "n5_samples": 100000,
+    "n3_peak_energy": 3.115432098765432,
+    "n4_peak_energy": 6.542890625,
+    "n5_peak_energy": 12.534247999999998
   }
 }

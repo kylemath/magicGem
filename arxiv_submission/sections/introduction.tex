@@ -40,10 +40,13 @@ We begin by formalizing the construction of Magic Gems from magic squares
 and establishing that symmetry-equivalent squares yield geometrically identical polyhedra,
 thus providing a canonical geometric representative for each equivalence class under the dihedral group $D_4$.
 
-Our main theoretical contribution is the Energy Characterization Theorem (\Cref{thm:energy_char}), 
-which establishes that magic squares correspond to zeros of a covariance energy functional.
-We prove this result rigorously for $n=3$ via exhaustive enumeration,
-and provide strong computational evidence for larger orders.
+Our main theoretical contribution is the Complete Energy Characterization Theorem (\Cref{thm:complete_energy_char}), 
+which establishes that magic squares correspond exactly to zeros of a covariance energy functional
+using individual row, column, and diagonal indicator variables.
+This result holds for all $n \geq 3$ and follows from elementary properties of covariances.
+We also identify a natural four-term ``low-mode'' relaxation using aggregate position coordinates;
+this simpler energy characterizes magic squares for $n=3$ but defines a strictly larger class for $n \geq 4$,
+with explicit counterexamples computed.
 This result extends the physical interpretation of magic squares initiated by 
 Loly \cite{loly2006invariance}, who showed that the moment of inertia tensor of a magic square 
 (treating entries as masses) exhibits special invariance properties.
@@ -58,15 +61,15 @@ The rarity of magic squares---approximately one in 45,000 random $3 \times 3$ ar
 to their isolation as zero-covariance configurations in a landscape where generic arrangements 
 exhibit substantial covariance.
 An interactive web application for exploring Magic Gems is available at
-\href{https://kylemath.github.io/MagicGemWebpage/}{https://kylemath.github.io/MagicGemWebpage/}.
+\url{https://kylemath.github.io/MagicGemWebpage/}.
 
 \subsection{Paper Organization}
 
 The remainder of this paper proceeds as follows.
 \Cref{sec:background} reviews classical results on magic squares and establishes notation 
 for the geometric and statistical concepts we employ.
-\Cref{sec:methodology} presents the Magic Gem construction, proves the Energy Characterization Theorem,
-and develops the perturbation analysis framework.
+\Cref{sec:methodology} presents the Magic Gem construction, proves the Complete Energy Characterization Theorem,
+introduces the low-mode relaxation, and develops the perturbation analysis framework.
 \Cref{sec:results} describes our computational experiments, validating theoretical predictions 
 and exploring the structure of the arrangement space for $n = 3$, $4$, and $5$.
 \Cref{sec:discussion} interprets our findings and discusses connections to related areas.

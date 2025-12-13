@@ -57,16 +57,18 @@ along with all eight $D_4$ symmetry variants of the Lo Shu square.
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{figures/fig02_combined_construction_symmetries.pdf}
-    \caption{\textbf{Construction process and symmetry structure.}
+    \caption{\textbf{Construction process and $D_4$ symmetry structure.}
     \emph{Top row (a--d):} Construction of a Magic Gem from the Lo Shu square.
     (a) The Lo Shu magic square---the unique (up to symmetry) $3 \times 3$ magic square, 
     with each row, column, and diagonal summing to $M(3) = 15$.
     (b) Placement on a centered coordinate grid with origin at center.
     (c) Assignment of $z$-values from cell entries.
     (d) Centered Magic Gem point cloud with convex hull.
-    \emph{Bottom rows (e--l):} The eight $D_4$ symmetries of the $3 \times 3$ magic square, 
-    comprising four rotations and four reflections. 
-    Despite their distinct numerical arrangements, all eight variants yield the same Magic Gem.}
+    \emph{Bottom section (e--l):} The eight $D_4$ symmetries of the $3 \times 3$ magic square.
+    Each panel shows a compact 2D magic square (top) paired with its corresponding 3D Magic Gem (bottom, large and prominent).
+    The gems are shown from different viewing angles to emphasize their three-dimensional structure.
+    Despite their distinct numerical arrangements, all eight $D_4$ variants yield the same 3D Magic Gem polyhedron,
+    demonstrating the geometric invariance of the Magic Gem representation under the symmetry group.}
     \label{fig:construction}
 \end{figure}
 
@@ -202,15 +204,30 @@ For any magic square, the covariance matrix of the Magic Gem coordinates has the
 In particular, the $z$-coordinate is uncorrelated with both horizontal coordinates.
 \end{corollary}
 
-\subsubsection{On the Insufficiency of Row and Column Covariances Alone}
+\subsubsection{On the Insufficiency of Aggregate Covariances}
 \label{sec:insufficiency}
 
 It is natural to ask whether the conditions $\Cov(X, Z) = \Cov(Y, Z) = 0$ alone 
 suffice to characterize magic squares, or at least semi-magic squares 
 (those with equal row and column sums but possibly failing the diagonal conditions).
-Perhaps surprisingly, the answer is \emph{no}.
+Perhaps surprisingly, the answer is \emph{no}---and understanding why reveals 
+a crucial distinction that motivates our energy functional approach.
 
-\begin{remark}[Counterexamples Exist]
+\begin{remark}[Why $\Cov(X,Z)=0$ Is Not Enough]
+\label{rem:first_moment}
+The condition $\Cov(X, Z) = 0$ is equivalent to a single \emph{first-moment} constraint on column sums.
+Let $C_j = \sum_{i=0}^{n-1} s_{ij}$ denote the sum of column $j$, and let $\delta_j = C_j - M(n)$ 
+be the deviation from the magic constant. Then $\Cov(X, Z) = 0$ is equivalent to
+\[
+\sum_{j=0}^{n-1} \left( j - \frac{n-1}{2} \right) \delta_j = 0.
+\]
+Combined with the constraint $\sum_j \delta_j = 0$ (which follows from the total sum being fixed),
+this leaves an $(n-2)$-dimensional space of possible deviation patterns.
+For $n = 3$, the nonzero deviations must have the form $(\delta_0, \delta_1, \delta_2) = t(1, -2, 1)$;
+for $n \geq 4$, the space of ``balanced but unequal'' column patterns grows rapidly.
+\end{remark}
+
+\begin{remark}[Counterexamples Exist for $n = 3$]
 \label{rem:counterexample}
 Exhaustive enumeration for $n = 3$ reveals that \emph{760 arrangements} of $\{1, \ldots, 9\}$ 
 satisfy both $\Cov(X, Z) = 0$ and $\Cov(Y, Z) = 0$, yet only 8 of these are magic squares.
@@ -226,14 +243,31 @@ has row sums $(13, 19, 13)$ and column sums $(16, 13, 16)$---far from equal---ye
 achieves $\Cov(X, Z) = \Cov(Y, Z) = 0$ exactly.
 \end{remark}
 
-This observation has important implications.
-The covariance conditions with $X$ and $Y$ alone impose only two linear constraints 
-on the space of possible row and column sum patterns.
-The remaining freedom in these patterns can be exploited to achieve zero covariance 
-without achieving equal sums.
-The \emph{characterization} of magic squares thus requires all four covariance conditions, 
-not merely the row and column covariances.
-This motivates the energy functional approach developed in \Cref{sec:energy_landscape}.
+\begin{remark}[The Four-Term Energy Is Insufficient for $n \geq 4$]
+\label{rem:four_term_insufficient}
+Even more strikingly, adding the diagonal covariance conditions does not resolve the issue for $n \geq 4$.
+The four covariances $\Cov(X, Z)$, $\Cov(Y, Z)$, $\Cov(D_{\mathrm{main}}, Z)$, $\Cov(D_{\mathrm{anti}}, Z)$
+impose only four linear constraints on the $(n^2 - 1)$-dimensional space of mean-zero value functions.
+For $n = 4$, this leaves an $(n^2 - 5) = 11$-dimensional nullspace.
+
+Consequently, there exist $4 \times 4$ permutations with all four covariances equal to zero 
+that are \emph{not} magic squares. For example:
+\[
+S = \begin{pmatrix}
+9 & 4 & 12 & 3 \\
+16 & 1 & 14 & 7 \\
+10 & 15 & 11 & 8 \\
+2 & 5 & 6 & 13
+\end{pmatrix}
+\]
+has both diagonal sums equal to $34$, but row sums $(28, 38, 44, 26)$ and column sums $(37, 25, 43, 31)$.
+All four covariances vanish, yet the arrangement is not magic.
+\end{remark}
+
+This analysis reveals that aggregate position coordinates $X$ and $Y$ are too coarse:
+they capture only the \emph{first moment} of the row and column sum distributions.
+A true characterization requires testing against \emph{individual} row and column indicators,
+which we develop in \Cref{sec:energy_landscape}.
 
 \subsection{Diagonal Conditions as Covariances}
 \label{sec:diagonal_cov}
@@ -271,9 +305,13 @@ Since $z_{ii} = s_{ii} - (n^2+1)/2$, the sum $\sum_i z_{ii} = \sum_i s_{ii} - n(
 This vanishes if and only if $\sum_i s_{ii} = M(n)$. The anti-diagonal case is analogous.
 \end{proof}
 
-This reformulation provides a unified covariance-based characterization:
-an arrangement is a magic square if and only if it has zero covariance with 
-\emph{all four} position indicators---$X$, $Y$, $D_{\mathrm{main}}$, and $D_{\mathrm{anti}}$.
+This reformulation expresses the diagonal constraints in the same statistical language as the row/column constraints.
+Together with the aggregate position covariances $\Cov(X,Z)$ and $\Cov(Y,Z)$, these diagonal covariances define the
+four-term ``low-mode'' energy $E_{\mathrm{low}}$ (\Cref{def:lowmode_energy}).
+For $n=3$, $E_{\mathrm{low}}(S)=0$ is already sufficient to characterize magic squares
+(verified by exhaustive enumeration; \Cref{prop:lowmode_char}),
+but for $n\ge 4$ it is only a necessary relaxation (see \Cref{rem:four_term_insufficient}).
+A complete characterization requires testing against individual row and column indicators, developed in \Cref{sec:energy_landscape}.
 
 \subsection{Perturbation Analysis}
 \label{sec:perturbation}
@@ -293,11 +331,12 @@ Define the off-diagonal covariance magnitude
 Then $\Phi(P) = 0$, and for generic perturbations $\epsilon$, we have $\Phi(\tilde{P}) > 0$.
 \end{proposition}
 
-This result establishes that magic squares correspond to global minima of the functional $\Phi$.
-Since $\Phi \geq 0$ with equality only for magic configurations (among integer arrangements),
-magic squares are isolated critical points in the covariance landscape.
-Generic perturbations---those not preserving all row and column sums---immediately increase $\Phi$,
-confirming the exceptional nature of magic configurations.
+This result shows that magic squares lie at $\Phi=0$, and that generic perturbations of the $z$-values destroy this balance.
+Importantly, $\Phi=0$ is \emph{not} unique to magic squares: already for $n=3$ there exist many non-magic arrangements with
+$\Cov(X,Z)=\Cov(Y,Z)=0$ (\Cref{rem:counterexample}).
+Thus $\Phi$ provides a useful first-order diagnostic of balance, but not a complete characterization.
+The complete energy $E_{\mathrm{full}}$ introduced next resolves this by having zeros \emph{exactly} at magic squares for all $n\ge 3$
+(\Cref{thm:complete_energy_char}).
 
 \subsection{The Covariance Energy Landscape}
 \label{sec:energy_landscape}
@@ -307,59 +346,100 @@ as equilibrium configurations in an energy landscape.
 This perspective connects the discrete combinatorics of magic squares 
 to continuous optimization and statistical mechanics.
 
-\begin{definition}[Covariance Energy Functional]
-\label{def:covariance_energy}
-For an arrangement $S$, define the \emph{total magic energy} as the sum of squared covariances 
-with all four position indicators:
-\begin{equation}
-E(S) = \Cov(X, Z)^2 + \Cov(Y, Z)^2 + \Cov(D_{\mathrm{main}}, Z)^2 + \Cov(D_{\mathrm{anti}}, Z)^2.
-\label{eq:total_energy}
-\end{equation}
-Equivalently, we may decompose this as
-\[
-E(S) = E_{\text{cov}}(S) + E_{\text{diag}}(S),
-\]
-where $E_{\text{cov}}(S) = \Cov(X, Z)^2 + \Cov(Y, Z)^2$ captures row/column imbalance
-and $E_{\text{diag}}(S) = \Cov(D_{\mathrm{main}}, Z)^2 + \Cov(D_{\mathrm{anti}}, Z)^2$ captures diagonal imbalance.
+As established in \Cref{sec:insufficiency}, the aggregate covariances with $X$, $Y$, and diagonal indicators
+are insufficient to characterize magic squares for $n \geq 4$.
+We now develop the \emph{complete} covariance energy using individual row and column indicators.
+
+\subsubsection{Row and Column Indicator Variables}
+
+\begin{definition}[Row and Column Indicators]
+For $k, \ell \in \{0, 1, \ldots, n-1\}$, define the indicator variables:
+\begin{align}
+R_k(i,j) &= \begin{cases} 1 & \text{if } i = k, \\ 0 & \text{otherwise}, \end{cases} \\
+C_\ell(i,j) &= \begin{cases} 1 & \text{if } j = \ell, \\ 0 & \text{otherwise}. \end{cases}
+\end{align}
+These functions select the cells in row $k$ or column $\ell$, respectively.
 \end{definition}
 
-This formulation is conceptually clean: the magic energy is simply the sum of squared 
-``correlations'' between $z$-values and each of the four structural directions 
-(rows, columns, main diagonal, anti-diagonal).
-An arrangement achieves zero energy precisely when it is uncorrelated with all four directions---the 
-definition of a magic square.
+\begin{proposition}[Row/Column Covariance Characterization]
+\label{prop:rowcol_cov}
+For an arrangement $S$ with centered $z$-values:
+\begin{enumerate}
+\item $\Cov(R_k, Z) = 0$ for all $k \in \{0, \ldots, n-1\}$ if and only if all row sums equal $M(n)$.
+\item $\Cov(C_\ell, Z) = 0$ for all $\ell \in \{0, \ldots, n-1\}$ if and only if all column sums equal $M(n)$.
+\end{enumerate}
+\end{proposition}
 
-\begin{theorem}[Energy Characterization]
-\label{thm:energy_char}
-For $n = 3$, an arrangement $S$ of $\{1, \ldots, n^2\}$ is a magic square 
-if and only if $E(S) = 0$.
-This result is proven by exhaustive enumeration.
+\begin{proof}
+The mean of $R_k$ over all cells is $\bar{R}_k = n/n^2 = 1/n$.
+With $\bar{Z} = 0$, we have:
+\[
+\Cov(R_k, Z) = \frac{1}{n^2} \sum_{i,j} R_k(i,j) \cdot z_{ij} = \frac{1}{n^2} \sum_{j=0}^{n-1} z_{kj}.
+\]
+Since $z_{kj} = s_{kj} - (n^2+1)/2$, the covariance vanishes if and only if 
+$\sum_j s_{kj} = n(n^2+1)/2 = M(n)$, i.e., row $k$ sums to the magic constant.
+The column case is analogous.
+\end{proof}
+
+\subsubsection{The Complete Magic Energy Functional}
+
+\begin{definition}[Complete Covariance Energy]
+\label{def:complete_energy}
+For an arrangement $S$, define the \emph{complete magic energy} as:
+\begin{equation}
+E_{\mathrm{full}}(S) = \sum_{k=0}^{n-2} \Cov(R_k, Z)^2 + \sum_{\ell=0}^{n-2} \Cov(C_\ell, Z)^2 
++ \Cov(D_{\mathrm{main}}, Z)^2 + \Cov(D_{\mathrm{anti}}, Z)^2.
+\label{eq:full_energy}
+\end{equation}
+This involves $2(n-1) + 2 = 2n$ terms (one row/column indicator is redundant due to the fixed total sum).
+\end{definition}
+
+\begin{theorem}[Complete Energy Characterization]
+\label{thm:complete_energy_char}
+For all $n \geq 3$, an arrangement $S$ of $\{1, \ldots, n^2\}$ is a magic square 
+if and only if $E_{\mathrm{full}}(S) = 0$.
 \end{theorem}
 
 \begin{proof}
-The forward direction follows from \Cref{prop:magic_implies_zero_cov} and \Cref{prop:diagonal_cov}:
-every magic square has $\Cov(X, Z) = \Cov(Y, Z) = 0$ (from equal row and column sums)
-and $\Cov(D_{\mathrm{main}}, Z) = \Cov(D_{\mathrm{anti}}, Z) = 0$ (from equal diagonal sums),
-hence $E(S) = 0$.
+\textbf{Forward direction:} If $S$ is a magic square, all rows, columns, and both diagonals sum to $M(n)$.
+By \Cref{prop:rowcol_cov} and \Cref{prop:diagonal_cov}, all covariances in \eqref{eq:full_energy} vanish,
+hence $E_{\mathrm{full}}(S) = 0$.
 
-For the converse, we rely on exhaustive enumeration.
-Among all $9! = 362{,}880$ permutations of $\{1, \ldots, 9\}$, exactly 8 arrangements 
-achieve $E(S) = 0$ (to machine precision).
-All 8 of these arrangements are magic squares---specifically, the Lo Shu square 
-and its seven $D_4$ symmetry variants.
-No false positives exist: every arrangement with $E(S) = 0$ is magic.
-
-Note that the individual covariance conditions are \emph{not} independent:
-as shown in \Cref{rem:counterexample}, 760 arrangements satisfy $\Cov(X, Z) = \Cov(Y, Z) = 0$,
-but only the 8 magic squares additionally satisfy the diagonal conditions.
-The characterization requires all four covariances to vanish simultaneously.
+\textbf{Converse:} If $E_{\mathrm{full}}(S) = 0$, then each squared covariance term must be zero 
+(as they are all non-negative). By \Cref{prop:rowcol_cov}, $\Cov(R_k, Z) = 0$ for $k = 0, \ldots, n-2$
+implies rows $0$ through $n-2$ sum to $M(n)$; since the total sum is fixed at $n^2(n^2+1)/2 = nM(n)$,
+row $n-1$ also sums to $M(n)$. Similarly, all columns sum to $M(n)$.
+By \Cref{prop:diagonal_cov}, both diagonals sum to $M(n)$. Thus $S$ is a magic square.
 \end{proof}
 
-For $n = 4$ and $n = 5$, large-scale sampling (over 460 million arrangements total) 
-found no counterexamples: every arrangement with $E(S) \approx 0$ (within machine precision)
-was verified to be a magic square.
-This computational evidence strongly supports the conjecture that the energy characterization 
-holds for all $n \geq 3$ (see Conjecture~\ref{conj:general} in the Appendix).
+This theorem establishes a \emph{complete characterization}: magic squares are precisely the zeros 
+of the energy functional $E_{\mathrm{full}}$, valid for all orders $n \geq 3$.
+The energy landscape interpretation is now rigorous: magic squares are the unique ground states.
+
+\subsubsection{The Low-Mode Relaxation}
+
+For comparison, we also define the simpler four-term energy:
+
+\begin{definition}[Low-Mode Energy]
+\label{def:lowmode_energy}
+The \emph{low-mode energy} uses aggregate position coordinates:
+\begin{equation}
+E_{\mathrm{low}}(S) = \Cov(X, Z)^2 + \Cov(Y, Z)^2 + \Cov(D_{\mathrm{main}}, Z)^2 + \Cov(D_{\mathrm{anti}}, Z)^2.
+\label{eq:lowmode_energy}
+\end{equation}
+\end{definition}
+
+\begin{proposition}[Low-Mode Characterization]
+\label{prop:lowmode_char}
+For $n = 3$, $E_{\mathrm{low}}(S) = 0$ if and only if $S$ is a magic square 
+(verified by exhaustive enumeration of all $362{,}880$ permutations).
+For $n \geq 4$, the condition $E_{\mathrm{low}}(S) = 0$ defines a strictly larger class 
+of ``low-mode balanced'' arrangements that properly contains the magic squares.
+\end{proposition}
+
+The low-mode energy is computationally simpler and provides a useful first-order diagnostic,
+but it cannot serve as a characterization for $n \geq 4$.
+The complete energy $E_{\mathrm{full}}$ is required for the full characterization.
 
 This characterization reveals magic squares as \emph{ground states} of a natural energy functional.
 Just as physical systems minimize their energy to reach equilibrium,
@@ -369,10 +449,10 @@ with isolated minima, making magic squares rare and difficult to find.
 
 \begin{proposition}[Isolation of Magic Squares]
 \label{prop:isolation}
-For $n = 3$ and $n = 4$, every magic square is a strict local minimum of $E$ 
+For $n = 3$ and $n = 4$, every magic square is a strict local minimum of $E_{\mathrm{full}}$ 
 over the discrete space of permutations.
 That is, for any magic square $S$ and any arrangement $S'$ differing from $S$ 
-by a single transposition of two elements, we have $E(S') > E(S) = 0$.
+by a single transposition of two elements, we have $E_{\mathrm{full}}(S') > E_{\mathrm{full}}(S) = 0$.
 \end{proposition}
 
 The proof follows from direct computation: swapping any two elements in a magic square 

@@ -39,7 +39,8 @@ The diagonal covariances $\Cov(D_{\mathrm{main}}, Z)$ and $\Cov(D_{\mathrm{anti}
 measure whether diagonal positions predict value.
 For magic squares, all four directional indicators---horizontal position, vertical position, 
 main diagonal membership, and anti-diagonal membership---are uncorrelated with value.
-The magic energy $E(S)$ is simply the sum of squared correlations with these four directions.
+The low-mode energy $E_{\mathrm{low}}(S)$ is the sum of squared correlations with these four aggregate directions;
+the complete energy $E_{\mathrm{full}}(S)$ extends this to individual row and column indicators.
 
 \subsubsection{Physical and Algebraic Interpretations}
 
@@ -50,18 +51,31 @@ the $xz$ and $yz$ products of inertia are zero.
 This implies the $z$-axis is aligned with a principal axis of the inertia tensor,
 simplifying the rotational dynamics about this direction.
 
+The variances themselves admit exact closed forms: since the $z$-values are a permutation of 
+$\{1-\mu, 2-\mu, \ldots, n^2-\mu\}$ where $\mu = (n^2+1)/2$, a standard calculation yields
+$\Var(Z) = (n^4-1)/12$ and $\Var(X) = \Var(Y) = (n^2-1)/12$.
+Combined with the zero off-diagonal covariances, this completely determines the covariance matrix 
+of the Magic Gem coordinates for any order $n$.
+
 From an algebraic perspective, the zero-covariance condition is equivalent to the defining property 
 of magic squares---equal row and column sums---expressed in the language of moments.
 The first moment (mean) of each coordinate vanishes by construction;
 the zero-covariance condition asserts that certain second moments (cross-terms) also vanish.
-This suggests a hierarchy: might there be higher-order ``super-magic'' squares 
-characterized by vanishing higher moments?
+In fact, this extends to higher-order moments: 
+since $X$ depends only on column index $j$, we have
+$\mathbb{E}[X^k Z] = \frac{1}{n^2} \sum_j X_j^k \cdot (\text{column}_j \text{ sum} - n\mu) = 0$
+for any power $k$, because all column sums equal $M(n) = n\mu$.
+Similarly $\mathbb{E}[Y^k Z] = 0$ for all $k$ follows from equal row sums.
+Thus magic squares exhibit vanishing cross-moments $\mathbb{E}[X^k Z] = \mathbb{E}[Y^k Z] = 0$ 
+at all orders---a stronger form of statistical balance than the covariance condition alone.
+This suggests a hierarchy: might there be ``super-magic'' squares 
+characterized by additional vanishing moments beyond those implied by equal line sums?
 
 \subsection{Magic Squares as Ground States}
 
 The energy landscape perspective developed in \Cref{sec:energy_landscape} offers perhaps 
 the most illuminating interpretation of our results.
-The covariance energy $E(S)$ provides a natural ``imbalance'' measure for arrangements,
+The complete covariance energy $E_{\mathrm{full}}(S)$ provides a natural ``imbalance'' measure for arrangements,
 and magic squares emerge as the unique configurations where this imbalance vanishes completely.
 
 Consider the analogy to physical systems.
@@ -89,18 +103,29 @@ Each magic square defines a basin of attraction in the discrete configuration sp
 though these basins have measure zero.
 The comprehensive perturbation analysis (\Cref{fig:perturbation_gaps}) confirms that 
 there are no ``flat directions'' around magic configurations:
-across 107,388 tested perturbations of 923 magic squares,
+across 116,388 tested perturbations of 923 magic squares,
 every single swap increases the energy, supporting the conclusion that magic squares are strict local minima.
+Notably, while magic squares are the unique \emph{global} minima (with energy zero),
+preliminary analysis for $n=3$ reveals additional \emph{local} minima
+where no single swap decreases energy.
+Exhaustive enumeration finds 16 such non-global local minima under $E_{\mathrm{full}}$,
+and 336 under the simpler $E_{\mathrm{low}}$.
+This ruggedness has algorithmic implications: 
+gradient-based search methods may become trapped in local minima,
+and the choice of energy functional affects the landscape structure.
 
 The perturbation analysis reveals additional structure within the magic square population.
 For $n=3$, all eight magic squares exhibit \emph{exactly the same} minimum perturbation gap 
 ($\Delta_3 = 0.0988$), a consequence of the $D_4$ symmetry preserving the embedding geometry.
 More surprisingly, the 880 $n=4$ magic squares cluster into three distinct bands 
 of perturbation resistance, suggesting the existence of geometric subclasses 
-with different stability properties---a finding that may correlate 
-with convex hull configurations and merits further investigation.
-The minimum gap scales approximately as $\Delta \propto 1/n^2$,
-quantifying how the energy wells become progressively shallower as order increases.
+with different stability properties.
+This trimodal structure appears to correlate with convex hull geometry,
+indicating a connection between polyhedral structure and energy landscape stability.
+This finding warrants further investigation across the full $n=4$ equivalence-class population.
+The minimum gap decreases with $n$---from 0.099 for $n=3$ to 0.004 for $n=4$ to 0.002 for $n=5$---quantifying 
+how the energy wells become progressively shallower as order increases.
+The precise scaling law requires investigation at additional orders.
 
 This energy landscape view also illuminates why magic squares are rare.
 They are not merely unusual configurations among many similar ones, but isolated singularities 
@@ -127,7 +152,8 @@ greater depth relative to typical arrangements.
 
 \paragraph{Scale-Invariant Complexity.}
 Despite the dramatic growth in configuration space ($n!^2$ arrangements),
-the landscape entropy remains approximately constant ($\approx 4.4$--$5.0$).
+the landscape entropy remains within a narrow band ($\approx 4.3$--$5.0$),
+decreasing from $n=3$ to $n=4$ and then stabilizing.
 This invariance suggests that the \emph{relative} difficulty of local optimization 
 is independent of scale: the ruggedness of the landscape, 
 measured by the distribution's shape rather than its position,
@@ -136,14 +162,17 @@ This has practical implications for algorithm design:
 local search heuristics that work for small orders may transfer to larger ones,
 with the primary challenge being the absolute energy scale rather than landscape structure.
 
-\paragraph{Isolation Persistence.}
+\paragraph{Low-Mode Energy Landscape.}
 Across over 460 million sampled arrangements---including exhaustive enumeration for $n=3$,
-60 million samples for $n=4$, and 400 million for $n=5$---no false-positive zero-energy 
-configurations were discovered.
-While this does not constitute a proof, it provides compelling computational evidence 
-that the Energy Characterization Theorem (\Cref{thm:energy_char}) extends beyond the analytically tractable cases.
+60 million samples for $n=4$, and 400 million for $n=5$---no zero-energy 
+configurations of the low-mode energy $E_{\mathrm{low}}$ were discovered by random sampling.
+However, this does \emph{not} imply that magic squares are the only zeros of $E_{\mathrm{low}}$ for $n \geq 4$;
+as shown in \Cref{rem:four_term_insufficient}, non-magic zeros exist but are too rare for random sampling to detect.
+The low-mode and complete energies measure different aspects of balance,
+and only the complete energy $E_{\mathrm{full}}$ (\Cref{thm:complete_energy_char}) provides a rigorous characterization for all orders.
 The probability of discovering a magic square by random sampling decreases super-exponentially 
-with $n$, from roughly $1$ in $45{,}000$ for $n=3$ to less than $1$ in $10^{17}$ for $n=5$.
+with $n$, from roughly $1$ in $45{,}000$ for $n=3$ to about $2\times 10^{-17}$ for $n=5$
+(roughly one in $5\times 10^{16}$).
 This quantifies the ``needle in a haystack'' intuition with concrete numbers.
 
 \subsection{Even versus Odd Orders}
@@ -280,8 +309,8 @@ their shapes encoding the magic property in tangible form.
 The energy landscape perspective suggests natural algorithmic strategies 
 for magic square generation beyond classical backtracking. 
 Since magic squares are isolated local minima, gradient-based descent in the 
-$E(S)$ objective becomes viable. 
-The challenge lies not in navigating a rugged landscape (entropy is modest and roughly constant at $H \approx 4.4$), 
+$E_{\mathrm{full}}(S)$ objective becomes viable. 
+The challenge lies not in navigating a rugged landscape (entropy is modest, $H \approx 4.3$--$5.0$), 
 but in the sheer breadth of the search space and the rarity of solutions.
 
 Simulated annealing with the covariance energy as a temperature-dependent objective, 

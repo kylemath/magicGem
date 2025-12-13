@@ -7,21 +7,30 @@ This framework reveals deep connections between the classical algebraic definiti
 and concepts from statistics, optimization, and statistical mechanics,
 opening new avenues for understanding these ancient mathematical objects.
 
-Our central theoretical contributions are the Zero-Covariance Theorem and its energy landscape interpretation.
-The theorem establishes that an arrangement of integers in a square grid is a magic square 
-if and only if the covariance between spatial position and assigned value vanishes.
-The energy characterization goes further: 
-magic squares are precisely the ground states of a natural energy functional 
-measuring geometric imbalance.
-These characterizations transform the discrete, combinatorial magic property
-into continuous conditions with physical meaning.
+Our central theoretical contribution is the Complete Energy Characterization Theorem 
+(\Cref{thm:complete_energy_char}), which establishes that an arrangement of integers in a square grid 
+is a magic square if and only if its covariance with every row, column, and diagonal indicator vanishes.
+Equivalently, magic squares are precisely the ground states of the complete energy functional 
+$E_{\mathrm{full}}$, valid for all orders $n \geq 3$.
+This characterization transforms the discrete, combinatorial magic property
+into a statistical orthogonality condition with physical meaning.
 
-For orders $n = 3$ and $n = 4$, we have provided complete proofs of the Zero-Covariance Theorem,
-verified exhaustively for $n = 3$ through enumeration of all 362,880 permutations.
-The Energy Characterization identifies magic squares as isolated local minima 
-in the covariance landscape, with our perturbation analysis confirming that every single-swap perturbation 
-strictly increases the energy.
-For general $n$, we state the result as a conjecture supported by extensive computational evidence.
+The proof is elementary once the right framework is established:
+each row/column covariance vanishes if and only if that line sums to $M(n)$,
+and similarly for the diagonals.
+The perturbation analysis confirms that magic squares are isolated local minima,
+with every single-swap perturbation strictly increasing the energy.
+
+We also investigated a natural simplification---the four-term ``low-mode'' energy 
+using aggregate position coordinates $X$, $Y$ and diagonal indicators.
+This characterizes magic squares for $n = 3$ (verified exhaustively),
+but defines a strictly larger class of ``low-mode balanced'' arrangements for $n \geq 4$.
+The existence of non-magic zeros of the low-mode energy, while initially surprising,
+follows from a dimensional argument: four linear constraints cannot determine 
+all $2n$ line-sum conditions.
+Explicit counterexamples (\Cref{rem:four_term_insufficient}) and comparative energy analysis (\Cref{fig:energy_comparison})
+illuminate this distinction,
+highlighting the necessity of the complete row/column indicator basis for a rigorous characterization.
 
 The energy landscape perspective offers the most compelling conceptual insight.
 Magic squares are not merely configurations satisfying arithmetic constraints;
@@ -35,9 +44,9 @@ The Magic Gem framework opens several directions for future research.
 The geometric classification of magic squares, particularly for $n = 4$ where 880 essentially different squares exist,
 could complement traditional algebraic approaches.
 Extensions to magic hypercubes, semi-magic squares, and pandiagonal squares 
-would test the generality of our energy characterization.
-The scaling behavior of the perturbation gap---observed to decrease with $n$---raises 
-intriguing questions about the structure of large magic squares.
+would test the generality of our framework.
+The ``low-mode balanced'' class identified by $E_{\mathrm{low}} = 0$ for $n \geq 4$
+is itself an interesting mathematical object worthy of further study.
 
 The Lo Shu square has fascinated humanity for nearly five thousand years,
 its balanced arrangement of numbers inspiring mythology, art, and mathematics across cultures.

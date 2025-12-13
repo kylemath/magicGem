@@ -161,12 +161,13 @@ def compute_diagonal_covariances(square: np.ndarray, tol: float = 1e-10) -> Dict
 
 def compute_total_magic_energy_v2(square: np.ndarray) -> Dict:
     """
-    Compute the total magic energy as sum of four squared covariances.
+    Compute the 4-term "low-mode" energy as sum of four squared covariances.
     
     E(S) = Cov(X,Z)² + Cov(Y,Z)² + Cov(D_main,Z)² + Cov(D_anti,Z)²
     
-    This is the clean formulation where magic squares are characterized
-    by E(S) = 0, with each term corresponding to a structural direction.
+    WARNING: This 4-term energy does NOT characterize magic squares for n >= 4.
+    It defines a broader "low-mode balanced" class. Use compute_full_magic_energy()
+    for a true characterization. See the discussion in Section 2.5 of the paper.
     
     Parameters
     ----------
@@ -208,6 +209,283 @@ def compute_total_magic_energy_v2(square: np.ndarray) -> Dict:
         'E_diag': E_diag,
         'E_total': E_total,
         'is_zero_energy': E_total < 1e-20
+    }
+
+
+def compute_full_magic_energy(square: np.ndarray) -> Dict:
+    """
+    Compute the COMPLETE magic energy using individual row/column indicators.
+    
+    E_full(S) = Σ_{k=0}^{n-2} Cov(R_k,Z)² + Σ_{ℓ=0}^{n-2} Cov(C_ℓ,Z)² 
+                + Cov(D_main,Z)² + Cov(D_anti,Z)²
+    
+    where R_k(i,j) = 1{i=k} and C_ℓ(i,j) = 1{j=ℓ} are row/column indicators.
+    
+    THEOREM: For all n >= 3, E_full(S) = 0 if and only if S is a magic square.
+    
+    This is the corrected characterization that works for all orders, unlike
+    the 4-term "low-mode" energy which only characterizes magic squares for n=3.
+    
+    Parameters
+    ----------
+    square : np.ndarray
+        n×n arrangement
+        
+    Returns
+    -------
+    Dict
+        Complete energy breakdown with all 2n terms
+    """
+    n = square.shape[0]
+    n_sq = n * n
+    M_n = n * (n_sq + 1) // 2
+    
+    # Centered z-values (mean-zero)
+    z_center = (n_sq + 1) / 2
+    z_flat = square.flatten() - z_center
+    
+    # Row indicator covariances: R_k(i,j) = 1{i=k}
+    # Cov(R_k, Z) = E[R_k * Z] - E[R_k] * E[Z] = E[R_k * Z] (since E[Z]=0)
+    # E[R_k * Z] = (1/n²) * Σ_j z_{kj} = (1/n²) * (row_k_sum - n*z_center)
+    row_cov = []
+    for k in range(n - 1):  # Only need n-1 (last is redundant due to constraint)
+        # R_k has mean 1/n
+        R_k_mean = 1.0 / n
+        # E[R_k * Z] = (1/n²) * sum of z values in row k
+        row_k_z_sum = z_flat[k*n:(k+1)*n].sum()
+        E_RkZ = row_k_z_sum / n_sq
+        cov_Rk_Z = E_RkZ  # Since E[Z] = 0
+        row_cov.append(cov_Rk_Z)
+    
+    # Column indicator covariances: C_ℓ(i,j) = 1{j=ℓ}
+    col_cov = []
+    for ell in range(n - 1):  # Only need n-1
+        # E[C_ℓ * Z] = (1/n²) * sum of z values in column ℓ
+        col_ell_z_sum = sum(z_flat[i*n + ell] for i in range(n))
+        E_CellZ = col_ell_z_sum / n_sq
+        cov_Cell_Z = E_CellZ  # Since E[Z] = 0
+        col_cov.append(cov_Cell_Z)
+    
+    # Diagonal covariances (same as before)
+    diag_cov = compute_diagonal_covariances(square)
+    cov_main_z = diag_cov['cov_main_z']
+    cov_anti_z = diag_cov['cov_anti_z']
+    
+    # Energy components
+    E_row = sum(c**2 for c in row_cov)
+    E_col = sum(c**2 for c in col_cov)
+    E_diag = cov_main_z**2 + cov_anti_z**2
+    E_full = E_row + E_col + E_diag
+    
+    # Also compute actual row/column sums for verification
+    row_sums = [int(square[k, :].sum()) for k in range(n)]
+    col_sums = [int(square[:, ell].sum()) for ell in range(n)]
+    
+    return {
+        'row_covariances': row_cov,
+        'col_covariances': col_cov,
+        'cov_main_z': cov_main_z,
+        'cov_anti_z': cov_anti_z,
+        'E_row': E_row,
+        'E_col': E_col,
+        'E_diag': E_diag,
+        'E_full': E_full,
+        'is_zero_energy': E_full < 1e-20,
+        'row_sums': row_sums,
+        'col_sums': col_sums,
+        'magic_constant': M_n,
+        'n_terms': 2 * (n - 1) + 2  # = 2n terms total
+    }
+
+
+def compute_variance_formulas(n: int) -> Dict:
+    """
+    Compute theoretical and actual variance formulas for Magic Gem coordinates.
+    
+    THEOREM: For any n×n magic square:
+        Var(Z) = (n⁴ - 1) / 12
+        Var(X) = Var(Y) = (n² - 1) / 12
+    
+    These follow from the fact that z-values are a permutation of centered 
+    integers {1-μ, ..., n²-μ} where μ = (n²+1)/2, and x,y are symmetric grids.
+    
+    Parameters
+    ----------
+    n : int
+        Order of the magic square
+        
+    Returns
+    -------
+    Dict
+        Theoretical and actual variance values
+    """
+    # Theoretical predictions
+    var_z_theory = (n**4 - 1) / 12
+    var_xy_theory = (n**2 - 1) / 12
+    
+    # Actual computation
+    # Z values: 1..n² centered by μ = (n²+1)/2
+    z_values = np.arange(1, n**2 + 1) - (n**2 + 1) / 2
+    var_z_actual = np.var(z_values, ddof=0)
+    
+    # X values: column positions centered
+    x_values = np.tile(np.arange(n) - (n-1)/2, n)
+    var_x_actual = np.var(x_values, ddof=0)
+    
+    # Y values: row positions centered
+    y_values = np.repeat((n-1)/2 - np.arange(n), n)
+    var_y_actual = np.var(y_values, ddof=0)
+    
+    return {
+        'n': n,
+        'var_z_theory': var_z_theory,
+        'var_z_actual': var_z_actual,
+        'var_z_match': np.isclose(var_z_theory, var_z_actual),
+        'var_xy_theory': var_xy_theory,
+        'var_x_actual': var_x_actual,
+        'var_y_actual': var_y_actual,
+        'var_xy_match': np.isclose(var_xy_theory, var_x_actual) and np.isclose(var_xy_theory, var_y_actual)
+    }
+
+
+def compute_higher_moments(square: np.ndarray) -> Dict:
+    """
+    Compute higher-order cross-moments for a magic square.
+    
+    THEOREM: For any n×n magic square, E[X^k Z] = E[Y^k Z] = 0 for all k ≥ 1.
+    
+    Proof: Since X depends only on column j, we have
+        E[X^k Z] = (1/n²) Σⱼ Xⱼᵏ · (column_j_sum - n·μ) = 0
+    because all column sums equal M(n) = n·μ for magic squares.
+    
+    Parameters
+    ----------
+    square : np.ndarray
+        n×n arrangement
+        
+    Returns
+    -------
+    Dict
+        Higher-order moments and verification of vanishing
+    """
+    n = square.shape[0]
+    mu = (n**2 + 1) / 2
+    
+    # Build coordinate arrays
+    x_vals, y_vals, z_vals = [], [], []
+    for i in range(n):
+        for j in range(n):
+            x_vals.append(j - (n-1)/2)
+            y_vals.append((n-1)/2 - i)
+            z_vals.append(square[i, j] - mu)
+    
+    x = np.array(x_vals)
+    y = np.array(y_vals)
+    z = np.array(z_vals)
+    
+    results = {
+        'n': n,
+        # First moments (k=1) - standard covariances
+        'E_XZ': float(np.mean(x * z)),
+        'E_YZ': float(np.mean(y * z)),
+        # Second moments (k=2)
+        'E_X2Z': float(np.mean(x**2 * z)),
+        'E_Y2Z': float(np.mean(y**2 * z)),
+        'E_XYZ': float(np.mean(x * y * z)),
+        # Third moments (k=3)
+        'E_X3Z': float(np.mean(x**3 * z)),
+        'E_Y3Z': float(np.mean(y**3 * z)),
+        # Mixed moments
+        'E_XZ2': float(np.mean(x * z**2)),
+        'E_YZ2': float(np.mean(y * z**2)),
+    }
+    
+    # Verify vanishing (within numerical tolerance)
+    tol = 1e-10
+    results['all_XkZ_vanish'] = all(abs(results[k]) < tol for k in ['E_XZ', 'E_X2Z', 'E_X3Z'])
+    results['all_YkZ_vanish'] = all(abs(results[k]) < tol for k in ['E_YZ', 'E_Y2Z', 'E_Y3Z'])
+    
+    return results
+
+
+def count_local_minima(n: int, energy_type: str = 'full', verbose: bool = False) -> Dict:
+    """
+    Count local minima in the energy landscape for order n.
+    
+    A local minimum is an arrangement where no single swap decreases energy.
+    Magic squares are global minima (E=0); this counts non-global local minima too.
+    
+    Parameters
+    ----------
+    n : int
+        Order of the square (only n=3 is feasible for exhaustive enumeration)
+    energy_type : str
+        'full' for E_full (complete energy), 'low' for E_low (4-term energy)
+    verbose : bool
+        Whether to print progress
+        
+    Returns
+    -------
+    Dict
+        Counts of global and local minima
+    """
+    from itertools import combinations
+    
+    if n > 3:
+        return {'error': 'Exhaustive enumeration only feasible for n=3'}
+    
+    def get_energy(arr):
+        if energy_type == 'full':
+            return compute_full_magic_energy(arr)['E_full']
+        else:
+            return compute_total_magic_energy_v2(arr)['E_total']
+    
+    def get_swaps(arr):
+        flat = arr.flatten()
+        neighbors = []
+        for i, j in combinations(range(n*n), 2):
+            new_flat = flat.copy()
+            new_flat[i], new_flat[j] = new_flat[j], new_flat[i]
+            neighbors.append(new_flat.reshape(n, n))
+        return neighbors
+    
+    local_minima = []
+    global_minima = []
+    total = 0
+    
+    for perm in permutations(range(1, n*n + 1)):
+        arr = np.array(perm).reshape(n, n)
+        total += 1
+        
+        e = get_energy(arr)
+        
+        # Check if local minimum
+        is_local_min = True
+        for neighbor in get_swaps(arr):
+            if get_energy(neighbor) < e - 1e-12:
+                is_local_min = False
+                break
+        
+        if is_local_min:
+            local_minima.append((arr.copy(), e))
+            if e < 1e-12:
+                global_minima.append(arr.copy())
+        
+        if verbose and total % 100000 == 0:
+            print(f'  Processed {total:,}...')
+    
+    energies = [e for _, e in local_minima]
+    
+    return {
+        'n': n,
+        'energy_type': energy_type,
+        'total_arrangements': total,
+        'total_local_minima': len(local_minima),
+        'global_minima': len(global_minima),
+        'non_global_local_minima': len(local_minima) - len(global_minima),
+        'min_energy': float(min(energies)) if energies else None,
+        'max_local_min_energy': float(max(energies)) if energies else None,
+        'mean_local_min_energy': float(np.mean(energies)) if energies else None,
     }
 
 

@@ -7,15 +7,16 @@ and discussion of the energy functional approach.
 
 \subsection{Proof Strategy Overview}
 
-The Energy Characterization Theorem (\Cref{thm:energy_char}) is established via 
+The Complete Energy Characterization Theorem (\Cref{thm:complete_energy_char}) is established via 
 two complementary approaches:
 
 \textbf{Forward Direction (Algebraic):} Direct proof that magic squares have zero energy,
 following from the algebraic relationship between covariances and line sums.
 
-\textbf{Converse Direction (Exhaustive Verification):} For $n=3$, exhaustive enumeration 
-of all $362{,}880$ arrangements confirms that only magic squares achieve zero energy.
-For $n \geq 4$, large-scale sampling provides strong computational evidence.
+\textbf{Converse Direction:} For the complete energy $E_{\mathrm{full}}$, the converse follows directly 
+from the row/column covariance characterization (\Cref{prop:rowcol_cov}, \Cref{prop:diagonal_cov}).
+For the low-mode energy $E_{\mathrm{low}}$, the converse holds only for $n=3$ 
+(verified by exhaustive enumeration of all $362{,}880$ arrangements).
 
 \subsection{Detailed Proof: Magic Implies Zero Covariance}
 
@@ -114,53 +115,62 @@ of which only 8 are magic squares.
 The remaining 752 arrangements satisfy the row and column covariance conditions 
 but fail to achieve equal row sums, equal column sums, or the diagonal conditions.
 
-\subsection{Energy Characterization Conjecture for General $n$}
+\subsection{Complete vs.\ Low-Mode Energy Characterization}
 
-For $n \geq 4$, exhaustive enumeration becomes computationally infeasible
-($16! \approx 2 \times 10^{13}$ for $n = 4$, and $25! \approx 10^{25}$ for $n = 5$).
-We therefore state the general result as a conjecture, supported by extensive computational evidence.
+The main text establishes two energy functionals with different characterization properties.
 
-\begin{conjecture}[Energy Characterization---General $n$]
-\label{conj:general}
-For all $n \geq 3$, an arrangement $S$ of $\{1, 2, \ldots, n^2\}$ in an $n \times n$ grid 
-is a magic square if and only if the total magic energy vanishes:
+\subsubsection{Complete Energy (Theorem)}
+
+The \emph{complete magic energy} uses individual row and column indicator covariances:
 \begin{equation}
-E(S) = \Cov(X, Z)^2 + \Cov(Y, Z)^2 + \Cov(D_{\mathrm{main}}, Z)^2 + \Cov(D_{\mathrm{anti}}, Z)^2 = 0.
+E_{\mathrm{full}}(S) = \sum_{k=0}^{n-2} \Cov(R_k, Z)^2 + \sum_{\ell=0}^{n-2} \Cov(C_\ell, Z)^2 
++ \Cov(D_{\mathrm{main}}, Z)^2 + \Cov(D_{\mathrm{anti}}, Z)^2,
 \end{equation}
-\end{conjecture}
+where $R_k(i,j) = \mathbf{1}\{i = k\}$ and $C_\ell(i,j) = \mathbf{1}\{j = \ell\}$.
 
-This formulation is conceptually appealing: magic squares are precisely those arrangements 
-that are simultaneously uncorrelated with all four structural directions of the grid
-(rows, columns, main diagonal, anti-diagonal).
+\begin{theorem}[Complete Energy Characterization---All $n$]
+\label{thm:complete_appendix}
+For all $n \geq 3$, an arrangement $S$ of $\{1, 2, \ldots, n^2\}$ in an $n \times n$ grid 
+is a magic square if and only if $E_{\mathrm{full}}(S) = 0$.
+\end{theorem}
 
-\textbf{Important clarification:} 
-Note that requiring all four covariances to vanish is essential.
-As discussed in \Cref{sec:insufficiency}, the conditions $\Cov(X, Z) = \Cov(Y, Z) = 0$ 
-alone do \emph{not} characterize semi-magic squares---760 non-semi-magic arrangements 
-satisfy these conditions for $n = 3$.
-Only the complete energy functional $E(S) = 0$ characterizes magic squares.
+This is proven in \Cref{thm:complete_energy_char} of the main text.
+The proof follows directly from the row/column covariance characterization:
+each row covariance vanishes iff that row sums to $M(n)$,
+each column covariance vanishes iff that column sums to $M(n)$,
+and each diagonal covariance vanishes iff that diagonal sums to $M(n)$.
 
-\textbf{Supporting evidence:}
-\begin{enumerate}
-\item \textbf{Proven for $n = 3$:} Exhaustive enumeration of all $362{,}880$ permutations 
-confirms that exactly 8 arrangements have $E(S) = 0$, all of which are magic squares 
-(the Lo Shu and its $D_4$ symmetry variants).
-\item \textbf{Strong evidence for $n = 4$:} All 7,040 known magic squares satisfy $E = 0$ exactly.
-Large-scale random sampling ($6 \times 10^7$ permutations) found zero 
-non-magic arrangements with $E < 10^{-10}$.
-\item \textbf{Strong evidence for $n = 5$:} All constructed magic squares satisfy $E = 0$ exactly. 
-Large-scale random sampling ($4 \times 10^8$ permutations) found zero 
-non-magic arrangements with $E < 10^{-10}$.
-\item \textbf{Total verification:} Over 460 million arrangements tested 
-across $n = 3, 4, 5$ with zero counterexamples observed.
-\end{enumerate}
+\subsubsection{Low-Mode Energy (Partial Characterization)}
 
-Note that the sampling approach tests the forward direction robustly 
-(confirming all magic squares have $E = 0$) but can only provide probabilistic evidence 
-for the converse (that all $E = 0$ arrangements are magic).
-Given the extreme rarity of magic squares (probability $\sim 10^{-10}$ for $n=4$ 
-and $\sim 10^{-17}$ for $n=5$), finding a counterexample by random sampling is unlikely 
-even if one existed, making this evidence suggestive but not conclusive.
+The simpler \emph{low-mode energy} uses aggregate position coordinates:
+\begin{equation}
+E_{\mathrm{low}}(S) = \Cov(X, Z)^2 + \Cov(Y, Z)^2 + \Cov(D_{\mathrm{main}}, Z)^2 + \Cov(D_{\mathrm{anti}}, Z)^2.
+\end{equation}
+
+\textbf{For $n = 3$:} Exhaustive enumeration confirms that $E_{\mathrm{low}}(S) = 0$ 
+if and only if $S$ is a magic square. Exactly 8 of 362,880 arrangements achieve zero energy,
+all being the Lo Shu and its $D_4$ symmetry variants.
+
+\textbf{For $n \geq 4$:} The condition $E_{\mathrm{low}}(S) = 0$ defines a \emph{strictly larger} class
+of ``low-mode balanced'' arrangements that properly contains the magic squares.
+Counterexamples exist: for example, the $4 \times 4$ arrangement
+\[
+\begin{pmatrix}
+9 & 4 & 12 & 3 \\
+16 & 1 & 14 & 7 \\
+10 & 15 & 11 & 8 \\
+2 & 5 & 6 & 13
+\end{pmatrix}
+\]
+has $E_{\mathrm{low}}(S) = 0$ (both diagonals sum to 34, and the first-moment conditions are satisfied),
+but row sums $(28, 38, 44, 26)$ and column sums $(37, 25, 43, 31)$ are not equal.
+This demonstrates that the four-term energy is insufficient for $n \geq 4$.
+
+\textbf{Why random sampling failed to detect counterexamples:}
+The probability of a uniformly random permutation achieving $E_{\mathrm{low}} = 0$ is extremely low
+(estimated below $10^{-8}$ for $n = 4$), so 460 million samples are unlikely to encounter such configurations.
+However, targeted search methods (e.g., hill-climbing on the constraint residuals) readily find them.
+This illustrates a fundamental limitation of random sampling for disproving ``if and only if'' conjectures.
 
 \subsection{Computational Methods}
 
@@ -183,7 +193,7 @@ The zero-covariance property was verified to hold within floating-point precisio
 
 Source code for all analyses and figures is available in the supplementary materials.
 An interactive web application for visualizing Magic Gems is available at
-\href{https://kylemath.github.io/MagicGemWebpage/}{https://kylemath.github.io/MagicGemWebpage/}.
+\url{https://kylemath.github.io/MagicGemWebpage/}.
 
 \subsection{Summary Statistics}
 

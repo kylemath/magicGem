@@ -1,0 +1,97 @@
+arXiv Submission Form - Field-by-Field Guide
+=============================================
+
+This document provides the exact information to fill in each field of the arXiv submission form.
+
+TITLE:
+------
+Magic Gems: A Polyhedral Framework for Magic Squares
+
+AUTHORS:
+--------
+Kyle Elliott Mathewson
+Faculty of Science, University of Alberta
+kyle.mathewson@ualberta.ca
+
+ABSTRACT:
+---------
+Copy the text from sections/abstract.tex (lines 2-17, excluding the \begin{abstract} and \end{abstract} tags):
+
+We introduce Magic Gems, a geometric representation of magic squares as three-dimensional polyhedra. By mapping an n×n magic square onto a centered coordinate grid with cell values as vertical displacements, we construct a point cloud whose convex hull defines the Magic Gem. This reveals a connection between magic square constraints and statistical structure: we prove that magic squares have vanishing covariances between position and value. We introduce a covariance energy functional---the sum of squared covariances with row, column, and diagonal indicator variables---and prove for n=3 (via exhaustive enumeration) that its zeros are precisely the magic squares. Large-scale sampling for n=4,5 (460+ million arrangements) provides strong numerical evidence that this characterization extends to larger orders. Perturbation analysis demonstrates that magic squares are isolated local minima. The representation is invariant under dihedral symmetry D_4, yielding canonical geometric objects for equivalence classes.
+
+Keywords: Magic squares, convex polyhedra, covariance, energy landscape, combinatorial geometry
+
+PRIMARY SUBJECT CLASSIFICATION:
+--------------------------------
+Select: Mathematics
+Then select: math.CO - Combinatorics
+
+SECONDARY SUBJECT CLASSIFICATION (OPTIONAL):
+--------------------------------------------
+Select: Computer Science
+Then select: cs.DM - Discrete Mathematics
+And/Or: cs.CG - Computational Geometry
+
+(You can select multiple secondary categories. cs.DM and cs.CG are excellent choices given the computational and geometric nature of the work.)
+
+COMMENTS:
+---------
+Connecting Combinatorics, Geometry, and Linear Algebra. 8 figures, ancillary code included. Interactive visualization: https://kylemath.github.io/MagicGemWebpage/
+
+Note: The page count will be determined automatically by arXiv after compilation. 
+You can add it manually if you know it (e.g., "24 pages, 8 figures, ...").
+
+KEYWORDS:
+---------
+Magic squares, convex polyhedra, covariance, energy landscape, combinatorial geometry
+
+MSC CLASSIFICATION (OPTIONAL):
+------------------------------
+Primary: 05B15 (Magic squares)
+Secondary: 52B11 (Convex polyhedra), 62H20 (Multivariate analysis)
+
+Format for arXiv: 05B15 (primary), 52B11, 62H20 (secondary)
+
+LICENSE:
+--------
+Choose one:
+- arXiv.org perpetual, non-exclusive license to distribute (default)
+- Creative Commons Attribution 4.0 International (CC-BY 4.0)
+- Creative Commons Attribution-ShareAlike 4.0 International (CC-BY-SA 4.0)
+
+(Recommendation: Use default arXiv license unless you have specific requirements)
+
+JOURNAL REFERENCE (IF ANY):
+---------------------------
+(Leave blank for initial submission)
+
+REPORT NUMBER (IF ANY):
+-----------------------
+(Leave blank unless you have an institutional report number)
+
+ACM CLASSIFICATION (IF APPLICABLE):
+-----------------------------------
+(Leave blank - not applicable for this paper)
+
+ACM CLASSIFICATION (OPTIONAL):
+-------------------------------
+(Leave blank - not applicable for this paper)
+
+UPLOAD FILES:
+-------------
+Upload all files from the arxiv_submission folder:
+- main.tex
+- references.bib
+- All files in sections/ directory
+- All files in figures/ directory
+
+Make sure to preserve the directory structure (sections/ and figures/ subdirectories).
+
+NOTES:
+------
+- arXiv will automatically compile your LaTeX
+- You can preview the compiled PDF before final submission
+- You can make corrections and resubmit if needed
+- The submission will be assigned an arXiv ID (e.g., 2401.12345)
+
+
