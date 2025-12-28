@@ -1,10 +1,16 @@
 \begin{thebibliography}{10}
 
-\bibitem{ahmed2004discovering}
+\bibitem{ahmed2004franklin}
 Maya~M. Ahmed.
-\newblock Discovering structure in the space of magic squares using the
-  {D}ihedral group.
-\newblock {\em The Mathematical Gazette}, 88(511):69--77, 2004.
+\newblock How many squares are there, mr. {F}ranklin?: Constructing and
+  enumerating {F}ranklin squares.
+\newblock {\em The American Mathematical Monthly}, 111(5):394--410, 2004.
+
+\bibitem{ahmed2003polyhedral}
+Maya~M. Ahmed, Jes{\'u}s~A. De~Loera, and Raymond Hemmecke.
+\newblock Polyhedral cones of magic cubes and squares.
+\newblock In {\em Discrete and Computational Geometry}, volume~25 of {\em
+  Algorithms and Combinatorics}, pages 25--41. Springer, 2003.
 
 \bibitem{andrews1960magic}
 W.~S. Andrews.
@@ -16,43 +22,47 @@ Alexander Barvinok.
 \newblock {\em A Course in Convexity}.
 \newblock Graduate Studies in Mathematics. American Mathematical Society, 2002.
 
-\bibitem{beck2000magic}
+\bibitem{beck2010enumeration}
+Matthias Beck and Andrew van Herick.
+\newblock Enumeration of 4 $\times$ 4 magic squares.
+\newblock {\em Mathematics of Computation}, 80(273):617--621, 2011.
+
+\bibitem{beck2006insideout}
 Matthias Beck and Thomas Zaslavsky.
-\newblock Magic squares and permutation matrices.
-\newblock {\em Journal of Combinatorial Theory, Series A}, 89(2):265--277,
-  2000.
+\newblock Inside-out polytopes.
+\newblock {\em Advances in Mathematics}, 205(1):134--162, 2006.
+\newblock MR 2254310.
 
-\bibitem{chan2013eigenvalues}
-Heng~Huat Chan and K.~P. Shum.
-\newblock Eigenvalues of magic squares.
-\newblock {\em Linear Algebra and its Applications}, 439(3):590--599, 2013.
+\bibitem{durer1514melencolia}
+Albrecht D{\"u}rer.
+\newblock Melencolia {I}, 1514.
+\newblock Engraving featuring a 4$\times$4 magic square.
 
-\bibitem{loly2004eigenproperties}
+\bibitem{loly2004invariance}
 Peter~D. Loly.
-\newblock The eigenproperties of magic squares.
-\newblock {\em Linear Algebra and its Applications}, 382:265--276, 2004.
+\newblock 88.30 the invariance of the moment of inertia of magic squares.
+\newblock {\em The Mathematical Gazette}, 88(511):113--119, 2004.
 
-\bibitem{loly2006invariance}
-Peter~D. Loly.
-\newblock The invariance of the moment of inertia of magic squares.
-\newblock {\em The College Mathematics Journal}, 37(3):186--190, 2006.
-
-\bibitem{loly2008franklin}
+\bibitem{loly2007franklin}
 Peter~D. Loly.
 \newblock Franklin squares: A chapter in the scientific studies of magical
   squares.
-\newblock {\em Complex Systems}, 17(2):139--157, 2008.
+\newblock {\em Complex Systems}, 17(2):143--157, 2007.
 
 \bibitem{loly2009spectra}
 Peter~D. Loly, Ian Cameron, Walter Trump, and Daniel Schindel.
 \newblock Magic square spectra.
-\newblock {\em Linear Algebra and its Applications}, 430(11-12):2659--2680,
-  2009.
+\newblock {\em Linear Algebra and its Applications}, 430(10):2659--2680, 2009.
 
-\bibitem{nordgren2012spectral}
+\bibitem{nordgren2012properties}
 R.~P. Nordgren.
-\newblock On the spectral analysis of magic squares.
-\newblock {\em Mathematics Magazine}, 85(2):69--74, 2012.
+\newblock On properties of special magic square matrices.
+\newblock {\em Linear Algebra and its Applications}, 437(8):2009--2025, 2012.
+
+\bibitem{nordgren2014spectra}
+R.~P. Nordgren.
+\newblock Spectra of order-4 special magic squares.
+\newblock {\em Linear Algebra and its Applications}, 455:320--331, 2014.
 
 \bibitem{pickover2002zen}
 Clifford~A. Pickover.
@@ -62,7 +72,6 @@ Clifford~A. Pickover.
 \bibitem{trump2012enumeration}
 Walter Trump.
 \newblock Enumeration of magic squares.
-\newblock 2012.
-\newblock Available at \url{http://www.trump.de/magic-squares/}.
+\newblock Available at \url{http://www.trump.de/magic-squares/}, 2012.
 
 \end{thebibliography}
