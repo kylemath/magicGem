@@ -1,0 +1,161 @@
+% ============================================================================================
+% Recommended replacement for Theorem 3.15 / Remark 3.16 and Open Question 2 of paper B.
+% Self-contained; uses \Cref, amsthm environments as in the paper.  Proofs as in kstar_proofs.md.
+% Suggested bib entries at the end.
+% ============================================================================================
+
+\subsection{The permutation threshold}
+\label{sec:kstar}
+
+For an arrangement $S$ put $P_\gamma(t)=\sum_{j=0}^{n-1}\gamma_jt^{j}$ and $P_\rho(t)=\sum_{i=0}^{n-1}\rho_it^{i}$.
+
+\begin{lemma}[Polynomial form of the degree-$k$ conditions]
+\label{lem:poly_form}
+For $\gamma\in\R^{n}$ the following are equivalent: (i) $\sum_j\gamma_j=0$ and $\sum_jx_j^{m}\gamma_j=0$ for $1\le m\le k$;
+(ii) $\sum_j\binom{j}{r}\gamma_j=0$ for $0\le r\le k$; (iii) $(t-1)^{k+1}$ divides $P_\gamma(t)$.
+\end{lemma}
+
+\begin{proof}
+Both families $(x_j^{m})_{m\le k}$ and $(\binom{j}{r})_{r\le k}$ span the restrictions to $\{0,\dots,n-1\}$ of the polynomials of
+degree $\le k$, so (i)$\Leftrightarrow$(ii); and $P_\gamma(t)=\sum_{r}\bigl(\sum_j\binom jr\gamma_j\bigr)(t-1)^{r}$ is the Taylor
+expansion at $1$, so (ii)$\Leftrightarrow$(iii).
+\end{proof}
+
+Thus the degree-$k$ conditions say that $\gamma$ and $\rho$ are integer vectors whose generating polynomials vanish to order $k+1$
+at $1$: the column (and row) deviations of the arrangement form a solution of a Prouhet--Tarry--Escott-type system, and the question
+how large $k$ can be for bounded integer coefficients is a Littlewood-type problem in the sense of Borwein, Erd\'elyi and
+K\'os~\cite{BEK1999}.  Two elementary facts about column deviations will be used: for every set of $p$ columns,
+\begin{equation}
+\Bigl|\sum_{j\in J}\gamma_j\Bigr|\le \frac{pn(N-pn)}{2}\qquad(|J|=p),
+\label{eq:col_feasible}
+\end{equation}
+since $p$ columns contain $pn$ distinct values; in particular $|\gamma_j|\le n^{2}(n-1)/2$ and $\|\gamma\|_1\le N^{2}/4$.
+
+\begin{lemma}
+\label{lem:jensen}
+Let $\gamma\in\Z^{n}\setminus\{0\}$ and suppose $(t-1)^{K}\mid P_\gamma$, $K\ge1$.  Then $K^{2}\le \pi e\,(n-1)\log\|\gamma\|_1$.
+\end{lemma}
+
+\begin{proof}
+Write $P=P_\gamma$, $L_1=\|\gamma\|_1$; note $K\le n-1$.  Since $P$ has integer coefficients, Jensen's formula gives
+$\int_{-1/2}^{1/2}\log|P(e^{2\pi i\theta})|\,d\theta=\log\bigl(|a|\prod_\alpha\max(1,|\alpha|)\bigr)\ge0$, where $a\ne0$ is the leading
+coefficient.  On $|z|=1$ we have $|P(z)|\le L_1$.  Since $P^{(i)}(1)=0$ for $i<K$, Taylor's formula with integral remainder on the
+segment $[1,z]\subset\{|w|\le1\}$ gives
+$|P(z)|\le |z-1|^{K}\max_{|w|\le1}|P^{(K)}(w)|/K!\le L_1\binom{n-1}{K}|z-1|^{K}\le L_1\bigl(e(n-1)|z-1|/K\bigr)^{K}$.
+With $|e^{2\pi i\theta}-1|\le2\pi|\theta|$ and $a:=2\pi e(n-1)/K>2$ we get
+$\log|P(e^{2\pi i\theta})|\le\log L_1+K\log\min(1,a|\theta|)$, and
+$\int_{-1/2}^{1/2}\log\min(1,a|\theta|)\,d\theta=-2/a$.  Hence $0\le\log L_1-2K/a=\log L_1-K^{2}/(\pi e(n-1))$.
+\end{proof}
+
+\begin{theorem}[Bounds for the permutation threshold]
+\label{thm:perm_threshold}
+For $n\ge3$ let $k^{*}(n)$ be the least $k$ such that every arrangement satisfying the degree-$k$ conditions is semi-magic.
+\begin{enumerate}
+\item[(a)] $k^{*}(n)\le\bigl\lfloor\sqrt{\pi e\,(n-1)\log(n^{4}/4)}\bigr\rfloor\le 2\sqrt{\pi e}\,\sqrt{n\log n}$ for all $n\ge3$.
+\item[(b)] $\liminf_{n\to\infty}k^{*}(n)/\sqrt n\ge\sqrt2$.  More precisely, (b') below gives an explicit sufficient condition for $k^*(n)\ge K$.
+\item[(c)] $k^{*}(n)=n-1$ for $3\le n\le13$, $k^{*}(n)=n-2$ for $14\le n\le17$, and $k^{*}(n)\le n-3$ for every $n\ge18$; the values for
+$14\le n\le40$ are given in \Cref{tab:kstar}.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}[Proof of (a)]
+If $S$ satisfies the degree-$k$ conditions and $\gamma\ne0$, then $(t-1)^{k+1}\mid P_\gamma$ by \Cref{lem:poly_form} and
+$\|\gamma\|_1\le n^{4}/4$ by \eqref{eq:col_feasible}, so $(k+1)^{2}\le\pi e(n-1)\log(n^{4}/4)$ by \Cref{lem:jensen}.  The same holds for
+$\rho$.
+\end{proof}
+
+The order $\sqrt{n\log n}$ in (a) also follows from \cite[Theorem~2.1]{BEK1999} applied to $P_\gamma(t)/(t^{r}\max_j|\gamma_j|)$,
+where $r$ is the index of the first nonzero $\gamma_j$ (constant term of modulus $\ge 1/\max_j|\gamma_j|$, all coefficients of
+modulus $\le1$), with an unspecified absolute constant.
+
+For the lower bound we need arrangements whose column deviations can be prescribed while all row sums stay equal to $M(n)$.
+Call rows $i\ne i'$ \emph{twins on} a set $J$ of columns if $s_{ij}+s_{i'j}=N+1$ for all $j\in J$.
+
+\begin{lemma}[Twin swaps]
+\label{lem:twin}
+Let $S$ be semi-magic and let rows $i,i'$ be twins on $J\ni j,j'$; put $d=s_{ij'}-s_{ij}\ne0$.  Exchanging the entries of row $i$ in
+columns $j,j'$ produces column deviations $d(e_j-e_{j'})$; exchanging those of row $i'$ produces $-d(e_j-e_{j'})$; all row sums are
+unchanged.  Exchanges involving disjoint cells may be combined, and their effects add.
+\end{lemma}
+
+\begin{proof}
+$s_{i'j}-s_{i'j'}=(N+1-s_{ij})-(N+1-s_{ij'})=d$.
+\end{proof}
+
+\begin{lemma}[Squares with many twin rows]
+\label{lem:twin_squares}
+(i) If $n=2m$ with $m$ even, or $m$ odd and $m\ge7$, there is a semi-magic square of order $n$ in which rows $r$ and $m+r$ are twins on
+all columns ($0\le r<m$).
+(ii) If $n\ge9$ is odd, there is a semi-magic square of order $n$ in which rows $\ell$ and $n-1-\ell$ are twins on the columns
+$\ell+1,\dots,n-2-\ell$, for $0\le\ell\le(n-9)/2$.
+\end{lemma}
+
+\begin{proof}[Proof (sketch; details in the ancillary notes)]
+(i) A value $v$ has weight $|2v-(N+1)|\in\{1,3,\dots,N-1\}$, and each weight belongs to a complementary pair.  It suffices to split
+the weights into $m$ groups of $n$ with signs so that every signed group sum vanishes: row $r$ then receives the values
+$(N+1\pm w)/2$ and row $m+r$ their complements.  Consecutive weights $w,w+2$ with opposite signs contribute $\mp2$; for $m$ even,
+$m$ such dominoes with alternating signs per row suffice.  For $m$ odd, row $r$ receives in addition the weights
+$8r+1,8r+3,8r+5,8r+7$ with signs $+,+,+,-$ (sum $16r+2$) and the weights $10m-1-2r$ and $10m+14r+1$ with signs $+,-$
+(sum $-16r-2$); the remaining weights split into dominoes when $m\ge7$.
+(ii) Border a magic square of order $7$ successively to orders $9,11,\dots,n$.  For the border of order $2m+1$ ($m\ge4$), with
+$c=(N+1)/2$, put $A=4m$, $B=4m-2$, corners $s_{00}=N+1-A$, $s_{0,n-1}=B$ and their complements opposite; choose an $m$-subset $T_+$
+of $[2m,4m-3]$ and an $(m-1)$-subset $T_-$ of $[1,2m-1]$ with $\sum T_+-\sum T_-=c-A+B$ (possible since $k$-subset sums of an interval
+fill an interval, and $c-A+B\in[m^{2}+m,3m^{2}-2m]$); the inner top row consists of $N+1-p$ $(p\in T_+)$ and $p$ $(p\in T_-)$, the
+inner left column of $N+1-p$ $(p\in[2m,4m]\setminus(T_+\cup\{A,B\}))$ and $p$ $(p\in[1,2m-1]\setminus T_-)$, and bottom row and right
+column are the complements.  All line sums equal $M$, and top and bottom rows are twins on the inner columns; shifting a square
+by a constant preserves twin relations.
+\end{proof}
+
+\begin{proof}[Proof of (b)]
+Let $S$ be a square of \Cref{lem:twin_squares}.  Pair the columns $(j_q,j_q+1)$ with $j_q=2q$ ($n$ even, $q<Q=n/2$) or
+$j_q=2q+1$ ($n$ odd, $q<Q=(n-3)/2$), and let $R_q$ be the number of twin pairs whose column set contains both columns
+($R_q=n/2$, resp.\ $R_q=\min(2q,n-4-2q,(n-9)/2)+1$).  Among the $R_q$ twin differences $d$ of \Cref{lem:twin} at least
+$\lceil R_q/2\rceil$ have the same sign, so their partial sums and $0$ give a set $F_q$ of $\lceil R_q/2\rceil+1$ distinct
+sub-sums, all in an interval of length $R_q(N-1)$.  For $g\in\prod_qF_q$ the moments $\mu_r(g)=\sum_qg_q\binom qr$,
+$0\le r\le K-2$, take at most $\prod_{r=0}^{K-2}\bigl((N-1)\sum_qR_q\binom qr+1\bigr)$ values.  Hence, if
+\[
+\text{(b$'$)}\qquad \prod_{q<Q}\bigl(\lceil R_q/2\rceil+1\bigr)>\prod_{r=0}^{K-2}\Bigl((N-1)\sum_{q<Q}R_q\binom qr+1\Bigr),
+\]
+there are $g\ne g'$ with equal moments.  Realising $g_q-g'_q$ by twin swaps (\Cref{lem:twin}) gives an arrangement with
+$\rho=0$ and $P_\gamma(t)=t^{j_0}(1-t)G(t^{2})$, $G(u)=\sum_q(g_q-g'_q)u^{q}\ne0$, $(u-1)^{K-1}\mid G$ by \Cref{lem:poly_form};
+so $(t-1)^{K}\mid P_\gamma$, the degree-$(K-1)$ conditions hold, $\gamma\ne0$, and $k^{*}(n)\ge K$.  With $K-1=\lfloor\alpha\sqrt n\rfloor$
+the logarithm of the left side of (b$'$) is $\frac n2\log n-O(n)$ and that of the right side is at most
+$\frac{\alpha^{2}}4\,n\log n+O(n)$, so (b$'$) holds for large $n$ whenever $\alpha<\sqrt2$.
+\end{proof}
+
+\begin{proof}[Proof of (c)]
+For $n\le13$ see \Cref{rem:kstar_search}.  Upper bounds: if no nonzero vector of the lattice
+$\Lambda_{n,k}=\{\gamma\in\Z^{n}:(t-1)^{k+1}\mid P_\gamma\}$ satisfies \eqref{eq:col_feasible} for all $p$, then $k^{*}(n)\le k$.  This was
+decided by exact enumeration of $\Lambda_{n,k}$ (LLL reduction and Schnorr--Euchner enumeration in rational arithmetic) over the ball
+$\|\gamma\|_2^{2}\le n^{5}(n^{2}-1)/12$, which contains every vector satisfying \eqref{eq:col_feasible} (it is majorised by
+$v_p=n(N-(2p-1)n)/2$).  With $k=k^{*}(n)$ from \Cref{tab:kstar} this gives the upper bounds for $14\le n\le40$, and with $k=n-3$
+(a lattice of rank $2$) it gives $k^{*}(n)\le n-3$ for $18\le n\le170$; for $n\ge166$, (a) already gives $k^{*}(n)\le n-3$.  Lower bounds: for each $14\le n\le40$ an arrangement with all
+row sums $M(n)$ and column deviations in $\Lambda_{n,k^{*}(n)-1}\setminus\{0\}$ was found by local search and verified in exact
+arithmetic (\texttt{anc/kstar\_witnesses.json}).
+\end{proof}
+
+\begin{table}[ht]
+\centering\small
+\begin{tabular}{r|rrrrrrrrrrrrrr}
+$n$ & 14&15&16&17&18&19&20&21&22&23&24&25&26&27\\ \hline
+$k^{*}(n)$ & 12&13&14&15&15&16&16&17&17&18&18&19&19&20\\[4pt]
+$n$ & 28&29&30&31&32&33&34&35&36&37&38&39&40&\\ \hline
+$k^{*}(n)$ & 21&21&22&22&23&23&23&24&24&25&25&26&26&
+\end{tabular}
+\caption{Exact values of the permutation threshold (computer-verified, \Cref{thm:perm_threshold}(c)).}
+\label{tab:kstar}
+\end{table}
+
+% ---- Replacement for Open Question 2 --------------------------------------------------------
+% \item \emph{The order of the permutation threshold.}  By \Cref{thm:perm_threshold},
+% $(\sqrt2-o(1))\sqrt n\le k^{*}(n)\le(2\sqrt{\pi e}+o(1))\sqrt{n\log n}$.  Is $k^{*}(n)\asymp\sqrt n$?  The upper bound uses only that
+% $\gamma$ is a nonzero integer vector with $\|\gamma\|_1\le n^{4}/4$; for such vectors the order $\sqrt n$ cannot be beaten (a box-principle
+% argument produces integer vectors with entries $\le n^{3}$ vanishing to order $\asymp\sqrt n$), and the remaining factor $\sqrt{\log n}$ is the
+% analogue of the gap left open in \cite{BEK1999} for polynomials with coefficients in $\{-1,0,1\}$.  In all cases $14\le n\le40$ the only
+% obstruction was \eqref{eq:col_feasible}; is this true for all $n$?
+
+% ---- bibliography --------------------------------------------------------------------------
+% @article{BEK1999, author={Borwein, Peter and Erd\'elyi, Tam\'as and K\'os, G\'eza}, title={Littlewood-type problems on $[0,1]$},
+%   journal={Proc. London Math. Soc. (3)}, volume={79}, year={1999}, number={1}, pages={22--46}}
+% @article{Wright1959, author={Wright, E. M.}, title={Prouhet's 1851 solution of the {T}arry--{E}scott problem of 1910},
+%   journal={Amer. Math. Monthly}, volume={66}, year={1959}, pages={199--201}}

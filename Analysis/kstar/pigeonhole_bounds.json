@@ -1,0 +1,378 @@
+{
+ "14": {
+  "generic": 2,
+  "exact": 4
+ },
+ "15": {
+  "generic": 1,
+  "exact": 2
+ },
+ "16": {
+  "generic": 2,
+  "exact": 4
+ },
+ "17": {
+  "generic": 1,
+  "exact": 3
+ },
+ "18": {
+  "generic": 2,
+  "exact": 5
+ },
+ "19": {
+  "generic": 1,
+  "exact": 2
+ },
+ "20": {
+  "generic": 2,
+  "exact": 5
+ },
+ "21": {
+  "generic": 2,
+  "exact": 3
+ },
+ "22": {
+  "generic": 2,
+  "exact": 6
+ },
+ "23": {
+  "generic": 2,
+  "exact": 3
+ },
+ "24": {
+  "generic": 2,
+  "exact": 6
+ },
+ "25": {
+  "generic": 2,
+  "exact": 4
+ },
+ "26": {
+  "generic": 3,
+  "exact": 7
+ },
+ "27": {
+  "generic": 2,
+  "exact": 3
+ },
+ "28": {
+  "generic": 3,
+  "exact": 6
+ },
+ "29": {
+  "generic": 2,
+  "exact": 4
+ },
+ "30": {
+  "generic": 3,
+  "exact": 7
+ },
+ "31": {
+  "generic": 2,
+  "exact": 4
+ },
+ "32": {
+  "generic": 3,
+  "exact": 7
+ },
+ "33": {
+  "generic": 2,
+  "exact": 5
+ },
+ "34": {
+  "generic": 3,
+  "exact": 8
+ },
+ "35": {
+  "generic": 2,
+  "exact": 4
+ },
+ "36": {
+  "generic": 3,
+  "exact": 8
+ },
+ "37": {
+  "generic": 3,
+  "exact": 5
+ },
+ "38": {
+  "generic": 3,
+  "exact": 9
+ },
+ "39": {
+  "generic": 3,
+  "exact": 4
+ },
+ "40": {
+  "generic": 4,
+  "exact": 8
+ },
+ "41": {
+  "generic": 3,
+  "exact": 5
+ },
+ "42": {
+  "generic": 4,
+  "exact": 10
+ },
+ "43": {
+  "generic": 3,
+  "exact": 5
+ },
+ "44": {
+  "generic": 4,
+  "exact": 9
+ },
+ "45": {
+  "generic": 3,
+  "exact": 6
+ },
+ "46": {
+  "generic": 4,
+  "exact": 10
+ },
+ "47": {
+  "generic": 3,
+  "exact": 5
+ },
+ "48": {
+  "generic": 4,
+  "exact": 10
+ },
+ "49": {
+  "generic": 3,
+  "exact": 6
+ },
+ "50": {
+  "generic": 4,
+  "exact": 11
+ },
+ "51": {
+  "generic": 3,
+  "exact": 5
+ },
+ "52": {
+  "generic": 4,
+  "exact": 10
+ },
+ "53": {
+  "generic": 3,
+  "exact": 6
+ },
+ "54": {
+  "generic": 5,
+  "exact": 12
+ },
+ "55": {
+  "generic": 4,
+  "exact": 6
+ },
+ "56": {
+  "generic": 5,
+  "exact": 11
+ },
+ "57": {
+  "generic": 4,
+  "exact": 7
+ },
+ "58": {
+  "generic": 5,
+  "exact": 12
+ },
+ "59": {
+  "generic": 4,
+  "exact": 6
+ },
+ "60": {
+  "generic": 5,
+  "exact": 11
+ },
+ "61": {
+  "generic": 4,
+  "exact": 7
+ },
+ "62": {
+  "generic": 5,
+  "exact": 13
+ },
+ "63": {
+  "generic": 4,
+  "exact": 6
+ },
+ "64": {
+  "generic": 5,
+  "exact": 12
+ },
+ "65": {
+  "generic": 4,
+  "exact": 7
+ },
+ "66": {
+  "generic": 5,
+  "exact": 13
+ },
+ "67": {
+  "generic": 4,
+  "exact": 6
+ },
+ "68": {
+  "generic": 5,
+  "exact": 12
+ },
+ "69": {
+  "generic": 4,
+  "exact": 8
+ },
+ "70": {
+  "generic": 6,
+  "exact": 14
+ },
+ "71": {
+  "generic": 4,
+  "exact": 7
+ },
+ "72": {
+  "generic": 6,
+  "exact": 13
+ },
+ "73": {
+  "generic": 5,
+  "exact": 8
+ },
+ "74": {
+  "generic": 6,
+  "exact": 14
+ },
+ "75": {
+  "generic": 5,
+  "exact": 7
+ },
+ "76": {
+  "generic": 6,
+  "exact": 13
+ },
+ "77": {
+  "generic": 5,
+  "exact": 8
+ },
+ "78": {
+  "generic": 6,
+  "exact": 15
+ },
+ "79": {
+  "generic": 5,
+  "exact": 7
+ },
+ "80": {
+  "generic": 6,
+  "exact": 14
+ },
+ "81": {
+  "generic": 5,
+  "exact": 8
+ },
+ "82": {
+  "generic": 6,
+  "exact": 15
+ },
+ "83": {
+  "generic": 5,
+  "exact": 7
+ },
+ "84": {
+  "generic": 6,
+  "exact": 14
+ },
+ "85": {
+  "generic": 5,
+  "exact": 9
+ },
+ "86": {
+  "generic": 6,
+  "exact": 16
+ },
+ "87": {
+  "generic": 5,
+  "exact": 8
+ },
+ "88": {
+  "generic": 6,
+  "exact": 15
+ },
+ "89": {
+  "generic": 5,
+  "exact": 9
+ },
+ "90": {
+  "generic": 7,
+  "exact": 16
+ },
+ "91": {
+  "generic": 5,
+  "exact": 8
+ },
+ "92": {
+  "generic": 7,
+  "exact": 15
+ },
+ "93": {
+  "generic": 5,
+  "exact": 9
+ },
+ "94": {
+  "generic": 7,
+  "exact": 17
+ },
+ "95": {
+  "generic": 6,
+  "exact": 8
+ },
+ "96": {
+  "generic": 7,
+  "exact": 16
+ },
+ "97": {
+  "generic": 6,
+  "exact": 9
+ },
+ "98": {
+  "generic": 7,
+  "exact": 17
+ },
+ "99": {
+  "generic": 6,
+  "exact": 8
+ },
+ "100": {
+  "generic": 7,
+  "exact": 16
+ },
+ "120": {
+  "generic": 8,
+  "exact": 18
+ },
+ "150": {
+  "generic": 10,
+  "exact": 23
+ },
+ "200": {
+  "generic": 12,
+  "exact": null
+ },
+ "300": {
+  "generic": 15,
+  "exact": null
+ },
+ "400": {
+  "generic": 18,
+  "exact": null
+ },
+ "600": {
+  "generic": 24,
+  "exact": null
+ },
+ "1000": {
+  "generic": 32,
+  "exact": null
+ }
+}

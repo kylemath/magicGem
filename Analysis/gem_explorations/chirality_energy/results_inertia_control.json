@@ -1,0 +1,39 @@
+{
+ "identity_detcov_checked_on": 2000,
+ "random_spearman_vol_detcov": 0.6587385471620897,
+ "random_spearman_vol_Exy": -0.65874094026192,
+ "random_spearman_vol_Ediag": 0.026034159865849203,
+ "random_spearman_vol_Efull_minus_Elow": 0.5743925607499785,
+ "Exy=0": {
+  "n": 3897,
+  "mean": 81.5243349585151,
+  "sd": 5.529106865240709,
+  "magic880_mean": 84.05303030303031,
+  "magic880_median_percentile": 0.7427508339748525,
+  "mean_pct": 0.6385532577507173,
+  "n_magic_in_sample": 0
+ },
+ "Elow=0 (no tilt, diagonals ok)": {
+  "n": 6,
+  "mean": 78.1388888888889,
+  "sd": 6.2704603371288625,
+  "magic880_mean": 84.05303030303031,
+  "magic880_median_percentile": 0.8333333333333334,
+  "mean_pct": 0.7379734848484849,
+  "n_magic_in_sample": 0
+ },
+ "Elow=0 and Efull>0 (nonmagic)": {
+  "n": 6,
+  "mean": 78.1388888888889,
+  "sd": 6.2704603371288625,
+  "magic880_mean": 84.05303030303031,
+  "magic880_median_percentile": 0.8333333333333334,
+  "mean_pct": 0.7379734848484849,
+  "n_magic_in_sample": 0
+ },
+ "Exy=0: spearman_vol_Efull": -0.21654807437364848,
+ "Elow=0: spearman_vol_Efull": null,
+ "detcov_880_all_equal": true,
+ "swaps_spearman_dV_ddetcov": 0.4066330579974534,
+ "swaps_pearson_dV_ddetcov": 0.5934349762222028
+}

@@ -1,0 +1,1653 @@
+                LITTLEWOOD-TYPE PROBLEMS ON [0, 1]
+
+
+
+                Peter Borwein, Tamás Erdélyi, and Géza Kós
+
+      Abstract. A highlight of the paper states that there are absolute constants c1 > 0
+      and c2 > 0 such that
+                              √                                       √ 
+                       exp −c1 n ≤           inf     kpk[0,1] ≤ exp −c2 n
+                                           06=p∈Fn
+
+
+      for every n ≥ 2, where Fn denotes the set of polynomials of degree at most n with
+      coefficients from {−1, 0, 1}.
+
+         This Chebyshev-type problem is closely related to the question of how many zeros
+      a polynomial from the above classes can have at 1. We also give essentially sharp
+      bounds for this problem. Among others we prove that there is an absolute constant
+      c > 0 such that every polynomial p of the form
+
+                           n
+                           X
+                  p(x) =         aj xj ,   |aj | ≤ 1 ,   |a0 | = |an | = 1 ,   aj ∈ C
+                           j=0
+
+                    √                                            √
+      has at most c n real zeros. This improves the old bound c n log n given by Schur
+      in 1933 as well as more recent related bounds of Bombieri and Vaaler, and up to the
+      constant c this is the best possible result.
+
+
+
+
+   0 Research supported in part by NSERC of Canada.
+
+   1991 Mathematics Subject Classification. 11J54,11B83.
+   Key words and phrases. Transfinite diameter; integers; diophantine approximation; Cheby-
+shev; polynomial; −1, 0, 1 coefficients; 0, 1 coefficients.
+
+                                                                                  Typeset by AMS-TEX
+                                                   1
+2              PETER BORWEIN, TAMÁS ERDÉLYI, AND GÉZA KÓS
+
+                                        0. Main Results
+
+  We consider the problem of minimizing the uniform norm on [0, 1] over polyno-
+mials 0 6= p of the form
+                                  n
+                                  X
+                      p(x) =            aj xj ,         |aj | ≤ 1 ,   aj ∈ C ,
+                                  j=0
+
+where the modulus of the first non-zero coefficient is at least δ > 0. Essentially
+sharp bounds are given for this problem. An interesting related result states that
+there are absolute constants c1 > 0 and c2 > 0 such that
+                          √                                √ 
+                  exp −c1 n ≤ inf kpk[0,1] ≤ exp −c2 n
+                                          06=p∈Fn
+
+for every n ≥ 2, where Fn denotes the set of polynomials of degree at most n with
+coefficients from {−1, 0, 1}.
+   This Chebyshev-type problem is closely related to the question of how many
+zeros a polynomial from the above classes can have at 1. We also give essentially
+sharp bounds for this problem.
+  Inter alia we prove that there is an absolute constant c > 0 such that every
+polynomial p of the form
+                      n
+                      X
+             p(x) =         aj xj ,       |aj | ≤ 1 ,      |a0 | = |an | = 1 ,   aj ∈ C
+                      j=0
+             √                                           √
+has at most c n real zeros. This improves the old bound c n log n given by Schur
+in 1933 as well as more recent related bounds of Bombieri and Vaaler, and up to
+the constant c this is the best possible result.
+  All the analysis rests critically on the key estimate stating that there are absolute
+constants c1 > 0 and c2 > 0 such that
+                                              c 
+                                                2
+                           |f (0)|c1 /a ≤ exp      kf k[1−a,1]
+                                               a
+for every f ∈ S and a ∈ (0, 1], where S denotes the collection of all analytic
+functions f on the open unit disk D := {z ∈ C : |z| < 1} that satisfy
+                                               1
+                                |f (z)| ≤           ,          z ∈ D.
+                                            1 − |z|
+
+                  1. Introduction, History, and Notation
+
+   We examine a number of problems concerning polynomials with coefficients re-
+stricted in various ways. We are particularly interested in how small such polyno-
+mials can be on the interval [0, 1]. For example, we prove that there are absolute
+constants c1 > 0 and c2 > 0 such that
+                           √                                √ 
+                   exp −c1 n ≤ inf kpk[0,1] ≤ exp −c2 n
+                                          06=p∈Fn
+                         LITTLEWOOD-TYPE PROBLEMS ON [0, 1]                         3
+
+for every n ≥ 2, where Fn denotes the set of polynomials of degree at most n with
+coefficients from {−1, 0, 1}.
+  Littlewood considered minimization problems of this variety on the unit disk,
+hence, the title of the paper. His most famous, now solved, conjecture was that the
+L1 norm of an element f ∈ Fn on the unit circle grows at least as fast as c log N ,
+where N is the number of non-zero coefficients in f and c > 0 is an absolute
+constant.
+   When the coefficients are required to be integers, the questions have a Diophan-
+tine nature and have been studied from a variety of points of view. See [2, 3, 10,
+11, 20, 35].
+   One key to the analysis is a study of the related problem of how large an order
+zero these restricted polynomials can have at 1. We answer this latter question
+precisely for the class of polynomials of the form
+                                  n
+                                  X
+                         p(x) =         aj xj ,     |aj | ≤ 1 ,   aj ∈ C
+                                  j=0
+
+with fixed |a0 | 6= 0.
+   Variants of these questions have attracted considerable study, though rarely have
+precise answers been possible to give. See in particular [1, 7, 6, 19, 39, 41]. Indeed
+the classical, much studied, and presumably very difficult problem of Prouhet,
+Tarry, and Escott rephrases as a question of this variety. (Precisely: what is the
+maximal vanishing at 1 of a polynomial with integer coefficients with l1 norm 2n?
+It is conjectured to be n. See [22] or [11].)
+   We introduce the following classes of polynomials. Let
+                                  ( n                  )
+                                    X
+                             c               i
+                            Pn :=        ai x : ai ∈ C
+                                              i=0
+
+denote the set of algebraic polynomials of degree at most n with complex coeffi-
+cients. Let                       ( n                 )
+                                   X
+                            Pn :=      ai xi : ai ∈ R
+                                              i=0
+denote the set of algebraic polynomials of degree at most n with real coefficients.
+Let                               ( n                )
+                                   X
+                                            i
+                            Zn :=       ai x : ai ∈ Z
+                                              i=0
+denote the set of algebraic polynomials of degree at most n with integer coefficients.
+Let                             ( n                        )
+                                 X
+                                        i
+                         Fn :=      ai x : ai ∈ {−1, 0, 1}
+                                        i=0
+denote the set of polynomials of degree at most n with coefficients from {−1, 0, 1}.
+Let                              ( n                     )
+                                   X
+                                          i
+                         An :=        ai x : ai ∈ {0, 1}
+                                          i=0
+4              PETER BORWEIN, TAMÁS ERDÉLYI, AND GÉZA KÓS
+
+denote the set of polynomials of degree at most n with coefficients from {0, 1}.
+Finally, let                  ( n                      )
+                                X
+                                       i
+                        Ln :=      ai x : ai ∈ {−1, 1}
+                                   i=0
+denote the set of polynomials of degree at most n with coefficients from {−1, 1}.
+    So obviously
+                          Ln , An ⊂ Fn ⊂ Zn ⊂ Pn ⊂ Pnc .
+
+    Throughout this paper the uniform norm on a set A ⊂ R is denoted by k.kA .
+   In his monograph [30], Littlewood discusses the class Ln and its complex ana-
+logue when the coefficients are complex numbers of modulus 1. On page 25 he
+writes “These raise fascinating questions.” It is easy to see that the L2 norm of any
+polynomial
+   √       of degree n with complex coefficients of modulus one on the unit circle
+is n + 1. (Here we have normalized so that the unit circle has length 1.) Hence
+the
+√ minimum supremum norm of any such polynomial on the unit circle is at least
+  n + 1.
+   The Rudin-Shapiro polynomials     √ show that there are polynomials from Ln with
+maximum modulus less than c n + 1 on the unit circle. Littlewood remarks
+in [30] that although it has been known
+P                                             √ for more than 50 years that gn (θ) :=
+  n      im log m imθ
+  m=0  e         e    satisfies |g n (θ)| <√ n + 1 on the real line, the existence of
+                                            c
+polynomials pn ∈ Ln with |pn (z)| < c n + 1 on the unit circle has only fairly re-
+cently been shown. He adds “As a matter of cold fact, many people had doubted its
+truth.” However, it is not known whether or √      not there are such polynomials from
+pn ∈ Ln with minimal modulus also at least c n on the unit circle, where c > 0 is
+an absolute constant. Littlewood conjectures that there are such polynomials.
+   Littlewood also makes the above conjecture in [29] as well as several others. In
+[28] he writes that the problem of finding polynomials of degree n with √
+                                                                        coefficients
+of modulus 1 and with modulus on the unit disk bounded below by c n “seems
+singularly elusive and intriguing.”
+   Erdős conjectured
+           √           that the maximum modulus of a polynomial from Ln is always
+at least c n + 1 with an absolute constant c > 1. Erdős offers $100 for a solution
+of this problem in [E9-95]. Both Littlewood’s and Erdős’ conjectures are still open.
+                                                  Pn−1 m(m+1)/2 m
+   In the paper [28] Littlewood also considers m=0       ω         z and shows that
+this polynomial has almost constant modulus (in an asymptotic sense) except on a
+set of size cn−1/2+δ . Here ω is a primitive nth root of unity. Further related results
+are to be found in [4, 5, 9, 12, 16, 17, 21, 25, 26, 27, 32, 34].
+    Carrol, Eustice, and T. Figiel [15] show that
+                                        log(m(n))
+                              lim inf              > .431 ,
+                                        log(n + 1)
+where m(n) denotes the largest value that the minimum modulus of a polynomial
+from Ln can be on the unit circle. They also prove that
+                            log(m(n))         log(m(n))
+                       sup             = lim            .
+                            log(n + 1)       log(n + 1)
+                      LITTLEWOOD-TYPE PROBLEMS ON [0, 1]                             5
+
+They further conjecture that m(n)n−1/2 tends to zero (contrary to Littlewood).
+   The average maximum modulus is computed by Salem and Zygmund [37] who
+show that for all but√o(2n ) polynomials
+                                    √ from Ln the maximum modulus on the unit
+disk lies between c1 n log n and c2 n log n.
+  The expected L4 norm of a polynomial p ∈ Ln is (2n2 − n)1/4 . This is due to
+Newman and Byrnes [33]. They also compute the L4 norm of the Rudin-Shapiro
+polynomials.
+   In the case of complex coefficients these problems are mostly solved. A very
+interesting result of Kahane [24] proves the existence of polynomials of degree n
+with complex coefficients
+                      √ of modulus one and with minimal and maximal modulus
+both asymptotically n + 1 on the unit circle. See also [4].
+  The study of the location of zeros of these classes of polynomials begins with
+Bloch and Pólya [6]. They√prove that the average number of real zeros of a polyno-
+mial from Fn is at most c n. They also prove that a polynomial from Fn cannot
+have more than
+                                    cn log log n
+                                       log n
+real zeros. This quite weak result appears to be the first on this subject. Schur
+[39]
+ √ and by different methods Szegő [41] and Erdős and Turán [19] improve this to
+c n log n (see also [10]). (Their results are more general, but in this specialization
+not sharp.)
+                                                             √
+   Our Theorem 4.1 gives the right upper bound of c n for the number of real
+zeros of polynomials from a much larger class, namely for all polynomials of the
+form
+                    X n
+            p(x) =      aj xj ,    |aj | ≤ 1 , |a0 | = |an | = 1 , aj ∈ C .
+                    j=0
+
+Schur [39] claims that Schmidt gives a version of part of this theorem. However, it
+does not appear in the reference he gives, namely [38], and we have √ not been able
+to trace it to any other source. Also, our method is able to give c n as an upper
+bound for the number of zeros of a polynomial p ∈ Pnc with |a0 | = 1, |ai | ≤ 1, inside
+any polygon with vertices in the unit circle (of course, c depends on the polygon).
+This may be discussed in a later publication.
+  Bloch and Pólya [6] also prove that there are polynomials p ∈ Fn with
+
+                                          cn1/4
+                                          √
+                                            log n
+
+distinct real zeros of odd multiplicity. (Schur [39] claims they do it for polynomials
+with coefficients only from {−1, 1}, but this appears to be incorrect.)
+   In a seminal paper Littlewood and Offord [31] prove that the number of real
+roots of a p ∈ Ln , on average, lies between
+
+                            c1 log n
+                                             and    c2 log2 n
+                          log log log n
+6              PETER BORWEIN, TAMÁS ERDÉLYI, AND GÉZA KÓS
+
+and it is proved by Boyd [13] that every p ∈ Ln has at most c log2 n/ log log n zeros
+at 1 (in the sense of multiplicity).
+   Kac [23] shows that the expected number of real roots of a polynomial of degree
+n with random uniformly distributed coefficients is asymptotically (2/π) log n. He
+writes “I have also stated that the same conclusion holds if the coefficients assume
+only the values 1 and −1 with equal probabilities. Upon closer examination it
+turns out that the proof I had in mind is inapplicable... . This situation tends to
+emphasize the particular interest of the discrete case, which surprisingly enough
+turns out to be thePmost difficult.” In a recent related paper Solomyak [40] studies
+the random series     ±λn .
+
+
+                  2. Number of Zeros at 1 of Polynomials
+                       with Restricted Coefficients
+
+   The following two theorems offer upper bounds for the number of zeros at 1 of
+certain classes of polynomials with restricted coefficients. The first result sharpens
+and generalizes results of Amoroso [1], Bombieri and Vaaler [7], and Hua [22] who
+give versions of this result for polynomials with integer coefficients.
+
+Theorem 2.1. There is an absolute constant c > 0 such that every polynomial p
+of the form
+                         Xn
+                 p(x) =     aj xj ,    |aj | ≤ 1 , aj ∈ C
+                               j=0
+
+has at most
+                                                     1/2
+                                 c (n(1 − log |a0 |))
+zeros at 1.
+
+    Applying Theorem 2.1 with q(x) := x−n p(x−1 ) immediately gives the following.
+
+Theorem 2.2. There is an absolute constant c > 0 such that every polynomial p
+of the form
+                         Xn
+                 p(x) =     aj xj ,    |aj | ≤ 1 , aj ∈ C
+                               j=0
+
+has at most
+                                                        1/2
+                                 c (n(1 − log |an |))
+zeros at 1.
+
+    The sharpness of the above theorems is shown by
+
+Theorem 2.3. Suppose n ∈ N. Then there exists a polynomial p of the form
+                               n
+                               X
+                      p(x) =         aj xj ,   |aj | ≤ 1 ,    aj ∈ R
+                               j=0
+                       LITTLEWOOD-TYPE PROBLEMS ON [0, 1]                                 7
+
+such that p has a zero at 1 with multiplicity at least
+                                                                     
+                                     1
+                          min          ((n (1 − log |a0 |))1/2 − 1 , n .
+                                     6
+
+
+   The following two theorems can be obtained from the results above with slightly
+worse constants. However, we have distinct attractive proofs of Theorems 2.4 and
+2.5 below and we give them also.
+
+Theorem 2.4. Every polynomial p of the form
+                           n
+                           X
+                 p(x) =          aj xj ,       |a0 | = 1 ,       |aj | ≤ 1 ,   aj ∈ C
+                           j=0
+
+               16 √ 
+has at most      7  n + 4 zeros at 1.
+
+Theorem 2.5. For every n ∈ N, there exists a polynomial
+                                                       2
+                                                      nX −1
+                                           pn (x) =           aj xj
+                                                      j=0
+
+
+such that an2 −1 = 1; a0 , a1 , . . . , an2 −2 are real numbers of modulus less than 1; and
+pn has a zero at 1 with multiplicity at least n − 1.
+
+   Theorem 2.5 immediately implies
+
+Corollary 2.6. For every n ∈ N, there exists a polynomial
+                           n
+                           X
+                pn (x) =         aj xj ,        an = 1 ,         |aj | ≤ 1 ,   aj ∈ R ,
+                           j=0
+
+                                                   √
+and pn has a zero at 1 with multiplicity at least ⌊ n − 1⌋.
+
+   The next related result is well known (in a variety of forms) but its proof is
+simple and we include it (see [6]).
+
+Theorem 2.7. There is an p   absolute constant c > 0 such that for every n ∈ N there
+is a p ∈ Fn having at least c n/ log(n + 1) zeros at 1.
+
+   Theorems 2.4 and 2.7 show that the right upper bound for the
+                                                            p number of zeros
+a√polynomial p ∈ Fn can have at 1 is somewhere between c1 n/ log(n + 1) and
+c2 n with absolute constants c1 > 0 and c2 > 0. Completely closing the gap in
+this problem looks quite difficult.
+   Our next theorem slightly generalizes Theorem 2.1 and offers an explicit constant.
+8               PETER BORWEIN, TAMÁS ERDÉLYI, AND GÉZA KÓS
+
+Theorem 2.8. If |a0 | ≥ exp(−L2 ) and |aj | ≤ 1 for each j = L2 + 1, L2 + 2, . . . , n,
+then the polynomial
+                                 Xn
+                          p(x) =    aj xj ,     aj ∈ C
+                                       j=0
+                     √
+has at most 44
+            7 (L + 1) n + 5 zeros at 1.
+
+
+  The next result is a simple observation about the maximal number of zeros a
+polynomial p ∈ An can have.
+
+Theorem 2.9. There is an absolute constant c > 0 such that every p ∈ An has at
+most c log n zeros at −1.
+
+Remark to Theorem 2.9. Let Rn be defined by
+                                             n
+                                             Y
+                               Rn (x) :=           (1 + xai ) ,
+                                             i=1
+
+                                                                       P
+where a1 := 1 and ai+1 is the smallest odd integer that is greater than ik=1 ak . It
+is tempting to speculate that Rn is the lowest degree polynomial with coefficients
+from {0, 1} and a zero of order n at −1. This is true for n = 1, 2, 3, 4, 5 but fails
+for n = 6 and hence for all larger n.
+   Our final result in this section shows that a polynomial Q ∈ Fn with k zeros at
+1 has many other zeros on the unit circle (at certain roots of unity). A version of
+this may be also be deduced from results in [7].
+
+Theorem 2.10. Let p ≤ n be a prime. Suppose Q ∈ Fn and Q has exactly k zeros
+at 1 and exactly m zeros at a primitive pth root of unity. Then
+
+                                                      log p
+                              p(m + 1) ≥ k                    .
+                                                   log(n + 1)
+
+
+
+                  3. The Chebyshev Problem on [0, 1] for
+                 Polynomials with Restricted Coefficients
+
+    If p is a polynomial of the form
+                                              n
+                                              X
+                                   p(x) =            aj xj
+                                              j=0
+
+
+with a1 = a2 = · · · = am−1 = 0 and am 6= 0, then we call I(p) := am the first
+non-zero coefficient of p.
+  Our first theorem in this section shows how small the uniform norm of a poly-
+nomial 0 6= p on [0, 1] can be under some restriction on its coefficients.
+                       LITTLEWOOD-TYPE PROBLEMS ON [0, 1]                            9
+
+Theorem 3.1. Let δ ∈ (0, 1]. There are absolute constants c1 > 0 and c2 > 0 such
+that
+                                                                      
+     exp −c1 (n(1 − log δ))1/2 ≤ inf kpk[0,1] ≤ exp −c2 (n(1 − log δ))1/2 ,
+                                             p
+
+
+where the infimum is taken over all polynomials p of the form
+                                 n
+                                 X
+                        p(x) =         aj xj ,           |aj | ≤ 1 ,   aj ∈ C
+                                 j=0
+
+                         1
+                                   
+with |I(p)| ≥ δ ≥ exp    2 (6 − n) .
+
+
+  The following result is a special case of Theorem 3.1.
+
+Theorem 3.2. There are absolute constants c1 > 0 and c2 > 0 such that
+                             √                         √ 
+                      exp −c1 n ≤ inf kpk[0,1] ≤ exp −c2 n
+                                              p
+
+
+for every n ≥ 2, where the infimum is taken over all polynomials p of the form
+                                 n
+                                 X
+                        p(x) =         aj xj ,           |aj | ≤ 1 ,   aj ∈ C
+                                 j=0
+
+
+with |I(p)| = 1.
+
+  For the class Fn we have
+
+Theorem 3.3. There are absolute constants c1 > 0 and c2 > 0 such that
+                           √                                             √ 
+                    exp −c1 n ≤              inf        kpk[0,1] ≤ exp −c2 n
+                                           06=p∈Fn
+
+
+for every n ≥ 2.
+
+   Note that the lower bound in the above theorem is a special case of Theorem
+3.2. The proof of the upper bound, however, requires new ideas.
+  The approximation rate in Theorems 3.2 and 3.3 should be compared with
+
+                                                  1/n      21/n
+                                   inf kpk[0,1] =               ,
+                                       p                    4
+
+where the infimum is taken for all monic p ∈ Pn , and also with
+
+                       1               1/n     1 + ǫn
+                              < inf kpk[0,1] <        ,                   ǫn → 0 .
+                   2.376 . . . 06=p∈Zn         2.3605
+
+The first equality above is attained by the normalized Chebyshev polynomial shifted
+linearly to [0, 1] and is proved by a simple perturbation argument. The second
+10             PETER BORWEIN, TAMÁS ERDÉLYI, AND GÉZA KÓS
+
+inequality is much harder (the exact result is open) and is discussed in [10]. It
+is an interesting fact that the polynomials 0 6= p ∈ Zn with the smallest uniform
+norm on [0, 1] are very different from the usual Chebyshev polynomial of degree
+n. For example, they have at least 52% of their zeros at either 0 or 1. Relaxation
+techniques do not allow for their approximate computation.
+  Likewise, polynomials 0 6= p ∈ Fn with small uniform norm on [0, 1] are again
+quite different from polynomials 0 6= p ∈ Zn with small uniform norm on [0, 1].
+   The story is roughly as follows. Polynomials 0 6= p ∈ Pn with leading coefficient
+1 and with smallest possible uniform norm on [0, 1] are characterized by equioscil-
+lation and are given explicitly by the Chebyshev polynomials. In contrast, finding
+polynomials from Zn with small uniform norm on [0, 1] is closely related to finding
+irreducible polynomials with all their roots in [0, 1].
+    The construction of non-zero polynomials from Fn with small uniform norm on
+[0, 1] is more or less governed by how many zeros such a polynomial can have at
+1. Indeed, non-zero polynomials from Fn with minimal uniform norm on [0, 1] are
+forced to have close to the maximal possible number of zeros at 1.
+   This problem of the maximum order of a zero at 1 for a polynomial in Fn , and
+closely related problems for polynomials of small height have attracted considerable
+attention but there is still a gap in what is known (see Theorem 2.4 and Theorem
+2.7).
+  For the class An we have the following Chebyshev-type theorem. This result
+should be compared with Theorem 3.3.
+
+Theorem 3.4. There are absolute constants c1 > 0 and c2 > 0 such that
+                                                                     
+     exp −c1 log2 (n + 1) ≤ inf kp(−x)k[0,1] ≤ exp −c2 log2 (n + 1)
+                                      06=p∈An
+
+for every n ≥ 2.
+
+  Our last theorem in this section is a sharp Chebyshev-type inequality for F :=
+∪∞
+ n=1 Fn and S, where S denotes the collection of all analytic functions f on the
+open unit disk D := {z ∈ C : |z| < 1} that satisfy
+                                              1
+                               |f (z)| ≤           ,       z ∈ D.
+                                           1 − |z|
+
+Theorem 3.5. There are absolute constants c1 > 0 and c2 > 0 such that
+     exp(−c1 /a) ≤       inf         kpk[1−a,1] ≤        inf         kpk[1−a,1] ≤ exp(−c2 /a)
+                     p∈S, |p(0)|=1                  p∈F , |p(0)|=1
+
+for every a ∈ (0, 1).
+
+                       4. The Number of Real Zeros of
+                   Polynomials with Restricted Coefficients
+
+  Theorems 4.1 and 4.2 below give upper bounds for the number of real zeros of
+polynomials p when their coefficients are restricted in various ways.
+                       LITTLEWOOD-TYPE PROBLEMS ON [0, 1]                                        11
+
+   The prototype for these theorems is given below. It was apparently first proved,
+at least up to the correct constant, by Schmidt in the early thirties. His complicated
+proof wasn’t published – the first published proof is due to Schur [39]. Later new
+and simpler proofs and generalizations were published by Szegő [41] and Erdős and
+Turán [19] and others. A version of the approach of Erdős and Turán is presented
+in [10].
+
+Theorem A. Suppose
+                                             n
+                                             X
+                                  p(z) :=          aj z j ,       aj ∈ C
+                                             j=0
+
+has m positive real roots. Then
+                                                                                !
+                            2                 |a0 | + |a1 | + · · · + |an |
+                       m ≤ 2n log                      p                            .
+                                                         |a0 an |
+
+                                              √
+   Theorem 4.1 improves the above bound of c n log n in the cases we are interested
+in where the coefficients are of similar size. Up to the constant c it is the best
+possible result.
+
+Theorem 4.1. There is an absolute constant c > 0 such that every polynomial p
+of the form
+                   Xn
+            p(x) =     aj xj ,   |aj | ≤ 1 , |a0 | = 1 , aj ∈ C
+                            j=0
+             √
+has at most c n zeros in [−1, 1].
+  There is an absolute constant c > 0 such that every polynomial p of the form
+                            n
+                            X
+                p(x) =            aj xj ,       |aj | ≤ 1 ,       |an | = 1 ,       aj ∈ C
+                            j=0
+
+             √
+has at most c n zeros in R \ (−1, 1).
+  There is an absolute constant c > 0 such that every polynomial p of the form
+                      n
+                      X
+             p(x) =         aj xj ,         |aj | ≤ 1 ,       |a0 | = |an | = 1 ,       aj ∈ C
+                      j=0
+
+             √
+has at most c n real zeros.
+
+Theorem 4.2. There is an absolute constant c > 0 such that every polynomial p
+of the form
+                            n
+                            X
+(4.1)           p(x) =            aj xj ,       |aj | ≤ 1 ,       |a0 | = 1 ,       aj ∈ C
+                            j=0
+12              PETER BORWEIN, TAMÁS ERDÉLYI, AND GÉZA KÓS
+
+has at most c/a zeros in [−1 + a, 1 − a] whenever a ∈ (0, 1).
+
+   This result is sharp up to the constant. It is possible to construct a polynomial
+(of degree n ≤ ck 2 ) of the form (4.1) with a zero of order k in the interval (0, 1−1/k].
+This is discussed in [3].
+   The next theorem gives an upper bound for the number of zeros of a polynomial
+p lying on a subarc of the unit circle when the coefficients of p are restricted as in
+the first statement of Theorem 4.1.
+
+Theorem 4.3. There is an absolute constant c > 0 such that every polynomial p
+of the form
+                   Xn
+            p(x) =     aj xj ,   |aj | ≤ 1 , |a0 | = 1 , aj ∈ C
+                          j=0
+
+has at most cnα zeros√on a subarc Iα of length α of the unit circle if α ≥ n−1/2 ,
+while it has at most c n zeros on Iα if α ≤ n−1/2 . The polynomial p(z) := z n − 1
+(α ≥ n−1/2 ) and Theorem 2.4 (α ≤ n−1/2 ) show that these bounds are essentially
+sharp.
+
+   We point out an interesting extension of Theorem 2.4 as a special case of Theorem
+4.1.
+
+Theorem 4.4. There is an absolute constant c > 0 such that every polynomial p
+of the form
+                   Xn
+            p(x) =     aj xj ,   |aj | ≤ 1 , |a0 | = 1 , aj ∈ C
+                          j=0
+             √
+has at most c n zeros at a point a ∈ C with 0 < |a| ≤ 1.
+     There is an absolute constant c > 0 such that every polynomial p of the form
+                          n
+                          X
+                 p(x) =         aj xj ,   |aj | ≤ 1 ,   |an | = 1 ,   aj ∈ C
+                          j=0
+             √
+has at most c n zeros at a point a ∈ C with 1 ≤ |a| < ∞.
+
+   One should observe that Jensen’s inequality implies that every function f an-
+alytic in the open unit disk D := {z ∈ C : |z| < 1} and satisfying the growth
+condition
+                                              1
+                   |f (0)| = 1 , |f (z)| ≤         ,   z∈D
+                                           1 − |z|
+has at most (c/a) log(1/a) zeros in the disk Da := {z ∈ C : |z| < 1 − a}, where
+0 < a < 1 and c > 0 is an absolute constant.
+
+                                          5. Tools
+
+   The main tool in the proof of Theorem 2.1 is the following result which is of
+interest for its own sake.
+                             LITTLEWOOD-TYPE PROBLEMS ON [0, 1]                                 13
+
+  Denote by S the collection of all analytic functions f on the open unit disk
+D := {z ∈ C : |z| < 1} that satisfy
+
+                                                   1
+                                    |f (z)| ≤           ,          z ∈ D.
+                                                1 − |z|
+
+Theorem 5.1. There are absolute constants c1 > 0 and c2 > 0 such that
+                                        c 
+                                          2
+                     |f (0)|c1 /a ≤ exp      kf k[1−a,1]
+                                         a
+for every f ∈ S and a ∈ (0, 1].
+
+   Theorem 2.1 is proved in the next section. In the rest of this section we formulate
+and prove some technical lemmas used in the proof of Theorem 5.1. We need some
+corollaries of the
+
+Hadamard Three Circles Theorem. Suppose f is regular in
+
+                                       {z ∈ C : r1 ≤ |z| ≤ r2 } .
+
+For r ∈ [r1 , r2 ], let
+                                         M (r) := max |f (z)| .
+                                                     |z|=r
+
+Then
+                          M (r)log(r2 /r1 ) ≤ M (r1 )log(r2 /r) M (r2 )log(r/r1 ) .
+
+
+Corollary 5.2. Let a ∈ (0, 1]. Suppose f is regular inside and on the ellipse Ea
+with foci at 1 − a and 1 − a + 14 a and with major axis
+                                                    
+                                      9a         25a
+                              1 − a− ,1 − a+            .
+                                      64          64
+
+    ea be the ellipse with foci at 1 − a and 1 − a + 1 a and with major axis
+Let E                                                 4
+                                                     
+                                        a          9a
+                               1 − a− ,1 − a +          .
+                                       32          32
+
+Then                                                               !1/2               1/2
+               max |f (z)| ≤               max           |f (z)|            max |f (z)|     .
+                ea
+              z∈E                    z∈[1−a,1−a+ 41 a]                  z∈Ea
+
+
+
+Proof. This follows from the Hadamard Three Circles Theorem with the substitu-
+tion                                   
+                            a z + z −1              a
+                        w=              + 1−a+         .
+                            8     2                 8
+The Hadamard Three Circles Theorem is applied with r1 := 1, r := 2, and r2 :=
+4. 
+14                PETER BORWEIN, TAMÁS ERDÉLYI, AND GÉZA KÓS
+
+Corollary 5.3. For every f ∈ S and a ∈ (0, 1]
+                                                       1/2                 1/2
+                                                   64
+                       max |f (z)| ≤                               max |f (z)|     .
+                         ea
+                       z∈E                        39a            z∈[1−a,1]
+
+
+
+
+Proof. This follows from Corollary 5.2 and the maximum principle.                                    
+
+Lemma 5.4. Suppose
+                              n
+                              X
+                   p(x) =           aj xj ,         |aj | ≤ 1 ,     aj ∈ C
+                              j=0
+                                                                     n−k
+                                                                     X
+                   p(x) = (x − 1)k q(x) ,                 q(x) =           bj xj ,   bj ∈ C .
+                                                                     j=0
+
+
+Then
+                              n−k
+                              X                             en k−1                    en k
+                 kqk[0,1] ≤         |bj | ≤ (n + 1)e                       ≤ (n + 1)             .
+                              j=0
+                                                             k                           k
+
+As a consequence,
+                                                                        e k
+                                kpk[1−k/(9n),1] ≤ (n + 1)                       .
+                                                                           9
+
+Proof. We have
+
+             1 dj
+       |bj | =      (p(x)(x − 1)−k )
+             j! dxj                  x=0
+                 j     
+             1 X j              (k + m − 1)! (j−m)
+           =              (−1)k             p      (0)
+             j! m=0 m              (k − 1)!
+                 j
+                 X                                Xj
+                   (k + m − 1)!  1                    (k + m − 1)!
+           =                         p(j−m) (0) =                  aj−m
+             m=0
+                 (k − 1)!m! (j − m)!              m=0
+                                                       (k − 1)!m!
+                              k  
+              k+j       e(k + j)        en k
+           ≤        ≤              ≤
+               k           k             k
+
+which proves the lemma. 
+
+     To prove Theorem 2.3 our tool is the next lemma due to Halász [42].
+
+Lemma 5.5. For every k ∈ N, there exists a polynomial h ∈ Pk such that
+                                                 
+                                                 2
+      h(0) = 1 ,    h(1) = 0 ,     |h(z)| < exp        for |z| ≤ 1 .
+                                                 k
+
+
+     To prove Theorems 2.4 and 2.8 we need Lemmas 5.6 and 5.7, respectively, below.
+                         LITTLEWOOD-TYPE PROBLEMS ON [0, 1]                                    15
+
+Lemma 5.6. For every positive integer n, there exists an f ∈ Pµ with
+                                   √ 
+                              µ ≤ 167   n +4
+
+such that
+                           f (0) > |f (1)| + |f (2)| + · · · + |f (n)| .
+
+
+Proof. Let                                       4√ 
+                                          k :=    7 n +1
+
+and
+                            1
+                      g(x) =  T0 (x) + T1 (x) + T2 (x) + · · · + Tk (x)
+                            2
+where, as usual, Ti denotes the Chebyshev polynomial of degree i. We have g(1) =
+k + 21 , and for 0 < t ≤ π,
+                                                                              
+                1                                    sin k + 12 t    sin k + 12 t
+      g(cos t) = + cos t + cos 2t + · · · + cos kt =               = p              ,
+                2                                       2 sin 2t       2(1 − cos t)
+
+whence
+                                      1
+                          |g(x)| ≤ p         ,             x ∈ [−1, 1) .
+                                    2(1 − x)
+Let                                          4
+                          f (x) := g 1 − n2 x    .
+                          16 √ 
+Then f ∈ Pµ with µ = 4k ≤ 7 n + 4 and
+                                          n 
+                                          X      −2            n
+                                              4j           n2 X 1       π2 2
+  |f (1)| + |f (2)| + · · · + |f (n)| ≤                =            2
+                                                                      <    n < k 4 < f (0) ,
+                                          j=1
+                                                 n         16 j=1 j     96
+
+and the proof is finished. 
+                                                                            √
+Lemma 5.7. Let n and L be a positive integers with 1 ≤ L ≤                   n. Then there
+exists a polynomial f ∈ Pµ with
+                          √        √               √
+                     µ ≤ 4 n + 97 L n + L + 4 ≤ 44
+                                                7 L n+4
+
+such that
+
+(5.1)                          f (1) = f (2) = · · · = f (L2 ) = 0
+
+and
+                                                                             
+(5.2)          f (0) > exp(L2 ) |f (L2 + 1)| + |f (L2 + 2)| + · · · + |f (n)| .
+
+
+Proof. The required polynomial f is constructed as a product of other polynomials.
+First we define these factors. Let g0 ∈ Pµ with
+                                        √ 
+                                  µ ≤ 167  n +4
+16             PETER BORWEIN, TAMÁS ERDÉLYI, AND GÉZA KÓS
+
+and
+
+(5.3)                    g0 (0) > |g0 (1)| + |g0 (2)| + · · · + |g0 (n)| .
+
+The existence of such a polynomial g0 is guaranteed by Lemma 5.6. For j =
+1, 2, . . . , n, we define          p
+                             mj := ⌊ n/j⌋ + 1
+and                                                                   !
+                                                            π
+                                                   1 − cos 2m j
+                           gj (x) := Tmj     1−                       x       .
+                                                           j
+
+Then                                                                     
+                                                                      π
+            gj (0) = Tmj (1) = 1         and        gj (j) = Tmj cos 2m j
+                                                                            = 0.
+
+Also, for 0 ≤ x ≤ n, we have
+                                                                                 2
+                                                                           π
+                      π
+             1 − cos 2m j
+                                       2n sin2 4m
+                                                π
+                                                  j
+                                                                2n        4mj
+      1≥1−                   x≥1−                       >1−                            > 1 − 2 = −1 ,
+                     j                       j                            j
+
+hence
+                                 |gj (x)| ≤ 1          x ∈ [0, n] .
+Now let                                     
+                                   2(L2 − x)                              √ 
+                   h(x) := TkL 1 +             ,                k :=        n +1.
+                                       n
+Then h ∈ PkL and
+                        |h(x)| ≤ 1 ,  L2 ≤ x ≤ n .
+                   √    √
+Further 1 ≤ L ≤ n, k = ⌊ n⌋ + 1, and the concavity of the function cosh−1 (1 +
+2x2 ) on [0, 1] imply
+
+
+                                                        
+                            2L2                  −1     2L2
+             h(0) = TkL 1 +       = cosh kL cosh     1+
+                             n                           n
+                                              
+                          √ L
+                  > cosh L n √ cosh−1 (1 + 2)
+                               n
+                    1
+                  > exp((7/4)L2 ) > exp(L2 ) .
+                    2
+Now we define the required polynomial f by
+                                                   2
+                                                  L
+                                                  Y
+                                         f := h         gj .
+                                                  j=0
+
+
+This f satisfies
+                             f (1) = f (2) = · · · = f (L2 ) = 0 ,
+                             |f (x)| ≤ g0 (x) ,         L2 ≤ x ≤ n ,
+                           LITTLEWOOD-TYPE PROBLEMS ON [0, 1]                                                          17
+
+and
+                                   f (0) = g0 (0)h(0) > exp(L2 )g0 (0) .
+These, together with (5.3) show that (5.1) and (5.2) are satisfied. The degree of
+the polynomial f is at most
+
+                                        2
+                                      L
+                                      X
+              16 √
+                                                  √   
+               7   n+4            +         mj +     n +1 L
+                                      j=1
+                                                                                     2
+                                                                   L p
+                                                                   X           
+                                        16 √
+                                                          √   
+                                  ≤      7   n+4         +  n+1 L+     n/j + 1
+                                                                                 j=1
+                                        16 √
+                                                          √                      √
+                                  <      7   n+4         +  n + 1 L + L2 + (2L − 1) n
+
+                                      √      √
+                                  ≤ 4L n + 79 n + L + 4 .
+
+This finishes the proof. 
+
+
+                                  6. Proofs of the Main Results
+
+Proof of Theorem 5.1. Let h(z) = 21 (1 − a)(z + z 2 ). Observe that h(0) = 0, and
+there are absolute constants c3 > 0 and c4 > 0 such that
+
+                                  |h(eit )| ≤ 1 − c3 t2 ,            −π ≤ t ≤ π ,
+
+                                                           ea . Now let m := ⌊2πc4 /a⌋ + 1.
+and for t ∈ [−c4 a, c4 a], h(eit ) lies inside the ellipse E
+Let ξ := exp(2πi/(2m)) be the first 2mth root of unity, and let
+
+                                                     2m−1
+                                                      Y
+                                            g(z) =             f (h(ξ j z)) .
+                                                         j=0
+
+
+
+   Using the Maximum Principle and the properties of h, we obtain
+
+                                                                          Y
+                                                                        2 m−1                1
+                                                                                                     2
+      |f (0)|2m = |g(0)| ≤ max |g(z)| ≤                  max |f (z)|
+                                  |z|=1                    ea
+                                                         z∈E                             c3 (k/m)2
+                                                                             k=1
+                                       2                     m−1
+                                                                        4                         2
+                                                              m
+               =       max |f (z)|           ec5 (m−1)                       <       max |f (z)|         ec6 (m−1) ,
+                         ea
+                       z∈E                                   (m − 1)!                  ea
+                                                                                     z∈E
+
+
+and the theorem follows by Lemma 5.3. 
+
+Proof of Theorem 2.1. Let p be a polynomial of the form
+                                  n
+                                  X
+                   p(x) =               aj xj ,      a0 6= 0 ,        |aj | ≤ 1 ,        aj ∈ C .
+                                  j=0
+18              PETER BORWEIN, TAMÁS ERDÉLYI, AND GÉZA KÓS
+
+Then p√∈ S. Suppose p has k zeros at 1. Without loss of generality we may assume
+that 2 n + 1 ≤ k ≤ n. Applying Theorem 5.1 with a := k/(3n), then using Lemma
+5.4, we obtain
+                                                                          e k
+             3c1 n/k         9c2 n                           9c2 n
+       |a0 |         ≤ exp           kpk[1−k/(9n),1] ≤ exp           (n + 1)        .
+                              k                               k                9
+Taking log of both sides, and after some algebra, we obtain
+                                                  
+                        9   3c1 n 3c2
+                  k log ≤               − log |a0 | + log(n + 1) .
+                        e     k      c1
+                   √
+Using log(n + 1) ≤ n + 1 ≤ k/2, we can deduce that
+                                                      
+                       2    9           3c2               k2
+                      k log ≤ 3c1 n         − log |a0 | +    .
+                            e           c1                 2
+Hence                                                   
+                        2   9 1             3c2
+                      k  log −    ≤ 3c1 n       − log |a0 | ,
+                            e 2             c1
+and the result follows. 
+
+Proof of Theorem 2.3. Let 0 6= |a0 | ≤ 1,
+                 $                    1/2 %
+                           4n                                            jnk
+            k :=                              +1        and       m :=         .
+                    log (1 + |a0 |−1 )                                    k
+
+Let h be a polynomial given by Lemma      5.5, that is, h ∈ Pk , h(0) = 1, h(1) = 0,
+and if |z| ≤ 1, then |h(z)| < exp k2 . Let
+
+                  f (x) := hm (x) =: b0 + b1 x + b2 x2 + · · · + bkm xkm .
+The degree of the polynomial f is km ≤ n; the multiplicity of the zero of f at 1 is at
+least m because of the choice of h; f (0) = b0 = 1; and for |z| ≤ 1, |f (z)| ≤ exp 2m
+                                                                                    k .
+The last inequality, together with the Parseval formula, implies that
+                                                      Z 2π
+                                                    1
+               |b0 |2 + |b1 |2 + · · · + |bkm |2 =          |f (eit )|2 dt
+                                                   2π 0
+                                                                        
+                                                         4m                 4n
+                                                 ≤ exp          ≤ exp
+                                                          k                 k2
+                                                                           
+                                                 ≤ exp log 1 + |a0 |−1
+                                              ≤ 1 + |a0 |−2 .
+Since b0 = 1, it follows that each of b1 , b2 , . . . , bkm has modulus less than |a0 |−1 .
+  Let p := a0 f. The constant term of p is a0 ; all the other coefficients of p have
+modulus less than 1; the multiplicity of the zero of p at 1 is at least m; and
+                                                 
+                                                 
+                             n                    1p
+    m=    j                                 k    ≥      n log (1 + |a0 |−1 ) − 1
+             (4n)1/2 (log (1 + |a0 |−1 ))−1/2 + 1     4
+
+          1 p
+        ≥ √  n (1 − log |a0 |) − 1
+         4 2
+                         LITTLEWOOD-TYPE PROBLEMS ON [0, 1]                                      19
+
+whenever exp(−3n) ≤ |a0 | ≤ 1. Note that exp(−3n) ≤ |a0 | ≤ 1 implies
+        j                             −1/2 k                                          −1/2
+            (4n)1/2 log 1 + |a0 |−1              + 1 ≤ 2 (4n)1/2 log 1 + |a0 |−1
+
+which was used in the first inequality above.
+                           n
+   If |a0 | ≤ exp(−3n) ≤ 21 , then the polynomial p defined by p(x) = a0 (x − 1)n
+is of the required form and has n zeros at 1. This finishes the proof. 
+
+Proof of Theorem 2.4. If p has a zero at 1 of multiplicity µ, then for every polyno-
+mial f ∈ Pµc , we have
+
+(6.1)                      a0 f (0) + a1 f (1) + · · · + an f (n) = 0 .
+
+Lemma 5.6 constructs a polynomial f of degree at most
+                                                  16 √ 
+                                            µ≤     7   n +4
+
+for which
+                           f (0) > |f (1)| + |f (2)| + · · · + |f (n)| .
+Equality (6.1) cannot hold with this f , so the multiplicity of the zero of p at 1 is
+at most the degree of f . 
+
+Proof of Theorem 2.5. Define
+                                        Z
+                                (n!)2           xt dt
+                    Ln (x) :=               Qn          2
+                                                           ,          n = 0, 1, . . .
+                                 2πi    Γ     k=0 (t − k )
+
+where the simple closed contour Γ surrounds the zeros of the denominator in the
+integrand. Then Ln is a polynomial of degree n2 with a zero of order n at 1. (This
+can easily be seen by repeated differentiation and then evaluation of the above
+contour integral by expanding the contour to infinity.)
+   Also, by the residue theorem,
+                                                    n
+                                                    X           2
+                                   Ln (x) = 1 +           ck,n xk ,
+                                                    k=1
+
+
+where
+                                   (−1)n (n!)2         (−1)k 2(n!)2
+                      ck,n = Qn             2   2
+                                                   =                  .
+                                 j=0,j6=k (k − j )   (n − k)!(n + k)!
+It follows that
+                                 ck,n ≤ 2 ,        k = 1, 2, . . . , n
+and |ck,n | is decreasing in k. Note also that sign(ck,n ) = (−1)k for k = 0, 1, . . . , n,
+where c0,n := 1. Hence,
+                                             Ln (x)
+                                   qn (x) :=
+                                             1−x
+20             PETER BORWEIN, TAMÁS ERDÉLYI, AND GÉZA KÓS
+
+is a polynomial of degree n2 − 1 with real coefficients and with a zero of order n − 1
+at 1. Also qn has constant coefficient 1 and each of its remaining coefficients is a
+                                                            2
+real number of modulus less than 1. Now let pn (x) := xn −1 qn (1/x). 
+
+Proof of Theorem 2.7. This is a standard box principle argument. The number of
+different outputs of the map
+                                                           
+               M (P ) := P (1), P ′ (1), . . . , P (k−1) (1) , P ∈ An
+
+is at most
+                          k−1
+                          Y               
+                                 (n + 1)nj ≤ (n + 1)k(k+1)/2 .
+                          j=0
+
+There are 2n+1 different elements of An . So if
+
+                                  (n + 1)k(k+1)/2 < 2n+1
+
+then there are two different P1 ∈ An and P2 ∈ An such that
+                        (j)           (j)
+                      P1 (1) = P2 (1) ,             j = 0, 1, . . . , k − 1
+
+that is 0 6= P1 − P2 ∈ Fn has at least k zeros at 1. Note that
+              s
+                 (2 log 2)(n + 1)
+          k<                      −1    implies      (n + 1)k(k+1)/2 < 2n+1
+                    log(n + 1)
+
+which finishes the proof. 
+
+Proof of Theorem 2.8. If p has a zero at 1 of multiplicity µ, then for every polyno-
+mial f ∈ Pµc , we have
+
+(6.2)                   a0 f (0) + a1 f (1) + · · · + an f (n) = 0 .
+
+Lemma 5.7 constructs a polynomial f of degree at most
+                           √        √               √
+                      µ ≤ 4 n + 97 L n + L + 4 ≤ 44
+                                                 7 L n+4
+
+for which (5.1) and (5.2) hold. Recalling the assumptions of the theorem on the
+coefficients aj of p, equality (6.2) cannot hold with this f , so the multiplicity of the
+zero of p at 1 is at most the degree of f . 
+
+Proof of Theorem 2.9. Suppose P ∈ An has m zeros at −1. Then (1 + x)m divides
+P and the quotient is a polynomial with integer coefficients. On evaluating P at 1
+we see that n + 1 ≥ P (1) ≥ 2m and the result follows. 
+
+Proof of Theorem 2.10. Let
+                                           
+                                     2πij
+                     ξj := exp                  ,   j = 1, 2, . . . , p − 1 .
+                                      p
+                        LITTLEWOOD-TYPE PROBLEMS ON [0, 1]                                       21
+
+Let Q ∈ Fn be of the form
+
+                                        Q(x) = (x − 1)k R(x) ,
+
+where R is a polynomial of degree at most n − k with integer coefficients. Then,
+for every integer m ≤ k, we have
+
+                                   Q(m) (x) = (x − 1)k−m S(x) ,
+
+where S is a polynomial of degree at most n − k with integer coefficients. Hence
+
+                     p−1
+                     Y                     p−1
+                                           Y                       p−1
+                                                                   Y
+             K :=          Q(m) (ξj ) =          (ξj − 1)k−m             S(ξj ) =: pk−m N ,
+                     j=1                   j=1                     j=1
+
+
+where both K and N are integers by the fundamental theorem of symmetric poly-
+nomials. Further
+                                  p−1
+                                  Y
+                       |K| ≤            (n + 1)nm ≤ (n + 1)(p−1)(m+1) .
+                                  j=1
+
+
+Hence K 6= 0 implies
+                                   pk−m ≤ (n + 1)(p−1)(m+1) ,
+that is,
+                                          (p − 1)(m + 1) log(n + 1)
+                            k−m≤                                    ,
+                                                    log p
+and the result follows. 
+
+Proof of Theorem 3.1. First we prove the lower bound. If P is one of those poly-
+nomials over which the infimum is taken, then
+
+                                           P (x) = xm Q(x)
+
+with an integer 0 ≤ m ≤ n and with a polynomial Q of the form
+
+                     n−m
+                     X
+            Q(x) =          bj xj ,       |bj | ≤ 1 ,       bj ∈ C ,      |Q(0)| = |b0 | ≥ δ .
+                     j=0
+
+
+Applying Theorem 5.1 with
+                                               1/2                        1/2
+                                1 − log |b0 |                  2 − (6 − n)            1
+               0 < a :=                                ≤                            <√ ,
+                                     n                             2n                  2
+
+we obtain
+                                                                                    
+                                                 −c2
+            kQk[1−a,1] ≥ |b0 |c1 /a exp                    ≥ exp −c3 (n(1 − log δ))1/2
+                                                  a
+22              PETER BORWEIN, TAMÁS ERDÉLYI, AND GÉZA KÓS
+
+with an absolute constant c3 > 0. Now observe that x ∈ [1 − a, 1] implies
+                                                                       
+        m     n          n           na
+       x ≥ x ≥ (1 − a) ≥ exp −              ≥ exp −c4 (n(1 − log δ))1/2
+                                    1−a
+
+with an absolute constant c4 > 0, and the lower bound is proved.
+     Next we prove the upper bound. Suppose n ∈ N and b0 := δ satisfy
+                                          
+                                  1
+                            exp     (6 − n) ≤ |b0 | ≤ 1 .
+                                  2
+
+Let ν := ⌊n/5⌋. This implies
+                                                          
+                                                  1
+                       exp(−3ν) ≤ exp               (6 − n) ≤ |b0 | ≤ 1 .
+                                                  2
+
+Then by Theorem 2.3 (recall the cases distinguished in its proof), there exists a
+polynomial Sν of the form
+                                  ν
+                                  X
+                       Sν (x) =         bj xj ,        |bj | ≤ 1   bj ∈ C
+                                  j=0
+
+such that Sν has a zero at 1 with multiplicity at least
+                                  1
+                            k≥      (ν (1 − log |b0 |))1/2 − 1 .
+                                  6
+Let
+                    Sν (x) := (1 − x)k Qν−k (x) ,                    c
+                                                             Qν−k ∈ Pν−k .
+Let Pn ∈ Pnc be defined by
+                                  Pn (x) := x4ν Sν (x) .
+Note that I(Pn ) = b0 = δ, so Pn is one of those polynomials over which the infimum
+in the theorem is taken. Now Lemma 5.4 implies that
+
+        kPn k[0,1] ≤ kx4ν (1 − x)k k[0,1] kQν−k k[0,1]
+                             4ν           k           eν k
+                         4ν               k
+                   ≤                             (ν + 1)
+                       4ν + k        4ν + k                 k
+                              e k
+                   ≤ (ν + 1)        = exp(−k log(4/e) + log(ν + 1))
+                              4                                             
+                 ≤ exp −c5 (n(1 − log |b0 |))1/2 = exp −c5 (n(1 − log δ))1/2
+
+with an absolute constant c5 > 0, and the upper bound of the theorem follows. 
+
+  As we have already remarked, Theorem 3.2 is an immediate consequence of
+Theorem 3.1.
+
+Proof of Theorem 3.3. The lower bound of the theorem follows from Theorem 3.2.
+To prove the upper bound of the theorem we argue as follows.
+                                LITTLEWOOD-TYPE PROBLEMS ON [0, 1]                                      23
+
+   Without
+         √ loss of generality we may assume that n ∈ N is sufficiently large. Let
+k := ⌊ 21 n⌋. Let
+                      1 − k/(2n) =: y0 < y1 < · · · < yk := 1
+be k + 1 equidistant points. We use a counting argument to find a polynomial
+f ∈ Fn−1 with the property
+                                                 √
+(6.3)                             |f (yj )| ≤ 21− n ,          j = 0, 1, . . . , k .
+
+if n is sufficiently large. Indeed, we can divide the (k + 1)–dimensional cube
+
+                  Q := {(x0 , x1 , . . . , xk ) : xj ∈ [0, n + 1) , j = 0, 1, . . . , k}
+
+into (m(n + 1))k+1 subcubes by defining
+                                                                                              
+                                                                ij ij + 1
+        Qi0 ,i1 ,... ,ik :=    (x0 , x1 , . . . , xk ) : xj ∈     ,         , j = 0, 1, . . . , k ,
+                                                                m m
+
+where (i0 , i1 , . . . , ik ) are (k + 1)–tuples of integers with 0 ≤ ij ≤ m(n + 1) − 1 for
+each j = 0, 1, . . . , k. Note that if P ∈ An−1 , then
+
+                               M (P ) := (P (y0 ), P (y1 ), . . . , P (yk )) ∈ Q .
+
+Also, there are exactly 2n elements of An−1 . Therefore, if
+
+                                            (m(n + 1))k+1 < 2n
+
+holds, then there exist two different P1 ∈ An and P2 ∈ An , and a subcube Qi0 ,i1 ,... ,ik
+such that
+                M (P1 ) = (P1 (y0 ), P1 (y1 ), . . . , P1 (yk )) ∈ Qi0 ,i1 ,... ,ik
+and
+                      M (P2 ) = (P2 (y0 ), P2 (y1 ), . . . , P2 (yk )) ∈ Qi0 ,i1 ,... ,ik .
+Hence, for 0 6= f := P1 − P2 ∈ Fn , we have
+
+                                   |f (yj )| ≤ m−1 ,        j = 0, 1, . . . , k .
+                      √                                   √
+Now choose m := ⌊2− n ⌋. This, together with k := ⌊ 21 n⌋, yields that the in-
+equality (m(n + 1))k < 2n holds provided n is sufficiently large, and (6.1) follows.
+   Observe that kp(k+1) k[0,1] ≤ nk+2 for every p ∈ Fn−1 , in particular, for f ∈ Fn−1
+satisfying (6.3).
+   Let y ∈ [y0 , 1] be an arbitrary point different from each yj . By a well-known
+formula for divided differences,
+
+                                     k
+                                     X
+                  f (y)                              f (yi )                        1
+           Qk                    +                  Qk                       =            f (k+1) (ξ)
+              j=0 (y − yj )          i=0 (yi − y)     j=0,j6=i (yi − yj )
+                                                                                 (k + 1)!
+
+for some ξ ∈ [y0 , 1].
+24                PETER BORWEIN, TAMÁS ERDÉLYI, AND GÉZA KÓS
+
+     Combining (6.3) and our two observations above, we obtain
+
+ |f (y)|
+                                 k               k                  Qk
+            1                   Y               X                     j=0 (y − yj )
+                     (k+1)
+       ≤          |f       (ξ)|     (y − yj ) +     |f (yi )|         Qk
+         (k + 1)!               j=0             i=0           (yi − y) j=0,j6=i (yi − yj )
+                                        √ X k
+              1          (k + 1)!                  k!
+       ≤            nk+2          + 2 1− n
+           (k + 1)!      (2n)k+1           i=0
+                                               i!(k − i)!
+                          √                    √             √         √
+       ≤ 2−(k+1) n + 21− n 2k ≤ 2−(1/2) n n + 21− n 2(1/2) n
+                  √ 
+       ≤ exp −c3 n
+
+with an absolute constant c3 > 0. Since y ∈ [y0 , 1] is arbitrary, we have proved that
+                                                  √ 
+                            kf k[y0 ,1] ≤ exp −c3 n ,
+
+where y0 = 1−k/(2n) ≤ 1− 41 n−1/2 for sufficiently large n. Now for g(x) := xn f (x),
+we have g ∈ F2n and                              √ 
+                            kgk[0,1] ≤ exp −c2 n
+with an absolute constant c2 > 0.
+     The proof of the theorem is now finished.               
+
+Proof of Theorem 3.4. First we prove the lower bound. Suppose 0 6= p(−x) ∈ An
+has exactly k zeros at 1. Then, using Theorem 2.9 and Markov’s Inequality, we
+obtain
+
+                         kP k[0,1] ≥ (2n)−2k |P (k) (1)| ≥ (2n)−c log n
+                                     ≥ exp (−c(log n) log(2n))
+
+(note that |P (k) (1)| is a positive integer, hence at least 1), and the lower bound of
+the theorem follows. The upper bound follows from the following example. Let
+                                                       m 
+                                                       Y          
+                                                   m            k
+                                 Qm (x) := x3             1 + x3 .
+                                                       k=0
+
+Then Qm ∈ A3m+1 , and for x ∈ [0, 1],
+                                                                                    k       
+                                    m 
+                                    Y                                    Y
+                                                                            m        3X−1
+                                m              k             m
+       0 ≤ −Qm (−x) = x3                  1 − x3       ≤ x3 (1 − x)m+1                   xj 
+                                    k=0                                       k=0     j=0
+                                             m+1                           3m Y
+                                                                                  m
+                                    m+1                            m+1
+                        ≤                           1−                                    3k
+                                3m + m + 1                       3m + m + 1
+                                                                                    k=0
+                                             m+1
+                                    m+1                                                        
+                        ≤                               3m(m+1)/2 ≤ exp −c(m + 1)2
+                                3m + m + 1
+
+with an absolute constant c > 0, and the upper bound of the theorem follows. 
+                     LITTLEWOOD-TYPE PROBLEMS ON [0, 1]                                25
+
+Proof of Theorem 3.5. The lower bound follows from Theorem 5.1 immediately.
+The upper bound is a simple corollary of Theorem 3.3 with the choice n := ⌊(c/a)2 ⌋
+with a suitable absolute constant c > 0. Indeed, without loss of generality we may
+assume that a ∈ (0, 1/2] and n := ⌊(c/a)2 ⌋ is an integer. The upper bound in
+Theorem 3.3 implies that there is a 0 6= p ∈ Fn such that
+                                       √ 
+(6.4)                kpk[0,1] ≤ exp −c2 n ≤ exp (−c2 c/a) .
+
+Then p is of the form
+
+(6.5)          p(x) = xk q(x) ,           q ∈ Fn ,   q(0) = 1 ,     0 ≤ k ≤ n.
+
+Here
+                                      2
+(6.6)     xk ≥ xn ≥ (1 − a)(c/a) ≥ exp (−(c2 c/(2a)) ,                x ∈ [1 − a, 1]
+
+with a suitable absolute constant c > 0. Now by (6.4), (6.5), and (6.6), we have
+q ∈ F , q(0) = 1, and
+                          kqk[1−a,1] ≤ exp (−(c2 c/(2a)) .
+  
+
+Proof of Theorem 4.2. By using a substitution q(x) = p(−x), it is sufficient to
+estimate the number of zeros only in (0, 1 − a]. Let p be a polynomial of the form
+in the theorem. If a > 1/2, then p has no zero in [0, 1 − a]. So we assume that
+a ≤ 1/2.First we estimate the number of zeros only in [1 − (5/4)a, 1 − a]. Denote
+the number of the zeros of p in [1 − (5/4)a, 1 − a] by m. Let y be a point in
+[1 − (5/4)a, 1 − a] at which
+                                               c 
+                                                  3
+                                  |p(y)| ≥ exp −    ,
+                                                 a
+
+where c3 > 0 is an absolute constant. The existence of such a point y is guaranteed
+by Theorem 5.1 (one needs to combine it with a linear transformation). By using a
+well-known formula for divided differences at the m zeros of p in [1 − (5/4)a, 1 − a]
+and at y, there exists a ξ ∈ [1 − (5/4)a, 1 − a] such that
+                                a −m                     a −m       c 
+                                                                          3
+             |p(m) (ξ)| ≥ m!                |p(y)| ≥ m!             exp −    .
+                                  4                        4              a
+
+Estimating |p(m) (ξ)| by the Cauchy integral formula on the circle centered at ξ with
+radius a/2 (note that ξ + a/2 ≤ 1 − a/2), we obtain
+
+                                            2(a/2)π 2  a −m−1
+                        |p(m) (ξ)| ≤ m!                         .
+                                               2π   a 2
+
+Combining the previous two inequalities, we get
+
+                                      2     c        c 
+                                              3          4
+                           2m ≤         exp      ≤ exp      ,
+                                      a      a          a
+26              PETER BORWEIN, TAMÁS ERDÉLYI, AND GÉZA KÓS
+
+which gives m ≤ c5 /a. Now counting the zeros of p in
+[1 − (5/4)a, 1 − a] ,   [1 − (5/4)2a, 1 − (5/4)a] ,   ... ,   [1 − (5/4)k a, 1 − (5/4)k−1a] ,
+where k is the smallest positive integer for which (5/4)k a ≥ 1/2, and applying the
+already proved estimate with a, (5/4)a, . . . , (5/4)k−1 a, we get the bound of the
+theorem for the number of zeros in [1/2, 1 − a]. Since p has no zeros in [0, 1/2), the
+proof is finished. 
+
+Proof of Theorem 4.1. By using a substitution q(x) = xn p(x−1 ), it is sufficient to
+prove only the first statement; the other two follow from it. Also, by Theorem 4.2
+and by the substitution q(x) = p(−x), it is sufficient to prove that p has at most
+ √
+c n zeros in [1 − n−1/2 , 1]. Let p be a polynomial of the form in the theorem.
+Denote the number of the zeros of p in [1 − n−1/2 , 1] by m. Let y ∈ [1 − n−1/2 , 1]
+be a point at which                                
+                             |p(y)| ≥ exp −c6 n1/2 ,
+where c6 > 0 is an absolute constant. The existence of such a point y is guaranteed
+by Theorem 5.1. By using a well-known formula for divided differences at the m
+zeros of p in [1 − n−1/2 , 1] and at y, there exists a ξ ∈ [1 − n−1/2 , 1] such that
+                                   −m                                   
+            |p(m) (ξ)| ≥ m! n−1/2        |p(y)| ≥ m! nm/2 exp −c6 n1/2 .
+
+Estimating |p(m) (ξ)| by the Cauchy integral formula on the circle centered at ξ with
+radius 2n−1/2 , we obtain
+                             2n−1/2 π              n         −m−1
+             |p(m) (ξ)| ≤ m!          n 1 + 2n−1/2       2n−1/2
+                                2π           
+                               m/2
+                        ≤ m! n     exp c7 n1/2 2−m−1 .
+Combining the previous two inequalities, we get
+                                               
+                             2m ≤ exp c8 n1/2 ,
+
+which gives m ≤ c9 n1/2 . This finishes the proof. 
+
+Proof of Theorem 4.3. The proof is a straightforward modification of that of The-
+orem 4.1. We omit the details. 
+
+Proof of Theorem 4.4. The proof follows easily from Theorem 4.1 by studying
+q(x) := p(ax). 
+
+                                       7. Remarks
+
+   There is an obvious interval dependence in the problem of finding non-zero poly-
+nomials from Fn with minimal uniform norm. It is quite easy to argue that on any
+interval [0, δ] with δ < 1/2 the only polynomials from Fn with minimal uniform
+norm are ±xn . On [0, 1/2] all of ±xn and ±(xn − xn−1 ) are extremals. On any
+interval [0, δ] with δ > 1/2 the polynomials ±(xn − xn−1 ) have smaller supremum
+norm than the supremum norm of xn , so the nature of the extremals change at
+1/2. Also, on any interval [1, γ] with γ > 1, inf f kf k[1,γ] > 0, where the infimum is
+taken over all 0 6= f ∈ ∪∞n=1 Fn .
+                  LITTLEWOOD-TYPE PROBLEMS ON [0, 1]                   27
+
+8. Acknowledgment. We would like to thank Gábor Halász and Chris Pinner
+for discussions related to this paper.
+28             PETER BORWEIN, TAMÁS ERDÉLYI, AND GÉZA KÓS
+
+                                       References
+
+      1. F. Amoroso, Sur le diamètre transfini entier d’un intervalle réel, Ann. Inst. Fourier,
+         Grenoble 40 (1990), 885–911.
+
+      2. B. Aparicio, New bounds on the minimal Diophantine deviation from zero on [0, 1] and
+         [0, 1/4], Actus Sextas Jour. Mat. Hisp.-Lusitanas (1979), 289–291.
+
+      3. F. Beaucoup, P. Borwein, D. Boyd and C. Pinner, Multiple Roots of [-1,1] Power Series,
+         Jour. London Math. Soc.(to appear).
+
+      4. J. Beck, Flat polynomials on the unit circle – note on a problem of Littlewood, Bull.
+         London Math. Soc. 23 (1991), 269–277.
+
+      5. A.T. Bharucha-Reid and M. Sambandham, Random polynomials, Academic Press, Or-
+         lando, 1986.
+
+      6. A. Bloch and G. Pólya, On the roots of certain algebraic equations, Proc. London Math.
+         Soc 33 (1932), 102–114.
+
+      7. E. Bombieri and J. Vaaler, Polynomials with low height and prescribed vanishing, in
+         Analytic Number Theory and Diophantine Problems, Birkhauser (1987), 53–73.
+
+      8. P. Borwein and T. Erdélyi, Markov and Bernstein type inequalities for polynomials with
+         restricted coefficients, Ramanujan J. 1 (1997), 309–323.
+
+      9. P. Borwein and T. Erdélyi, The integer Chebyshev problem, Math. Computat. 65 (1996),
+         661–681.
+
+     10. P. Borwein and T. Erdélyi, Polynomials and Polynomial Inequalities, Springer-Verlag,
+         New York, 1995.
+
+     11. P. Borwein and C. Ingalls, The Prouhet, Tarry, Escott problem, Ens. Math. 40 (1994),
+         3–27.
+
+     12. J. Bourgain, Sul le minimum d’une somme de cosinus, Acta Arith. 45 (1986), 381–389.
+
+     13. D. Boyd, On a problem of Byrnes concerning polynomials with restricted coefficients,
+         Math. Comput. 66 (1997), 1697–1703.
+
+     14. J.S. Byrnes and D.J. Newman, Null Steering Employing Polynomials with Restricted
+         Coefficients, IEEE Trans. Antennas and Propagation 36 (1988), 301–303.
+
+     15. F.W. Carrol, D. Eustice and T. Figiel, The minimum modulus of polynomials with
+         coefficients of modulus one, Jour. London Math. Soc. 16 (1977), 76–82.
+
+     16. J. Clunie, On the minimum modulus of a polynomial on the unit circle, Quart. J. Math.
+         10 (1959), 95–98.
+
+     17. P.J. Cohen, On a conjecture of Littlewood and idempotent measures, Amer. J. Math.
+         82 (1960), 191–212.
+
+     18. P. Erdős, Some old and new problems in approximation theory: research problems 95-1,
+         Constr. Approx. 11 (1995), 419–421.
+
+     19. P. Erdős and P. Turán, On the distribution of roots of polynomials, Annals of Math.
+         57 (1950), 105–119.
+
+     20. Le Baron O. Ferguson, Approximation by Polynomials with Integral Coefficients, Amer.
+         Math. Soc., Rhode Island, 1980.
+                  LITTLEWOOD-TYPE PROBLEMS ON [0, 1]                                   29
+
+21. G.T. Fielding, The expected value of the integral around the unit circle of a certain
+    class of polynomials, Bull. London Math. Soc. 2 (1970), 301–306.
+
+22. L.K. Hua, Introduction to Number Theory, Springer-Verlag, Berlin Heidelberg, New
+    York, 1982.
+
+23. M. Kac, On the average number of real roots of a random algebraic equation, II, Proc.
+    London Math. Soc. 50 (1948), 390–408.
+
+24. J-P. Kahane, Some Random Series of Functions, vol. 5, Cambridge Studies in Advanced
+    Mathematics, Cambridge, 1985; Second Edition.
+
+25. J-P. Kahane, Sur les polynômes á coefficients unimodulaires, Bull. London Math. Soc
+    12 (1980), 321–342.
+
+26. S. Konjagin, On a problem of Littlewood, Izv. A. N. SSSR, ser. mat. 45, 2 (1981),
+    243–265.
+
+27. T.W. Körner, On a polynomial of J.S. Byrnes, Bull. London Math. Soc. 12 (1980),
+    219–224.
+
+28. J.E. Littlewood, On the mean value of certain trigonometric polynomials, Jour. London
+    Math. Soc. 36 (1961), 307–334.
+                                     Pn               Pn α i m
+29. J.E. Littlewood, On polynomials       ±z m and       e m z , z = eθi , Jour. London
+    Math. Soc. 41 (1966), 367–376.
+
+30. J.E. Littlewood, Some Problems in Real and Complex Analysis, Heath Mathematical
+    Monographs, Lexington, Massachusetts, 1968.
+
+31. J.E. Littlewood and A.C. Offord, On the number of real roots of a random algebraic
+    equation, II, Proc. Cam. Phil. Soc. 35 (1939), 133-148.
+
+32. K. Mahler, On two extremal properties of polynomials, Illinois J. Math. 7 (1963), 681–
+    701.
+
+33. D.J. Newman and J.S. Byrnes, The L4 norm of a polynomial with coefficients ±1, MAA
+    Monthly 97 (1990), 42–45.
+
+34. D.J. Newman and A. Giroux, properties on the unit circle of polynomials with uni-
+    modular coefficients, in Recent Advances in Fourier Analysis and its Applications J.S.
+    Byrnes and J.F. Byrnes, Eds.), Kluwer, 1990, pp. 79–81..
+
+35. A. Odlyzko and B. Poonen, Zeros of polynomials with 0,1 coefficients, Ens. Math. 39
+    (1993), 317–348.
+
+36. G. Pólya and G. Szegő, Problems and Theorems in Analysis, Volume I, Springer-Verlag,
+    New York, 1972.
+
+37. R. Salem and A. Zygmund, Some properties of trigonometric series whose terms have
+    random signs, Acta Math 91 (1954), 254–301.
+
+38. E. Schmidt, Über algebraische Gleichungen vom Pólya-Bloch-Typos, Sitz. Preuss. Akad.
+    Wiss., Phys.-Math. Kl. (1932), 321.
+
+39. I. Schur, Untersuchungen über algebraische Gleichungen., Sitz. Preuss. Akad. Wiss.,
+    Phys.-Math. Kl. (1933), 403–428.
+
+                                          ±λn (an Erdős problem), Annals of Math. 142,
+                                       P
+40. B. Solomyak, On the random series
+    611–625.
+
+41. G. Szegő, Bemerkungen zu einem Satz von E. Schmidt uber algebraische Gleichungen.,
+    Sitz. Preuss. Akad. Wiss., Phys.-Math. Kl. (1934), 86–98.
+30             PETER BORWEIN, TAMÁS ERDÉLYI, AND GÉZA KÓS
+
+     42. P. Turán, On a New Method of Analysis and its Applications, Wiley, New York, 1984.
+
+
+  Department of Mathematics and Statistics, Simon Fraser University, Burnaby,
+B.C., Canada V5A 1S6 (P. Borwein)
+
+
+   Department of Mathematics, Texas A&M University, College Station, Texas
+77843 (T. Erdélyi)
+
+
+  Eötvös University, Dept. of Analysis, Muzeum krt. 6-8. Budapest, H-1088 and
+Computer and Automation Research Institut, Kende u. 13-17. Budapest, H-1111.
+(G. Kós)
+
