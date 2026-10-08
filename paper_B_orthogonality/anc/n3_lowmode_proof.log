@@ -1,8 +1,8 @@
 degree-1 conditions: 760 (expect 760)
 both diagonals     : 4224 (expect 4224)
 degree-2 (semi-magic): 72 (expect 72)
-E_low = 0          : 8 (expect 8)
+E_4 = 0            : 8 (expect 8)
 all 8 are magic: OK
-parametrisation satisfies the four conditions; sum of squares = 2(4k^2+3(P^2+Q^2)+T^2+U^2): OK
-integer solutions (k, T, U, P^2+Q^2): [(0, 0, 0, 10)]
+parametrisation satisfies the four conditions; sum of squares = 2(4kappa^2+3(a'^2+c'^2)+xi'^2+eta'^2): OK
+integer solutions (kappa, xi', eta', a'^2+c'^2): [(0, 0, 0, 10)]
 proof steps verified

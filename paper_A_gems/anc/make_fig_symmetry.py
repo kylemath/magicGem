@@ -28,7 +28,7 @@ for col, (grp, idx, title) in enumerate(CASES):
         colors = {t0: (OI['orange'], 0.65), t1: (OI['green'], 0.65)}
     keys, polys = draw_faces(ax, h, P, colors=colors, alpha=0.10, lw=0.45)
     ax.scatter(P[V, 0], P[V, 1], P[V, 2], s=7, color=OI['blue'], depthshade=False)
-    _, inner, bnd = classify_points(h)        # strictly interior points: red discs; boundary non-vertex points: orange squares
+    _, inner, bnd = classify_points(h)        # strictly interior points: red discs; non-vertex boundary points: orange squares
     if inner: ax.scatter(P[inner, 0], P[inner, 1], P[inner, 2], s=7, color=OI['verm'], depthshade=False)
     if bnd: ax.scatter(P[bnd, 0], P[bnd, 1], P[bnd, 2], s=12, color=OI['orange'], marker='s', edgecolors='k', linewidths=0.4, depthshade=False)
     if grp == 'Ci':

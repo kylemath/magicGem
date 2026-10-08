@@ -6,7 +6,7 @@ The modern literature treats them from several directions: enumeration and the g
 
 \begin{definition}[Magic square]
 \label{def:magic_square}
-An \emph{arrangement} of order $n$ is a bijection $S=(s_{ij})$ from the cells of the $n\times n$ grid onto $\{1,\dots,n^2\}$.
+An \emph{arrangement} of order $n$ is a bijection $S=(s_{ij})$ from the cells of the $n\times n$ grid onto $\{1,\dots,n^2\}$ (a permutation of $1,\dots,n^2$ written into the grid).
 It is a \emph{magic square} if every row, every column and both main diagonals sum to the magic constant $\mu_n=n(n^2+1)/2$, and \emph{semi-magic} if only the rows and columns do.
 \end{definition}
 
@@ -15,7 +15,7 @@ Centre the grid at the origin and attach to the cell $(i,j)$ the point
 \[
 \mathbf p_{ij}=(x_{ij},y_{ij},z_{ij}),
 \]
-whose horizontal part $(x_{ij},y_{ij})$ is the position of the cell and whose height is the \emph{centred entry} $z_{ij}=s_{ij}-\frac{n^2+1}{2}$.
+whose horizontal part $(x_{ij},y_{ij})$ is the position of the cell and whose height $z_{ij}=s_{ij}-\frac{n^2+1}{2}$ is the entry minus the mean entry.
 Read as vectors from the origin, the $\mathbf p_{ij}$ of a magic square have vertical components that cancel along every row, column and both diagonals (\Cref{lem:lines}; Figures~\ref{fig:vectors} and~\ref{fig:lines}).
 The \emph{Magic Gem} $\mathcal G(S)$ is the convex hull of the $n^2$ points (\Cref{sec:gem}).
 \Cref{fig:vectors} shows D\"urer's square, its vectors and its gem, which has $12$ vertices and $4$ points in its interior.
@@ -29,10 +29,15 @@ The \emph{Magic Gem} $\mathcal G(S)$ is the convex hull of the $n^2$ points (\Cr
 
 \paragraph{Results.}
 The gem is the lift of the grid by the height function $z$, so its lower and upper faces are the regular subdivisions of the grid induced by $z$ and $-z$ (\Cref{sec:subdivisions}).
+The point set determines the square, but its convex hull keeps only the extreme points.
+The results below ask how much of the square the hull still sees.
+For every order, the point set has a non-trivial isometry exactly when the square is self-complementary, i.e.\ a rotation or reflection of the grid turns it into its complement (item~1).
+At order four the hull has no isometry that the point set lacks, and its vertices alone determine the square (item~2).
+For the Siamese squares of every odd order $n\ge5$ the hull sees only the twelve entries that the boundary of the grid forces (item~3).
 \begin{enumerate}\setlength\itemsep{2pt}
 \item \emph{Symmetry and congruence for every order} (\Cref{thm:pointset}). For a semi-magic square the covariance matrix of the $N=n^2$ points is $\operatorname{diag}(a_n,a_n,b_n)$ with $a_n=(n^2-1)/12\ne b_n=(n^4-1)/12$. Hence every isometry of the point set lies in $D_4\times\{\pm1\}$, the point set has a non-trivial isometry if and only if $S$ is self-complementary, and two semi-magic squares have congruent point sets if and only if one is a $D_4$-image of the other or of its complement.
-\item \emph{The $880$ gems of order four} (\Cref{thm:symmetry}, \Cref{sec:census}). The isometry group of each gem equals that of its point set; so $48$ gems (the associative squares) are centrally symmetric, $304$ have one half-turn, and $528$ have no symmetry. We tabulate the exact geometry ($8$ to $16$ vertices, $39$ $f$-vectors, $352$ combinatorial types, $155$ distinct volumes, $616$ congruence classes) and show that the vertex set alone determines the square up to $D_4$ (\Cref{prop:gem-injective}).
-\item \emph{Siamese gems} (\Cref{thm:siamese}). For the Siamese square of every odd order $n\ge5$ the vertices of the gem are exactly its twelve forced vertices (\Cref{lem:forced}), the $f$-vector is $(12,26,16)$, and the isometry group is $\{\pm\mathrm{id}\}$. The proof is printed in full as a table of slack polynomials. Over the wider family of linear squares the largest vertex count grows with $n$ (\Cref{rem:linear}).
+\item \emph{The gems of order four} (\Cref{thm:symmetry}, \Cref{sec:census}). There are $880$ magic squares of order four up to rotation and reflection ($D_4$-classes). The isometry group of each gem equals that of its point set; so $48$ gems (the associative squares) are centrally symmetric, $304$ have one half-turn, and $528$ have no symmetry. We tabulate the exact geometry ($8$ to $16$ vertices, $39$ $f$-vectors, $352$ combinatorial types, $155$ distinct volumes, $616$ congruence classes) and show that the vertex set alone determines the square up to $D_4$ (\Cref{prop:gem-injective}).
+\item \emph{Siamese gems} (\Cref{thm:siamese}). For the Siamese square of every odd order $n\ge5$ the vertices of the gem are exactly the twelve vertices that the boundary of the grid forces (\Cref{lem:forced}), the $f$-vector is $(12,26,16)$, and the isometry group is $\{\pm\mathrm{id}\}$. The proof is complete on paper: a three-case reduction, a table of $128$ polynomial slacks (a slack is the right-hand side minus the left-hand side of a facet inequality, evaluated at a point), and a closing argument on $16$ facets. Other linear magic squares can have many more vertices: up to $18$, $25$, $31$ and $36$ for $n=5,7,9,11$, and as few as $11$ at order five, while some order-five magic squares that are not linear have only $10$ (\Cref{rem:linear}).
 \end{enumerate}
 
 \paragraph{Relation to previous work.}
@@ -41,8 +46,8 @@ In all of these the magic squares are the \emph{points} of a polytope, whereas t
 The lifting construction itself is that of regular subdivisions and secondary fans \cite{gelfand1994discriminants,deloera2010triangulations}.
 The moment identities of \Cref{sec:moments} are due in substance to Loly and Rogers \cite{loly2004invariance,rogers2004inertia,rogers2005multipole}; we record them in the coordinates of the gem for later use.
 The partition of the $880$ order-four squares into associative, self-complementary and other squares is Dudeney's \cite{dudeney1917amusements}.
-New are the symmetry and congruence theorem for point sets of every order, the hull-level symmetry classification and census of the order-four gems, and the Siamese theorem.
-The reading of the line conditions as orthogonality conditions on the height function and the statistics of random arrangements are treated in a companion manuscript \cite{mathewson_companion}; no result of it is used here.
+New are the Siamese theorem and the exact order-four census, together with a short covariance argument that settles symmetry and congruence of the point sets for every order.
+The reading of the line conditions as orthogonality conditions on the centred entries and the statistics of random arrangements are treated in a companion manuscript \cite{mathewson_companion}; no result of it is used here.
 
-\Cref{sec:gem} defines the gem and its relation to regular subdivisions, \Cref{sec:moments} records the moment identities, \Cref{sec:symmetry} treats symmetry and congruence, \Cref{sec:census} the order-four census, \Cref{sec:siamese-gems} the Siamese gems, and \Cref{sec:discussion} lists open questions; \Cref{sec:appendix} describes the computations.
+\Cref{sec:gem} defines the gem, its forced vertices and its relation to regular subdivisions, \Cref{sec:symmetry} records the moment identities and treats symmetry and congruence, \Cref{sec:census} the order-four census, \Cref{sec:siamese-gems} the Siamese gems, and \Cref{sec:discussion} lists open questions; \Cref{sec:appendix} describes the computations.
 An interactive display of the $880$ order-four gems is available at \url{https://kylemath.github.io/MagicGemWebpage/}.

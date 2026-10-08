@@ -9,7 +9,10 @@ integers; lengths are divided by 2, areas by 4, volumes by 8 at the end.
 Provides
     scaled_points(S)            -> (N,3) int array (doubled coordinates)
     exact_hull(S)               -> dict with vertices, faces (exact planes), edges,
-                                   f-vector, exact volume (Fraction), area (float)
+                                   f-vector, exact volume (Fraction), area (float);
+                                   every hull is certified: all points satisfy all facet
+                                   inequalities, V - E + F = 2, and every facet edge lies in
+                                   exactly two facets (certify_closure)
     bipartite_graph(hull)       -> networkx graph of vertex-facet incidences
     combinatorial_hash(hull)    -> WL hash (first pass)
     congruent(P, Q)             -> exact test: distance-preserving bijection exists
@@ -90,6 +93,7 @@ def exact_hull(S):
             edges.add((u, v))
     V, E, F = len(vertices), len(edges), len(faces)
     assert V - E + F == 2, (V, E, F)
+    certify_closure(P, faces, edges)
     # face sizes
     face_sizes = sorted(len(f) for f in face_list)
     # exact volume: signed tetrahedra from the (integer) first vertex over qhull triangles
@@ -111,8 +115,28 @@ def exact_hull(S):
                 volume=volume, area=area)
 
 
+def certify_closure(P, faces, edges):
+    """Closure certificate: order the vertices of each facet cyclically in its plane; every edge of every facet
+    polygon must lie in exactly two facets (so the facets form a closed surface and are all the facets of the hull),
+    and these polygon edges must be exactly the edges found from the incidences."""
+    from collections import Counter
+    ecount = Counter()
+    for (a, b, c, d), fv in faces.items():
+        fv = list(fv)
+        nrm = np.array([a, b, c], dtype=float)
+        Q = P[fv].astype(float); cen = Q.mean(0)
+        e1 = Q[0] - cen; e1 -= nrm * (e1 @ nrm) / (nrm @ nrm); e1 /= np.linalg.norm(e1)
+        e2 = np.cross(nrm / np.linalg.norm(nrm), e1)
+        ang = np.arctan2((Q - cen) @ e2, (Q - cen) @ e1)
+        cyc = [fv[i] for i in np.argsort(ang)]
+        for i in range(len(cyc)):
+            ecount[frozenset((cyc[i], cyc[(i + 1) % len(cyc)]))] += 1
+    assert all(v == 2 for v in ecount.values()), "facet edge not in exactly two facets"
+    assert sorted(tuple(sorted(e)) for e in ecount) == sorted(tuple(sorted(e)) for e in edges), "edge sets differ"
+
+
 def classify_points(h):
-    """Split the points of a gem into (vertices, strictly interior points, boundary non-vertex points), all as index lists.
+    """Split the points of a gem into (vertices, strictly interior points, non-vertex boundary points), all as index lists.
     A non-vertex point is strictly interior iff it satisfies every facet inequality strictly (exact integer test)."""
     P = h['P']; V = set(h['vertices']); interior, boundary = [], []
     for k in range(len(P)):

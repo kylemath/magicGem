@@ -1,4 +1,4 @@
-"""Number of order-4 gems whose solid centre of mass differs from the origin (quoted in Section 3)."""
+"""Number of order-4 gems whose solid centre of mass differs from the origin (supplementary; the paper's moment statements concern the point set, Section 2)."""
 import os, sys
 import numpy as np
 from scipy.spatial import ConvexHull

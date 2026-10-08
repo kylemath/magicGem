@@ -1,4 +1,4 @@
-\section{The moment hierarchy and the permutation threshold}
+\section{Moment conditions and the permutation threshold}
 \label{sec:theory}
 
 \subsection{Moment conditions}
@@ -10,7 +10,7 @@ For $\gamma\in\R^n$ put $P_\gamma(t)=\sum_{j=0}^{n-1}\gamma_jt^j$.
 \begin{definition}[Degree-$k$ conditions]
 \label{def:degree_k}
 A centred $f\in\mathcal F$ satisfies the \emph{degree-$k$ conditions} ($k\ge1$) if $\langle x^{m},f\rangle=\langle y^{m},f\rangle=0$ for $1\le m\le k$.
-For $f=z(S)$ these read $\sum_{i,j}z_{ij}x_j^m=\sum_{i,j}z_{ij}y_i^m=0$, i.e.\ $\Cov(X^m,Z)=\Cov(Y^m,Z)=0$.
+For $f=z(S)$ these read $\sum_{i,j}z_{ij}x_j^m=\sum_{i,j}z_{ij}y_i^m=0$.
 \end{definition}
 
 \begin{lemma}[Polynomial form]
@@ -29,12 +29,12 @@ The families $(x_j^{m})_{m\le k}$ and $(\binom{j}{r})_{r\le k}$ both span the re
 The case $m=0$ of (i) holds for every centred $f$.
 \end{proof}
 
-\begin{proposition}[Moment hierarchy]
+\begin{proposition}[Moment conditions]
 \label{prop:hierarchy}
 Let $n\ge3$ and let $f\in\mathcal F$ be centred.
 \begin{enumerate}
-\item[(a)] If $\gamma(f)=\rho(f)=0$, then $\langle a(X)+b(Y),f\rangle=0$ for all functions $a,b$ on $\{x_0,\dots,x_{n-1}\}$; in particular $f$ satisfies the degree-$k$ conditions for every $k$.
-For $f=z(S)$ with $S$ magic, also $\langle a(X)+b(Y)+c_1\mathbf 1_{D_{\mathrm m}}+c_2\mathbf 1_{D_{\mathrm a}},z\rangle=0$.
+\item[(a)] If $\gamma(f)=\rho(f)=0$, then $\langle a(x)+b(y),f\rangle=0$ for all functions $a,b$ on $\{x_0,\dots,x_{n-1}\}$; in particular $f$ satisfies the degree-$k$ conditions for every $k$.
+For $f=z(S)$ with $S$ magic, also $\langle a(x)+b(y)+c_1\mathbf 1_{D_{\mathrm m}}+c_2\mathbf 1_{D_{\mathrm a}},z\rangle=0$.
 \item[(b)] If $k\ge n-1$, the degree-$k$ conditions imply $\gamma(f)=\rho(f)=0$.
 \item[(c)] If $1\le k\le n-2$, the function $f_{ij}=\frac1n(-1)^{j}\binom{k+1}{j}$ ($0\le j\le k+1$), $f_{ij}=0$ ($j>k+1$), satisfies the degree-$k$ conditions but not the degree-$(k+1)$ conditions, and $\gamma(f)\ne0$.
 \end{enumerate}
@@ -50,8 +50,8 @@ The mixed moments are not determined by the line sums:
 
 \begin{remark}[Mixed moments]
 \label{rem:product_inertia}
-The magic square with rows $(1,6,11,16)$, $(8,15,2,9)$, $(12,3,14,5)$, $(13,10,7,4)$ has $\sum_cz_cx_cy_c=60$.
-Among the $880$ magic squares of order $4$ up to $D_4$, the product of inertia $\sum_cz_cx_cy_c$ is nonzero for $824$, takes $48$ distinct absolute values between $0$ and $60$, and $\sum_cz_cx_c^2y_c$, $\sum_cz_cx_cy_c^2$ are nonzero for $623$ and $773$ of them.
+The magic square with rows $(1,6,11,16)$, $(8,15,2,9)$, $(12,3,14,5)$, $(13,10,7,4)$ has mixed moment $\sum_cz_cx_cy_c=60$ (Loly's product of inertia).
+Among the $880$ magic squares of order $4$ up to $D_4$, the mixed moment $\sum_cz_cx_cy_c$ is nonzero for $824$ and takes $48$ distinct absolute values between $0$ and $60$, and the mixed moments $\sum_cz_cx_c^2y_c$, $\sum_cz_cx_cy_c^2$ are nonzero for $623$ and $773$ of them.
 For $n=3$ the mixed moment $\sum_cz_cx_cy_c$ vanishes for all eight magic squares, because $s_c+s_{-c}=10$ for centrally opposite cells, so $z$ is odd under $(x,y)\mapsto(-x,-y)$ while $xy$ is even.
 \end{remark}
 
@@ -59,11 +59,11 @@ For $n=3$ the mixed moment $\sum_cz_cx_cy_c$ vanishes for all eight magic square
 \label{cor:loly}
 Let $I(S)=\sum_{i,j}s_{ij}(x_{j}^{2}+y_{i}^{2})$ be the moment of inertia about the centre of the masses $s_{ij}$ placed at $(x_j,y_i)$.  For every arrangement,
 \begin{equation}
-I(S)=N\,\Cov\bigl(Z,\,X^{2}+Y^{2}\bigr)+\frac{n^{2}(n^{4}-1)}{12}
+I(S)=N\,\langle x^{2}+y^{2},z\rangle+\frac{n^{2}(n^{4}-1)}{12}
 =\sum_j x_j^{2}\gamma_j+\sum_i y_i^{2}\rho_i+\frac{n^{2}(n^{4}-1)}{12}.
 \label{eq:loly_identity}
 \end{equation}
-Hence $I(S)=n^{2}(n^{4}-1)/12$ if and only if the single condition $\Cov(Z,X^{2}+Y^{2})=0$ holds; it is implied by the degree-$2$ conditions, hence by the semi-magic property.
+Hence $I(S)=n^{2}(n^{4}-1)/12$ if and only if the single condition $\langle x^2+y^2,z\rangle=0$ holds; it is implied by the degree-$2$ conditions, hence by the semi-magic property.
 \end{corollary}
 
 \begin{proof}
@@ -72,7 +72,7 @@ Substitute $s_{ij}=z_{ij}+\frac{N+1}2$ and use \Cref{lem:variances} and \Cref{le
 
 Loly's derivation uses the row and column sums in the same way \cite{loly2004invariance}.
 The single condition is much weaker than the degree-$2$ conditions: for $n=3$, $24{,}192$ of the $9!$ arrangements have $I=60$, while $72$ (the semi-magic squares, \Cref{rem:n3_enum}) satisfy the degree-$2$ conditions.
-The energy $\Elow$ of \eqref{eq:Elow} combines the degree-$1$ conditions with the two diagonal conditions: $\Elow=\langle x,z\rangle^2+\langle y,z\rangle^2+(\delta_{\mathrm m}^2+\delta_{\mathrm a}^2)/N^2$.
+The energy $\Efour$ of \eqref{eq:Elow} combines the degree-$1$ conditions with the two diagonal conditions: $\Efour=\langle x,z\rangle^2+\langle y,z\rangle^2+(\delta_{\mathrm m}^2+\delta_{\mathrm a}^2)/N^2$.
 
 \subsection{The permutation threshold}
 \label{sec:kstar}
@@ -83,14 +83,15 @@ For arrangements the deviations are integers of bounded size, and the threshold 
 \begin{definition}
 \label{def:kstar}
 For $n\ge3$, $k^*(n)$ is the least $k\ge1$ such that every arrangement of order $n$ satisfying the degree-$k$ conditions is semi-magic.
+A \emph{witness} for $k^*(n)\ge K$ is an arrangement that satisfies the degree-$(K-1)$ conditions and is not semi-magic.
 \end{definition}
 
 By \Cref{prop:hierarchy}(b), $k^*(n)\le n-1$.
-By \Cref{lem:poly_form}, an arrangement satisfies the degree-$k$ conditions if and only if $\gamma$ and $\rho$ lie in the lattice
+By \Cref{lem:poly_form}, an arrangement satisfies the degree-$k$ conditions if and only if $\gamma$ and $\rho$ lie in
 \[
-\Lambda_{n,k}=\{\gamma\in\Z^{n}:(t-1)^{k+1}\mid P_\gamma(t)\}=(t-1)^{k+1}\,\Z[t]_{<n-k-1},
+\Lambda_{n,k}=\{\gamma\in\Z^{n}:(t-1)^{k+1}\mid P_\gamma(t)\}=(t-1)^{k+1}\,\Z[t]_{<n-k-1}
 \]
-of rank $n-k-1$.
+(identifying $\gamma$ with $P_\gamma$; the quotient of an integer polynomial by the monic polynomial $(t-1)^{k+1}$ has integer coefficients), a lattice of rank $n-k-1$.
 Writing $\gamma=\gamma^+-\gamma^-$ with $\gamma^\pm\ge0$, the condition $\gamma\in\Lambda_{n,k}$ says that the multisets in which $j$ occurs $\gamma^+_j$, resp.\ $\gamma^-_j$, times have equal power sums of degrees $0,\dots,k$: a Prouhet--Tarry--Escott system \cite{wright1959prouhet,borwein2002computational}.
 Small vectors in $\Lambda_{n,k}$ are classical: the Prouhet--Thue--Morse vector $\bigl((-1)^{s_2(j)}\bigr)_{0\le j<2^{k+1}}$ ($s_2$ the binary digit sum) has entries $\pm1$ and lies in $\Lambda_{2^{k+1},k}$ \cite{wright1959prouhet,allouche1999ubiquitous}, and Borwein, Erd\'elyi and K\'os construct polynomials of degree $n$ with coefficients in $\{-1,0,1\}$ vanishing to order $\ge c\sqrt{n/\log n}$ at $1$ \cite[Thm.~2.7]{BEK1999}.
 The question is therefore how large $k$ can be for vectors that are column-deviation vectors of arrangements.
@@ -106,13 +107,13 @@ The question is therefore how large $k$ can be for vectors that are column-devia
 \end{theorem}
 
 The constant $2\sqrt{\pi e}$ is about $5.84$.
-Part (a) improves on $k^*(n)\le n-3$ only for $n\ge166$; for smaller $n$ the exact computation behind (c) is much stronger (\Cref{fig:kstar}).
-Parts (c) for $n\ge14$ and the values in \Cref{tab:kstar} rest on exact computer calculations, described in \Cref{sec:kstar_exact}.
+Part (a) gives $k^*(n)\le n-3$ from $n=166$ on and improves on it from $n=169$; it is of asymptotic interest only, since part (c) gives $k^*(n)\le n-3$ for all $n\ge18$.
+In part (c) the lower bounds rest on explicit witness arrangements, checkable in exact arithmetic; $k^*(n)\le n-1$, $k^*(n)\le n-2$ ($n\ge14$) and $k^*(n)\le n-3$ ($n\ge18$) are proved by hand; only the upper bounds of \Cref{tab:kstar} for $18\le n\le40$ are computer-assisted (\Cref{sec:kstar_exact}).
 
 \subsection{Proof of the upper bound}
 \label{sec:kstar_upper}
 
-\begin{lemma}[Column feasibility]
+\begin{lemma}[Majorisation bound for column deviations]
 \label{lem:col_feasible}
 Let $\gamma$ be the column-deviation vector of an arrangement.  For every set $J$ of $p$ columns,
 \begin{equation}
@@ -125,7 +126,7 @@ In particular $|\gamma_j|\le n^{2}(n-1)/2$, $\|\gamma\|_1\le N^{2}/4$ and $\|\ga
 \begin{proof}
 The $pn$ cells of $J$ carry distinct values, whose sum is at most that of the $pn$ largest values, $pn(2N-pn+1)/2$; subtracting $pM(n)=pn(N+1)/2$ gives the upper bound, and the lower bound is symmetric.
 With $p$ the number of positive $\gamma_j$, $\|\gamma\|_1=2\sum_{\gamma_j>0}\gamma_j\le pn(N-pn)\le N^2/4$.
-Finally \eqref{eq:col_feasible} says that $\gamma$ is majorised by the vector with entries $n(N-(2p-1)n)/2$, $1\le p\le n$, whose squared norm is $n^5(n^2-1)/12$, and $\|\cdot\|_2^2$ is Schur-convex.
+Finally, $\gamma$ is majorised by the vector $v$ with $v_p=n(N-(2p-1)n)/2$, $1\le p\le n$ (equal totals, $\sum_pv_p=0=\sum_j\gamma_j$, and \eqref{eq:col_feasible} bounds the partial sums of $\gamma$ sorted in decreasing order by $\sum_{p\le P}v_p=Pn(N-Pn)/2$); $\|v\|_2^2=n^5(n^2-1)/12$, and $\|\cdot\|_2^2$ is Schur-convex.
 \end{proof}
 
 \begin{lemma}[Order of vanishing of an integer polynomial at $1$]
@@ -135,8 +136,9 @@ Let $\gamma\in\Z^{n}\setminus\{0\}$ with $(t-1)^{K}\mid P_\gamma$ for some $K\ge
 
 \begin{proof}
 Write $P=P_\gamma$ and $L=\|\gamma\|_1$; note $K\le\deg P\le n-1$.
-Since $P$ has integer coefficients and leading coefficient $a\ne0$, Jensen's formula gives
-$\int_{-1/2}^{1/2}\log|P(e^{2\pi i\theta})|\,d\theta=\log\bigl(|a|\prod_\alpha\max(1,|\alpha|)\bigr)\ge0$, the product over the roots of $P$.
+The Mahler measure $\mathcal M(P)=|a|\prod_\alpha\max(1,|\alpha|)$ of a nonzero $P\in\Z[t]$, with $a$ its leading coefficient and the product over its roots $\alpha$, is at least $1$, because $|a|\ge1$, and Jensen's formula gives $\log\mathcal M(P)=\int_{-1/2}^{1/2}\log|P(e^{2\pi i\theta})|\,d\theta$.
+A root at $0$ (when $\gamma_0=0$) contributes $\max(1,0)=1$, so no condition on $\gamma_0$ is needed.
+Hence $\int_{-1/2}^{1/2}\log|P(e^{2\pi i\theta})|\,d\theta\ge0$.
 On $|z|=1$ we have $|P(z)|\le L$.
 Since $P^{(i)}(1)=0$ for $i<K$, Taylor's formula with integral remainder along the segment $[1,z]$, which lies in the closed unit disc when $|z|=1$, gives
 \[
@@ -157,21 +159,27 @@ The second inequality follows from $(n-1)\log(n^4/4)<4n\log n$.
 
 The order $\sqrt{n\log n}$ also follows from \cite[Thm.~2.1]{BEK1999}, applied to $P_\gamma(t)/(t^{r}\max_j|\gamma_j|)$ with $r$ the index of the first nonzero $\gamma_j$; that theorem bounds the number of zeros at $1$ of $\sum_{j\le n}a_jt^j$ with $|a_j|\le1$ by $c\sqrt{n(1-\log|a_0|)}$, with an unspecified absolute constant.
 \Cref{lem:jensen} is a self-contained version for integer coefficients.
-An argument using only that $\gamma$ is a nonzero integer vector with $\|\gamma\|_\infty\le n^3$ cannot give an upper bound of smaller order than $\sqrt n$: the box principle applied to the vectors in $\{0,\dots,n^3\}^n$ and their binomial moments of order $<K$ produces such vectors in $\Lambda_{n,K-1}$ with $K\asymp\sqrt n$.
+
+The hypothesis $\|\gamma\|_1\le n^4/4$ alone cannot give an upper bound of smaller order than $\sqrt n$.
+For a vector $g=(g_0,\dots,g_{n-1})$ write $B_r(g)=\sum_j\binom jrg_j$ for its binomial moments, and let $H=\lfloor n^3/4\rfloor$.
+The $(H+1)^n$ vectors $g\in\{0,\dots,H\}^n$ have $B_r(g)\in\bigl[0,H\binom n{r+1}\bigr]$.
+If $(H+1)^n>\prod_{r<K}\bigl(H\binom n{r+1}+1\bigr)$, two of them, $g\ne g'$, share $B_0,\dots,B_{K-1}$; then $\gamma=g-g'\ne0$, $\|\gamma\|_1\le nH\le n^4/4$, and $(t-1)^K\mid P_\gamma$ by \Cref{lem:poly_form}.
+Since $\prod_{r<K}\bigl(H\binom n{r+1}+1\bigr)\le(2H)^Kn^{K(K+1)/2}$, for $K=\lfloor2\sqrt n\rfloor$ the logarithm of the right side is $2n\log n+O(\sqrt n\log n)$, while that of the left side is at least $n\log H=3n\log n-O(n)$.
+So for all large $n$ there are such vectors with $K=\lfloor2\sqrt n\rfloor$.\footnote{Estimating the product as in the proof of \Cref{thm:perm_threshold}(b) below, with $\binom n{r+1}\le n^{r+1}/(r+1)!$, gives such vectors with $K=(\sqrt{12}-o(1))\sqrt n$.}
 
 \subsection{Proof of the lower bound}
 \label{sec:kstar_lower}
 
-A lower bound $k^*(n)\ge K$ requires an arrangement that satisfies the degree-$(K-1)$ conditions without being semi-magic.
+A lower bound $k^*(n)\ge K$ requires a witness, i.e.\ an arrangement that satisfies the degree-$(K-1)$ conditions without being semi-magic.
 We keep all row sums equal to $M(n)$ and control the column deviations by swaps.
 
 \begin{definition}
-Rows $i\ne i'$ of an arrangement are \emph{twins on} a set $J$ of columns if $s_{ij}+s_{i'j}=N+1$ for all $j\in J$.
+Rows $i\ne i'$ of an arrangement are \emph{complementary on} a set $J$ of columns if $s_{ij}+s_{i'j}=N+1$ for all $j\in J$.
 \end{definition}
 
-\begin{lemma}[Twin swaps]
+\begin{lemma}[Swaps in complementary rows]
 \label{lem:twin}
-Let $S$ be semi-magic, let rows $i,i'$ be twins on $J$, let $j,j'\in J$ and $d=s_{ij'}-s_{ij}$.
+Let $S$ be semi-magic, let rows $i,i'$ be complementary on $J$, let $j,j'\in J$ and $d=s_{ij'}-s_{ij}$.
 Exchanging the entries of row $i$ in columns $j,j'$ changes the column deviations by $d(e_j-e_{j'})$, exchanging those of row $i'$ changes them by $-d(e_j-e_{j'})$, and neither changes a row sum.
 Exchanges involving pairwise disjoint sets of cells can be combined, and their effects add.
 \end{lemma}
@@ -180,83 +188,103 @@ Exchanges involving pairwise disjoint sets of cells can be combined, and their e
 $s_{i'j}-s_{i'j'}=(N+1-s_{ij})-(N+1-s_{ij'})=d$.
 \end{proof}
 
-\begin{lemma}[Squares with many twin rows]
+\begin{lemma}[Squares with many complementary rows]
 \label{lem:twin_squares}
 \leavevmode
 \begin{enumerate}
-\item If $n=2m$ with $m$ even, or with $m$ odd and $m\ge7$, there is a semi-magic square of order $n$ in which rows $r$ and $m+r$ are twins on all columns, for $0\le r<m$.
-\item If $n\ge9$ is odd, there is a semi-magic square of order $n$ in which rows $\ell$ and $n-1-\ell$ are twins on the columns $\ell+1,\dots,n-2-\ell$, for $0\le\ell\le(n-9)/2$.
+\item If $n=2h$ with $h$ even, or with $h$ odd and $h\ge7$, there is a semi-magic square of order $n$ in which rows $r$ and $h+r$ are complementary on all columns, for $0\le r<h$.
+\item If $n\ge9$ is odd, there is a semi-magic square of order $n$ in which rows $\ell$ and $n-1-\ell$ are complementary on the columns $\ell+1,\dots,n-2-\ell$, for $0\le\ell\le(n-9)/2$.
 \end{enumerate}
 \end{lemma}
 
-The proof is a direct construction, given in \Cref{sec:app_twin}.
+Part (1) does not cover $n=6,10$; this is irrelevant for \Cref{thm:perm_threshold}(b), which concerns large $n$.
+The proof is a direct construction, given in Appendix~\ref{sec:app_twin}.
 
-\begin{proposition}[Box-principle criterion]
+\begin{proposition}[Pigeonhole criterion]
 \label{prop:box}
 Let $S$ be a square of \Cref{lem:twin_squares}.
-Pair the columns as $(j_q,j_q+1)$, where $j_q=2q$ for $q<Q=n/2$ ($n$ even) and $j_q=2q+1$ for $q<Q=(n-3)/2$ ($n$ odd), and let $R_q$ be the number of twin pairs of rows that are twins on both columns of the $q$-th pair: $R_q=n/2$ for even $n$, and $R_q=\min(2q,\,n-4-2q,\,(n-9)/2)+1$ for odd $n$.
+Pair the columns as $(j_q,j_q+1)$, where $j_q=2q$ for $q<Q=n/2$ ($n$ even) and $j_q=2q+1$ for $q<Q=(n-3)/2$ ($n$ odd), and let $r_q$ be the number of pairs of complementary rows of \Cref{lem:twin_squares} that are complementary on both columns of the $q$-th pair: $r_q=n/2$ for even $n$, and $r_q=\min(2q,\,n-4-2q,\,(n-9)/2)+1$ for odd $n$.
+For odd $n$ the $q$-th pair consists of the columns $2q+1,2q+2$, and the complementary rows $\ell,n-1-\ell$ of \Cref{lem:twin_squares}(2) cover both columns if and only if $\ell\le2q$ and $\ell\le n-4-2q$; with $0\le\ell\le(n-9)/2$ this gives the formula for $r_q$.
 If $K\ge2$ and
 \begin{equation}
-\prod_{q<Q}\Bigl(\Bigl\lceil\frac{R_q}2\Bigr\rceil+1\Bigr)\ >\ \prod_{r=0}^{K-2}\Bigl((N-1)\sum_{q<Q}R_q\binom qr+1\Bigr),
+\prod_{q<Q}\Bigl(\Bigl\lceil\frac{r_q}2\Bigr\rceil+1\Bigr)\ >\ \prod_{s=0}^{K-2}\Bigl((N-1)\sum_{q<Q}r_q\binom qs+1\Bigr),
 \label{eq:box}
 \end{equation}
 then there is an arrangement with all row sums $M(n)$ and $\gamma\ne0$ that satisfies the degree-$(K-1)$ conditions; hence $k^*(n)\ge K$.
 \end{proposition}
 
 \begin{proof}
-For each $q$, \Cref{lem:twin} gives $R_q$ nonzero integers $d_{q,1},\dots,d_{q,R_q}$ with $|d_{q,i}|\le N-1$, one for each twin pair covering the $q$-th column pair.
-At least $\lceil R_q/2\rceil$ of them have the same sign, and their partial sums, together with $0$, form a set $F_q$ of $\lceil R_q/2\rceil+1$ distinct subset sums lying in an interval of length at most $R_q(N-1)$.
-For $g\in\prod_qF_q$ the integers $\mu_r(g)=\sum_qg_q\binom qr$, $0\le r\le K-2$, lie in intervals of lengths at most $(N-1)\sum_qR_q\binom qr$, so by \eqref{eq:box} there are $g\ne g'$ with $\mu_r(g)=\mu_r(g')$ for all $r\le K-2$.
+For each $q$, \Cref{lem:twin} gives $r_q$ nonzero integers $d_{q,1},\dots,d_{q,r_q}$ with $|d_{q,i}|\le N-1$, one for each pair of complementary rows covering the $q$-th column pair.
+At least $\lceil r_q/2\rceil$ of them have the same sign, and their partial sums, together with $0$, form a set $F_q$ of $\lceil r_q/2\rceil+1$ distinct subset sums lying in an interval of length at most $r_q(N-1)$.
+For $g\in\prod_qF_q$ the binomial moments $B_s(g)=\sum_qg_q\binom qs$, $0\le s\le K-2$, are integers in intervals of lengths at most $(N-1)\sum_qr_q\binom qs$, so by \eqref{eq:box} there are $g\ne g'$ with $B_s(g)=B_s(g')$ for all $s\le K-2$.
 Write $g_q=\sum_{i\in I_q}d_{q,i}$ and $g'_q=\sum_{i\in I'_q}d_{q,i}$.
-Perform the row-$i$ exchange of \Cref{lem:twin} for the twin pairs in $I_q\setminus I'_q$ and the twin-row exchange for those in $I'_q\setminus I_q$, for every $q$; all these exchanges involve disjoint cells.
-The result has all row sums $M(n)$ and $\gamma=\sum_q h_q(e_{j_q}-e_{j_q+1})$ with $h=g-g'\ne0$.
-Then $P_\gamma(t)=t^{j_0}(1-t)H(t^2)$ with $H(u)=\sum_qh_qu^q\ne0$.
-Since $\sum_qh_q\binom qr=0$ for $r\le K-2$, \Cref{lem:poly_form} gives $(u-1)^{K-1}\mid H(u)$, so $(t^2-1)^{K-1}\mid H(t^2)$ and $(t-1)^{K}\mid P_\gamma$.
+For every $q$, perform the exchange of \Cref{lem:twin} in the first row of each pair in $I_q\setminus I'_q$ and in the second row of each pair in $I'_q\setminus I_q$; all these exchanges involve disjoint cells.
+The result has all row sums $M(n)$ and $\gamma=\sum_q \zeta_q(e_{j_q}-e_{j_q+1})$ with $\zeta=g-g'\ne0$.
+Then $P_\gamma(t)=t^{j_0}(1-t)P_\zeta(t^2)$ with $P_\zeta(u)=\sum_q\zeta_qu^q\ne0$.
+Since $B_s(\zeta)=0$ for $s\le K-2$, \Cref{lem:poly_form} gives $(u-1)^{K-1}\mid P_\zeta(u)$, so $(t^2-1)^{K-1}\mid P_\zeta(t^2)$ and $(t-1)^{K}\mid P_\gamma$.
 With $\rho=0$, the arrangement satisfies the degree-$(K-1)$ conditions, and $\gamma\ne0$.
 \end{proof}
 
 \begin{proof}[Proof of \Cref{thm:perm_threshold}(b)]
 Fix $\alpha<\sqrt2$ and let $K-1=k=\lfloor\alpha\sqrt n\rfloor$; we show that \eqref{eq:box} holds for all large $n$ covered by \Cref{lem:twin_squares} (every $n\ge14$ is covered).
-\emph{Right side.} $\sum_{q<Q}\binom qr=\binom Q{r+1}\le\binom n{r+1}$, $R_q\le n$ and $N\le n^2$, so each factor is at most $n^4\binom n{r+1}$, and with $\log s!\ge s\log s-s$,
+
+\emph{Right side.} $\sum_{q<Q}\binom qs=\binom Q{s+1}\le\binom n{s+1}$, $r_q\le n$ and $N\le n^2$, so each factor is at most $n^4\binom n{s+1}\le n^4\,n^{s+1}/(s+1)!$.
+From $\log s!\ge s\log s-s$ and $\sum_{s\le k}s\log s\ge\int_0^kx\log x\,dx=\frac{k^2}2\log k-\frac{k^2}4$,
+\[
+\sum_{s=1}^{k}\log s!\ \ge\ \frac{k^2}2\log k-\frac34k^2-\frac k2 ,
+\]
+hence $\sum_{s=1}^{k}(s\log n-\log s!)\le\frac{k^2}2\log\frac nk+O(k^2+k\log n)$ and
 \[
 \log(\text{right side})\le4k\log n+\sum_{s=1}^{k}\bigl(s\log n-\log s!\bigr)\le\frac{k^2}2\log\frac nk+O(k^2+k\log n)=\frac{\alpha^2}4\,n\log n+O(n).
 \]
+
 \emph{Left side.} For even $n$ it equals $(\lceil n/4\rceil+1)^{n/2}$, with logarithm $\frac n2\log n-O(n)$.
-For odd $n$, $R_q\ge\min(q+1,\,Q-q,\,(n-9)/2)$, and $\min(q+1,Q-q)\le(Q+1)/2<(n-9)/2$ for large $n$, so the logarithm is at least $2\log(\lfloor Q/2\rfloor!)-O(n)=\frac n2\log n-O(n)$.
+For odd $n$, with $Q=(n-3)/2$, $r_q=\min(2q+1,\,2(Q-q),\,Q-2)\ge\min(q+1,\,Q-q)$ once $Q\ge5$ ($n\ge13$), so $\lceil r_q/2\rceil+1\ge\min(q+1,Q-q)/2$.
+Hence
+\[
+\log(\text{left side})\ \ge\ \sum_{q<Q}\log\min(q+1,Q-q)-Q\log2\ \ge\ 2\log\bigl(\lfloor Q/2\rfloor!\bigr)-Q\log2=\frac n2\log n-O(n).
+\]
 Since $\alpha^2/4<1/2$, \eqref{eq:box} holds for large $n$, and $k^*(n)\ge\lfloor\alpha\sqrt n\rfloor+1$.
 \end{proof}
 
-The convergence in (b) is slow: \eqref{eq:box} itself gives only $k^*(n)\ge2$ at $n=14$ and $k^*(n)\ge7$ at $n=100$.
+The convergence in (b) is slow: \eqref{eq:box} itself gives only $k^*(n)\ge2$ at $n=14$ and $k^*(n)\ge7$ at $n=100$ (\Cref{fig:kstar}).
 Thus
 \[
-(\sqrt2-o(1))\sqrt n\le k^*(n)\le(2\sqrt{\pi e}+o(1))\sqrt{n\log n},
+(\sqrt2-o(1))\sqrt n\le k^*(n)\le(2\sqrt{\pi e}+o(1))\sqrt{n\log n}.
 \]
-and the factor $\sqrt{\log n}$ between the bounds is the analogue of the gap between $\sqrt{n/\log n}$ and $\sqrt n$ left open in \cite{BEK1999} for polynomials with coefficients in $\{-1,0,1\}$.
+The situation resembles that of polynomials with coefficients in $\{-1,0,1\}$ in \cite{BEK1999}: in both settings the upper bound comes from Jensen's formula and the lower construction from the pigeonhole principle, and they differ by a factor $\sqrt{\log n}$.
 
 \subsection{Exact values}
 \label{sec:kstar_exact}
 
 \begin{proof}[Proof of \Cref{thm:perm_threshold}(c)]
-\emph{$3\le n\le13$.}  Here $k^*(n)\le n-1$, and the lower bound needs an arrangement satisfying the degree-$(n-2)$ conditions that is not semi-magic.  For $n=3$ and $n=4$,
+\emph{$3\le n\le13$.}  Here $k^*(n)\le n-1$, and the lower bound needs a witness for $k^*(n)\ge n-1$, i.e.\ an arrangement satisfying the degree-$(n-2)$ conditions that is not semi-magic.  For $n=3$ and $n=4$,
 \[
 \begin{pmatrix}1&3&9\\8&6&5\\7&4&2\end{pmatrix}\ \ \gamma=(1,-2,1),\ \rho=(-2,4,-2);\qquad
 \begin{pmatrix}14&2&5&13\\8&15&7&4\\12&3&9&10\\1&11&16&6\end{pmatrix}\ \ \gamma=(1,-3,3,-1),\ \rho=0.
 \]
 In both cases $P_\gamma=(1-t)^{n-1}$ and $P_\rho\in\{0,-2(1-t)^2\}$, so the degree-$(n-2)$ conditions hold.
-For $5\le n\le13$ we found arrangements with $\rho=0$ and $\gamma_j=(-1)^j\binom{n-1}j$, i.e.\ $P_\gamma=(1-t)^{n-1}$ (\Cref{sec:app_witnesses}).
+For $5\le n\le13$ we found arrangements with $\rho=0$ and $\gamma_j=(-1)^j\binom{n-1}j$, i.e.\ $P_\gamma=(1-t)^{n-1}$ (Appendix~\ref{sec:app_witnesses}).
 
-\emph{$n\ge14$: level $n-2$.}  $\Lambda_{n,n-2}$ has rank $1$ and is spanned by $v=\bigl((-1)^j\binom{n-1}j\bigr)_j$.  If $\gamma=tv\ne0$ with $t\in\Z$, then $\max_j|\gamma_j|\ge\binom{n-1}{\lfloor(n-1)/2\rfloor}$, which exceeds $n^2(n-1)/2$ for $n\ge14$, contradicting \Cref{lem:col_feasible}.
+\emph{The lattices $\Lambda_{n,n-2}$ and $\Lambda_{n,n-3}$.}  $\Lambda_{n,n-2}$ has rank $1$ and is spanned by $v=\bigl((-1)^j\binom{n-1}j\bigr)_j$.  If $\gamma=av\ne0$ with $a\in\Z$, then $\max_j|\gamma_j|\ge\binom{n-1}{\lfloor(n-1)/2\rfloor}$, which exceeds $n^2(n-1)/2$ for $n\ge14$, contradicting \Cref{lem:col_feasible}.
 (At $n=14$, $\binom{13}6=1716>1274$; passing from $n$ to $n+1$ multiplies the left side by $2$ for even $n$ and by $2n/(n+1)\ge15/8$ for odd $n\ge15$, and the right side by $(n+1)^2/(n(n-1))$, which decreases in $n$ and equals $225/182<15/8$ at $n=14$.)
 So $k^*(n)\le n-2$ for $n\ge14$; at $n=13$ the bound fails ($\binom{12}6=924<1014$), and the witness has central entry $924$.
 
-\emph{$n\ge18$: level $n-3$.}  $\Lambda_{n,n-3}$ has rank $2$: $\gamma=(t-1)^{n-2}(a+bt)$ with $a,b\in\Z$.
-Two consecutive central coefficients bound $|a|,|b|$, and checking all pairs $(a,b)$ in the resulting box shows that for $18\le n\le400$ no nonzero $\gamma\in\Lambda_{n,n-3}$ satisfies $|\gamma_j|\le n^2(n-1)/2$.
-For $n\ge166$, part (a) gives $k^*(n)\le n-3$, since $f(n)=(n-2)^2-\pi e(n-1)\log(n^4/4)$ is positive at $n=166$ and $f'(n)\ge2(n-2)-4\pi e(\log n+1)>0$ for $n\ge166$ (the last expression increases for $n\ge18$ and is positive at $n=166$).
+$\Lambda_{n,n-3}$ has rank $2$: $P_\gamma=(t-1)^{n-2}(a+bt)$ with $a,b\in\Z$.
+At $t=-1$, $2^{n-2}|a-b|=|P_\gamma(-1)|\le\|\gamma\|_1\le N^2/4=n^4/4$ by \Cref{lem:col_feasible}; since $n^4<2^n$ for $n\ge17$, $a=b$ and $P_\gamma=a(t-1)^{n-2}(t+1)$.
+By Parseval, $\|\gamma\|_2^2=a^2\sum_j\bigl(\binom{n-2}j-\binom{n-2}{j-1}\bigr)^2=2a^2\binom{2n-4}{n-2}/(n-1)$ (twice a Catalan number).
+At $n=18$ this factor is $70{,}715{,}340>50{,}860{,}872=18^5(18^2-1)/12$.
+From $n$ to $n+1$ the left side grows by the factor $2(2n-3)/n\ge11/3$ and the right side by $(n+1)^4(n+2)/(n^4(n-1))<3/2$.
+So for $n\ge18$ the bound $\|\gamma\|_2^2\le n^5(n^2-1)/12$ of \Cref{lem:col_feasible} forces $a=0$, and $k^*(n)\le n-3$.
 
-\emph{Upper bounds for $14\le n\le 40$.}  If no nonzero vector of $\Lambda_{n,k}$ satisfies \eqref{eq:col_feasible} for every $p$, then $k^*(n)\le k$.  By \Cref{lem:col_feasible} it suffices to examine the vectors of $\Lambda_{n,k}$ with $\|\gamma\|_2^2\le n^5(n^2-1)/12$; we enumerated them exactly (LLL reduction followed by Fincke--Pohst enumeration in rational arithmetic, \Cref{sec:appendix}).
-At the level $k=k^*(n)$ of \Cref{tab:kstar}, no nonzero vector passes the test.
+\emph{Upper bounds for $18\le n\le 40$.}  (For $n\le17$ they were proved above.)  If no nonzero vector of $\Lambda_{n,k}$ satisfies \eqref{eq:col_feasible} for every $p$, then $k^*(n)\le k$.
+By \Cref{lem:col_feasible} only vectors with $\|\gamma\|_2^2\le n^5(n^2-1)/12$ need be examined; we enumerated them exactly with two independent implementations (Appendix~\ref{sec:appendix}).
+At $k=k^*(n)$ the ball contains no nonzero vector for $16$ of the $23$ values of $n$, since the Gram--Schmidt norms of the reduced basis already exceed the radius.
+For $n=20,22,24,26,34,36,38$ it contains $2,2,6,6,6,2,2$ vectors.
+Each violates \eqref{eq:col_feasible}, in every case but one already with $p=1$; the exception is $n=26$, where two of the six vectors need $p=2$.
+The certificate \texttt{anc/kstar\_certificates.json} lists the reduced bases and, for each vector, a violated instance $(p,J)$.
 
-\emph{Lower bounds for $14\le n\le 40$.}  For each $n$ we found an arrangement with all row sums $M(n)$ whose column deviations satisfy $(t-1)^{k^*(n)}\mid P_\gamma$ and $\gamma\ne0$; each was verified in exact integer arithmetic.
+\emph{Lower bounds for $14\le n\le 40$.}  For each $n$ we found a witness for $k^*(n)\ge K$, with $K$ the value of \Cref{tab:kstar}: an arrangement with all row sums $M(n)$ whose column deviations satisfy $(t-1)^{K}\mid P_\gamma$ and $\gamma\ne0$; each was verified in exact integer arithmetic.
 \end{proof}
 
 \begin{table}[htbp]
@@ -272,75 +300,21 @@ $k^{*}(n)$ & 21&21&22&22&23&23&23&24&24&25&25&26&26&\\
 $\max_j|\gamma_j|$ & 8892&6405&11737&9330&14881&11799&9177&18147&14766&24150&16515&26520&22233&\\
 $n^2(n-1)/2$ & 10584&11774&13050&14415&15872&17424&19074&20825&22680&24642&26714&28899&31200&
 \end{tabular}
-\caption{Exact values of the permutation threshold for $14\le n\le40$ (\Cref{thm:perm_threshold}(c)), the largest column deviation $\max_j|\gamma_j|$ of the witness arrangement, and the bound $n^2(n-1)/2$ of \Cref{lem:col_feasible}. The upper bounds come from the exact lattice enumeration of \texttt{anc/kstar\_verify.py}; for $n\le33$ they were also reproduced by an independent integer-programming computation (\texttt{anc/kstar\_crosscheck/}), so for $34\le n\le40$ they rest on the lattice enumeration alone.}
+\caption{Exact values of the permutation threshold for $14\le n\le40$ (\Cref{thm:perm_threshold}(c)), the largest column deviation $\max_j|\gamma_j|$ of the witness arrangement, and the bound $n^2(n-1)/2$ of \Cref{lem:col_feasible}. The upper bounds for $18\le n\le40$ were computed by two independent exact lattice enumerations (\texttt{anc/kstar\_verify.py}, \texttt{anc/kstar\_enum\_independent.py}) and, for $n\le33$, also by integer programming (\texttt{anc/kstar\_crosscheck/}); a certificate is in \texttt{anc/kstar\_certificates.json}.}
 \label{tab:kstar}
 \end{table}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.72\textwidth]{figures/fig_kstar.pdf}
-\caption{The permutation threshold. Exact values of $k^*(n)$ for $3\le n\le40$ (dots), the upper bounds obtained by the exact lattice enumeration for $41\le n\le100$ (open circles), the linear-algebra threshold $n-1$, the bound of \Cref{thm:perm_threshold}(a), and the curve $\sqrt{2n}$, the asymptotic order of the lower bound (b).}
+\caption{The permutation threshold. Exact values of $k^*(n)$ for $3\le n\le40$ (dots), computer-assisted upper bounds for $41\le n\le100$ (one implementation, not certified; open circles), the linear-algebra threshold $n-1$, the bound of \Cref{thm:perm_threshold}(a), the lower bound given by \eqref{eq:box} (open squares, shown where it gives $K\ge2$; for odd $n$ with small $r_q$ it is trivial and is not plotted), and $\sqrt{2n}$, the asymptotic order of (b), which \eqref{eq:box} approaches slowly.}
 \label{fig:kstar}
 \end{figure}
 
 \paragraph{The witnesses.}
 The target vectors $\gamma$ were chosen among the shortest vectors of $\Lambda_{n,k^*(n)-1}$ satisfying \eqref{eq:col_feasible}, as produced by the enumeration.
-Starting from a semi-magic square of \Cref{lem:twin_squares} (or a Siamese square), a steepest-descent search over exchanges within a row, which fix the row sums, minimised $\sum_j(\text{column sum}_j-M(n)-\gamma_j)^2$, with random exchanges to leave local minima; for the hardest cases a simulated annealing over arbitrary exchanges, with energy the squared distance of both row and column sums to their targets, was used.
-We observe (for these $n$ only; this is not a theorem) that for $14\le n\le40$ the threshold is determined by the column-feasibility inequalities alone: $k^*(n)$ is the least $k$ for which no nonzero vector of $\Lambda_{n,k}$ satisfies \eqref{eq:col_feasible}.
+Starting from a semi-magic square of \Cref{lem:twin_squares} (or a Siamese (de la Loub\`ere) magic square \cite{andrews1960magic}), a steepest-descent search over exchanges within a row, which fix the row sums, minimised $\sum_j(\text{column sum}_j-M(n)-\gamma_j)^2$, with random exchanges to leave local minima; for the hardest cases a simulated annealing over arbitrary exchanges, with energy the squared distance of both row and column sums to their targets, was used.
+For each $14\le n\le40$ the witness search succeeded at the last $k$ at which $\Lambda_{n,k}$ still contains a nonzero vector satisfying \eqref{eq:col_feasible}, so $k^*(n)$ equals the least $k$ for which $\Lambda_{n,k}$ contains no such vector.
+We do not know whether this holds for all $n$.
 Some witnesses come close to the bound of \Cref{lem:col_feasible}: $\max_j|\gamma_j|=924$ against $1014$ at $n=13$, and $24150$ against $24642$ at $n=37$.
-Beyond $n=40$ we computed only upper bounds (\Cref{fig:kstar}); for instance $k^*(50)\le30$, $k^*(80)\le39$ and $k^*(100)\le45$.
-
-\subsection{The low-order conditions for \texorpdfstring{$n=3$}{n=3}}
-
-\begin{proposition}
-\label{prop:n3_lowmode}
-For $n=3$, $\Elow(S)=0$ if and only if $S$ is magic.
-\end{proposition}
-
-\begin{proof}
-Write the centred entries $z_c=s_c-5\in\{-4,\dots,4\}$ as $\left(\begin{smallmatrix}a&b&c\\d&e&f\\g&h&i\end{smallmatrix}\right)$, so that $\sum_cz_c=0$, $\sum_cz_c^2=60$, and every line sum of $z$ is the deviation of that line.
-The degree-$1$ conditions with $\sum_j\gamma_j=\sum_i\rho_i=0$ give $\gamma=(t,-2t,t)$ and $\rho=(u,-2u,u)$, and the diagonal conditions give $a+e+i=c+e+g=0$.
-The middle row, the middle column and the two diagonals cover every cell once and the centre three more times, so $3e=-2(t+u)$; as $e$ is an integer, $t+u=3k$ and $e=-2k$ with $k\in\Z$.
-Put $P=a-k$, $Q=c-k$, $T=t-k$, $U=u-k$, so that $T+U=k$.
-The diagonals give $i=k-P$, $g=k-Q$; the first and last rows (sum $u$) and columns (sum $t$) then give
-\[
-z=\begin{pmatrix}k+P&-T-P-Q&k+Q\\-U-P+Q&-2k&-U+P-Q\\k-Q&-T+P+Q&k-P\end{pmatrix},
-\qquad
-\sum_cz_c^2=2\bigl(4k^2+3(P^2+Q^2)+T^2+U^2\bigr),
-\]
-so $4k^2+3(P^2+Q^2)+T^2+U^2=30$.
-The four corners are distinct, so $P\ne0$, $Q\ne0$ and $|P|\ne|Q|$, hence $P^2+Q^2\ge5$; therefore $R=4k^2+T^2+U^2$ is a multiple of $3$ and at most $15$, and $P^2+Q^2=10-R/3$.
-So $|k|\le1$.
-If $|k|=1$, then $T+U=\pm1$ makes $T^2+U^2$ odd, so $R\in\{9,15\}$ (as $R\ge5$) and $T^2+U^2\in\{5,11\}$; $11$ is not a sum of two squares, and $T^2+U^2=5$ gives $P^2+Q^2=7$, which is not either.
-So $k=0$, $U=-T$, and $R=2T^2\le15$ divisible by $3$ forces $T=0$.
-Hence $t=u=0$: all rows, columns and diagonals have deviation $0$, and $S$ is magic.
-The converse is clear.
-\end{proof}
-
-\begin{remark}
-\label{rem:n3_enum}
-The enumeration of all $9!$ arrangements confirms \Cref{prop:n3_lowmode} and each step of its proof (\texttt{anc/n3\_lowmode\_proof.py}): exactly $760$ arrangements satisfy the degree-$1$ conditions, $4{,}224$ have both diagonal sums $15$, $72$ (the semi-magic squares) satisfy the degree-$2$ conditions, and $8$, the magic squares, satisfy the degree-$1$ and both diagonal conditions; the only integer solution of $4k^2+3(P^2+Q^2)+T^2+U^2=30$ with $T+U=k$, $PQ\ne0$, $|P|\ne|Q|$ is $k=T=U=0$, $P^2+Q^2=10$.
-The four conditions are weaker than the magic conditions for real-valued $z$; the proof uses that the entries are distinct integers with $\sum_cz_c^2=60$.
-For $n=4$ the equivalence fails (\Cref{rem:four_term_insufficient}); the arrangement there has $\gamma=(3,-9,9,-3)$ and $\rho=(-6,4,10,-8)$, so it satisfies the degree-$2$ condition in $x$ but not in $y$.
-\end{remark}
-
-\subsection{Balance of the signed mass}
-\label{sec:balance}
-
-Regard $z_c$ as a signed mass at $(x_c,y_c)$.
-By \Cref{prop:hierarchy}(a), a semi-magic square balances every separable test function $a(x)+b(y)$, and a magic square also the diagonal indicators; by \Cref{rem:product_inertia} it need not balance $xy$.
-For arbitrary arrangements the balance is controlled by the energy:
-
-\begin{remark}[Quantitative balance]
-\label{rem:quant_balance}
-Since $\sum_cz_cx_c=\sum_jx_j\gamma_j$ and $\sum_jx_j^2=n(n^2-1)/12$, the Cauchy--Schwarz inequality gives
-\[
-\Bigl|\sum_cz_c(x_c,y_c)\Bigr|^2\le\frac{n(n^2-1)}{12}\bigl(\|\gamma\|^2+\|\rho\|^2\bigr)\le N^2\,\frac{n(n^2-1)}{12}\,\Efull ,
-\]
-with equality in the first step if and only if $\gamma\parallel(x_j)$ and $\rho\parallel(y_i)$, for instance for $s_{ij}=in+j+1$.
-More generally, by \Cref{lem:W_structure}, $\|P_Wz\|^2=n(\|\rho\|^2+\|\gamma\|^2)/N^2+\frac1N\delta^{\mathsf T}\Gamma_D^{-1}\delta$ with $\delta=(\delta_{\mathrm m},\delta_{\mathrm a})$, so $n\Efull\le\|P_Wz\|^2\le\lambda_n\Efull$ with $\lambda_n=n^2/(n-1)$ for odd $n$ and $n^2/(n-2)$ for even $n$; hence $|\sum_cz_c\varphi_c|\le N\|\varphi\|\sqrt{\lambda_n\Efull}$ for every $\varphi\in W$.
-\end{remark}
-
-Nonlinear balance is not implied.
-With the radial unit vectors $u_c=(x_c,y_c)/|(x_c,y_c)|$ ($u_c=0$ at the centre), each of the eight $3\times3$ magic squares has $|\sum_cz_cu_c|=2(2-\sqrt2)\sqrt5\approx2.62$: for the Lo Shu with rows $(2,7,6),(9,5,1),(4,3,8)$ the edge cells contribute $(-8,4)$ and the corners $(4\sqrt2,-2\sqrt2)$.
-For $n=4$ this ring imbalance is positive for all $880$ magic squares (smallest value $0.070$), with mean $5.51$ against $17.06$ for uniformly random arrangements; the magic mean lies at the $7.4$th percentile of the random distribution (\texttt{anc/balance\_check.py}).
+Beyond $n=40$ we computed only upper bounds (computer-assisted, single implementation; \Cref{fig:kstar}); for instance $k^*(50)\le30$, $k^*(80)\le39$ and $k^*(100)\le45$.

@@ -1,28 +1,62 @@
 \section{Computations for small orders}
 \label{sec:computations}
 
-All counts below were computed in exact integer arithmetic; the methods are described in \Cref{sec:appendix}, and every number is produced by a script in the ancillary directory \texttt{anc/}.
+All counts below were computed in exact integer arithmetic; the methods are described in Appendix~\ref{sec:appendix}, and every number is produced by a script in the ancillary directory \texttt{anc/}.
 
-\subsection{The low-order class for \texorpdfstring{$n=4$}{n=4}}
+\subsection{The classes \texorpdfstring{$L_3$}{L3} and \texorpdfstring{$L_4$}{L4}}
 \label{sec:lowmode_n4}
 
-Let $L_n$ be the set of arrangements with $\Elow=0$, i.e.\ $\Cov(X,Z)=\Cov(Y,Z)=0$ and both diagonal sums equal to $M(n)$.
+Let $L_n$ be the class of arrangements whose first moments vanish and whose diagonal sums equal $M(n)$, i.e.\ the arrangements with $\Efour=0$: $\langle x,z\rangle=\langle y,z\rangle=0$ and both diagonal sums equal to $M(n)$.
 With cells indexed by $(i,j)$, these are the conditions $U_1=U_2=\frac{n-1}2\cdot\frac{N(N+1)}2$ and $U_3=U_4=M(n)$ on the sums
 $U_1=\sum_{i,j}j\,s_{ij}$, $U_2=\sum_{i,j}i\,s_{ij}$, $U_3=\sum_is_{ii}$, $U_4=\sum_is_{i,n-1-i}$, which are additive over cells.
 
+\begin{proposition}
+\label{prop:n3_lowmode}
+For $n=3$, $\Efour(S)=0$ if and only if $S$ is magic; that is, $L_3$ consists of the eight magic squares.
+\end{proposition}
+
+\begin{proof}
+Write the centred entries $z_c=s_c-5\in\{-4,\dots,4\}$ as $\left(\begin{smallmatrix}a&b&c\\d&e&f\\g&h&i\end{smallmatrix}\right)$, so that $\sum_cz_c=0$, $\sum_cz_c^2=60$, and every line sum of $z$ is the deviation of that line.
+The degree-$1$ conditions with $\sum_j\gamma_j=\sum_i\rho_i=0$ give $\gamma=(\xi,-2\xi,\xi)$ and $\rho=(\eta,-2\eta,\eta)$, and the diagonal conditions give $a+e+i=c+e+g=0$.
+The middle row, the middle column and the two diagonals cover every cell once and the centre three more times, so $3e=-2(\xi+\eta)$; as $e$ is an integer, $\xi+\eta=3\kappa$ and $e=-2\kappa$ with $\kappa\in\Z$.
+Put $a'=a-\kappa$, $c'=c-\kappa$, $\xi'=\xi-\kappa$, $\eta'=\eta-\kappa$, so that $\xi'+\eta'=\kappa$.
+The diagonals give $i=\kappa-a'$, $g=\kappa-c'$; the first and last rows (sum $\eta$) and columns (sum $\xi$) then give
+\[
+z=\begin{pmatrix}\kappa+a'&-\xi'-a'-c'&\kappa+c'\\-\eta'-a'+c'&-2\kappa&-\eta'+a'-c'\\\kappa-c'&-\xi'+a'+c'&\kappa-a'\end{pmatrix},
+\qquad
+\sum_cz_c^2=2\bigl(4\kappa^2+3(a'^2+c'^2)+\xi'^2+\eta'^2\bigr),
+\]
+so $4\kappa^2+3(a'^2+c'^2)+\xi'^2+\eta'^2=30$.
+The four corners are distinct, so $a'\ne0$, $c'\ne0$ and $|a'|\ne|c'|$, hence $a'^2+c'^2\ge5$; therefore $4\kappa^2+\xi'^2+\eta'^2$ is a multiple of $3$ and at most $15$, and $a'^2+c'^2=10-(4\kappa^2+\xi'^2+\eta'^2)/3$.
+So $|\kappa|\le1$.
+If $|\kappa|=1$, then $\xi'+\eta'=\pm1$ makes $\xi'^2+\eta'^2$ odd, so $4\kappa^2+\xi'^2+\eta'^2\in\{9,15\}$ (as it is at least $5$) and $\xi'^2+\eta'^2\in\{5,11\}$; $11$ is not a sum of two squares, and $\xi'^2+\eta'^2=5$ gives $a'^2+c'^2=7$, which is not either.
+So $\kappa=0$, $\eta'=-\xi'$, and $2\xi'^2\le15$ divisible by $3$ forces $\xi'=0$.
+Hence $\xi=\eta=0$: all rows, columns and diagonals have deviation $0$, and $S$ is magic.
+The converse is clear.
+\end{proof}
+
+\begin{remark}
+\label{rem:n3_enum}
+The enumeration of all $9!$ arrangements confirms \Cref{prop:n3_lowmode} and each step of its proof (\texttt{anc/n3\_lowmode\_proof.py}): exactly $760$ arrangements satisfy the degree-$1$ conditions, $4{,}224$ have both diagonal sums $15$, $72$ (the semi-magic squares) satisfy the degree-$2$ conditions, and $8$, the magic squares, satisfy the degree-$1$ and both diagonal conditions; the only integer solution of $4\kappa^2+3(a'^2+c'^2)+\xi'^2+\eta'^2=30$ with $\xi'+\eta'=\kappa$, $a'c'\ne0$, $|a'|\ne|c'|$ is $\kappa=\xi'=\eta'=0$, $a'^2+c'^2=10$.
+The four conditions are weaker than the magic conditions for real-valued $z$; the proof uses that the entries are distinct integers with $\sum_cz_c^2=60$.
+\end{remark}
+
+For $n=4$ the equivalence fails (\Cref{rem:four_term_insufficient}).
+
 \begin{proposition}[The size of $L_4$]
 \label{prop:L4}
-$|L_3|=8$ (the magic squares), and
+$|L_3|=8$ (\Cref{prop:n3_lowmode}), and
 \[
 |L_4|=14{,}639{,}440=8\times1{,}829{,}930,
 \]
 of which $7{,}040$ are magic squares.
-The class $\{\Cov(X,Z)=\Cov(Y,Z)=0\}$ has $6{,}697{,}177{,}424$ members for $n=4$, and the class with both diagonal sums equal to $34$ has $49{,}932{,}288{,}000$.
+The class $\{\langle x,z\rangle=\langle y,z\rangle=0\}$ has $6{,}697{,}177{,}424$ members for $n=4$, and the class with both diagonal sums equal to $34$ has $49{,}932{,}288{,}000$.
 \end{proposition}
 
 \begin{proof}[Computation]
-A meet-in-the-middle enumeration over $(U_1,\dots,U_4)$, splitting the grid into the top two and bottom two rows (\Cref{sec:appendix}); the matching pairs were expanded to obtain the breakdown of \Cref{tab:L4}.
+A meet-in-the-middle enumeration over $(U_1,\dots,U_4)$, splitting the grid into the top two and bottom two rows (Appendix~\ref{sec:appendix}); the matching pairs were expanded to obtain the breakdown of \Cref{tab:L4}.
 The same program reproduces the brute-force counts for $n=3$ ($8$, $760$, $4224$, and $72$ semi-magic squares) and, with the $2n$ line sums in place of $U_1,U_2$, the $7{,}040$ magic and $549{,}504$ semi-magic squares of order $4$.
+Two further programs written independently of \texttt{anc/lowmode\_enum.c} (\texttt{anc/lowmode\_recount.py}, \texttt{anc/table4\_recount.py}) together reproduce $|L_4|$, the first-moment count $6{,}697{,}177{,}424$ and every entry of \Cref{tab:L4}.
 The diagonal-only count also follows from a direct count: there are $2150$ ordered pairs of disjoint $4$-subsets of $\{1,\dots,16\}$ with sum $34$, and $2150\cdot(4!)^2\cdot8!=49{,}932{,}288{,}000$.
 \end{proof}
 
@@ -48,16 +82,18 @@ total & 11\,910\,864 & 2\,611\,472 & 117\,104 & 14\,639\,440 \\
 \label{tab:L4}
 \end{table}
 
-Exactly two or three rows with sum $34$ are impossible in $L_4$: the row deviations $e_i$ satisfy $\sum_ie_i=0$ and $\sum_iie_i=0$, which cannot hold with exactly one or two nonzero $e_i$; the same holds for columns.
+Exactly two or three rows with sum $34$ are impossible in $L_4$: the row deviations satisfy $\sum_i\rho_i=0$ and $\sum_ii\rho_i=0$, which cannot hold with exactly one or two nonzero $\rho_i$; the same holds for columns.
 Thus $7040/14{,}639{,}440\approx0.048\%$ of $L_4$ is magic, and $9{,}637{,}312$ members ($66\%$) have no row or column with sum $34$, among them the arrangement of \Cref{rem:four_term_insufficient}.
 
-\paragraph{A local-limit estimate.}
+\paragraph{A local-limit heuristic.}
 Under a uniformly random arrangement the vector $(U_1,\dots,U_4)$ has mean equal to the target vector and covariance matrix $\Sigma_U$ given by \eqref{eq:ww_identity}: $U_1,U_2$ are uncorrelated with each other and with the diagonal sums, which have correlation $-1/(n-1)$ for even $n$ and $0$ for odd $n$.
-The single transpositions change $(U_1,\dots,U_4)$ by vectors whose $\Z$-span is $\Z^4$ (Smith normal form, $n\le8$).
-A Gaussian local limit would therefore give $|L_n|\approx N!\,(2\pi)^{-2}\det(\Sigma_U)^{-1/2}$.
+Since any two arrangements differ by a product of transpositions, the differences of $(U_1,\dots,U_4)$ generate the same lattice as the increments of single transpositions; by a Smith normal form computation ($n\le8$) this lattice is $\Z^4$.
+A Gaussian local limit would therefore give the heuristic estimate $|L_n|\approx N!\,(2\pi)^{-2}\det(\Sigma_U)^{-1/2}$.
 This estimate is $13.6$ for $n=3$ ($|L_3|=8$) and $1.82\times10^{7}$ for $n=4$, so $|L_4|$ is $0.80$ times the estimate; for the two-condition classes the ratios at $n=3,4$ are $0.59,0.91$ (first moments) and $1.10,0.96$ (diagonals).
 For $n=5,6$ Monte Carlo ($10^{10}$ and $2\times10^{10}$ samples, $328$ and $62$ members of $L_n$) gives $|L_5|\approx5.1\times10^{17}$ ($\pm6\%$) and $|L_6|\approx1.2\times10^{33}$ ($\pm13\%$), ratios $0.76$ and $0.78$ to the estimate.
-Since $\det(\Sigma_U)^{1/2}$ grows like $n^{13}$, one expects $|L_n|/N!$ to decay like $n^{-13}$, and the fraction of magic squares in $L_n$ to tend to $0$; local limit theorems for permutation statistics of this kind are studied in \cite{kuperberg2017probabilistic,eberhard2019additive}, and related counts of matrices with prescribed margins in \cite{canfield2010asymptotic}.
+Since $\det(\Sigma_U)^{1/2}$ grows like $n^{13}$, the heuristic suggests $|L_n|/N!\asymp n^{-13}$.
+The same heuristic applied to the $2n$ independent line conditions, each with variance $\asymp n^5/12$, suggests that magic squares form a fraction $\exp(-5n\log n+O(n))$ of all arrangements, hence a vanishing proportion of $L_n$.
+Neither statement is proved here; local limit theorems for permutation statistics of this kind are studied in \cite{kuperberg2017probabilistic,eberhard2019additive}, and related counts of matrices with prescribed margins in \cite{canfield2010asymptotic}.
 
 \subsection{Single swaps}
 \label{sec:swap-gaps}
@@ -70,18 +106,11 @@ Expanding \eqref{eq:Efull_devs},
 N^{2}\bigl(\Efull(S^{ab})-\Efull(S)\bigr)=d^{2}\lambda(a,b)+2d\bigl(u_S(a)-u_S(b)\bigr),
 \]
 the incremental evaluation used in local search \cite{pinn1998number}.
-Here $\lambda(a,b)=2[i\ne i']+2[j\ne j']+[\text{a diagonal separates }a,b]+[\text{the other diagonal separates }a,b]\in\{2,\dots,6\}$ for $a=(i,j)$, $b=(i',j')$.
-For a magic square $S$, $N^2\Efull(S^{ab})=d^2\lambda(a,b)\ge2$, so no two magic squares differ by a transposition, and the values lie in the set $\{d^2\lambda:1\le d\le N-1,\ 2\le\lambda\le6\}$.
-The smallest value $g_{\min}(S)=\min_{a\ne b}d^2\lambda(a,b)$ satisfies $2\le g_{\min}(S)\le6$: the value $2$ occurs if and only if two consecutive values lie in a common row or column and off both diagonals, and consecutive values give at most $6$.
+Here $\lambda(a,b)=2[i\ne i']+2[j\ne j']+[\text{exactly one of }a,b\text{ lies on }D_{\mathrm m}]+[\text{exactly one of }a,b\text{ lies on }D_{\mathrm a}]\in\{2,\dots,6\}$ for $a=(i,j)$, $b=(i',j')$.
+For a magic square $S$, $N^2\Efull(S^{ab})=d^2\lambda(a,b)\ge2$, so no two magic squares differ by a transposition, and the increase of $N^2\Efull$ under a transposition lies in the set $\{d^2\lambda:1\le d\le N-1,\ 2\le\lambda\le6\}$.
+The smallest increase $g_{\min}(S)=\min_{a\ne b}d^2\lambda(a,b)$ satisfies $2\le g_{\min}(S)\le6$: the value $2$ occurs if and only if two consecutive values lie in a common row or column and off both diagonals, and consecutive values give at most $6$.
 \end{remark}
 
-Over the $880\cdot\binom{16}2=105{,}600$ swaps of the $880$ magic squares of order $4$ up to $D_4$, the gap $d^2\lambda$ takes $70$ values from $2$ to $980$, and $g_{\min}(S)$ is $2$ for $432$ squares, $3$ for $420$ and $4$ for $28$ (\Cref{fig:swap_spectrum}); it is $3$ for the magic squares of order $3$.
-For $n=3$, besides the eight magic squares, $\Efull$ has eight non-magic local minima with respect to swaps, all with $N^2\Efull=2$; $\Elow$ has $344$ local minima, of which $336$ are non-magic.
-Steepest swap descent on $\Efull$ from a random arrangement reaches a magic square in $19.5\%$ of runs for $n=4$, $1.2\%$ for $n=5$ and $0.8\%$ for $n=6$ (\texttt{anc/algorithms.py}).
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=\textwidth]{figures/fig_swap_spectrum.pdf}
-\caption{Swap gaps. (a)~For $n=3$, the number of arrangements with each value of $N^2\Efull=\sum_L\delta_L^2$; the eight magic squares are at $0$ and the eight non-magic local minima at $2$. (b)~For $n=4$, the number of single swaps of the $880$ magic squares ($105{,}600$ in total) by value difference $d$ and number $\lambda$ of separating lines; the gap is $d^2\lambda$. (c)~The smallest gap $g_{\min}(S)$ over the $880$ squares.}
-\label{fig:swap_spectrum}
-\end{figure}
+Call $S$ a local minimum with respect to transpositions if no transposition lowers the energy.
+For $n=3$ the local minima of $\Efull$ are the eight magic squares and eight non-magic arrangements with $N^2\Efull=2$, all strict; $\Efour$ has $344$, of which $336$ are non-magic, and only $72$ of them ($64$ non-magic) are strict.
+Steepest descent on $\Efull$ (at each step perform the transposition with the most negative change of $N^2\Efull$, ties broken by the first cell pair in row-major order; stop when no transposition lowers it) reaches a magic square in $19.5\%$ ($\pm0.1\%$), $1.2\%$ and $0.8\%$ of $2\times10^5$ runs from uniformly random starts for $n=4,5,6$ (\texttt{anc/algorithms.py}).

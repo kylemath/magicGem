@@ -1,4 +1,4 @@
-"""Bounding box, forced vertices, interior / boundary non-vertex points and square classes of the
+"""Bounding box, forced vertices, interior / non-vertex boundary points and square classes of the
 880 order-4 gems (exact integer arithmetic).  Every statement quoted in the paper is asserted below.
 Run from this directory:  python3 box_and_classes.py   ->  results_box_classes.json, box_and_classes.log
 """
@@ -24,11 +24,11 @@ def canon(S):
     return min(tuple(int(x) for x in V.ravel()) for V in d4(np.asarray(S)))
 
 
-# Dudeney groups (column Gr. of all7040_dudeney.csv); checked to be constant on D4-classes
+# Dudeney groups (column Gr. of all7040_dudeney.tsv); checked to be constant on D4-classes
 cidx = {canon(S): k for k, S in enumerate(SQ)}
 assert len(cidx) == 880
 dud = {}
-for r in list(csv.reader(open(os.path.join(HERE, 'all7040_dudeney.csv')), delimiter='\t'))[1:]:
+for r in list(csv.reader(open(os.path.join(HERE, 'all7040_dudeney.tsv')), delimiter='\t'))[1:]:
     S = np.array([int(x) for x in r[3:19]]).reshape(4, 4)
     k = cidx[canon(S)]
     assert dud.setdefault(k, int(r[1])) == int(r[1])
@@ -60,7 +60,7 @@ for k, S in enumerate(SQ):
     for sd in sides:
         vs = sorted(sd, key=lambda c: S[c]); forced |= {vs[0][0] * 4 + vs[0][1], vs[-1][0] * 4 + vs[-1][1]}
     assert forced <= V
-    # (3) strictly interior vs boundary non-vertex points (exact: slack against all facet planes)
+    # (3) strictly interior vs non-vertex boundary points (exact: slack against all facet planes)
     interior = bnd = 0
     for v in range(16):
         if v in V: continue

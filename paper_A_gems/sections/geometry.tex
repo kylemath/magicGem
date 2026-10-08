@@ -2,15 +2,15 @@
 \label{sec:census}
 
 There are $8$ magic squares of order $3$, all images of the Lo Shu under $D_4$, and $7{,}040$ of order $4$, forming $880$ $D_4$-classes; the order-four squares were listed by Fr\'enicle de Bessy \cite{frenicle1693} and have been recounted by computer \cite{beck2010enumeration}.
-Dudeney sorted them into twelve groups according to the pattern of complementary pairs $(a,17-a)$ \cite{dudeney1917amusements}; since the numbering of the groups differs between reproductions of his table, we list the labels used here, for all $7040$ squares, in \texttt{anc/all7040\_dudeney.csv}.
-The number $275{,}305{,}224$ of essentially different order-five squares is due to Schroeppel (1973) \cite{gardner1976}; for order six the count was estimated by Monte Carlo methods \cite{pinn1998number} and was computed exactly by H.~Mino in 2024 \cite{trump2012enumeration}.
+Dudeney sorted them into twelve groups according to the pattern of complementary pairs $(a,17-a)$ \cite{dudeney1917amusements}; since the numbering of the groups differs between reproductions of his table, we list the labels used here, for all $7040$ squares together with the number $\#$ of their class, in \texttt{anc/all7040\_dudeney.tsv}.
+The number $275{,}305{,}224$ of magic squares of order five up to $D_4$ is due to Schroeppel (1973) \cite{gardner1976}; for order six the count was estimated by Monte Carlo methods \cite{pinn1998number} and was computed exactly by H.~Mino in 2024, as announced on his web page \cite{mino2024order6} and reported in \cite{trump_howmany}.
 
 For each of the $880$ squares we computed $\mathcal G(S)$ exactly (integer facet inequalities, rational volumes; \Cref{sec:appendix}).
 \Cref{tab:census} and \Cref{fig:gem-geometry-880} summarise the results.
 
 \begin{table}[htbp]
 \centering
-\caption{The $880$ order-four gems by number $V$ of vertices: numbers of squares, of combinatorial types (face lattices up to isomorphism), of $f$-vectors and of distinct exact volumes, and the volume as a fraction of the box $\mathcal B_4$ ($\operatorname{vol}\mathcal B_4=135$). A volume can occur for several values of $V$, so the volume counts add up to more than $155$. Bottom: numbers of gems with $k$ interior points ($V^\circ=k$) and with $k$ boundary non-vertex points ($V^\partial=k$).}
+\caption{The $880$ order-four gems by number $V$ of vertices: numbers of squares, of combinatorial types (face lattices up to isomorphism), of $f$-vectors and of distinct exact volumes, and the volume as a fraction of the box $\mathcal B_4$ ($\operatorname{vol}\mathcal B_4=135$). A volume can occur for several values of $V$, so the volume counts add up to more than $155$. Bottom: numbers of gems with $k$ interior points ($V^\circ=k$) and with $k$ non-vertex boundary points ($V^\partial=k$).}
 \label{tab:census}
 \small
 \begin{tabular}{l rrrrrrrrr r}
@@ -42,15 +42,14 @@ gems with $V^\partial=k$ & 357 & 204 & 257 & 40 & 21 & 0 & 1\\
 \paragraph{Vertices, faces and volumes.}
 Between $8$ and all $16$ points are vertices; $V=12$ is the most frequent value ($380$ gems), and the mean is $269/22\approx12.23$.
 The $39$ $f$-vectors range from $(8,14,8)$ (one gem) to $(16,36,22)$ (nine gems); the most frequent is $(12,26,16)$ ($164$ gems).
-For these $880$ gems the multiset of facet sizes is determined by the $f$-vector.
 The volume takes $155$ distinct values, from $58$ to $292/3$, with mean $84.05$; its denominators are $1,2,3,6$, because for even $n$ all coordinates are half-odd integers, so that $\mathcal G(S)+(\frac12,\frac12,\frac12)$ is a lattice polytope.
 The Ehrhart polynomials of these lattice polytopes take $554$ distinct values (\texttt{anc/ehrhart\_880.py}); for lattice $3$-polytopes this polynomial is equivalent to the volume, the lattice-normalised surface area and the number of lattice points.
 Every gem lies in the box $\mathcal B_n=[-\frac{n-1}2,\frac{n-1}2]^2\times[-\frac{N-1}2,\frac{N-1}2]$, and the gems of order four fill between $43\%$ and $72\%$ of it.
-At most four points are interior, and at most six are boundary non-vertex points.
+At most four points are interior, and at most six are non-vertex boundary points.
 
 \paragraph{Combinatorial types.}
-Two gems have the same combinatorial type if their vertex--facet incidence graphs are isomorphic.
-Grouping by a Weisfeiler--Lehman hash of these graphs and confirming each group by an explicit isomorphism test gives $352$ types.
+Two gems have the same combinatorial type if their vertex--facet incidence graphs are isomorphic by an isomorphism that maps vertices to vertices and facets to facets.
+Testing pairs of incidence graphs for isomorphism gives $352$ types (\Cref{sec:appendix}).
 By \eqref{eq:complement} the gems of $S$ and $\overline S$ are mirror images, so every type is a union of complement orbits; the $93$ types with one member are self-complementary squares, and of the $201$ types with two members, $177$ are mirror pairs and $24$ consist of two self-complementary squares.
 The numbers of types with $1,2,3,\dots$ members are
 \[
@@ -60,10 +59,10 @@ The numbers of types with $1,2,3,\dots$ members are
 \end{array}
 \]
 The largest type, with $f=(10,22,14)$ (twelve triangles and two quadrilaterals), has $32$ members.
-The vertex count is not tied to Dudeney's groups: every group with more than eight members spans at least three vertex counts and at least $20$ types, and the $8$-vertex gems occur only in groups VI (three) and VIII (four).
+Each of Dudeney's groups with more than eight members contains gems with at least three different vertex counts and at least $20$ combinatorial types, and the $8$-vertex gems occur only in groups VI (three) and VIII (four).
 The $48$ pandiagonal squares (Dudeney's group I \cite{ollerenshaw1998most}) have gems with $11$ to $15$ vertices and between one and four interior points; no order-four square is both pandiagonal and associative.
 
-\begin{proposition}[Injectivity and congruence]
+\begin{proposition}[The vertex set determines the square; congruence]
 \label{prop:gem-injective}
 Let $S$ and $T$ be magic squares of order four.
 \begin{enumerate}
@@ -74,15 +73,15 @@ Let $S$ and $T$ be magic squares of order four.
 
 \begin{proof}
 (1) The $880$ vertex sets have pairwise distinct $D_4$-canonical forms (exact comparison), so $T=g'S$ for some $g'\in D_4$, and then $\hat g'\operatorname{vert}\mathcal G(S)=\operatorname{vert}\mathcal G(T)=\hat g\operatorname{vert}\mathcal G(S)$ by \eqref{eq:d4}. Thus $\hat g^{-1}\hat g'$ is an isometry of $\mathcal G(S)$ that preserves heights; by \Cref{thm:symmetry} the only such isometry is the identity, so $g'=g$.
-(2) ``If'' is \eqref{eq:d4} and \eqref{eq:complement}. For ``only if'' we tested all pairs of vertex sets for a bijection preserving all squared distances, which is equivalent to congruence (\Cref{sec:appendix}); the congruence classes are exactly the $616$ complement orbits.
+(2) ``If'' is \eqref{eq:d4} and \eqref{eq:complement}. For ``only if'': the sorted multiset of pairwise squared distances of the vertex set is a congruence invariant, and it takes $616$ distinct values over the $880$ gems (exact computation). Gems in one complement orbit are congruent, and there are $616$ orbits ($352$ self-complementary classes and $264$ pairs). Hence the congruence classes are exactly the complement orbits.
 \end{proof}
 
 \paragraph{Forced vertices and named squares.}
-For order four the forced vertices of \Cref{lem:forced} number between $4$ and $13$, and nothing more is forced: the only cells that carry a vertex in all $880$ gems are the four corners, and the only entries that always label a vertex are $1$ and $16$.
-In eight gems the point of the entry $2$ is a boundary non-vertex point, for instance for square \#593 below.
-The gems of the Lo Shu, of D\"urer's square and of the Siamese square of order $5$ have vertex fractions $8/9$, $12/16$ and $12/25$ and volumes $18$, $92$ and $830/3$.
+For order four nothing beyond the forced vertices of \Cref{lem:forced} is a vertex of every gem: the only cells that carry a vertex in all $880$ gems are the four corners, and the only entries that always label a vertex are $1$ and $16$.
+In eight gems the point of the entry $2$ is a non-vertex boundary point, for instance for square \#593 below.
+The gems of the Lo Shu, of D\"urer's square and of the Siamese square of order $5$ have $8$ of $9$, $12$ of $16$ and $12$ of $25$ points as vertices and volumes $18$, $92$ and $830/3$.
 The gem of D\"urer's square is centrally symmetric with twelve vertices; exchanging its first two rows and its last two rows gives square \#802, whose gem has all sixteen points as vertices.
-The squares cited in Figures~\ref{fig:moments}, \ref{fig:symmetry} and~\ref{fig:gem-geometry-880} and in the text are
+The squares cited in Figures~\ref{fig:weighted}, \ref{fig:symmetry} and~\ref{fig:gem-geometry-880} and in the text are
 {\small\[
 \setlength{\arraycolsep}{2.5pt}
 \#45=\begin{pmatrix}1&6&11&16\\8&15&2&9\\12&3&14&5\\13&10&7&4\end{pmatrix}\quad \#54=\begin{pmatrix}1&6&11&16\\15&12&5&2\\14&9&8&3\\4&7&10&13\end{pmatrix}\quad \#102=\begin{pmatrix}1&8&10&15\\13&12&6&3\\16&9&7&2\\4&5&11&14\end{pmatrix}\quad \#124=\begin{pmatrix}1&8&15&10\\13&12&3&6\\4&5&14&11\\16&9&2&7\end{pmatrix}
@@ -95,6 +94,6 @@ The squares cited in Figures~\ref{fig:moments}, \ref{fig:symmetry} and~\ref{fig:
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.9\textwidth]{figures/fig_gem_geometry_880.pdf}
-\caption{The $880$ order-four gems. (a)~Number of vertices. (b)~Exact volume. (c)~Sizes of the $352$ combinatorial types (logarithmic scale). (d)--(f)~Three extreme gems with translucent faces: the unique gem with $f=(8,14,8)$ (square \#54; interior points as red discs, boundary non-vertex points as orange squares), a gem with all $16$ points as vertices (square \#802), and the gem of largest volume (square \#379).}
+\caption{The $880$ order-four gems. (a)~Number of vertices. (b)~Exact volume. (c)~Sizes of the $352$ combinatorial types (logarithmic scale). (d)--(f)~Three extreme gems with translucent faces: the unique gem with $f=(8,14,8)$ (square \#54; interior points as red discs, non-vertex boundary points as orange squares), a gem with all $16$ points as vertices (square \#802), and the gem of largest volume (square \#379).}
 \label{fig:gem-geometry-880}
 \end{figure}

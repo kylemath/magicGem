@@ -112,6 +112,12 @@ Kyle~Elliott Mathewson.
   threshold and random line-sum energies, 2026.
 \newblock Manuscript.
 
+\bibitem{mino2024order6}
+Hidetoshi Mino.
+\newblock The number of magic squares of order 6.
+\newblock \url{https://magicsquare6.net/}, 2024.
+\newblock Accessed October 2026.
+
 \bibitem{nordgren2012properties}
 R.~P. Nordgren.
 \newblock On properties of special magic square matrices.
@@ -165,7 +171,7 @@ Richard~P. Stanley.
   graphs.
 \newblock {\em Duke Mathematical Journal}, 40:607--632, 1973.
 
-\bibitem{trump2012enumeration}
+\bibitem{trump_howmany}
 Walter Trump.
 \newblock How many magic squares are there?
 \newblock \url{https://www.trump.de/magic-squares/howmany.html}, 2024.

@@ -116,7 +116,7 @@ if __name__ == '__main__':
             r = R[str(n)]; line = f"n={n}: random {r['mean']:.3f} (sem {r['sem']:.3f}) V/N {r['mean_over_N']:.3f}"
             if str(n) in M and n > 4:
                 m = M[str(n)]; z = (m['mean'] - r['mean']) / (m['sem'] ** 2 + r['sem'] ** 2) ** 0.5
-                line += f"; magic {m['mean']:.3f} (sem {m['sem']:.3f}, {m['distinct_up_to_D4']} squares, min {m['min']}) z={z:.2f}"; assert abs(z) < 1.5
+                line += f"; magic {m['mean']:.3f} (sem {m['sem']:.3f}, {m['distinct_up_to_D4']} distinct D4-classes, min {m['min']}) z={z:.2f}"; assert abs(z) < 1.5
             print(line)
     elif mode == 'volume':
         from scipy.stats import spearmanr

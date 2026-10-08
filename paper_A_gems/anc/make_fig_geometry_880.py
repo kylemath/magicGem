@@ -48,7 +48,7 @@ def render_gem(ax, S, title=None, elev=22, azim=-55, annotate=True):
     polys = [face_cycle(P, f, key[:3]) for key, f in h['faces'].items()]
     coll = Poly3DCollection(polys, facecolor=FACE, edgecolor=EDGE, linewidths=0.6, alpha=0.28)
     ax.add_collection3d(coll)
-    hv, inner, bnd = classify_points(h)       # vertices (dark blue), strictly interior points (red), boundary non-vertex points (orange squares)
+    hv, inner, bnd = classify_points(h)       # vertices (dark blue), strictly interior points (red), non-vertex boundary points (orange squares)
     ax.scatter(P[hv, 0], P[hv, 1], P[hv, 2], s=14, c=EDGE, depthshade=False, zorder=5)
     if inner:
         ax.scatter(P[inner, 0], P[inner, 1], P[inner, 2], s=9, c=INNER, depthshade=False, zorder=5)
@@ -100,7 +100,7 @@ ax.axvline(float(Fraction(R['volume_max'])), color='#555555', lw=0.6, ls=':')
 ax.text(float(Fraction(R['volume_min'])) + 0.5, ax.get_ylim()[1] * 0.92, f"min {R['volume_min']}", fontsize=8)
 ax.text(float(Fraction(R['volume_max'])) - 0.5, ax.get_ylim()[1] * 0.92, f"max {R['volume_max']}", fontsize=8, ha='right')
 
-# (c) combinatorial type sizes (round 1: legible version; the counts are also printed as a table in the text)
+# (c) combinatorial type sizes (the counts are also printed as a table in the text)
 ax = fig.add_subplot(gs[0, 2])
 ts = {int(k): v for k, v in R['combinatorial_type_size_distribution'].items()}
 sizes = sorted(ts)

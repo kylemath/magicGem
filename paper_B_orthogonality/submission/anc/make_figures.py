@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Generate the figures of the paper (vector PDF) into ../figures/.
-   python3 make_figures.py [decomposition] [swap] [random] [kstar]     (default: all; [balance] is an optional extra figure)
+   python3 make_figures.py [decomposition] [random] [kstar]     (default: these three; [swap] writes the supplementary anc/fig_swap_spectrum.pdf, [balance] an optional extra figure)
 Needs: numpy, scipy, matplotlib, sympy; mc_hist.npz, mc_results.json, data_witnesses_variances.json, magic4_all7040.txt, kstar_verify.json."""
 import itertools, json, math, os, sys
 from collections import Counter
@@ -166,7 +166,7 @@ def fig_swap():
     ax.set_title(r'$n=4$, 880 squares', fontsize=8, loc='right')
     panel_label(ax, '(c)', x=-0.28)
     fig.subplots_adjust(left=0.085, right=0.985, top=0.9, bottom=0.2)
-    fig.savefig(os.path.join(FIG, 'fig_swap_spectrum.pdf'))
+    fig.savefig(os.path.join(HERE, 'fig_swap_spectrum.pdf'))  # supplementary (anc/), not in the paper
     plt.close(fig)
     print('swap: distinct', len(vals), 'min', min(vals), 'max', max(vals), 'mins', dict(chk))
 
@@ -192,7 +192,7 @@ def fig_random():
     COL = {3: BLUE, 5: VERM, 8: GREEN}
     fig, axes = plt.subplots(1, 3, figsize=(TEXTWIDTH, 2.4))
     bins_norm = np.linspace(0, 5, 61)
-    for ax, key, which, title in ((axes[0], 'E_low', 'low', 'E_{\\rm low}'), (axes[1], 'E_full', 'full', 'E_{\\rm full}')):
+    for ax, key, which, title in ((axes[0], 'E_low', 'low', 'E_4'), (axes[1], 'E_full', 'full', 'E_{\\rm full}')):
         for n in (3, 5, 8):
             m = float(mean_energy_closed(n, which))
             if n == 3:
@@ -207,7 +207,7 @@ def fig_random():
         if which == 'low':
             xs = np.linspace(0, 5, 200)
             ax.plot(xs, np.exp(-xs), color=DGREY, lw=0.8, ls=':', label=r'$\mathrm{Exp}(1)$')
-        ax.plot([], [], color=DGREY, lw=0.9, ls=(0, (2, 1.2)), label='Gaussian mixture')
+        ax.plot([], [], color=DGREY, lw=0.9, ls=(0, (2, 1.2)), label=r'$\chi^2$ mixture')
         ax.set_xlim(0, 5 if which == 'low' else 2.5); ax.set_ylim(0, 1.25 if which == 'low' else 2.6)
         ax.set_xlabel(r'$%s/\mathbb{E}[%s]$' % (title, title)); ax.set_ylabel('density')
         ax.legend(loc='upper right', handlelength=1.6, labelspacing=0.25, borderaxespad=0.1, fontsize=6.8)
@@ -215,7 +215,7 @@ def fig_random():
     panel_label(axes[0], '(a)', x=-0.2); panel_label(axes[1], '(b)', x=-0.2)
     ax = axes[2]
     ns = list(range(3, 41))
-    for which, col, lab in (('low', BLUE, r'$E_{\rm low}$'), ('full', VERM, r'$E_{\rm full}$')):
+    for which, col, lab in (('low', BLUE, r'$E_4$'), ('full', VERM, r'$E_{\rm full}$')):
         ax.plot(ns, [float(mean_energy_closed(n, which)) for n in ns], color=col, lw=1.0, label='mean ' + lab)
         ax.plot(ns, [var_exact(n, which) ** 0.5 for n in ns], color=col, lw=1.0, ls='--', label='std ' + lab)
         key = 'E_low' if which == 'low' else 'E_full'
@@ -275,8 +275,36 @@ def fig_balance():
     plt.close(fig); print('balance figure written')
 
 
+def lower_bound_34(n):
+    """Largest K >= 2 for which the pigeonhole criterion (11) holds, or None (orders covered by Lemma 3.12 only)."""
+    from math import comb
+    if n % 2 == 0:
+        h = n // 2
+        if h % 2 == 1 and h < 7:
+            return None
+        r = [n // 2] * (n // 2)
+    else:
+        if n < 9:
+            return None
+        Q = (n - 3) // 2
+        r = [min(2 * q, n - 4 - 2 * q, (n - 9) // 2) + 1 for q in range(Q)]
+    N = n * n; lhs = 1
+    for rq in r:
+        lhs *= -(-rq // 2) + 1
+    best = None; K = 2
+    while True:
+        rhs = 1
+        for s in range(K - 1):
+            rhs *= (N - 1) * sum(r[q] * comb(q, s) for q in range(len(r))) + 1
+        if lhs > rhs:
+            best = K; K += 1
+        else:
+            return best
+
+
 def fig_kstar():
-    """k*(n): exact values (n<=40), enumeration upper bounds (41<=n), Theorem (a) bound, n-1, sqrt(2n)."""
+    """k*(n): exact values (n<=40), single-implementation upper bounds (41<=n<=100), Theorem (a) bound, n-1,
+    the lower bound given by (11), and sqrt(2n)."""
     jp = os.path.join(HERE, 'kstar_verify.json')
     if os.path.exists(jp):
         d = json.load(open(jp))
@@ -293,20 +321,23 @@ def fig_kstar():
     ax.plot(ns, ns - 1, color=GREY, lw=0.9, ls='--', label=r'$n-1$ (real-valued $z$)')
     A = np.floor(np.sqrt(np.pi * np.e * (ns - 1) * np.log(ns ** 4 / 4.0)))
     ax.plot(ns, A, color=VERM, lw=1.0, label=r'upper bound $\lfloor\sqrt{\pi e(n-1)\log(n^4/4)}\rfloor$')
+    lb = {n: lower_bound_34(n) for n in range(9, nmax + 1)}
+    xl = [n for n in sorted(lb) if lb[n] is not None and lb[n] >= 2]
+    ax.plot(xl, [lb[n] for n in xl], 's', color=GREEN, ms=2.4, mfc='white', mew=0.7, label=r'lower bound from the pigeonhole criterion')
     ax.plot(ns, np.sqrt(2 * ns), color=GREEN, lw=1.0, ls=':', label=r'$\sqrt{2n}$ (order of the lower bound)')
     xe = sorted(exact); ax.plot(xe, [exact[n] for n in xe], 'o', color=BLUE, ms=3.2, label=r'$k^*(n)$, exact')
-    xu = sorted(up); ax.plot(xu, [up[n] for n in xu], 'o', color=BLUE, ms=3.2, mfc='white', mew=0.8, label=r'upper bound by enumeration')
+    xu = sorted(up); ax.plot(xu, [up[n] for n in xu], 'o', color=BLUE, ms=3.2, mfc='white', mew=0.8, label=r'upper bound, computer-assisted (not certified)')
     ax.set_xlim(0, nmax + 2); ax.set_ylim(0, 0.62 * nmax)
     ax.set_xlabel('$n$'); ax.set_ylabel('degree $k$')
-    ax.legend(loc='upper left', fontsize=6.8, handlelength=1.8, labelspacing=0.25)
+    ax.legend(loc='upper left', fontsize=6.6, handlelength=1.8, labelspacing=0.2)
     ax.grid(True, color=LGREY, lw=0.5); ax.set_axisbelow(True)
     fig.subplots_adjust(left=0.1, right=0.98, top=0.97, bottom=0.17)
     fig.savefig(os.path.join(FIG, 'fig_kstar.pdf'))
-    plt.close(fig); print('kstar figure written')
+    plt.close(fig); print('kstar figure written; (11) lower bounds:', {n: lb[n] for n in xl if n in (14, 20, 30, 40, 60, 80, 100)})
 
 
 if __name__ == '__main__':
-    todo = sys.argv[1:] or ['decomposition', 'swap', 'random', 'kstar']
+    todo = sys.argv[1:] or ['decomposition', 'random', 'kstar']
     if 'decomposition' in todo: fig_decomposition()
     if 'swap' in todo: fig_swap()
     if 'random' in todo: fig_random()

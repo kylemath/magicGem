@@ -82,6 +82,7 @@ def check_n3():
     res['mode_low_times81'] = max(cG.items(), key=lambda kv: kv[1])[0] / 4
     # local minima under single swaps: no swap with strictly smaller energy
     minF = np.ones(len(P), bool); minG = np.ones(len(P), bool)
+    sminF = np.ones(len(P), bool); sminG = np.ones(len(P), bool)  # strict: every swap raises the energy
     for a, b in itertools.combinations(range(9), 2):
         Q = P.copy(); Q[:, [a, b]] = Q[:, [b, a]]
         devq = Q @ A.T - M
@@ -89,9 +90,11 @@ def check_n3():
         zq = Q - 5
         Gq = ((zq @ x2) ** 2 + (zq @ y2) ** 2) + 4 * (devq[:, 6] ** 2 + devq[:, 7] ** 2)
         minF &= (Fq >= F); minG &= (Gq >= G)
+        sminF &= (Fq > F); sminG &= (Gq > G)
     res['localmin_full'] = int(minF.sum()); res['localmin_full_magic'] = int((minF & (F == 0)).sum())
     res['localmin_full_values'] = sorted(set((F[minF] / 81).round(6).tolist()))
     res['localmin_low'] = int(minG.sum()); res['localmin_low_nonmagic'] = int((minG & (F != 0)).sum())
+    res['strict_localmin_full'] = int(sminF.sum()); res['strict_localmin_low'] = int(sminG.sum()); res['strict_localmin_low_nonmagic'] = int((sminG & (F != 0)).sum())
     # Loly's invariant, n=3: I = sum s (x^2+y^2); 9 cells
     w = (j - 1) ** 2 + (1 - i) ** 2
     I = P @ w

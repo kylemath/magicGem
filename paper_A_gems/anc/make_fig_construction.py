@@ -1,4 +1,4 @@
-"""Figure 3: construction of the Magic Gem of the Lo Shu: (a) square, (b) centred cells and heights, (c) point set, (d) gem.
+"""Figure 3: construction of the Magic Gem of the Lo Shu: (a) square, (b) cell positions (measured from the centre) and heights, (c) point set, (d) gem.
 Vector PDF, 6.5 in wide; hull faces from the exact hull code gem_geometry.py."""
 import os, sys
 import numpy as np
@@ -70,7 +70,7 @@ gs = fig.add_gridspec(1, 4, wspace=0.12, left=0.01, right=0.99, top=0.88, bottom
 
 # (a) the Lo Shu
 ax = fig.add_subplot(gs[0, 0]); draw_square(ax, LOSHU, '(a) Lo Shu $S$')
-# (b) centred grid
+# (b) grid centred at the origin
 ax = fig.add_subplot(gs[0, 1]); n = 3
 ax.set_xlim(-1.7, 1.7); ax.set_ylim(-1.7, 1.7); ax.set_aspect('equal'); ax.axis('off')
 for i in range(n):
@@ -82,7 +82,7 @@ for i in range(n):
 ax.annotate('', xy=(1.65, -1.55), xytext=(-1.55, -1.55), arrowprops=dict(arrowstyle='->', lw=0.6))
 ax.annotate('', xy=(-1.55, 1.65), xytext=(-1.55, -1.55), arrowprops=dict(arrowstyle='->', lw=0.6))
 ax.text(1.55, -1.45, '$x$', fontsize=7); ax.text(-1.45, 1.5, '$y$', fontsize=7)
-ax.set_title('(b) centred cells, $z_{ij}=s_{ij}-5$', loc='left', pad=2)
+ax.set_title('(b) cell positions, $z_{ij}=s_{ij}-5$', loc='left', pad=2)
 # (c) heights as stems
 ax = fig.add_subplot(gs[0, 2], projection='3d')
 P = points(LOSHU)

@@ -1,6 +1,7 @@
-"""Central-symmetry defect sigma(G) = vol((G-G)/2) / vol(G) of the 880 order-4 gems (exact rational arithmetic).
-G-G is the convex hull of the 256 pairwise differences of the 16 points.  sigma >= 1 (Brunn-Minkowski), with equality
-iff G is centrally symmetric.  Run from this directory:  python3 central_symmetry_defect.py -> results_sigma.json
+"""Difference-body ratio sigma(G) = vol(G-G) / (8 vol(G)) = vol((G-G)/2) / vol(G) of the 880 order-4 gems (exact rational
+arithmetic).  G-G is the convex hull of the 256 pairwise differences of the 16 points.  sigma >= 1 (Brunn-Minkowski), with
+equality iff G is centrally symmetric; sigma <= 5/2 (Rogers-Shephard).
+Run from this directory:  python3 difference_body_ratio.py > difference_body_ratio.log -> results_sigma.json
 """
 import os, json
 from fractions import Fraction

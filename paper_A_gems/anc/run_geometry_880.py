@@ -150,7 +150,7 @@ print('hull-congruence classes that are NOT complement orbits:', len(extra))
 
 # ------------------------------------------------------------- Dudeney groups
 dud = {}
-with open(os.path.join(HERE, 'all7040_dudeney.csv')) as f:
+with open(os.path.join(HERE, 'all7040_dudeney.tsv')) as f:
     rd = csv.reader(f, delimiter='\t')
     next(rd)
     for row in rd:
@@ -159,7 +159,7 @@ with open(os.path.join(HERE, 'all7040_dudeney.csv')) as f:
         c = canon(S)
         k = canon_index.get(c)
         if k is None:
-            raise RuntimeError('CSV square not found among the 880')
+            raise RuntimeError('TSV square not found among the 880')
         dud.setdefault(k, set()).add(g)
 assert len(dud) == 880 and all(len(v) == 1 for v in dud.values())
 dudeney = [next(iter(dud[k])) for k in range(880)]

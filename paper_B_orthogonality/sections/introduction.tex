@@ -11,41 +11,44 @@ It is a \emph{magic square} if every row, every column and both main diagonals s
 \end{definition}
 
 We centre both the grid and the entries (\Cref{def:coords}): the cell $(i,j)$ sits at $(x_j,y_i)=(j-\frac{n-1}2,\frac{n-1}2-i)$ and carries the value $z_{ij}=s_{ij}-\frac{n^2+1}2$.
-The condition ``line $L$ sums to $M(n)$'' then says that $z$ is orthogonal to the centred indicator of $L$, so an arrangement is magic if and only if $z$ is orthogonal to a fixed $2n$-dimensional space $W$ of test functions.
+A \emph{test function} is a real function $\varphi$ on the cells, used only through the inner product $\langle\varphi,z\rangle=n^{-2}\sum_{i,j}\varphi_{ij}z_{ij}$.
+The condition ``line $L$ sums to $M(n)$'' says that $z$ is orthogonal to the centred indicator of $L$, so an arrangement is magic if and only if $z$ is orthogonal to a fixed $2n$-dimensional space $W$ of test functions.
 The dimension count is the classical fact that the real magic squares of order $n\ge3$ form a space of dimension $n^2-2n$ \cite{ward1980vector}, \cite[\S4.6]{stanley2012ec1}, and the squared length of the vector of line deviations, $\sum_L\delta_L^2$, is the energy of the Monte Carlo study of magic squares by Pinn and Wieczerkowski \cite{pinn1998number}.
 This reformulation is elementary; we use it to pose the questions treated below.
 The convex hull of the points $(x_j,y_i,z_{ij})$ is studied in the companion paper \cite{mathewson_gems} and is not used here.
 
 \paragraph{The permutation threshold.}
-Replacing the line indicators by the powers $x^m$ and $y^m$, $1\le m\le k$, gives the \emph{degree-$k$ conditions} $\sum_{ij}z_{ij}x_j^m=\sum_{ij}z_{ij}y_i^m=0$.
+Replacing the line indicators by the powers $x^m$ and $y^m$, $1\le m\le k$, gives the \emph{degree-$k$ conditions} $\sum_{i,j}z_{ij}x_j^m=\sum_{i,j}z_{ij}y_i^m=0$; equivalently, the moments of orders $1,\dots,k$ of the vector of column-sum deviations and of the vector of row-sum deviations vanish (\Cref{lem:poly_form}).
 They hold for every semi-magic square, and for real-valued $z$ they imply equal row and column sums if and only if $k\ge n-1$ (Vandermonde).
 For arrangements, integrality and the bounded size of the line sums lower this threshold.
 Let $k^*(n)$ be the least $k$ such that every arrangement satisfying the degree-$k$ conditions is semi-magic.
+A \emph{witness} for $k^*(n)\ge K$ is an arrangement that satisfies the degree-$(K-1)$ conditions and is not semi-magic.
 The degree-$k$ conditions say that the polynomial $\sum_j\gamma_jt^j$ formed from the column deviations is divisible by $(t-1)^{k+1}$, and similarly for the rows, so that the positive and negative parts of $\gamma$ form a solution of a Prouhet--Tarry--Escott system \cite{wright1959prouhet,borwein2002computational}.
 Our main result (\Cref{thm:perm_threshold}) is
 \[
 (\sqrt2-o(1))\sqrt n\ \le\ k^*(n)\ \le\ \sqrt{\pi e\,(n-1)\log(n^4/4)}\ \le\ 2\sqrt{\pi e}\,\sqrt{n\log n},
 \]
-together with the exact values $k^*(n)=n-1$ for $3\le n\le13$, $k^*(n)=n-2$ for $14\le n\le17$, the bound $k^*(n)\le n-3$ for all $n\ge18$, and the exact values for $n\le40$ (\Cref{tab:kstar}).
+together with the exact values $k^*(n)=n-1$ for $3\le n\le13$ and $k^*(n)=n-2$ for $14\le n\le17$ and the bound $k^*(n)\le n-3$ for all $n\ge18$, all with short proofs, and the exact values for $n\le40$, which are computer-assisted (\Cref{tab:kstar}).
 The upper bound is a Jensen-formula argument of the type used by Borwein, Erd\'elyi and K\'os for polynomials with bounded coefficients \cite{BEK1999}.
-The lower bound needs the converse direction, namely that suitable integer vectors are column-deviation vectors of arrangements whose row sums all equal $M(n)$; we obtain it from semi-magic squares with many pairs of complementary rows, in which swaps realise prescribed column deviations, combined with a box-principle argument.
+The lower bound needs the converse direction, namely that suitable integer vectors are column-deviation vectors of arrangements whose row sums all equal $M(n)$; we obtain it from semi-magic squares with many pairs of complementary rows, in which swaps realise prescribed column deviations, combined with the pigeonhole principle.
 Whether $k^*(n)$ grows like $\sqrt n$ or like $\sqrt{n\log n}$ remains open.
 
 \paragraph{Random arrangements.}
-For a uniformly random arrangement each $\Cov(\varphi,Z)$ is a linear permutation statistic, so the energy $\Efull=N^{-2}\sum_L\delta_L^2$ (all $2n+2$ lines) and the low-order energy $\Elow$, which combines the degree-$1$ and the two diagonal conditions (\Cref{def:energies}), are quadratic forms in a random permutation of the centred values.
-We prove a closed formula for the variance of such a form in terms of three invariants of its matrix (\Cref{thm:var_identity}), a special case of the classical moment formulas for quadratic assignment statistics \cite{mantel1967,hubert1987assignment}, and obtain the exact means and variances of both energies for every $n$ (\Cref{thm:var_closed}).
-By Hoeffding's combinatorial central limit theorem, $\Elow/\E[\Elow]\to\mathrm{Exp}(1)$ (\Cref{cor:random_energy_clt}).
-The same tools give the null distribution of Loly's moment of inertia $I(S)=\sum s_{ij}(x_j^2+y_i^2)$ (\Cref{cor:loly_null}): magic squares sit exactly at its mean.
+For a uniformly random arrangement each $\langle\varphi,z\rangle$ is a linear permutation statistic, so the energy $\Efull=N^{-2}\sum_L\delta_L^2$ ($N=n^2$, all $2n+2$ lines) and the four-term energy $\Efour$, which combines the degree-$1$ and the two diagonal conditions (\Cref{def:energies}), are quadratic forms in a random permutation of the centred values.
+We specialise the classical variance formula for quadratic assignment statistics \cite{mantel1967,hubert1987assignment} to quadratic forms with zero row sums in the centred entries (\Cref{prop:var_identity}); the variance is then a combination of three invariants of the matrix of the form, and we obtain the exact means and variances of both energies for every $n$ (\Cref{thm:var_closed}).
+By Hoeffding's combinatorial central limit theorem, $\Efour/\E[\Efour]\to\mathrm{Exp}(1)$ (\Cref{cor:random_energy_clt}).
+The same tools give the mean and variance of Loly's moment-of-inertia invariant $I(S)=\sum s_{ij}(x_j^2+y_i^2)$ under a uniformly random arrangement (\Cref{cor:loly_null}); magic squares take exactly the mean value.
 
-\paragraph{The low-order class for $n=4$.}
-Exactly $14{,}639{,}440$ of the $16!$ arrangements of order $4$ satisfy the four conditions $\Elow=0$, and $7{,}040$ of them are magic (\Cref{prop:L4}); the count is $0.80$ times a Gaussian local-limit estimate.
+\paragraph{The class $L_4$.}
+Exactly $14{,}639{,}440$ of the $16!$ arrangements of order $4$ satisfy the four conditions $\Efour=0$, and $7{,}040$ of them are magic (\Cref{prop:L4}); the count is $0.80$ times a Gaussian local-limit heuristic.
 
 \paragraph{Classical and new material.}
-Orthogonality to the line space, the Vandermonde threshold, the vanishing of the separable moments of a semi-magic square and Loly's invariant \cite{loly2004invariance} are classical or elementary, and the single-swap formula of \Cref{rem:swap} is the incremental evaluation used in local search.
-To our knowledge \Cref{thm:perm_threshold}, the closed forms of \Cref{thm:var_closed} with the limit law, \Cref{cor:loly_null} and the count in \Cref{prop:L4} have not appeared before.
+Orthogonality to the line space, the Vandermonde threshold, the vanishing of the moments $\langle a(x)+b(y),z\rangle$ of a semi-magic square, Loly's invariant \cite{loly2004invariance} and the means of the energies are classical or elementary, \Cref{prop:var_identity} is a special case of classical formulas, and the single-swap formula of \Cref{rem:swap} is the incremental evaluation used in local search.
+To our knowledge \Cref{thm:perm_threshold}, the closed forms for the variances in \Cref{thm:var_closed} with the limit law, the variance in \Cref{cor:loly_null} and the count in \Cref{prop:L4} have not appeared before.
 
 \paragraph{Organisation.}
-\Cref{sec:background} fixes notation and collects the tools.
-\Cref{sec:theory} contains the moment hierarchy and the permutation threshold.
+\Cref{sec:background} fixes notation and collects the tools; \Cref{tab:notation} summarises the notation.
+\Cref{sec:theory} contains the moment conditions and the permutation threshold.
 \Cref{sec:random_energy} treats random arrangements, \Cref{sec:computations} the computations for small $n$, and \Cref{sec:discussion} lists open questions.
-The appendices contain the computational methods, the construction of the squares used for the lower bound, and the derivation of the variance formulas.
+The appendices contain the computational methods (Appendix~\ref{sec:appendix}), the construction of the squares used for the lower bound (Appendix~\ref{sec:app_twin}), the derivation of the variance formulas (Appendix~\ref{sec:app_variance}) and a witness for $n=5$ (Appendix~\ref{sec:app_witnesses}).
+The two parts are independent: \Cref{sec:theory} (with Appendices~\ref{sec:app_twin} and~\ref{sec:app_witnesses}) can be read without Sections~\ref{sec:random_energy} and~\ref{sec:computations} (with Appendix~\ref{sec:app_variance}) and conversely; they share only the notation of \Cref{sec:background}, and Appendix~\ref{sec:appendix} describes the computations for both.

@@ -15,7 +15,7 @@
   "V_max": 18,
   "n_min": 2,
   "siamese_V": 12,
-  "seconds": 0
+  "seconds": 1
  },
  "7": {
   "classes": 3159,
@@ -39,7 +39,7 @@
   "V_max": 25,
   "n_min": 2,
   "siamese_V": 12,
-  "seconds": 4
+  "seconds": 14
  },
  "9": {
   "classes": 441,
@@ -67,7 +67,7 @@
   "V_max": 31,
   "n_min": 2,
   "siamese_V": 12,
-  "seconds": 4
+  "seconds": 10
  },
  "11": {
   "classes": 89125,
@@ -102,9 +102,9 @@
   "V_max": 36,
   "n_min": 2,
   "siamese_V": 12,
-  "seconds": 175
+  "seconds": 474
  },
- "digit_swapped_siamese": {
+ "digit_exchanged_square": {
   "5": {
    "f": [
     12,

@@ -1,6 +1,6 @@
-"""Siamese layer figure (round 1, RefB point 15): (a) the five lattice polygons T,U,M,D,B in the (x,y) plane
-for n=9 with the twelve vertex cells marked; (b) the affinely reduced gem Phi(G(S)) = conv{(x,y,zeta)} with its
-16 facets.  Uses zeta_points from Analysis/revision/gem_geometry/siamese_util.py.  Vector PDF, 6.5 x 2.5 in."""
+"""Figure 8: (a) the five level polygons Lambda_{+2},...,Lambda_{-2} of the sheared height zeta in the (x,y) plane
+for n=9, with the twelve vertex cells q_1..q_12 marked; (b) the sheared gem Phi(G(S)) = conv{(x,y,zeta)} with its
+16 facets.  Uses zeta_points from siamese_util.py.  Vector PDF, 6.5 x 2.6 in."""
 import os, sys
 import numpy as np
 from itertools import combinations
@@ -26,7 +26,7 @@ names = {n + 1: r'$\Lambda_{+2}$', 1: r'$\Lambda_{+1}$', 0: r'$\Lambda_{0}$', -1
 cols = {n + 1: '#b0433a', 1: '#e0904a', 0: '#3b6fb6', -1: '#6aa36a', -(n + 1): '#7a4fa0'}
 assert sorted(set(zeta.tolist())) == sorted(levels)
 
-# the twelve vertices (Proposition: v_1..v_12 in (x,y,zeta))
+# the twelve vertices q_1..q_12 of Theorem 6.2 in (x,y,zeta)
 V = [(-m, m, n + 1), (-1, m, n + 1), (-m, 1, n + 1), (-m, 0, 1), (-m, -m, 0), (0, -m, 0), (0, m, 0), (m, m, 0),
      (m, 0, -1)]
 V += [tuple(-np.array(V[0])), tuple(-np.array(V[2])), tuple(-np.array(V[1]))]
@@ -61,7 +61,7 @@ def cyc(P):
 fig = plt.figure(figsize=(6.5, 2.6))
 gs = fig.add_gridspec(1, 2, width_ratios=[1, 1.0], wspace=0.35, left=0.06, right=0.99, top=0.9, bottom=0.08)
 
-# (a) layers in the plane
+# (a) level polygons in the plane
 ax = fig.add_subplot(gs[0, 0])
 for lv in levels:
     sel = pts[zeta == lv]
@@ -74,14 +74,14 @@ for lv in levels:
 ax.scatter(V[:, 0], V[:, 1], s=70, facecolors='none', edgecolors='k', linewidths=0.8, zorder=4)
 for k, v in enumerate(V):
     dx, dy = (0.42, 0.42)
-    ax.text(v[0] + dx, v[1] + dy, f'$v_{{{k+1}}}$', fontsize=6.5, ha='left', va='bottom', zorder=5)
+    ax.text(v[0] + dx, v[1] + dy, f'$q_{{{k+1}}}$', fontsize=6.5, ha='left', va='bottom', zorder=5)
 ax.set_xlim(-m - 0.8, m + 1.3); ax.set_ylim(-m - 0.8, m + 1.3); ax.set_aspect('equal')
 ax.set_xticks(range(-m, m + 1)); ax.set_yticks(range(-m, m + 1))
 ax.tick_params(labelsize=6, length=2); ax.set_xlabel('$x$', labelpad=1); ax.set_ylabel('$y$', labelpad=1)
 ax.legend(frameon=False, fontsize=6.5, loc='upper left', bbox_to_anchor=(1.01, 1.0), handletextpad=0.2, borderaxespad=0.0, labelspacing=0.3)
-ax.set_title(f'(a) the five layers, $n={n}$ ($m={m}$)', loc='left')
+ax.set_title(f'(a) the five levels of $\\zeta$, $n={n}$ ($m={m}$)', loc='left')
 
-# (b) the reduced polytope
+# (b) the sheared polytope
 ax = fig.add_subplot(gs[0, 1], projection='3d')
 polys = [cyc(pts[f].astype(float)) for f in faces.values()]
 ax.add_collection3d(Poly3DCollection(polys, facecolor='#5b8ed6', edgecolor='#1f3f73', linewidths=0.6, alpha=0.25))
@@ -90,7 +90,7 @@ for lv in levels:
     ax.scatter(sel[:, 0], sel[:, 1], sel[:, 2], s=6, c=cols[lv], depthshade=False)
 ax.scatter(V[:, 0], V[:, 1], V[:, 2], s=16, c='k', depthshade=False)
 for k, v in enumerate(V):
-    ax.text(v[0], v[1], v[2] + 0.5, f'$v_{{{k+1}}}$', fontsize=6)
+    ax.text(v[0], v[1], v[2] + 0.5, f'$q_{{{k+1}}}$', fontsize=6)
 ax.set_xlim(-m - .5, m + .5); ax.set_ylim(-m - .5, m + .5); ax.set_zlim(-n - 1.5, n + 1.5)
 ax.set_box_aspect((1, 1, 1.1)); ax.view_init(elev=18, azim=-52)
 ax.set_xticks([]); ax.set_yticks([]); ax.set_zticks([-(n + 1), 0, n + 1]); ax.tick_params(labelsize=6)

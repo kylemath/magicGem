@@ -1,19 +1,17 @@
-"""Figure 4: (a) Duerer's square as piles of checkers on a checkerboard, (b) the mixed moment: the integers 8 z x y per cell for two magic squares (sums 0 and 480)."""
+"""Figure 4: Duerer's square as piles of checkers on a checkerboard; every row and column carries 34 checkers, so the centre of mass
+of all the checkers lies over the centre O of the board."""
 from vecfig import *
 import matplotlib.patheffects as pe
 from matplotlib.patches import FancyArrow, Polygon
 n = 4
 X = np.array([[j - 1.5 for j in range(n)] for i in range(n)]); Y = np.array([[1.5 - i] * n for i in range(n)])
-S1 = DURER; S2 = SQ[45]                          # P_xy = 0 (associative) and |P_xy| = 60
+S1 = DURER
 def z_of(S): return S - 8.5
 # ---- exact checks ----
-z1, z2 = z_of(S1), z_of(S2)
-for S in (S1, S2):
-    assert (S.sum(0) == 34).all() and (S.sum(1) == 34).all() and np.trace(S) == 34 and np.trace(S[::-1]) == 34
-    assert abs((z_of(S) * X).sum()) < 1e-12 and abs((z_of(S) * Y).sum()) < 1e-12
-m1, m2 = (z1 * X * Y).sum(), (z2 * X * Y).sum()
-print('sum z x y: Durer', m1, ' square #45', m2, S2.tolist()); assert m1 == 0 and m2 == 60
-W, H = 6.5, 2.95
+S = S1
+assert (S.sum(0) == 34).all() and (S.sum(1) == 34).all() and np.trace(S) == 34 and np.trace(S[::-1]) == 34
+assert abs((z_of(S) * X).sum()) < 1e-12 and abs((z_of(S) * Y).sum()) < 1e-12
+W, H = 3.9, 2.95
 fig = plt.figure(figsize=(W, H))
 def A(x, ytop, w, h, **kw):
     """axes from inch coordinates (x from left, ytop from top, width, height)"""
@@ -53,24 +51,10 @@ for k in range(16):
     axp.text(P1[k, 0], P1[k, 1], 0.05 + cnt.ravel()[k] * ZS + 0.01, str(cnt.ravel()[k]), fontsize=6.5, weight='bold', ha='center', va='center', zorder=40, path_effects=[pe.withStroke(linewidth=1.8, foreground='white')])
 axp.scatter([0], [0], [0.06], s=55, color='#E4002B', edgecolor='k', linewidths=0.8, depthshade=False, zorder=50)
 axp.text(-0.08, 0.08, 0.1, '$O$ ', fontsize=11, color='#E4002B', weight='bold', zorder=60, path_effects=HALO, ha='left', va='bottom')
-T(0.1, 0.1, "(a)  checkers on a checkerboard", fontsize=9.5, weight='bold', va='top')
+T(0.1, 0.1, "checkers on a checkerboard", fontsize=9.5, weight='bold', va='top')
 T(0.1, 0.38, 'cell $(i,j)$ carries $s_{ij}$ checkers (number and\ncolour = the entry $s_{ij}$)', fontsize=7.8, va='top', color='#333333')
-T(1.95, 2.62, r'$34$ checkers in every row and column;' + '\n' + r'their centre of mass lies over $O$ ($\sum s\,x=\sum s\,y=0$)', fontsize=7.8, ha='center', va='top', color='#333333')
+T(1.95, 2.62, r'$34$ checkers in every row and column;' + '\n' + r'so the centre of mass of all the checkers lies over $O$', fontsize=7.8, ha='center', va='top', color='#333333')
 
 cbp = fig.colorbar(ScalarMappable(Normalize(1, 16), CMAP), cax=A(0.12, 0.95, 0.08, 1.1), orientation='vertical')
 cbp.set_ticks([1, 8, 16]); cbp.ax.tick_params(labelsize=7, length=2); cbp.set_label('entry $s$', fontsize=7.5, labelpad=1)
-# (b) mixed moment for two magic squares: 8 z x y is an integer in every cell
-T(4.0, 0.1, r'(b)  the mixed moment $\sum z\,xy$', fontsize=9.5, weight='bold', va='top')
-T(4.0, 0.38, r'square $S$ (coloured by $z$) and $8\,z\,x\,y$ per cell', fontsize=7.8, va='top', color='#333333')
-CM2 = LinearSegmentedColormap.from_list('bv2', [BLUE, '#9CC6E3', '#F4F1EC', '#F2B27A', VERM])
-N2 = Normalize(-240, 240)
-for S, zz, tot, off in ((S1, z1, m1, 0.0), (S2, z2, m2, 1.2)):
-    prod = (8 * zz * X * Y)
-    assert np.allclose(prod, np.rint(prod)); prod = np.rint(prod).astype(int)
-    assert prod.sum() == 8 * tot
-    a1 = A(4.0, 0.7 + off, 0.95, 0.95); grid(a1, zz, [[str(v) for v in r] for r in S], fs=7.5)
-    a2 = A(5.05, 0.7 + off, 0.95, 0.95)
-    grid(a2, prod, [[f'{v:+d}' if v else '0' for v in r] for r in prod], cmap=CM2, norm=N2, fs=6.3)
-    T(6.08, 1.17 + off, r'$\Sigma$' + '\n' + (r'$0$' if tot == 0 else rf'${8 * tot:+.0f}$'), fontsize=9.5, va='center', ha='left',
-      weight='bold', color='k' if tot == 0 else WARN)
 fig.savefig(f'{FIGDIR}/fig_moments.pdf'); print('ok')

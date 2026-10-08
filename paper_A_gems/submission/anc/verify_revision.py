@@ -2,7 +2,7 @@
 verify_revision.py -- exact checks of the structural statements of the paper (every statement asserted).
 
   A  coplanar point sets: for n = 2, 3 (all arrangements) the points p_ij are coplanar exactly for the
-     8 D4-images of the row-by-row arrangement s_ij = n i + j + 1; for n = 4..6 these 8 are coplanar and
+     8 D4-images of the natural square s_ij = n i + j + 1; for n = 4..6 these 8 are coplanar and
      random arrangements are not; no semi-magic square is coplanar (all 880 of order 4 checked).
   B  covariance matrix of the point set of every semi-magic square = diag(a, a, b), a=(n^2-1)/12, b=(N^2-1)/12
      (880 order-4 squares, Siamese n = 3..21).
@@ -11,7 +11,7 @@ verify_revision.py -- exact checks of the structural statements of the paper (ev
      and for the Siamese gems n = 5..15.
   D  injectivity: the 880 vertex sets are pairwise distinct up to the action of D4 (D4-canonical forms),
      and the congruence classes of the 880 gems are the 616 complement orbits.
-  E  parity for the 48 associative squares (V, B, I even) and the failure for the row-by-row square.
+  E  parity for the 48 associative squares (V, B, I even) and the failure for the natural square.
   F  certification of the exact hulls: every point satisfies every facet inequality, and every edge of
      every facet polygon lies in exactly two facets (closed facet complex), for all 880 gems.
   G  regular subdivisions: lower / upper / vertical facets; vertical facets only over the four sides,
@@ -21,7 +21,7 @@ verify_revision.py -- exact checks of the structural statements of the paper (ev
   H  combinatorial types are unions of complement orbits; composition of the 352 types.
   I  Siamese gems n = 3..41: vertex cells = forced cells (corners, entries 1 and N, side extremes).
   J  squares880.txt lists the Frenicle standard forms in lexicographic order.
-  K  census numbers by number of vertices (strictly interior / boundary non-vertex counts, k = 0..6).
+  K  census numbers by number of vertices (strictly interior / non-vertex boundary counts, k = 0..6).
 Writes verify_revision.json and verify_revision.log.
 """
 import itertools, math, json, os, sys, time
@@ -110,7 +110,7 @@ for n in (4, 5, 6):
     assert cnt == 0
     # rank of the natural square's point set is 2
     P = points(natural[n]); assert np.linalg.matrix_rank(P) == 2
-log('A: n=4,5,6: the 8 images of the row-by-row arrangement are coplanar (rank 2); 20000 random arrangements each are not')
+log('A: n=4,5,6: the 8 images of the natural square are coplanar (rank 2); 20000 random arrangements each are not')
 SQ = load880()
 assert all(is_semimagic(S) and not coplanar(S) for S in SQ)
 log('A: none of the 880 order-4 magic squares is coplanar')
@@ -207,6 +207,10 @@ for k in range(880):
 orbits = {frozenset((k, comp_idx[k])) for k in range(880)}
 assert {frozenset(c) for c in classes.values()} == orbits and len(orbits) == 616
 log('D: congruence classes of the 880 gems = the 616 complement orbits {S, 17-S} (exact)')
+# certificate used in the paper (Prop. 4.1(2)): the sorted squared-distance multiset is a congruence invariant and
+# takes 616 distinct values, one per complement orbit
+assert len(groups) == 616 and {frozenset(v) for v in groups.values()} == orbits
+log('D: the sorted squared-distance multisets of the 880 vertex sets take 616 distinct values, one per complement orbit')
 
 # ------------------------------------------------------------------ E parity
 cls = [classify_points(h) for h in hulls]
@@ -218,26 +222,17 @@ I_assoc = Counter(len(cls[k][1]) for k in range(880) if assoc[k])
 log(f'E: the 48 associative gems have V, I, B all even; I distribution {dict(sorted(I_assoc.items()))}')
 S3 = natural[3]
 assert (S3 + np.rot90(S3, 2) == 10).all() and np.linalg.matrix_rank(points(S3)) == 2
-log('E: the row-by-row square of order 3 is associative and its point set has rank 2 (parity needs full dimension)')
+log('E: the natural square of order 3 is associative and its point set has rank 2 (parity needs full dimension)')
 
 # ------------------------------------------------------------------ F certification
+# (the closure test itself is part of gem_geometry.exact_hull, so it was applied to every hull above;
+#  it is repeated here explicitly for the 880 order-four hulls)
+from gem_geometry import certify_closure
 for k, h in enumerate(hulls):
     P = h['P']
     for (a, b, c, d) in h['faces']:
         assert (a * P[:, 0] + b * P[:, 1] + c * P[:, 2] + d <= 0).all()
-    ecount = Counter()
-    for (a, b, c, d), fv in h['faces'].items():
-        fv = list(fv)
-        nrm = np.array([a, b, c], dtype=float)
-        Q = P[fv].astype(float); cen = Q.mean(0)
-        e1 = Q[0] - cen; e1 -= nrm * (e1 @ nrm) / (nrm @ nrm); e1 /= np.linalg.norm(e1)
-        e2 = np.cross(nrm / np.linalg.norm(nrm), e1)
-        ang = np.arctan2((Q - cen) @ e2, (Q - cen) @ e1)
-        cyc = [fv[i] for i in np.argsort(ang)]
-        for i in range(len(cyc)):
-            ecount[frozenset((cyc[i], cyc[(i + 1) % len(cyc)]))] += 1
-    assert all(v == 2 for v in ecount.values()), k
-    assert sorted(tuple(sorted(e)) for e in ecount) == sorted(tuple(e) for e in h['edges'])
+    certify_closure(P, h['faces'], h['edges'])
 log('F: all 880 hulls certified: every point satisfies every integer facet inequality; every facet edge lies in exactly two facets')
 
 # ------------------------------------------------------------------ G regular subdivisions
@@ -358,7 +353,7 @@ for (V, I, B) in cls:
     Ic[len(I)] += 1; Bc[len(B)] += 1
 OUT['I_distribution'] = {k: Ic.get(k, 0) for k in range(7)}
 OUT['B_distribution'] = {k: Bc.get(k, 0) for k in range(7)}
-log(f'K: strictly interior counts {OUT["I_distribution"]}; boundary non-vertex counts {OUT["B_distribution"]}')
+log(f'K: strictly interior counts {OUT["I_distribution"]}; non-vertex boundary counts {OUT["B_distribution"]}')
 OUT['runtime_seconds'] = round(time.time() - T0, 1)
 json.dump(OUT, open(os.path.join(HERE, 'verify_revision.json'), 'w'), indent=1)
 

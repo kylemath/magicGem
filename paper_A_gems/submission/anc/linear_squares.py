@@ -3,7 +3,7 @@ linear_squares.py -- vertex counts of the gems of all linear ("cyclic") magic sq
     s(i,j) = n*<a1 i + a2 j + alpha> + <b1 i + b2 j + beta> + 1,   <t> = t mod n,
 over all a1,a2,b1,b2,alpha,beta in Z_n that give a magic square (rows, columns, both diagonals), up to D4.
 Exact hulls (gem_geometry.exact_hull).  Usage: python3 linear_squares.py 5 7 9 11   (n = 11 takes about 2-3 min)
-Writes results_linear_squares.json and linear_squares.log.  The Siamese square is linear (Section 6) and is checked
+Writes results_linear_squares.json and linear_squares.log.  The Siamese square is linear (Section 5) and is checked
 to be among the classes with the minimal vertex count for n >= 7.
 """
 import sys, os, json, itertools, time
@@ -50,8 +50,8 @@ for n in range(5, 33, 2):
     h = exact_hull(S); assert h['f_vector'] == (12, 24, 14), n
     corners = {(0, 0), (0, n - 1), (n - 1, 0), (n - 1, n - 1)}
     sw[n] = dict(f=list(h['f_vector']), vertices_at_corners=len(corners & {(v // n, v % n) for v in h['vertices']}))
-res['digit_swapped_siamese'] = sw
-log.append('digit-swapped Siamese square s = n<i+2j-2m> + <i+j-m> + 1: magic, gem f-vector (12,24,14) for n = 5..31')
+res['digit_exchanged_square'] = sw
+log.append("digit-exchanged square s' = n<i+2j-2m> + <i+j-m> + 1: magic, gem f-vector (12,24,14) for n = 5..31")
 print(log[-1])
 json.dump(res, open(os.path.join(HERE, 'results_linear_squares.json'), 'w'), indent=1)
 open(os.path.join(HERE, 'linear_squares.log'), 'w').write('\n'.join(log) + '\n')
