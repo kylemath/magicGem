@@ -125,11 +125,12 @@ As $n\to\infty$, $\bigl(T_X/\tau_1,T_Y/\tau_2,T_{D_{\mathrm m}}/\tau_3,T_{D_{\ma
 Fix $\alpha\in\R^4\setminus\{0\}$ and let $a=\sum_k\alpha_ka_k/\tau_k$ be the corresponding combination of the four centred, standardised test vectors.
 Then $\sum_k\alpha_kT_k/\tau_k=\sum_ca_cz_c$ is a linear permutation statistic with doubly centred array $d(c,v)=a_cb_v$, and
 \[
-\frac{\max_{c,v}|a_cb_v|}{\bigl(N^{-1}\sum_{c,v}a_c^2b_v^2\bigr)^{1/2}}=\frac{\max_c|a_c|}{\|a\|_2}\cdot\frac{\max_v|b_v|}{(\sum_vb_v^2/N)^{1/2}} .
+\biggl(\frac{\max_{c,v}a_c^2b_v^2}{N^{-1}\sum_{c,v}a_c^2b_v^2}\biggr)^{1/2}=\frac{\max_c|a_c|}{\|a\|_2}\cdot\frac{\max_v|b_v|}{(\sum_vb_v^2/N)^{1/2}} ;
 \]
+this is the square root of the quotient in \eqref{eq:hoeffding_max} (equivalently, of the condition of Hoeffding's Theorem~4).
 The second factor tends to $\sqrt3$.
 For the first, $\max_c|a_c|\le\sum_k|\alpha_k|\max_c|a_{k,c}|/\tau_k$, and $\max_c|a_{k,c}|/\|a_k\|_2$ is $O(n^{-1})$ for $X$ and $Y$ and $O(n^{-1/2})$ for a diagonal indicator (a centred indicator of $n$ of the $N$ cells); moreover $\|a\|_2^2$ is proportional to $\alpha^{\mathsf T}C_n\alpha$ with $C_n$ the correlation matrix, which tends to the identity because the only nonzero correlation is $\operatorname{corr}(T_{D_{\mathrm m}},T_{D_{\mathrm a}})=-1/(n-1)$ for even $n$.
-So the quotient tends to $0$, Hoeffding's theorem (\Cref{sec:bg_perm}) gives asymptotic normality of every such combination, and the Cram\'er--Wold device gives the joint limit $N(0,I_4)$.
+So the quotient tends to $0$, condition \eqref{eq:hoeffding_max} holds, Hoeffding's Theorem~3 \cite{hoeffding1951} (\Cref{sec:bg_perm}) gives asymptotic normality of every such combination, and the Cram\'er--Wold device gives the joint limit $N(0,I_4)$.
 In $\Elow=\tau_1^2(\tilde T_X^2+\tilde T_Y^2)+\tau_3^2\tilde T_{D_{\mathrm m}}^2+\tau_4^2\tilde T_{D_{\mathrm a}}^2$ (tildes denoting standardised statistics) the diagonal weights satisfy $\tau_3^2/\tau_1^2=12(n-1)/(n^2(n^2-1))\to0$, so $\Elow/(2\tau_1^2)\to\frac12\chi^2_2=\mathrm{Exp}(1)$; and $\E[\Elow]/(2\tau_1^2)\to1$.
 \end{proof}
 

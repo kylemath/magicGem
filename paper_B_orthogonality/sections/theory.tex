@@ -71,7 +71,7 @@ Substitute $s_{ij}=z_{ij}+\frac{N+1}2$ and use \Cref{lem:variances} and \Cref{le
 \end{proof}
 
 Loly's derivation uses the row and column sums in the same way \cite{loly2004invariance}.
-The single condition is much weaker than the degree-$2$ conditions: for $n=3$, $24{,}192$ of the $9!$ arrangements have $I=60$, while $72$ (the semi-magic squares, \Cref{rem:n3_lowmode}) satisfy the degree-$2$ conditions.
+The single condition is much weaker than the degree-$2$ conditions: for $n=3$, $24{,}192$ of the $9!$ arrangements have $I=60$, while $72$ (the semi-magic squares, \Cref{rem:n3_enum}) satisfy the degree-$2$ conditions.
 The energy $\Elow$ of \eqref{eq:Elow} combines the degree-$1$ conditions with the two diagonal conditions: $\Elow=\langle x,z\rangle^2+\langle y,z\rangle^2+(\delta_{\mathrm m}^2+\delta_{\mathrm a}^2)/N^2$.
 
 \subsection{The permutation threshold}
@@ -292,12 +292,35 @@ Beyond $n=40$ we computed only upper bounds (\Cref{fig:kstar}); for instance $k^
 
 \subsection{The low-order conditions for \texorpdfstring{$n=3$}{n=3}}
 
+\begin{proposition}
+\label{prop:n3_lowmode}
+For $n=3$, $\Elow(S)=0$ if and only if $S$ is magic.
+\end{proposition}
+
+\begin{proof}
+Write the centred entries $z_c=s_c-5\in\{-4,\dots,4\}$ as $\left(\begin{smallmatrix}a&b&c\\d&e&f\\g&h&i\end{smallmatrix}\right)$, so that $\sum_cz_c=0$, $\sum_cz_c^2=60$, and every line sum of $z$ is the deviation of that line.
+The degree-$1$ conditions with $\sum_j\gamma_j=\sum_i\rho_i=0$ give $\gamma=(t,-2t,t)$ and $\rho=(u,-2u,u)$, and the diagonal conditions give $a+e+i=c+e+g=0$.
+The middle row, the middle column and the two diagonals cover every cell once and the centre three more times, so $3e=-2(t+u)$; as $e$ is an integer, $t+u=3k$ and $e=-2k$ with $k\in\Z$.
+Put $P=a-k$, $Q=c-k$, $T=t-k$, $U=u-k$, so that $T+U=k$.
+The diagonals give $i=k-P$, $g=k-Q$; the first and last rows (sum $u$) and columns (sum $t$) then give
+\[
+z=\begin{pmatrix}k+P&-T-P-Q&k+Q\\-U-P+Q&-2k&-U+P-Q\\k-Q&-T+P+Q&k-P\end{pmatrix},
+\qquad
+\sum_cz_c^2=2\bigl(4k^2+3(P^2+Q^2)+T^2+U^2\bigr),
+\]
+so $4k^2+3(P^2+Q^2)+T^2+U^2=30$.
+The four corners are distinct, so $P\ne0$, $Q\ne0$ and $|P|\ne|Q|$, hence $P^2+Q^2\ge5$; therefore $R=4k^2+T^2+U^2$ is a multiple of $3$ and at most $15$, and $P^2+Q^2=10-R/3$.
+So $|k|\le1$.
+If $|k|=1$, then $T+U=\pm1$ makes $T^2+U^2$ odd, so $R\in\{9,15\}$ (as $R\ge5$) and $T^2+U^2\in\{5,11\}$; $11$ is not a sum of two squares, and $T^2+U^2=5$ gives $P^2+Q^2=7$, which is not either.
+So $k=0$, $U=-T$, and $R=2T^2\le15$ divisible by $3$ forces $T=0$.
+Hence $t=u=0$: all rows, columns and diagonals have deviation $0$, and $S$ is magic.
+The converse is clear.
+\end{proof}
+
 \begin{remark}
-\label{rem:n3_lowmode}
-Of the $9!$ arrangements of order $3$, exactly $760$ satisfy the degree-$1$ conditions, exactly $72$ (the semi-magic squares) satisfy the degree-$2$ conditions, and exactly $8$ satisfy the degree-$1$ conditions and both diagonal conditions, namely the magic squares (exhaustive enumeration in exact arithmetic).
-So $\Elow(S)=0$ if and only if $S$ is magic when $n=3$, although the four conditions are weaker than the magic conditions for real-valued $z$.
-The degree-$1$ conditions leave $\gamma=t(1,-2,1)$, $\rho=u(1,-2,1)$; the row, the column and the two diagonals through the centre cover every cell once and the centre four times, which gives $3e=15-2(t+u)$ for the centre value $e$.
-We have no proof of $t=u=0$ shorter than the enumeration.
+\label{rem:n3_enum}
+The enumeration of all $9!$ arrangements confirms \Cref{prop:n3_lowmode} and each step of its proof (\texttt{anc/n3\_lowmode\_proof.py}): exactly $760$ arrangements satisfy the degree-$1$ conditions, $4{,}224$ have both diagonal sums $15$, $72$ (the semi-magic squares) satisfy the degree-$2$ conditions, and $8$, the magic squares, satisfy the degree-$1$ and both diagonal conditions; the only integer solution of $4k^2+3(P^2+Q^2)+T^2+U^2=30$ with $T+U=k$, $PQ\ne0$, $|P|\ne|Q|$ is $k=T=U=0$, $P^2+Q^2=10$.
+The four conditions are weaker than the magic conditions for real-valued $z$; the proof uses that the entries are distinct integers with $\sum_cz_c^2=60$.
 For $n=4$ the equivalence fails (\Cref{rem:four_term_insufficient}); the arrangement there has $\gamma=(3,-9,9,-3)$ and $\rho=(-6,4,10,-8)$, so it satisfies the degree-$2$ condition in $x$ but not in $y$.
 \end{remark}
 

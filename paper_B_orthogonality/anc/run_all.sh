@@ -3,6 +3,7 @@
 set -e
 cd "$(dirname "$0")"
 python3 verify_numbers.py > verify_numbers.log      # exact re-verification of the quoted numbers
+python3 n3_lowmode_proof.py > n3_lowmode_proof.log  # n=3: E_low=0 iff magic (Proposition 3.14), each proof step against all 9! arrangements
 python3 balance_check.py  > balance_check.log       # balance numbers of Section 3.7 -> balance_results.json
 python3 variance_proof.py > variance_proof.log      # symbolic proof of the variance formulas (~2 min)
 python3 make_figures.py                              # figures -> ../figures/ (fig_kstar needs kstar_verify.json)

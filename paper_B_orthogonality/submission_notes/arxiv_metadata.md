@@ -10,7 +10,7 @@
 
 **MSC 2020:** 05B20 (primary); 05A05, 11C08, 60C05, 60F05
 
-**Comments:** 21 pages, 4 figures, 3 tables. Ancillary files (verification scripts, lattice enumeration, witness arrangements, symbolic variance derivation, figure scripts, C enumerator, data) in `anc/`. Companion paper: "Magic Gems: A Polyhedral Framework for Magic Squares" (arXiv:2512.09170).
+**Comments:** 22 pages, 4 figures, 3 tables. Ancillary files (verification scripts, lattice enumeration, witness arrangements, symbolic variance derivation, figure scripts, C enumerator, data) in `anc/`. Companion paper: "Magic Gems: A Polyhedral Framework for Magic Squares" (arXiv:2512.09170).
 
 **Abstract (plain text / TeX):**
 

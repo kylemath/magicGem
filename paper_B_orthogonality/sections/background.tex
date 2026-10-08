@@ -82,7 +82,7 @@ All $n$ rows and $n$ columns are kept in \eqref{eq:Efull}: the last row and colu
 \begin{remark}[The four low-order conditions]
 \label{rem:four_term_insufficient}
 $\Elow=0$ consists of four linear conditions on $z$, and ``magic'' of $2n$ independent ones; for every $n\ge3$ the four conditions are therefore strictly weaker than the magic conditions on real-valued $z$.
-For permutations the two coincide when $n=3$ (\Cref{rem:n3_lowmode}) but not when $n=4$: the arrangement
+For permutations the two coincide when $n=3$ (\Cref{prop:n3_lowmode}) but not when $n=4$: the arrangement
 \[
 S=\begin{pmatrix}9&4&12&3\\16&1&14&7\\10&15&11&8\\2&5&6&13\end{pmatrix}
 \]
@@ -111,14 +111,24 @@ For a uniformly random arrangement, $z_c=b_{\pi(c)}$ with $b$ the centred values
 \sigma_n^2=\frac{\Var(Z)}{N-1}=\frac{N+1}{12}=\frac{n^2+1}{12}.
 \label{eq:sigma}
 \end{equation}
-Hoeffding's combinatorial central limit theorem \cite[Thm.~3]{hoeffding1951} concerns $\sum_ic_N(i,\pi(i))$ for an $N\times N$ array $c_N$.
-Let $d_N(i,j)=c_N(i,j)-\frac1N\sum_gc_N(g,j)-\frac1N\sum_hc_N(i,h)+\frac1{N^2}\sum_{g,h}c_N(g,h)$ be the doubly centred array.
-The theorem asserts asymptotic normality of $\bigl(\sum_ic_N(i,\pi(i))-\E\bigr)/\sqrt{\Var}$ provided that
+Hoeffding's combinatorial central limit theorem \cite{hoeffding1951} concerns $\sum_ic_N(i,\pi(i))$ for an $N\times N$ array $c_N$.
+Let $d_N(i,j)=c_N(i,j)-\frac1N\sum_gc_N(g,j)-\frac1N\sum_hc_N(i,h)+\frac1{N^2}\sum_{g,h}c_N(g,h)$ be the doubly centred array, and assume $d_N\ne0$.
+By \cite[Thm.~3]{hoeffding1951}, $\sum_ic_N(i,\pi(i))$ is asymptotically normal, i.e.\ $\bigl(\sum_ic_N(i,\pi(i))-\E\bigr)/\sqrt{\Var}$ converges in distribution to $N(0,1)$, if
+\begin{equation}
+\lim_{N\to\infty}\frac{N^{-1}\sum_{i,j}d_N(i,j)^r}{\bigl(N^{-1}\sum_{i,j}d_N(i,j)^2\bigr)^{r/2}}=0,\qquad r=3,4,\dots,
+\label{eq:hoeffding_moment}
+\end{equation}
+and \eqref{eq:hoeffding_moment} is satisfied if
+\begin{equation}
+\lim_{N\to\infty}\frac{\max_{i,j}d_N(i,j)^2}{N^{-1}\sum_{i,j}d_N(i,j)^2}=0
+\label{eq:hoeffding_max}
+\end{equation}
+(conditions (11) and (12) of \cite{hoeffding1951}).
+For a product array $c_N(i,j)=a_ib_j$ one has $d_N(i,j)=(a_i-\bar a)(b_j-\bar b)$, and \eqref{eq:hoeffding_max} becomes
 \[
-\frac{N^{-1}\sum_{i,j}|d_N(i,j)|^r}{\bigl(N^{-1}\sum_{i,j}d_N(i,j)^2\bigr)^{r/2}}\ \longrightarrow\ 0\qquad(N\to\infty)
+\lim_{N\to\infty}N\,\frac{\max_i(a_i-\bar a)^2\,\max_j(b_j-\bar b)^2}{\sum_i(a_i-\bar a)^2\,\sum_j(b_j-\bar b)^2}=0,
 \]
-for some $r>2$, and in particular whenever $\max_{i,j}|d_N(i,j)|\big/\bigl(N^{-1}\sum_{i,j}d_N(i,j)^2\bigr)^{1/2}\to0$, since the ratio above is at most the $(r-2)$-th power of this quotient.
-For a product array $c_N(i,j)=a_ib_j$ one has $d_N(i,j)=(a_i-\bar a)(b_j-\bar b)$.
+the sufficient condition (14) of Hoeffding's Theorem~4, which treats this case.
 Motoo \cite{motoo1957} gives a Lindeberg-type condition and Bolthausen \cite{bolthausen1984} a Berry--Esseen bound.
 
 \subsection{Known counts}

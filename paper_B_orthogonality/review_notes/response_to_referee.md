@@ -2,7 +2,7 @@
 
 Thank you for the careful report. The paper has been restructured around the strongest content, as suggested. Its main result is now a two-sided bound for the permutation threshold, with exact values for n <= 40. The variance formulas are now proved. The trivial material has been demoted or cut, and the defensive text has been removed.
 
-The new title is "Magic squares as orthogonality conditions: the permutation moment threshold and random line-sum energies". The paper is 21 pages, including about 4 pages of references and appendices; the body is about 17 pages, and the previous version had 25 pages.
+The new title is "Magic squares as orthogonality conditions: the permutation moment threshold and random line-sum energies". The paper is 22 pages, including about 4 pages of references and appendices; the body is about 17 pages, and the previous version had 25 pages.
 
 Numbering below refers to the revised version, with old numbers in brackets.
 
@@ -63,7 +63,7 @@ Numbering below refers to the revised version, with old numbers in brackets.
 | Thm 3.18, Lemma 3.19, Cor 3.20, Rem 3.21 | Merged into the single Remark 5.2. It states that the formula is the incremental evaluation used in local search [Pinn–Wieczerkowski]. It is no longer a contribution or a novelty claim, and the E_low swap remark was cut. |
 | Rem 3.22 | Merged with old Thm 4.1(d) into Remark 3.4 (mixed moments). |
 | Thm 4.1 | Removed as a theorem. (a) is Lemma 2.3(3), (b, c) are Prop 3.3(a), and (d) is Remark 3.4. |
-| Thm 4.2 | Now Remark 3.15. The improved odd-n constant was verified (see C10). The numerical check of the proved inequality and Fig. 2(a) have been deleted. |
+| Thm 4.2 | Now Remark 3.16. The improved odd-n constant was verified (see C10). The numerical check of the proved inequality and Fig. 2(a) have been deleted. |
 | Prop 4.3, Rem 4.4 | Cut to two sentences in §3.7: the Lo Shu ring value and the n = 4 comparison. |
 | Rem 4.5, Rem 4.6, Table 1 | Deleted. |
 | Prop 5.1 | Split. The means are Prop 4.1, with the one-line sampling-without-replacement derivation added. The variances are now proved (Theorems 4.3, 4.4); see C1. |
@@ -104,15 +104,14 @@ Numbering below refers to the revised version, with old numbers in brackets.
 
 - **C1 (variances not proved).** Now proved.
   - Theorem 4.3 gives a general identity: Var(zᵀAz) = −N(N+1)(2N+3)/360 (trA)² + N(N²−1)(5N+6)/360 tr(A²) − N²(N+1)²/120 Σ A_aa², for symmetric A with zero row sums. The main text has a proof sketch; Appendix C has the full derivation, by Möbius inversion over equality patterns, where only the four singleton-free partitions survive.
-  - The invariants of the two energies are derived in Appendix C, eqs. (17)–(18).
+  - The invariants of the two energies are derived in Appendix C, eqs. (19)–(20).
   - Theorem 4.4 prints all four polynomials, which answers the question about the denominators.
   - The asymptotics are now Var(E_low) = n⁸/5184 − 41n⁶/64800 + O(n⁴), so the n⁷ coefficient is zero, and Var(E_full) = n³/36 − n²/18 − 7n/180 + O(1).
   - We re-checked the identity independently: by enumerating all N! permutations for random zero-row-sum integer matrices (N = 4–8), and against the explicit energy matrices for n = 3–11, where it agrees with the closed forms.
   - We note that the identity is a special case of the classical moment formulas for quadratic assignment statistics (Mantel 1967; Hubert 1987).
 - **C2 (Hoeffding).**
-  - §2.3 now states the condition as a ratio → 0, together with the simpler sufficient condition max|d_N| / (N⁻¹Σd_N²)^{1/2} → 0.
-  - I could not access the original paper. The wording follows the restatement of Hoeffding's Theorem 3 in M. Albert, "Concentration inequalities for randomly permuted sums" (arXiv:1805.03579). That restatement gives the ratio condition "for some r > 2" and the max condition as the simpler sufficient one. We use only the max condition, which implies the ratio condition for every r > 2, so the result does not depend on the exact wording.
-  - The proof of Cor 4.5 now verifies the max condition directly. The quotient factorises as (max|a|/‖a‖)·(max|b|/rms b) = o(1)·√3.
+  - We have now consulted the original paper (Ann. Math. Statist. 22 (1951) 558–566). §2.3 states its Theorem 3 as printed: with d_n(i,j) the doubly centred array (Hoeffding's (8)), S_n is asymptotically normal if lim N⁻¹ΣΣ d_n^r / (N⁻¹ΣΣ d_n²)^{r/2} = 0 for r = 3, 4, … (condition (11), with d^r, not |d|^r, and for every integer r ≥ 3); (11) is satisfied if lim max d_n² / (N⁻¹ΣΣ d_n²) = 0 (condition (12)). For c_n(i,j) = a_n(i)b_n(j), Theorem 4 has the corresponding condition (13), implied by lim n·max(a−ā)²·max(b−b̄)² / (Σ(a−ā)²·Σ(b−b̄)²) = 0 (condition (14)). Our earlier wording ("for some r > 2", with |d|^r), taken from a secondary restatement, mixed Theorem 3 with Hoeffding's Theorem 1 and has been replaced; equations (11), (12) and (14) are cited by number.
+  - The proof of Cor 4.5 verifies condition (12) (equivalently (14)) directly. The quotient factorises as (max|a|/‖a‖)·(max|b|/rms b) = o(1)·√3.
   - Motoo (1957) and Bolthausen (1984) are cited.
 - **C3.** Remark 2.5 now says: for every n ≥ 3 the four conditions are strictly weaker on real z; for permutations they coincide when n = 3 and not when n = 4.
 - **C4.** The clause has been deleted. Remark 4.6 states that the Gaussian sd of E_full at n = 3 is about twice the exact one. It gives the exact/Gaussian variance ratio 1 − 2/n − 7/(5n²) + O(n⁻³) for E_full, and 1 − 82/(25n²) + O(n⁻³) for E_low, which I verified symbolically.
@@ -121,9 +120,9 @@ Numbering below refers to the revised version, with old numbers in brackets.
 - **C7.** §5.1 now says that D4 acts freely on all arrangements and preserves L_4.
 - **C8.** The constants have been fixed as suggested: 15/8 for odd n ≥ 15, and the right-side ratio decreases, equal to 225/182 at n = 14 (proof of Theorem 3.7(c)).
 - **C9.** Prop 3.3(a) now takes a, b defined on {x_0, …, x_{n−1}}.
-- **C10.** Verified and adopted. ‖P_W z‖² ≤ λ_n E_full, with λ_n = n²/(n−1) for odd n and n²/(n−2) for even n (Remark 3.15), since the eigenvalues of Γ_D are n−1, n−1 for odd n.
+- **C10.** Verified and adopted. ‖P_W z‖² ≤ λ_n E_full, with λ_n = n²/(n−1) for odd n and n²/(n−2) for even n (Remark 3.16), since the eigenvalues of Γ_D are n−1, n−1 for odd n.
 - **C11.** Remark 5.2: the values "lie in the set {d²λ}". The text adds that 70 values occur, out of 105,600 swaps.
-- **C12.** We tried the suggested argument. The four lines through the centre give only 3e = 15 − 2(t+u), where e is the centre value and γ = t(1,−2,1), ρ = u(1,−2,1); this does not force t = u = 0 without further case analysis. Remark 3.14 therefore states the equivalence as verified by exhaustive enumeration, records the partial argument, and says that no shorter proof is given.
+- **C12.** Done: a short human proof now replaces the computer verification (Proposition 3.14 and its proof in §3.6). In centred entries, the four lines through the centre give t + u = 3k and centre −2k; with P = a − k, Q = c − k, T = t − k, U = u − k (T + U = k) the corners, the outer rows/columns and the diagonals determine the whole square, and Σz² = 60 becomes 4k² + 3(P² + Q²) + T² + U² = 30. Distinct corners give P, Q ≠ 0 and |P| ≠ |Q|, so P² + Q² ≥ 5; hence 4k² + T² + U² ∈ {0, 3, …, 15}, which forces |k| ≤ 1, excludes |k| = 1 (it would need T² + U² ∈ {5, 11} and then P² + Q² = 7) and leaves k = T = U = 0. The enumeration of all 9! arrangements is kept as a check of the statement and of each step (Remark 3.15, anc/n3_lowmode_proof.py).
 - **C13.** The colour bar of Fig. 4(b) is now labelled "number of swaps". The annotation arrows of panel (a) have been replaced by a legend.
 
 ## Section 7: notation and presentation
@@ -135,13 +134,13 @@ Numbering below refers to the revised version, with old numbers in brackets.
 - **δ.** δ is only line deviations. The Kronecker delta and δ_mean are gone.
 - **T.** Φ_a is the generic statistic (§2.3), T_φ = Cov(φ, Z) is used in §4, and U_1, …, U_4 are the uncentred sums (§5.1).
 - **Σ.** Σ_n has been replaced by σ_n²Γ, and Σ_U is the covariance of the U_i.
-- **D in eq. (17).** Replaced.
+- **D in eq. (19).** Replaced.
 - **C_j.** The statement now reads "E Cov(1_L, Z)² for every line L".
 - **σ_n².** Defined once, in eq. (7).
 - **γ, ρ.** The column and row sums of a general f are distinguished once, at the start of §3.1.
 - **Forward references.**
   - Cor 3.14 has moved (see above).
-  - The Lemma 3.8(3) claims are now Remark 3.14 / Remark 2.5.
+  - The Lemma 3.8(3) claims are now Proposition 3.14 / Remark 3.15 / Remark 2.5.
   - The label `sec:results` has been renamed `sec:computations`.
   - Local search is no longer in the Discussion.
 - **§7.3.**
@@ -204,6 +203,4 @@ Barvinok (2010) was not added, because nothing in the text depends on it. The Tr
 
 ## Not addressed, or only partly
 
-- The two-line human proof for n = 3 (C12): we could not find one. See above.
 - The target length of 10–12 pages: the paper is longer because of the new threshold theorem.
-- The original Hoeffding (1951) Theorem 3 could not be consulted directly. The formulation used is robust to the precise wording; see C2.
