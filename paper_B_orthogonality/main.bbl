@@ -6,6 +6,12 @@ Maya~M. Ahmed, Jes{\'u}s~A. De~Loera, and Raymond Hemmecke.
 \newblock In {\em Discrete and Computational Geometry}, volume~25 of {\em
   Algorithms and Combinatorics}, pages 25--41. Springer, 2003.
 
+\bibitem{allouche1999ubiquitous}
+Jean-Paul Allouche and Jeffrey Shallit.
+\newblock The ubiquitous {P}rouhet--{T}hue--{M}orse sequence.
+\newblock In {\em Sequences and Their Applications (Singapore, 1998)}, Springer
+  Ser. Discrete Math. Theor. Comput. Sci., pages 1--16. Springer, London, 1999.
+
 \bibitem{andrews1960magic}
 W.~S. Andrews.
 \newblock {\em Magic Squares and Cubes}.
@@ -21,6 +27,24 @@ Matthias Beck and Thomas Zaslavsky.
 \newblock Inside-out polytopes.
 \newblock {\em Advances in Mathematics}, 205(1):134--162, 2006.
 
+\bibitem{bolthausen1984}
+Erwin Bolthausen.
+\newblock An estimate of the remainder in a combinatorial central limit
+  theorem.
+\newblock {\em Zeitschrift f{\"u}r Wahrscheinlichkeitstheorie und Verwandte
+  Gebiete}, 66:379--386, 1984.
+
+\bibitem{borwein2002computational}
+Peter Borwein.
+\newblock {\em Computational Excursions in Analysis and Number Theory}.
+\newblock CMS Books in Mathematics. Springer, New York, 2002.
+
+\bibitem{BEK1999}
+Peter Borwein, Tam{\'a}s Erd{\'e}lyi, and G{\'e}za K{\'o}s.
+\newblock Littlewood-type problems on $[0,1]$.
+\newblock {\em Proceedings of the London Mathematical Society (3)},
+  79(1):22--46, 1999.
+
 \bibitem{cameron2013signatura}
 Ian Cameron, Adam Rogers, and Peter~D. Loly.
 \newblock Signatura of magic and {L}atin integer squares: isentropic clans and
@@ -28,18 +52,30 @@ Ian Cameron, Adam Rogers, and Peter~D. Loly.
 \newblock {\em Discussiones Mathematicae Probability and Statistics},
   33(1-2):121--149, 2013.
 
-\bibitem{diaconis1995rectangular}
-Persi Diaconis and Anil Gangolli.
-\newblock Rectangular arrays with fixed margins.
-\newblock In {\em Discrete Probability and Algorithms (Minneapolis, MN, 1993)},
-  volume~72 of {\em The IMA Volumes in Mathematics and its Applications}, pages
-  15--41. Springer, New York, 1995.
+\bibitem{canfield2010asymptotic}
+E.~Rodney Canfield and Brendan~D. McKay.
+\newblock Asymptotic enumeration of integer matrices with large equal row and
+  column sums.
+\newblock {\em Combinatorica}, 30:655--680, 2010.
+
+\bibitem{eberhard2019additive}
+Sean Eberhard, Freddie Manners, and Rudi Mrazovi{\'c}.
+\newblock Additive triples of bijections, or the toroidal semiqueens problem.
+\newblock {\em Journal of the European Mathematical Society}, 21:441--463,
+  2019.
 
 \bibitem{ehrhart1973magic}
 Eug{\`e}ne Ehrhart.
 \newblock Sur les carr{\'e}s magiques.
 \newblock {\em Comptes Rendus de l'Acad{\'e}mie des Sciences, S{\'e}rie A},
   277:651--654, 1973.
+
+\bibitem{frenicle1693}
+Bernard Fr{\'e}nicle~de Bessy.
+\newblock Des quarrez ou tables magiques.
+\newblock In {\em Divers ouvrages de math{\'e}matique et de physique, par
+  Messieurs de l'Acad{\'e}mie Royale des Sciences}, pages 423--483. Imprimerie
+  Royale, Paris, 1693.
 
 \bibitem{gardner1976}
 Martin Gardner.
@@ -52,10 +88,20 @@ Wassily Hoeffding.
 \newblock A combinatorial central limit theorem.
 \newblock {\em Annals of Mathematical Statistics}, 22(4):558--566, 1951.
 
+\bibitem{hubert1987assignment}
+Lawrence Hubert.
+\newblock {\em Assignment Methods in Combinatorial Data Analysis}.
+\newblock Marcel Dekker, New York, 1987.
+
 \bibitem{imhof1961}
 J.~P. Imhof.
 \newblock Computing the distribution of quadratic forms in normal variables.
 \newblock {\em Biometrika}, 48(3/4):419--426, 1961.
+
+\bibitem{kuperberg2017probabilistic}
+Greg Kuperberg, Shachar Lovett, and Ron Peled.
+\newblock Probabilistic existence of regular combinatorial structures.
+\newblock {\em Geometric and Functional Analysis}, 27:919--972, 2017.
 
 \bibitem{loly2004invariance}
 Peter~D. Loly.
@@ -74,10 +120,27 @@ Peter~D. Loly, Ian Cameron, Walter Trump, and Daniel Schindel.
 \newblock Magic square spectra.
 \newblock {\em Linear Algebra and its Applications}, 430(10):2659--2680, 2009.
 
+\bibitem{mantel1967}
+Nathan Mantel.
+\newblock The detection of disease clustering and a generalized regression
+  approach.
+\newblock {\em Cancer Research}, 27:209--220, 1967.
+
 \bibitem{mathewson_gems}
 Kyle~Elliott Mathewson.
 \newblock Magic gems: A polyhedral framework for magic squares.
 \newblock arXiv:2512.09170, 2026.
+
+\bibitem{motoo1957}
+Minoru Motoo.
+\newblock On the {H}oeffding's combinatorial central limit theorem.
+\newblock {\em Annals of the Institute of Statistical Mathematics}, 8:145--154,
+  1957.
+
+\bibitem{noether1949}
+Gottfried~E. Noether.
+\newblock On a theorem by {W}ald and {W}olfowitz.
+\newblock {\em Annals of Mathematical Statistics}, 20:455--458, 1949.
 
 \bibitem{nordgren2012properties}
 R.~P. Nordgren.
@@ -93,6 +156,11 @@ R.~P. Nordgren.
 Clifford~A. Pickover.
 \newblock {\em The Zen of Magic Squares, Circles, and Stars}.
 \newblock Princeton University Press, 2002.
+
+\bibitem{pinn1998number}
+K.~Pinn and C.~Wieczerkowski.
+\newblock Number of magic squares from parallel tempering {M}onte {C}arlo.
+\newblock {\em International Journal of Modern Physics C}, 9(4):541--546, 1998.
 
 \bibitem{rogers2004inertia}
 Adam Rogers and Peter~D. Loly.
@@ -110,6 +178,17 @@ Richard~P. Stanley.
   graphs.
 \newblock {\em Duke Mathematical Journal}, 40:607--632, 1973.
 
+\bibitem{stanley2012ec1}
+Richard~P. Stanley.
+\newblock {\em Enumerative Combinatorics, Volume 1}, volume~49 of {\em
+  Cambridge Studies in Advanced Mathematics}.
+\newblock Cambridge University Press, Cambridge, 2nd edition, 2012.
+
+\bibitem{thurston1990conway}
+William~P. Thurston.
+\newblock Conway's tiling groups.
+\newblock {\em American Mathematical Monthly}, 97(8):757--773, 1990.
+
 \bibitem{trump2012enumeration}
 Walter Trump.
 \newblock Notes on magic squares and cubes.
@@ -121,10 +200,14 @@ Abraham Wald and Jacob Wolfowitz.
 \newblock Statistical tests based on permutations of the observations.
 \newblock {\em Annals of Mathematical Statistics}, 15(4):358--372, 1944.
 
-\bibitem{ziegler1995lectures}
-G{\"u}nter~M. Ziegler.
-\newblock {\em Lectures on Polytopes}, volume 152 of {\em Graduate Texts in
-  Mathematics}.
-\newblock Springer, New York, 1995.
+\bibitem{ward1980vector}
+James~E. Ward, III.
+\newblock Vector spaces of magic squares.
+\newblock {\em Mathematics Magazine}, 53(2):108--111, 1980.
+
+\bibitem{wright1959prouhet}
+E.~M. Wright.
+\newblock Prouhet's 1851 solution of the {T}arry--{E}scott problem of 1910.
+\newblock {\em American Mathematical Monthly}, 66:199--201, 1959.
 
 \end{thebibliography}

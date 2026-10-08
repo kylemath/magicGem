@@ -1,0 +1,90 @@
+witnesses verified: n = [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40]
+level n-3 not excluded by F1 for n in [14,400]: [14, 15, 16, 17]
+Theorem A gives k* <= n-3 for all n in [166, 10^6]
+14 U(n) = 12 = lower bound (exact) 0.0s
+15 U(n) = 13 = lower bound (exact) 0.0s
+16 U(n) = 14 = lower bound (exact) 0.0s
+17 U(n) = 15 = lower bound (exact) 0.0s
+18 U(n) = 15 = lower bound (exact) 0.0s
+19 U(n) = 16 = lower bound (exact) 0.0s
+20 U(n) = 16 = lower bound (exact) 0.0s
+21 U(n) = 17 = lower bound (exact) 0.0s
+22 U(n) = 17 = lower bound (exact) 0.0s
+23 U(n) = 18 = lower bound (exact) 0.0s
+24 U(n) = 18 = lower bound (exact) 0.0s
+25 U(n) = 19 = lower bound (exact) 0.0s
+26 U(n) = 19 = lower bound (exact) 0.0s
+27 U(n) = 20 = lower bound (exact) 0.0s
+28 U(n) = 21 = lower bound (exact) 0.0s
+29 U(n) = 21 = lower bound (exact) 0.0s
+30 U(n) = 22 = lower bound (exact) 0.0s
+31 U(n) = 22 = lower bound (exact) 0.0s
+32 U(n) = 23 = lower bound (exact) 0.0s
+33 U(n) = 23 = lower bound (exact) 0.0s
+34 U(n) = 23 = lower bound (exact) 0.0s
+35 U(n) = 24 = lower bound (exact) 0.0s
+36 U(n) = 24 = lower bound (exact) 0.0s
+37 U(n) = 25 = lower bound (exact) 0.0s
+38 U(n) = 25 = lower bound (exact) 0.0s
+39 U(n) = 26 = lower bound (exact) 0.0s
+40 U(n) = 26 = lower bound (exact) 0.0s
+41 U(n) = 26  0.0s
+42 U(n) = 27  0.0s
+43 U(n) = 27  0.0s
+44 U(n) = 27  0.0s
+45 U(n) = 28  0.0s
+46 U(n) = 28  0.0s
+47 U(n) = 28  0.0s
+48 U(n) = 29  0.0s
+49 U(n) = 29  0.0s
+50 U(n) = 30  0.0s
+51 U(n) = 30  0.0s
+52 U(n) = 30  0.0s
+53 U(n) = 31  0.0s
+54 U(n) = 31  0.0s
+55 U(n) = 31  0.0s
+56 U(n) = 32  0.0s
+57 U(n) = 32  0.0s
+58 U(n) = 32  0.0s
+59 U(n) = 33  0.0s
+60 U(n) = 33  0.0s
+61 U(n) = 33  0.0s
+62 U(n) = 34  0.0s
+63 U(n) = 34  0.0s
+64 U(n) = 35  0.0s
+65 U(n) = 35  0.0s
+66 U(n) = 35  0.0s
+67 U(n) = 35  0.0s
+68 U(n) = 36  0.0s
+69 U(n) = 36  0.0s
+70 U(n) = 36  0.0s
+71 U(n) = 37  0.0s
+72 U(n) = 37  0.0s
+73 U(n) = 37  0.0s
+74 U(n) = 38  0.0s
+75 U(n) = 38  0.0s
+76 U(n) = 38  0.0s
+77 U(n) = 39  0.0s
+78 U(n) = 39  0.0s
+79 U(n) = 39  0.0s
+80 U(n) = 39  0.0s
+81 U(n) = 40  0.0s
+82 U(n) = 40  0.0s
+83 U(n) = 40  0.0s
+84 U(n) = 40  0.0s
+85 U(n) = 41  0.0s
+86 U(n) = 41  0.0s
+87 U(n) = 41  0.0s
+88 U(n) = 42  0.0s
+89 U(n) = 42  0.0s
+90 U(n) = 42  0.0s
+91 U(n) = 42  0.0s
+92 U(n) = 43  0.0s
+93 U(n) = 43  0.0s
+94 U(n) = 43  0.0s
+95 U(n) = 43  0.0s
+96 U(n) = 44  0.0s
+97 U(n) = 44  0.0s
+98 U(n) = 44  0.0s
+99 U(n) = 44  0.0s
+100 U(n) = 45  0.0s

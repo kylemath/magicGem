@@ -1,530 +1,323 @@
-\section{Orthogonality conditions on the height function}
+\section{The moment hierarchy and the permutation threshold}
 \label{sec:theory}
 
-Throughout, $n\ge 3$, $N=n^{2}$, and a cell of the $n\times n$ grid is a pair
-$c=(i,j)$ with $0\le i,j\le n-1$; an arrangement is a bijection $S=(s_{ij})$ from the cells onto
-$\{1,\dots,N\}$ (\Cref{def:magic_square}).  We use the centred
-coordinates of \Cref{def:coords},
-\[
-x_{ij}=j-\tfrac{n-1}{2},\qquad y_{ij}=\tfrac{n-1}{2}-i,\qquad
-z_{ij}=s_{ij}-\tfrac{N+1}{2},
-\]
-and refer to $z=z(S)$ as the \emph{height function} of $S$.
-A \emph{line} is one of the $n$ rows, the $n$ columns, the main diagonal
-$\{i=j\}$ or the anti-diagonal $\{i+j=n-1\}$; there are $2n+2$ lines, each
-containing exactly $n$ cells.  With $M(n)=n(N+1)/2$ the magic constant, the
-\emph{deviation} of a line $L$ is
-\begin{equation}
-\delta_L(S)\;=\;\sum_{c\in L}s_c-M(n)\;=\;\sum_{c\in L}z_c ,
-\label{eq:line_dev}
-\end{equation}
-the second equality because $|L|=n$ and $M(n)=n\cdot\frac{N+1}{2}$.
-$S$ is \emph{semi-magic} if $\delta_L=0$ for the $2n$ rows and columns, and
-\emph{magic} if $\delta_L=0$ for all $2n+2$ lines.  We write $\rho_k=\delta_{\text{row }k}$,
-$\gamma_\ell=\delta_{\text{col }\ell}$, $\delta_{\mathrm{m}}$ and $\delta_{\mathrm{a}}$ for the
-row, column, main-diagonal and anti-diagonal deviations.
-
-\subsection{Height functions, the inner product, and the energies}
-\label{sec:theory_setup}
-
-Let $\mathcal F=\R^{\text{cells}}$ be the $N$-dimensional space of real
-functions on the grid, with the normalised inner product and norm
-\begin{equation}
-\langle f,g\rangle=\frac1N\sum_{i,j}f_{ij}g_{ij},\qquad \|f\|^{2}=\langle f,f\rangle .
-\label{eq:inner}
-\end{equation}
-The mean of $f$ is $\bar f=\langle f,\mathbf 1\rangle$ and its centring is
-$\tilde f=f-\bar f\mathbf 1$.  For two functions (``test function'' $\varphi$ and
-height $f$) the empirical covariance over the $N$ cells is
-$\Cov(\varphi,f)=\langle\tilde\varphi,\tilde f\rangle=\langle\tilde\varphi,f\rangle=\langle\varphi,\tilde f\rangle$;
-the last two equalities hold because $\tilde\varphi\perp\mathbf 1$ and $\tilde f\perp\mathbf 1$.
-
-\begin{lemma}[Means, variances, and covariance as an inner product]
-\label{lem:variances}
-For every arrangement $S$ of $\{1,\dots,N\}$:
-\begin{enumerate}
-\item $\bar x=\bar y=\bar z=0$, so $z$ is centred and $\Cov(\varphi,Z)=\langle\tilde\varphi,z\rangle=\langle\varphi,z\rangle$ for every $\varphi\in\mathcal F$;
-\item $\Var(X)=\Var(Y)=\dfrac{n^{2}-1}{12}$, \quad $\Var(Z)=\dfrac{N^{2}-1}{12}=\dfrac{n^{4}-1}{12}$, \quad $\Cov(X,Y)=0$;
-\item for every line $L$ with indicator $\mathbf 1_L$,\quad $\Cov(\mathbf 1_L,Z)=\dfrac{\delta_L(S)}{N}$.
-\end{enumerate}
-\end{lemma}
-
-\begin{proof}
-(1) $\sum_{i,j}x_{ij}=n\sum_{j}(j-\frac{n-1}2)=0$, likewise for $y$, and $\sum_{i,j}z_{ij}=\sum_{v=1}^{N}v-N\frac{N+1}2=0$;
-then $\Cov(\varphi,Z)=\langle\varphi,z\rangle-\bar\varphi\langle\mathbf 1,z\rangle=\langle\varphi,z\rangle$.
-(2) $\Var(X)=\frac1n\sum_{j}(j-\frac{n-1}2)^{2}$ is the variance of the uniform distribution on $n$ equally spaced
-points, $(n^{2}-1)/12$; the same for $Y$, and for $Z$ with $N$ points.  $\sum_{i,j}x_{ij}y_{ij}=(\sum_jx_{\cdot j})(\sum_iy_{i\cdot})=0$.
-(3) By (1), $\Cov(\mathbf 1_L,Z)=\frac1N\sum_{c\in L}z_c=\delta_L/N$ by \eqref{eq:line_dev}.
-\end{proof}
-
-We write $R_k=\mathbf 1_{\{i=k\}}$, $C_\ell=\mathbf 1_{\{j=\ell\}}$,
-$D_{\mathrm{m}}=\mathbf 1_{\{i=j\}}$, $D_{\mathrm{a}}=\mathbf 1_{\{i+j=n-1\}}$ for the $2n+2$ line indicators.
-
-\begin{definition}[Complete and low-mode energies]
-\label{def:energies}
-For an arrangement $S$ with height function $z$,
-\begin{align}
-\Efull(S)&=\sum_{k=0}^{n-1}\Cov(R_k,Z)^{2}+\sum_{\ell=0}^{n-1}\Cov(C_\ell,Z)^{2}
-+\Cov(D_{\mathrm m},Z)^{2}+\Cov(D_{\mathrm a},Z)^{2},\label{eq:Efull}\\
-\Elow(S)&=\Cov(X,Z)^{2}+\Cov(Y,Z)^{2}+\Cov(D_{\mathrm m},Z)^{2}+\Cov(D_{\mathrm a},Z)^{2}.\label{eq:Elow}
-\end{align}
-\end{definition}
-
-Note that \eqref{eq:Efull} sums over \emph{all} $n$ rows and \emph{all} $n$ columns.
-The word ``energy'' is a label for these sums of squares and nothing more: no Hamiltonian is implied, and the temperature of the annealing in \Cref{sec:algorithms} is a search parameter only.
-By \Cref{lem:variances}(3) it has the following elementary description, which we use constantly:
-\begin{equation}
-N^{2}\Efull(S)=\sum_{L}\delta_L(S)^{2}
-=\sum_k\rho_k^{2}+\sum_\ell\gamma_\ell^{2}+\delta_{\mathrm m}^{2}+\delta_{\mathrm a}^{2},
-\label{eq:Efull_devs}
-\end{equation}
-the sum of the squared line-sum deviations over all $2n+2$ lines.  In particular $N^{2}\Efull(S)$ is a
-non-negative integer.
-
-\begin{remark}[The four-term energy does not characterise magic squares for $n\ge4$]
-\label{rem:four_term_insufficient}
-$\Elow=0$ imposes four linear conditions on the centred height functions, while ``magic'' imposes $2n$ independent ones
-(\Cref{lem:W_structure}); for $n\ge4$ the two cannot agree even before the permutation constraint is taken into account.
-A witness for $n=4$ is
-\[
-S=\begin{pmatrix}9&4&12&3\\16&1&14&7\\10&15&11&8\\2&5&6&13\end{pmatrix},
-\]
-whose diagonals both sum to $34$ while the row sums are $(28,38,44,26)$ and the column sums $(37,25,43,31)$; nevertheless $\Cov(X,Z)=\Cov(Y,Z)=0$, so $\Elow(S)=0$ although $\Efull(S)=396/256$.
-\Cref{prop:L4} counts all such arrangements, and \Cref{rem:n3_lowmode} explains why none exist for $n=3$.
-\end{remark}
-
-The dihedral group $D_4$ acts on the grid by the rotations and reflections of the square, on arrangements by
-$(gS)_c=s_{g^{-1}c}$ and on functions by $(gf)_c=f_{g^{-1}c}$, so that $z(gS)=g\,z(S)$ and $\langle gf,gh\rangle=\langle f,h\rangle$.
-Every $g$ permutes the $2n$ rows and columns among themselves and the two diagonals among themselves, and acts on the centred
-coordinates by a signed permutation: $\{gx,gy\}=\{\pm x,\pm y\}$ as unordered pairs up to sign.
-
-\begin{proposition}[$D_4$-invariance of the energies]
-\label{prop:d4_energy}
-For every $g\in D_4$ and every arrangement $S$: $\Efull(gS)=\Efull(S)$ and
-$\Elow(gS)=\Elow(S)$.
-\end{proposition}
-
-\begin{proof}
-For any line $L$, $\delta_{gL}(gS)=\sum_{c\in gL}s_{g^{-1}c}=\delta_L(S)$, and $L\mapsto gL$ is a bijection of the set of lines,
-so the multiset of deviations is invariant and \eqref{eq:Efull_devs} gives $\Efull(gS)=\Efull(S)$.  For $\Elow$,
-$\Cov(X,gZ)=\langle g^{-1}x,z\rangle$ with $g^{-1}x\in\{\pm x,\pm y\}$, and similarly for $y$, so
-$\Cov(X,gZ)^{2}+\Cov(Y,gZ)^{2}$ is invariant; the diagonal terms are permuted among themselves.
-\end{proof}
-
-\begin{remark}[Why all $2n+2$ lines]
-\label{rem:all_lines}
-Since $\sum_k\rho_k=\sum_\ell\gamma_\ell=0$, the last row and the last column are redundant for the zero set.
-They are not redundant for the values: dropping them would give a function that is not $D_4$-invariant, because the reflection that maps column $n-1$ to column $0$ would change it by $(\gamma_{n-1}^{2}-\gamma_{0}^{2})/N^{2}$.
-Keeping all $2n+2$ terms (two more than the dimension $2n$ of the constraint space, \Cref{lem:W_structure}) is the price of invariance, and all statistics of $\Efull$ below refer to \eqref{eq:Efull}.
-\end{remark}
-
-\subsection{The projection lemma}
-\label{sec:theory_projection}
-
-Let $\tilde R_k=R_k-\frac1n\mathbf 1$, $\tilde C_\ell=C_\ell-\frac1n\mathbf 1$,
-$\tilde D_{\mathrm m}=D_{\mathrm m}-\frac1n\mathbf 1$, $\tilde D_{\mathrm a}=D_{\mathrm a}-\frac1n\mathbf 1$
-be the centred line indicators (each line has $n$ of the $N$ cells, so each mean is $1/n$), and set
-\[
-W_R=\operatorname{span}\{\tilde R_k\},\quad W_C=\operatorname{span}\{\tilde C_\ell\},\quad
-W_D=\operatorname{span}\{\tilde D_{\mathrm m},\tilde D_{\mathrm a}\},\quad
-W=W_R+W_C+W_D\subset\mathbf 1^{\perp}.
-\]
-
-\begin{lemma}[Structure of $W$]
-\label{lem:W_structure}
-For $n\ge 3$:
-\begin{enumerate}
-\item $W_R=\{f:\ f_{ij}=a_i,\ \sum_i a_i=0\}$ and $W_C=\{f:\ f_{ij}=b_j,\ \sum_j b_j=0\}$; both have dimension $n-1$.
-\item $\langle\tilde R_k,\tilde R_{k'}\rangle=\frac1N(n\delta_{kk'}-1)$, and the same for columns.
-\item $W_R\perp W_C$, $W_R\perp W_D$, $W_C\perp W_D$.
-\item $\langle\tilde D_{\mathrm m},\tilde D_{\mathrm m}\rangle=\langle\tilde D_{\mathrm a},\tilde D_{\mathrm a}\rangle=\frac{n-1}{N}$ and
-$\langle\tilde D_{\mathrm m},\tilde D_{\mathrm a}\rangle=\frac{\epsilon_n}{N}$ with $\epsilon_n=0$ for $n$ odd and
-$\epsilon_n=-1$ for $n$ even; in particular $\tilde D_{\mathrm m},\tilde D_{\mathrm a}$ are linearly independent and $\dim W_D=2$.
-\item $W=W_R\oplus W_C\oplus W_D$ is an orthogonal direct sum and $\dim W=2n$.
-\end{enumerate}
-\end{lemma}
-
-\begin{proof}
-For two lines $L,L'$, $N\langle\tilde{\mathbf 1}_L,\tilde{\mathbf 1}_{L'}\rangle=|L\cap L'|-1$, since each line has $n$ of the $N=n^2$ cells.
-Two distinct rows are disjoint and a row meets itself in $n$ cells (2); a row meets every column and each diagonal in exactly one
-cell, and so does a column (3); the two diagonals meet in the centre cell when $n$ is odd and not at all when $n$ is even (4),
-and the Gram matrix $\frac1N\bigl(\begin{smallmatrix}n-1&\epsilon_n\\ \epsilon_n&n-1\end{smallmatrix}\bigr)$ has positive
-determinant for $n\ge3$.  For (1), $\sum_ka_k\tilde R_k$ is the function $(i,j)\mapsto a_i-\bar a$, and every zero-mean
-function of $i$ alone arises this way; the map $a\mapsto a-\bar a$ has rank $n-1$.  (5) follows: the three subspaces are
-mutually orthogonal, hence independent, and $\dim W=2(n-1)+2$.
-\end{proof}
-
-For a subspace $V\subset\mathcal F$ let $P_V$ denote the orthogonal projection with respect to \eqref{eq:inner}.
-
-\begin{lemma}[Projection lemma]
-\label{lem:projection}
-Let $S$ be an arrangement with height function $z$ and line deviations $\rho,\gamma\in\R^{n}$,
-$\delta=(\delta_{\mathrm m},\delta_{\mathrm a})\in\R^{2}$, and let $G=\bigl(\begin{smallmatrix}n-1&\epsilon_n\\ \epsilon_n&n-1\end{smallmatrix}\bigr)$
-as in \Cref{lem:W_structure}(4).  Then
-\begin{enumerate}
-\item $P_{W_R}z$ is the function $(i,j)\mapsto\rho_i/n$ (the row means of $z$) and $P_{W_C}z$ is $(i,j)\mapsto\gamma_j/n$, with
-$\sum_{k}\Cov(R_k,Z)^{2}=\|\rho\|^{2}/N^{2}=\frac1n\|P_{W_R}z\|^{2}$ and likewise for columns;
-\item $\|P_{W_D}z\|^{2}=\frac1N\,\delta^{\mathsf T}G^{-1}\delta$, while $\Cov(D_{\mathrm m},Z)^{2}+\Cov(D_{\mathrm a},Z)^{2}=\delta^{\mathsf T}\delta/N^{2}$;
-\item consequently
-\begin{equation}
-\Efull(S)=\frac1n\Bigl(\|P_{W_R}z\|^{2}+\|P_{W_C}z\|^{2}\Bigr)+\frac{\delta^{\mathsf T}\delta}{N^{2}}=Q\bigl(P_Wz\bigr),
-\label{eq:Efull_projection}
-\end{equation}
-where $Q(w)=\frac1n\|P_{W_R}w\|^{2}+\frac1n\|P_{W_C}w\|^{2}+\frac1{N^{2}}w_D^{\mathsf T}G^{2}w_D$ ($w_D$ the coordinates of
-$P_{W_D}w$ in the basis $\tilde D_{\mathrm m},\tilde D_{\mathrm a}$) is a positive-definite quadratic form on $W$.
-In particular $\Efull$ depends on $z$ only through $P_Wz$; but $\Efull\ne\|P_Wz\|^{2}$ in general, because the centred
-indicators are not an orthonormal system.
-\end{enumerate}
-\end{lemma}
-
-\begin{proof}
-(1) The orthogonal projection of $z$ onto the functions of $i$ alone is the function of row means $(i,j)\mapsto\rho_i/n$, which
-has zero mean because $z$ does, so it is $P_{W_R}z$; its squared norm is $\|\rho\|^{2}/n^{3}$ while
-$\sum_k\Cov(R_k,Z)^{2}=\|\rho\|^{2}/n^{4}$ by \Cref{lem:variances}(3).  Columns are identical.
-(2) The Gram matrix of $(\tilde D_{\mathrm m},\tilde D_{\mathrm a})$ is $G/N$ and the vector of inner products with $z$ is
-$\delta/N$, so $\|P_{W_D}z\|^{2}=(\delta/N)^{\mathsf T}(G/N)^{-1}(\delta/N)=\frac1N\delta^{\mathsf T}G^{-1}\delta$.
-(3) Sum (1) and (2).  If $P_{W_D}z=w_{\mathrm m}\tilde D_{\mathrm m}+w_{\mathrm a}\tilde D_{\mathrm a}$ then $\delta=Gw_D$,
-so $\delta^{\mathsf T}\delta/N^{2}=w_D^{\mathsf T}G^{2}w_D/N^{2}$; each piece of $Q$ is positive definite on its orthogonal
-summand ($G$ is invertible), so $Q$ is positive definite on $W$.
-\end{proof}
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=\textwidth]{figures/fig_decomposition.pdf}
-\caption{The projection lemma for $n=4$. (a)~The arrangement of \Cref{rem:four_term_insufficient}, shaded by the height $z$, with its row and column deviations (the diagonal sums are both $34$). (b)~Schematic: $z$ splits orthogonally into $P_Wz\in W$ and a component in $W^{\perp}\cap\mathbf 1^{\perp}$; the arrangement is magic if and only if the first component vanishes. (c)~Squared norms $\|P_{W_R}z\|^2,\|P_{W_C}z\|^2,\|P_{W_D}z\|^2$ and that of the complement, for the square of (a) ($3.38+2.81+0+15.06$) and for D\"urer's magic square (all of $\|z\|^2=21.25$ lies in the complement).}
-\label{fig:decomposition}
-\end{figure}
-
-\begin{lemma}[Zero set of the energies]
-\label{lem:zero_set}
-For every arrangement $S$ of $\{1,\dots,N\}$:
-\begin{enumerate}
-\item $\Efull(S)=0\iff P_Wz=0\iff z\perp W\iff S$ is a magic square.
-\item $\sum_k\Cov(R_k,Z)^{2}+\sum_\ell\Cov(C_\ell,Z)^{2}=0\iff z\perp W_R\oplus W_C\iff S$ is semi-magic.
-\item $\Elow(S)=0\implies$ both diagonals sum to $M(n)$; the implication
-``$\Elow(S)=0\implies S$ magic'' holds for $n=3$ and fails for $n=4$ (\Cref{rem:n3_lowmode}, \Cref{prop:L4}).
-\end{enumerate}
-\end{lemma}
-
-\begin{proof}
-(1) $\Efull(S)=0$ iff $Q(P_Wz)=0$ iff $P_Wz=0$ iff $z\perp W$, and by \eqref{eq:Efull_devs} iff all line deviations vanish.
-(2) is the same with the diagonal terms removed; (3) is immediate from \eqref{eq:Elow} and \Cref{rem:n3_lowmode}.
-\end{proof}
-
-\begin{remark}[What the projection lemma does and does not say]
-\label{rem:tautology}
-\Cref{lem:zero_set}(1) is the definition of a magic square rewritten in the language of orthogonality; it is not a theorem
-about magic squares, and we do not present it as one.  Its use is as a change of viewpoint, which makes three things available
-that are not visible in the line-sum formulation: (i) $W$ can be replaced by polynomial test functions
-(\Cref{sec:theory_hierarchy}), which produces a hierarchy of relaxations whose degree-two level implies Loly's inertia
-invariance, and orthogonality to $W$ is a balance condition on the signed mass $z$ (\Cref{sec:balance}); (ii) for a uniformly random arrangement the quantities $\langle\varphi,z\rangle$ are permutation statistics in the
-sense of Hoeffding, with computable moments and limit law (\Cref{sec:random_energy}); (iii) a single swap changes $z$ by a
-multiple of a difference of two cell indicators, and \eqref{eq:Efull_devs} turns the change of $\Efull$ into a two-line count
-(\Cref{sec:theory_swap}).
-\end{remark}
-
-\subsection{The moment hierarchy}
+\subsection{Moment conditions}
 \label{sec:theory_hierarchy}
 
-The functions $x$ and $y$ are the degree-one polynomials in the column and row index.  Replacing them by
-higher powers gives a natural family of relaxations of the semi-magic condition.
+For a centred $f\in\mathcal F$ let $\gamma_j(f)=\sum_if_{ij}$ and $\rho_i(f)=\sum_jf_{ij}$ be its column and row sums; for $f=z(S)$ these are the deviations $\gamma,\rho$ of $S$.
+For $\gamma\in\R^n$ put $P_\gamma(t)=\sum_{j=0}^{n-1}\gamma_jt^j$.
 
 \begin{definition}[Degree-$k$ conditions]
 \label{def:degree_k}
-Let $f\in\mathcal F$ be centred ($\langle f,\mathbf 1\rangle=0$) and $k\ge1$.  We say $f$ satisfies the
-\emph{degree-$k$ conditions} if
-\[
-\langle x^{m},f\rangle=0\quad\text{and}\quad\langle y^{m},f\rangle=0\qquad\text{for all }1\le m\le k .
-\]
-For $f=z(S)$ these read $\Cov(X^{m},Z)=\Cov(Y^{m},Z)=0$ for $1\le m\le k$, by \Cref{lem:variances}(1).
+A centred $f\in\mathcal F$ satisfies the \emph{degree-$k$ conditions} ($k\ge1$) if $\langle x^{m},f\rangle=\langle y^{m},f\rangle=0$ for $1\le m\le k$.
+For $f=z(S)$ these read $\sum_{i,j}z_{ij}x_j^m=\sum_{i,j}z_{ij}y_i^m=0$, i.e.\ $\Cov(X^m,Z)=\Cov(Y^m,Z)=0$.
 \end{definition}
 
-Write $x_j=j-\frac{n-1}2$ and $y_i=\frac{n-1}2-i$ for the $n$ distinct values taken by $x$ and $y$, and
-for centred $f$ let $\gamma_j(f)=\sum_i f_{ij}$ and $\rho_i(f)=\sum_j f_{ij}$ be its column and row sums
-(for $f=z(S)$ these are the deviations $\gamma,\rho$ of \eqref{eq:line_dev}).
+\begin{lemma}[Polynomial form]
+\label{lem:poly_form}
+If $\varphi$ depends only on the column index, $\langle\varphi,f\rangle=\frac1N\sum_j\varphi(j)\gamma_j(f)$; similarly for rows.
+For $\gamma\in\R^{n}$ and $k\ge0$ the following are equivalent:
+(i)~$\sum_jx_j^{m}\gamma_j=0$ for $0\le m\le k$;
+(ii)~$\sum_j\binom{j}{r}\gamma_j=0$ for $0\le r\le k$;
+(iii)~$(t-1)^{k+1}$ divides $P_\gamma(t)$.
+Hence a centred $f$ satisfies the degree-$k$ conditions if and only if $(t-1)^{k+1}$ divides both $P_{\gamma(f)}$ and $P_{\rho(f)}$.
+\end{lemma}
+
+\begin{proof}
+The first statement is $\sum_{i,j}\varphi(j)f_{ij}=\sum_j\varphi(j)\gamma_j(f)$.
+The families $(x_j^{m})_{m\le k}$ and $(\binom{j}{r})_{r\le k}$ both span the restrictions to $\{0,\dots,n-1\}$ of the polynomials of degree at most $k$ in $j$, so (i)$\Leftrightarrow$(ii); and $P_\gamma(t)=\sum_{r}\bigl(\sum_j\binom jr\gamma_j\bigr)(t-1)^{r}$ is the Taylor expansion at $t=1$, so (ii)$\Leftrightarrow$(iii).
+The case $m=0$ of (i) holds for every centred $f$.
+\end{proof}
 
 \begin{proposition}[Moment hierarchy]
 \label{prop:hierarchy}
 Let $n\ge3$ and let $f\in\mathcal F$ be centred.
 \begin{enumerate}
-\item[(a)] For every function $\varphi$ that depends only on the column index, $\langle\varphi,f\rangle=\frac1N\sum_j\varphi(j)\gamma_j(f)$;
-in particular $\langle x^{m},f\rangle=\frac1N\sum_j x_j^{m}\gamma_j(f)$ and $\langle y^{m},f\rangle=\frac1N\sum_i y_i^{m}\rho_i(f)$ for all $m\ge0$.
-Hence if $\gamma(f)=0$ and $\rho(f)=0$ (for $f=z(S)$: if $S$ is semi-magic), then
-$\langle x^{m},f\rangle=\langle y^{m},f\rangle=0$ for \emph{every} $m\ge0$.
+\item[(a)] If $\gamma(f)=\rho(f)=0$, then $\langle a(X)+b(Y),f\rangle=0$ for all functions $a,b$ on $\{x_0,\dots,x_{n-1}\}$; in particular $f$ satisfies the degree-$k$ conditions for every $k$.
+For $f=z(S)$ with $S$ magic, also $\langle a(X)+b(Y)+c_1\mathbf 1_{D_{\mathrm m}}+c_2\mathbf 1_{D_{\mathrm a}},z\rangle=0$.
 \item[(b)] If $k\ge n-1$, the degree-$k$ conditions imply $\gamma(f)=\rho(f)=0$.
-\item[(c)] If $1\le k\le n-2$, there is a centred $f$ satisfying the degree-$k$ conditions with $\gamma(f)\ne0$;
-explicitly, $f_{ij}=\frac1n(-1)^{j}\binom{k+1}{j}$ for $0\le j\le k+1$ and $f_{ij}=0$ for $j>k+1$.
-This $f$ violates the degree-$(k+1)$ condition.
+\item[(c)] If $1\le k\le n-2$, the function $f_{ij}=\frac1n(-1)^{j}\binom{k+1}{j}$ ($0\le j\le k+1$), $f_{ij}=0$ ($j>k+1$), satisfies the degree-$k$ conditions but not the degree-$(k+1)$ conditions, and $\gamma(f)\ne0$.
 \end{enumerate}
-Thus, for real-valued height functions, the degree-$k$ conditions are equivalent to ``equal row sums and equal
-column sums'' exactly when $k\ge n-1$.
 \end{proposition}
 
-Parts (b) and (c) are the invertibility of the Vandermonde matrix of the nodes $x_0,\dots,x_{n-1}$, and we claim no
-novelty for them; the threshold $n-1$ is the benchmark against which \Cref{thm:perm_threshold} is measured.  Part (a) is,
-in physical language, the vanishing of the axial moments $\sum_{ij}z_{ij}x_j^{m}$ of the signed charge distribution $z$ of a semi-magic square (\Cref{rem:multipole}), in the spirit of Rogers and Loly's multipole analysis of a magic cube \cite{rogers2005multipole}.  Note that the hierarchy uses
-the pure powers $x^{m},y^{m}$ only: the mixed moments $\sum_{ij}s_{ij}x_j^{a}y_i^{b}$ with $a,b\ge1$, beginning with the
-product of inertia $\sum_{ij}s_{ij}x_jy_i$, are not determined by the line sums (\Cref{rem:product_inertia}).
-
 \begin{proof}
-(a) $\langle\varphi,f\rangle=\frac1N\sum_j\varphi(j)\sum_i f_{ij}=\frac1N\sum_j\varphi(j)\gamma_j(f)$; the row statement is symmetric.
-The last sentence is immediate.
-
-(b) Suppose $\langle x^{m},f\rangle=0$ for $1\le m\le k$ with $k\ge n-1$.  Together with
-$\sum_j\gamma_j(f)=\sum_{i,j}f_{ij}=0$ (the case $m=0$), part (a) says that $\gamma(f)\in\R^{n}$ is orthogonal to the
-$n$ vectors $(x_j^{m})_{j}$, $m=0,\dots,n-1$.  These are the columns of the Vandermonde matrix of the $n$
-\emph{distinct} nodes $x_0,\dots,x_{n-1}$, which is invertible; hence they span $\R^{n}$ and $\gamma(f)=0$.
-The same argument with the nodes $y_i$ gives $\rho(f)=0$.
-
-(c) Let $v_j=(-1)^{j}\binom{k+1}{j}$ for $0\le j\le k+1$ and $v_j=0$ for $k+1<j\le n-1$ (this needs
-$k+1\le n-1$).  For a polynomial $p$ define the forward difference $(\Delta p)(t)=p(t+1)-p(t)$; $\Delta$
-lowers the degree of a nonconstant polynomial by exactly one and kills constants, so $\Delta^{k+1}p=0$ whenever
-$\deg p\le k$.  Writing $E$ for the shift $(Ep)(t)=p(t+1)$ we have $\Delta=E-1$, and since $E$ and $1$ commute
-the binomial theorem gives $\Delta^{k+1}=\sum_{j=0}^{k+1}\binom{k+1}{j}(-1)^{k+1-j}E^{j}$, i.e.
-\begin{equation}
-(\Delta^{k+1}p)(0)=(-1)^{k+1}\sum_{j=0}^{k+1}(-1)^{j}\binom{k+1}{j}\,p(j)=(-1)^{k+1}\sum_{j=0}^{n-1}v_j\,p(j).
-\label{eq:finite_diff}
-\end{equation}
-Taking $p(t)=(t-\frac{n-1}2)^{m}$ with $0\le m\le k$ shows $\sum_j v_jx_j^{m}=0$; in particular ($m=0$)
-$\sum_jv_j=0$.  Now set $f_{ij}=v_j/n$.  Then $\sum_{i,j}f_{ij}=\sum_jv_j=0$, so $f$ is centred;
-$\rho_i(f)=\frac1n\sum_jv_j=0$ for every $i$, so all $\langle y^{m},f\rangle$ vanish by (a);
-$\gamma_j(f)=v_j$, so $\langle x^{m},f\rangle=\frac1N\sum_jv_jx_j^{m}=0$ for $1\le m\le k$ by \eqref{eq:finite_diff};
-and $\gamma_0(f)=v_0=1\ne0$.  Finally, for $p(t)=(t-\frac{n-1}2)^{k+1}$ we have $\Delta^{k+1}p\equiv(k+1)!\ne0$,
-so $\langle x^{k+1},f\rangle=\pm(k+1)!/N\ne0$.
+(a) is the first statement of \Cref{lem:poly_form}.  (b) A nonzero polynomial of degree at most $n-1$ is not divisible by $(t-1)^{n}$.  (c) Here $\rho(f)=0$ and $P_{\gamma(f)}(t)=(1-t)^{k+1}$.
 \end{proof}
 
-\begin{corollary}[$\Elow$ is the degree-one truncation]
-\label{cor:Elow_degree1}
-$\Elow(S)=\langle x,z\rangle^{2}+\langle y,z\rangle^{2}+(\delta_{\mathrm m}^{2}+\delta_{\mathrm a}^{2})/N^{2}$, so
-$\Elow(S)=0$ iff $z$ satisfies the degree-$1$ conditions and both diagonals sum to $M(n)$ (\Cref{lem:variances}).
-By \Cref{prop:hierarchy}(a) every magic square has $\Elow=0$; by \Cref{prop:hierarchy}(c) the degree-$1$ conditions
-characterise equal line sums among real height functions only when $n-1\le1$, i.e.\ never for $n\ge3$.
-\end{corollary}
+Part (a) contains the vanishing of the centre of mass $\sum_cz_c(x_c,y_c)$ and of all axial moments $\sum_cz_cx_c^m$, $\sum_cz_cy_c^m$ of a semi-magic square, in the spirit of the multipole analysis of a magic cube by Rogers and Loly \cite{rogers2005multipole}.
+Parts (b) and (c) are the invertibility of a Vandermonde matrix.
+The mixed moments are not determined by the line sums:
 
-\begin{corollary}[Loly's invariant from the hierarchy]
+\begin{remark}[Mixed moments]
+\label{rem:product_inertia}
+The magic square with rows $(1,6,11,16)$, $(8,15,2,9)$, $(12,3,14,5)$, $(13,10,7,4)$ has $\sum_cz_cx_cy_c=60$.
+Among the $880$ magic squares of order $4$ up to $D_4$, the product of inertia $\sum_cz_cx_cy_c$ is nonzero for $824$, takes $48$ distinct absolute values between $0$ and $60$, and $\sum_cz_cx_c^2y_c$, $\sum_cz_cx_cy_c^2$ are nonzero for $623$ and $773$ of them.
+For $n=3$ the mixed moment $\sum_cz_cx_cy_c$ vanishes for all eight magic squares, because $s_c+s_{-c}=10$ for centrally opposite cells, so $z$ is odd under $(x,y)\mapsto(-x,-y)$ while $xy$ is even.
+\end{remark}
+
+\begin{corollary}[Loly's invariant {\cite{loly2004invariance}}]
 \label{cor:loly}
-Place a mass $s_{ij}$ at the planar point $(x_{ij},y_{ij})$ and let
-$I(S)=\sum_{i,j}s_{ij}\bigl(x_{ij}^{2}+y_{ij}^{2}\bigr)$ be the moment of inertia about the centre \cite{loly2004invariance}.
-Then for every arrangement
+Let $I(S)=\sum_{i,j}s_{ij}(x_{j}^{2}+y_{i}^{2})$ be the moment of inertia about the centre of the masses $s_{ij}$ placed at $(x_j,y_i)$.  For every arrangement,
 \begin{equation}
 I(S)=N\,\Cov\bigl(Z,\,X^{2}+Y^{2}\bigr)+\frac{n^{2}(n^{4}-1)}{12}
 =\sum_j x_j^{2}\gamma_j+\sum_i y_i^{2}\rho_i+\frac{n^{2}(n^{4}-1)}{12}.
 \label{eq:loly_identity}
 \end{equation}
-Hence $I(S)$ takes Loly's value $n^{2}(n^{4}-1)/12$ if and only if the single condition $\Cov(Z,X^{2}+Y^{2})=0$ holds.
-This condition is implied by the degree-$2$ conditions of \Cref{def:degree_k}, and therefore (\Cref{prop:hierarchy}(a)) by the
-semi-magic property, but it is much weaker than the degree-$2$ conditions (see below).
-The two halves $I_x=\sum_jx_j^{2}(\gamma_j+M(n))$ and $I_y=\sum_iy_i^{2}(\rho_i+M(n))$ each equal $n^{2}(n^{4}-1)/24$ for
-semi-magic squares.
-\end{corollary}
-
-The invariance and its validity for semi-magic squares are Loly's \cite{loly2004invariance}: his derivation writes
-$I=I_x+I_y$ with $I_x=\sum_jx_j^{2}\cdot(\text{column sum }j)$, $I_y=\sum_iy_i^{2}\cdot(\text{row sum }i)$, uses the row and
-column sums only, and gives $I_x=I_y=n^{2}(n^{4}-1)/24$.  The corollary re-derives this; what it adds is the decomposition
-\eqref{eq:loly_identity} into a degree-two cross-moment plus a constant, and the observation that the invariance is one scalar
-condition rather than the degree-two level.  How much weaker the single condition is can be seen for $n=3$ by enumeration
-of all $9!$ arrangements (\texttt{anc/verify\_numbers.py}): $24{,}192$ of them have $I=60$, against $72$ satisfying the
-degree-$2$ conditions (the semi-magic squares, \Cref{rem:n3_lowmode}).  Loly's value $n^2(n^4-1)/12$ equals $60$, $340$, $1300$, $3885$, $9800$, $21840$, $44280$ for $n=3,\dots,9$.
-
-\begin{proof}
-Substitute $s_{ij}=z_{ij}+\frac{N+1}2$:
-$I(S)=\sum_{i,j}z_{ij}(x_{ij}^{2}+y_{ij}^{2})+\frac{N+1}2\sum_{i,j}(x_{ij}^{2}+y_{ij}^{2})$.
-The first sum is $N\Cov(X^{2}+Y^{2},Z)$ by \Cref{lem:variances}(1) and equals
-$\sum_jx_j^{2}\gamma_j+\sum_iy_i^{2}\rho_i$ by \Cref{prop:hierarchy}(a); the second is
-$\frac{N+1}2\cdot2\cdot\frac{n^{2}(n^{2}-1)}{12}=\frac{n^{2}(n^{4}-1)}{12}$ by \Cref{lem:variances}(2).
-For semi-magic squares $\gamma=\rho=0$ and $I_x=M(n)\sum_jx_j^{2}=\frac{n(n^{2}+1)}2\cdot\frac{n(n^{2}-1)}{12}$.
-\end{proof}
-
-\begin{corollary}[Null distribution of Loly's invariant]
-\label{cor:loly_null}
-For a uniformly random arrangement $S$ of order $n$,
-\begin{equation}
-\E[I(S)]=\frac{n^{2}(n^{4}-1)}{12},\qquad
-\Var\bigl(I(S)\bigr)=N^{2}\sigma_n^{2}\,\Var(X^{2}+Y^{2})=\frac{n^{4}(n^{4}-1)(n^{2}-4)}{1080},
-\label{eq:loly_null}
-\end{equation}
-where $\sigma_n^{2}=(n^{2}+1)/12$ and $\Var(X^{2}+Y^{2})=(n^{2}-1)(n^{2}-4)/90$ is the variance of $x^{2}+y^{2}$ over the $N$ cells.
-The mean equals Loly's value for every distribution of arrangements that is invariant under relabelling of the values
-$1,\dots,N$ (in particular the uniform distribution):
-magic and semi-magic squares sit exactly at the population mean of $I$, and the invariance says that their fluctuation
-vanishes, not that their value is extreme.  For $n=3$, $\Var(I)=30$ (standard deviation $5.48$; $29$ values from $46$ to $74$);
-for $n=4$, $\Var(I)=2176/3$ (standard deviation $26.9$), and $2.9\%$ of arrangements have $I=340$.
+Hence $I(S)=n^{2}(n^{4}-1)/12$ if and only if the single condition $\Cov(Z,X^{2}+Y^{2})=0$ holds; it is implied by the degree-$2$ conditions, hence by the semi-magic property.
 \end{corollary}
 
 \begin{proof}
-$N\Cov(Z,X^{2}+Y^{2})=\sum_c\bigl(x_c^{2}+y_c^{2}-\overline{x^{2}+y^{2}}\bigr)z_{\pi(c)}$ is a linear permutation statistic
-with mean $0$ (\Cref{sec:bg_perm}); by \eqref{eq:ww_identity} with $a=x^{2}+y^{2}$ and $b=z$ its variance is
-$\frac1{N-1}\cdot N\Var(X^{2}+Y^{2})\cdot N\Var(Z)=N^{2}\sigma_n^{2}\Var(X^{2}+Y^{2})$, as in \Cref{prop:random_energy_moments}.
-Since $X$ and $Y$ are independent and uniform on $n$ equally spaced points, $\Var(X^{2}+Y^{2})=2\Var(X^{2})=2(\E X^{4}-(\E X^{2})^{2})$
-with $\E X^{2}=(n^{2}-1)/12$ and $\E X^{4}=(n^{2}-1)(3n^{2}-7)/240$, which gives $(n^{2}-1)(n^{2}-4)/90$.
-The $n=3$ values are confirmed by enumeration of all $9!$ arrangements, and the $n=4$ values by exact enumeration over the assignments of values to the three radial shells of the grid (\texttt{anc/verify\_numbers.py}).
+Substitute $s_{ij}=z_{ij}+\frac{N+1}2$ and use \Cref{lem:variances} and \Cref{lem:poly_form}: $\frac{N+1}2\sum_{i,j}(x_j^{2}+y_i^{2})=\frac{N+1}2\cdot\frac{n^{2}(n^{2}-1)}{6}$.
 \end{proof}
 
-\Cref{prop:hierarchy} is a statement about real-valued height functions.  For arrangements, i.e.\ for
-$f=z(S)$ with $S$ a permutation of $\{1,\dots,N\}$, the integrality and boundedness of the line sums
-change the picture in an interesting way.
+Loly's derivation uses the row and column sums in the same way \cite{loly2004invariance}.
+The single condition is much weaker than the degree-$2$ conditions: for $n=3$, $24{,}192$ of the $9!$ arrangements have $I=60$, while $72$ (the semi-magic squares, \Cref{rem:n3_lowmode}) satisfy the degree-$2$ conditions.
+The energy $\Elow$ of \eqref{eq:Elow} combines the degree-$1$ conditions with the two diagonal conditions: $\Elow=\langle x,z\rangle^2+\langle y,z\rangle^2+(\delta_{\mathrm m}^2+\delta_{\mathrm a}^2)/N^2$.
 
-\begin{theorem}[Integrality lowers the permutation threshold]
-\label{thm:perm_threshold}
-For $n\ge3$ let $k^{*}(n)$ be the least $k$ such that every arrangement $S$ of $\{1,\dots,N\}$ satisfying
-the degree-$k$ conditions is semi-magic.  Then $k^{*}(n)\le n-2$ for all $n\ge14$: for such $n$ the degree-$(n-2)$
-conditions already force equal row and column sums.
-By contrast $k^{*}(n)\le n-1$ for all $n$ (\Cref{prop:hierarchy}(b)), with equality for $n=3,4$: $k^{*}(3)=2$ and $k^{*}(4)=3$
-by the witnesses
-\begin{align*}
-n=3,\ \text{degree }1:&\quad
-\begin{pmatrix}1&3&9\\8&6&5\\7&4&2\end{pmatrix},\qquad \gamma=(1,-2,1),\ \rho=(-2,4,-2);\\[2pt]
-n=4,\ \text{degree }2:&\quad
-\begin{pmatrix}14&2&5&13\\8&15&7&4\\12&3&9&10\\1&11&16&6\end{pmatrix},\qquad \gamma=(1,-3,3,-1),\ \rho=0.
-\end{align*}
-\end{theorem}
+\subsection{The permutation threshold}
+\label{sec:kstar}
 
-\begin{proof}
-\emph{Lower bounds.}  For the $3\times3$ array, the column sums are $16,13,16$ and the row sums $13,19,13$, so
-$\gamma=(1,-2,1)$, $\rho=(-2,4,-2)$ and $\sum_jx_j\gamma_j=(-1)(1)+0+(1)(1)=0$, $\sum_iy_i\rho_i=(1)(-2)+0+(-1)(-2)=0$:
-the degree-$1$ conditions hold but the square is not semi-magic, so $k^{*}(3)\ge2$.
-For the $4\times4$ array, every row sums to $34$ and the column sums are $35,31,37,33$, so $\rho=0$ and
-$\gamma=(1,-3,3,-1)$, which is the vector $v$ of \Cref{prop:hierarchy}(c) with $k=2$; hence
-$\sum_jx_j^{m}\gamma_j=0$ for $m=1,2$ by \eqref{eq:finite_diff}, the degree-$2$ conditions hold, and the square
-is not semi-magic, so $k^{*}(4)\ge3$.
+By \Cref{prop:hierarchy}, for real-valued $f$ the degree-$k$ conditions force equal row and column sums exactly when $k\ge n-1$.
+For arrangements the deviations are integers of bounded size, and the threshold drops.
 
-\emph{The bound for $n\ge14$.}  Let $S$ satisfy the degree-$(n-2)$ conditions.  By \Cref{prop:hierarchy}(a), $\gamma$ is orthogonal to the
-$n-1$ linearly independent vectors $(x_j^{m})_j$, $m=0,\dots,n-2$, so it lies in their one-dimensional orthogonal
-complement in $\R^{n}$.  By \eqref{eq:finite_diff} with $k+1=n-1$, this complement is spanned by
-$v_j=(-1)^{j}\binom{n-1}{j}$, $j=0,\dots,n-1$ (which is orthogonal to all polynomials of degree $\le n-2$ and
-nonzero).  So $\gamma=tv$ with $t=\gamma_0\in\Z$ because $v_0=1$ and $\gamma$ is an integer vector.
-On the other hand every column sum of a permutation of $\{1,\dots,N\}$ lies between the sum of the $n$ smallest
-and the sum of the $n$ largest values, so
+\begin{definition}
+\label{def:kstar}
+For $n\ge3$, $k^*(n)$ is the least $k\ge1$ such that every arrangement of order $n$ satisfying the degree-$k$ conditions is semi-magic.
+\end{definition}
+
+By \Cref{prop:hierarchy}(b), $k^*(n)\le n-1$.
+By \Cref{lem:poly_form}, an arrangement satisfies the degree-$k$ conditions if and only if $\gamma$ and $\rho$ lie in the lattice
 \[
-|\gamma_j|\le\sum_{v=N-n+1}^{N}v-M(n)=\frac{n(2N-n+1)}{2}-\frac{n(N+1)}{2}=\frac{n(N-n)}{2}=\frac{n^{2}(n-1)}{2}.
+\Lambda_{n,k}=\{\gamma\in\Z^{n}:(t-1)^{k+1}\mid P_\gamma(t)\}=(t-1)^{k+1}\,\Z[t]_{<n-k-1},
 \]
-If $t\ne0$ then $\max_j|\gamma_j|\ge\binom{n-1}{\lfloor(n-1)/2\rfloor}$.  We claim
-$\binom{n-1}{\lfloor(n-1)/2\rfloor}>\frac{n^{2}(n-1)}2$ for all $n\ge14$.  For $n=14$: $\binom{13}{6}=1716>1274=\frac{14^{2}\cdot13}{2}$.
-Passing from $n$ to $n+1$ multiplies the left side by $\binom{n}{\lfloor n/2\rfloor}/\binom{n-1}{\lfloor(n-1)/2\rfloor}$,
-which equals $2$ for $n$ even and $\frac{2n}{n+1}\ge\frac{28}{15}$ for odd $n\ge14$, while it multiplies the right side by
-$\frac{(n+1)^{2}n}{n^{2}(n-1)}=\frac{(n+1)^{2}}{n(n-1)}\le\frac{225}{182}<\frac{28}{15}$ for $n\ge14$; the claim follows by induction.
-Hence $t=0$ and $\gamma=0$; the same argument applied to the rows gives $\rho=0$.
-\end{proof}
+of rank $n-k-1$.
+Writing $\gamma=\gamma^+-\gamma^-$ with $\gamma^\pm\ge0$, the condition $\gamma\in\Lambda_{n,k}$ says that the multisets in which $j$ occurs $\gamma^+_j$, resp.\ $\gamma^-_j$, times have equal power sums of degrees $0,\dots,k$: a Prouhet--Tarry--Escott system \cite{wright1959prouhet,borwein2002computational}.
+Small vectors in $\Lambda_{n,k}$ are classical: the Prouhet--Thue--Morse vector $\bigl((-1)^{s_2(j)}\bigr)_{0\le j<2^{k+1}}$ ($s_2$ the binary digit sum) has entries $\pm1$ and lies in $\Lambda_{2^{k+1},k}$ \cite{wright1959prouhet,allouche1999ubiquitous}, and Borwein, Erd\'elyi and K\'os construct polynomials of degree $n$ with coefficients in $\{-1,0,1\}$ vanishing to order $\ge c\sqrt{n/\log n}$ at $1$ \cite[Thm.~2.7]{BEK1999}.
+The question is therefore how large $k$ can be for vectors that are column-deviation vectors of arrangements.
 
-\begin{remark}[$k^{*}(n)=n-1$ for $5\le n\le13$; computer-verified]
-\label{rem:kstar_search}
-For each $5\le n\le13$ a randomised swap search found an arrangement with all row sums equal to $M(n)$ and column deviations
-$\gamma_j=(-1)^{j}\binom{n-1}{j}$; by \eqref{eq:finite_diff} such an arrangement satisfies the degree-$(n-2)$ conditions
-without being semi-magic, so $k^{*}(n)=n-1$ for all $3\le n\le13$.  The $n=5$ witness is printed in \Cref{sec:app_witnesses};
-all nine are in the ancillary file \texttt{anc/data\_witnesses\_variances.json} and verified in exact integer arithmetic by
-\texttt{anc/verify\_numbers.py}.  Thus the permutation threshold agrees with the linear-algebra threshold exactly for $n\le13$ and drops
-below it from $n=14$ on; determining $k^{*}(n)$ for $n\ge14$ is open (\Cref{sec:discussion}).
-\end{remark}
-
-\begin{remark}[The low-mode energy for $n=3$]
-\label{rem:n3_lowmode}
-Exhaustive enumeration of the $9!$ arrangements in exact arithmetic (\texttt{anc/verify\_numbers.py}) gives $760$ arrangements
-satisfying the degree-$1$ conditions, exactly $72$ (the semi-magic squares) satisfying the degree-$2$ conditions, in accordance
-with $k^{*}(3)=2$, and exactly $8$ satisfying the degree-$1$ conditions together with both diagonal conditions---the magic
-squares.  So for $n=3$, $\Elow(S)=0\iff S$ is magic, but for the ``wrong'' reason: the degree-$1$ conditions leave the
-families $\gamma=t(1,-2,1)$, $\rho=u(1,-2,1)$ open, and the two diagonal conditions combined with the permutation constraint
-happen to force $t=u=0$.  Nothing of the sort survives for $n=4$: the arrangement of \Cref{rem:four_term_insufficient} has
-$\Elow=0$ with $\gamma=(3,-9,9,-3)$, $\rho=(-6,4,10,-8)$; it satisfies the degree-$2$ condition in $x$ but not in $y$
-($\sum_iy_i^{2}\rho_i=-28$).
-\end{remark}
-
-\subsection{The single-swap formula}
-\label{sec:theory_swap}
-
-Let $a\ne b$ be two cells and let $S^{ab}$ be the arrangement obtained from $S$ by exchanging the entries in
-$a$ and $b$.  Define
-\begin{align*}
-m(a,b)&=\#\{\text{lines }L:\ L\text{ contains exactly one of }a,b\},\\
-u_S(c)&=\sum_{L\ni c}\delta_L(S)\qquad(\text{sum over the lines through }c).
-\end{align*}
-
-\begin{theorem}[Single-swap formula]
-\label{thm:swap}
-For every arrangement $S$ and cells $a\ne b$, with $d=s_b-s_a$,
-\begin{equation}
-N^{2}\bigl(\Efull(S^{ab})-\Efull(S)\bigr)=d^{2}\,m(a,b)+2d\,\bigl(u_S(a)-u_S(b)\bigr).
-\label{eq:swap_general}
-\end{equation}
-In particular, if $S$ is a magic square then, with $d=|s_a-s_b|$,
-\begin{equation}
-\Efull(S^{ab})=\frac{d^{2}\,m(a,b)}{N^{2}} .
-\label{eq:swap_magic}
-\end{equation}
+\begin{theorem}[The permutation threshold]
+\label{thm:perm_threshold}
+\leavevmode
+\begin{enumerate}
+\item[(a)] For all $n\ge3$, $\displaystyle k^{*}(n)\le\Bigl\lfloor\sqrt{\pi e\,(n-1)\log(n^{4}/4)}\Bigr\rfloor\le 2\sqrt{\pi e}\,\sqrt{n\log n}$.
+\item[(b)] $\displaystyle\liminf_{n\to\infty}\frac{k^{*}(n)}{\sqrt n}\ge\sqrt2$.
+\item[(c)] $k^{*}(n)=n-1$ for $3\le n\le13$, $k^{*}(n)=n-2$ for $14\le n\le17$, and $k^{*}(n)\le n-3$ for every $n\ge18$.  The values for $14\le n\le40$ are those of \Cref{tab:kstar}.
+\end{enumerate}
 \end{theorem}
 
-\begin{proof}
-The swap changes the height function by $z(S^{ab})=z(S)+d(\mathbf 1_a-\mathbf 1_b)$.  For a line $L$,
-$\delta_L(S^{ab})=\delta_L(S)+d\bigl(\mathbf 1_L(a)-\mathbf 1_L(b)\bigr)$: the deviation increases by $d$ if $L$
-contains $a$ but not $b$, decreases by $d$ if $L$ contains $b$ but not $a$, and is unchanged if $L$ contains both
-or neither.  By \eqref{eq:Efull_devs},
-\begin{align*}
-N^{2}\Delta \Efull&=\sum_{L\ni a,\,L\not\ni b}\bigl[(\delta_L+d)^{2}-\delta_L^{2}\bigr]
-+\sum_{L\ni b,\,L\not\ni a}\bigl[(\delta_L-d)^{2}-\delta_L^{2}\bigr]\\
-&=d^{2}m(a,b)+2d\Bigl(\sum_{L\ni a,\,L\not\ni b}\delta_L-\sum_{L\ni b,\,L\not\ni a}\delta_L\Bigr).
-\end{align*}
-Adding and subtracting the lines containing both $a$ and $b$ turns the bracket into $u_S(a)-u_S(b)$.
-If $S$ is magic, all $\delta_L(S)=0$, so $u_S\equiv0$ and $\Efull(S)=0$, giving \eqref{eq:swap_magic}.
-\end{proof}
+The constant $2\sqrt{\pi e}$ is about $5.84$.
+Part (a) improves on $k^*(n)\le n-3$ only for $n\ge166$; for smaller $n$ the exact computation behind (c) is much stronger (\Cref{fig:kstar}).
+Parts (c) for $n\ge14$ and the values in \Cref{tab:kstar} rest on exact computer calculations, described in \Cref{sec:kstar_exact}.
 
-\begin{lemma}[The multiplicity $m(a,b)$]
-\label{lem:m_values}
-For distinct cells $a=(i,j)$, $b=(i',j')$:
-\begin{align*}
-m(a,b)=2\cdot[i\ne i']+2\cdot[j\ne j']&+[\text{exactly one of }a,b\text{ on the main diagonal}]\\
-&+[\text{exactly one of }a,b\text{ on the anti-diagonal}].
-\end{align*}
-Hence $2\le m(a,b)\le6$, and $m(a,b)=2$ if and only if $a$ and $b$ lie in a common row or a common column and
-neither of them lies on a diagonal.  Such pairs exist for every $n\ge3$ (for $n=3$ exactly one pair up to $D_4$:
-the two non-central cells of the middle row or column; for $n\ge4$ any two off-diagonal cells of a row).
+\subsection{Proof of the upper bound}
+\label{sec:kstar_upper}
+
+\begin{lemma}[Column feasibility]
+\label{lem:col_feasible}
+Let $\gamma$ be the column-deviation vector of an arrangement.  For every set $J$ of $p$ columns,
+\begin{equation}
+\Bigl|\sum_{j\in J}\gamma_j\Bigr|\le \frac{pn(N-pn)}{2}.
+\label{eq:col_feasible}
+\end{equation}
+In particular $|\gamma_j|\le n^{2}(n-1)/2$, $\|\gamma\|_1\le N^{2}/4$ and $\|\gamma\|_2^2\le n^5(n^2-1)/12$.  The same holds for $\rho$.
 \end{lemma}
 
 \begin{proof}
-If $i=i'$ the common row contains both cells and no other row contains either; if $i\ne i'$ the row of $a$ contains $a$ only
-and the row of $b$ contains $b$ only; columns likewise, and each diagonal contributes $1$ or $0$ according to whether it
-separates $a$ from $b$.  Since $a\ne b$ the row/column contribution is $2$ or $4$, so $2\le m\le 6$.  If $m=2$ then $i=i'$ or
-$j=j'$ (not both) and no diagonal separates the cells; for $i=i'$, $j\ne j'$ both cells cannot lie on the same diagonal, so
-``not separated'' means neither is on it.  For existence: a row contains at most two diagonal cells, so it has at least
-$n-2\ge2$ off-diagonal cells when $n\ge4$, and the middle row of the $3\times3$ grid has the two off-diagonal cells $(1,0),(1,2)$.
+The $pn$ cells of $J$ carry distinct values, whose sum is at most that of the $pn$ largest values, $pn(2N-pn+1)/2$; subtracting $pM(n)=pn(N+1)/2$ gives the upper bound, and the lower bound is symmetric.
+With $p$ the number of positive $\gamma_j$, $\|\gamma\|_1=2\sum_{\gamma_j>0}\gamma_j\le pn(N-pn)\le N^2/4$.
+Finally \eqref{eq:col_feasible} says that $\gamma$ is majorised by the vector with entries $n(N-(2p-1)n)/2$, $1\le p\le n$, whose squared norm is $n^5(n^2-1)/12$, and $\|\cdot\|_2^2$ is Schur-convex.
 \end{proof}
 
-\begin{corollary}[Strict local minimality and the exact gap]
-\label{cor:local_min}
-Let $S$ be a magic square of order $n\ge3$.
-\begin{enumerate}
-\item Every single swap strictly increases the energy: $\Efull(S^{ab})\ge 2/N^{2}>0$ for all $a\ne b$.
-Thus every magic square is a strict local minimum of $\Efull$ on the set of arrangements with respect to transpositions, for every $n$.
-\item The smallest energy reachable by one swap is
-\[
-\Delta_{\min}(S)=\min_{a\ne b}\frac{(s_a-s_b)^{2}\,m(a,b)}{N^{2}},\qquad
-\frac{2}{N^{2}}\le\Delta_{\min}(S)\le\frac{6}{N^{2}} .
-\]
-The lower bound is attained iff two cells with consecutive values share a row or column and are both off the diagonals;
-the upper bound is the swap of any two consecutive values ($d=1$, $m\le6$).  Thus $\Delta_{\min}(S)=\Theta(n^{-4})$ with
-explicit constants, uniformly over all magic squares of order $n$.
-\item The possible values of $N^{2}\Efull(S^{ab})$ are the integers $d^{2}m$ with $1\le d\le N-1$ and $2\le m\le6$.
-For the $880$ magic squares of order $4$ the multiset of $N^{2}\Delta_{\min}$ is $\{2:432,\ 3:420,\ 4:28\}$, and for the
-$8$ squares of order $3$ it is $\{3:8\}$ (\Cref{sec:swap-gaps}, \Cref{fig:swap_spectrum}).
-\end{enumerate}
-\end{corollary}
+\begin{lemma}[Order of vanishing of an integer polynomial at $1$]
+\label{lem:jensen}
+Let $\gamma\in\Z^{n}\setminus\{0\}$ with $(t-1)^{K}\mid P_\gamma$ for some $K\ge1$.  Then $K^{2}\le \pi e\,(n-1)\log\|\gamma\|_1$.
+\end{lemma}
 
 \begin{proof}
-By \eqref{eq:swap_magic}, $N^{2}\Efull(S^{ab})=d^{2}m(a,b)$ with $d\ge1$ and $m\ge2$ (\Cref{lem:m_values}); the cells
-carrying the values $v,v+1$ have $d=1$ and $m\le6$, and the equality case of the lower bound is \Cref{lem:m_values}.
+Write $P=P_\gamma$ and $L=\|\gamma\|_1$; note $K\le\deg P\le n-1$.
+Since $P$ has integer coefficients and leading coefficient $a\ne0$, Jensen's formula gives
+$\int_{-1/2}^{1/2}\log|P(e^{2\pi i\theta})|\,d\theta=\log\bigl(|a|\prod_\alpha\max(1,|\alpha|)\bigr)\ge0$, the product over the roots of $P$.
+On $|z|=1$ we have $|P(z)|\le L$.
+Since $P^{(i)}(1)=0$ for $i<K$, Taylor's formula with integral remainder along the segment $[1,z]$, which lies in the closed unit disc when $|z|=1$, gives
+\[
+|P(z)|\le\frac{|z-1|^{K}}{K!}\max_{|w|\le1}|P^{(K)}(w)|\le L\binom{n-1}{K}|z-1|^{K}\le L\Bigl(\frac{e(n-1)|z-1|}{K}\Bigr)^{K},
+\]
+because $|P^{(K)}(w)|\le\sum_j|\gamma_j|\,j(j-1)\cdots(j-K+1)$ for $|w|\le1$.
+With $|e^{2\pi i\theta}-1|\le2\pi|\theta|$ and $\beta=2\pi e(n-1)/K\ge2\pi e$ we get $\log|P(e^{2\pi i\theta})|\le\log L+K\log\min(1,\beta|\theta|)$, and
+$\int_{-1/2}^{1/2}\log\min(1,\beta|\theta|)\,d\theta=-2/\beta$.
+Hence $0\le\log L-2K/\beta=\log L-K^{2}/(\pi e(n-1))$.
 \end{proof}
 
-\begin{remark}[Swap formula for $\Elow$]
-\label{rem:swap_low}
-Since $\Cov(\varphi,Z^{ab})=\Cov(\varphi,Z)+\frac dN(\varphi(a)-\varphi(b))$ for every test function $\varphi$
-(\Cref{lem:variances}(1)), the same computation gives, for $\Elow(S)=0$ and in particular for $S$ magic,
+\begin{proof}[Proof of \Cref{thm:perm_threshold}(a)]
+Let $S$ satisfy the degree-$k$ conditions with $(k+1)^2>\pi e(n-1)\log(n^4/4)$.
+If $\gamma\ne0$, then $(t-1)^{k+1}\mid P_\gamma$ (\Cref{lem:poly_form}) and $\|\gamma\|_1\le n^4/4$ (\Cref{lem:col_feasible}), contradicting \Cref{lem:jensen}.
+So $\gamma=0$, and likewise $\rho=0$.
+The second inequality follows from $(n-1)\log(n^4/4)<4n\log n$.
+\end{proof}
+
+The order $\sqrt{n\log n}$ also follows from \cite[Thm.~2.1]{BEK1999}, applied to $P_\gamma(t)/(t^{r}\max_j|\gamma_j|)$ with $r$ the index of the first nonzero $\gamma_j$; that theorem bounds the number of zeros at $1$ of $\sum_{j\le n}a_jt^j$ with $|a_j|\le1$ by $c\sqrt{n(1-\log|a_0|)}$, with an unspecified absolute constant.
+\Cref{lem:jensen} is a self-contained version for integer coefficients.
+An argument using only that $\gamma$ is a nonzero integer vector with $\|\gamma\|_\infty\le n^3$ cannot give an upper bound of smaller order than $\sqrt n$: the box principle applied to the vectors in $\{0,\dots,n^3\}^n$ and their binomial moments of order $<K$ produces such vectors in $\Lambda_{n,K-1}$ with $K\asymp\sqrt n$.
+
+\subsection{Proof of the lower bound}
+\label{sec:kstar_lower}
+
+A lower bound $k^*(n)\ge K$ requires an arrangement that satisfies the degree-$(K-1)$ conditions without being semi-magic.
+We keep all row sums equal to $M(n)$ and control the column deviations by swaps.
+
+\begin{definition}
+Rows $i\ne i'$ of an arrangement are \emph{twins on} a set $J$ of columns if $s_{ij}+s_{i'j}=N+1$ for all $j\in J$.
+\end{definition}
+
+\begin{lemma}[Twin swaps]
+\label{lem:twin}
+Let $S$ be semi-magic, let rows $i,i'$ be twins on $J$, let $j,j'\in J$ and $d=s_{ij'}-s_{ij}$.
+Exchanging the entries of row $i$ in columns $j,j'$ changes the column deviations by $d(e_j-e_{j'})$, exchanging those of row $i'$ changes them by $-d(e_j-e_{j'})$, and neither changes a row sum.
+Exchanges involving pairwise disjoint sets of cells can be combined, and their effects add.
+\end{lemma}
+
+\begin{proof}
+$s_{i'j}-s_{i'j'}=(N+1-s_{ij})-(N+1-s_{ij'})=d$.
+\end{proof}
+
+\begin{lemma}[Squares with many twin rows]
+\label{lem:twin_squares}
+\leavevmode
+\begin{enumerate}
+\item If $n=2m$ with $m$ even, or with $m$ odd and $m\ge7$, there is a semi-magic square of order $n$ in which rows $r$ and $m+r$ are twins on all columns, for $0\le r<m$.
+\item If $n\ge9$ is odd, there is a semi-magic square of order $n$ in which rows $\ell$ and $n-1-\ell$ are twins on the columns $\ell+1,\dots,n-2-\ell$, for $0\le\ell\le(n-9)/2$.
+\end{enumerate}
+\end{lemma}
+
+The proof is a direct construction, given in \Cref{sec:app_twin}.
+
+\begin{proposition}[Box-principle criterion]
+\label{prop:box}
+Let $S$ be a square of \Cref{lem:twin_squares}.
+Pair the columns as $(j_q,j_q+1)$, where $j_q=2q$ for $q<Q=n/2$ ($n$ even) and $j_q=2q+1$ for $q<Q=(n-3)/2$ ($n$ odd), and let $R_q$ be the number of twin pairs of rows that are twins on both columns of the $q$-th pair: $R_q=n/2$ for even $n$, and $R_q=\min(2q,\,n-4-2q,\,(n-9)/2)+1$ for odd $n$.
+If $K\ge2$ and
+\begin{equation}
+\prod_{q<Q}\Bigl(\Bigl\lceil\frac{R_q}2\Bigr\rceil+1\Bigr)\ >\ \prod_{r=0}^{K-2}\Bigl((N-1)\sum_{q<Q}R_q\binom qr+1\Bigr),
+\label{eq:box}
+\end{equation}
+then there is an arrangement with all row sums $M(n)$ and $\gamma\ne0$ that satisfies the degree-$(K-1)$ conditions; hence $k^*(n)\ge K$.
+\end{proposition}
+
+\begin{proof}
+For each $q$, \Cref{lem:twin} gives $R_q$ nonzero integers $d_{q,1},\dots,d_{q,R_q}$ with $|d_{q,i}|\le N-1$, one for each twin pair covering the $q$-th column pair.
+At least $\lceil R_q/2\rceil$ of them have the same sign, and their partial sums, together with $0$, form a set $F_q$ of $\lceil R_q/2\rceil+1$ distinct subset sums lying in an interval of length at most $R_q(N-1)$.
+For $g\in\prod_qF_q$ the integers $\mu_r(g)=\sum_qg_q\binom qr$, $0\le r\le K-2$, lie in intervals of lengths at most $(N-1)\sum_qR_q\binom qr$, so by \eqref{eq:box} there are $g\ne g'$ with $\mu_r(g)=\mu_r(g')$ for all $r\le K-2$.
+Write $g_q=\sum_{i\in I_q}d_{q,i}$ and $g'_q=\sum_{i\in I'_q}d_{q,i}$.
+Perform the row-$i$ exchange of \Cref{lem:twin} for the twin pairs in $I_q\setminus I'_q$ and the twin-row exchange for those in $I'_q\setminus I_q$, for every $q$; all these exchanges involve disjoint cells.
+The result has all row sums $M(n)$ and $\gamma=\sum_q h_q(e_{j_q}-e_{j_q+1})$ with $h=g-g'\ne0$.
+Then $P_\gamma(t)=t^{j_0}(1-t)H(t^2)$ with $H(u)=\sum_qh_qu^q\ne0$.
+Since $\sum_qh_q\binom qr=0$ for $r\le K-2$, \Cref{lem:poly_form} gives $(u-1)^{K-1}\mid H(u)$, so $(t^2-1)^{K-1}\mid H(t^2)$ and $(t-1)^{K}\mid P_\gamma$.
+With $\rho=0$, the arrangement satisfies the degree-$(K-1)$ conditions, and $\gamma\ne0$.
+\end{proof}
+
+\begin{proof}[Proof of \Cref{thm:perm_threshold}(b)]
+Fix $\alpha<\sqrt2$ and let $K-1=k=\lfloor\alpha\sqrt n\rfloor$; we show that \eqref{eq:box} holds for all large $n$ covered by \Cref{lem:twin_squares} (every $n\ge14$ is covered).
+\emph{Right side.} $\sum_{q<Q}\binom qr=\binom Q{r+1}\le\binom n{r+1}$, $R_q\le n$ and $N\le n^2$, so each factor is at most $n^4\binom n{r+1}$, and with $\log s!\ge s\log s-s$,
 \[
-\Elow(S^{ab})=\frac{d^{2}}{N^{2}}\Bigl[(x_a-x_b)^{2}+(y_a-y_b)^{2}+\bigl(D_{\mathrm m}(a)-D_{\mathrm m}(b)\bigr)^{2}+\bigl(D_{\mathrm a}(a)-D_{\mathrm a}(b)\bigr)^{2}\Bigr],
+\log(\text{right side})\le4k\log n+\sum_{s=1}^{k}\bigl(s\log n-\log s!\bigr)\le\frac{k^2}2\log\frac nk+O(k^2+k\log n)=\frac{\alpha^2}4\,n\log n+O(n).
 \]
-i.e.\ $d^{2}/N^{2}$ times the squared planar distance between the cells plus the number of diagonals separating them.
-The bracket is at least $1$, so magic squares are strict local minima of $\Elow$ as well, with $\Elow(S^{ab})\ge1/N^{2}$.
+\emph{Left side.} For even $n$ it equals $(\lceil n/4\rceil+1)^{n/2}$, with logarithm $\frac n2\log n-O(n)$.
+For odd $n$, $R_q\ge\min(q+1,\,Q-q,\,(n-9)/2)$, and $\min(q+1,Q-q)\le(Q+1)/2<(n-9)/2$ for large $n$, so the logarithm is at least $2\log(\lfloor Q/2\rfloor!)-O(n)=\frac n2\log n-O(n)$.
+Since $\alpha^2/4<1/2$, \eqref{eq:box} holds for large $n$, and $k^*(n)\ge\lfloor\alpha\sqrt n\rfloor+1$.
+\end{proof}
+
+The convergence in (b) is slow: \eqref{eq:box} itself gives only $k^*(n)\ge2$ at $n=14$ and $k^*(n)\ge7$ at $n=100$.
+Thus
+\[
+(\sqrt2-o(1))\sqrt n\le k^*(n)\le(2\sqrt{\pi e}+o(1))\sqrt{n\log n},
+\]
+and the factor $\sqrt{\log n}$ between the bounds is the analogue of the gap between $\sqrt{n/\log n}$ and $\sqrt n$ left open in \cite{BEK1999} for polynomials with coefficients in $\{-1,0,1\}$.
+
+\subsection{Exact values}
+\label{sec:kstar_exact}
+
+\begin{proof}[Proof of \Cref{thm:perm_threshold}(c)]
+\emph{$3\le n\le13$.}  Here $k^*(n)\le n-1$, and the lower bound needs an arrangement satisfying the degree-$(n-2)$ conditions that is not semi-magic.  For $n=3$ and $n=4$,
+\[
+\begin{pmatrix}1&3&9\\8&6&5\\7&4&2\end{pmatrix}\ \ \gamma=(1,-2,1),\ \rho=(-2,4,-2);\qquad
+\begin{pmatrix}14&2&5&13\\8&15&7&4\\12&3&9&10\\1&11&16&6\end{pmatrix}\ \ \gamma=(1,-3,3,-1),\ \rho=0.
+\]
+In both cases $P_\gamma=(1-t)^{n-1}$ and $P_\rho\in\{0,-2(1-t)^2\}$, so the degree-$(n-2)$ conditions hold.
+For $5\le n\le13$ we found arrangements with $\rho=0$ and $\gamma_j=(-1)^j\binom{n-1}j$, i.e.\ $P_\gamma=(1-t)^{n-1}$ (\Cref{sec:app_witnesses}).
+
+\emph{$n\ge14$: level $n-2$.}  $\Lambda_{n,n-2}$ has rank $1$ and is spanned by $v=\bigl((-1)^j\binom{n-1}j\bigr)_j$.  If $\gamma=tv\ne0$ with $t\in\Z$, then $\max_j|\gamma_j|\ge\binom{n-1}{\lfloor(n-1)/2\rfloor}$, which exceeds $n^2(n-1)/2$ for $n\ge14$, contradicting \Cref{lem:col_feasible}.
+(At $n=14$, $\binom{13}6=1716>1274$; passing from $n$ to $n+1$ multiplies the left side by $2$ for even $n$ and by $2n/(n+1)\ge15/8$ for odd $n\ge15$, and the right side by $(n+1)^2/(n(n-1))$, which decreases in $n$ and equals $225/182<15/8$ at $n=14$.)
+So $k^*(n)\le n-2$ for $n\ge14$; at $n=13$ the bound fails ($\binom{12}6=924<1014$), and the witness has central entry $924$.
+
+\emph{$n\ge18$: level $n-3$.}  $\Lambda_{n,n-3}$ has rank $2$: $\gamma=(t-1)^{n-2}(a+bt)$ with $a,b\in\Z$.
+Two consecutive central coefficients bound $|a|,|b|$, and checking all pairs $(a,b)$ in the resulting box shows that for $18\le n\le400$ no nonzero $\gamma\in\Lambda_{n,n-3}$ satisfies $|\gamma_j|\le n^2(n-1)/2$.
+For $n\ge166$, part (a) gives $k^*(n)\le n-3$, since $f(n)=(n-2)^2-\pi e(n-1)\log(n^4/4)$ is positive at $n=166$ and $f'(n)\ge2(n-2)-4\pi e(\log n+1)>0$ for $n\ge166$ (the last expression increases for $n\ge18$ and is positive at $n=166$).
+
+\emph{Upper bounds for $14\le n\le 40$.}  If no nonzero vector of $\Lambda_{n,k}$ satisfies \eqref{eq:col_feasible} for every $p$, then $k^*(n)\le k$.  By \Cref{lem:col_feasible} it suffices to examine the vectors of $\Lambda_{n,k}$ with $\|\gamma\|_2^2\le n^5(n^2-1)/12$; we enumerated them exactly (LLL reduction followed by Fincke--Pohst enumeration in rational arithmetic, \Cref{sec:appendix}).
+At the level $k=k^*(n)$ of \Cref{tab:kstar}, no nonzero vector passes the test.
+
+\emph{Lower bounds for $14\le n\le 40$.}  For each $n$ we found an arrangement with all row sums $M(n)$ whose column deviations satisfy $(t-1)^{k^*(n)}\mid P_\gamma$ and $\gamma\ne0$; each was verified in exact integer arithmetic.
+\end{proof}
+
+\begin{table}[htbp]
+\centering\footnotesize
+\setlength{\tabcolsep}{2.9pt}
+\begin{tabular}{r|rrrrrrrrrrrrrr}
+$n$ & 14&15&16&17&18&19&20&21&22&23&24&25&26&27\\ \hline
+$k^{*}(n)$ & 12&13&14&15&15&16&16&17&17&18&18&19&19&20\\
+$\max_j|\gamma_j|$ & 297&572&1001&2002&1430&2860&1794&3094&2210&3638&2380&4522&2736&4541\\
+$n^2(n-1)/2$ & 1274&1575&1920&2312&2754&3249&3800&4410&5082&5819&6624&7500&8450&9477\\[5pt]
+$n$ & 28&29&30&31&32&33&34&35&36&37&38&39&40&\\ \hline
+$k^{*}(n)$ & 21&21&22&22&23&23&23&24&24&25&25&26&26&\\
+$\max_j|\gamma_j|$ & 8892&6405&11737&9330&14881&11799&9177&18147&14766&24150&16515&26520&22233&\\
+$n^2(n-1)/2$ & 10584&11774&13050&14415&15872&17424&19074&20825&22680&24642&26714&28899&31200&
+\end{tabular}
+\caption{Exact values of the permutation threshold for $14\le n\le40$ (\Cref{thm:perm_threshold}(c)), the largest column deviation $\max_j|\gamma_j|$ of the witness arrangement, and the bound $n^2(n-1)/2$ of \Cref{lem:col_feasible}. The upper bounds come from the exact lattice enumeration of \texttt{anc/kstar\_verify.py}; for $n\le33$ they were also reproduced by an independent integer-programming computation (\texttt{anc/kstar\_crosscheck/}), so for $34\le n\le40$ they rest on the lattice enumeration alone.}
+\label{tab:kstar}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.72\textwidth]{figures/fig_kstar.pdf}
+\caption{The permutation threshold. Exact values of $k^*(n)$ for $3\le n\le40$ (dots), the upper bounds obtained by the exact lattice enumeration for $41\le n\le100$ (open circles), the linear-algebra threshold $n-1$, the bound of \Cref{thm:perm_threshold}(a), and the curve $\sqrt{2n}$, the asymptotic order of the lower bound (b).}
+\label{fig:kstar}
+\end{figure}
+
+\paragraph{The witnesses.}
+The target vectors $\gamma$ were chosen among the shortest vectors of $\Lambda_{n,k^*(n)-1}$ satisfying \eqref{eq:col_feasible}, as produced by the enumeration.
+Starting from a semi-magic square of \Cref{lem:twin_squares} (or a Siamese square), a steepest-descent search over exchanges within a row, which fix the row sums, minimised $\sum_j(\text{column sum}_j-M(n)-\gamma_j)^2$, with random exchanges to leave local minima; for the hardest cases a simulated annealing over arbitrary exchanges, with energy the squared distance of both row and column sums to their targets, was used.
+We observe (for these $n$ only; this is not a theorem) that for $14\le n\le40$ the threshold is determined by the column-feasibility inequalities alone: $k^*(n)$ is the least $k$ for which no nonzero vector of $\Lambda_{n,k}$ satisfies \eqref{eq:col_feasible}.
+Some witnesses come close to the bound of \Cref{lem:col_feasible}: $\max_j|\gamma_j|=924$ against $1014$ at $n=13$, and $24150$ against $24642$ at $n=37$.
+Beyond $n=40$ we computed only upper bounds (\Cref{fig:kstar}); for instance $k^*(50)\le30$, $k^*(80)\le39$ and $k^*(100)\le45$.
+
+\subsection{The low-order conditions for \texorpdfstring{$n=3$}{n=3}}
+
+\begin{remark}
+\label{rem:n3_lowmode}
+Of the $9!$ arrangements of order $3$, exactly $760$ satisfy the degree-$1$ conditions, exactly $72$ (the semi-magic squares) satisfy the degree-$2$ conditions, and exactly $8$ satisfy the degree-$1$ conditions and both diagonal conditions, namely the magic squares (exhaustive enumeration in exact arithmetic).
+So $\Elow(S)=0$ if and only if $S$ is magic when $n=3$, although the four conditions are weaker than the magic conditions for real-valued $z$.
+The degree-$1$ conditions leave $\gamma=t(1,-2,1)$, $\rho=u(1,-2,1)$; the row, the column and the two diagonals through the centre cover every cell once and the centre four times, which gives $3e=15-2(t+u)$ for the centre value $e$.
+We have no proof of $t=u=0$ shorter than the enumeration.
+For $n=4$ the equivalence fails (\Cref{rem:four_term_insufficient}); the arrangement there has $\gamma=(3,-9,9,-3)$ and $\rho=(-6,4,10,-8)$, so it satisfies the degree-$2$ condition in $x$ but not in $y$.
 \end{remark}
 
-\begin{remark}[Loly's invariant and the product of inertia]
-\label{rem:product_inertia}
-Loly's value-weighted planar moments of inertia have diagonal entries $\sum s_{ij}y_{ij}^{2}$ and $\sum s_{ij}x_{ij}^{2}$ that are fixed by the row and column sums (\Cref{cor:loly}), whereas the product of inertia $P_{xy}=-\sum_{ij}s_{ij}x_{ij}y_{ij}$ is a mixed moment, fixed by no line sum: $D_4$ changes at most its sign, and over the $880$ essentially different magic squares of order $4$ the invariant $|P_{xy}|$ takes $48$ distinct values between $0$ and $60$, vanishing for $56$ of them.
-This is the reason the hierarchy of \Cref{def:degree_k} uses only the pure powers $x^m,y^m$.
+\subsection{Balance of the signed mass}
+\label{sec:balance}
+
+Regard $z_c$ as a signed mass at $(x_c,y_c)$.
+By \Cref{prop:hierarchy}(a), a semi-magic square balances every separable test function $a(x)+b(y)$, and a magic square also the diagonal indicators; by \Cref{rem:product_inertia} it need not balance $xy$.
+For arbitrary arrangements the balance is controlled by the energy:
+
+\begin{remark}[Quantitative balance]
+\label{rem:quant_balance}
+Since $\sum_cz_cx_c=\sum_jx_j\gamma_j$ and $\sum_jx_j^2=n(n^2-1)/12$, the Cauchy--Schwarz inequality gives
+\[
+\Bigl|\sum_cz_c(x_c,y_c)\Bigr|^2\le\frac{n(n^2-1)}{12}\bigl(\|\gamma\|^2+\|\rho\|^2\bigr)\le N^2\,\frac{n(n^2-1)}{12}\,\Efull ,
+\]
+with equality in the first step if and only if $\gamma\parallel(x_j)$ and $\rho\parallel(y_i)$, for instance for $s_{ij}=in+j+1$.
+More generally, by \Cref{lem:W_structure}, $\|P_Wz\|^2=n(\|\rho\|^2+\|\gamma\|^2)/N^2+\frac1N\delta^{\mathsf T}\Gamma_D^{-1}\delta$ with $\delta=(\delta_{\mathrm m},\delta_{\mathrm a})$, so $n\Efull\le\|P_Wz\|^2\le\lambda_n\Efull$ with $\lambda_n=n^2/(n-1)$ for odd $n$ and $n^2/(n-2)$ for even $n$; hence $|\sum_cz_c\varphi_c|\le N\|\varphi\|\sqrt{\lambda_n\Efull}$ for every $\varphi\in W$.
 \end{remark}
+
+Nonlinear balance is not implied.
+With the radial unit vectors $u_c=(x_c,y_c)/|(x_c,y_c)|$ ($u_c=0$ at the centre), each of the eight $3\times3$ magic squares has $|\sum_cz_cu_c|=2(2-\sqrt2)\sqrt5\approx2.62$: for the Lo Shu with rows $(2,7,6),(9,5,1),(4,3,8)$ the edge cells contribute $(-8,4)$ and the corners $(4\sqrt2,-2\sqrt2)$.
+For $n=4$ this ring imbalance is positive for all $880$ magic squares (smallest value $0.070$), with mean $5.51$ against $17.06$ for uniformly random arrangements; the magic mean lies at the $7.4$th percentile of the random distribution (\texttt{anc/balance\_check.py}).

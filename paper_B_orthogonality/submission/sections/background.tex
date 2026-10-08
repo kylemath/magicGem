@@ -1,53 +1,128 @@
-\section{Background}
+\section{Notation and tools}
 \label{sec:background}
 
-\subsection{Centred coordinates and the height function}
+\subsection{Centred coordinates}
 \label{sec:bg_coords}
 
-Let $S=(s_{ij})$ be an arrangement of order $n$, with cells indexed by $i,j\in\{0,\dots,n-1\}$ ($i$ the row from the top, $j$ the column from the left), and write $N=n^2$.
+Throughout, $n\ge3$ and $N=n^2$.  Cells are pairs $c=(i,j)$ with $0\le i,j\le n-1$ ($i$ the row from the top, $j$ the column from the left).
 
-\begin{definition}[Centred coordinates and height function]
+\begin{definition}[Centred coordinates]
 \label{def:coords}
-To the cell $(i,j)$ assign
+To the cell $(i,j)$ of an arrangement $S$ assign
 \begin{equation}
-x_{ij}=j-\frac{n-1}{2},\qquad y_{ij}=\frac{n-1}{2}-i,\qquad z_{ij}=s_{ij}-\frac{N+1}{2}.
+x_{ij}=x_j=j-\frac{n-1}{2},\qquad y_{ij}=y_i=\frac{n-1}{2}-i,\qquad z_{ij}=s_{ij}-\frac{N+1}{2}.
 \label{eq:coords}
 \end{equation}
-The function $z=(z_{ij})$ on the grid is the \emph{height function} of $S$.
+We call $z=z(S)$ the \emph{centred value function} of $S$, and write $X,Y,Z$ for the functions $c\mapsto x_c,y_c,z_c$.
 \end{definition}
 
-The horizontal coordinates centre the grid at the origin; the vertical coordinate centres the entries so that the mean entry $(N+1)/2$ sits at height zero.
-All three have mean zero over the $N$ cells (\Cref{lem:variances}).
-The $N$ points $(x_{ij},y_{ij},z_{ij})\in\R^3$ have a convex hull, the object of the companion paper~A, \emph{Magic Gems: A Polyhedral Framework for Magic Squares} (Mathewson, arXiv:2512.09170) \cite{mathewson_gems}, which studies the convex hull of these points, the symmetry classification of the $880$ order-four hulls, and the hulls of Siamese squares.
-Nothing below uses the hull.
+The function $z$ is the vertical coordinate of the points $(x_c,y_c,z_c)$ studied in \cite{mathewson_gems}; we do not call it a height function, a term that in combinatorics refers to tilings \cite{thurston1990conway}.
+A \emph{line} is one of the $n$ rows, the $n$ columns, the main diagonal $\{i=j\}$ or the anti-diagonal $\{i+j=n-1\}$.
+Each line has $n$ cells, and since $M(n)=n\cdot\frac{N+1}2$ the \emph{deviation} of a line is
+\begin{equation}
+\delta_L(S)=\sum_{c\in L}s_c-M(n)=\sum_{c\in L}z_c .
+\label{eq:line_dev}
+\end{equation}
+We write $\rho_i$, $\gamma_j$, $\delta_{\mathrm m}$, $\delta_{\mathrm a}$ for the deviations of row $i$, column $j$ and the two diagonals; $\sum_i\rho_i=\sum_j\gamma_j=0$.
+On the space $\mathcal F=\R^{\text{cells}}$ we use $\langle f,g\rangle=\frac1N\sum_cf_cg_c$, and $\Cov(\varphi,f)=\langle\varphi-\bar\varphi\mathbf 1,f-\bar f\mathbf 1\rangle$ is the empirical covariance over the $N$ cells.
+$R_i$, $C_j$, $D_{\mathrm m}$, $D_{\mathrm a}$ denote the line indicators.
 
-\subsection{Covariance and Loly's planar moment}
-\label{sec:bg_cov}
+\begin{lemma}
+\label{lem:variances}
+For every arrangement, $\bar x=\bar y=\bar z=0$, so $\Cov(\varphi,Z)=\langle\varphi,z\rangle$ for every $\varphi\in\mathcal F$;
+$\Var(X)=\Var(Y)=\frac{n^2-1}{12}$, $\Var(Z)=\frac{N^2-1}{12}$, $\Cov(X,Y)=0$; and $\Cov(\mathbf 1_L,Z)=\delta_L/N$ for every line $L$.
+\end{lemma}
 
-For functions $\varphi,f$ on the cells, $\Cov(\varphi,f)$ denotes the empirical covariance over the $N$ cells, $\Cov(\varphi,f)=\frac1N\sum_c(\varphi_c-\bar\varphi)(f_c-\bar f)$, and $X,Y,Z$ denote the functions \eqref{eq:coords}.
-Loly's planar moment of inertia \cite{loly2004invariance} places the \emph{value} $s_{ij}$ as a mass at the planar point $(x_{ij},y_{ij})$ and computes $\sum s_{ij}(x_{ij}^{2}+y_{ij}^{2})$.
-It is an affine function of the single degree-two cross-moment $\Cov(Z,X^2+Y^2)$ (\Cref{cor:loly}).
+\begin{proof}
+$X$, $Y$, $Z$ are uniform on $n$, $n$ and $N$ equally spaced points centred at $0$, and $X,Y$ are independent under the uniform distribution on cells; the last claim is \eqref{eq:line_dev}.
+\end{proof}
 
-\subsection{Two tools from permutation statistics}
+\subsection{The line space and the energies}
+\label{sec:theory_projection}
+
+Let $\tilde{\mathbf 1}_L=\mathbf 1_L-\frac1n\mathbf 1$ be the centred indicator of a line and
+$W_R=\operatorname{span}\{\tilde{\mathbf 1}_{R_i}\}$, $W_C=\operatorname{span}\{\tilde{\mathbf 1}_{C_j}\}$, $W_D=\operatorname{span}\{\tilde{\mathbf 1}_{D_{\mathrm m}},\tilde{\mathbf 1}_{D_{\mathrm a}}\}$, $W=W_R+W_C+W_D\subset\mathbf 1^\perp$.
+
+\begin{lemma}[The line space]
+\label{lem:W_structure}
+Let $n\ge3$.  For lines $L,L'$, $N\langle\tilde{\mathbf 1}_L,\tilde{\mathbf 1}_{L'}\rangle=|L\cap L'|-1$.  Consequently:
+\begin{enumerate}
+\item $W_R$ consists of the zero-mean functions of the row index and $W_C$ of the zero-mean functions of the column index; both have dimension $n-1$, and the orthogonal projection of $z$ onto them is $(i,j)\mapsto\rho_i/n$, resp.\ $\gamma_j/n$.
+\item $W_R$, $W_C$, $W_D$ are mutually orthogonal, and the Gram matrix of $(\tilde{\mathbf 1}_{D_{\mathrm m}},\tilde{\mathbf 1}_{D_{\mathrm a}})$ is $\Gamma_D/N$ with $\Gamma_D=\bigl(\begin{smallmatrix}n-1&\epsilon_n\\ \epsilon_n&n-1\end{smallmatrix}\bigr)$, $\epsilon_n=0$ for odd and $-1$ for even $n$; its eigenvalues are $n-1,n-1$ (odd $n$) and $n-2,n$ (even $n$).
+\item $W=W_R\oplus W_C\oplus W_D$ has dimension $2n$, and $z\perp W$ if and only if $S$ is magic.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Each line has $n$ of the $N$ cells, which gives the inner products: a row meets every column and each diagonal in one cell, two distinct rows (or columns) are disjoint, and the diagonals meet in the centre cell if and only if $n$ is odd.  The projection onto the functions of the row index replaces $z$ by its row means $\rho_i/n$.  Finally $\langle\tilde{\mathbf 1}_L,z\rangle=\delta_L/N$ by \Cref{lem:variances}.
+\end{proof}
+
+Part 3 is equivalent to the classical fact that the real magic squares of order $n\ge3$ (all line sums equal to a common, arbitrary value) form a space of dimension $N-2n$ \cite{ward1980vector}, \cite[\S4.6]{stanley2012ec1}.
+
+\begin{definition}[Energies]
+\label{def:energies}
+For an arrangement $S$ with centred value function $z$,
+\begin{align}
+\Efull(S)&=\sum_{i}\Cov(R_i,Z)^{2}+\sum_{j}\Cov(C_j,Z)^{2}+\Cov(D_{\mathrm m},Z)^{2}+\Cov(D_{\mathrm a},Z)^{2},\label{eq:Efull}\\
+\Elow(S)&=\Cov(X,Z)^{2}+\Cov(Y,Z)^{2}+\Cov(D_{\mathrm m},Z)^{2}+\Cov(D_{\mathrm a},Z)^{2}.\label{eq:Elow}
+\end{align}
+\end{definition}
+
+By \Cref{lem:variances},
+\begin{equation}
+N^{2}\Efull(S)=\sum_{L}\delta_L(S)^{2}=\sum_i\rho_i^{2}+\sum_j\gamma_j^{2}+\delta_{\mathrm m}^{2}+\delta_{\mathrm a}^{2},
+\label{eq:Efull_devs}
+\end{equation}
+the sum of the squared deviations of all $2n+2$ lines, a non-negative integer.
+This is the energy of the Monte Carlo study of Pinn and Wieczerkowski \cite{pinn1998number}, and we follow them in calling $\Efull$ and $\Elow$ energies.
+$\Efull(S)=0$ if and only if $S$ is magic, and $\Efull$ depends on $z$ only through its projection onto $W$ (\Cref{fig:decomposition}).
+Both energies are invariant under the dihedral group $D_4$ of the square, which permutes the lines and maps $\{\pm X,\pm Y\}$ to itself.
+All $n$ rows and $n$ columns are kept in \eqref{eq:Efull}: the last row and column are redundant for the zero set, but omitting them would destroy the $D_4$-invariance.
+
+\begin{remark}[The four low-order conditions]
+\label{rem:four_term_insufficient}
+$\Elow=0$ consists of four linear conditions on $z$, and ``magic'' of $2n$ independent ones; for every $n\ge3$ the four conditions are therefore strictly weaker than the magic conditions on real-valued $z$.
+For permutations the two coincide when $n=3$ (\Cref{rem:n3_lowmode}) but not when $n=4$: the arrangement
+\[
+S=\begin{pmatrix}9&4&12&3\\16&1&14&7\\10&15&11&8\\2&5&6&13\end{pmatrix}
+\]
+has both diagonal sums $34$, row sums $(28,38,44,26)$ and column sums $(37,25,43,31)$, and $\Cov(X,Z)=\Cov(Y,Z)=0$; so $\Elow(S)=0$ while $N^2\Efull(S)=396$.
+\Cref{prop:L4} counts all such arrangements.
+\end{remark}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{figures/fig_decomposition.pdf}
+\caption{The line space for $n=4$. $W$ is the $2n$-dimensional span of the centred line indicators, and $W^{\perp}\cap\mathbf 1^{\perp}$ (dimension $N-1-2n$) is its orthogonal complement among the zero-mean functions. (a)~The arrangement of \Cref{rem:four_term_insufficient}, shaded by $z$, with its row and column deviations (both diagonal deviations are $0$). (b)~Schematic of the orthogonal splitting $z=P_Wz+(z-P_Wz)$; the arrangement is magic if and only if $P_Wz=0$. (c)~The squared norms $\|P_{W_R}z\|^2,\|P_{W_C}z\|^2,\|P_{W_D}z\|^2$ and that of the complement, for the arrangement of (a) ($3.38+2.81+0+15.06$) and for D\"urer's magic square (all of $\|z\|^2=21.25$ lies in the complement).}
+\label{fig:decomposition}
+\end{figure}
+
+\subsection{Permutation statistics}
 \label{sec:bg_perm}
 
-Let $\pi$ be a uniformly random permutation of $\{1,\dots,N\}$ and $a,b\in\R^N$ fixed vectors.
-The quantity $T_a=\sum_i a_i b_{\pi(i)}$ is a \emph{linear permutation statistic}.
-Its mean is $N\bar a\bar b$ and, for two such statistics with the same $b$ (Wald--Wolfowitz \cite{waldwolfowitz1944}, polarised),
+Let $\pi$ be a uniformly random permutation of $\{1,\dots,N\}$ and $a,a',b\in\R^N$.
+For the linear permutation statistics $\Phi_a=\sum_ia_ib_{\pi(i)}$ one has $\E\Phi_a=N\bar a\bar b$ and, by the theorem of Wald and Wolfowitz \cite{waldwolfowitz1944,noether1949} (polarised),
 \begin{equation}
-\Cov(T_a,T_{a'})=\frac{1}{N-1}\sum_i(a_i-\bar a)(a'_i-\bar a')\sum_j(b_j-\bar b)^2 .
+\Cov(\Phi_a,\Phi_{a'})=\frac{1}{N-1}\sum_i(a_i-\bar a)(a'_i-\bar a')\sum_j(b_j-\bar b)^2 .
 \label{eq:ww_identity}
 \end{equation}
-Hoeffding's combinatorial central limit theorem \cite[Thm.~3]{hoeffding1951} gives asymptotic normality of $\sum_i c_N(i,\pi(i))$ when, for every integer $r\ge3$, $N^{-1}\sum_{i,j}|d_N(i,j)|^r$ is $O\bigl((N^{-1}\sum_{i,j}d_N(i,j)^2)^{r/2}\bigr)$, $d_N$ being the doubly centred array; for product arrays $c_N(i,j)=a_ib_j$ the condition reduces to a bound on the standardised absolute moments of $a$ and $b$.
-In \Cref{sec:random_energy} the energies of a random arrangement are quadratic forms in such statistics; \eqref{eq:ww_identity} gives their means exactly, and the distribution of a quadratic form in Gaussian variables can be computed by numerical inversion of its characteristic function, as in Imhof's method \cite{imhof1961}.
+For a uniformly random arrangement, $z_c=b_{\pi(c)}$ with $b$ the centred values $k-\frac{N+1}2$; we put
+\begin{equation}
+\sigma_n^2=\frac{\Var(Z)}{N-1}=\frac{N+1}{12}=\frac{n^2+1}{12}.
+\label{eq:sigma}
+\end{equation}
+Hoeffding's combinatorial central limit theorem \cite[Thm.~3]{hoeffding1951} concerns $\sum_ic_N(i,\pi(i))$ for an $N\times N$ array $c_N$.
+Let $d_N(i,j)=c_N(i,j)-\frac1N\sum_gc_N(g,j)-\frac1N\sum_hc_N(i,h)+\frac1{N^2}\sum_{g,h}c_N(g,h)$ be the doubly centred array.
+The theorem asserts asymptotic normality of $\bigl(\sum_ic_N(i,\pi(i))-\E\bigr)/\sqrt{\Var}$ provided that
+\[
+\frac{N^{-1}\sum_{i,j}|d_N(i,j)|^r}{\bigl(N^{-1}\sum_{i,j}d_N(i,j)^2\bigr)^{r/2}}\ \longrightarrow\ 0\qquad(N\to\infty)
+\]
+for some $r>2$, and in particular whenever $\max_{i,j}|d_N(i,j)|\big/\bigl(N^{-1}\sum_{i,j}d_N(i,j)^2\bigr)^{1/2}\to0$, since the ratio above is at most the $(r-2)$-th power of this quotient.
+For a product array $c_N(i,j)=a_ib_j$ one has $d_N(i,j)=(a_i-\bar a)(b_j-\bar b)$.
+Motoo \cite{motoo1957} gives a Lindeberg-type condition and Bolthausen \cite{bolthausen1984} a Berry--Esseen bound.
 
-\subsection{Enumeration and related polytopes}
+\subsection{Known counts}
 \label{sec:bg_polytopes}
 
-There are $8$ magic squares of order $3$, all images of the Lo Shu under the dihedral group $D_4$ of the square; $7{,}040$ of order $4$, forming $880$ $D_4$-orbits first listed by Fr\'enicle de Bessy and verified many times since \cite{beck2010enumeration}; and $275{,}305{,}224$ of order $5$ \cite{gardner1976}.
-For $n\ge6$ only statistical estimates are known \cite{trump2012enumeration}.
-Classical constructions show that magic squares exist for all $n\ge3$ \cite{andrews1960magic}.
-
-The polytope literature concerns a different object from the one used here.
-An $n\times n$ nonnegative integer matrix with all row and column sums equal to $t$ is a lattice point of the $t$-th dilate of the Birkhoff polytope, and their number is a polynomial in $t$ \cite{stanley1973magic,ehrhart1973magic,ziegler1995lectures}; adding the diagonal conditions and distinct entries leads to the inside-out polytopes of Beck and Zaslavsky \cite{beck2006insideout,beck2010enumeration}; the cones of magic squares and cubes have Hilbert-basis descriptions \cite{ahmed2003polyhedral}; and contingency tables with fixed margins are the same lattice points studied as a sample space \cite{diaconis1995rectangular}.
-Spectral and matrix properties of a magic square \cite{loly2009spectra,nordgren2012properties,nordgren2014spectra}, the singular-value signatures of Cameron, Rogers and Loly \cite{cameron2013signatura}, and Loly's physical invariants \cite{loly2004invariance,rogers2004inertia,rogers2005multipole,loly2007franklin} are closer to our viewpoint: they attach a quantity to one square and ask what it reveals.
+There are $8$ magic squares of order $3$, all images of the Lo Shu under $D_4$; $7{,}040$ of order $4$, forming the $880$ $D_4$-orbits listed by Fr\'enicle de Bessy \cite{frenicle1693} and recounted many times since \cite{beck2010enumeration}; and $275{,}305{,}224$ $D_4$-orbits of order $5$, i.e.\ $2{,}202{,}441{,}792$ squares, counted by Schroeppel in 1973 and reported by Gardner \cite{gardner1976}.
+For $n\ge6$ only statistical estimates are known \cite{pinn1998number,trump2012enumeration}.

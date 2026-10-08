@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Generate the four figures of the paper (vector PDF) into ../figures/.
-   python3 make_figures.py [decomposition] [swap] [random] [balance]     (default: all)
-Needs: numpy, scipy, matplotlib, sympy; mc_hist.npz, mc_results.json, data_witnesses_variances.json, magic4_all7040.txt."""
+"""Generate the figures of the paper (vector PDF) into ../figures/.
+   python3 make_figures.py [decomposition] [swap] [random] [kstar]     (default: all; [balance] is an optional extra figure)
+Needs: numpy, scipy, matplotlib, sympy; mc_hist.npz, mc_results.json, data_witnesses_variances.json, magic4_all7040.txt, kstar_verify.json."""
 import itertools, json, math, os, sys
 from collections import Counter
 import numpy as np
@@ -113,19 +113,18 @@ def fig_swap():
     sys.path.insert(0, HERE)
     from balance_lib import magic4_reps
     from verify_numbers import incidence, F_of
-    fig, axs = plt.subplots(1, 3, figsize=(TEXTWIDTH, 2.35), gridspec_kw=dict(width_ratios=[1.15, 1.05, 0.8], wspace=0.42))
+    fig, axs = plt.subplots(1, 3, figsize=(TEXTWIDTH, 2.35), gridspec_kw=dict(width_ratios=[1.15, 1.05, 0.8], wspace=0.7))
     # (a) n=3 exhaustive distribution of N^2 E_full
     P = np.array(list(itertools.permutations(range(1, 10))), dtype=np.int64)
     F = F_of(P, 3)
     cnt = Counter(F.tolist()); xs = sorted(cnt)
     ax = axs[0]
-    ax.bar(xs, [cnt[v] for v in xs], width=1.6, color=SKY, ec='none')
-    ax.bar([0], [cnt[0]], width=1.6, color=VERM)
-    ax.bar([2], [cnt[2]], width=1.6, color=ORANGE)
-    ax.set_yscale('log'); ax.set_xlim(-4, 184); ax.set_ylim(1, 1.2e6)
+    ax.bar(xs, [cnt[v] for v in xs], width=1.6, color=SKY, ec='none', label='other values')
+    ax.bar([0], [cnt[0]], width=1.9, color=VERM, zorder=3, label='0: the 8 magic squares')
+    ax.bar([2], [cnt[2]], width=1.9, color=ORANGE, zorder=3, label='2: 8 non-magic local minima')
+    ax.set_yscale('log'); ax.set_xlim(-4, 184); ax.set_ylim(1, 3e7)
     ax.set_xlabel(r'$N^2E_{\rm full}=\sum_L\delta_L^2$'); ax.set_ylabel('number of arrangements')
-    ax.annotate('value 0: the 8 magic squares', xy=(0, 8), xytext=(18, 2.5e5), fontsize=7, color=VERM, va='center', arrowprops=dict(arrowstyle='-', color=VERM, lw=0.6))
-    ax.annotate('value 2: 8 non-magic local minima', xy=(2, cnt[2]), xytext=(18, 6e4), fontsize=7, color='#9a6a00', va='center', arrowprops=dict(arrowstyle='-', color=ORANGE, lw=0.6))
+    ax.legend(loc='upper right', fontsize=6.3, handlelength=1.0, borderaxespad=0.2, labelspacing=0.2)
     ax.set_title(r'$n=3$, all $9!$ arrangements', fontsize=8, loc='right')
     panel_label(ax, '(a)', x=-0.22)
     # (b) heat map of swap gaps by (d, m), n=4
@@ -143,17 +142,15 @@ def fig_swap():
     im = ax.imshow(np.where(H > 0, H, np.nan).T, origin='lower', aspect='auto', cmap='Blues', norm=matplotlib_lognorm(H))
     ax.set_xticks(range(0, 15, 2)); ax.set_xticklabels([str(d) for d in range(1, 16, 2)])
     ax.set_yticks(range(5)); ax.set_yticklabels(['2', '3', '4', '5', '6'])
-    ax.set_xlabel(r'value difference $d$'); ax.set_ylabel(r'separating lines $m$')
+    ax.set_xlabel(r'value difference $d$'); ax.set_ylabel(r'separating lines $\lambda$')
     ax.spines['top'].set_visible(True); ax.spines['right'].set_visible(True)
-    ax.set_title(r'$n=4$: $N^2\Delta E=d^2m$', fontsize=8, loc='right')
+    ax.set_title(r'$n=4$: gap $d^2\lambda$', fontsize=8, loc='right')
     cb = fig.colorbar(im, ax=ax, fraction=0.05, pad=0.03); cb.ax.tick_params(labelsize=6.5)
+    cb.set_label('number of swaps', fontsize=7)
     cb.outline.set_linewidth(0.4)
     panel_label(ax, '(b)', x=-0.22)
     # (c) minimum gap per square
     ax = axs[2]
-    mins = Counter()
-    for S in reps:
-        S = S.astype(int); mins[min(S[a] != 0 and 0 or 0 for a, b in [(0, 1)])] += 0
     m4 = {2: 432, 3: 420, 4: 28}
     chk = Counter()
     for S in reps:
@@ -165,7 +162,7 @@ def fig_swap():
     for v in (2, 3, 4):
         ax.text(v, chk[v] + 12, str(chk[v]), ha='center', fontsize=7.5)
     ax.set_xticks([2, 3, 4]); ax.set_ylim(0, 520)
-    ax.set_xlabel(r'$N^2\Delta_{\min}(S)$'); ax.set_ylabel('magic squares')
+    ax.set_xlabel(r'smallest gap $g_{\min}(S)$'); ax.set_ylabel('magic squares')
     ax.set_title(r'$n=4$, 880 squares', fontsize=8, loc='right')
     panel_label(ax, '(c)', x=-0.28)
     fig.subplots_adjust(left=0.085, right=0.985, top=0.9, bottom=0.2)
@@ -278,9 +275,40 @@ def fig_balance():
     plt.close(fig); print('balance figure written')
 
 
+def fig_kstar():
+    """k*(n): exact values (n<=40), enumeration upper bounds (41<=n), Theorem (a) bound, n-1, sqrt(2n)."""
+    jp = os.path.join(HERE, 'kstar_verify.json')
+    if os.path.exists(jp):
+        d = json.load(open(jp))
+    else:  # partial run: parse the log
+        import re
+        U = {int(m.group(1)): int(m.group(2)) for m in re.finditer(r'^(\d+) U\(n\) = (\d+)', open(os.path.join(HERE, 'kstar_verify.log')).read(), re.M)}
+        d = {'upper_bounds': U, 'exact': {n: U[n] for n in U if n <= 40}}
+    exact = {int(k): v for k, v in d['exact'].items()}
+    for n in range(3, 14): exact[n] = n - 1
+    up = {int(k): v for k, v in d['upper_bounds'].items() if int(k) > 40}
+    fig, ax = plt.subplots(figsize=(0.72 * TEXTWIDTH, 2.25))
+    nmax = max(up) if up else 40
+    ns = np.arange(3, nmax + 1)
+    ax.plot(ns, ns - 1, color=GREY, lw=0.9, ls='--', label=r'$n-1$ (real-valued $z$)')
+    A = np.floor(np.sqrt(np.pi * np.e * (ns - 1) * np.log(ns ** 4 / 4.0)))
+    ax.plot(ns, A, color=VERM, lw=1.0, label=r'upper bound $\lfloor\sqrt{\pi e(n-1)\log(n^4/4)}\rfloor$')
+    ax.plot(ns, np.sqrt(2 * ns), color=GREEN, lw=1.0, ls=':', label=r'$\sqrt{2n}$ (order of the lower bound)')
+    xe = sorted(exact); ax.plot(xe, [exact[n] for n in xe], 'o', color=BLUE, ms=3.2, label=r'$k^*(n)$, exact')
+    xu = sorted(up); ax.plot(xu, [up[n] for n in xu], 'o', color=BLUE, ms=3.2, mfc='white', mew=0.8, label=r'upper bound by enumeration')
+    ax.set_xlim(0, nmax + 2); ax.set_ylim(0, 0.62 * nmax)
+    ax.set_xlabel('$n$'); ax.set_ylabel('degree $k$')
+    ax.legend(loc='upper left', fontsize=6.8, handlelength=1.8, labelspacing=0.25)
+    ax.grid(True, color=LGREY, lw=0.5); ax.set_axisbelow(True)
+    fig.subplots_adjust(left=0.1, right=0.98, top=0.97, bottom=0.17)
+    fig.savefig(os.path.join(FIG, 'fig_kstar.pdf'))
+    plt.close(fig); print('kstar figure written')
+
+
 if __name__ == '__main__':
-    todo = sys.argv[1:] or ['decomposition', 'swap', 'random', 'balance']
+    todo = sys.argv[1:] or ['decomposition', 'swap', 'random', 'kstar']
     if 'decomposition' in todo: fig_decomposition()
     if 'swap' in todo: fig_swap()
     if 'random' in todo: fig_random()
     if 'balance' in todo: fig_balance()
+    if 'kstar' in todo: fig_kstar()
