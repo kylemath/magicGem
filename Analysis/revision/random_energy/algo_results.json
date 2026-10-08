@@ -1,0 +1,96 @@
+{
+ "4": {
+  "n": 4,
+  "greedy": {
+   "runs": 200000,
+   "success_prob": 0.195235,
+   "success_se": 0.0008863359825004285,
+   "n_success": 39047,
+   "mean_swaps_all": 8.143945,
+   "mean_swaps_success": 8.68479012472149,
+   "mean_swaps_stuck": 8.012736637403465,
+   "stuck_in_nonmagic_local_min": 0.804765,
+   "stuck_final_F_mean": 4.385976030269706,
+   "stuck_final_F_min": 2,
+   "stuck_final_E_full_mean": 0.01713271886824104,
+   "expected_restarts_to_success": 5.122032422465234
+  },
+  "sa": {
+   "runs": 400,
+   "steps_budget": 320000,
+   "T0": 75.5,
+   "T1": 0.5,
+   "success_prob": 1.0,
+   "success_se": 0.0,
+   "n_success": 400,
+   "mean_proposals_success": 145789.9825,
+   "median_proposals_success": 152386.0,
+   "mean_accepted_swaps_success": 42006.645,
+   "fail_best_F_mean": null
+  },
+  "runtime_s": 53.02961492538452
+ },
+ "5": {
+  "n": 5,
+  "greedy": {
+   "runs": 200000,
+   "success_prob": 0.01153,
+   "success_se": 0.0002387159305534509,
+   "n_success": 2306,
+   "mean_swaps_all": 11.205305,
+   "mean_swaps_success": 12.196010407632263,
+   "mean_swaps_stuck": 11.193748925106478,
+   "stuck_in_nonmagic_local_min": 0.98847,
+   "stuck_final_F_mean": 4.356171659230933,
+   "stuck_final_F_min": 1,
+   "stuck_final_E_full_mean": 0.006969874654769492,
+   "expected_restarts_to_success": 86.73026886383347
+  },
+  "sa": {
+   "runs": 400,
+   "steps_budget": 500000,
+   "T0": 221.0,
+   "T1": 0.5,
+   "success_prob": 0.7825,
+   "success_se": 0.02062727260206739,
+   "n_success": 313,
+   "mean_proposals_success": 420459.97763578274,
+   "median_proposals_success": 424152.0,
+   "mean_accepted_swaps_success": 80396.89776357828,
+   "fail_best_F_mean": 1.0459770114942528
+  },
+  "runtime_s": 140.91012692451477
+ },
+ "6": {
+  "n": 6,
+  "greedy": {
+   "runs": 200000,
+   "success_prob": 0.007875,
+   "success_se": 0.0001976484805785261,
+   "n_success": 1575,
+   "mean_swaps_all": 14.10873,
+   "mean_swaps_success": 15.365714285714287,
+   "mean_swaps_stuck": 14.098752677334005,
+   "stuck_in_nonmagic_local_min": 0.992125,
+   "stuck_final_F_mean": 4.327045483180043,
+   "stuck_final_F_min": 1,
+   "stuck_final_E_full_mean": 0.0033387696629475637,
+   "expected_restarts_to_success": 126.98412698412699
+  },
+  "sa": {
+   "runs": 400,
+   "steps_budget": 720000,
+   "T0": 440.0,
+   "T1": 0.5,
+   "success_prob": 0.5,
+   "success_se": 0.025,
+   "n_success": 200,
+   "mean_proposals_success": 658148.255,
+   "median_proposals_success": 661440.0,
+   "mean_accepted_swaps_success": 107890.255,
+   "fail_best_F_mean": 1.215
+  },
+  "runtime_s": 199.57589411735535
+ },
+ "total_runtime_s": 393.63345098495483
+}

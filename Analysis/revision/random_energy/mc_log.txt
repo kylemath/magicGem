@@ -1,0 +1,7 @@
+n=3: 100,000,000 samples in 13.0s; E_low mean 1.48139 vs 1.48148; var 0.70048 vs 0.70050; KS 0.1026
+n=4: 100,000,000 samples in 18.5s; E_low mean 4.07362 vs 4.07292; var 9.78959 vs 9.78681; KS 0.0369
+n=5: 100,000,000 samples in 26.9s; E_low mean 9.36052 vs 9.36000; var 64.77349 vs 64.77586; KS 0.0187
+n=6: 100,000,000 samples in 35.7s; E_low mean 18.84342 vs 18.84259; var 293.17707 vs 293.15371; KS 0.0119
+n=7: 100,000,000 samples in 65.6s; E_low mean 34.34935 vs 34.35374; var 1034.70515 vs 1035.19270; KS 0.0080
+n=8: 100,000,000 samples in 94.9s; E_low mean 58.05799 vs 58.05990; var 3067.07678 vs 3066.60475; KS 0.0070
+done

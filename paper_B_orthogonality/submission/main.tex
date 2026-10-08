@@ -1,0 +1,168 @@
+\documentclass[11pt,a4paper]{article}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\PassOptionsToPackage{hyphens}{url}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+% Hyperlinks (disable duplicate anchor names)
+\usepackage[hypertexnames=false,hidelinks,pdfauthor={Kyle Elliott Mathewson},pdftitle={Magic squares as orthogonality conditions on a height function}]{hyperref}
+% \usepackage{cleveref}  % Not available in basic TeX Live
+% \usepackage{algorithm}  % Not needed
+% \usepackage{algorithmic}  % Not needed
+% \usepackage{natbib}  % Not available in basic TeX Live
+\usepackage{geometry}
+\usepackage{float}
+% \usepackage{subcaption}  % Not available in basic TeX Live
+% \usepackage{xcolor}  % Not available in basic TeX Live
+
+% Minimal reference helpers (cleveref not available in basic TeX Live).
+% We infer the reference type from the label prefix (e.g., fig:..., thm:..., sec:...).
+\makeatletter
+\def\Cref@getprefix#1:#2\relax{#1}
+\def\Cref@prefix@sec{sec}
+\def\Cref@prefix@fig{fig}
+\def\Cref@prefix@tab{tab}
+\def\Cref@prefix@eq{eq}
+\def\Cref@prefix@thm{thm}
+\def\Cref@prefix@prop{prop}
+\def\Cref@prefix@lem{lem}
+\def\Cref@prefix@cor{cor}
+\def\Cref@prefix@conj{conj}
+\def\Cref@prefix@def{def}
+\def\Cref@prefix@rem{rem}
+\def\Cref@prefix@ex{ex}
+
+\def\Cref@type@cap#1{%
+  \edef\Cref@tmp{#1}%
+  \ifx\Cref@tmp\Cref@prefix@sec Section%
+  \else\ifx\Cref@tmp\Cref@prefix@fig Figure%
+  \else\ifx\Cref@tmp\Cref@prefix@tab Table%
+  \else\ifx\Cref@tmp\Cref@prefix@eq Equation%
+  \else\ifx\Cref@tmp\Cref@prefix@thm Theorem%
+  \else\ifx\Cref@tmp\Cref@prefix@prop Proposition%
+  \else\ifx\Cref@tmp\Cref@prefix@lem Lemma%
+  \else\ifx\Cref@tmp\Cref@prefix@cor Corollary%
+  \else\ifx\Cref@tmp\Cref@prefix@conj Conjecture%
+  \else\ifx\Cref@tmp\Cref@prefix@def Definition%
+  \else\ifx\Cref@tmp\Cref@prefix@rem Remark%
+  \else\ifx\Cref@tmp\Cref@prefix@ex Example%
+  \else Ref.%
+  \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
+}
+
+\def\Cref@type@low#1{%
+  \edef\Cref@tmp{#1}%
+  \ifx\Cref@tmp\Cref@prefix@sec section%
+  \else\ifx\Cref@tmp\Cref@prefix@fig figure%
+  \else\ifx\Cref@tmp\Cref@prefix@tab table%
+  \else\ifx\Cref@tmp\Cref@prefix@eq equation%
+  \else\ifx\Cref@tmp\Cref@prefix@thm theorem%
+  \else\ifx\Cref@tmp\Cref@prefix@prop proposition%
+  \else\ifx\Cref@tmp\Cref@prefix@lem lemma%
+  \else\ifx\Cref@tmp\Cref@prefix@cor corollary%
+  \else\ifx\Cref@tmp\Cref@prefix@conj conjecture%
+  \else\ifx\Cref@tmp\Cref@prefix@def definition%
+  \else\ifx\Cref@tmp\Cref@prefix@rem remark%
+  \else\ifx\Cref@tmp\Cref@prefix@ex example%
+  \else ref.%
+  \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
+}
+
+\DeclareRobustCommand{\Cref}[1]{%
+  \begingroup
+  \edef\Cref@label{#1}%
+  \edef\Cref@prefix{\expandafter\Cref@getprefix\Cref@label:\relax}%
+  \hyperref[#1]{\Cref@type@cap{\Cref@prefix}~\ref*{#1}}%
+  \endgroup
+}
+\DeclareRobustCommand{\cref}[1]{%
+  \begingroup
+  \edef\Cref@label{#1}%
+  \edef\Cref@prefix{\expandafter\Cref@getprefix\Cref@label:\relax}%
+  \hyperref[#1]{\Cref@type@low{\Cref@prefix}~\ref*{#1}}%
+  \endgroup
+}
+\makeatother
+
+\geometry{margin=0.9in}
+\setlength{\emergencystretch}{2em} % reduce overfull lines without \sloppy
+\setlength{\textfloatsep}{10pt plus 2pt minus 2pt}
+\setlength{\intextsep}{8pt plus 2pt minus 2pt}
+\setlength{\abovecaptionskip}{4pt}
+% captions in \small
+\makeatletter
+\long\def\@makecaption#1#2{\vskip\abovecaptionskip\small\sbox\@tempboxa{#1: #2}\ifdim\wd\@tempboxa>\hsize #1: #2\par\else\global\@minipagefalse\hb@xt@\hsize{\hfil\box\@tempboxa\hfil}\fi\vskip\belowcaptionskip}
+\makeatother
+% Float placement parameters (reduce float-page waste)
+\renewcommand{\topfraction}{0.9}
+\renewcommand{\bottomfraction}{0.6}
+\renewcommand{\textfraction}{0.07}
+\renewcommand{\floatpagefraction}{0.85}
+\setcounter{topnumber}{3}
+\setcounter{totalnumber}{5}
+
+% Theorem environments
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+% Custom commands
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Efull}{E_{\mathrm{full}}}
+\newcommand{\Elow}{E_{\mathrm{low}}}
+\newcommand{\E}{\mathbb{E}}
+
+
+\title{\textbf{Magic squares as orthogonality conditions\\ on a height function}}
+
+\author{Kyle Elliott Mathewson\\
+\textit{Faculty of Science, University of Alberta}\\
+\texttt{kyle.mathewson@ualberta.ca}}
+
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\input{sections/abstract}
+
+\input{sections/introduction}
+
+\input{sections/background}
+
+\input{sections/theory}
+
+\input{sections/balance}
+
+\input{sections/computations}
+
+\input{sections/discussion}
+
+\input{sections/conclusion}
+
+\bibliographystyle{plain}
+\bibliography{references}
+
+\appendix
+\input{sections/appendix}
+
+\end{document}

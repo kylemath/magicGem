@@ -1,0 +1,1405 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex)
+ restricted \write18 enabled.
+entering extended mode
+(../Analysis/revision/theory/scratch_main_full.tex
+LaTeX2e <2025-06-01> patch level 1
+L3 programming layer <2025-05-26>
+(/usr/local/texlive/2025basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2025/01/22 v1.4n Standard LaTeX document class
+(/usr/local/texlive/2025basic/texmf-dist/tex/latex/base/size11.clo))
+(/usr/local/texlive/2025basic/texmf-dist/tex/latex/base/inputenc.sty)
+(/usr/local/texlive/2025basic/texmf-dist/tex/latex/base/fontenc.sty)
+(/usr/local/texlive/2025basic/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/local/texlive/2025basic/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/local/texlive/2025basic/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/local/texlive/2025basic/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/local/texlive/2025basic/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/local/texlive/2025basic/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(/usr/local/texlive/2025basic/texmf-dist/tex/latex/amsfonts/amsfonts.sty))
+(/usr/local/texlive/2025basic/texmf-dist/tex/latex/amscls/amsthm.sty)
+(/usr/local/texlive/2025basic/texmf-dist/tex/latex/mathtools/mathtools.sty
+(/usr/local/texlive/2025basic/texmf-dist/tex/latex/graphics/keyval.sty)
+(/usr/local/texlive/2025basic/texmf-dist/tex/latex/tools/calc.sty)
+(/usr/local/texlive/2025basic/texmf-dist/tex/latex/mathtools/mhsetup.sty))
+(/usr/local/texlive/2025basic/texmf-dist/tex/latex/graphics/graphicx.sty
+(/usr/local/texlive/2025basic/texmf-dist/tex/latex/graphics/graphics.sty
+(/usr/local/texlive/2025basic/texmf-dist/tex/latex/graphics/trig.sty)
+(/usr/local/texlive/2025basic/texmf-dist/tex/latex/graphics-cfg/graphics.cfg)
+(/usr/local/texlive/2025basic/texmf-dist/tex/latex/graphics-def/pdftex.def)))
+(/usr/local/texlive/2025basic/texmf-dist/tex/latex/booktabs/booktabs.sty)
+(/usr/local/texlive/2025basic/texmf-dist/tex/latex/hyperref/hyperref.sty
+(/usr/local/texlive/2025basic/texmf-dist/tex/generic/iftex/iftex.sty)
+(/usr/local/texlive/2025basic/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty)
+(/usr/local/texlive/2025basic/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.
+sty)
+(/usr/local/texlive/2025basic/texmf-dist/tex/generic/pdfescape/pdfescape.sty
+(/usr/local/texlive/2025basic/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty)
+(/usr/local/texlive/2025basic/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
+(/usr/local/texlive/2025basic/texmf-dist/tex/generic/infwarerr/infwarerr.sty)))
+ (/usr/local/texlive/2025basic/texmf-dist/tex/latex/hycolor/hycolor.sty)
+(/usr/local/texlive/2025basic/texmf-dist/tex/latex/hyperref/nameref.sty
+(/usr/local/texlive/2025basic/texmf-dist/tex/latex/refcount/refcount.sty)
+(/usr/local/texlive/2025basic/texmf-dist/tex/generic/gettitlestring/gettitlestr
+ing.sty
+(/usr/local/texlive/2025basic/texmf-dist/tex/latex/kvoptions/kvoptions.sty)))
+(/usr/local/texlive/2025basic/texmf-dist/tex/latex/etoolbox/etoolbox.sty)
+(/usr/local/texlive/2025basic/texmf-dist/tex/generic/stringenc/stringenc.sty)
+(/usr/local/texlive/2025basic/texmf-dist/tex/latex/hyperref/pd1enc.def)
+(/usr/local/texlive/2025basic/texmf-dist/tex/generic/intcalc/intcalc.sty)
+(/usr/local/texlive/2025basic/texmf-dist/tex/latex/hyperref/puenc.def)
+(/usr/local/texlive/2025basic/texmf-dist/tex/latex/url/url.sty)
+(/usr/local/texlive/2025basic/texmf-dist/tex/generic/bitset/bitset.sty
+(/usr/local/texlive/2025basic/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty)
+)) (/usr/local/texlive/2025basic/texmf-dist/tex/latex/hyperref/hpdftex.def
+(/usr/local/texlive/2025basic/texmf-dist/tex/latex/rerunfilecheck/rerunfilechec
+k.sty
+(/usr/local/texlive/2025basic/texmf-dist/tex/generic/uniquecounter/uniquecounte
+r.sty)))
+(/usr/local/texlive/2025basic/texmf-dist/tex/latex/geometry/geometry.sty
+(/usr/local/texlive/2025basic/texmf-dist/tex/generic/iftex/ifvtex.sty))
+(/usr/local/texlive/2025basic/texmf-dist/tex/latex/float/float.sty)
+(/usr/local/texlive/2025basic/texmf-dist/tex/latex/l3backend/l3backend-pdftex.d
+ef)
+No file scratch_main_full.aux.
+(/usr/local/texlive/2025basic/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+)
+(/usr/local/texlive/2025basic/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.s
+ty
+(/usr/local/texlive/2025basic/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+))
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+(/usr/local/texlive/2025basic/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(/usr/local/texlive/2025basic/texmf-dist/tex/latex/amsfonts/umsb.fd)
+(./sections/abstract.tex) (./sections/introduction.tex
+
+LaTeX Warning: Citation `pickover2002zen' on page 1 undefined on input line 4.
+
+
+LaTeX Warning: Citation `durer1514melencolia' on page 1 undefined on input line
+ 5.
+
+
+LaTeX Warning: Citation `andrews1960magic' on page 1 undefined on input line 8.
+
+
+
+LaTeX Warning: Citation `loly2004invariance' on page 1 undefined on input line 
+27.
+
+
+LaTeX Warning: Citation `loly2009spectra' on page 1 undefined on input line 27.
+
+
+
+[1{/usr/local/texlive/2025basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+
+LaTeX Warning: Citation `loly2004invariance' on page 2 undefined on input line 
+34.
+
+
+LaTeX Warning: Hyper reference `thm:complete_energy_char' on page 2 undefined o
+n input line 44.
+
+
+LaTeX Warning: Reference `thm:complete_energy_char' on page 2 undefined on inpu
+t line 44.
+
+
+LaTeX Warning: Citation `loly2004invariance' on page 2 undefined on input line 
+52.
+
+
+LaTeX Warning: Hyper reference `sec:background' on page 2 undefined on input li
+ne 70.
+
+
+LaTeX Warning: Reference `sec:background' on page 2 undefined on input line 70.
+
+
+
+LaTeX Warning: Hyper reference `sec:methodology' on page 2 undefined on input l
+ine 72.
+
+
+LaTeX Warning: Reference `sec:methodology' on page 2 undefined on input line 72
+.
+
+
+LaTeX Warning: Hyper reference `sec:results' on page 2 undefined on input line 
+74.
+
+
+LaTeX Warning: Reference `sec:results' on page 2 undefined on input line 74.
+
+
+LaTeX Warning: Hyper reference `sec:discussion' on page 2 undefined on input li
+ne 76.
+
+
+LaTeX Warning: Reference `sec:discussion' on page 2 undefined on input line 76.
+
+
+
+LaTeX Warning: Hyper reference `sec:conclusion' on page 2 undefined on input li
+ne 77.
+
+
+LaTeX Warning: Reference `sec:conclusion' on page 2 undefined on input line 77.
+
+
+) (./sections/background.tex
+[2]
+
+LaTeX Warning: Citation `trump2012enumeration' on page 3 undefined on input lin
+e 10.
+
+
+LaTeX Warning: Citation `beck2010enumeration' on page 3 undefined on input line
+ 10.
+
+
+LaTeX Warning: Citation `andrews1960magic' on page 3 undefined on input line 25
+.
+
+
+LaTeX Warning: Citation `ahmed2004franklin' on page 3 undefined on input line 3
+8.
+
+
+[3]) (./sections/methodology.tex
+[4]
+
+LaTeX Warning: Hyper reference `fig:construction' on page 5 undefined on input 
+line 53.
+
+
+LaTeX Warning: Reference `fig:construction' on page 5 undefined on input line 5
+3.
+
+
+[5]
+
+LaTeX Warning: Citation `barvinok2002course' on page 6 undefined on input line 
+77.
+
+
+[6 <./figures/fig02_combined_construction_symmetries.pdf>]
+
+LaTeX Warning: Hyper reference `fig:construction' on page 7 undefined on input 
+line 106.
+
+
+LaTeX Warning: Reference `fig:construction' on page 7 undefined on input line 1
+06.
+
+
+[7]
+[8]
+Underfull \hbox (badness 1742) in paragraph at lines 241--244
+\T1/cmr/m/n/10.95 has row sums $\OT1/cmr/m/n/10.95 (13\OML/cmm/m/it/10.95 ; \OT
+1/cmr/m/n/10.95 19\OML/cmm/m/it/10.95 ; \OT1/cmr/m/n/10.95 13)$ \T1/cmr/m/n/10.
+95 and col-umn sums $\OT1/cmr/m/n/10.95 (16\OML/cmm/m/it/10.95 ; \OT1/cmr/m/n/1
+0.95 13\OML/cmm/m/it/10.95 ; \OT1/cmr/m/n/10.95 16)$\T1/cmr/m/n/10.95 ---far fr
+om equal---yet achieves
+
+Underfull \hbox (badness 1237) in paragraph at lines 262--265
+\T1/cmr/m/n/10.95 has both di-ag-o-nal sums equal to $\OT1/cmr/m/n/10.95 34$\T1
+/cmr/m/n/10.95 , but row sums $\OT1/cmr/m/n/10.95 (28\OML/cmm/m/it/10.95 ; \OT1
+/cmr/m/n/10.95 38\OML/cmm/m/it/10.95 ; \OT1/cmr/m/n/10.95 44\OML/cmm/m/it/10.95
+ ; \OT1/cmr/m/n/10.95 26)$ \T1/cmr/m/n/10.95 and col-umn sums
+
+LaTeX Warning: Hyper reference `sec:energy_landscape' on page 9 undefined on in
+put line 270.
+
+
+LaTeX Warning: Reference `sec:energy_landscape' on page 9 undefined on input li
+ne 270.
+
+
+[9]
+
+LaTeX Warning: Hyper reference `def:lowmode_energy' on page 10 undefined on inp
+ut line 310.
+
+
+LaTeX Warning: Reference `def:lowmode_energy' on page 10 undefined on input lin
+e 310.
+
+
+LaTeX Warning: Hyper reference `prop:lowmode_char' on page 10 undefined on inpu
+t line 312.
+
+
+LaTeX Warning: Reference `prop:lowmode_char' on page 10 undefined on input line
+ 312.
+
+
+LaTeX Warning: Hyper reference `rem:four_term_insufficient' on page 10 undefine
+d on input line 313.
+
+
+LaTeX Warning: Reference `rem:four_term_insufficient' on page 10 undefined on i
+nput line 313.
+
+
+LaTeX Warning: Hyper reference `sec:energy_landscape' on page 10 undefined on i
+nput line 314.
+
+
+LaTeX Warning: Reference `sec:energy_landscape' on page 10 undefined on input l
+ine 314.
+
+
+LaTeX Warning: Hyper reference `rem:counterexample' on page 10 undefined on inp
+ut line 336.
+
+
+LaTeX Warning: Reference `rem:counterexample' on page 10 undefined on input lin
+e 336.
+
+
+LaTeX Warning: Hyper reference `thm:complete_energy_char' on page 10 undefined 
+on input line 339.
+
+
+LaTeX Warning: Reference `thm:complete_energy_char' on page 10 undefined on inp
+ut line 339.
+
+
+LaTeX Warning: Hyper reference `sec:insufficiency' on page 10 undefined on inpu
+t line 349.
+
+
+LaTeX Warning: Reference `sec:insufficiency' on page 10 undefined on input line
+ 349.
+
+
+[10]
+
+LaTeX Warning: Hyper reference `prop:rowcol_cov' on page 11 undefined on input 
+line 405.
+
+
+LaTeX Warning: Reference `prop:rowcol_cov' on page 11 undefined on input line 4
+05.
+
+
+LaTeX Warning: Hyper reference `prop:diagonal_cov' on page 11 undefined on inpu
+t line 405.
+
+
+LaTeX Warning: Reference `prop:diagonal_cov' on page 11 undefined on input line
+ 405.
+
+
+LaTeX Warning: Reference `eq:full_energy' on page 11 undefined on input line 40
+5.
+
+
+LaTeX Warning: Hyper reference `prop:rowcol_cov' on page 11 undefined on input 
+line 409.
+
+
+LaTeX Warning: Reference `prop:rowcol_cov' on page 11 undefined on input line 4
+09.
+
+
+LaTeX Warning: Hyper reference `prop:diagonal_cov' on page 11 undefined on inpu
+t line 412.
+
+
+LaTeX Warning: Reference `prop:diagonal_cov' on page 11 undefined on input line
+ 412.
+
+
+[11]
+
+LaTeX Warning: Hyper reference `prop:magic_implies_zero_cov' on page 12 undefin
+ed on input line 481.
+
+
+LaTeX Warning: Reference `prop:magic_implies_zero_cov' on page 12 undefined on 
+input line 481.
+
+) (./sections/drafts/theory.tex
+
+LaTeX Warning: Hyper reference `def:gem_coords' on page 12 undefined on input l
+ine 17.
+
+
+LaTeX Warning: Reference `def:gem_coords' on page 12 undefined on input line 17
+.
+
+
+[12]
+
+LaTeX Warning: Reference `eq:line_dev' on page 13 undefined on input line 73.
+
+
+LaTeX Warning: Reference `eq:Efull' on page 13 undefined on input line 89.
+
+
+LaTeX Warning: Hyper reference `lem:variances' on page 13 undefined on input li
+ne 90.
+
+
+LaTeX Warning: Reference `lem:variances' on page 13 undefined on input line 90.
+
+
+
+[13]
+
+LaTeX Warning: Reference `eq:Efull_devs' on page 14 undefined on input line 118
+.
+
+
+LaTeX Warning: Reference `eq:Efull' on page 14 undefined on input line 128.
+
+
+LaTeX Warning: Reference `eq:Efull' on page 14 undefined on input line 138.
+
+
+Overfull \hbox (10.23845pt too wide) detected at line 151
+\OML/cmm/m/it/10.95 W[] \OT1/cmr/m/n/10.95 = []\OMS/cmsy/m/n/10.95 f[]g\OML/cmm
+/m/it/10.95 ;  W[] \OT1/cmr/m/n/10.95 = []\OMS/cmsy/m/n/10.95 f[]g\OML/cmm/m/it
+/10.95 ;  W[] \OT1/cmr/m/n/10.95 = []\OMS/cmsy/m/n/10.95 f[]\OML/cmm/m/it/10.95
+ ; []\OMS/cmsy/m/n/10.95 g\OML/cmm/m/it/10.95 ;  W \OT1/cmr/m/n/10.95 = \OML/cm
+m/m/it/10.95 W[] \OT1/cmr/m/n/10.95 + \OML/cmm/m/it/10.95 W[] \OT1/cmr/m/n/10.9
+5 + \OML/cmm/m/it/10.95 W[] \OMS/cmsy/m/n/10.95 ^^Z \OT1/cmr/bx/n/10.95 1[]\OML
+/cmm/m/it/10.95 :
+
+[14]
+
+LaTeX Warning: Hyper reference `rem:v4_not_invariant' on page 15 undefined on i
+nput line 186.
+
+
+LaTeX Warning: Reference `rem:v4_not_invariant' on page 15 undefined on input l
+ine 186.
+
+
+LaTeX Warning: Reference `eq:inner' on page 15 undefined on input line 189.
+
+
+LaTeX Warning: Hyper reference `lem:W_structure' on page 15 undefined on input 
+line 201.
+
+
+LaTeX Warning: Reference `lem:W_structure' on page 15 undefined on input line 2
+01.
+
+
+LaTeX Warning: Hyper reference `lem:W_structure' on page 15 undefined on input 
+line 221.
+
+
+LaTeX Warning: Reference `lem:W_structure' on page 15 undefined on input line 2
+21.
+
+
+LaTeX Warning: Hyper reference `lem:W_structure' on page 15 undefined on input 
+line 227.
+
+
+LaTeX Warning: Reference `lem:W_structure' on page 15 undefined on input line 2
+27.
+
+
+LaTeX Warning: Reference `eq:line_dev' on page 15 undefined on input line 229.
+
+
+LaTeX Warning: Hyper reference `lem:variances' on page 15 undefined on input li
+ne 230.
+
+
+LaTeX Warning: Reference `lem:variances' on page 15 undefined on input line 230
+.
+
+
+LaTeX Warning: Hyper reference `lem:variances' on page 15 undefined on input li
+ne 232.
+
+
+LaTeX Warning: Reference `lem:variances' on page 15 undefined on input line 232
+.
+
+
+LaTeX Warning: Hyper reference `lem:variances' on page 15 undefined on input li
+ne 238.
+
+
+LaTeX Warning: Reference `lem:variances' on page 15 undefined on input line 238
+.
+
+
+LaTeX Warning: Reference `eq:Efull_projection' on page 15 undefined on input li
+ne 240.
+
+
+LaTeX Warning: Hyper reference `lem:W_structure' on page 15 undefined on input 
+line 241.
+
+
+LaTeX Warning: Reference `lem:W_structure' on page 15 undefined on input line 2
+41.
+
+
+LaTeX Warning: Reference `eq:Efull_bounds' on page 15 undefined on input line 2
+51.
+
+
+[15]
+
+LaTeX Warning: Hyper reference `rem:n3_lowmode' on page 16 undefined on input l
+ine 262.
+
+
+LaTeX Warning: Reference `rem:n3_lowmode' on page 16 undefined on input line 26
+2.
+
+
+LaTeX Warning: Reference `eq:Efull_devs' on page 16 undefined on input line 268
+.
+
+
+LaTeX Warning: Hyper reference `rem:n3_lowmode' on page 16 undefined on input l
+ine 270.
+
+
+LaTeX Warning: Reference `rem:n3_lowmode' on page 16 undefined on input line 27
+0.
+
+
+LaTeX Warning: Hyper reference `lem:zero_set' on page 16 undefined on input lin
+e 275.
+
+
+LaTeX Warning: Reference `lem:zero_set' on page 16 undefined on input line 275.
+
+
+
+LaTeX Warning: Hyper reference `sec:theory_hierarchy' on page 16 undefined on i
+nput line 280.
+
+
+LaTeX Warning: Reference `sec:theory_hierarchy' on page 16 undefined on input l
+ine 280.
+
+
+LaTeX Warning: Reference `eq:Efull_devs' on page 16 undefined on input line 285
+.
+
+
+LaTeX Warning: Hyper reference `sec:theory_swap' on page 16 undefined on input 
+line 286.
+
+
+LaTeX Warning: Reference `sec:theory_swap' on page 16 undefined on input line 2
+86.
+
+
+LaTeX Warning: Hyper reference `lem:variances' on page 16 undefined on input li
+ne 302.
+
+
+LaTeX Warning: Reference `lem:variances' on page 16 undefined on input line 302
+.
+
+
+LaTeX Warning: Reference `eq:line_dev' on page 16 undefined on input line 307.
+
+
+[16]
+
+LaTeX Warning: Reference `eq:finite_diff' on page 17 undefined on input line 34
+8.
+
+
+LaTeX Warning: Hyper reference `def:degree_k' on page 17 undefined on input lin
+e 356.
+
+
+LaTeX Warning: Reference `def:degree_k' on page 17 undefined on input line 356.
+
+
+
+LaTeX Warning: Hyper reference `thm:hierarchy' on page 17 undefined on input li
+ne 358.
+
+
+LaTeX Warning: Reference `thm:hierarchy' on page 17 undefined on input line 358
+.
+
+
+LaTeX Warning: Hyper reference `thm:hierarchy' on page 17 undefined on input li
+ne 358.
+
+
+LaTeX Warning: Reference `thm:hierarchy' on page 17 undefined on input line 358
+.
+
+
+LaTeX Warning: Hyper reference `lem:variances' on page 17 undefined on input li
+ne 363.
+
+
+LaTeX Warning: Reference `lem:variances' on page 17 undefined on input line 363
+.
+
+
+LaTeX Warning: Hyper reference `thm:hierarchy' on page 17 undefined on input li
+ne 363.
+
+
+LaTeX Warning: Reference `thm:hierarchy' on page 17 undefined on input line 363
+.
+
+
+LaTeX Warning: Citation `loly2004invariance' on page 17 undefined on input line
+ 377.
+
+
+LaTeX Warning: Hyper reference `lem:variances' on page 17 undefined on input li
+ne 383.
+
+
+LaTeX Warning: Reference `lem:variances' on page 17 undefined on input line 383
+.
+
+
+LaTeX Warning: Hyper reference `thm:hierarchy' on page 17 undefined on input li
+ne 384.
+
+
+LaTeX Warning: Reference `thm:hierarchy' on page 17 undefined on input line 384
+.
+
+
+LaTeX Warning: Hyper reference `lem:variances' on page 17 undefined on input li
+ne 385.
+
+
+LaTeX Warning: Reference `lem:variances' on page 17 undefined on input line 385
+.
+
+
+LaTeX Warning: Hyper reference `thm:hierarchy' on page 17 undefined on input li
+ne 387.
+
+
+LaTeX Warning: Reference `thm:hierarchy' on page 17 undefined on input line 387
+.
+
+
+[17]
+
+LaTeX Warning: Hyper reference `thm:hierarchy' on page 18 undefined on input li
+ne 391.
+
+
+LaTeX Warning: Reference `thm:hierarchy' on page 18 undefined on input line 391
+.
+
+
+Overfull \hbox (198.82198pt too wide) detected at line 406
+[]  \OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 n \OT1/cmr/m/n/10.95 = 3\OML/cmm/m/
+it/10.95 ;  []\OT1/cmr/m/n/10.95 1;  \OML/cmm/m/it/10.95 ^^M \OT1/cmr/m/n/10.95
+ = (1\OML/cmm/m/it/10.95 ; \OMS/cmsy/m/n/10.95 ^^@\OT1/cmr/m/n/10.95 2\OML/cmm/
+m/it/10.95 ; \OT1/cmr/m/n/10.95 1)\OML/cmm/m/it/10.95 ;  ^^Z \OT1/cmr/m/n/10.95
+ = (\OMS/cmsy/m/n/10.95 ^^@\OT1/cmr/m/n/10.95 2\OML/cmm/m/it/10.95 ; \OT1/cmr/m
+/n/10.95 4\OML/cmm/m/it/10.95 ; \OMS/cmsy/m/n/10.95 ^^@\OT1/cmr/m/n/10.95 2))\O
+ML/cmm/m/it/10.95 ;  []  \OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 n \OT1/cmr/m/n
+/10.95 = 4\OML/cmm/m/it/10.95 ;  []\OT1/cmr/m/n/10.95 2;  \OML/cmm/m/it/10.95 ^
+^M \OT1/cmr/m/n/10.95 = (1\OML/cmm/m/it/10.95 ; \OMS/cmsy/m/n/10.95 ^^@\OT1/cmr
+/m/n/10.95 3\OML/cmm/m/it/10.95 ; \OT1/cmr/m/n/10.95 3\OML/cmm/m/it/10.95 ; \OM
+S/cmsy/m/n/10.95 ^^@\OT1/cmr/m/n/10.95 1)\OML/cmm/m/it/10.95 ;  ^^Z \OT1/cmr/m/
+n/10.95 = 0)\OML/cmm/m/it/10.95 :
+
+LaTeX Warning: Hyper reference `thm:hierarchy' on page 18 undefined on input li
+ne 412.
+
+
+LaTeX Warning: Reference `thm:hierarchy' on page 18 undefined on input line 412
+.
+
+
+LaTeX Warning: Hyper reference `thm:hierarchy' on page 18 undefined on input li
+ne 418.
+
+
+LaTeX Warning: Reference `thm:hierarchy' on page 18 undefined on input line 418
+.
+
+
+LaTeX Warning: Reference `eq:finite_diff' on page 18 undefined on input line 41
+9.
+
+
+LaTeX Warning: Hyper reference `thm:hierarchy' on page 18 undefined on input li
+ne 422.
+
+
+LaTeX Warning: Reference `thm:hierarchy' on page 18 undefined on input line 422
+.
+
+
+LaTeX Warning: Reference `eq:finite_diff' on page 18 undefined on input line 42
+4.
+
+
+LaTeX Warning: Hyper reference `prop:perm_threshold' on page 18 undefined on in
+put line 445.
+
+
+LaTeX Warning: Reference `prop:perm_threshold' on page 18 undefined on input li
+ne 445.
+
+
+[18]
+
+LaTeX Warning: Hyper reference `rem:four_term_insufficient' on page 19 undefine
+d on input line 461.
+
+
+LaTeX Warning: Reference `rem:four_term_insufficient' on page 19 undefined on i
+nput line 461.
+
+
+Overfull \hbox (67.8822pt too wide) detected at line 474
+\OML/cmm/m/it/10.95 m\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 a; b\OT1/cmr/m/n/1
+0.95 ) = #\OMS/cmsy/m/n/10.95 f[]\OML/cmm/m/it/10.95 L \OT1/cmr/m/n/10.95 :  \O
+ML/cmm/m/it/10.95 L[]a; b\OMS/cmsy/m/n/10.95 g\OML/cmm/m/it/10.95 ;  u[]\OT1/cm
+r/m/n/10.95 (\OML/cmm/m/it/10.95 c\OT1/cmr/m/n/10.95 ) = [] \OML/cmm/m/it/10.95
+ ^^N[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 S\OT1/cmr/m/n/10.95 ) ([]\OML/cmm
+/m/it/10.95 c\OT1/cmr/m/n/10.95 )\OML/cmm/m/it/10.95 :
+
+LaTeX Warning: Reference `eq:Efull_devs' on page 19 undefined on input line 494
+.
+
+
+Overfull \hbox (17.5809pt too wide) detected at line 499
+\OML/cmm/m/it/10.95 N[]\OT1/cmr/m/n/10.95 ^^A\OML/cmm/m/it/10.95 E[] \OT1/cmr/m
+/n/10.95 = [][](\OML/cmm/m/it/10.95 ^^N[] \OT1/cmr/m/n/10.95 + \OML/cmm/m/it/10
+.95 d\OT1/cmr/m/n/10.95 )[] \OMS/cmsy/m/n/10.95 ^^@ \OML/cmm/m/it/10.95 ^^N[][]
+ \OT1/cmr/m/n/10.95 + [][](\OML/cmm/m/it/10.95 ^^N[] \OMS/cmsy/m/n/10.95 ^^@ \O
+ML/cmm/m/it/10.95 d\OT1/cmr/m/n/10.95 )[] \OMS/cmsy/m/n/10.95 ^^@ \OML/cmm/m/it
+/10.95 ^^N[][] \OT1/cmr/m/n/10.95 = \OML/cmm/m/it/10.95 d[]m\OT1/cmr/m/n/10.95 
+(\OML/cmm/m/it/10.95 a; b\OT1/cmr/m/n/10.95 ) + 2\OML/cmm/m/it/10.95 d[][] ^^N[
+] \OMS/cmsy/m/n/10.95 ^^@ [] \OML/cmm/m/it/10.95 ^^N[][]:
+
+LaTeX Warning: Reference `eq:swap_magic' on page 19 undefined on input line 501
+.
+
+
+Overfull \hbox (91.31093pt too wide) detected at line 509
+\OML/cmm/m/it/10.95 m\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 a; b\OT1/cmr/m/n/1
+0.95 ) = 2 \OMS/cmsy/m/n/10.95 ^^A \OT1/cmr/m/n/10.95 [\OML/cmm/m/it/10.95 i \O
+MS/cmsy/m/n/10.95 6\OT1/cmr/m/n/10.95 = \OML/cmm/m/it/10.95 i[]\OT1/cmr/m/n/10.
+95 ] + 2 \OMS/cmsy/m/n/10.95 ^^A \OT1/cmr/m/n/10.95 [\OML/cmm/m/it/10.95 j \OMS
+/cmsy/m/n/10.95 6\OT1/cmr/m/n/10.95 = \OML/cmm/m/it/10.95 j[]\OT1/cmr/m/n/10.95
+ ] + [[]\OML/cmm/m/it/10.95 a; b[]\OT1/cmr/m/n/10.95 ] + [[]\OML/cmm/m/it/10.95
+ a; b[]\OT1/cmr/m/n/10.95 ]\OML/cmm/m/it/10.95 :
+
+[19]
+
+LaTeX Warning: Reference `eq:swap_magic' on page 20 undefined on input line 543
+.
+
+
+LaTeX Warning: Reference `eq:swap_magic' on page 20 undefined on input line 548
+.
+
+
+LaTeX Warning: Hyper reference `lem:m_values' on page 20 undefined on input lin
+e 549.
+
+
+LaTeX Warning: Reference `lem:m_values' on page 20 undefined on input line 549.
+
+
+
+LaTeX Warning: Hyper reference `lem:m_values' on page 20 undefined on input lin
+e 550.
+
+
+LaTeX Warning: Reference `lem:m_values' on page 20 undefined on input line 550.
+
+
+
+LaTeX Warning: Reference `eq:swap_magic' on page 20 undefined on input line 550
+.
+
+
+LaTeX Warning: Hyper reference `sec:results' on page 20 undefined on input line
+ 551.
+
+
+LaTeX Warning: Reference `sec:results' on page 20 undefined on input line 551.
+
+
+Overfull \hbox (175.00487pt too wide) detected at line 567
+[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 X; Z[]\OT1/cmr/m/n/10.95 ) = [](\OML/
+cmm/m/it/10.95 X; Z\OT1/cmr/m/n/10.95 ) + []\OML/cmm/m/it/10.95 ;  []\OT1/cmr/m
+/n/10.95 (\OML/cmm/m/it/10.95 Y; Z[]\OT1/cmr/m/n/10.95 ) = [](\OML/cmm/m/it/10.
+95 Y; Z\OT1/cmr/m/n/10.95 ) + []\OML/cmm/m/it/10.95 ;  []\OT1/cmr/m/n/10.95 (\O
+ML/cmm/m/it/10.95 D; Z[]\OT1/cmr/m/n/10.95 ) = [](\OML/cmm/m/it/10.95 D; Z\OT1/
+cmr/m/n/10.95 ) + []
+
+LaTeX Warning: Hyper reference `lem:variances' on page 20 undefined on input li
+ne 580.
+
+
+LaTeX Warning: Reference `lem:variances' on page 20 undefined on input line 580
+.
+
+
+[20]
+
+LaTeX Warning: Hyper reference `lem:variances' on page 21 undefined on input li
+ne 587.
+
+
+LaTeX Warning: Reference `lem:variances' on page 21 undefined on input line 587
+.
+
+
+LaTeX Warning: Hyper reference `lem:variances' on page 21 undefined on input li
+ne 607.
+
+
+LaTeX Warning: Reference `lem:variances' on page 21 undefined on input line 607
+.
+
+
+LaTeX Warning: Hyper reference `lem:variances' on page 21 undefined on input li
+ne 609.
+
+
+LaTeX Warning: Reference `lem:variances' on page 21 undefined on input line 609
+.
+
+
+LaTeX Warning: Hyper reference `thm:hierarchy' on page 21 undefined on input li
+ne 609.
+
+
+LaTeX Warning: Reference `thm:hierarchy' on page 21 undefined on input line 609
+.
+
+
+LaTeX Warning: Hyper reference `prop:inertia' on page 21 undefined on input lin
+e 615.
+
+
+LaTeX Warning: Reference `prop:inertia' on page 21 undefined on input line 615.
+
+
+
+LaTeX Warning: Hyper reference `prop:perm_threshold' on page 21 undefined on in
+put line 618.
+
+
+LaTeX Warning: Reference `prop:perm_threshold' on page 21 undefined on input li
+ne 618.
+
+
+LaTeX Warning: Hyper reference `cor:loly' on page 21 undefined on input line 61
+9.
+
+
+LaTeX Warning: Reference `cor:loly' on page 21 undefined on input line 619.
+
+
+LaTeX Warning: Hyper reference `thm:hierarchy' on page 21 undefined on input li
+ne 621.
+
+
+LaTeX Warning: Reference `thm:hierarchy' on page 21 undefined on input line 621
+.
+
+) (./sections/results.tex
+
+LaTeX Warning: Hyper reference `prop:lowmode_char' on page 21 undefined on inpu
+t line 16.
+
+
+LaTeX Warning: Reference `prop:lowmode_char' on page 21 undefined on input line
+ 16.
+
+
+LaTeX Warning: Hyper reference `prop:lowmode_char' on page 21 undefined on inpu
+t line 21.
+
+
+LaTeX Warning: Reference `prop:lowmode_char' on page 21 undefined on input line
+ 21.
+
+
+[21]
+
+LaTeX Warning: Hyper reference `fig:energy_landscapes_comparison' on page 22 un
+defined on input line 24.
+
+
+LaTeX Warning: Reference `fig:energy_landscapes_comparison' on page 22 undefine
+d on input line 24.
+
+
+LaTeX Warning: Hyper reference `fig:energy_landscapes_comparison' on page 22 un
+defined on input line 37.
+
+
+LaTeX Warning: Reference `fig:energy_landscapes_comparison' on page 22 undefine
+d on input line 37.
+
+
+LaTeX Warning: Hyper reference `sec:large_scale_landscape' on page 22 undefined
+ on input line 37.
+
+
+LaTeX Warning: Reference `sec:large_scale_landscape' on page 22 undefined on in
+put line 37.
+
+
+LaTeX Warning: Hyper reference `fig:perturbation_gaps' on page 22 undefined on 
+input line 45.
+
+
+LaTeX Warning: Reference `fig:perturbation_gaps' on page 22 undefined on input 
+line 45.
+
+
+[22]
+
+LaTeX Warning: Hyper reference `tab:perturbation_stats' on page 23 undefined on
+ input line 91.
+
+
+LaTeX Warning: Reference `tab:perturbation_stats' on page 23 undefined on input
+ line 91.
+
+
+[23 <./figures/Complete_Perturbation_Analysis_n345.png>]
+
+LaTeX Warning: Hyper reference `prop:magic_implies_zero_cov' on page 24 undefin
+ed on input line 119.
+
+
+LaTeX Warning: Reference `prop:magic_implies_zero_cov' on page 24 undefined on 
+input line 119.
+
+
+Underfull \hbox (badness 1024) in paragraph at lines 122--128
+[]\T1/cmr/m/n/10.95 Notably, ex-haus-tive enu-mer-a-tion re-veals that 760 ar-r
+ange-ments of $\OMS/cmsy/m/n/10.95 f\OT1/cmr/m/n/10.95 1\OML/cmm/m/it/10.95 ; [
+] ; \OT1/cmr/m/n/10.95 9\OMS/cmsy/m/n/10.95 g$ \T1/cmr/m/n/10.95 sat-isfy
+
+LaTeX Warning: Hyper reference `fig:3x3_analysis' on page 24 undefined on input
+ line 134.
+
+
+LaTeX Warning: Reference `fig:3x3_analysis' on page 24 undefined on input line 
+134.
+
+
+LaTeX Warning: Hyper reference `prop:magic_implies_zero_cov' on page 24 undefin
+ed on input line 163.
+
+
+LaTeX Warning: Reference `prop:magic_implies_zero_cov' on page 24 undefined on 
+input line 163.
+
+
+[24]
+[25]
+
+LaTeX Warning: Hyper reference `prop:magic_implies_zero_cov' on page 26 undefin
+ed on input line 217.
+
+
+LaTeX Warning: Reference `prop:magic_implies_zero_cov' on page 26 undefined on 
+input line 217.
+
+
+[26 <./figures/fig03_combined_3x3_analysis.pdf>]
+
+LaTeX Warning: Hyper reference `sec:insufficiency' on page 27 undefined on inpu
+t line 222.
+
+
+LaTeX Warning: Reference `sec:insufficiency' on page 27 undefined on input line
+ 222.
+
+
+LaTeX Warning: Hyper reference `fig:energy_comparison' on page 27 undefined on 
+input line 229.
+
+
+LaTeX Warning: Reference `fig:energy_comparison' on page 27 undefined on input 
+line 229.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 248.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 248.
+
+
+LaTeX Warning: Hyper reference `fig:perturbation_gaps' on page 27 undefined on 
+input line 255.
+
+
+LaTeX Warning: Reference `fig:perturbation_gaps' on page 27 undefined on input 
+line 255.
+
+
+[27 <./figures/fig_energy_comparison_n4.pdf>]
+
+LaTeX Warning: Hyper reference `fig:comparison_scaling' on page 28 undefined on
+ input line 266.
+
+
+LaTeX Warning: Reference `fig:comparison_scaling' on page 28 undefined on input
+ line 266.
+
+
+LaTeX Warning: Hyper reference `tab:comparison_all' on page 28 undefined on inp
+ut line 290.
+
+
+LaTeX Warning: Reference `tab:comparison_all' on page 28 undefined on input lin
+e 290.
+
+
+LaTeX Warning: Hyper reference `prop:magic_implies_zero_cov' on page 28 undefin
+ed on input line 313.
+
+
+LaTeX Warning: Reference `prop:magic_implies_zero_cov' on page 28 undefined on 
+input line 313.
+
+
+LaTeX Warning: Hyper reference `rem:four_term_insufficient' on page 28 undefine
+d on input line 313.
+
+
+LaTeX Warning: Reference `rem:four_term_insufficient' on page 28 undefined on i
+nput line 313.
+
+
+LaTeX Warning: Hyper reference `prop:magic_implies_zero_cov' on page 28 undefin
+ed on input line 313.
+
+
+LaTeX Warning: Reference `prop:magic_implies_zero_cov' on page 28 undefined on 
+input line 313.
+
+
+LaTeX Warning: Hyper reference `rem:four_term_insufficient' on page 28 undefine
+d on input line 313.
+
+
+LaTeX Warning: Reference `rem:four_term_insufficient' on page 28 undefined on i
+nput line 313.
+
+
+[28 <./figures/fig06_combined_comparison_scaling.pdf>]
+
+LaTeX Warning: Hyper reference `fig:energy_comparison' on page 29 undefined on 
+input line 321.
+
+
+LaTeX Warning: Reference `fig:energy_comparison' on page 29 undefined on input 
+line 321.
+
+
+LaTeX Warning: Hyper reference `thm:complete_energy_char' on page 29 undefined 
+on input line 327.
+
+
+LaTeX Warning: Reference `thm:complete_energy_char' on page 29 undefined on inp
+ut line 327.
+
+
+LaTeX Warning: Hyper reference `def:lowmode_energy' on page 29 undefined on inp
+ut line 335.
+
+
+LaTeX Warning: Reference `def:lowmode_energy' on page 29 undefined on input lin
+e 335.
+
+
+LaTeX Warning: Hyper reference `fig:energy_landscapes_comparison' on page 29 un
+defined on input line 341.
+
+
+LaTeX Warning: Reference `fig:energy_landscapes_comparison' on page 29 undefine
+d on input line 341.
+
+
+LaTeX Warning: Hyper reference `rem:four_term_insufficient' on page 29 undefine
+d on input line 361.
+
+
+LaTeX Warning: Reference `rem:four_term_insufficient' on page 29 undefined on i
+nput line 361.
+
+
+LaTeX Warning: Hyper reference `rem:four_term_insufficient' on page 29 undefine
+d on input line 361.
+
+
+LaTeX Warning: Reference `rem:four_term_insufficient' on page 29 undefined on i
+nput line 361.
+
+
+[29]
+
+LaTeX Warning: Hyper reference `tab:landscape_stats' on page 30 undefined on in
+put line 365.
+
+
+LaTeX Warning: Reference `tab:landscape_stats' on page 30 undefined on input li
+ne 365.
+
+
+LaTeX Warning: Hyper reference `rem:four_term_insufficient' on page 30 undefine
+d on input line 370.
+
+
+LaTeX Warning: Reference `rem:four_term_insufficient' on page 30 undefined on i
+nput line 370.
+
+
+LaTeX Warning: Hyper reference `rem:four_term_insufficient' on page 30 undefine
+d on input line 393.
+
+
+LaTeX Warning: Reference `rem:four_term_insufficient' on page 30 undefined on i
+nput line 393.
+
+
+LaTeX Warning: Hyper reference `rem:four_term_insufficient' on page 30 undefine
+d on input line 393.
+
+
+LaTeX Warning: Reference `rem:four_term_insufficient' on page 30 undefined on i
+nput line 393.
+
+
+[30 <./figures/energy_landscapes_comparison.png>]
+
+LaTeX Warning: Hyper reference `fig:scaling_summary' on page 31 undefined on in
+put line 431.
+
+
+LaTeX Warning: Reference `fig:scaling_summary' on page 31 undefined on input li
+ne 431.
+
+
+[31]
+
+LaTeX Warning: Hyper reference `thm:complete_energy_char' on page 32 undefined 
+on input line 456.
+
+
+LaTeX Warning: Reference `thm:complete_energy_char' on page 32 undefined on inp
+ut line 456.
+
+
+LaTeX Warning: Hyper reference `prop:rowcol_cov' on page 32 undefined on input 
+line 459.
+
+
+LaTeX Warning: Reference `prop:rowcol_cov' on page 32 undefined on input line 4
+59.
+
+
+LaTeX Warning: Hyper reference `prop:diagonal_cov' on page 32 undefined on inpu
+t line 459.
+
+
+LaTeX Warning: Reference `prop:diagonal_cov' on page 32 undefined on input line
+ 459.
+
+
+[32 <./figures/Figure7_ScalingSummary.png>]
+
+LaTeX Warning: Hyper reference `sec:methodology' on page 33 undefined on input 
+line 479.
+
+
+LaTeX Warning: Reference `sec:methodology' on page 33 undefined on input line 4
+79.
+
+) (./sections/discussion.tex
+
+LaTeX Warning: Hyper reference `prop:magic_implies_zero_cov' on page 33 undefin
+ed on input line 11.
+
+
+LaTeX Warning: Reference `prop:magic_implies_zero_cov' on page 33 undefined on 
+input line 11.
+
+
+LaTeX Warning: Hyper reference `sec:vector_rep' on page 33 undefined on input l
+ine 23.
+
+
+LaTeX Warning: Reference `sec:vector_rep' on page 33 undefined on input line 23
+.
+
+
+Underfull \hbox (badness 1668) in paragraph at lines 37--44
+[]\T1/cmr/m/n/10.95 This in-ter-pre-ta-tion ex-tends to the di-ag-o-nal con-di-
+tions. The di-ag-o-nal co-vari-ances
+
+[33]
+
+LaTeX Warning: Hyper reference `sec:energy_landscape' on page 34 undefined on i
+nput line 76.
+
+
+LaTeX Warning: Reference `sec:energy_landscape' on page 34 undefined on input l
+ine 76.
+
+
+LaTeX Warning: Hyper reference `fig:perturbation_gaps' on page 34 undefined on 
+input line 104.
+
+
+LaTeX Warning: Reference `fig:perturbation_gaps' on page 34 undefined on input 
+line 104.
+
+
+[34]
+
+LaTeX Warning: Hyper reference `sec:large_scale_landscape' on page 35 undefined
+ on input line 139.
+
+
+LaTeX Warning: Reference `sec:large_scale_landscape' on page 35 undefined on in
+put line 139.
+
+
+LaTeX Warning: Hyper reference `rem:four_term_insufficient' on page 35 undefine
+d on input line 170.
+
+
+LaTeX Warning: Reference `rem:four_term_insufficient' on page 35 undefined on i
+nput line 170.
+
+
+LaTeX Warning: Hyper reference `thm:complete_energy_char' on page 35 undefined 
+on input line 172.
+
+
+LaTeX Warning: Reference `thm:complete_energy_char' on page 35 undefined on inp
+ut line 172.
+
+
+[35]
+
+LaTeX Warning: Hyper reference `prop:magic_implies_zero_cov' on page 36 undefin
+ed on input line 187.
+
+
+LaTeX Warning: Reference `prop:magic_implies_zero_cov' on page 36 undefined on 
+input line 187.
+
+
+LaTeX Warning: Citation `loly2004invariance' on page 36 undefined on input line
+ 227.
+
+
+LaTeX Warning: Citation `loly2007franklin' on page 36 undefined on input line 2
+27.
+
+
+LaTeX Warning: Citation `loly2009spectra' on page 36 undefined on input line 22
+7.
+
+
+LaTeX Warning: Citation `loly2004invariance' on page 36 undefined on input line
+ 228.
+
+
+[36]
+
+LaTeX Warning: Citation `loly2009spectra' on page 37 undefined on input line 24
+6.
+
+
+LaTeX Warning: Citation `nordgren2012properties' on page 37 undefined on input 
+line 246.
+
+
+LaTeX Warning: Citation `nordgren2014spectra' on page 37 undefined on input lin
+e 246.
+
+
+LaTeX Warning: Citation `beck2006insideout' on page 37 undefined on input line 
+247.
+
+
+LaTeX Warning: Citation `ahmed2003polyhedral' on page 37 undefined on input lin
+e 247.
+
+
+[37]) (./sections/conclusion.tex
+
+LaTeX Warning: Hyper reference `thm:complete_energy_char' on page 38 undefined 
+on input line 11.
+
+
+LaTeX Warning: Reference `thm:complete_energy_char' on page 38 undefined on inp
+ut line 11.
+
+
+LaTeX Warning: Hyper reference `rem:four_term_insufficient' on page 38 undefine
+d on input line 31.
+
+
+LaTeX Warning: Reference `rem:four_term_insufficient' on page 38 undefined on i
+nput line 31.
+
+
+LaTeX Warning: Hyper reference `fig:energy_comparison' on page 38 undefined on 
+input line 31.
+
+
+LaTeX Warning: Reference `fig:energy_comparison' on page 38 undefined on input 
+line 31.
+
+
+[38])
+No file scratch_main_full.bbl.
+(./sections/appendix.tex
+
+LaTeX Warning: Hyper reference `thm:complete_energy_char' on page 39 undefined 
+on input line 10.
+
+
+LaTeX Warning: Reference `thm:complete_energy_char' on page 39 undefined on inp
+ut line 10.
+
+
+LaTeX Warning: Hyper reference `prop:rowcol_cov' on page 39 undefined on input 
+line 17.
+
+
+LaTeX Warning: Reference `prop:rowcol_cov' on page 39 undefined on input line 1
+7.
+
+
+LaTeX Warning: Hyper reference `prop:diagonal_cov' on page 39 undefined on inpu
+t line 17.
+
+
+LaTeX Warning: Reference `prop:diagonal_cov' on page 39 undefined on input line
+ 17.
+
+
+LaTeX Warning: Hyper reference `prop:magic_implies_zero_cov' on page 39 undefin
+ed on input line 23.
+
+
+LaTeX Warning: Reference `prop:magic_implies_zero_cov' on page 39 undefined on 
+input line 23.
+
+
+LaTeX Warning: Hyper reference `prop:magic_implies_zero_cov' on page 39 undefin
+ed on input line 26.
+
+
+LaTeX Warning: Reference `prop:magic_implies_zero_cov' on page 39 undefined on 
+input line 26.
+
+
+LaTeX Warning: Hyper reference `def:gem_coords' on page 39 undefined on input l
+ine 28.
+
+
+LaTeX Warning: Reference `def:gem_coords' on page 39 undefined on input line 28
+.
+
+
+[39]
+[40]
+
+LaTeX Warning: Hyper reference `thm:complete_energy_char' on page 41 undefined 
+on input line 137.
+
+
+LaTeX Warning: Reference `thm:complete_energy_char' on page 41 undefined on inp
+ut line 137.
+
+
+[41]
+
+LaTeX Warning: Hyper reference `tab:magic_stats' on page 42 undefined on input 
+line 200.
+
+
+LaTeX Warning: Reference `tab:magic_stats' on page 42 undefined on input line 2
+00.
+
+)
+[42] (../Analysis/revision/theory/build/scratch_main_full.aux)
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+
+Package rerunfilecheck Warning: File `scratch_main_full.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+ )
+(see the transcript file for additional information) </Users/kylemathewson/Libr
+ary/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcbx1200.600pk> </U
+sers/kylemathewson/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen
+/ec/ecrm0800.600pk> </Users/kylemathewson/Library/texlive/2025basic/texmf-var/f
+onts/pk/ljfour/jknappen/ec/ectt1095.600pk> </Users/kylemathewson/Library/texliv
+e/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk> </Users/kylem
+athewson/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti10
+95.600pk> </Users/kylemathewson/Library/texlive/2025basic/texmf-var/fonts/pk/lj
+four/jknappen/ec/ecbx1095.600pk> </Users/kylemathewson/Library/texlive/2025basi
+c/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1095.600pk> </Users/kylemathewson/L
+ibrary/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1440.600pk> 
+</Users/kylemathewson/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknap
+pen/ec/ecti1000.600pk> </Users/kylemathewson/Library/texlive/2025basic/texmf-va
+r/fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk> </Users/kylemathewson/Library/tex
+live/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1000.600pk> </Users/ky
+lemathewson/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ect
+t1200.600pk> </Users/kylemathewson/Library/texlive/2025basic/texmf-var/fonts/pk
+/ljfour/jknappen/ec/ecti1200.600pk> </Users/kylemathewson/Library/texlive/2025b
+asic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1200.600pk> </Users/kylemathewso
+n/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1728.600p
+k></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx1
+0.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mex10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmmi10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmmi12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmmi6.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmr10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2025basic/texmf-dist/font
+s/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2025basic/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmss8.pfb></usr/local/texlive/2025basic/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025basic/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2025basic/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2025basic/
+texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on ../Analysis/revision/theory/build/scratch_main_full.pdf (42 p
+ages, 2413738 bytes).
+Transcript written on ../Analysis/revision/theory/build/scratch_main_full.log.

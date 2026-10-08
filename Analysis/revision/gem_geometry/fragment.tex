@@ -1,0 +1,382 @@
+% ---------------------------------------------------------------------------
+% fragment.tex — Gem geometry of the 880 n=4 squares, exact swap-gap
+% verification, Siamese gems.  Written by the gem_geometry subagent for v5.
+% Assumes amsthm environments proposition/lemma/corollary/remark and \Cov.
+% Figures: Analysis/revision/gem_geometry/fig_gem_geometry_880.pdf,
+%          Analysis/revision/gem_geometry/fig_gems_cross_order.pdf
+% Numbers: Analysis/revision/gem_geometry/results.json
+% ---------------------------------------------------------------------------
+
+% ===========================================================================
+\subsection{Swap gaps: exact verification}
+\label{sec:swap-gaps}
+
+Throughout, $N=n^2$ and $E_{\mathrm{full}}$ is the symmetric energy
+$E_{\mathrm{full}}(S)=\sum_{L}\Cov(\mathbf 1_L,Z)^2$, the sum running over all
+$2n+2$ lines $L$ ($n$ rows, $n$ columns, two diagonals), with
+$\Cov(\varphi,Z)=\frac1N\sum_{ij}(\varphi_{ij}-\bar\varphi)z_{ij}$.
+For two distinct cells $a,b$ let $m(a,b)$ be the number of lines containing
+exactly one of $a,b$; since two distinct cells differ in their row or in their
+column, $m(a,b)\in\{2,\dots,6\}$.
+
+\begin{proposition}[single-swap gap; verification]
+\label{prop:swap-verified}
+Let $S$ be a magic square of order $n$ and let $S'$ be obtained by exchanging
+the entries of two cells $a,b$ with $d=|s_a-s_b|$.  Then
+\[
+E_{\mathrm{full}}(S')-E_{\mathrm{full}}(S)=\frac{d^{2}\,m(a,b)}{N^{2}} .
+\]
+The formula was verified in exact rational arithmetic on every one of the
+$880\cdot\binom{16}{2}=105{,}600$ single swaps of the $880$ essentially
+different order-$4$ squares and the $8\cdot\binom 92=288$ swaps of the eight
+order-$3$ squares, and on all swaps of the Siamese squares of orders $5,7,9$:
+agreement in $100\%$ of cases, no exceptions.
+\end{proposition}
+
+(The proof is in Section~\ref{sec:swap-formula}; here we only record the
+computation.)  Two consequences are immediate.  First, every magic square is a
+strict local minimum of $E_{\mathrm{full}}$ under transpositions, for every
+$n$, since $d\ge 1$ and $m\ge 2$.  Second, the gap spectrum is
+\emph{arithmetic}, not ``banded'': over the $105{,}600$ order-$4$ swaps the
+quantity $N^2\Delta E=d^2m$ takes exactly $70$ distinct integer values from $2$
+to $980$, and the three smallest, $2,3,4$, are precisely the three values that
+can occur as the \emph{minimum} gap of a square
+(Table~\ref{tab:min-gaps}).  The ``trimodal band structure'' reported in v4
+was the histogram of $d^2m/N^2$ computed with a non-symmetric energy; it
+carries no information beyond Proposition~\ref{prop:swap-verified}.
+
+\begin{table}[htbp]
+\centering
+\caption{Minimum single-swap gap $\Delta_{\min}(S)=\min_{a\neq b}\Delta E$
+(exact) over the magic squares of orders $3$ and $4$ and the Siamese squares
+of orders $5$--$9$.  All values are $k/N^2$ with $k\in\{2,3,4\}$, as forced by
+$\Delta E=d^2m/N^2$ with $d=1$.}
+\label{tab:min-gaps}
+\begin{tabular}{lccl}
+\toprule
+squares & $N^2$ & $N^2\Delta_{\min}$ & multiplicity \\
+\midrule
+all $8$ of order $3$ & $81$ & $3$ & $8$ \\
+all $880$ of order $4$ & $256$ & $2$ / $3$ / $4$ & $432$ / $420$ / $28$ \\
+Siamese, $n=5$ & $625$ & $3$ & -- \\
+Siamese, $n=7$ & $2401$ & $2$ & -- \\
+Siamese, $n=9$ & $6561$ & $2$ & -- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% ===========================================================================
+\subsection{Geometry of the 880 order-4 gems}
+\label{sec:gem-geometry-880}
+
+For each of the $880$ essentially different order-$4$ magic squares we
+computed the Magic Gem $G(S)=\operatorname{conv}\{p_{ij}\}$ exactly: doubling
+all coordinates makes every point an integer vector, facet planes are
+recovered as primitive integer equations (so coplanar triangles returned by
+\textsc{qhull} are merged into true faces), vertices are the points lying on
+at least three facet planes, edges are pairs of vertices sharing two facets,
+and volumes are computed as exact rationals.  Euler's relation $V-E+F=2$ holds
+for all $880$ gems.  Figure~\ref{fig:gem-geometry-880} and
+Table~\ref{tab:gem-fvectors} summarise the results.
+
+\begin{table}[htbp]
+\centering
+\caption{Face structure of the $880$ order-$4$ gems by number of hull
+vertices $V$.  ``types'' is the number of distinct combinatorial types (face
+lattices up to isomorphism) and ``vols'' the number of distinct exact
+volumes among the squares with that $V$.  The $f$-vector column lists
+$(V,E,F)$ with multiplicities.}
+\label{tab:gem-fvectors}
+\footnotesize
+\begin{tabular}{rrrrp{7.6cm}}
+\toprule
+$V$ & squares & types & vols & $f$-vectors $(V,E,F)$: count \\
+\midrule
+8 & 7 & 4 & 4 & (8,14,8):1, (8,16,10):1, (8,17,11):1, (8,18,12):4 \\
+9 & 10 & 1 & 5 & (9,20,13):10 \\
+10 & 103 & 27 & 51 & (10,19,11):1, (10,20,12):3, (10,21,13):11, (10,22,14):75, (10,23,15):11, (10,24,16):2 \\
+11 & 80 & 32 & 33 & (11,22,13):2, (11,23,14):6, (11,24,15):28, (11,25,16):38, (11,26,17):6 \\
+12 & 380 & 129 & 111 & (12,22,12):1, (12,24,14):37, (12,25,15):25, (12,26,16):164, (12,27,17):75, (12,28,18):77, (12,29,19):1 \\
+13 & 106 & 52 & 40 & (13,27,16):4, (13,28,17):12, (13,29,18):46, (13,30,19):42, (13,31,20):2 \\
+14 & 162 & 85 & 65 & (14,28,16):1, (14,29,17):2, (14,30,18):36, (14,31,19):17, (14,32,20):106 \\
+15 & 14 & 7 & 6 & (15,32,19):4, (15,33,20):6, (15,34,21):4 \\
+16 & 18 & 15 & 14 & (16,32,18):1, (16,34,20):8, (16,36,22):9 \\
+\midrule
+all & 880 & 352 & 155 & 39 distinct $f$-vectors \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Vertex counts, $f$-vectors, volumes.}
+Between $8$ and all $16$ of the points are hull vertices; $V=12$ is modal
+($380/880$).  There are $39$ distinct $f$-vectors, and the multiset of facet
+sizes (number of triangles, quadrilaterals, \dots) is determined by the
+$f$-vector in every case.  The exact volume takes $155$ distinct values, from
+$58$ (square \#427) to $292/3$ (square \#379), mean $84.05$; denominators are
+$1,2,3,6$ as they must be for lattice polytopes of the doubled lattice.
+Surface areas range from $116.5$ to $148.6$.
+
+\paragraph{Combinatorial types.}
+Two gems have the same combinatorial type if their vertex--facet incidence
+structures (equivalently, their face lattices) are isomorphic.  Grouping by a
+Weisfeiler--Lehman hash of the bipartite vertex--facet graph and confirming
+every group by an explicit graph isomorphism test gives
+\[
+\textbf{352 combinatorial types}
+\]
+among the $880$ gems (the hash was already exact: no hash class had to be
+split).  Their sizes are very uneven: $93$ types occur once, $201$ twice,
+$8$ three times, $20$ four times, and the remaining $30$ types have between
+$5$ and $32$ members; the largest type, with $f=(10,22,14)$ (12 triangles,
+2 quadrilaterals), is shared by $32$ squares, and the second largest,
+$f=(12,24,14)$, by $26$.  The $7$ gems with $8$ vertices fall into $4$ types,
+including a single $(8,14,8)$ gem with four triangular and four quadrilateral
+faces (square \#54, Fig.~\ref{fig:gem-geometry-880}d) and four
+$(8,18,12)$ gems sharing one simplicial type with $12$ triangular faces.  The $18$ gems with all $16$ points
+extreme belong to $15$ types.
+
+\paragraph{Congruence classes and injectivity.}
+Two gems are \emph{congruent} if an isometry of $\mathbb R^3$ (rotations,
+reflections, translations) maps one onto the other.  Because a
+distance-preserving bijection between finite point sets extends to an
+isometry, congruence of gems is decided exactly by testing for a bijection of
+hull-vertex sets preserving all pairwise (integer) squared distances; we
+grouped candidates by the sorted multiset of squared distances and confirmed
+each group by an edge-labelled graph isomorphism, with a floating-point
+Kabsch superposition as a cross-check (maximal RMSD $2\cdot10^{-14}$).
+
+\begin{proposition}[class $\to$ gem]
+\label{prop:gem-injective}
+\begin{enumerate}
+\item The $880$ hull-vertex point sets are pairwise distinct: the map from
+  $D_4$-classes of order-$4$ magic squares to gems (as subsets of
+  $\mathbb R^3$) is injective.
+\item Up to congruence there are exactly $616$ gems.  The congruence classes
+  are precisely the orbits of the complement map $S\mapsto 17-S$, which acts
+  on gems as the reflection $z\mapsto -z$: $352$ squares are
+  self-complementary (their gems are mirror-symmetric up to a lattice
+  symmetry) and the other $528$ form $264$ mirror pairs.  No two gems of
+  non-complementary squares are congruent, and the same holds for the full
+  $16$-point configurations.
+\end{enumerate}
+\end{proposition}
+
+Part (2) is the only failure of injectivity, and it is the expected one:
+$17-S$ is magic whenever $S$ is, and the gem of $17-S$ is the mirror image of
+$G(S)$ in the plane $z=0$.  The $352$ self-complementary classes are exactly
+Dudeney's group III (the $48$ associated squares, whose complement is the
+$180^\circ$ rotation) together with all $304$ squares of Dudeney's
+group VI; the complement map preserves every Dudeney group.  The coincidence
+$352 = \#\{\text{combinatorial types}\} = \#\{\text{self-complementary
+squares}\}$ is numerical only: the type partition ($93$ singletons) and the
+complement partition ($352$ singletons) are different partitions of the $880$.
+
+\paragraph{Dudeney groups.}
+Table~\ref{tab:dudeney-gems} crosses the hull-vertex count with Dudeney's
+twelve groups.  Geometry is only loosely tied to Dudeney type: every group
+with more than eight members spans at least four vertex counts and at least
+$20$ combinatorial types, while the two $8$-member groups XI and XII are
+confined to $V\in\{12,13\}$ and $V\in\{10,12,13\}$ with $4$ types each.  The
+$8$-vertex gems occur only in groups VI (three) and VIII (four), and
+$V=9$ occurs only in groups VIII and IX.
+
+\begin{table}[htbp]
+\centering
+\caption{Hull-vertex count $V$ versus Dudeney group for the $880$ order-$4$
+squares; last column: number of combinatorial types in the group.}
+\label{tab:dudeney-gems}
+\small
+\begin{tabular}{rr|rrrrrrrrr|r}
+\toprule
+group & size & $V{=}8$ & 9 & 10 & 11 & 12 & 13 & 14 & 15 & 16 & types \\
+\midrule
+I & 48 &  &  &  & 10 & 20 & 12 & 4 & 2 &  & 20 \\
+II & 48 &  &  & 4 & 14 & 14 & 6 & 6 & 2 & 2 & 22 \\
+III & 48 &  &  & 13 &  & 28 &  & 4 &  & 3 & 30 \\
+IV & 96 &  &  & 12 & 20 & 40 & 14 & 10 &  &  & 43 \\
+V & 96 &  &  & 12 & 10 & 34 & 20 & 16 & 4 &  & 48 \\
+VI & 304 & 3 &  & 40 &  & 150 &  & 98 &  & 13 & 126 \\
+VII & 56 &  &  &  & 4 & 20 & 22 & 4 & 6 &  & 28 \\
+VIII & 56 & 4 & 8 & 10 & 4 & 24 & 6 &  &  &  & 20 \\
+IX & 56 &  & 2 & 10 & 18 & 12 & 10 & 4 &  &  & 25 \\
+X & 56 &  &  &  &  & 32 & 8 & 16 &  &  & 26 \\
+XI & 8 &  &  &  &  & 4 & 4 &  &  &  & 4 \\
+XII & 8 &  &  & 2 &  & 2 & 4 &  &  &  & 4 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{remark}
+Groups III and VI, the self-complementary ones, have only even vertex counts;
+this is forced: for a self-complementary square the reflection $z\mapsto-z$
+composed with the element of $D_4$ that realises $17-S$ is an isometry of
+the gem of order $2$ or $4$ without fixed hull vertices (no point has $z=0$
+when $N$ is even), so hull vertices fall into orbits of size $2$ or $4$.
+\end{remark}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{figures/fig_gem_geometry_880.pdf}
+\caption{Geometry of the $880$ order-$4$ Magic Gems.
+(a)~Number of hull vertices ($8$ to $16$; modal value $12$).
+(b)~Exact hull volume ($155$ distinct values between $58$ and $292/3$).
+(c)~Sizes of the $352$ combinatorial types: $93$ types occur once, $201$
+twice, and one type is shared by $32$ squares.
+(d)--(f)~Three extreme gems, drawn with translucent faces after merging
+coplanar triangles: the unique $(8,14,8)$ gem (square \#54; the eight
+interior points are shown in red), a gem with all $16$ points extreme
+(square \#802, a row-permuted D\"urer square), and the gem of largest
+volume (square \#379).}
+\label{fig:gem-geometry-880}
+\end{figure}
+
+% ===========================================================================
+\subsection{Siamese gems have twelve vertices}
+\label{sec:siamese-gems}
+
+For the Siamese (de la Loub\`ere) squares of odd order the hull-vertex count
+does not grow with $n$.  We computed the gems for $n=3,5,\dots,21$: the Lo Shu
+gem has $f=(8,16,10)$, and every Siamese gem with $n\ge5$ has
+$f=(12,26,16)$ with $12$ triangular and $4$ quadrilateral facets, so the hull
+fraction $12/n^2$ tends to zero (Fig.~\ref{fig:gems-cross-order}).  This is a
+theorem, with a short computer-assisted proof.
+
+\begin{proposition}[Siamese gems]
+\label{prop:siamese-12}
+Let $n=2m+1\ge5$ and let $S$ be the Siamese square of order $n$ ($1$ in the
+middle cell of the top row, successive entries one step up and to the right
+modulo $n$, one step down when blocked).  Then $G(S)$ has exactly $12$
+vertices, $26$ edges and $16$ facets ($12$ triangles, $4$ quadrilaterals).
+With $0$-indexed cells $(i,j)$ and $c=(n^2+1)/2$, the vertices are the
+points over the cells
+\[
+\begin{array}{lll}
+(0,0)\colon c+m+2, & (0,m-1)\colon n^2-1, & (0,m)\colon 1, \\
+(0,2m)\colon c+m, & (m-1,0)\colon n^2-m, & (m,0)\colon m+2, \\
+(m,2m)\colon n^2-m-1, & (m+1,2m)\colon m+1, & (2m,0)\colon c-m, \\
+(2m,m)\colon n^2, & (2m,m+1)\colon 2, & (2m,2m)\colon c-m-2,
+\end{array}
+\]
+i.e.\ the four corners, and on each side of the square the two cells holding
+the side's extreme values.  For $n=3$ the same construction gives the Lo Shu
+gem, with $8$ vertices (all cells except the centre).
+\end{proposition}
+
+\begin{proof}
+\emph{Step 1: closed form.}  Write $\langle t\rangle\in\{0,\dots,n-1\}$ for
+$t\bmod n$.  We claim $s(i,j)=n\langle i+j-m\rangle+\langle i+2j-2m\rangle+1$.
+Indeed, along a run of $n$ consecutive entries the move $(i,j)\to(i-1,j+1)$
+fixes $i+j$ and increases $i+2j$ by $1$ modulo $n$, while the ``blocked''
+move $(i,j)\to(i+1,j)$ increases both $i+j$ and $i+2j$ by $1$; the entry $1$
+sits at $(0,m)$ where both expressions vanish.  Hence by induction the entry
+$k$ lies in a cell with $\langle i+j-m\rangle=\lfloor (k-1)/n\rfloor$ and
+$\langle i+2j-2m\rangle=\langle k-1\rangle$; since
+$(i,j)\mapsto(i+j,\,i+2j)$ is a bijection of $\mathbb Z_n^2$ (determinant
+$1$), this determines the cell, which proves the claim.
+
+\emph{Step 2: affine reduction to five layers.}  In gem coordinates
+$x=j-m$, $y=m-i$ put $u=i+j-m=x-y+m$ and $w=i+2j-2m=2x-y+m$.  Since
+$\langle t\rangle=t-n\lfloor t/n\rfloor$,
+\[
+z=s-\tfrac{n^2+1}{2}=\underbrace{nu+w+1-\tfrac{n^2+1}{2}}_{L(x,y)\ \text{affine}}
++\;n\,\zeta(x,y),\qquad
+\zeta:=-n\Big\lfloor\frac{x-y+m}{n}\Big\rfloor-\Big\lfloor\frac{2x-y+m}{n}\Big\rfloor .
+\]
+The map $\Phi(x,y,z)=(x,y,(z-L(x,y))/n)$ is an affine bijection of
+$\mathbb R^3$, so $\Phi(G(S))=\operatorname{conv}\{(x,y,\zeta(x,y))\}$ has the
+same face lattice as $G(S)$ and the same vertex cells.  Because
+$-m\le x-y+m\le 3m$ and $-2m\le 2x-y+m\le 4m$, both floors lie in
+$\{-1,0,1\}$; the floor of $(x-y+m)/n$ equals $-1$ iff $y\ge x+m+1$ and
+$1$ iff $y\le x-m-1$, that of $(2x-y+m)/n$ equals $-1$ iff $y\ge 2x+m+1$ and
+$1$ iff $y\le 2x-m-1$.  The combinations $(-1,1)$ and $(-1,0)$ are impossible
+in the box $|x|,|y|\le m$ (they force $x\ge 2m+2$, resp.\ $x\ge1$ together
+with $y>m$), and by the central symmetry $\zeta(-x,-y)=-\zeta(x,y)$ so are
+$(1,-1),(1,0)$.  The configuration therefore consists of the lattice points of
+five convex lattice polygons at five heights:
+\[
+\begin{array}{ll}
+T=\operatorname{conv}\{(-m,m),(-1,m),(-m,1)\}, & \zeta=n+1;\\
+U=\operatorname{conv}\{(-m,1-m),(-m,0),(-1,m-1)\}, & \zeta=1;\\
+M=\operatorname{conv}\{(-m,-m),(0,m),(m,m),(0,-m)\}, & \zeta=0;\\
+D=-U,\quad B=-T, & \zeta=-1,\ \zeta=-(n+1).
+\end{array}
+\]
+(For $T$: $y\ge x+m+1$ with $y\le m$ forces $x\le-1$ and then implies
+$y\ge 2x+m+1$; for $U$: $2x+m+1\le y\le x+m$ forces $x\le -1$ and implies the
+other constraints; $M$ is cut out by $y\le 2x+m$, $y\ge 2x-m$, $|y|\le m$.)
+
+\emph{Step 3: the twelve points and sixteen planes.}  Let
+$v_1=(-m,m,n{+}1)$, $v_2=(-1,m,n{+}1)$, $v_3=(-m,1,n{+}1)$, $v_4=(-m,0,1)$,
+$v_5=(-m,-m,0)$, $v_6=(0,-m,0)$, $v_7=(0,m,0)$, $v_8=(m,m,0)$, $v_9=(m,0,-1)$,
+$v_{10}=-v_1$, $v_{11}=-v_3$, $v_{12}=-v_2$ (so $v_{10}=(m,-m,-n-1)$,
+$v_{11}=(m,-1,-n-1)$, $v_{12}=(1,-m,-n-1)$; these are the cells listed in
+the statement).  Consider the eight inequalities
+\begin{align*}
+&(1)\ \zeta\le 2m+2, \qquad (2)\ y\le m, \qquad (3)\ x\ge -m, \qquad (8)\ -2y+\zeta\le 2m,\\
+&(4)\ -2(m{+}1)x+(2m{+}1)y-m\zeta\le m(2m{+}1),\\
+&(5)\ 2(m{+}1)x-2(m{+}1)y+(2m{+}1)\zeta\le 2m(m{+}1),\\
+&(6)\ 2m(m{+}2)x-(2m^2{+}2m{-}1)y+m(2m{+}1)\zeta\le m(2m^2{+}2m{-}1),\\
+&(7)\ 2mx-y+m\zeta\le m(2m{-}1),
+\end{align*}
+together with their images $(1')$--$(8')$ under $(x,y,\zeta)\mapsto
+(-x,-y,-\zeta)$, and let $Q$ be the polyhedron they define.  The following
+facts are finitely many polynomial identities and inequalities in $m$; they
+were verified exactly (integer polynomial arithmetic; an inequality
+$p(m)>0$ for all integers $m\ge2$ is certified by writing $p(2+t)$ with
+non-negative coefficients, or, failing that, by checking $p$ exactly on
+$[2,R]$ for a Cauchy root bound $R$ and the sign of the leading coefficient
+beyond) by the script \texttt{siamese\_proof.py}:
+\begin{enumerate}
+\item[(a)] every vertex of the five polygons $T,U,M,D,B$, placed at its
+  height, satisfies all $16$ inequalities; by linearity so does every
+  configuration point, i.e.\ $\Phi(G(S))\subseteq Q$;
+\item[(b)] each plane contains exactly the following $v$'s, with every other
+  $v_k$ strictly inside (and the centrally symmetric lists for
+  $(1')$--$(8')$):
+  \[
+  \begin{array}{llll}
+  (1)\colon v_1v_2v_3, & (2)\colon v_1v_2v_8v_7, & (3)\colon v_1v_3v_5v_4, & (4)\colon v_1v_4v_7,\\
+  (5)\colon v_2v_3v_6, & (6)\colon v_2v_6v_9, & (7)\colon v_2v_8v_9, & (8)\colon v_3v_5v_6;
+  \end{array}
+  \]
+\item[(c)] the two quadrilaterals (and their mirrors) are in convex position
+  in the cyclic order given, so the $16$ face polygons have $26$ distinct
+  edges, each shared by exactly two polygons, and $12-26+16=2$;
+\item[(d)] each $v_k$ lies on three of the planes with linearly independent
+  normals.
+\end{enumerate}
+By (b), each of the $16$ planes supports $P:=\operatorname{conv}\{v_1,\dots,
+v_{12}\}$ in a $2$-dimensional face, hence a facet, of $P$ with the stated
+vertices.  By (c) this family of facets is closed under edge-adjacency; the
+facet-adjacency graph of a $3$-polytope is connected, so these are
+\emph{all} facets of $P$ and $P=Q$.  With (a),
+$P\subseteq\Phi(G(S))\subseteq Q=P$, so $\Phi(G(S))=P$, whose vertex set is
+$\{v_1,\dots,v_{12}\}$ by (d).  Mapping back by $\Phi^{-1}$ gives the
+statement; the facet counts are read off from (b)--(c).
+\end{proof}
+
+\begin{remark}
+For $m=1$ ($n=3$) the triangles $T$, $U$, $D$, $B$ degenerate to single
+points, $v_1=v_2=v_3$ and $v_{10}=v_{11}=v_{12}$, and the same argument gives
+the $8$-vertex Lo Shu gem.  The proof shows more than the count: up to an
+affine map, every Siamese gem is the convex hull of five parallel lattice
+polygons whose shapes do not depend on $n$ except through scale, which is why
+the combinatorial type is constant for all $n\ge5$.  Whether other classical
+constructions (e.g.\ the LUX or Strachey methods for $n\equiv 0,2\pmod 4$)
+have bounded hull-vertex counts is open.
+\end{remark}
+
+% ===========================================================================
+\subsection{Cross-order comparison}
+\label{sec:cross-order}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{figures/fig_gems_cross_order.pdf}
+\caption{Magic Gems across orders, drawn with coplanar triangles merged into
+true faces (translucent) and interior points in red: (a)~the Lo Shu
+($n=3$, $8$ of $9$ points extreme), (b)~D\"urer's square ($n=4$, $12$ of
+$16$), (c)~the Siamese square of order $5$ ($12$ of $25$;
+Proposition~\ref{prop:siamese-12}).  Exact volumes $18$, $92$, $830/3$.}
+\label{fig:gems-cross-order}
+\end{figure}

@@ -1,0 +1,259 @@
+% ---------------------------------------------------------------------------
+% Fragment: exact theory of the energy of a uniformly random arrangement
+% (for Sec. 4.2 "Random-arrangement energy" and Sec. 5(iii) "algorithms").
+% Requires amsthm envs proposition/corollary/remark, \Cov, \Var, booktabs, graphicx.
+% Numbers: Analysis/revision/random_energy/results.json.  Figure: fig_random_energy.pdf.
+% ---------------------------------------------------------------------------
+
+\subsection{The energy of a random arrangement}
+\label{sec:random_energy}
+
+Let $S$ be a uniformly random arrangement, i.e.\ the values $1,\dots,N$ ($N=n^2$) are placed in the
+grid by a uniformly random permutation $\pi$. For a test function $\varphi$ on the grid write
+$T_\varphi := \Cov(\varphi,Z) = \sum_{c} a_c\, z_{\pi(c)}$ with $a_c=(\varphi_c-\bar\varphi)/N$;
+this is a \emph{linear permutation statistic} in the sense of Wald--Wolfowitz and Hoeffding, and all
+of its first two moments are classical. Throughout, $\Var(\varphi)$ and $\Cov(\varphi,\psi)$ denote
+population variances and covariances over the $N$ cells, and
+\[
+\sigma_n^2 := \frac{\Var(Z)}{N-1} = \frac{N+1}{12} = \frac{n^2+1}{12},
+\qquad \Var(Z)=\frac{N^2-1}{12}.
+\]
+
+\begin{proposition}[Exact moments of the random energies]
+\label{prop:random_energy_moments}
+For a uniformly random arrangement and any test functions $\varphi,\psi$,
+\begin{equation}
+\mathbb{E}[T_\varphi]=0,\qquad
+\mathbb{E}[T_\varphi T_\psi] = \sigma_n^2\,\Cov(\varphi,\psi).
+\label{eq:cov_T}
+\end{equation}
+Consequently, with $E_{\mathrm{low}}$ as in \eqref{eq:lowmode_energy} and the symmetric
+$E_{\mathrm{full}}$ (all $n$ rows, all $n$ columns, both diagonals; $2n+2$ terms),
+\begin{align}
+\mathbb{E}\,\Cov(X,Z)^2 &= \mathbb{E}\,\Cov(Y,Z)^2 = \frac{n^4-1}{144},\qquad
+\mathbb{E}\,\Cov(D,Z)^2 = \mathbb{E}\,\Cov(R_k,Z)^2 = \frac{(n-1)(n^2+1)}{12\,n^2},
+\label{eq:single_terms}\\
+\mathbb{E}[E_{\mathrm{low}}] &= \frac{(n^2+1)\,(n^4-n^2+12n-12)}{72\,n^2}
+= \frac{n^4}{72}+\frac{n}{6}-\frac{13}{72}+\frac{1}{6n}-\frac{1}{6n^2},
+\label{eq:mean_low}\\
+\mathbb{E}[E_{\mathrm{full}}] &= \frac{n^4-1}{6\,n^2} = \frac{n^2}{6}-\frac{1}{6n^2}.
+\label{eq:mean_full}
+\end{align}
+The covariance matrix $\Sigma_n:=\sigma_n^2 G$ of the vector of covariances is $\sigma_n^2$ times
+the Gram matrix $G$ of the centred test functions. For $E_{\mathrm{low}}$,
+$G=\operatorname{diag}\!\big(\tfrac{n^2-1}{12},\tfrac{n^2-1}{12},\tfrac{n-1}{n^2},\tfrac{n-1}{n^2}\big)$
+except that the two diagonal indicators have $\Cov(D_{\mathrm{main}},D_{\mathrm{anti}})=-1/n^2$ when
+$n$ is even (they are uncorrelated when $n$ is odd). For $E_{\mathrm{full}}$, $G$ is block diagonal:
+the $n$ row indicators have Gram block $\tfrac1n(I-\tfrac1n J)$, the columns likewise, every
+row--column, row--diagonal and column--diagonal covariance vanishes, and the diagonal block is as for
+$E_{\mathrm{low}}$. Hence the eigenvalues of $\Sigma_n$ are
+\begin{equation}
+E_{\mathrm{low}}:\ \sigma_n^2\Big\{\tfrac{n^2-1}{12}\,(\times 2),\ \tfrac{n-1}{n^2}\,(\times 2)\Big\},
+\qquad
+E_{\mathrm{full}}:\ \sigma_n^2\Big\{\tfrac1n\,(\times\,2n-2),\ \tfrac{n-1}{n^2}\,(\times 2)\Big\}
+\label{eq:weights}
+\end{equation}
+for odd $n$; for even $n$ the last pair $\{\tfrac{n-1}{n^2},\tfrac{n-1}{n^2}\}$ is replaced by
+$\{\tfrac1n,\tfrac{n-2}{n^2}\}$. Finally, the variances are the rational functions
+\begin{align}
+\Var(E_{\mathrm{low}}) &=
+\frac{(n-1)(n^2+1)\,(25n^{11}+25n^{10}-82n^{9}-82n^{8}-9n^{7}-1209n^{6}+3738n^{5}-5862n^{4}+2160n^{3}-2880n^{2}-4320n+4320)}{129600\,n^{6}}
+\quad(n\ \text{odd}),\nonumber\\
+\Var(E_{\mathrm{low}}) &=
+\frac{(n^2+1)\,(25n^{10}-107n^{8}+73n^{6}-1200n^{5}+4947n^{4}-9600n^{3}+13782n^{2}-13680n+10080)}{129600\,n^{4}}
+\quad(n\ \text{even}),\label{eq:var_low}\\
+\Var(E_{\mathrm{full}}) &=
+\frac{(n-1)(n^2+1)\,(5n^{6}-5n^{5}-17n^{4}+11n^{3}-24n^{2}+18n+6)}{180\,n^{6}}\quad(n\ \text{odd}),\qquad
+\frac{(n-2)(n^2+1)\,(5n^{5}-12n^{3}+12n^{2}-23n+12)}{180\,n^{5}}\quad(n\ \text{even}),\label{eq:var_full}
+\end{align}
+so that $\Var(E_{\mathrm{low}})=n^8/5184+O(n^7)$ and $\Var(E_{\mathrm{full}})=n^3/36+O(n^2)$.
+\end{proposition}
+
+\begin{proof}
+Since $\sum_c a_c=0$, $\mathbb{E}[T_\varphi]=\bar z\sum_c a_c=0$. For two linear permutation
+statistics $T_a=\sum_i a_i b_{\pi(i)}$, $T_{a'}=\sum_i a'_i b_{\pi(i)}$ the classical identity
+(Wald--Wolfowitz; see \cite{hoeffding1951}, polarised) reads
+$\Cov(T_a,T_{a'})=\frac{1}{N-1}\sum_i(a_i-\bar a)(a'_i-\bar a')\sum_j(b_j-\bar b)^2$.
+With $a=(\varphi-\bar\varphi)/N$, $a'=(\psi-\bar\psi)/N$, $b=z$ this is
+$\frac{1}{N-1}\cdot\frac{N\Cov(\varphi,\psi)}{N^2}\cdot N\Var(Z)=\sigma_n^2\Cov(\varphi,\psi)$,
+which is \eqref{eq:cov_T}. The entries of $G$ are elementary:
+$\Var(X)=\Var(Y)=\frac{1}{n}\sum_{j}(j-\tfrac{n-1}{2})^2=\frac{n^2-1}{12}$; an indicator $L$ of a
+line of $n$ cells has $\Var(L)=\frac1n(1-\frac1n)$; two lines meeting in $m$ cells have
+$\Cov(L,L')=\frac{m}{N}-\frac{1}{n^2}$, which is $0$ for a row and a column, a row and a diagonal,
+or a column and a diagonal ($m=1$), $-1/n^2$ for two parallel lines ($m=0$), and for the two
+diagonals $m=1$ ($n$ odd) or $0$ ($n$ even); finally $\Cov(X,Y)=0$ and
+$\Cov(X,D)=\frac1N\sum_{c\in D}x_c=0$ for either diagonal, since a diagonal contains every column
+coordinate exactly once (likewise $\Cov(Y,D)=0$). ($X$ is not orthogonal to the column
+indicators, $\Cov(X,C_j)=x_j/n$, but $X,Y$ and the line indicators never occur in the same energy.)
+Taking traces of $\Sigma_n$ gives \eqref{eq:single_terms}--\eqref{eq:mean_full}:
+$\mathbb{E}[E_{\mathrm{low}}]=\sigma_n^2\big(2\cdot\frac{n^2-1}{12}+2\cdot\frac{n-1}{n^2}\big)$ and
+$\mathbb{E}[E_{\mathrm{full}}]=\sigma_n^2(2n+2)\frac{n-1}{n^2}$. The eigenvalues
+\eqref{eq:weights} follow from the block structure, $\tfrac1n(I-\tfrac1nJ)$ having eigenvalue
+$\tfrac1n$ with multiplicity $n-1$ and $0$ once.
+
+For the variances, $E=\sum_k T_k^2$ is a quadratic form $\sum_{c,c'}M_{cc'}z_{\pi(c)}z_{\pi(c')}$,
+and $\mathbb{E}[E^2]$ is a sum over cell quadruples $(c_1,\dots,c_4)$ of
+$M_{c_1c_2}M_{c_3c_4}\,\mathbb{E}[z_{\pi(c_1)}\cdots z_{\pi(c_4)}]$. The expectation depends only on
+the equality pattern of the quadruple (a set partition of $\{1,2,3,4\}$) and is a polynomial in the
+power sums $p_2=\sum z^2=N(N^2-1)/12$ and $p_4=\sum z^4=N(N^2-1)(3N^2-7)/240$ (odd power sums
+vanish): for blocks of sizes $(4)$, $(3,1)$, $(2,2)$, $(2,1,1)$, $(1,1,1,1)$ it equals
+$p_4/N$, $-p_4/N^{\underline 2}$, $(p_2^2-p_4)/N^{\underline 2}$, $(2p_4-p_2^2)/N^{\underline 3}$,
+$(3p_2^2-6p_4)/N^{\underline 4}$, with $N^{\underline k}$ the falling factorial. The sum of
+$M_{c_1c_2}M_{c_3c_4}$ over quadruples with an exact pattern is obtained by M\"obius inversion on
+the partition lattice from the sums over "at least as coarse" patterns, which factor into mixed power
+sums $\sum_c a_k(c)^\alpha a_l(c)^\beta$ of the coefficient vectors; for the line indicators these
+depend only on $|L\cap L'|$. This yields $\Var(E)$ exactly for each $n$ as a rational number; the
+falling-factorial denominators cancel and the result is a Laurent polynomial in $n$ (of degree $8$,
+resp.\ $3$) whose coefficients depend on the parity of $n$ only through $|D_{\mathrm{main}}\cap
+D_{\mathrm{anti}}|$. The displayed formulas were obtained by exact rational interpolation on
+$n=3,\dots,45$ and verified on $5$--$11$ further orders each; they agree with exhaustive enumeration
+for $n=3$ ($\Var(E_{\mathrm{low}})=1532/2187$, $\Var(E_{\mathrm{full}})=398/2187$).
+\end{proof}
+
+\begin{remark}
+The paper's normalisation $\Cov(\cdot,\cdot)=\frac1N\sum(\cdot)(\cdot)$ makes the mean of
+$E_{\mathrm{low}}$ grow like $n^4/72$ and that of $E_{\mathrm{full}}$ like $n^2/6$; the growth is a
+property of the normalisation, not of the landscape, and the statements replace the empirical
+"quadratic scaling" fits of the previous version. For $n=3$ the two means coincide
+($40/27$) because $\Var(X)=\frac{n^2-1}{12}$ equals $\Var(C_j)\cdot n = \frac{n-1}{n}$ exactly when
+$n=3$; the two distributions are nevertheless different (Figure~\ref{fig:random_energy}).
+\end{remark}
+
+\begin{corollary}[Limiting law]
+\label{cor:random_energy_clt}
+As $n\to\infty$, the standardised vector
+$\big(T_X/\sqrt{\Sigma_{11}},\,T_Y/\sqrt{\Sigma_{22}},\,T_{D_{\mathrm{main}}}/\sqrt{\Sigma_{33}},\,T_{D_{\mathrm{anti}}}/\sqrt{\Sigma_{44}}\big)$
+converges in distribution to a standard Gaussian vector in $\mathbb{R}^4$, and therefore
+\begin{equation}
+\frac{E_{\mathrm{low}}}{(n^4-1)/144}\ \xrightarrow{\ d\ }\ \chi^2_2,
+\qquad\text{equivalently}\qquad
+\frac{E_{\mathrm{low}}}{\mathbb{E}[E_{\mathrm{low}}]}\ \xrightarrow{\ d\ }\ \mathrm{Exp}(1).
+\label{eq:low_limit}
+\end{equation}
+For finite $n$ the Gaussian approximation gives $E\approx\sum_j w_j\chi^2_{1,j}$ with independent
+$\chi^2_1$ variables and weights $w_j$ the eigenvalues \eqref{eq:weights}; its density is computed by
+Imhof's inversion formula in Figure~\ref{fig:random_energy}.
+\end{corollary}
+
+\begin{proof}
+Each fixed linear combination $\sum_k\alpha_kT_{\varphi_k}$ is again a linear permutation
+statistic $\sum_c a_c z_{\pi(c)}$. Hoeffding's combinatorial central limit theorem
+\cite[Thm.~3]{hoeffding1951} asserts asymptotic normality of
+$\sum_i c_N(i,\pi(i))$ provided that for every $r\ge 3$ the ratio
+$N^{-1}\sum_{i,j}d_N(i,j)^r\big/\big(N^{-1}\sum_{i,j}d_N(i,j)^2\big)^{r/2}$ remains bounded, where
+$d_N$ is the doubly centred array. In the product case $c_N(i,j)=a_iz_j$ the ratio equals
+$N^{1-r/2}\kappa_r(a)\kappa_r(z)$ with $\kappa_r$ the standardised $r$-th absolute moments. For $z$
+(uniform on $\{1,\dots,N\}$ centred) $\kappa_r(z)=O(1)$. For $a$ a combination of $X$, $Y$ and the
+two diagonal indicators, $\kappa_r(a)=O(n^{r/2-1})=O(N^{r/4-1/2})$ (the worst case being a pure
+indicator of $n$ out of $N$ cells, a Bernoulli$(1/n)$ variable), so the ratio is
+$O(N^{1/2-r/4})\to0$ for $r\ge3$ and Hoeffding's condition holds (it even tends to zero). By the
+Cram\'er--Wold device the vector is asymptotically Gaussian with covariance $\Sigma_n$; for even $n$
+the only nonzero correlation is $\operatorname{corr}(T_{D_{\mathrm{main}}},T_{D_{\mathrm{anti}}})
+=-1/(n-1)\to0$, so the standardised limit is $N(0,I_4)$. In
+$E_{\mathrm{low}}=\Sigma_{11}(\tilde T_X^2+\tilde T_Y^2)+\Sigma_{33}\tilde T_{D_m}^2+\Sigma_{44}\tilde T_{D_a}^2$
+the diagonal terms carry weight $\Sigma_{33}/\Sigma_{11}=12(n-1)/(n^2(n^2-1))\to0$, giving
+\eqref{eq:low_limit}; the second form uses $\mathbb{E}[E_{\mathrm{low}}]/((n^4-1)/72)\to1$.
+\end{proof}
+
+\begin{remark}
+For $E_{\mathrm{full}}$ the number of statistics grows with $n$, so the corollary does not apply
+verbatim; the $2n+2$ line sums are each asymptotically normal, but the Gaussian mixture
+$\sigma_n^2\big[\tfrac1n\chi^2_{2n-2}+\tfrac{n-1}{n^2}\chi^2_2\big]$ is only a heuristic at the
+orders we can simulate. The exact variance \eqref{eq:var_full} quantifies this: the ratio of the
+exact to the Gaussian-mixture variance is $0.24, 0.45, 0.56, 0.64, 0.69, 0.73$ for $n=3,\dots,8$
+(for $E_{\mathrm{low}}$: $0.51, 0.76, 0.86, 0.90, 0.93, 0.95$), reflecting the finite-population
+fourth-moment corrections, and the Kolmogorov distances in Table~\ref{tab:random_energy} decrease
+accordingly. For $n=3$ both energies take only finitely many values ($346$ and $177$ distinct values
+of $E_{\mathrm{low}}$ and $E_{\mathrm{full}}$ respectively, all multiples of $1/81$).
+\end{remark}
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{c l r r r r r r r}
+\toprule
+$n$ & energy & $\mathbb{E}[E]$ exact & MC mean & $\sqrt{\Var E}$ exact & MC std & Gauss.\ std & $|\delta_{\mathrm{mean}}|$ & KS \\
+\midrule
+3 & $E_{\mathrm{low}}$  & $40/27=1.4815$ & 1.4814 & 0.8370 & 0.8369 & 1.171 & $6\times10^{-5}$ & 0.103 \\
+3 & $E_{\mathrm{full}}$ & $40/27=1.4815$ & 1.4815 & 0.4266 & 0.4266 & 0.869 & $8\times10^{-6}$ & 0.200 \\
+4 & $E_{\mathrm{low}}$  & $391/96=4.0729$ & 4.0736 & 3.1284 & 3.1288 & 3.586 & $2\times10^{-4}$ & 0.037 \\
+4 & $E_{\mathrm{full}}$ & $85/32=2.6562$ & 2.6564 & 0.9074 & 0.9073 & 1.349 & $7\times10^{-5}$ & 0.107 \\
+5 & $E_{\mathrm{low}}$  & $234/25=9.3600$ & 9.3605 & 8.0483 & 8.0482 & 8.694 & $6\times10^{-5}$ & 0.019 \\
+5 & $E_{\mathrm{full}}$ & $104/25=4.1600$ & 4.1600 & 1.3966 & 1.3966 & 1.867 & $9\times10^{-6}$ & 0.078 \\
+6 & $E_{\mathrm{low}}$  & $2035/108=18.843$ & 18.843 & 17.122 & 17.122 & 18.007 & $4\times10^{-5}$ & 0.012 \\
+6 & $E_{\mathrm{full}}$ & $1295/216=5.9954$ & 5.9957 & 1.9671 & 1.9671 & 2.459 & $6\times10^{-5}$ & 0.061 \\
+7 & $E_{\mathrm{low}}$  & $5050/147=34.354$ & 34.349 & 32.174 & 32.167 & 33.349 & $1\times10^{-4}$ & 0.008 \\
+7 & $E_{\mathrm{full}}$ & $400/49=8.1633$ & 8.1631 & 2.5697 & 2.5698 & 3.089 & $2\times10^{-5}$ & 0.050 \\
+8 & $E_{\mathrm{low}}$  & $22295/384=58.060$ & 58.058 & 55.377 & 55.381 & 56.888 & $3\times10^{-5}$ & 0.007 \\
+8 & $E_{\mathrm{full}}$ & $1365/128=10.664$ & 10.664 & 3.2352 & 3.2353 & 3.777 & $3\times10^{-5}$ & 0.042 \\
+\bottomrule
+\end{tabular}
+\caption{Exact moments of Proposition~\ref{prop:random_energy_moments} against Monte Carlo
+($10^8$ uniformly random arrangements per order; for $n=3$ the exact values were also confirmed by
+enumerating all $9!$ arrangements). $|\delta_{\mathrm{mean}}|$ is the relative error of the MC mean;
+all MC means and variances agree with the exact values to within $5\times10^{-4}$ relative error,
+consistent with the sampling standard errors ($|z|\le 2.3$). "Gauss.\ std" is the standard deviation
+of the Gaussian-limit mixture $\sum_j w_j\chi^2_1$ of Corollary~\ref{cor:random_energy_clt}, and KS
+is the Kolmogorov distance between the MC sample and that mixture.}
+\label{tab:random_energy}
+\end{table}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/fig_random_energy.pdf}
+\caption{Energy of a uniformly random arrangement. (a) Distribution of
+$E_{\mathrm{low}}/\mathbb{E}[E_{\mathrm{low}}]$ for $n=3$ (exact, all $9!$ arrangements) and
+$n=5,8$ ($10^8$ Monte Carlo samples each), with the Gaussian-limit mixture densities (dashed, Imhof
+inversion with the weights \eqref{eq:weights}) and the $n\to\infty$ limit $\mathrm{Exp}(1)$ of
+Corollary~\ref{cor:random_energy_clt} (dotted). (b) The same for the symmetric $E_{\mathrm{full}}$;
+here the Gaussian mixture is only a slowly improving approximation (see the remark after
+Corollary~\ref{cor:random_energy_clt}). (c) Exact mean (solid) and standard deviation (dashed) of
+both energies from Proposition~\ref{prop:random_energy_moments}, $3\le n\le 40$, with the Monte Carlo
+values for $n=3,\dots,8$ (open markers). The mean of $E_{\mathrm{low}}$ grows like $n^4/72$ and its
+standard deviation like $n^4/72$ as well (an exponential limit has unit coefficient of variation);
+$E_{\mathrm{full}}$ has mean $\sim n^2/6$ and standard deviation $\sim n^{3/2}/6$.}
+\label{fig:random_energy}
+\end{figure}
+
+% ---------------------------------------------------------------------------
+% Discussion (iii): algorithms -- one paragraph + one table
+% ---------------------------------------------------------------------------
+
+\paragraph{Searching the landscape.}
+Because $E_{\mathrm{full}}$ is a sum of squares of the $2n+2$ line-sum deviations, a single swap of
+two cells changes it by an explicit quadratic expression in the swapped values, and local search is
+cheap. We ran two elementary searches on the symmetric $E_{\mathrm{full}}$ from uniformly random
+starting arrangements (Table~\ref{tab:search}): steepest swap descent (always take the swap with the
+largest decrease; stop when no swap decreases the energy) and a plain simulated annealing (random
+swap proposals, Metropolis acceptance, geometric cooling from $T_0$ = the median uphill increment of
+$N^2E_{\mathrm{full}}$ at a random arrangement to $T_1=1/2$, over $2\times10^4 N$ proposals). Greedy
+descent reaches a magic square ($E_{\mathrm{full}}=0$) from $19.5\%$ of random starts for $n=4$ but
+from only $1.2\%$ ($n=5$) and $0.8\%$ ($n=6$); in all other runs it stops after $8$--$15$ swaps in a
+non-magic local minimum, typically with a single diagonal off by one (the smallest residual
+$N^2E_{\mathrm{full}}$ was $1$ for $n=5,6$ and $2$ for $n=4$). Annealing succeeds in every run for
+$n=4$ and in $78\%$ ($n=5$) and $50\%$ ($n=6$) of runs within the budget, after $\approx 1.5\times10^5$,
+$4\times10^5$ and $6.6\times10^5$ proposals respectively; its failures again end at
+$N^2E_{\mathrm{full}}\in\{1,2\}$. The landscape of $E_{\mathrm{full}}$ is thus easy to descend but,
+exactly as the exhaustive $n=3$ count of non-magic local minima suggests (eight of them, all at
+$E_{\mathrm{full}}=2/81$), it is riddled with diagonal-only defects that a swap move cannot repair.
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{c rrr rrr}
+\toprule
+ & \multicolumn{3}{c}{steepest swap descent ($2\times10^5$ runs)} & \multicolumn{3}{c}{simulated annealing ($400$ runs)}\\
+\cmidrule(lr){2-4}\cmidrule(lr){5-7}
+$n$ & success & mean swaps & stuck ($E_{\mathrm{full}}>0$) & success & median proposals & accepted swaps \\
+\midrule
+4 & $0.195\pm0.001$ & 8.1  & $80.5\%$ & $1.000$ & $1.5\times10^5$ & $4.2\times10^4$ \\
+5 & $0.0115\pm0.0002$ & 11.2 & $98.9\%$ & $0.78\pm0.02$ & $4.2\times10^5$ & $8.0\times10^4$ \\
+6 & $0.0079\pm0.0002$ & 14.1 & $99.2\%$ & $0.50\pm0.03$ & $6.6\times10^5$ & $1.1\times10^5$ \\
+\bottomrule
+\end{tabular}
+\caption{Local search on the symmetric $E_{\mathrm{full}}$ from uniformly random arrangements.
+"Success" is the fraction of runs reaching $E_{\mathrm{full}}=0$ (a magic square), $\pm$ one
+standard error; "stuck" is the fraction of descents ending in a non-magic local minimum. Annealing
+budget $2\times10^4N$ proposals; "median proposals" and "accepted swaps" refer to successful runs.}
+\label{tab:search}
+\end{table}

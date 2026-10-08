@@ -1,0 +1,90 @@
+\section{The Magic Gem}
+\label{sec:gem}
+
+Let $S=(s_{ij})$ be an arrangement of order $n$, with cells indexed by $i,j\in\{0,\dots,n-1\}$ ($i$ the row from the top, $j$ the column from the left), and write $N=n^2$.
+
+\begin{definition}[Gem coordinates and Magic Gem]
+\label{def:gem_coords}
+To the cell $(i,j)$ assign the point $\mathbf p_{ij}=(x_{ij},y_{ij},z_{ij})\in\R^3$ with
+\begin{equation}
+x_{ij}=j-\frac{n-1}{2},\qquad y_{ij}=\frac{n-1}{2}-i,\qquad z_{ij}=s_{ij}-\frac{N+1}{2}.
+\label{eq:gem_coords}
+\end{equation}
+The \emph{Magic Gem} of $S$ is the convex hull $\mathcal G(S)=\operatorname{conv}\{\mathbf p_{ij}\}$.
+The function $z=(z_{ij})$ is the \emph{height function} of $S$, and each $\mathbf p_{ij}$ is read as a vector from the origin.
+Every centroid or moment statement in this paper refers to the full set of $N$ points $\mathbf p_{ij}$, interior points included, and not to the solid $\mathcal G(S)$.
+\end{definition}
+
+The $x$-axis runs along the columns and the $y$-axis along the rows (top row at positive $y$); the centred entries have mean zero because the mean entry is $(N+1)/2$.
+Let $x_j=j-\frac{n-1}2$ and $y_i=\frac{n-1}2-i$ denote the $n$ values taken by $x$ and $y$.
+A \emph{line} is one of the $n$ rows, the $n$ columns, the main diagonal $\{i=j\}$ or the anti-diagonal $\{i+j=n-1\}$; each contains $n$ cells.
+For a line $L$ let $\delta_L(S)=\sum_{c\in L}s_c-M(n)$ be its \emph{deviation}, so $S$ is magic iff $\delta_L(S)=0$ for all $2n+2$ lines.
+
+\begin{lemma}[Means, variances, line vector sums]
+\label{lem:lines}
+For every arrangement $S$ of order $n$:
+\begin{enumerate}
+\item $\sum_{i,j}x_{ij}=\sum_{i,j}y_{ij}=\sum_{i,j}z_{ij}=0$ and $\sum_{i,j}x_{ij}y_{ij}=0$;
+\item the empirical variances are $\operatorname{Var}(x)=\operatorname{Var}(y)=\frac{n^{2}-1}{12}$ and $\operatorname{Var}(z)=\frac{n^{4}-1}{12}$;
+\item for every line $L$, $\delta_L(S)=\sum_{c\in L}z_c$, and
+\[
+\sum_{c\in L}\mathbf p_c=\bigl(n\,\bar x_L,\ n\,\bar y_L,\ \delta_L(S)\bigr),
+\]
+where $(\bar x_L,\bar y_L)$ is the centre of the line (the mean of its cell positions): $(0,y_i)$ for the row $i$, $(x_j,0)$ for the column $j$, and $(0,0)$ for both diagonals.
+\end{enumerate}
+In particular $S$ is magic if and only if the vector sum of the $\mathbf p_c$ along every line is horizontal, i.e.\ the vertical components cancel along every row, column and diagonal.
+\end{lemma}
+
+\begin{proof}
+(1) $\sum_{i,j}x_{ij}=n\sum_j x_j=0$, likewise for $y$; $\sum z=\sum_{v=1}^{N}v-N\frac{N+1}2=0$; and $\sum xy=(\sum_jx_j)(\sum_iy_i)=0$.
+(2) $\operatorname{Var}(x)=\frac1n\sum_jx_j^2$ is the variance of $n$ equally spaced points with unit spacing, $(n^2-1)/12$; the same holds for $y$, and for $z$ with $N$ points.
+(3) Since $M(n)=n\frac{N+1}2$, $\sum_{c\in L}z_c=\sum_{c\in L}s_c-M(n)=\delta_L$. The cells of a row $i$ have $y=y_i$ and $x$ running over all $x_j$ (sum $0$); for a column the roles are exchanged; each diagonal is invariant under $(x,y)\mapsto(-x,-y)$, so its position sums vanish.
+\end{proof}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{figures/fig_vectors_row.pdf}
+\caption{The Magic Gem of D\"urer's square $S=\begin{smallmatrix}16&3&2&13\\5&10&11&8\\9&6&7&12\\4&15&14&1\end{smallmatrix}$ as an arrangement of vectors from the centroid.
+(a)~The $16$ vectors $\mathbf p_{ij}$ from the origin $O$ to the tips (grey), and the translucent convex hull. The four vectors of the top row are highlighted (orange: positive height, blue: negative height) and labelled with their heights $z_{0j}=s_{0j}-8.5$.
+(b)~The heights of the highlighted row stacked head to tail: $+7.5$, $-5.5$, $-6.5$, $+4.5$; the running total returns to zero, so the vector sum of the row is the horizontal vector $(0,6,0)=4\,(0,\tfrac32,0)$ of \Cref{lem:lines}(3).}
+\label{fig:vectors}
+\end{figure}
+
+\begin{example}[Lo Shu]
+\label{ex:loshu}
+For the Lo Shu square $S=\begin{pmatrix}2&7&6\\9&5&1\\4&3&8\end{pmatrix}$, $n=3$ and the centre value is $5$, so the nine points are
+\[
+\begin{array}{lll}
+\mathbf p_{00}=(-1,1,-3), & \mathbf p_{01}=(0,1,2), & \mathbf p_{02}=(1,1,1),\\
+\mathbf p_{10}=(-1,0,4), & \mathbf p_{11}=(0,0,0), & \mathbf p_{12}=(1,0,-4),\\
+\mathbf p_{20}=(-1,-1,-1), & \mathbf p_{21}=(0,-1,-2), & \mathbf p_{22}=(1,-1,3).
+\end{array}
+\]
+The top row has heights $-3+2+1=0$ and horizontal vector sum $(0,3,0)$.
+The centre cell maps to the origin and is the only point not on the hull; the gem has $f$-vector $(8,16,10)$ and volume $18$ (\Cref{fig:construction}).
+\end{example}
+
+\begin{proposition}[$D_4$-invariance]
+\label{prop:symmetry_invariance}
+Let $g\in D_4$ act on the grid and let $gS$ be the arrangement with $(gS)_c=s_{g^{-1}c}$.
+Then $\mathcal G(gS)=\hat g\,\mathcal G(S)$, where $\hat g(x,y,z)=(g(x,y),z)$ is the isometry of $\R^3$ that applies the orthogonal map $g$ of the $(x,y)$-plane and fixes $z$; $\det\hat g=\det g$.
+In particular $\mathcal G(gS)$ and $\mathcal G(S)$ are congruent, and the gem is an invariant of the $D_4$-orbit of $S$.
+\end{proposition}
+
+\begin{proof}
+In the centred coordinates \eqref{eq:gem_coords}, each $g\in D_4$ acts on the cell positions as an orthogonal map of the plane (a rotation by a multiple of $90^\circ$ or a reflection in a coordinate axis or a diagonal), and $(x_{gc},y_{gc})=g(x_c,y_c)$.
+The point of $gS$ over the cell $gc$ has height $(gS)_{gc}-\frac{N+1}2=z_c$.
+Hence the point set of $gS$ is $\{(g(x_c,y_c),z_c)\}_c=\hat g\{\mathbf p_c\}_c$, and an affine bijection maps the convex hull of a set onto the convex hull of its image.
+\end{proof}
+
+Magic squares are mapped to magic squares by $D_4$ (lines go to lines), so every \emph{essentially different} magic square, that is, every $D_4$-orbit, has a single gem up to congruence.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/fig01_construction_d4.pdf}
+    \caption{Construction of the Magic Gem and its $D_4$-invariance.
+    Top row: (a)~the Lo Shu square $S$; (b)~the centred cells $(x_{ij},y_{ij})$ with the heights $z_{ij}=s_{ij}-5$; (c)~the nine points $\mathbf p_{ij}$ over the grid, labelled by the entries $s_{ij}$; (d)~their convex hull, the gem of \Cref{ex:loshu}, with $f$-vector $(8,16,10)$; the centre point $(0,0,0)$ is the only interior point.
+    Rows two and three (e--l): the eight images of the Lo Shu under $D_4$---the identity $e$, the rotations $r,r^2,r^3$ by $90^\circ,180^\circ,270^\circ$, the left--right and top--bottom reflections $h,v$, and the two diagonal reflections (transpose $t$ and anti-transpose $tr^2$)---each printed row by row beneath its gem.
+    All eight gems are drawn from the same viewpoint; by \Cref{prop:symmetry_invariance} they are the images of one another under the isometries $\hat g$, so they are congruent, and all have $f$-vector $(8,16,10)$ and volume $18$.}
+    \label{fig:construction}
+\end{figure}

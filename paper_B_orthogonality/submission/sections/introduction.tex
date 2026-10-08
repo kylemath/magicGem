@@ -1,0 +1,37 @@
+\section{Introduction}
+\label{sec:introduction}
+
+Magic squares are among the oldest objects of recreational mathematics: the $3\times3$ Lo Shu appears in Chinese sources more than two millennia old, a $4\times4$ square is engraved in D\"urer's \emph{Melencolia~I} (1514), and systematic constructions for every order have been known since the seventeenth century \cite{andrews1960magic,pickover2002zen}.
+The modern literature treats them from several directions: enumeration and the geometry of the associated polytopes \cite{stanley1973magic,ehrhart1973magic,ahmed2003polyhedral,beck2006insideout,beck2010enumeration}, spectral and matrix properties \cite{loly2009spectra,nordgren2012properties,nordgren2014spectra,cameron2013signatura}, and, in work of Loly and collaborators, physical invariants such as the moment of inertia and the multipole moments \cite{loly2004invariance,rogers2004inertia,rogers2005multipole}.
+
+\begin{definition}[Magic square]
+\label{def:magic_square}
+An \emph{arrangement} of order $n$ is a bijection $S=(s_{ij})$ from the cells of the $n\times n$ grid onto $\{1,\dots,n^2\}$.
+It is a \emph{magic square} if every row, every column and both main diagonals sum to the magic constant $M(n)=n(n^2+1)/2$, and \emph{semi-magic} if only the rows and columns do.
+\end{definition}
+
+This paper reads an arrangement as a function on the grid: the centred entry $z_{ij}=s_{ij}-(n^2+1)/2$ is a \emph{height} over the centred cell $(x_{ij},y_{ij})=(j-\frac{n-1}2,\ \frac{n-1}2-i)$ (\Cref{def:coords}).
+The points $(x_{ij},y_{ij},z_{ij})\in\R^3$ have a convex hull, studied in the companion paper~A \cite{mathewson_gems}; here the object is the height function $z$ alone.
+Every line-sum condition ``row $k$ sums to $M(n)$'' becomes ``$z$ is orthogonal to the centred indicator of row $k$'', i.e.\ $\Cov(R_k,Z)=0$ for the empirical covariance over the $n^2$ cells.
+A magic square is therefore an arrangement whose height function is orthogonal to a fixed $2n$-dimensional space $W$ of test functions, and the \emph{energy} $\Efull(S)=\sum_L\Cov(\mathbf 1_L,Z)^2$ over the $2n+2$ lines vanishes exactly on magic squares (\Cref{lem:zero_set}).
+This is a reformulation of the definition, not a theorem about magic squares (\Cref{rem:tautology}); its value is that it makes certain questions natural, and the paper is organised around their answers.
+
+\paragraph{Contributions.}
+\begin{enumerate}\setlength\itemsep{1pt}
+\item \emph{The moment hierarchy} (\Cref{prop:hierarchy}, \Cref{thm:perm_threshold}). Replacing the line indicators by the polynomial test functions $x^m,y^m$ gives, for each degree $k$, the conditions $\Cov(X^m,Z)=\Cov(Y^m,Z)=0$ for $m\le k$. For real-valued height functions these are equivalent to equal row and column sums if and only if $k\ge n-1$ (a Vandermonde fact). For permutations of $1,\dots,n^2$, integrality and the bound on line sums lower the threshold $k^*(n)$ to at most $n-2$ for every $n\ge14$, whereas $k^*(n)=n-1$ for $3\le n\le13$ (computer-verified witnesses, \Cref{rem:kstar_search}). The four-term energy $\Elow$ is the degree-one truncation. Loly's invariance of the moment of inertia \cite{loly2004invariance} is the single condition $\Cov(Z,X^2+Y^2)=0$, implied by the degree-two conditions but much weaker than them (\Cref{cor:loly}); the same identity gives the null distribution of the moment of inertia of a random arrangement (\Cref{cor:loly_null}).
+\item \emph{Balance of the signed mass} (\Cref{sec:balance}). $\Efull=0$ is equivalent to $\sum_cz_c\varphi_c=0$ for every $\varphi$ in the line space (\Cref{thm:linear_balance}); this contains Loly's invariant, the vanishing of the centre of mass and of all axial moments, and leaves the mixed moments free. For any arrangement, $|\sum_cz_c(x_c,y_c)|^2\le N^2\frac{n(n^2-1)}{12}\Efull$ with a sharp constant (\Cref{thm:quant_balance}). The corresponding statement for unit vectors is false: the eight $3\times3$ magic squares all have a ring imbalance $2(2-\sqrt2)\sqrt5$, and a three-dimensional unit-vector sum never vanishes (\Cref{prop:unit_negative}); a numerical comparison for $n=4$ is given in \Cref{tab:unit_n4}.
+\item \emph{Exact statistics of a random arrangement} (\Cref{prop:random_energy_moments}). $\E[\Elow]=(n^2+1)(n^4-n^2+12n-12)/(72n^2)$ and $\E[\Efull]=(n^4-1)/(6n^2)$, with exact variances; $\Elow/\E[\Elow]\to\mathrm{Exp}(1)$ by Hoeffding's combinatorial central limit theorem. Monte Carlo with $10^8$ samples per order agrees for $3\le n\le 8$ to within $5\times10^{-4}$ relative error.
+\item \emph{The single-swap formula} (\Cref{thm:swap}). Exchanging two entries of a magic square that differ by $d$ raises $\Efull$ by exactly $d^2m/n^4$, where $m\in\{2,\dots,6\}$ counts the lines separating the two cells; every magic square is a strict local minimum, with minimum gap between $2/n^4$ and $6/n^4$. Elementary steepest descent and annealing on $\Efull$ are reported in \Cref{sec:algorithms}.
+\item \emph{The low-mode class for $n=4$} (\Cref{prop:L4}). Exactly $14{,}639{,}440$ of the $16!$ arrangements satisfy $\Elow=0$, of which $7{,}040$ are magic; the count is a meet-in-the-middle enumeration and agrees with a Gaussian local-limit estimate to within $20\%$.
+\end{enumerate}
+
+\paragraph{Context and scope.}
+The enumerative and polyhedral theory of magic squares is classical. Nonnegative integer matrices with all line sums equal to $t$ are the lattice points of the $t$-th dilate of the Birkhoff polytope and their number is a polynomial in $t$ \cite{stanley1973magic,ehrhart1973magic}; the count of magic squares with distinct entries is an Ehrhart quasi-polynomial of an inside-out polytope \cite{beck2006insideout,beck2010enumeration}; the cones of magic squares and cubes have Hilbert-basis descriptions \cite{ahmed2003polyhedral}; and arrays with fixed margins have been studied as a sample space by Diaconis and Gangolli \cite{diaconis1995rectangular}.
+None of this is used or extended here: our sample space is the uniform distribution on permutations, and we count nothing polyhedrally.
+The orthogonality reading is elementary and implicit in Loly's work: he derived the invariance of the moment of inertia from row and column sums alone \cite{loly2004invariance}, and Rogers and Loly studied the multipole expansion of a magic cube \cite{rogers2005multipole}.
+The linear balance statements of \Cref{sec:balance} belong to that circle of ideas; what we add is their formulation as a single orthogonality statement, the sharp quantitative bound, and the negative results for nonlinear (unit-vector) balance.
+The Vandermonde threshold of the hierarchy is elementary linear algebra.
+To our knowledge the permutation refinement (\Cref{thm:perm_threshold}), the exact moments and limit law for random arrangements, the swap formula and the exact count for $n=4$ are new; they are small statements about a classical object, and we make no claim that the energy reformulation by itself is a result.
+
+\paragraph{Organisation.}
+\Cref{sec:background} fixes coordinates and collects the facts used; \Cref{sec:theory} contains the projection lemma, the hierarchy and the swap formula; \Cref{sec:balance} the balance results; \Cref{sec:results} the computations; \Cref{sec:discussion} what the viewpoint does and does not buy, local search, and open questions; the appendices the methods, the variance closed forms and a witness for $k^*(5)=4$.

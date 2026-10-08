@@ -1,0 +1,56 @@
+\section{Discussion}
+\label{sec:discussion}
+
+\subsection{What the orthogonality viewpoint buys, and what it does not}
+
+Reading the line-sum conditions as $z\perp W$ changes nothing about which arrangements are magic, but it changes which questions are natural, and four of them have been answered above.
+First, the test space can be varied: replacing the $2n$ line indicators by the polynomials $x^m,y^m$ ($m\le k$) gives the moment hierarchy, \Cref{prop:hierarchy} locates the degree $k=n-1$ at which polynomial test functions become equivalent to line sums for real heights, and \Cref{thm:perm_threshold} shows that the permutation constraint is not idle: for $n\ge14$ integrality forces equal line sums one degree earlier than linear algebra does.
+In this frame the four-term energy $\Elow$ is the degree-one member and is weaker than ``magic'' for every $n\ge4$, while Loly's invariance of the moment of inertia \cite{loly2004invariance} is a consequence of the degree-two member: the value $n^2(n^4-1)/12$ is the constant term of \eqref{eq:loly_identity}, the arrangement-dependent part is the single cross-moment $\Cov(Z,X^2+Y^2)$, and the invariance is weaker than the degree-two level (\Cref{cor:loly}).
+Second, $z\perp W$ is a statement about the signed mass $z$: all separable moments vanish (\Cref{thm:linear_balance}), the centre-of-mass offset of an arbitrary arrangement is controlled by $\Efull$ with a sharp constant (\Cref{thm:quant_balance}), and the line-sum conditions say nothing about mixed moments or about unit-vector sums (\Cref{prop:unit_negative}).
+Third, each $\Cov(\varphi,Z)$ is a linear permutation statistic, so the energies of a random arrangement have exact moments and a Hoeffding limit law (\Cref{prop:random_energy_moments}, \Cref{cor:random_energy_clt}), and Loly's moment of inertia has an exact null distribution (\Cref{cor:loly_null}); the growth $\E[\Elow]\sim n^4/72$, $\E[\Efull]\sim n^2/6$ is a property of the normalisation $\Cov=\frac1N\sum$, not of the arrangements.
+Fourth, because $N^2\Efull$ is a sum of squared integer deviations, a swap changes it by the two-line formula \eqref{eq:swap_general}, which gives local minimality and the exact gap spectrum for all $n$ at once (\Cref{cor:local_min}).
+
+What the viewpoint does not buy is equally clear.
+The projection lemma is a restatement of the definition (\Cref{rem:tautology}); it proves nothing about magic squares that the line sums do not already say, and we have not used it to count anything: the counting is done by the meet-in-the-middle enumeration of \Cref{prop:L4}.
+The low-mode energy is a poor proxy for the magic property: for $n=4$ its zero set is about $2080$ times larger than the set of magic squares, and even its two-condition sub-classes have $6.7\times10^9$ and $5.0\times10^{10}$ members.
+
+\subsection{Local search on the energy}
+\label{sec:algorithms}
+
+By \Cref{thm:swap} a single swap changes $\Efull$ by an explicit quadratic expression in the swapped values, so local search is cheap.
+We ran two elementary searches on the symmetric $\Efull$ from uniformly random starting arrangements (\Cref{tab:search}): steepest swap descent (take the swap with the largest decrease; stop when none decreases the energy) and a plain simulated annealing (random swap proposals, Metropolis acceptance, geometric cooling from $T_0$ = the median uphill increment of $N^2\Efull$ at a random arrangement to $T_1=1/2$, over $2\times10^4N$ proposals).
+Descent reaches a magic square from $19.5\%$ of random starts for $n=4$ but from only $1.2\%$ ($n=5$) and $0.8\%$ ($n=6$); otherwise it stops after $8$--$14$ swaps on average in a non-magic local minimum with mean residual $N^2\Efull\approx4.4$ (smallest observed residual $1$ for $n=5,6$ and $2$ for $n=4$).
+Annealing succeeds in every run for $n=4$ and in $78\%$ ($n=5$) and $50\%$ ($n=6$) of runs within the budget; the failed runs end with a best residual $N^2\Efull$ of $1.05$ ($n=5$) and $1.2$ ($n=6$) on average.
+The landscape is thus easy to descend but, as the exhaustive $n=3$ count of non-magic local minima already suggests (eight, all at $\Efull=2/81$), it contains many shallow non-magic minima that a swap move cannot leave.
+The experiment is small and the methods elementary; neither competes with the classical constructions or with the backtracking enumerations of \cite{beck2010enumeration,trump2012enumeration}. The energy is a search objective, not a counting tool.
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabular}{c rrr rrr}
+\toprule
+ & \multicolumn{3}{c}{steepest swap descent ($2\times10^5$ runs)} & \multicolumn{3}{c}{simulated annealing ($400$ runs)}\\
+\cmidrule(lr){2-4}\cmidrule(lr){5-7}
+$n$ & success & mean swaps & stuck ($\Efull>0$) & success & median proposals & accepted swaps \\
+\midrule
+4 & $0.195\pm0.001$ & 8.1  & $80.5\%$ & $1.000$ & $1.5\times10^5$ & $4.2\times10^4$ \\
+5 & $0.0115\pm0.0002$ & 11.2 & $98.9\%$ & $0.78\pm0.02$ & $4.2\times10^5$ & $8.0\times10^4$ \\
+6 & $0.0079\pm0.0002$ & 14.1 & $99.2\%$ & $0.50\pm0.03$ & $6.6\times10^5$ & $1.1\times10^5$ \\
+\bottomrule
+\end{tabular}
+\caption{Local search on the symmetric $\Efull$ from uniformly random arrangements.
+``Success'' is the fraction of runs reaching $\Efull=0$ (a magic square), $\pm$ one
+standard error; ``stuck'' is the fraction of descents ending in a non-magic local minimum; ``mean swaps'' is over all descents. Annealing
+budget $2\times10^4N$ proposals; ``median proposals'' and ``accepted swaps'' (mean) refer to successful runs.
+Full-scale data: \texttt{anc/algo\_results.json}; an independent rerun at reduced scale ($2\times10^4$ descents, $64$ annealing runs per order, \texttt{anc/search\_reduced.json}) gives success rates $0.193,\,0.011,\,0.008$ for descent and $1.00,\,0.81,\,0.45$ for annealing, within sampling error of the table.}
+\label{tab:search}
+\end{table}
+
+\subsection{Open questions}
+
+\begin{enumerate}\setlength\itemsep{1pt}
+\item \emph{Size of the low-mode class.} $|L_3|=8$, $|L_4|=14{,}639{,}440$, and the Gaussian local-limit estimate $N!(2\pi)^{-2}\det(\Sigma)^{-1/2}$ is within $20\%$ at $n=4$ and, by Monte Carlo, within about $25\%$ at $n=5,6$ (\Cref{sec:lowmode_n4}). Is $|L_n|/N!\sim c\,n^{-13}$ with an explicit constant, i.e.\ does a local limit theorem hold for the four lattice statistics $(T_1,\dots,T_4)$?
+\item \emph{The permutation threshold.} What is $k^*(n)$ for $n\ge14$? The proof of \Cref{thm:perm_threshold} compares the entries of the integer vectors orthogonal to all polynomials of degree $\le k$ with the largest possible deviation $n^2(n-1)/2$. If the smallest such vectors were always alternating binomial vectors supported on $k+2$ consecutive columns, whose largest entry is $\binom{k+1}{\lfloor(k+1)/2\rfloor}\approx2^{k+1}/\sqrt k$, the comparison $2^k\gtrsim n^3$ would give $k^*(n)=O(\log n)$; but shorter integer vectors with small entries might exist, and we have no proof.
+\item \emph{Exact unit-vector balance.} Is there a magic square of any order with $B_{\mathrm{ring}}=0$? None exists for $n=3$ and none among the $880$ classes for $n=4$ (smallest value $0.070$); the orthogonality conditions give no handle on this because the radial unit vectors are not in the line space (\Cref{prop:unit_negative}).
+\item \emph{Other square families.} The orthogonality formulation and \Cref{sec:theory} apply verbatim to semi-magic, pandiagonal and Franklin squares \cite{loly2007franklin}, with $W$ replaced by the span of the relevant line indicators; Loly's inertia invariance already covers the semi-magic case. The hierarchy, energies and swap formulas for these families have not been worked out.
+\end{enumerate}

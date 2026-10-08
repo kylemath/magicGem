@@ -1,0 +1,39 @@
+\section{Introduction}
+\label{sec:introduction}
+
+Magic squares are among the oldest objects of recreational mathematics: the $3\times3$ Lo Shu belongs to Chinese tradition, a $4\times4$ square is engraved in D\"urer's \emph{Melencolia~I} (1514), and constructions for every order have been known for centuries \cite{andrews1960magic,pickover2002zen}.
+The modern literature treats them from several directions: enumeration and the geometry of the polytopes whose lattice points are the squares \cite{stanley1973magic,ehrhart1973magic,ahmed2003polyhedral,beck2006insideout,beck2010enumeration}, spectral and matrix properties \cite{loly2009spectra,nordgren2012properties,nordgren2014spectra,cameron2013signatura}, and, in work of Loly and collaborators, physical invariants such as the moment of inertia and the multipole moments \cite{loly2004invariance,rogers2004inertia,rogers2005multipole}.
+
+\begin{definition}[Magic square]
+\label{def:magic_square}
+An \emph{arrangement} of order $n$ is a bijection $S=(s_{ij})$ from the cells of the $n\times n$ grid onto $\{1,\dots,n^2\}$.
+It is a \emph{magic square} if every row, every column and both main diagonals sum to the magic constant $M(n)=n(n^2+1)/2$, and \emph{semi-magic} if only the rows and columns do.
+\end{definition}
+
+\paragraph{The picture.}
+Centre the grid at the origin and attach to the cell $(i,j)$ the vector
+\[
+\mathbf p_{ij}=(x_{ij},y_{ij},z_{ij}),
+\]
+whose horizontal part $(x_{ij},y_{ij})$ is the position of the cell and whose vertical part is the \emph{centred entry} $z_{ij}=s_{ij}-\frac{n^2+1}{2}$.
+Then $S$ is magic exactly when the vertical components of these vectors cancel along every row, column and both diagonals (\Cref{lem:lines}; \Cref{fig:vectors}).
+The \emph{Magic Gem} $\mathcal G(S)$ is the convex hull of the tips of the $n^2$ vectors $\mathbf p_{ij}$ (\Cref{sec:gem}).
+An interactive display of the $880$ order-four gems is available at \url{https://kylemath.github.io/MagicGemWebpage/}.
+
+\paragraph{Results.}
+\begin{enumerate}\setlength\itemsep{2pt}
+\item \emph{Balance} (\Cref{sec:balance}). For every arrangement, magic or not, $\sum_{i,j}\mathbf p_{ij}=\mathbf 0$ (\Cref{prop:centroid}), so the unweighted statement ``the vectors balance about the centroid'' carries no information about $S$; it concerns all $n^2$ points, interior ones included, not the solid hull.
+The magic-specific statements weight each vector by its height: $\sum z\,\varphi(x)=\sum z\,\varphi(y)=0$ for every function $\varphi$ when $S$ is semi-magic, which contains the vanishing of the height-weighted centroid and Loly's invariant, while the mixed moment $\sum z\,xy$ is not forced (\Cref{prop:signed_mass}, \Cref{cor:loly}).
+\item \emph{Symmetry of the order-four gems} (\Cref{sec:symmetry}). The complement $S\mapsto 17-S$ reflects the gem in the plane $z=0$. We prove that a self-complementary square yields a gem with an explicit isometry (a point reflection if $S$ is associative, a half-turn about a horizontal axis otherwise), and determine by exact computation the complete isometry group of each of the $880$ gems: $48$ gems are centrally symmetric, $304$ have exactly one half-turn symmetry, and $528$ have no symmetry (\Cref{thm:symmetry}). Facet orbits are classified (\Cref{prop:facet-orbits}).
+\item \emph{Geometry of the $880$ gems} (\Cref{sec:gem-geometry-880}). Vertex counts, $f$-vectors, combinatorial types, volumes and congruence classes; the congruence classes are exactly the orbits of the complement map, and no two gems have the same vertex set.
+\item \emph{Siamese gems} (\Cref{prop:siamese-12}). The Siamese square of every odd order $n\ge5$ has a gem with exactly twelve vertices, $26$ edges and $16$ facets (computer-assisted proof, \Cref{sec:app_siamese}); the fraction of points that are vertices tends to zero.
+\end{enumerate}
+
+\paragraph{What is and is not new.}
+The polyhedral geometry of magic squares is classical: nonnegative integer matrices with all line sums equal to $t$ are the lattice points of the $t$-th dilate of the Birkhoff polytope, and their number is a polynomial in $t$ \cite{stanley1973magic,ehrhart1973magic,ziegler1995lectures}; the count of magic squares with distinct entries is an Ehrhart quasi-polynomial of an inside-out polytope \cite{beck2006insideout,beck2010enumeration}; the cones of magic squares and cubes have Hilbert-basis descriptions \cite{ahmed2003polyhedral}; contingency tables with fixed margins are the same lattice points seen as a sample space \cite{diaconis1995rectangular}.
+In all of these the magic squares are the \emph{points} of a polytope, whereas the Magic Gem attaches a polyhedron to a \emph{single} square, in the spirit of the physical invariants of Loly and Rogers \cite{loly2004invariance,rogers2004inertia,rogers2005multipole} (see also \cite{loly2007franklin} for Franklin squares).
+The balance statements of \Cref{sec:balance} are elementary and implicit in that work; we state and prove them in the gem's coordinates because the geometric picture invites misreadings of them.
+The symmetry classification, the exact geometry of the $880$ gems and the Siamese theorem are new.
+The reading of the line conditions as orthogonality conditions on the height function, the hierarchy of moment conditions, the statistics of random arrangements and the enumeration of low-energy squares are developed in the companion paper \cite{mathewson_companion}; none of its results is used here.
+
+\Cref{sec:gem} defines the gem, \Cref{sec:balance} treats balance, \Cref{sec:symmetry} symmetry, \Cref{sec:results} the exact geometry of the order-four and Siamese gems, \Cref{sec:discussion} open questions, and the appendices contain the computational methods and the remaining steps of the Siamese proof.

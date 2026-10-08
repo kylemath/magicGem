@@ -1,0 +1,289 @@
+\section{Computations}
+\label{sec:results}
+
+This section reports the computations behind the statements of \Cref{sec:theory} and the exact count of the low-mode class for $n=4$.
+All counts and all swap gaps were computed in exact integer or rational arithmetic; Monte Carlo results are reported with standard errors.
+Hardware, software and algorithms are described in \Cref{sec:appendix}; every number below is produced by a script in the ancillary directory \texttt{anc/} (see its \texttt{README}).
+
+\subsection{Exhaustive enumeration for \texorpdfstring{$n=3$}{n=3}}
+\label{sec:n3_exhaustive}
+
+All $9!=362{,}880$ arrangements of order $3$ were enumerated in exact integer arithmetic.
+Exactly $8$ arrangements have $\Efull=0$ (the Lo Shu orbit), and the same $8$ are the zeros of $\Elow$ (\Cref{rem:n3_lowmode});
+$760$ arrangements satisfy the degree-one conditions, $4{,}224$ have both diagonals summing to $15$, and $72$ are semi-magic.
+Both energies have mean $40/27$ (the coincidence is special to $n=3$: $\Var(X)=\frac{n^2-1}{12}$ equals $n\Var(C_j)=\frac{n-1}{n}$
+only there), with standard deviations $0.4266$ ($\Efull$) and $0.8370$ ($\Elow$), modes $138/81$ and $90/81$, maxima
+$180/81$ and $360/81$, and $177$ and $346$ distinct values, all multiples of $1/81$.
+Under single swaps the symmetric $\Efull$ has $16$ local minima, the $8$ magic squares and $8$ non-magic arrangements at
+$\Efull=2/81$ (two line deviations of $\pm1$); $\Elow$ is more rugged, with $344$ local minima, $336$ of them non-magic.
+
+\subsection{The energy of a random arrangement}
+\label{sec:random_energy}
+
+Let $S$ be a uniformly random arrangement, i.e.\ the values $1,\dots,N$ are placed in the
+grid by a uniformly random permutation $\pi$. For a test function $\varphi$ on the grid write
+$T_\varphi := \Cov(\varphi,Z) = \sum_{c} a_c\, z_{\pi(c)}$ with $a_c=(\varphi_c-\bar\varphi)/N$;
+this is a linear permutation statistic in the sense of \Cref{sec:bg_perm}, and its first two moments
+follow from \eqref{eq:ww_identity}. Throughout, $\Var(\varphi)$ and $\Cov(\varphi,\psi)$ denote
+population variances and covariances over the $N$ cells, and
+\[
+\sigma_n^2 := \frac{\Var(Z)}{N-1} = \frac{N+1}{12} = \frac{n^2+1}{12},
+\qquad \Var(Z)=\frac{N^2-1}{12}.
+\]
+
+\begin{proposition}[Exact moments of the random energies]
+\label{prop:random_energy_moments}
+For a uniformly random arrangement and any test functions $\varphi,\psi$,
+\begin{equation}
+\E[T_\varphi]=0,\qquad
+\E[T_\varphi T_\psi] = \sigma_n^2\,\Cov(\varphi,\psi).
+\label{eq:cov_T}
+\end{equation}
+Consequently, with $\Elow$ as in \eqref{eq:Elow} and the symmetric
+$\Efull$ (all $n$ rows, all $n$ columns, both diagonals; $2n+2$ terms),
+\begin{align}
+\E\,\Cov(X,Z)^2 &= \E\,\Cov(Y,Z)^2 = \frac{n^4-1}{144},\qquad
+\E\,\Cov(D,Z)^2 = \E\,\Cov(R_k,Z)^2 = \frac{(n-1)(n^2+1)}{12\,n^2},
+\label{eq:single_terms}\\
+\E[\Elow] &= \frac{(n^2+1)\,(n^4-n^2+12n-12)}{72\,n^2}
+= \frac{n^4}{72}+\frac{n}{6}-\frac{13}{72}+\frac{1}{6n}-\frac{1}{6n^2},
+\label{eq:mean_low}\\
+\E[\Efull] &= \frac{n^4-1}{6\,n^2} = \frac{n^2}{6}-\frac{1}{6n^2}.
+\label{eq:mean_full}
+\end{align}
+The covariance matrix $\Sigma_n:=\sigma_n^2 G$ of the vector of covariances is $\sigma_n^2$ times
+the Gram matrix $G$ of the centred test functions. For $\Elow$,
+$G=\operatorname{diag}\!\big(\tfrac{n^2-1}{12},\tfrac{n^2-1}{12},\tfrac{n-1}{n^2},\tfrac{n-1}{n^2}\big)$
+except that the two diagonal indicators have $\Cov(D_{\mathrm{m}},D_{\mathrm{a}})=-1/n^2$ when
+$n$ is even (they are uncorrelated when $n$ is odd). For $\Efull$, $G$ is block diagonal:
+the $n$ row indicators have Gram block $\tfrac1n(I-\tfrac1n J)$, the columns likewise, every
+row--column, row--diagonal and column--diagonal covariance vanishes, and the diagonal block is as for
+$\Elow$. Hence the eigenvalues of $\Sigma_n$ are
+\begin{equation}
+\Elow:\ \sigma_n^2\Big\{\tfrac{n^2-1}{12}\,(\times 2),\ \tfrac{n-1}{n^2}\,(\times 2)\Big\},
+\qquad
+\Efull:\ \sigma_n^2\Big\{\tfrac1n\,(\times\,2n-2),\ \tfrac{n-1}{n^2}\,(\times 2)\Big\}
+\label{eq:weights}
+\end{equation}
+for odd $n$; for even $n$ the last pair $\{\tfrac{n-1}{n^2},\tfrac{n-1}{n^2}\}$ is replaced by
+$\{\tfrac1n,\tfrac{n-2}{n^2}\}$. Finally, the variances are explicit rational functions of $n$, given as
+\eqref{eq:var_low} in \Cref{sec:app_variance}, with $\Var(\Elow)=n^8/5184+O(n^7)$ and $\Var(\Efull)=n^3/36+O(n^2)$.
+\end{proposition}
+
+\begin{proof}
+Since $\sum_c a_c=0$, $\E[T_\varphi]=\bar z\sum_c a_c=0$. For two linear permutation
+statistics $T_a=\sum_i a_i b_{\pi(i)}$, $T_{a'}=\sum_i a'_i b_{\pi(i)}$ the classical identity
+\eqref{eq:ww_identity} reads
+$\Cov(T_a,T_{a'})=\frac{1}{N-1}\sum_i(a_i-\bar a)(a'_i-\bar a')\sum_j(b_j-\bar b)^2$.
+With $a=(\varphi-\bar\varphi)/N$, $a'=(\psi-\bar\psi)/N$, $b=z$ this is
+$\frac{1}{N-1}\cdot\frac{N\Cov(\varphi,\psi)}{N^2}\cdot N\Var(Z)=\sigma_n^2\Cov(\varphi,\psi)$,
+which is \eqref{eq:cov_T}. The entries of $G$ are elementary: $\Var(X)=\Var(Y)=\frac{n^2-1}{12}$; a line
+indicator has $\Var(L)=\frac1n(1-\frac1n)$; two lines meeting in $m$ cells have $\Cov(L,L')=\frac{m}{N}-\frac{1}{n^2}$
+(\Cref{lem:W_structure}); and $\Cov(X,Y)=0$, $\Cov(X,D)=\Cov(Y,D)=0$ since a diagonal contains every column and every row
+coordinate exactly once.  Taking traces of $\Sigma_n$ gives \eqref{eq:single_terms}--\eqref{eq:mean_full}:
+$\E[\Elow]=\sigma_n^2\big(2\cdot\frac{n^2-1}{12}+2\cdot\frac{n-1}{n^2}\big)$ and
+$\E[\Efull]=\sigma_n^2(2n+2)\frac{n-1}{n^2}$. The eigenvalues
+\eqref{eq:weights} follow from the block structure, $\tfrac1n(I-\tfrac1nJ)$ having eigenvalue
+$\tfrac1n$ with multiplicity $n-1$ and $0$ once.
+
+The variances are obtained by expanding $\E[E^2]$ over the equality patterns of cell quadruples and
+using the exact fourth moments of a uniform permutation (\Cref{sec:appendix}); the result is a rational number
+for each $n$, and the closed forms \eqref{eq:var_low} were obtained by exact rational interpolation on
+$n=3,\dots,45$, verified on $5$--$11$ further orders each and against the exhaustive $n=3$ values
+$\Var(\Elow)=1532/2187$, $\Var(\Efull)=398/2187$.
+For $n=3,\dots,6$ the exact means and variances were also recomputed by a separate direct summation over the equality patterns of cell quadruples (\texttt{anc/verify\_numbers.py}) and agree with the closed forms.
+\end{proof}
+
+\begin{corollary}[Limiting law]
+\label{cor:random_energy_clt}
+As $n\to\infty$, the standardised vector
+\[
+\bigl(T_X/\sqrt{\Sigma_{11}},\ T_Y/\sqrt{\Sigma_{22}},\ T_{D_{\mathrm{m}}}/\sqrt{\Sigma_{33}},\ T_{D_{\mathrm{a}}}/\sqrt{\Sigma_{44}}\bigr)
+\]
+converges in distribution to a standard Gaussian vector in $\R^4$, and therefore
+\begin{equation}
+\frac{\Elow}{(n^4-1)/144}\ \xrightarrow{\ d\ }\ \chi^2_2,
+\qquad\text{equivalently}\qquad
+\frac{\Elow}{\E[\Elow]}\ \xrightarrow{\ d\ }\ \mathrm{Exp}(1).
+\label{eq:low_limit}
+\end{equation}
+For finite $n$ the Gaussian approximation gives $E\approx\sum_j w_j\chi^2_{1,j}$ with independent
+$\chi^2_1$ variables and weights $w_j$ the eigenvalues \eqref{eq:weights}; its density is computed by numerical inversion of the characteristic function (Imhof's method \cite{imhof1961}) in Figure~\ref{fig:random_energy}.
+\end{corollary}
+
+\begin{proof}
+Each fixed linear combination $\sum_k\alpha_kT_{\varphi_k}$ is again a linear permutation statistic $\sum_c a_c z_{\pi(c)}$.
+Hoeffding's theorem \cite[Thm.~3]{hoeffding1951} (\Cref{sec:bg_perm}) asserts asymptotic normality provided that, for every
+$r\ge3$, $N^{-1}\sum_{i,j}|d_N(i,j)|^r$ is $O\bigl((N^{-1}\sum_{i,j}d_N(i,j)^2)^{r/2}\bigr)$, $d_N$ the doubly centred array.
+In the product case $c_N(i,j)=a_iz_j$ the ratio of the two sides equals $N^{1-r/2}\kappa_r(a)\kappa_r(z)$ with $\kappa_r$ the
+standardised $r$-th absolute moments.  For $z$ (uniform on $\{1,\dots,N\}$, centred) $\kappa_r(z)=O(1)$; for each of $X$, $Y$
+and the two diagonal indicators, $\kappa_r(a)=O(n^{r/2-1})=O(N^{r/4-1/2})$ (the worst case is an indicator of $n$ of the
+$N$ cells, a Bernoulli$(1/n)$ variable), so the ratio is $O(N^{1/2-r/4})\to0$.  The same bound holds for every fixed
+combination $a=\sum_k\alpha_ka_k$ of the four standardised test functions: $\|a\|_r\le\sum_k|\alpha_k|\|a_k\|_r$ by
+Minkowski's inequality, while $\Var(\sum_k\alpha_kT_k)\ge(1-o(1))\sum_k\alpha_k^2$ because the only nonzero correlation among
+the $T_k$ tends to zero.  By the Cram\'er--Wold device the vector is asymptotically Gaussian with covariance $\Sigma_n$; for
+even $n$ the only nonzero correlation is $\operatorname{corr}(T_{D_{\mathrm{m}}},T_{D_{\mathrm{a}}})=-1/(n-1)\to0$, so the
+standardised limit is $N(0,I_4)$.  In $\Elow=\Sigma_{11}(\tilde T_X^2+\tilde T_Y^2)+\Sigma_{33}\tilde T_{D_m}^2+\Sigma_{44}\tilde T_{D_a}^2$
+the diagonal terms carry weight $\Sigma_{33}/\Sigma_{11}=12(n-1)/(n^2(n^2-1))\to0$, giving \eqref{eq:low_limit}; the second
+form uses $\E[\Elow]/((n^4-1)/72)\to1$.
+\end{proof}
+
+\begin{remark}
+For $\Efull$ the number of statistics grows with $n$, so the corollary does not apply verbatim; the Gaussian mixture
+$\sigma_n^2\big[\tfrac1n\chi^2_{2n-2}+\tfrac{n-1}{n^2}\chi^2_2\big]$ is only a heuristic at the orders we can simulate, and the
+ratio of the exact to the Gaussian-mixture variance is $0.24, 0.45, 0.56, 0.64, 0.69, 0.73$ for $n=3,\dots,8$ (for $\Elow$:
+$0.51, 0.76, 0.86, 0.90, 0.93, 0.95$).  For $n=3$, $\Elow$ takes $346$ and $\Efull$ $177$ distinct values, all multiples
+of $1/81$; the Kolmogorov distances $0.10$ and $0.20$ at $n=3$ are inflated by this discreteness and are not a failure of the
+Gaussian approximation as such.
+\end{remark}
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabular}{c l r r r r r r r}
+\toprule
+$n$ & energy & $\E[E]$ exact & MC mean & $\sqrt{\Var E}$ exact & MC std & Gauss.\ std & $|\delta_{\mathrm{mean}}|$ & KS \\
+\midrule
+3 & $\Elow$  & $40/27=1.4815$ & 1.4814 & 0.8370 & 0.8369 & 1.171 & $6\times10^{-5}$ & 0.103 \\
+3 & $\Efull$ & $40/27=1.4815$ & 1.4815 & 0.4266 & 0.4266 & 0.869 & $8\times10^{-6}$ & 0.200 \\
+4 & $\Elow$  & $391/96=4.0729$ & 4.0736 & 3.1284 & 3.1288 & 3.586 & $2\times10^{-4}$ & 0.037 \\
+4 & $\Efull$ & $85/32=2.6562$ & 2.6564 & 0.9074 & 0.9073 & 1.349 & $7\times10^{-5}$ & 0.107 \\
+5 & $\Elow$  & $234/25=9.3600$ & 9.3605 & 8.0483 & 8.0482 & 8.694 & $6\times10^{-5}$ & 0.019 \\
+5 & $\Efull$ & $104/25=4.1600$ & 4.1600 & 1.3966 & 1.3966 & 1.867 & $9\times10^{-6}$ & 0.078 \\
+6 & $\Elow$  & $2035/108=18.843$ & 18.843 & 17.122 & 17.122 & 18.007 & $4\times10^{-5}$ & 0.012 \\
+6 & $\Efull$ & $1295/216=5.9954$ & 5.9957 & 1.9671 & 1.9671 & 2.459 & $6\times10^{-5}$ & 0.061 \\
+7 & $\Elow$  & $5050/147=34.354$ & 34.349 & 32.174 & 32.167 & 33.349 & $1\times10^{-4}$ & 0.008 \\
+7 & $\Efull$ & $400/49=8.1633$ & 8.1631 & 2.5697 & 2.5698 & 3.089 & $2\times10^{-5}$ & 0.050 \\
+8 & $\Elow$  & $22295/384=58.060$ & 58.058 & 55.377 & 55.381 & 56.888 & $3\times10^{-5}$ & 0.007 \\
+8 & $\Efull$ & $1365/128=10.664$ & 10.664 & 3.2352 & 3.2353 & 3.777 & $3\times10^{-5}$ & 0.042 \\
+\bottomrule
+\end{tabular}
+\caption{Exact moments of Proposition~\ref{prop:random_energy_moments} against Monte Carlo
+($10^8$ uniformly random arrangements per order; for $n=3$ the exact values were also confirmed by
+enumerating all $9!$ arrangements). $|\delta_{\mathrm{mean}}|$ is the relative error of the MC mean;
+all MC means and variances agree with the exact values to within $5\times10^{-4}$ relative error,
+consistent with the sampling standard errors. ``Gauss.\ std'' is the standard deviation
+of the Gaussian-limit mixture $\sum_j w_j\chi^2_1$ of Corollary~\ref{cor:random_energy_clt}, and KS
+is the Kolmogorov distance between the MC sample and that mixture (not the Exp(1) limit). Monte Carlo data: \texttt{anc/mc\_results.json}.}
+\label{tab:random_energy}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.92\textwidth]{figures/fig_random_energy.pdf}
+\caption{Energy of a uniformly random arrangement. (a) Distribution of
+$\Elow/\E[\Elow]$ for $n=3$ (exact, all $9!$ arrangements) and
+$n=5,8$ ($10^8$ Monte Carlo samples each), with the Gaussian-limit mixture densities (dashed, characteristic-function
+inversion with the weights \eqref{eq:weights}) and the $n\to\infty$ limit $\mathrm{Exp}(1)$ of
+Corollary~\ref{cor:random_energy_clt} (dotted). (b) The same for the symmetric $\Efull$;
+here the Gaussian mixture is only a slowly improving approximation (see the remark after
+Corollary~\ref{cor:random_energy_clt}). (c) Exact mean (solid) and standard deviation (dashed) of
+both energies from Proposition~\ref{prop:random_energy_moments}, $3\le n\le 40$, with the Monte Carlo
+values for $n=3,\dots,8$ (open markers). The mean of $\Elow$ grows like $n^4/72$ and its
+standard deviation like $n^4/72$ as well (an exponential limit has unit coefficient of variation);
+$\Efull$ has mean $\sim n^2/6$ and standard deviation $\sim n^{3/2}/6$.}
+\label{fig:random_energy}
+\end{figure}
+
+\subsection{Swap gaps: exact verification}
+\label{sec:swap-gaps}
+
+\Cref{thm:swap} gives, for a magic square $S$ and the swap of two cells $a,b$ with $d=|s_a-s_b|$,
+$\Efull(S^{ab})=d^{2}m(a,b)/N^{2}$ with $m(a,b)\in\{2,\dots,6\}$ the number of lines separating $a$ from $b$.
+We verified the formula in exact rational arithmetic, with the symmetric energy evaluated directly from the definition, on
+every one of the $880\cdot\binom{16}{2}=105{,}600$ single swaps of the $880$ essentially different order-$4$ squares, the
+$8\cdot\binom92=288$ swaps of the eight order-$3$ squares, and all swaps of the Siamese (de la Loub\`ere) squares of orders $5$, $7$ and $9$:
+agreement in every case, and $\Efull(S)=0$ exactly for every magic square.  The gap spectrum is arithmetic, not ``banded'':
+over the $105{,}600$ order-$4$ swaps $N^2\Delta E=d^2m$ takes exactly $70$ distinct integer values from $2$ to
+$980=14^2\cdot5$, and the minimum gap $N^2\Delta_{\min}(S)$ is $2$ for $432$ squares, $3$ for $420$ and $4$ for $28$
+(\Cref{cor:local_min}(3)); it is $3$ for all eight order-$3$ squares and $3$, $2$, $2$ for the Siamese squares of orders
+$5$, $7$, $9$.
+\Cref{fig:swap_spectrum} shows the structure: the values $d^2m$ arise from the $15\times5$ pairs $(d,m)$, so the spectrum is a union of the scaled square sequences $m,4m,9m,\dots$, $2\le m\le6$.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{figures/fig_swap_spectrum.pdf}
+\caption{Energy landscape and swap gaps. (a)~For $n=3$, the number of arrangements (of all $9!$) with each value of $N^2\Efull=\sum_L\delta_L^2$: the $8$ magic squares at value $0$, and the $8$ non-magic local minima, which lie at value $2$. (b)~For $n=4$, the number of single swaps of the $880$ essentially different magic squares ($105{,}600$ in total) by value difference $d$ and number $m$ of separating lines; the energy gap is exactly $N^2\Delta E=d^2m$, which takes $70$ distinct values between $2$ and $980$. (c)~The smallest gap $N^2\Delta_{\min}(S)$ over the $880$ squares.}
+\label{fig:swap_spectrum}
+\end{figure}
+
+% ===========================================================================
+
+\subsection{The low-mode balanced class for \texorpdfstring{$n=4$}{n=4}}
+\label{sec:lowmode_n4}
+
+Write $L_n$ for the set of arrangements of $\{1,\dots,N\}$ with
+$\Cov(X,Z)=\Cov(Y,Z)=\Cov(D_{\mathrm{m}},Z)=\Cov(D_{\mathrm{a}},Z)=0$,
+i.e.\ $\Elow=0$ (\Cref{cor:Elow_degree1}).  Each of the four conditions is a \emph{linear} statistic of the
+arrangement: with cells indexed by $(i,j)\in\{0,\dots,n-1\}^2$,
+$\Cov(X,Z)=0 \iff T_1:=\sum_{i,j} j\,s_{ij} = \tfrac{n-1}{2}\cdot\tfrac{N(N+1)}{2}$,
+$\Cov(Y,Z)=0 \iff T_2:=\sum_{i,j} i\,s_{ij}$ equals the same target, and the two diagonal
+conditions say that $T_3=\sum_i s_{ii}$ and $T_4=\sum_i s_{i,n-1-i}$ equal $M(n)=n(N+1)/2$.
+
+\begin{proposition}[Exact size of $L_4$]
+\label{prop:L4}
+$|L_3| = 8$ (the Lo Shu orbit; the class with only $\Cov(X,Z)=\Cov(Y,Z)=0$ has $760$ members), and
+\[
+  |L_4| \;=\; 14\,639\,440 \;=\; 8\times 1\,829\,930 ,
+\]
+of which exactly $7040$ are magic squares.  The class is $D_4$-invariant and $D_4$ acts freely on it
+($1\,829\,930$ orbits of size $8$).  The first-moment class
+$\{\Cov(X,Z)=\Cov(Y,Z)=0\}$ has $6\,697\,177\,424$ members for $n=4$,
+and the class with both diagonals equal to $34$ has $49\,932\,288\,000$ members.
+\end{proposition}
+
+\begin{proof}[Computation]
+The count is a meet-in-the-middle enumeration over the four additive statistics $T_1,\dots,T_4$ (\Cref{sec:appendix}; $9$\,s on
+$16$ threads), with the matching pairs expanded explicitly to obtain the row- and column-sum breakdown of \Cref{tab:L4}.
+Validation: on $n=3$ the same program reproduces the brute-force counts $8$, $760$, $4224$, $8$ magic and $72$ semi-magic; on
+$n=4$, with the $2n$ line sums in place of $T_1,T_2$, it reproduces the $7040$ magic and the $549{,}504=8\times68{,}688$
+semi-magic squares; the diagonal-only count was also obtained by direct combinatorics (ordered pairs of disjoint $4$-subsets of $\{1,\dots,16\}$ with sum $34$: $2150$ pairs, times $(4!)^2\,8!$), and the probability $|L_4|/16!$ was
+checked by $2\times10^{9}$ Monte Carlo samples ($1373$ hits against $1399$ expected; relative standard error $2.7\%$).
+\end{proof}
+
+
+\begin{table}[H]
+\centering
+\caption{Breakdown of $L_4$ by the number of row sums and column sums equal to $M(4)=34$.
+Exactly two or three equal row sums are impossible: if $R_i=34+e_i$ then $\sum_i e_i=0$ and
+$\sum_i i\,e_i=0$ (this is $T_2$), which cannot hold with exactly one or two nonzero $e_i$;
+the same holds for columns.  The table is symmetric under transposition.}
+\label{tab:L4}
+\begin{tabular}{lrrrr}
+\toprule
+ & \multicolumn{4}{c}{columns equal to 34} \\
+\cmidrule(lr){2-5}
+rows equal to 34 & 0 & 1 & 4 & total \\
+\midrule
+0 & 9\,637\,312 & 2\,172\,824 & 100\,728 & 11\,910\,864 \\
+1 & 2\,172\,824 & 429\,312 & 9\,336 & 2\,611\,472 \\
+4 & 100\,728 & 9\,336 & \textbf{7\,040} (magic) & 117\,104 \\
+\midrule
+total & 11\,910\,864 & 2\,611\,472 & 117\,104 & 14\,639\,440 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Thus only $7040/14\,639\,440 = 0.048\%$ of the low-mode balanced arrangements are magic;
+$110\,064$ members have all row sums equal to 34 but not all column sums (and symmetrically),
+and $9\,637\,312$ (66\%) have \emph{no} row or column summing to $34$ at all; the arrangement
+of \Cref{rem:four_term_insufficient} belongs to the last class.
+
+\paragraph{Frequency under random sampling.}
+$|L_4|/16!=6.997\times10^{-7}$, about one arrangement in $1.43$ million, so naive sampling rarely sees a member of $L_4$.
+Among the $10^8$ uniformly random arrangements of \Cref{sec:random_energy}, $61$ lie in $L_4$ (expected $70.0\pm8.4$), and $2\times10^{9}$ further samples (sixteen independent streams) gave $1373$ members, against an expectation of $1399$.
+A Gaussian local-limit estimate explains the order of magnitude of $|L_4|$: under a uniformly random arrangement the vector
+$(T_1,\dots,T_4)$ has mean equal to the target vector (by symmetry) and covariance $\Sigma$ given by \eqref{eq:ww_identity} ($T_1,T_2$ are uncorrelated with each other and with the
+diagonals; the two diagonal sums have correlation $-1/(n-1)$ for even $n$ and $0$ for odd $n$), and the $\Z$-span of the
+change vectors of all single transpositions has index $1$ in $\Z^4$ (Smith normal form, computed for $n\le8$), so
+\[
+  |L_n| \;\approx\; N!\,(2\pi)^{-2}\det(\Sigma)^{-1/2}.
+\]
+The estimate gives $13.6$ for $n=3$ (true: $8$, ratio $0.59$) and $1.82\times10^{7}$ for $n=4$ (true:
+$14\,639\,440$, ratio $0.80$); for the two-condition classes the ratios at $n=3,4$ are $0.59,0.91$ (first moments)
+and $1.10,0.96$ (diagonals).  For $n=5,6$ we have no exact count; the estimate gives $6.7\times10^{17}$ and $1.5\times10^{33}$, and Monte Carlo
+($10^{10}$ and $2\times10^{10}$ samples, $328$ and $62$ hits) gives $5.1\times10^{17}$ ($\pm6\%$) and $1.2\times10^{33}$ ($\pm13\%$), i.e.\ ratios $0.76$ and $0.78$ to the estimate; these are estimates of the order of magnitude only.
+For $n=3$ the classes coincide ($L_3$ is the set of magic squares), while for $n=4$ the magic squares are $0.048\%$ of $L_4$.
+Heuristically this fraction tends to zero: the four low-mode conditions cost a factor of order
+$\det(\Sigma)^{1/2}\propto n^{13}$, while a magic square requires $2n$ independent line conditions, each costing a further
+factor of order $n^{5/2}$.

@@ -1,0 +1,7 @@
+{"n": 3, "mode": "L", "count": 8, "seconds": 0.00, "threads": 16, "hist_rows_cols_equal_M": {"3,3": 8}}
+{"n": 3, "mode": "XY", "count": 760, "seconds": 0.00, "threads": 16}
+{"n": 3, "mode": "DIAG", "count": 4224, "seconds": 0.00, "threads": 16}
+{"n": 3, "mode": "MAGIC", "count": 8, "seconds": 0.00, "threads": 16}
+{"n": 3, "mode": "SEMI", "count": 72, "seconds": 0.00, "threads": 16}
+{"n": 3, "mode": "ROWSL", "count": 8, "seconds": 0.00, "threads": 16}
+{"n": 3, "mode": "COLSL", "count": 8, "seconds": 0.00, "threads": 16}

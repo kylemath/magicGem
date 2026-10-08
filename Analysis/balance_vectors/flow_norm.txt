@@ -1,0 +1,4 @@
+magic unit2D B / |z|: 0.2987703679416641
+random perm  B/|z|: 0.9491664055094017  after flow: 0.31857584485735657  |z| ratio: 0.6626664603319725
+dim W-perp: 7
+random Gaussian in W-perp B/|z|: 0.32227448205673903

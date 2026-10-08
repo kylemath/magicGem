@@ -1,0 +1,7 @@
+{"n": 4, "mode": "L", "count": 14639440, "seconds": 9.17, "threads": 16, "hist_rows_cols_equal_M": {"0,0": 9637312, "0,1": 2172824, "0,4": 100728, "1,0": 2172824, "1,1": 429312, "1,4": 9336, "4,0": 100728, "4,1": 9336, "4,4": 7040}}
+{"n": 4, "mode": "XY", "count": 6697177424, "seconds": 5.15, "threads": 16}
+{"n": 4, "mode": "DIAG", "count": 49932288000, "seconds": 4.70, "threads": 16}
+{"n": 4, "mode": "MAGIC", "count": 7040, "seconds": 7.38, "threads": 16}
+{"n": 4, "mode": "SEMI", "count": 549504, "seconds": 6.72, "threads": 16}
+{"n": 4, "mode": "ROWSL", "count": 117104, "seconds": 6.45, "threads": 16}
+{"n": 4, "mode": "COLSL", "count": 117104, "seconds": 10.66, "threads": 16}

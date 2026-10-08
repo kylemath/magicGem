@@ -1,0 +1,3 @@
+n=4: greedy p=0.1952 swaps=8.1; SA p=1.000 proposals=145789.9825; 53s
+n=5: greedy p=0.0115 swaps=11.2; SA p=0.782 proposals=420459.97763578274; 141s
+n=6: greedy p=0.0079 swaps=14.1; SA p=0.500 proposals=658148.255; 200s

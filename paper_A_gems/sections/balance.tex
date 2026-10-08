@@ -1,0 +1,68 @@
+\section{Balance: what the vectors from the centroid do and do not say}
+\label{sec:balance}
+
+\paragraph{Unweighted balance holds for every arrangement.}
+
+\begin{proposition}[Centroid]
+\label{prop:centroid}
+For every arrangement $S$ of order $n$, $\sum_{i,j}\mathbf p_{ij}=\mathbf 0$: the origin is the centroid of the $N$ points, each of which is a vector from it. Moreover $\mathbf 0$ lies in the interior of $\mathcal G(S)$.
+\end{proposition}
+
+\begin{proof}
+The sum vanishes by \Cref{lem:lines}(1). The centroid of a finite point set that is not contained in a plane is an interior point of its convex hull, as a convex combination with all weights positive; the points $\mathbf p_{ij}$ span $\R^3$ since the positions $(x_{ij},y_{ij})$ do and the heights are not all equal for $n\ge2$.
+\end{proof}
+
+This is a consequence of centring the coordinates and carries no information about $S$; in particular it does not distinguish magic squares from arbitrary arrangements.
+It is a statement about the point set with unit weights, and not about the solid: the hull depends only on its vertex set, interior points do not affect it, and the centre of mass of the solid $\mathcal G(S)$ need not be the origin (for $829$ of the $880$ gems of order four it is not).
+The hull records the extent of the point set (extreme points, faces, volume), not how the heights are distributed over the cells.
+
+\paragraph{Height-weighted balance is what magic means.}
+Take the \emph{signed mass} $m_{ij}=z_{ij}$ at the planar position $(x_{ij},y_{ij})$, with total mass $0$.
+Write $\rho_i=\sum_jz_{ij}$ and $\gamma_j=\sum_iz_{ij}$ for the row and column mass sums; by \Cref{lem:lines}(3) they are the row and column deviations of $S$.
+
+\begin{proposition}[Height-weighted moments]
+\label{prop:signed_mass}
+Let $S$ be an arrangement of order $n\ge3$.
+\begin{enumerate}
+\item $S$ is semi-magic if and only if $\rho_i=0$ for every row and $\gamma_j=0$ for every column.
+\item For every function $\varphi\colon\R\to\R$,
+\[
+\sum_{i,j}z_{ij}\,\varphi(x_{ij})=\sum_j\varphi(x_j)\gamma_j,\qquad
+\sum_{i,j}z_{ij}\,\varphi(y_{ij})=\sum_i\varphi(y_i)\rho_i .
+\]
+Hence if $S$ is semi-magic, $\sum z\,\varphi(x)=\sum z\,\varphi(y)=0$ for every $\varphi$ (for $\varphi(t)=t^k$, all $k\ge0$; for $k=1$ the height-weighted centroid is the origin).
+Conversely, if $\sum z\,\varphi(x)=\sum z\,\varphi(y)=0$ for all $\varphi$, then $S$ is semi-magic.
+\item The mixed moment is not forced: for $n=4$ there are magic squares with $\sum z\,xy\neq0$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(1) By \Cref{lem:lines}(3), a row sums to $M(n)$ if and only if its heights sum to $0$; likewise for columns.
+(2) Grouping the cells by column, $\sum_{i,j}z_{ij}\varphi(x_j)=\sum_j\varphi(x_j)\gamma_j$; the row identity is the same with $y_i,\rho_i$. If $\gamma=\rho=0$ both vanish. Conversely take $\varphi$ to be the indicator of a single value $x_{j_0}$ (the $x_j$ are distinct): then $\gamma_{j_0}=0$; likewise $\rho_{i_0}=0$, and (1) applies.
+(3) Since $\sum xy=0$, $\sum z\,xy=\sum s\,xy=-P_{xy}$, the product of inertia of Loly's value-weighted planar body.
+Exact enumeration over the $880$ essentially different magic squares of order $4$ gives $|P_{xy}|\in\{0,\dots,60\}$ with $48$ distinct values; it vanishes for $56$ classes and is non-zero for the other $824$.
+\end{proof}
+
+Thus the height-weighted statements guaranteed by the line sums are exactly the pure axial ones: the vanishing of the first moment along each axis and Loly's invariant below.
+The mixed moment can vanish for structural reasons: if $S$ is associative, $z$ is odd under $(x,y)\mapsto(-x,-y)$ (\Cref{sec:symmetry}) and $xy$ is even, so $\sum z\,xy=0$ (this accounts for the order-$3$ square and for $48$ of the $56$ vanishing classes of order $4$).
+
+\begin{corollary}[Loly's moment of inertia]
+\label{cor:loly}
+For every arrangement, $I(S):=\sum_{i,j}s_{ij}(x_{ij}^2+y_{ij}^2)=\sum_jx_j^2\gamma_j+\sum_iy_i^2\rho_i+\frac{n^2(n^4-1)}{12}$.
+In particular $I(S)=n^2(n^4-1)/12$ for every semi-magic square.
+\end{corollary}
+
+\begin{proof}
+Substitute $s_{ij}=z_{ij}+\frac{N+1}2$. The first part is $\sum z\,(x^2+y^2)$, equal to $\sum_jx_j^2\gamma_j+\sum_iy_i^2\rho_i$ by \Cref{prop:signed_mass}(2); the second is $\frac{N+1}2\sum(x^2+y^2)=\frac{N+1}2\cdot2N\frac{n^2-1}{12}=\frac{n^2(n^4-1)}{12}$ by \Cref{lem:lines}(2).
+\end{proof}
+
+This is Loly's invariance \cite{loly2004invariance}, which he derived from the row and column sums.
+For $n=3,\dots,9$ the value is $60,340,1300,3885,9800,21840,44280$.
+
+\begin{remark}[Inertia tensor of the unit-mass point set]
+\label{rem:inertia}
+With unit masses at the $N$ points, the centre of mass is the origin and the inertia tensor about it is $I_{jk}=N(\delta_{jk}\operatorname{tr}\Sigma-\Sigma_{jk})$, where $\Sigma$ is the covariance matrix of the points \cite{goldstein2002classical}.
+By \Cref{lem:lines} and \Cref{prop:signed_mass}(2), $I_{xx}=I_{yy}=n^{2}(n^{2}-1)(n^{2}+2)/12$, $I_{zz}=n^{2}(n^{2}-1)/6$, $I_{xy}=0$, $I_{xz}=-\sum_jx_j\gamma_j$ and $I_{yz}=-\sum_iy_i\rho_i$.
+The diagonal entries are the same for all $N!$ arrangements and the tensor is diagonal for every semi-magic square, so the inertia of the unit-mass point set does not depend on the square.
+The informative planar object is Loly's value-weighted body: its diagonal entries are fixed by the row and column sums (\Cref{cor:loly}), whereas the product of inertia $P_{xy}=-\sum s_{ij}x_{ij}y_{ij}$ is a mixed moment, fixed by no line sum; $D_4$ changes at most its sign.
+\end{remark}

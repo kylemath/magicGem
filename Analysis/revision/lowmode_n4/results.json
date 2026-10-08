@@ -1,0 +1,571 @@
+{
+ "machine": {
+  "cpu": "Apple M4 Max",
+  "cores": 16,
+  "platform": "macOS-15.5-arm64-arm-64bit",
+  "python": "3.9.6",
+  "compiler": "Apple clang 17 (cc -O3 -march=native)"
+ },
+ "conventions": "cells (i,j) 0-indexed; T1 = sum j s_ij, T2 = sum i s_ij, target (n-1)N(N+1)/4; T3 = main diagonal, T4 = anti-diagonal, target M = n(N+1)/2. L_n = {T1=T2=target, T3=T4=M}.",
+ "n3": {
+  "L": 8,
+  "XY": 760,
+  "DIAG": 4224,
+  "MAGIC": 8,
+  "SEMI": 72,
+  "brute_force_reference": {
+   "L": 8,
+   "XY": 760,
+   "DIAG": 4224,
+   "MAGIC": 8,
+   "SEMI": 72
+  }
+ },
+ "n4": {
+  "L4": 14639440,
+  "L4_over_16fact": 6.996887163884518e-07,
+  "XY": 6697177424,
+  "XY_over_16fact": 0.0003200900768898454,
+  "DIAG": 49932288000,
+  "DIAG_independent_combinatorial_check": 49932288000,
+  "MAGIC": 7040,
+  "SEMI": 549504,
+  "SEMI_over_8": 68688,
+  "ROWSL": 117104,
+  "COLSL": 117104,
+  "breakdown_rows_cols_equal_34": {
+   "0,0": 9637312,
+   "0,1": 2172824,
+   "0,4": 100728,
+   "1,0": 2172824,
+   "1,1": 429312,
+   "1,4": 9336,
+   "4,0": 100728,
+   "4,1": 9336,
+   "4,4": 7040
+  },
+  "breakdown_coarse": {
+   "magic": 7040,
+   "rows_all_34_not_cols": 110064,
+   "cols_all_34_not_rows": 110064,
+   "neither_all": 14412272,
+   "no_line_equal_34": 9637312
+  },
+  "d4_orbits": 1829930,
+  "paper_example_in_L4": true,
+  "E_full_nonmagic": {
+   "min": 0.015625,
+   "max": 5.3125,
+   "mean": 1.9124989492496105,
+   "median": 1.796875
+  },
+  "distinct_sorted_row_deviation_patterns": 349,
+  "runtime_seconds": {
+   "L": 9.17,
+   "XY": 5.15,
+   "DIAG": 4.7,
+   "MAGIC": 7.38,
+   "SEMI": 6.72,
+   "ROWSL": 6.45,
+   "COLSL": 10.66
+  },
+  "threads": 16
+ },
+ "gaussian_local_limit": {
+  "3": {
+   "N_factorial": "362880",
+   "sd": [
+    6.708203932499369,
+    6.708203932499369,
+    3.872983346207417,
+    3.8729833462074175
+   ],
+   "corr_T3T4": -1.3877787807814455e-17,
+   "lattice_index_L": 1,
+   "lattice_index_XY": 1,
+   "lattice_index_DIAG": 1,
+   "gauss_prob_L": 3.752636431197694e-05,
+   "gauss_count_L": 13.617567081530192,
+   "exact_L": 8,
+   "ratio_exact_over_gauss_L": 0.5874764524457954,
+   "gauss_prob_XY": 0.0035367765131532306,
+   "gauss_count_XY": 1283.4254610930443,
+   "exact_XY": 760,
+   "ratio_exact_over_gauss_XY": 0.5921652819266474,
+   "gauss_prob_DIAG": 0.010610329539459685,
+   "gauss_count_DIAG": 3850.2763832791306,
+   "exact_DIAG": 4224,
+   "ratio_exact_over_gauss_DIAG": 1.097064101253579
+  },
+  "4": {
+   "N_factorial": "20922789888000",
+   "sd": [
+    21.29162589689508,
+    21.29162589689508,
+    8.246211251235321,
+    8.246211251235321
+   ],
+   "corr_T3T4": -0.33333333333333337,
+   "lattice_index_L": 1,
+   "lattice_index_XY": 1,
+   "lattice_index_DIAG": 1,
+   "gauss_prob_L": 8.715452858484275e-07,
+   "gauss_count_L": 18235158.89368355,
+   "exact_L": 14639440,
+   "ratio_exact_over_gauss_L": 0.8028139532730332,
+   "gauss_prob_XY": 0.0003510770803497691,
+   "gauss_count_XY": 7345511986.650712,
+   "exact_XY": 6697177424,
+   "ratio_exact_over_gauss_XY": 0.911737321533345,
+   "gauss_prob_DIAG": 0.002482489842344962,
+   "gauss_count_DIAG": 51940613370.47789,
+   "exact_DIAG": 49932288000,
+   "ratio_exact_over_gauss_DIAG": 0.9613341999611543
+  },
+  "5": {
+   "N_factorial": "15511210043330985984000000",
+   "sd": [
+    52.04164998665332,
+    52.04164998665332,
+    14.719601443879746,
+    14.719601443879744
+   ],
+   "corr_T3T4": -2.775557561562891e-17,
+   "lattice_index_L": 1,
+   "lattice_index_XY": 1,
+   "lattice_index_DIAG": 1,
+   "gauss_prob_L": 4.3166421433422044e-08,
+   "gauss_count_L": 6.695634296727539e+17,
+   "gauss_prob_XY": 5.8764902064699835e-05,
+   "gauss_count_XY": 9.115147391013338e+20,
+   "gauss_prob_DIAG": 0.0007345612758087474,
+   "gauss_count_DIAG": 1.1393934238766665e+22
+  },
+  "6": {
+   "N_factorial": "371993326789901217467999448150835200000000",
+   "sd": [
+    107.95832529267949,
+    107.95832529267949,
+    23.55843797877949,
+    23.55843797877949
+   ],
+   "corr_T3T4": -0.19999999999999998,
+   "lattice_index_L": 1,
+   "lattice_index_XY": 1,
+   "lattice_index_DIAG": 1,
+   "gauss_prob_L": 3.996680078704147e-09,
+   "gauss_count_L": 1.4867383185920802e+33,
+   "gauss_prob_XY": 1.3655507772792402e-05,
+   "gauss_count_XY": 5.079757765406401e+36,
+   "gauss_prob_DIAG": 0.0002926789794420708,
+   "gauss_count_DIAG": 1.0887462724412903e+38
+  },
+  "7": {
+   "N_factorial": "608281864034267560872252163321295376887552831379210240000000000",
+   "sd": [
+    200.04166232729287,
+    200.04166232729287,
+    35.0,
+    35.0
+   ],
+   "corr_T3T4": 5.551115123125784e-17,
+   "lattice_index_L": 1,
+   "lattice_index_XY": 1,
+   "lattice_index_DIAG": 1,
+   "gauss_prob_L": 5.167295105389995e-10,
+   "gauss_count_L": 3.143171898721773e+53,
+   "gauss_prob_XY": 3.977216403795803e-06,
+   "gauss_count_XY": 2.419268607768577e+57,
+   "gauss_prob_DIAG": 0.00012992240252399624,
+   "gauss_count_DIAG": 7.902944118710685e+58
+  },
+  "8": {
+   "N_factorial": "126886932185884164103433389335161480802865516174545192198801894375214704230400000000000000",
+   "sd": [
+    341.2916641232247,
+    341.2916641232247,
+    49.26120853842978,
+    49.26120853842978
+   ],
+   "corr_T3T4": -0.14285714285714288,
+   "lattice_index_L": 1,
+   "lattice_index_XY": 1,
+   "lattice_index_DIAG": 1,
+   "gauss_prob_L": 9.054327477787227e-11,
+   "gauss_count_L": 1.1488758366627754e+79,
+   "gauss_prob_XY": 1.366371420775201e-06,
+   "gauss_count_XY": 1.7337467780863313e+83,
+   "gauss_prob_DIAG": 6.626549223819612e-05,
+   "gauss_count_DIAG": 8.408225019892224e+84
+  }
+ },
+ "monte_carlo": {
+  "4": {
+   "samples": 2000000000,
+   "processes": 16,
+   "XY": {
+    "hits": 639772,
+    "prob": 0.000319886,
+    "rel_stderr": 0.0012502227157586336,
+    "count_estimate": 6692907566.112768,
+    "ratio_mc_over_gauss": 0.9111560335448438
+   },
+   "DIAG": {
+    "hits": 4778271,
+    "prob": 0.0023891355,
+    "rel_stderr": 0.0004574720985996824,
+    "count_estimate": 49987380080.46182,
+    "ratio_mc_over_gauss": 0.9623948743907932
+   },
+   "L": {
+    "hits": 1373,
+    "prob": 6.865e-07,
+    "rel_stderr": 0.026987629007500225,
+    "count_estimate": 14363495.258112,
+    "ratio_mc_over_gauss": 0.787681387469969
+   }
+  },
+  "5": {
+   "samples": 10000000000,
+   "processes": 16,
+   "XY": {
+    "hits": 548912,
+    "prob": 5.48912e-05,
+    "rel_stderr": 0.0013497353968146084,
+    "count_estimate": 8.514289327304898e+20,
+    "ratio_mc_over_gauss": 0.9340813661114433
+   },
+   "DIAG": {
+    "hits": 6736026,
+    "prob": 0.0006736026,
+    "rel_stderr": 0.00038529921358616245,
+    "count_estimate": 1.0448391414333865e+22,
+    "ratio_mc_over_gauss": 0.9170134911595602
+   },
+   "L": {
+    "hits": 328,
+    "prob": 3.28e-08,
+    "rel_stderr": 0.05521576303742327,
+    "count_estimate": 5.087676894212564e+17,
+    "ratio_mc_over_gauss": 0.7598498766127568
+   }
+  },
+  "6": {
+   "samples": 20000000000,
+   "processes": 16,
+   "XY": {
+    "hits": 261092,
+    "prob": 1.30546e-05,
+    "rel_stderr": 0.0019570558403867273,
+    "count_estimate": 4.856224083911445e+36,
+    "ratio_mc_over_gauss": 0.9559952084689471
+   },
+   "DIAG": {
+    "hits": 5525286,
+    "prob": 0.0002762643,
+    "rel_stderr": 0.0004254246189638706,
+    "count_estimate": 1.0276847603028333e+38,
+    "ratio_mc_over_gauss": 0.9439157555033101
+   },
+   "L": {
+    "hits": 62,
+    "prob": 3.1e-09,
+    "rel_stderr": 0.1270001270001905,
+    "count_estimate": 1.1531793130486938e+33,
+    "ratio_mc_over_gauss": 0.77564376906673
+   }
+  }
+ },
+ "estimates_L5_L6": {
+  "5": {
+   "gaussian_count": 6.695634296727539e+17,
+   "gaussian_times_n4_ratio": 5.375348639426341e+17,
+   "mc_count": 5.087676894212564e+17,
+   "mc_rel_stderr": 0.05521576303742327
+  },
+  "6": {
+   "gaussian_count": 1.4867383185920802e+33,
+   "gaussian_times_n4_ratio": 1.1935742670314101e+33,
+   "mc_count": 1.1531793130486938e+33,
+   "mc_rel_stderr": 0.1270001270001905
+  }
+ },
+ "gallery": [
+  {
+   "category": [
+    0,
+    0
+   ],
+   "label": "no row or column equals 34",
+   "square": [
+    [
+     9,
+     4,
+     12,
+     3
+    ],
+    [
+     16,
+     1,
+     14,
+     7
+    ],
+    [
+     10,
+     15,
+     11,
+     8
+    ],
+    [
+     2,
+     5,
+     6,
+     13
+    ]
+   ],
+   "row_sums": [
+    28,
+    38,
+    44,
+    26
+   ],
+   "col_sums": [
+    37,
+    25,
+    43,
+    31
+   ],
+   "E_full": 1.546875
+  },
+  {
+   "category": [
+    1,
+    0
+   ],
+   "label": "one row equals 34",
+   "square": [
+    [
+     3,
+     7,
+     6,
+     16
+    ],
+    [
+     15,
+     9,
+     12,
+     1
+    ],
+    [
+     13,
+     2,
+     14,
+     5
+    ],
+    [
+     4,
+     10,
+     11,
+     8
+    ]
+   ],
+   "row_sums": [
+    32,
+    37,
+    34,
+    33
+   ],
+   "col_sums": [
+    35,
+    28,
+    43,
+    30
+   ],
+   "E_full": 0.578125
+  },
+  {
+   "category": [
+    0,
+    1
+   ],
+   "label": "one column equals 34",
+   "square": [
+    [
+     15,
+     8,
+     5,
+     11
+    ],
+    [
+     1,
+     7,
+     6,
+     9
+    ],
+    [
+     12,
+     3,
+     10,
+     16
+    ],
+    [
+     14,
+     4,
+     13,
+     2
+    ]
+   ],
+   "row_sums": [
+    39,
+    23,
+    41,
+    33
+   ],
+   "col_sums": [
+    42,
+    22,
+    34,
+    38
+   ],
+   "E_full": 1.640625
+  },
+  {
+   "category": [
+    1,
+    1
+   ],
+   "label": "one row and one column equal 34",
+   "square": [
+    [
+     1,
+     16,
+     10,
+     5
+    ],
+    [
+     9,
+     14,
+     8,
+     3
+    ],
+    [
+     2,
+     15,
+     12,
+     11
+    ],
+    [
+     6,
+     13,
+     4,
+     7
+    ]
+   ],
+   "row_sums": [
+    32,
+    34,
+    40,
+    30
+   ],
+   "col_sums": [
+    18,
+    58,
+    34,
+    26
+   ],
+   "E_full": 3.71875
+  },
+  {
+   "category": [
+    4,
+    0
+   ],
+   "label": "all rows equal 34 (no column)",
+   "square": [
+    [
+     10,
+     3,
+     8,
+     13
+    ],
+    [
+     16,
+     5,
+     1,
+     12
+    ],
+    [
+     9,
+     14,
+     4,
+     7
+    ],
+    [
+     6,
+     11,
+     2,
+     15
+    ]
+   ],
+   "row_sums": [
+    34,
+    34,
+    34,
+    34
+   ],
+   "col_sums": [
+    41,
+    33,
+    15,
+    47
+   ],
+   "E_full": 2.265625
+  },
+  {
+   "category": [
+    0,
+    4
+   ],
+   "label": "all columns equal 34 (no row)",
+   "square": [
+    [
+     10,
+     2,
+     13,
+     5
+    ],
+    [
+     15,
+     7,
+     12,
+     4
+    ],
+    [
+     8,
+     16,
+     3,
+     11
+    ],
+    [
+     1,
+     9,
+     6,
+     14
+    ]
+   ],
+   "row_sums": [
+    30,
+    38,
+    38,
+    30
+   ],
+   "col_sums": [
+    34,
+    34,
+    34,
+    34
+   ],
+   "E_full": 0.25
+  }
+ ]
+}

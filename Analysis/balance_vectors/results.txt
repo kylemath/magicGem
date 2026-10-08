@@ -1,0 +1,51 @@
+n=3: 362880 perms, magic (E=0): 8
+  lin_|sum z(x,y)|             magic: min=0.0000 max=0.0000 | all mean=8.627 min=0.0000 | frac of perms with B<=max_magic=0.0021 | spearman(E,B)=0.475
+  cross_sum z xy               magic: min=0.0000 max=0.0000 | all mean=4.455 min=0.0000 | frac of perms with B<=max_magic=0.0899 | spearman(E,B)=-0.068
+  inertia_sum z(x2+y2)         magic: min=0.0000 max=0.0000 | all mean=4.495 min=0.0000 | frac of perms with B<=max_magic=0.0667 | spearman(E,B)=0.237
+  unit2D_m=z                   magic: min=2.6197 max=2.6197 | all mean=7.029 min=0.1313 | frac of perms with B<=max_magic=0.0907 | spearman(E,B)=0.446
+  unit3D_m=z_full              magic: min=17.9858 max=17.9858 | all mean=18.382 min=17.8707 | frac of perms with B<=max_magic=0.0205 | spearman(E,B)=0.381
+  unit3D_m=z_xy                magic: min=1.5279 max=1.5279 | all mean=2.650 min=0.1021 | frac of perms with B<=max_magic=0.2268 | spearman(E,B)=0.451
+  fixedc1.0_m=z                magic: min=1.1606 max=1.1606 | all mean=5.371 min=0.1423 | frac of perms with B<=max_magic=0.0306 | spearman(E,B)=0.466
+  unit2D_m=s                   magic: min=2.6197 max=2.6197 | all mean=7.029 min=0.1313 | frac of perms with B<=max_magic=0.0907 | spearman(E,B)=0.446
+  unit3D_m=s_full              magic: min=17.9858 max=17.9858 | all mean=18.716 min=15.4640 | frac of perms with B<=max_magic=0.2694 | spearman(E,B)=0.058
+  unit3D_m=s_xy                magic: min=1.5279 max=1.5279 | all mean=4.159 min=0.0175 | frac of perms with B<=max_magic=0.0882 | spearman(E,B)=0.140
+  fixedc1.0_m=s                magic: min=1.1606 max=1.1606 | all mean=5.371 min=0.1423 | frac of perms with B<=max_magic=0.0306 | spearman(E,B)=0.466
+n=4: found 880 magic squares
+  E magic max=0.00e+00; random E mean=2.658, min=0.0586, frac random E=0: 0.00e+00
+  lin_|sum z(x,y)|             magic mean=0.0000 (min 0.0000 max 0.0000) | random mean=27.069 p5=7.211 | frac random<= magic mean=0.0003, <=magic max=0.0003
+  cross_sum z xy               magic mean=19.9182 (min 0.0000 max 60.0000) | random mean=19.294 p5=1.500 | frac random<= magic mean=0.5748, <=magic max=0.9939
+  inertia_sum z(x2+y2)         magic mean=0.0000 (min 0.0000 max 0.0000) | random mean=21.750 p5=2.000 | frac random<= magic mean=0.0287, <=magic max=0.0287
+  unit2D_m=z                   magic mean=5.5091 (min 0.0705 max 11.9814) | random mean=17.082 p5=4.534 | frac random<= magic mean=0.0735, <=magic max=0.3063
+  unit3D_m=z_full              magic mean=59.5836 (min 59.1122 max 60.1401) | random mean=59.817 p5=59.421 | frac random<= magic mean=0.2027, <=magic max=0.8736
+  unit3D_m=z_xy                magic mean=0.8739 (min 0.0360 max 2.5385) | random mean=4.905 p5=1.294 | frac random<= magic mean=0.0235, <=magic max=0.1804
+  fixedc1.0_m=z                magic mean=2.5358 (min 0.0948 max 5.5180) | random mean=13.726 p5=3.631 | frac random<= magic mean=0.0248, <=magic max=0.1122
+  unit2D_m=s                   magic mean=5.5091 (min 0.0705 max 11.9814) | random mean=17.082 p5=4.534 | frac random<= magic mean=0.0735, <=magic max=0.3063
+  unit3D_m=s_full              magic mean=60.2691 (min 57.8166 max 63.6365) | random mean=60.393 p5=56.177 | frac random<= magic mean=0.4841, <=magic max=0.8909
+  unit3D_m=s_xy                magic mean=7.6947 (min 0.1036 max 20.6507) | random mean=9.013 p5=2.401 | frac random<= magic mean=0.4197, <=magic max=0.9940
+  fixedc1.0_m=s                magic mean=2.5358 (min 0.0948 max 5.5180) | random mean=13.726 p5=3.631 | frac random<= magic mean=0.0248, <=magic max=0.1122
+  random with lin B==0: 2.77e-04
+  theorem |sum z(x,y)|^2 <= N^2 n(n^2-1)/12 E_rc: violations=0, max ratio=0.998
+  corr(E,lin_|sum z(x,y)|) random n=4: spearman=0.376
+  corr(E,cross_sum z xy) random n=4: spearman=-0.009
+  corr(E,inertia_sum z(x2+y2)) random n=4: spearman=0.215
+  corr(E,unit2D_m=z) random n=4: spearman=0.328
+  corr(E,unit3D_m=z_full) random n=4: spearman=0.254
+  corr(E,unit3D_m=z_xy) random n=4: spearman=0.345
+  corr(E,fixedc1.0_m=z) random n=4: spearman=0.361
+  corr(E,unit2D_m=s) random n=4: spearman=0.328
+  corr(E,unit3D_m=s_full) random n=4: spearman=0.024
+  corr(E,unit3D_m=s_xy) random n=4: spearman=0.080
+  corr(E,fixedc1.0_m=s) random n=4: spearman=0.361
+gradient flow n=4 (60 random perm starts), mean over runs at t=0 and t=199 (E, then B's):
+  E                            t0=2.4424 tEnd=0.00000
+  lin_|sum z(x,y)|             t0=24.0232 tEnd=0.00000
+  cross_sum z xy               t0=19.4667 tEnd=13.50833
+  inertia_sum z(x2+y2)         t0=21.2000 tEnd=0.00000
+  unit2D_m=z                   t0=15.6675 tEnd=3.72167
+  unit3D_m=z_full              t0=59.7969 tEnd=37.83049
+  unit3D_m=z_xy                t0=4.4661 tEnd=1.48144
+  fixedc1.0_m=z                t0=12.3534 tEnd=1.75663
+  unit2D_m=s                   t0=15.6675 tEnd=3.72167
+  unit3D_m=s_full              t0=60.3481 tEnd=39.10692
+  unit3D_m=s_xy                t0=8.6891 tEnd=7.32299
+  fixedc1.0_m=s                t0=12.3534 tEnd=1.75663
