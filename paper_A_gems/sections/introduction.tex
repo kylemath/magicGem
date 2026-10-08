@@ -18,12 +18,12 @@ Centre the grid at the origin and attach to the cell $(i,j)$ the vector
 whose horizontal part $(x_{ij},y_{ij})$ is the position of the cell and whose vertical part is the \emph{centred entry} $z_{ij}=s_{ij}-\frac{n^2+1}{2}$.
 Then $S$ is magic exactly when the vertical components of these vectors cancel along every row, column and both diagonals (\Cref{lem:lines}; \Cref{fig:vectors}, \Cref{fig:lines}).
 The \emph{Magic Gem} $\mathcal G(S)$ is the convex hull of the tips of the $n^2$ vectors $\mathbf p_{ij}$ (\Cref{sec:gem}).
-\Cref{fig:vectors} shows the vectors of D\"urer's square and the gem they span; the tips fill the gem's $12$ vertices and four interior points, and $\sum\mathbf p_{ij}=\mathbf 0$.
+\Cref{fig:vectors} shows the vectors of D\"urer's square and the gem they span; the tips are the gem's $12$ vertices and four strictly interior points, and $\sum\mathbf p_{ij}=\mathbf 0$.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{figures/fig_vectors.pdf}
-\caption{D\"urer's square as vectors from the centroid $O$. (a)~The square as a heat map of the heights $z_{ij}=s_{ij}-8.5$ (orange: above $O$, blue: below), with the entries $s_{ij}$ printed in the cells; every row, column and both diagonals sum to $34$. (b)~The $16$ vectors $\mathbf p_{ij}=(x_{ij},y_{ij},z_{ij})$: each points from $O$ over the cell $(x_{ij},y_{ij})$ of the floor grid (dotted drop lines) to a tip at height $z_{ij}$, labelled by the entry $s_{ij}$. (c)~The same vectors inside their convex hull, the Magic Gem: $12$ tips are vertices (filled dots) and $4$ lie in the interior (open dots). The colour bar is shared by (a) and (b). The vectors sum to $\mathbf 0$ for every arrangement of $1,\dots,16$ (\Cref{prop:centroid}); what singles out magic squares is how the heights cancel along lines (\Cref{fig:lines}).}
+\caption{D\"urer's square as vectors from the centroid $O$. (a)~The square as a heat map of the heights $z_{ij}=s_{ij}-8.5$ (orange: above $O$, blue: below), with the entries $s_{ij}$ printed in the cells; every row, column and both diagonals sum to $34$. (b)~The $16$ vectors $\mathbf p_{ij}=(x_{ij},y_{ij},z_{ij})$: each points from $O$ over the cell $(x_{ij},y_{ij})$ of the floor grid (dotted drop lines) to a tip at height $z_{ij}$, labelled by the entry $s_{ij}$. (c)~The same vectors inside their convex hull, the Magic Gem: $12$ tips are vertices (filled dots) and $4$ are strictly interior (open dots). The colour bar is shared by (a) and (b). The vectors sum to $\mathbf 0$ for every arrangement of $1,\dots,16$ (\Cref{prop:centroid}); what singles out magic squares is how the heights cancel along lines (\Cref{fig:lines}).}
 \label{fig:vectors}
 \end{figure}
 
@@ -31,10 +31,11 @@ An interactive display of the $880$ order-four gems is available at \url{https:/
 
 \paragraph{Results.}
 \begin{enumerate}\setlength\itemsep{2pt}
-\item \emph{Balance} (\Cref{sec:balance}). For every arrangement, magic or not, $\sum_{i,j}\mathbf p_{ij}=\mathbf 0$ (\Cref{prop:centroid}), so the unweighted statement ``the vectors balance about the centroid'' carries no information about $S$; it concerns all $n^2$ points, interior ones included, not the solid hull.
+\item \emph{Balance} (\Cref{sec:balance}). For every arrangement, magic or not, $\sum_{i,j}\mathbf p_{ij}=\mathbf 0$ (\Cref{prop:centroid}), so the unweighted statement ``the vectors balance about the centroid'' carries no information about $S$; it concerns all $n^2$ points, including those that are not vertices, not the solid hull.
 The magic-specific statements weight each vector by its height: $\sum z\,\varphi(x)=\sum z\,\varphi(y)=0$ for every function $\varphi$ when $S$ is semi-magic, which contains the vanishing of the height-weighted centroid and Loly's invariant, while the mixed moment $\sum z\,xy$ is not forced (\Cref{prop:signed_mass}, \Cref{cor:loly}).
 \item \emph{Symmetry of the order-four gems} (\Cref{sec:symmetry}). The complement $S\mapsto 17-S$ reflects the gem in the plane $z=0$. We prove that a self-complementary square yields a gem with an explicit isometry (a point reflection if $S$ is associative, a half-turn about a horizontal axis otherwise), and determine by exact computation the complete isometry group of each of the $880$ gems: $48$ gems are centrally symmetric, $304$ have exactly one half-turn symmetry, and $528$ have no symmetry (\Cref{thm:symmetry}). Facet orbits are classified (\Cref{prop:facet-orbits}).
 \item \emph{Geometry of the $880$ gems} (\Cref{sec:gem-geometry-880}). Vertex counts, $f$-vectors, combinatorial types, volumes and congruence classes; the congruence classes are exactly the orbits of the complement map, and no two gems have the same vertex set.
+Every gem lies in a fixed box, and the points over the corners and the extreme entries of each side are always vertices (\Cref{prop:box}); the order-four gems have $554$ distinct Ehrhart polynomials (\Cref{sec:ehrhart}).
 \item \emph{Siamese gems} (\Cref{prop:siamese-12}). The Siamese square of every odd order $n\ge5$ has a gem with exactly twelve vertices, $26$ edges and $16$ facets (computer-assisted proof, \Cref{sec:app_siamese}); the fraction of points that are vertices tends to zero.
 \end{enumerate}
 
@@ -42,7 +43,7 @@ The magic-specific statements weight each vector by its height: $\sum z\,\varphi
 The polyhedral geometry of magic squares is classical: nonnegative integer matrices with all line sums equal to $t$ are the lattice points of the $t$-th dilate of the Birkhoff polytope, and their number is a polynomial in $t$ \cite{stanley1973magic,ehrhart1973magic,ziegler1995lectures}; the count of magic squares with distinct entries is an Ehrhart quasi-polynomial of an inside-out polytope \cite{beck2006insideout,beck2010enumeration}; the cones of magic squares and cubes have Hilbert-basis descriptions \cite{ahmed2003polyhedral}; contingency tables with fixed margins are the same lattice points seen as a sample space \cite{diaconis1995rectangular}.
 In all of these the magic squares are the \emph{points} of a polytope, whereas the Magic Gem attaches a polyhedron to a \emph{single} square, in the spirit of the physical invariants of Loly and Rogers \cite{loly2004invariance,rogers2004inertia,rogers2005multipole} (see also \cite{loly2007franklin} for Franklin squares).
 The balance statements of \Cref{sec:balance} are elementary and implicit in that work; we state and prove them in the gem's coordinates because the geometric picture invites misreadings of them.
-The symmetry classification, the exact geometry of the $880$ gems and the Siamese theorem are new.
+The symmetry classification, the exact geometry of the $880$ gems (including the forced-vertex and Ehrhart statements) and the Siamese theorem are new.
 The reading of the line conditions as orthogonality conditions on the height function, the hierarchy of moment conditions, the statistics of random arrangements and the enumeration of low-energy squares are developed in the companion paper \cite{mathewson_companion}; none of its results is used here.
 
 \Cref{sec:gem} defines the gem, \Cref{sec:balance} treats balance, \Cref{sec:symmetry} symmetry, \Cref{sec:results} the exact geometry of the order-four and Siamese gems, \Cref{sec:discussion} open questions, and the appendices contain the computational methods and the remaining steps of the Siamese proof.

@@ -1,5 +1,6 @@
 """Figure: three gems (centrally symmetric / half-turn symmetric / no symmetry) with a symmetry-related facet pair highlighted."""
 from gemfig import *
+from gem_geometry import classify_points
 from isolib import isometries, element_type
 sym = __import__('json').load(open(os.path.join(HERE, 'symmetry_880.json')))
 CASES = [('Ci', 174, '(a) centrally symmetric\n(isometry $\\mathbf{p}\\mapsto-\\mathbf{p}$)'),
@@ -27,8 +28,9 @@ for col, (grp, idx, title) in enumerate(CASES):
         colors = {t0: (OI['orange'], 0.65), t1: (OI['green'], 0.65)}
     keys, polys = draw_faces(ax, h, P, colors=colors, alpha=0.10, lw=0.45)
     ax.scatter(P[V, 0], P[V, 1], P[V, 2], s=7, color=OI['blue'], depthshade=False)
-    inner = [k for k in range(16) if k not in V]
+    _, inner, bnd = classify_points(h)        # strictly interior points: red discs; boundary non-vertex points: orange squares
     if inner: ax.scatter(P[inner, 0], P[inner, 1], P[inner, 2], s=7, color=OI['verm'], depthshade=False)
+    if bnd: ax.scatter(P[bnd, 0], P[bnd, 1], P[bnd, 2], s=12, color=OI['orange'], marker='s', edgecolors='k', linewidths=0.4, depthshade=False)
     if grp == 'Ci':
         c0, c1 = polys[t0].mean(0), polys[t1].mean(0)
         ax.plot(*zip(c0, c1), color='k', lw=0.8, ls='--'); ax.scatter([0], [0], [0], s=12, color='k', depthshade=False)

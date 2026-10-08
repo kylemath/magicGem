@@ -97,10 +97,25 @@ The counts are those of the exact computation.
 (3) $\iota$ and $-\mathrm{id}$ fix no vertex: the half-turn fixes only points with $x=z=0$, while $x$ is a half-odd integer; the point reflection fixes only the origin.
 \end{proof}
 
+\begin{proposition}[Parity of the point types for associative squares]
+\label{prop:parity}
+Let $S$ be associative of order $n$ and let $V,I,B$ be the numbers of vertices, strictly interior points and boundary non-vertex points of $\mathcal G(S)$.
+Then $V$ and $B$ are even, and $I\equiv n\pmod 2$.
+In particular for even $n$ all three numbers are even.
+\end{proposition}
+
+\begin{proof}
+Associativity says that the cell $c'$ opposite to $c$ carries $s_{c'}=N+1-s_c$, so $\mathbf p_{c'}=-\mathbf p_c$: the point set is invariant under the linear isometry $-\mathrm{id}$, which therefore maps $\mathcal G(S)$ to itself, and permutes its vertices, its strictly interior points and its boundary non-vertex points among themselves.
+The only fixed point of $-\mathrm{id}$ is the origin, which is a point $\mathbf p_{ij}$ only if $n$ is odd (the central cell has $s=\frac{N+1}2$), and then it is strictly interior by \Cref{prop:centroid}.
+Hence the involution is fixed-point free on vertices and on boundary non-vertex points, and on strictly interior points when $n$ is even; for odd $n$ it fixes exactly one of the latter.
+\end{proof}
+
+For $n=4$ the $48$ associative gems have $V\in\{10,12,14,16\}$ and $I\in\{0,2,4\}$ ($4$, $23$ and $21$ gems), in accordance with \Cref{prop:parity} (exact computation, \texttt{anc/box\_and\_classes.py}); among the non-associative squares both parities of $I$ occur.
+
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{figures/fig_symmetry.pdf}
-\caption{Symmetry types of order-four gems (same viewpoint; interior points in red; the square is printed above each gem).
+\caption{Symmetry types of order-four gems (same viewpoint; strictly interior points are red discs, boundary non-vertex points orange squares; the square is printed above each gem).
 (a)~D\"urer's square: a centrally symmetric gem; an antipodal pair of facets $F$ (orange) and $-F$ (green) and the segment joining their centroids through the centre $\mathbf 0$ (dashed).
 (b)~A self-complementary, non-associative square (square \#124): the half-turn $\iota$ about the dashed axis swaps the highlighted pair of facets and has no other symmetry.
 (c)~A square with no symmetry (square \#102): the gem is chiral, and its mirror image in $z=0$ is the gem of the complement $17-S$.}
@@ -115,3 +130,18 @@ The counts are those of the exact computation.
 \caption{The $16$ points $\mathbf p_{ij}$ as spheres on stems over the floor grid, coloured by height $z$ (same squares and viewpoint as \Cref{fig:symmetry}; $O$ red). (a)~D\"urer's square: the points form $8$ antipodal pairs $\{\mathbf p,-\mathbf p\}$, joined by segments through $O$. (b)~Square \#124: the half-turn $(x,y,z)\mapsto(x,-y,-z)$ about the dashed $x$-axis exchanges $8$ pairs of points, each pair joined by a segment perpendicular to the axis; this gem is chiral. (c)~Square \#102: no non-trivial isometry preserves the point set.}
 \label{fig:pointsets}
 \end{figure}
+
+\begin{remark}[Classes of order-four squares and vertex counts; exact computation]
+\label{rem:classes}
+Dudeney's group I consists exactly of the $48$ pandiagonal squares (all broken diagonals sum to $34$), group III of the $48$ associative squares, and group VI of the $304$ self-complementary non-associative squares, whose gems have the half-turn symmetry of \Cref{thm:symmetry}; no order-four square is both pandiagonal and associative.
+The gems of the $48$ pandiagonal squares have $11$ to $15$ vertices ($10,20,12,4,2$ gems with $11,\dots,15$), never $16$ and never at most $10$, and each has between one and four strictly interior points.
+The $7$ gems with $8$ vertices are squares \#50, \#54, \#672 (group VI) and \#276, \#277, \#494, \#496 (group VIII); none is pandiagonal or associative, and each has $I=B=4$.
+\end{remark}
+
+\begin{remark}[Central-symmetry defect]
+\label{rem:sigma}
+For a convex body $K\subset\R^3$ let $\sigma(K)=\operatorname{vol}\bigl(\tfrac12(K-K)\bigr)/\operatorname{vol}(K)$.
+The Brunn--Minkowski inequality gives $\operatorname{vol}(K-K)^{1/3}\ge\operatorname{vol}(K)^{1/3}+\operatorname{vol}(-K)^{1/3}=2\operatorname{vol}(K)^{1/3}$, that is $\sigma(K)\ge1$, and for bodies with non-empty interior equality holds if and only if $K$ and $-K$ are homothetic \cite{schneider2014convex}; since they have equal volume the homothety is a translation, so $\sigma(K)=1$ if and only if $K$ is centrally symmetric.
+The defect $\sigma$ is invariant under all isometries including reflections, so $\sigma(\mathcal G(S))=\sigma(\mathcal G(\overline S))$ and $\sigma$ is constant on $D_4$-orbits.
+For the $880$ order-four gems, $\sigma$ was computed in exact rational arithmetic from the convex hull of the $256$ pairwise differences of the points (\texttt{anc/central\_symmetry\_defect.py}): $\sigma=1$ for exactly the $48$ associative gems, and $\sigma\in[1057/1018,\,145/88]\approx[1.038,\,1.648]$ for the other $832$, the extremes occurring for squares \#569 and \#218.
+\end{remark}

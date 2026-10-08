@@ -7,6 +7,7 @@ h = exact_hull(S); P = coords(S)
 assert np.allclose(P, h['P'] / 2.0) and abs(P.sum(0)).max() < 1e-12      # sum_ij p_ij = 0
 assert (S.sum(0) == 34).all() and (S.sum(1) == 34).all()
 V = set(h['vertices'])
+_, _inner, _bnd = classify_points(h); assert len(V) == 12 and len(_inner) == 4 and not _bnd     # Duerer: 12 vertices, 4 strictly interior points, no other
 ZF = -9.2
 fig = plt.figure(figsize=(6.5, 3.5))
 ELEV, AZIM = 26, -48
@@ -56,7 +57,7 @@ for k in range(N):
 ax2.scatter([0], [0], [0], s=36, color='k', depthshade=False, zorder=30)
 ax2.text(-0.3, -0.2, -2.6, '$O$', fontsize=11, zorder=30, ha='right', path_effects=HALO)
 fig.text(0.655, 0.965, '(c)  their hull: the Magic Gem', fontsize=9, weight='bold', va='top')
-fig.text(0.655, 0.905, r'$\bullet$ vertex (12)    $\circ$ interior tip (4)', fontsize=7.8, color='#444444', va='top')
+fig.text(0.655, 0.905, r'$\bullet$ vertex (12)    $\circ$ strictly interior (4)', fontsize=7.8, color='#444444', va='top')
 fig.text(0.66, 0.012, r'$\sum\,\vec{p}_{ij}=\vec{0}$ for every arrangement:  $O$ is the centroid of the 16 tips', ha='center', fontsize=9)
 # shared colourbar
 cax = fig.add_axes([0.05, 0.145, 0.22, 0.02])

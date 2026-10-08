@@ -6,6 +6,29 @@ The vector picture is exact but easily over-read: the centroid statement belongs
 What the hull does see is symmetry: the complement map acts as a mirror reflection of the gem, and for order four this accounts for all the symmetry there is (\Cref{thm:symmetry}) and for all coincidences between gems (\Cref{prop:gem-injective}).
 The coarse invariants, the vertex count (nine values) and the volume ($155$ values), are not well aligned with Dudeney's groups, and the vertex count is a property of the square, not of its group or construction (D\"urer's square versus square \#802).
 
+\paragraph{Hull vertices for larger $n$ (numerical).}
+\Cref{tab:vertices} lists the mean number of hull vertices of random arrangements ($10^5$ uniform samples for each $n\le10$, standard error at most $0.010$; Qhull, with the vertex sets of the first $100$ hulls of each batch re-checked in exact integer arithmetic), of the magic squares (exact for $n=3,4$; for $n=5,\dots,8$ the mean over magic squares found by simulated annealing on the sum of squared line deviations, \texttt{anc/sa\_magic.c}), and of the Siamese squares.
+The fraction $\mathbb E[V]/n^2$ of random arrangements falls from $0.91$ ($n=3$) to $0.28$ ($n=10$).
+At $n=4$ magic gems have slightly more vertices than random ones ($12.23$ against $12.06\pm0.004$); for $n=5,\dots,8$ the annealed means differ from the random means by at most $1.2$ standard errors.
+This is a statement about the samples only: at $n=4$, where all $880$ classes are known, the annealer reached every class ($20{,}000$ draws, $10$ to $41$ hits per class, hit-weighted mean $12.24$), but its sampling distribution for $n\ge5$ is unknown and could be biased towards easily reached squares.
+The Siamese value $12$ is thus atypical: it stays constant while the means grow (for $n=7$ the smallest vertex count among $8000$ annealed squares is $14$, for $n=8$ it is $16$ among $2400$).
+
+\begin{table}[htbp]
+\centering
+\caption{Mean number of hull vertices (numerical except where marked exact). Random: uniform random arrangements; magic: exact for $n=3,4$, annealing samples of $59{,}993$, $24{,}000$, $8{,}000$, $2{,}400$ squares for $n=5,\dots,8$ (standard errors $0.007$, $0.013$, $0.025$, $0.054$); Siamese: exact.}
+\label{tab:vertices}
+\small
+\begin{tabular}{l rrrrrrrr}
+\toprule
+$n$ & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10\\
+\midrule
+random, $\mathbb E[V]$ & 8.22 & 12.06 & 15.39 & 18.39 & 21.08 & 23.53 & 25.79 & 27.91\\
+magic & 8 (exact) & 12.23 (exact) & 15.38 & 18.41 & 21.08 & 23.56 & -- & --\\
+Siamese & 8 & -- & 12 & -- & 12 & -- & 12 & --\\
+\bottomrule
+\end{tabular}
+\end{table}
+
 \paragraph{Open questions.}
 \begin{enumerate}\setlength\itemsep{1pt}
 \item \emph{Order five.} By Schroeppel's enumeration there are $275{,}305{,}224$ essentially different squares of order $5$ \cite{gardner1976}; an exact hull computation for each is feasible. How many combinatorial types occur, what is the modal $f$-vector, and is the complement map again the only source of congruence? By \Cref{prop:selfcomp} the self-complementary squares of odd order are exactly the associative ones, so every symmetric gem of order five is centrally symmetric.

@@ -12,8 +12,12 @@ x_{ij}=j-\frac{n-1}{2},\qquad y_{ij}=\frac{n-1}{2}-i,\qquad z_{ij}=s_{ij}-\frac{
 \end{equation}
 The \emph{Magic Gem} of $S$ is the convex hull $\mathcal G(S)=\operatorname{conv}\{\mathbf p_{ij}\}$.
 The function $z=(z_{ij})$ is the \emph{height function} of $S$, and each $\mathbf p_{ij}$ is read as a vector from the origin.
-Every centroid or moment statement in this paper refers to the full set of $N$ points $\mathbf p_{ij}$, interior points included, and not to the solid $\mathcal G(S)$.
+Every centroid or moment statement in this paper refers to the full set of $N$ points $\mathbf p_{ij}$, including those that are not vertices, and not to the solid $\mathcal G(S)$.
 \end{definition}
+
+\paragraph{Terminology.}
+Every point $\mathbf p_{ij}$ is of exactly one of three kinds: a \emph{vertex} (an extreme point of $\mathcal G(S)$); a \emph{strictly interior point} (lying in the topological interior of $\mathcal G(S)$); or a \emph{boundary non-vertex point} (lying on the boundary, in the relative interior of an edge or of a facet).
+If $V,I,B$ denote their numbers, $V+I+B=N$ and the number of hull vertices is $V$; the $f$-vector is $(V,E,F)$.
 
 The $x$-axis runs along the columns and the $y$-axis along the rows (top row at positive $y$); the centred entries have mean zero because the mean entry is $(N+1)/2$.
 Let $x_j=j-\frac{n-1}2$ and $y_i=\frac{n-1}2-i$ denote the $n$ values taken by $x$ and $y$.
@@ -61,7 +65,7 @@ For the Lo Shu square $S=\begin{pmatrix}2&7&6\\9&5&1\\4&3&8\end{pmatrix}$, $n=3$
 \end{array}
 \]
 The top row has heights $-3+2+1=0$ and horizontal vector sum $(0,3,0)$.
-The centre cell maps to the origin and is the only point not on the hull; the gem has $f$-vector $(8,16,10)$ and volume $18$ (\Cref{fig:construction}).
+The centre cell maps to the origin, which is the only non-vertex point and is strictly interior (\Cref{prop:centroid}); the gem has $f$-vector $(8,16,10)$ and volume $18$ (\Cref{fig:construction}).
 \end{example}
 
 \begin{proposition}[$D_4$-invariance]
@@ -83,7 +87,7 @@ Magic squares are mapped to magic squares by $D_4$ (lines go to lines), so every
     \centering
     \includegraphics[width=\textwidth]{figures/fig01_construction_d4.pdf}
     \caption{Construction of the Magic Gem and its $D_4$-invariance.
-    Top row: (a)~the Lo Shu square $S$; (b)~the centred cells $(x_{ij},y_{ij})$ with the heights $z_{ij}=s_{ij}-5$; (c)~the nine points $\mathbf p_{ij}$ over the grid, labelled by the entries $s_{ij}$; (d)~their convex hull, the gem of \Cref{ex:loshu}, with $f$-vector $(8,16,10)$; the centre point $(0,0,0)$ is the only interior point.
+    Top row: (a)~the Lo Shu square $S$; (b)~the centred cells $(x_{ij},y_{ij})$ with the heights $z_{ij}=s_{ij}-5$; (c)~the nine points $\mathbf p_{ij}$ over the grid, labelled by the entries $s_{ij}$; (d)~their convex hull, the gem of \Cref{ex:loshu}, with $f$-vector $(8,16,10)$; the centre point $(0,0,0)$ is the only non-vertex point and is strictly interior.
     Rows two and three (e--l): the eight images of the Lo Shu under $D_4$---the identity $e$, the rotations $r,r^2,r^3$ by $90^\circ,180^\circ,270^\circ$, the left--right and top--bottom reflections $h,v$, and the two diagonal reflections (transpose $t$ and anti-transpose $tr^2$)---each printed row by row beneath its gem.
     All eight gems are drawn from the same viewpoint; by \Cref{prop:symmetry_invariance} they are the images of one another under the isometries $\hat g$, so they are congruent, and all have $f$-vector $(8,16,10)$ and volume $18$.}
     \label{fig:construction}

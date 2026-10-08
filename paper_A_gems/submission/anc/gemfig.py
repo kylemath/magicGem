@@ -6,7 +6,7 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d.art3d import Poly3DCollection
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
-from gem_geometry import exact_hull
+from gem_geometry import exact_hull, classify_points
 FIGDIR = os.path.join(HERE, '..', 'figures'); os.makedirs(FIGDIR, exist_ok=True)
 OI = dict(black='#000000', orange='#E69F00', sky='#56B4E9', green='#009E73', yellow='#F0E442',
           blue='#0072B2', verm='#D55E00', purple='#CC79A7')

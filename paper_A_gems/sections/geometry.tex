@@ -110,8 +110,7 @@ The groups III and VI, the self-complementary ones, have only even vertex counts
 (c)~Sizes of the $352$ combinatorial types (logarithmic scale): $93$ types occur once, $201$
 twice, and one type is shared by $32$ squares.
 (d)--(f)~Three extreme gems, drawn with translucent faces after merging
-coplanar triangles: the unique $(8,14,8)$ gem (square \#54; the eight
-interior points are shown in red), a gem with all $16$ points extreme
+coplanar triangles: the unique $(8,14,8)$ gem (square \#54; its four strictly interior points are red discs and its four boundary non-vertex points orange squares), a gem with all $16$ points extreme
 (square \#802, D\"urer's square with its first two rows exchanged and its last two rows exchanged), and the gem of largest
 volume (square \#379).}
 \label{fig:gem-geometry-880}
@@ -123,6 +122,80 @@ $12/25$ and exact volumes $18$, $92$ and $830/3$.  D\"urer's own gem is centrall
 its last two rows (which preserves the magic property) gives a square whose gem has all sixteen points extreme (square \#802,
 \Cref{fig:gem-geometry-880}e): the hull-vertex count is a property of the square, not of the Dudeney group or of the
 construction method.
+
+% ===========================================================================
+\subsection{Extreme points and the bounding box}
+\label{sec:box}
+
+Let $B_n=[-\frac{n-1}2,\frac{n-1}2]^2\times[-\frac{N-1}2,\frac{N-1}2]$, a box of volume $(n-1)^2(N-1)$ that depends only on $n$.
+The \emph{side lines} of the grid are its first and last rows and columns.
+
+\begin{proposition}[Bounding box and forced vertices]
+\label{prop:box}
+Let $S$ be any arrangement of order $n\ge2$.
+\begin{enumerate}\setlength\itemsep{0pt}\setlength\topsep{2pt}
+\item $\mathcal G(S)\subseteq B_n$.
+\item The points carrying the entries $1$ and $N$ are the only points on the planes $z=\mp\frac{N-1}2$, and they are vertices of $\mathcal G(S)$.
+\item The points over the four corner cells of the grid are vertices.
+\item For each of the four side lines, the points over its cells carrying the smallest and the largest entry of that line are vertices.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(1) $|x_{ij}|,|y_{ij}|\le\frac{n-1}2$ and $1\le s_{ij}\le N$, and $B_n$ is convex.
+A point that is the unique maximiser over $\{\mathbf p_{ij}\}$ of a linear functional is a vertex.
+(2) The entries are distinct, so $z$ is uniquely minimal where $s=1$ and uniquely maximal where $s=N$.
+(3) On the grid the functional $-x+y$ attains its maximum $n-1$ only at the top-left cell, and similarly for the other corners.
+(4) Take the left column, where $x=-\frac{n-1}2$ and the other columns have $x\ge-\frac{n-1}2+1$.
+For $\varepsilon=1/N$ the functional $-x+\varepsilon z$ has, on points of the column, values greater than $\frac{n-1}2-\frac12$ and, on all other points, values at most $\frac{n-1}2-1+\frac12$; so its maximiser lies in the column and is the point of largest height there, which is unique.
+Replacing $\varepsilon z$ by $-\varepsilon z$ gives the point of smallest height, and the other three sides are obtained by applying elements of $D_4$.
+\end{proof}
+
+The vertices named in (2)--(4) number at least $4$ and at most $14$; for $n=4$ they number between $4$ and $13$ over the $880$ gems, and nothing more is forced (exact computation, \texttt{anc/box\_and\_classes.py}): the only cells carrying a vertex in all $880$ gems are the four corners, and the only entries that always label a vertex are $1$ and $16$.
+In particular $2$ and $N-1$ are not forced: in eight gems the point carrying $2$ is a boundary non-vertex point, for instance for square \#593, $\begin{smallmatrix}4&1&16&13\\5&15&2&12\\14&8&9&3\\11&10&7&6\end{smallmatrix}$, and the complement $17-S$ (the mirror image, \Cref{lem:complement}) has the same property for $15$.
+The twelve vertices of a Siamese gem (\Cref{prop:siamese-12}) are its forced vertices.
+
+\Cref{tab:box} gives the volume of the order-four gems as a fraction of $\operatorname{vol}B_4=135$ and the numbers $I$ and $B$ of strictly interior and boundary non-vertex points (exact computation).
+Gems fill between $58/135\approx43\%$ and $292/405\approx72\%$ of the box, on average $2219/3564\approx62\%$.
+At most four points are strictly interior, while one gem has $I=0$, $B=6$.
+
+\begin{table}[htbp]
+\centering
+\caption{Order-four gems: volume as a fraction of the box $B_4$ (exact; rounded), by number $V$ of vertices, and numbers of gems with $k$ strictly interior points ($I=k$) and with $k$ boundary non-vertex points ($B=k$).}
+\label{tab:box}
+\small
+\begin{tabular}{r rrrrrrrrr r}
+\toprule
+$V$ & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15 & 16 & all\\
+\midrule
+min & .622 & .588 & .481 & .549 & .430 & .456 & .452 & .498 & .449 & .430\\
+mean & .642 & .623 & .631 & .630 & .634 & .614 & .608 & .560 & .536 & .623\\
+max & .648 & .667 & .701 & .699 & .721 & .688 & .691 & .615 & .598 & .721\\
+\bottomrule
+\end{tabular}
+
+\medskip
+\begin{tabular}{r rrrrrr}
+\toprule
+$k$ & 0 & 1 & 2 & 3 & 4 & 6\\
+\midrule
+gems with $I=k$ & 37 & 32 & 353 & 178 & 280 & 0\\
+gems with $B=k$ & 357 & 204 & 257 & 40 & 21 & 1\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% ===========================================================================
+\subsection{Lattice structure and Ehrhart polynomials}
+\label{sec:ehrhart}
+
+For even $n$ all coordinates of every $\mathbf p_{ij}$ are half-odd integers, so $Q(S)=\mathcal G(S)+(\frac12,\frac12,\frac12)$ is a lattice polytope; any other lattice translate has the same Ehrhart polynomial $L_S(t)=\#(tQ\cap\Z^3)=\operatorname{vol}(\mathcal G)\,t^3+c_2t^2+c_1t+1$ \cite{beck2007computing}, and $L_S$ is the same for all images $gS$, $g\in D_4$, since $\hat g$ preserves $\Z^3$ up to an integer translation of $Q$.
+Writing $\sum_{k\ge0}L_S(k)t^k=(h^*_0+h^*_1t+h^*_2t^2+h^*_3t^3)/(1-t)^4$, the $h^*_i$ are non-negative integers \cite{stanley1980decompositions}, $h^*_0=1$, $\sum h^*_i=6\operatorname{vol}$, and $h^*_3$ is the number of interior lattice points of $Q$ \cite{beck2007computing}.
+
+\emph{Exact computation} (\texttt{anc/ehrhart\_880.py}; lattice points of $tQ$ counted for $t\le6$, the cubic interpolated from $t\le3$ and checked at $t=4,5,6$, with $h^*_3$ checked against the interior count and $\sum h^*_i$ against $6\operatorname{vol}$).
+Over the $880$ gems, $h^*_1\in[70,136]$, $h^*_2\in[233,403]$ and $h^*_3\in[34,52]$.
+There are $554$ distinct Ehrhart polynomials, against $616$ congruence classes, $352$ combinatorial types, $39$ $f$-vectors and $155$ volumes: congruent gems (complement partners; the reflection $z\mapsto-z$ followed by an integer translation is a unimodular affine map of $\Z^3$) have equal polynomials, but non-congruent gems can share one, and $L_S$ is determined neither by the $f$-vector (it takes several values on $29$ of the $39$ $f$-vectors), nor by the combinatorial type ($81$ of $352$ types), nor by the volume ($104$ of $155$ volumes).
+For the Lo Shu square (odd order: the gem itself is a lattice polytope) $L(t)=1+t+13t^2+18t^3$ and $h^*=(1,29,73,5)$; for D\"urer's square $L(t)=1-3t+44t^2+92t^3$ and $h^*=(1,130,377,44)$; the leading coefficients are the volumes $18$ and $92$.
 
 % ===========================================================================
 \subsection{Siamese gems have twelve vertices}

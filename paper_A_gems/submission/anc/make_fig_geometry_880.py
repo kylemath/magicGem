@@ -13,7 +13,7 @@ SRC = HERE
 FIGDIR = os.path.join(HERE, '..', 'figures'); os.makedirs(FIGDIR, exist_ok=True)
 
 sys.path.insert(0, SRC)
-from gem_geometry import exact_hull
+from gem_geometry import exact_hull, classify_points
 from siamese_util import siamese
 
 SQ = np.loadtxt(os.path.join(HERE, 'squares880.txt'), dtype=int).reshape(880, 4, 4)
@@ -48,11 +48,12 @@ def render_gem(ax, S, title=None, elev=22, azim=-55, annotate=True):
     polys = [face_cycle(P, f, key[:3]) for key, f in h['faces'].items()]
     coll = Poly3DCollection(polys, facecolor=FACE, edgecolor=EDGE, linewidths=0.6, alpha=0.28)
     ax.add_collection3d(coll)
-    hv = set(h['vertices'])
-    inner = [k for k in range(N) if k not in hv]
-    ax.scatter(P[list(hv), 0], P[list(hv), 1], P[list(hv), 2], s=14, c=EDGE, depthshade=False, zorder=5)
+    hv, inner, bnd = classify_points(h)       # vertices (dark blue), strictly interior points (red), boundary non-vertex points (orange squares)
+    ax.scatter(P[hv, 0], P[hv, 1], P[hv, 2], s=14, c=EDGE, depthshade=False, zorder=5)
     if inner:
         ax.scatter(P[inner, 0], P[inner, 1], P[inner, 2], s=9, c=INNER, depthshade=False, zorder=5)
+    if bnd:
+        ax.scatter(P[bnd, 0], P[bnd, 1], P[bnd, 2], s=14, c='#E69F00', marker='s', edgecolors='k', linewidths=0.4, depthshade=False, zorder=6)
     lim = (n - 1) / 2 + 0.3
     ax.set_xlim(-lim, lim); ax.set_ylim(-lim, lim); ax.set_zlim(-(N - 1) / 2 - 0.5, (N - 1) / 2 + 0.5)
     ax.set_box_aspect((1, 1, 1.1))

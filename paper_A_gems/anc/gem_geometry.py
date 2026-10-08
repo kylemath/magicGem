@@ -111,6 +111,18 @@ def exact_hull(S):
                 volume=volume, area=area)
 
 
+def classify_points(h):
+    """Split the points of a gem into (vertices, strictly interior points, boundary non-vertex points), all as index lists.
+    A non-vertex point is strictly interior iff it satisfies every facet inequality strictly (exact integer test)."""
+    P = h['P']; V = set(h['vertices']); interior, boundary = [], []
+    for k in range(len(P)):
+        if k in V: continue
+        slack = max(a * int(P[k, 0]) + b * int(P[k, 1]) + c * int(P[k, 2]) + d for a, b, c, d in h['faces'])
+        assert slack <= 0
+        (interior if slack < 0 else boundary).append(k)
+    return sorted(V), interior, boundary
+
+
 def bipartite_graph(h):
     G = nx.Graph()
     for v in h['vertices']:

@@ -13,7 +13,7 @@ The sum vanishes by \Cref{lem:lines}(1). The centroid of a finite point set that
 \end{proof}
 
 This is a consequence of centring the coordinates and carries no information about $S$; in particular it does not distinguish magic squares from arbitrary arrangements.
-It is a statement about the point set with unit weights, and not about the solid: the hull depends only on its vertex set, interior points do not affect it, and the centre of mass of the solid $\mathcal G(S)$ need not be the origin (for $829$ of the $880$ gems of order four it is not).
+It is a statement about the point set with unit weights, and not about the solid: the hull depends only on its vertex set, points that are not vertices do not affect it, and the centre of mass of the solid $\mathcal G(S)$ need not be the origin (for $829$ of the $880$ gems of order four it is not).
 The hull records the extent of the point set (extreme points, faces, volume), not how the heights are distributed over the cells.
 
 \paragraph{Height-weighted balance is what magic means.}
@@ -81,4 +81,17 @@ With unit masses at the $N$ points, the centre of mass is the origin and the ine
 By \Cref{lem:lines} and \Cref{prop:signed_mass}(2), $I_{xx}=I_{yy}=n^{2}(n^{2}-1)(n^{2}+2)/12$, $I_{zz}=n^{2}(n^{2}-1)/6$, $I_{xy}=0$, $I_{xz}=-\sum_jx_j\gamma_j$ and $I_{yz}=-\sum_iy_i\rho_i$.
 The diagonal entries are the same for all $N!$ arrangements and the tensor is diagonal for every semi-magic square, so the inertia of the unit-mass point set does not depend on the square.
 The informative planar object is Loly's value-weighted body: its diagonal entries are fixed by the row and column sums (\Cref{cor:loly}), whereas the product of inertia $P_{xy}=-\sum s_{ij}x_{ij}y_{ij}$ is a mixed moment, fixed by no line sum; $D_4$ changes at most its sign.
+\end{remark}
+
+\begin{remark}[Covariance determinant]
+\label{rem:detcov}
+Let $\Sigma$ be the covariance matrix of $(x,y,z)$ over the $N$ points.
+Since $\Sigma_{xy}=0$ and $\Sigma_{xx}=\Sigma_{yy}=:a$, $\Sigma_{zz}=:c$ are the same for all arrangements (\Cref{lem:lines}),
+\[
+\det\Sigma=a\,a\,c-a\,\Sigma_{xz}^2-a\,\Sigma_{yz}^2=a\bigl(ac-\Sigma_{xz}^2-\Sigma_{yz}^2\bigr),
+\]
+with $N\Sigma_{xz}=\sum z\,x$ and $N\Sigma_{yz}=\sum z\,y$.
+So among all arrangements of order $n$ the determinant, which is proportional to the squared volume of the covariance ellipsoid, is largest exactly when $\sum z\,x=\sum z\,y=0$, in particular for every semi-magic square (\Cref{prop:signed_mass}(2) with $\varphi(t)=t$).
+This concerns the point set, not its hull.
+Numerically ($n=4$, $10^5$ uniformly random arrangements, \texttt{anc/vertex\_statistics.py}), the hull volume of a random arrangement has mean $75.7$ and is positively rank-correlated with $\det\Sigma$ (Spearman $0.65$), and the median of the $880$ magic gem volumes ($85.2$; mean $84.05$) lies at the $91$st percentile of the random volumes, numerical statements about samples only.
 \end{remark}
