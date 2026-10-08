@@ -34,32 +34,31 @@ def grid(ax, vals, texts, cmap=CMAP, norm=NORM, fs=9, tcol=None):
 # (a) piles of checkers: one disc = height 1 (last disc = half), up = orange, down = blue, board = plane z=0, O = centre
 import matplotlib.patheffects as pe
 HALO = [pe.withStroke(linewidth=2.5, foreground='white')]
-ZS = 0.30                                    # drawn thickness of one unit of height
-def pile(zv):
-    a = abs(zv); k = int(np.floor(a)); return [1.0] * k + ([0.5] if a - k > 0 else [])
-for zv in z1.ravel(): assert abs(sum(pile(zv)) - abs(zv)) < 1e-12          # pile height = |z|
+ZS = 0.14                                    # drawn thickness of one checker
 P1 = coords(S1)
-for lines in (z1, z1.T):                                                    # every row/column: up = down
-    for r in lines: assert abs(sum(v for v in r if v > 0) + sum(v for v in r if v < 0)) < 1e-12
+cnt = S1                                     # the pile on cell (i,j) has s_ij checkers
+assert cnt.sum(0).tolist() == [34] * 4 and cnt.sum(1).tolist() == [34] * 4           # 34 checkers in every row and column
+assert (cnt.ravel() * P1[:, 0]).sum() == 0 and (cnt.ravel() * P1[:, 1]).sum() == 0     # centre of mass of the checkers lies over O
+assert P1[:, 0].sum() == 0 and P1[:, 1].sum() == 0
 axp = A(0.0, 0.62, 3.8, 2.65, projection='3d')
-style3d(axp, elev=30, azim=-55); axp.set_zlim(-2.4, 2.6); axp.set_box_aspect((1, 1, 0.72), zoom=1.1); axp.computed_zorder = False
+style3d(axp, elev=30, azim=-55); axp.set_zlim(-0.1, 2.9); axp.set_box_aspect((1, 1, 0.72), zoom=1.1); axp.computed_zorder = False
+checkerboard(axp, alpha=0.9)
 cam = np.array([np.cos(np.radians(-55)), np.sin(np.radians(-55))]); depth = lambda k: P1[k, :2] @ cam
 Rr = 0.42
-for k in sorted([k for k in range(16) if P1[k, 2] < 0], key=depth):
-    x, y, z = P1[k]; zz = 0.0
-    for q, d in enumerate(pile(z)):
-        disc(axp, x, y, zz - d * ZS, zz, Rr, BLUE, shade(BLUE, 0.5), dark=1.0 if q % 2 == 0 else 0.93); zz -= d * ZS
-checkerboard(axp)
-for k in sorted([k for k in range(16) if P1[k, 2] > 0], key=depth):
-    x, y, z = P1[k]; zz = 0.0
-    for q, d in enumerate(pile(z)):
-        disc(axp, x, y, zz, zz + d * ZS, Rr, VERM, shade(VERM, 0.5), dark=1.0 if q % 2 == 0 else 0.93); zz += d * ZS
-axp.scatter([0], [0], [0], s=55, color='#E4002B', edgecolor='k', linewidths=0.8, depthshade=False, zorder=50)
-axp.text(0.12, -0.05, 0.05, '$O$', fontsize=11, color='#E4002B', weight='bold', zorder=60, path_effects=HALO, ha='left', va='bottom')
-T(0.1, 0.1, "(a)  piles of checkers: D\u00fcrer's square", fontsize=9.5, weight='bold', va='top')
-T(0.1, 0.38, 'pile height $=|z_{ij}|$ (one disc = height $1$);\nup (orange) $z>0$, down (blue) $z<0$ from the board', fontsize=7.8, va='top', color='#333333')
-T(1.75, 3.2, r'every row and column: height piled up = height piled down' + '\n' + r'(top row: $7.5+4.5=5.5+6.5$)', fontsize=7.8, ha='center', va='top', color='#333333')
+for k in sorted(range(16), key=depth):
+    x, y, z = P1[k]; col = plt.cm.viridis((cnt.ravel()[k] - 1) / 15.0)[:3]
+    for q in range(int(cnt.ravel()[k])):
+        disc(axp, x, y, 0.05 + q * ZS, 0.05 + (q + 1) * ZS, Rr, col, shade(col, 0.5), dark=1.0 if q % 2 == 0 else 0.93, nseg=20, lw=0.35)
+for k in range(16):
+    axp.text(P1[k, 0], P1[k, 1], 0.05 + cnt.ravel()[k] * ZS + 0.04, str(cnt.ravel()[k]), fontsize=7, weight='bold', ha='center', va='bottom', zorder=40, path_effects=HALO)
+axp.scatter([0], [0], [0.06], s=55, color='#E4002B', edgecolor='k', linewidths=0.8, depthshade=False, zorder=50)
+axp.text(0.12, -0.05, 0.12, '$O$', fontsize=11, color='#E4002B', weight='bold', zorder=60, path_effects=HALO, ha='left', va='bottom')
+T(0.1, 0.1, "(a)  checkers on a checkerboard", fontsize=9.5, weight='bold', va='top')
+T(0.1, 0.38, 'cell $(i,j)$ carries a pile of $s_{ij}$ checkers,\nlabelled and coloured by the entry $s_{ij}$', fontsize=7.8, va='top', color='#333333')
+T(1.75, 3.2, r'$34$ checkers in every row and column;' + '\n' + r'their centre of mass lies over $O$ ($\sum s\,x=\sum s\,y=0$)', fontsize=7.8, ha='center', va='top', color='#333333')
 
+cbp = fig.colorbar(plt.cm.ScalarMappable(Normalize(1, 16), plt.cm.viridis), cax=A(0.12, 1.0, 0.08, 1.3), orientation='vertical')
+cbp.set_ticks([1, 8, 16]); cbp.ax.tick_params(labelsize=7, length=2); cbp.set_label('entry $s$', fontsize=7.5, labelpad=1)
 # (b) grid coloured by height with row and column sums
 ax = A(4.05, 0.85, 2.45, 2.0)
 grid(ax, z1, [[f'{v:+.1f}' for v in r] for r in z1], fs=8.5)
