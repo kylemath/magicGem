@@ -148,7 +148,6 @@ We also prove, with computer assistance, that the Siamese square of every odd or
 
 \noindent\textbf{Keywords:} magic squares, convex polyhedra, symmetry, combinatorial geometry, moment of inertia
 \end{abstract}
-
 \section{Introduction}
 \label{sec:introduction}
 
@@ -167,8 +166,17 @@ Centre the grid at the origin and attach to the cell $(i,j)$ the vector
 \mathbf p_{ij}=(x_{ij},y_{ij},z_{ij}),
 \]
 whose horizontal part $(x_{ij},y_{ij})$ is the position of the cell and whose vertical part is the \emph{centred entry} $z_{ij}=s_{ij}-\frac{n^2+1}{2}$.
-Then $S$ is magic exactly when the vertical components of these vectors cancel along every row, column and both diagonals (\Cref{lem:lines}; \Cref{fig:vectors}).
+Then $S$ is magic exactly when the vertical components of these vectors cancel along every row, column and both diagonals (\Cref{lem:lines}; \Cref{fig:vectors}, \Cref{fig:lines}).
 The \emph{Magic Gem} $\mathcal G(S)$ is the convex hull of the tips of the $n^2$ vectors $\mathbf p_{ij}$ (\Cref{sec:gem}).
+\Cref{fig:vectors} shows the vectors of D\"urer's square and the gem they span; the tips fill the gem's $12$ vertices and four interior points, and $\sum\mathbf p_{ij}=\mathbf 0$.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{fig_vectors.pdf}
+\caption{D\"urer's square $S=\begin{smallmatrix}16&3&2&13\\5&10&11&8\\9&6&7&12\\4&15&14&1\end{smallmatrix}$ as vectors from the centroid $O$. (a)~The $16$ vectors $\mathbf p_{ij}=(x_{ij},y_{ij},z_{ij})$ alone: each points from $O$ over the cell $(x_{ij},y_{ij})$ of the floor grid (dotted drop lines) to a tip at height $z_{ij}=s_{ij}-8.5$, labelled by the entry $s_{ij}$ and coloured by height (orange: above $O$, blue: below). (b)~The same vectors inside their convex hull, the Magic Gem: $12$ tips are vertices (filled dots) and $4$ lie in the interior (open dots). The vectors sum to $\mathbf 0$ for every arrangement of $1,\dots,16$ (\Cref{prop:centroid}); what singles out magic squares is how the heights cancel along lines (\Cref{fig:lines}).}
+\label{fig:vectors}
+\end{figure}
+
 An interactive display of the $880$ order-four gems is available at \url{https://kylemath.github.io/MagicGemWebpage/}.
 
 \paragraph{Results.}
@@ -188,7 +196,6 @@ The symmetry classification, the exact geometry of the $880$ gems and the Siames
 The reading of the line conditions as orthogonality conditions on the height function, the hierarchy of moment conditions, the statistics of random arrangements and the enumeration of low-energy squares are developed in the companion paper \cite{mathewson_companion}; none of its results is used here.
 
 \Cref{sec:gem} defines the gem, \Cref{sec:balance} treats balance, \Cref{sec:symmetry} symmetry, \Cref{sec:results} the exact geometry of the order-four and Siamese gems, \Cref{sec:discussion} open questions, and the appendices contain the computational methods and the remaining steps of the Siamese proof.
-
 \section{The Magic Gem}
 \label{sec:gem}
 
@@ -232,13 +239,13 @@ In particular $S$ is magic if and only if the vector sum of the $\mathbf p_c$ al
 (3) Since $M(n)=n\frac{N+1}2$, $\sum_{c\in L}z_c=\sum_{c\in L}s_c-M(n)=\delta_L$. The cells of a row $i$ have $y=y_i$ and $x$ running over all $x_j$ (sum $0$); for a column the roles are exchanged; each diagonal is invariant under $(x,y)\mapsto(-x,-y)$, so its position sums vanish.
 \end{proof}
 
+\Cref{fig:lines} illustrates \Cref{lem:lines}(3) for D\"urer's square: along each of four lines the heights stack head to tail and return to zero, so the vector sum of the line is horizontal, $(0,6,0)=4\,(0,\tfrac32,0)$ for the top row; after swapping two entries the stack of the affected lines fails to close, by the deviation $\delta_L$.
+
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=\textwidth]{fig_vectors_row.pdf}
-\caption{The Magic Gem of D\"urer's square $S=\begin{smallmatrix}16&3&2&13\\5&10&11&8\\9&6&7&12\\4&15&14&1\end{smallmatrix}$ as an arrangement of vectors from the centroid.
-(a)~The $16$ vectors $\mathbf p_{ij}$ from the origin $O$ to the tips (grey), and the translucent convex hull. The four vectors of the top row are highlighted (orange: positive height, blue: negative height) and labelled with their heights $z_{0j}=s_{0j}-8.5$.
-(b)~The heights of the highlighted row stacked head to tail: $+7.5$, $-5.5$, $-6.5$, $+4.5$; the running total returns to zero, so the vector sum of the row is the horizontal vector $(0,6,0)=4\,(0,\tfrac32,0)$ of \Cref{lem:lines}(3).}
-\label{fig:vectors}
+\includegraphics[width=0.92\textwidth]{fig_lines.pdf}
+\caption{Magic means that heights cancel along every line. \emph{Top:} for D\"urer's square, the four vectors of the top row, left column, main diagonal and anti-diagonal (coloured, with their entries; the other twelve in grey; the cells of the line are shaded on the floor) and below each the heights $z=s-8.5$ of the line stacked head to tail in line order; the running total returns to $0$, so $\sum_{c\in L}\mathbf p_c$ is the horizontal vector $(n\bar x_L,n\bar y_L,0)$ of \Cref{lem:lines}(3), here $(0,6,0)$, $(-6,0,0)$, $\mathbf 0$, $\mathbf 0$. \emph{Bottom:} the same after swapping the entries $3$ and $5$, which is not magic: the top row and the left column no longer close (deviations $\delta_L=+2$ and $-2$, in magenta) and their vector sums acquire the vertical component $\delta_L$; the diagonals do not contain the swapped cells and still close.}
+\label{fig:lines}
 \end{figure}
 
 \begin{example}[Lo Shu]
@@ -279,7 +286,6 @@ Magic squares are mapped to magic squares by $D_4$ (lines go to lines), so every
     All eight gems are drawn from the same viewpoint; by \Cref{prop:symmetry_invariance} they are the images of one another under the isometries $\hat g$, so they are congruent, and all have $f$-vector $(8,16,10)$ and volume $18$.}
     \label{fig:construction}
 \end{figure}
-
 \section{Balance: what the vectors from the centroid do and do not say}
 \label{sec:balance}
 
@@ -325,6 +331,15 @@ Conversely, if $\sum z\,\varphi(x)=\sum z\,\varphi(y)=0$ for all $\varphi$, then
 Exact enumeration over the $880$ essentially different magic squares of order $4$ gives $|P_{xy}|\in\{0,\dots,60\}$ with $48$ distinct values; it vanishes for $56$ classes and is non-zero for the other $824$.
 \end{proof}
 
+\Cref{fig:moments} shows both halves of \Cref{prop:signed_mass}: each column of heights has zero total mass, so the lever of signed masses balances, while the mixed moment $\sum z\,xy$ takes the value $0$ for D\"urer's square and $+60$ for another magic square.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{fig_moments.pdf}
+\caption{Height-weighted moments, order $n=4$. (a)~The height function of D\"urer's square with row sums $\rho_i$ and column sums $\gamma_j$, all zero. (b)~Reading $z_{ij}$ as a force at position $x_j$ on a lever (up $+$, down $-$): every column has net force $\gamma_j=0$, hence $\sum z\,x=\sum_jx_j\gamma_j=0$ (\Cref{prop:signed_mass}(2)); the same holds for $y$ and the rows. (c)~The mixed moment is not forced: for two magic squares, the heights $z$ and the cell contributions $z\,x\,y$ (rounded to integers), which sum to $0$ for D\"urer's square and to $+60$ for the square $\begin{smallmatrix}1&6&11&16\\8&15&2&9\\12&3&14&5\\13&10&7&4\end{smallmatrix}$ (so $P_{xy}=-60$).}
+\label{fig:moments}
+\end{figure}
+
 Thus the height-weighted statements guaranteed by the line sums are exactly the pure axial ones: the vanishing of the first moment along each axis and Loly's invariant below.
 The mixed moment can vanish for structural reasons: if $S$ is associative, $z$ is odd under $(x,y)\mapsto(-x,-y)$ (\Cref{sec:symmetry}) and $xy$ is even, so $\sum z\,xy=0$ (this accounts for the order-$3$ square and for $48$ of the $56$ vanishing classes of order $4$).
 
@@ -348,7 +363,6 @@ By \Cref{lem:lines} and \Cref{prop:signed_mass}(2), $I_{xx}=I_{yy}=n^{2}(n^{2}-1
 The diagonal entries are the same for all $N!$ arrangements and the tensor is diagonal for every semi-magic square, so the inertia of the unit-mass point set does not depend on the square.
 The informative planar object is Loly's value-weighted body: its diagonal entries are fixed by the row and column sums (\Cref{cor:loly}), whereas the product of inertia $P_{xy}=-\sum s_{ij}x_{ij}y_{ij}$ is a mixed moment, fixed by no line sum; $D_4$ changes at most its sign.
 \end{remark}
-
 \section{Symmetry of the gems}
 \label{sec:symmetry}
 
@@ -457,7 +471,6 @@ The counts are those of the exact computation.
 (c)~A square with no symmetry (square \#102): the gem is chiral, and its mirror image in $z=0$ is the gem of the complement $17-S$.}
 \label{fig:symmetry}
 \end{figure}
-
 \section{Exact geometry: the order-four gems and the Siamese gems}
 \label{sec:results}
 
@@ -655,7 +668,6 @@ polygons $T,U,M,D,B$ outlined and the twelve vertex cells $v_1,\dots,v_{12}$ cir
 combinatorial type is constant for all odd $n\ge5$.}
 \label{fig:siamese-layers}
 \end{figure}
-
 \section{Discussion and open questions}
 \label{sec:discussion}
 
@@ -671,7 +683,6 @@ The coarse invariants, the vertex count (nine values) and the volume ($155$ valu
 \item \emph{Bounded hull-vertex counts.} Siamese gems have twelve vertices for every odd $n\ge5$ because, affinely, they are hulls of five lattice polygons whose shapes do not depend on $n$ (\Cref{prop:siamese-12}). Do the LUX, Strachey or diagonal-complement constructions have the same property, and is the fraction of vertices for a uniformly random magic square of large order bounded away from zero?
 \item \emph{Other square families.} The construction applies verbatim to semi-magic, pandiagonal and Franklin squares \cite{loly2007franklin}; the statements of \Cref{prop:signed_mass} already cover the semi-magic case. The gems of these families have not been examined.
 \end{enumerate}
-
 
 \bibliographystyle{plain}
 \bibliography{references}
@@ -742,6 +753,5 @@ by (c) this family of facets is closed under edge-adjacency, and since the facet
 these are all the facets, so $P=Q$.  With (a), $P\subseteq\Phi(\mathcal G(S))\subseteq Q=P$, whose vertex set is
 $\{v_1,\dots,v_{12}\}$ by (d); mapping back by $\Phi^{-1}$ gives the statement, with $(V,E,F)=(12,26,16)$ read off from (b)--(c).
 For $m=1$ the triangles degenerate to points and the same argument gives the $8$-vertex Lo Shu gem.
-
 
 \end{document}

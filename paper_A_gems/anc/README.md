@@ -12,6 +12,6 @@ Squares are numbered 0..879 in the order of `squares880.txt` (one square per lin
 | `python3 siamese_proof.py` | symbolic verification of the Siamese theorem for all m >= 2 -> `results_siamese_proof.json` |
 | `python3 verify_numbers.py` | re-derives the other numbers in the paper (Table 2, Dudeney cross-tabulation, named squares, Siamese f-vectors n=3..21) -> `verify_numbers.json` |
 | `python3 solid_centroid.py` | number of gems whose solid centroid is not the origin (829) |
-| `python3 make_fig_vectors.py`, `make_fig_construction_d4.py`, `make_fig_symmetry.py`, `make_fig_geometry_880.py`, `make_fig_siamese_layers.py` | the figures (PDF, written to `../figures`) |
+| `python3 make_fig_vectors.py` (Fig. 1, `fig_vectors.pdf`), `make_fig_lines.py` (Fig. 2, `fig_lines.pdf`), `make_fig_moments.py` (Fig. 4, `fig_moments.pdf`; checks sum z x y = 0 and 60), `make_fig_construction_d4.py`, `make_fig_symmetry.py`, `make_fig_geometry_880.py`, `make_fig_siamese_layers.py` | the figures (PDF, written to `../figures`) |
 
-`gem_geometry.py` (exact hull, congruence), `isolib.py` (isometry groups), `siamese_util.py`, `gemfig.py` are libraries.
+`gem_geometry.py` (exact hull, congruence), `isolib.py` (isometry groups), `siamese_util.py`, `gemfig.py`, `vecfig.py` are libraries.

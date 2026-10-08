@@ -1,39 +1,45 @@
-"""Figure: the Magic Gem of Duerer's square as vectors from the centroid; one row's vertical components cancel."""
-from gemfig import *
+"""Figure A: Duerer's square as 16 vectors from the centroid O (left), and inside its Magic Gem (right)."""
+from vecfig import *
+import matplotlib.patheffects as pe
+HALO = [pe.withStroke(linewidth=2.5, foreground='white')]
 S = DURER; n = 4; N = 16
-h = exact_hull(S); P = h['P'] / 2.0
-fig = plt.figure(figsize=(6.5, 2.9))
-ax = fig.add_axes([0.0, 0.0, 0.5, 1.0], projection='3d')
-draw_faces(ax, h, P, alpha=0.05, lw=0.4)
-row = [i * n + j for i in [0] for j in range(n)]
+h = exact_hull(S); P = coords(S)
+assert np.allclose(P, h['P'] / 2.0) and abs(P.sum(0)).max() < 1e-12      # sum_ij p_ij = 0
+V = set(h['vertices'])
+ZF = -9.2
+fig = plt.figure(figsize=(6.5, 3.9))
+ELEV, AZIM = 26, -48
+def setup(ax):
+    style3d(ax, elev=ELEV, azim=AZIM); ax.set_zlim(-9.4, 8.2); ax.set_box_aspect((1, 1, 1.05)); ax.computed_zorder = False
+# (a) vectors alone
+ax = fig.add_axes([-0.02, 0.02, 0.54, 0.86], projection='3d'); setup(ax)
+floor(ax, ZF)
 for k in range(N):
-    if k in row: continue
-    ax.plot([0, P[k, 0]], [0, P[k, 1]], [0, P[k, 2]], color='#888888', lw=0.5)
-    ax.scatter(*P[k], s=6, color='#555555', depthshade=False)
-for k in row:
-    c = OI['verm'] if P[k, 2] > 0 else OI['blue']
-    ax.plot([0, P[k, 0]], [0, P[k, 1]], [0, P[k, 2]], color=c, lw=1.8)
-    ax.scatter(*P[k], s=16, color=c, depthshade=False)
-    off = 0.8 if P[k, 2] > 0 else -1.0
-    ax.text(P[k, 0], P[k, 1], P[k, 2] + off, f'{P[k,2]:+.1f}', fontsize=7, ha='center', color=c)
-ax.scatter([0], [0], [0], s=14, color='k', depthshade=False); ax.text(-0.6, 0, 1.2, 'O', fontsize=8)
-style3d(ax, elev=18, azim=-70)
-ax.text2D(0.02, 0.93, '(a)', transform=ax.transAxes, fontsize=9, weight='bold')
-# (b) cancellation of vertical components along the top row
-ax2 = fig.add_axes([0.58, 0.20, 0.39, 0.66])
-z = P[row, 2]; s = np.cumsum(z); start = np.concatenate([[0], s[:-1]])
-for j in range(n):
-    c = OI['verm'] if z[j] > 0 else OI['blue']
-    ax2.bar(j, z[j], bottom=start[j], width=0.55, color=c, alpha=0.85, edgecolor='k', lw=0.4)
-    ax2.text(j, start[j] + z[j] / 2, f'{S[0, j]}\n({z[j]:+.1f})', ha='center', va='center', fontsize=7, color='white', weight='bold')
-    if j < n - 1: ax2.plot([j + 0.275, j + 0.725], [s[j]] * 2, color='k', lw=0.5, ls=':')
-ax2.axhline(0, color='k', lw=0.8)
-ax2.annotate('', xy=(3.45, 0), xytext=(3.45, s[2]), arrowprops=dict(arrowstyle='->', color='k', lw=0.8))
-ax2.text(2.2, 4.0, 'running total\nreturns to $0$', fontsize=7, ha='center')
-ax2.set_xticks(range(n)); ax2.set_xticklabels([f'$j={j}$' for j in range(n)])
-ax2.set_ylabel(r'height $z_{0j}=s_{0j}-8.5$'); ax2.set_ylim(-9.5, 9.5); ax2.set_xlim(-0.6, 3.8)
-for sp in ('top', 'right'): ax2.spines[sp].set_visible(False)
-ax2.set_title('(b) heights along the top row', loc='left', fontsize=9, weight='bold')
-ax2.text(1.5, -8.3, r'$\sum_j z_{0j}=7.5-5.5-6.5+4.5=0$', ha='center', fontsize=8)
-fig.savefig(f'{FIGDIR}/fig_vectors_row.pdf')
-print('ok')
+    drop(ax, P[k], ZF)
+for k in np.argsort(-P[:, 0] * np.sin(np.radians(AZIM)) * 0 + P[:, 1]):   # far (large y) first
+    vec(ax, P[k], lw=2.4, dot=30)
+for k in range(N):
+    up = P[k, 2] > 0
+    dx = {5: -0.55, 10: 0.45, 9: -0.4}.get(int(S.ravel()[k]), 0.0)
+    ax.text(P[k, 0] + dx, P[k, 1], P[k, 2] + (1.15 if up else -1.15), str(S.ravel()[k]), fontsize=8.5, weight='bold',
+            ha='center', va='bottom' if up else 'top', color=zcol_strong(P[k, 2]), zorder=20, path_effects=HALO)
+ax.scatter([0], [0], [0], s=40, color='k', depthshade=False, zorder=30)
+ax.text(-0.3, -0.2, -2.6, '$O$', fontsize=12, zorder=30, ha='right', path_effects=HALO)
+fig.text(0.015, 0.93, '(a)  16 vectors from $O$', fontsize=9.5, weight='bold')
+fig.text(0.015, 0.865, 'label = entry, colour = height $z$', fontsize=8, color='#444444')
+# (b) the gem
+ax2 = fig.add_axes([0.46, 0.02, 0.54, 0.86], projection='3d'); setup(ax2)
+floor(ax2, ZF)
+draw_faces(ax2, h, P, alpha=0.07, lw=0.6)
+for k in range(N):
+    vec(ax2, P[k], lw=1.6, alpha=0.9, dot=34 if k in V else 30, hollow=(k not in V))
+ax2.scatter([0], [0], [0], s=40, color='k', depthshade=False, zorder=30)
+ax2.text(-0.3, -0.2, -2.6, '$O$', fontsize=12, zorder=30, ha='right', path_effects=HALO)
+fig.text(0.55, 0.93, '(b)  their hull: the Magic Gem', fontsize=9.5, weight='bold')
+fig.text(0.55, 0.865, r'$\bullet$ vertex (12)    $\circ$ interior tip (4)', fontsize=8, color='#444444')
+fig.text(0.5, 0.012, r'$\sum\,\vec{p}_{ij}=\vec{0}$ for every arrangement:  $O$ is the centroid of the 16 tips', ha='center', fontsize=9)
+# colourbar
+cax = fig.add_axes([0.39, 0.125, 0.22, 0.02])
+cb = fig.colorbar(ScalarMappable(NORM, CMAP), cax=cax, orientation='horizontal'); cb.set_ticks([-7.5, 0, 7.5])
+cb.ax.tick_params(labelsize=7, length=2); cb.set_label('height $z=s-8.5$', fontsize=7.5, labelpad=1)
+fig.savefig(f'{FIGDIR}/fig_vectors.pdf'); print('ok', len(V))

@@ -33,5 +33,5 @@ def draw_faces(ax, h, P, colors=None, alpha=0.16, default=OI['blue'], lw=0.5):
     if colors:
         for idx, (c, a) in colors.items(): fc[idx] = c; al[idx] = a
     for poly, c, a in zip(polys, fc, al):
-        ax.add_collection3d(Poly3DCollection([poly], facecolor=c, edgecolor=OI['blue'], linewidths=lw, alpha=a))
+        ax.add_collection3d(Poly3DCollection([poly], facecolor=c, edgecolor=OI['blue'], linewidths=lw, alpha=a, zorder=2))
     return keys, polys

@@ -41,13 +41,13 @@ In particular $S$ is magic if and only if the vector sum of the $\mathbf p_c$ al
 (3) Since $M(n)=n\frac{N+1}2$, $\sum_{c\in L}z_c=\sum_{c\in L}s_c-M(n)=\delta_L$. The cells of a row $i$ have $y=y_i$ and $x$ running over all $x_j$ (sum $0$); for a column the roles are exchanged; each diagonal is invariant under $(x,y)\mapsto(-x,-y)$, so its position sums vanish.
 \end{proof}
 
+\Cref{fig:lines} illustrates \Cref{lem:lines}(3) for D\"urer's square: along each of four lines the heights stack head to tail and return to zero, so the vector sum of the line is horizontal, $(0,6,0)=4\,(0,\tfrac32,0)$ for the top row; after swapping two entries the stack of the affected lines fails to close, by the deviation $\delta_L$.
+
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=\textwidth]{figures/fig_vectors_row.pdf}
-\caption{The Magic Gem of D\"urer's square $S=\begin{smallmatrix}16&3&2&13\\5&10&11&8\\9&6&7&12\\4&15&14&1\end{smallmatrix}$ as an arrangement of vectors from the centroid.
-(a)~The $16$ vectors $\mathbf p_{ij}$ from the origin $O$ to the tips (grey), and the translucent convex hull. The four vectors of the top row are highlighted (orange: positive height, blue: negative height) and labelled with their heights $z_{0j}=s_{0j}-8.5$.
-(b)~The heights of the highlighted row stacked head to tail: $+7.5$, $-5.5$, $-6.5$, $+4.5$; the running total returns to zero, so the vector sum of the row is the horizontal vector $(0,6,0)=4\,(0,\tfrac32,0)$ of \Cref{lem:lines}(3).}
-\label{fig:vectors}
+\includegraphics[width=0.92\textwidth]{figures/fig_lines.pdf}
+\caption{Magic means that heights cancel along every line. \emph{Top:} for D\"urer's square, the four vectors of the top row, left column, main diagonal and anti-diagonal (coloured, with their entries; the other twelve in grey; the cells of the line are shaded on the floor) and below each the heights $z=s-8.5$ of the line stacked head to tail in line order; the running total returns to $0$, so $\sum_{c\in L}\mathbf p_c$ is the horizontal vector $(n\bar x_L,n\bar y_L,0)$ of \Cref{lem:lines}(3), here $(0,6,0)$, $(-6,0,0)$, $\mathbf 0$, $\mathbf 0$. \emph{Bottom:} the same after swapping the entries $3$ and $5$, which is not magic: the top row and the left column no longer close (deviations $\delta_L=+2$ and $-2$, in magenta) and their vector sums acquire the vertical component $\delta_L$; the diagonals do not contain the swapped cells and still close.}
+\label{fig:lines}
 \end{figure}
 
 \begin{example}[Lo Shu]
