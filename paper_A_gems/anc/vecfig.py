@@ -38,3 +38,34 @@ def vec(ax, p, lw=2.0, color=None, alpha=1.0, dot=26, hollow=False, zorder=5):
 
 def drop(ax, p, zf, color='#888888', lw=0.6):
     ax.plot([p[0], p[0]], [p[1], p[1]], [p[2], zf], color=color, lw=lw, ls=(0, (1.5, 2)), zorder=1)
+
+def shade(c, f):
+    """scale an RGB colour by f (f<1 darker)"""
+    import matplotlib.colors as mc
+    r = np.array(mc.to_rgb(c)); return tuple(np.clip(r * f, 0, 1))
+
+def disc(ax, cx, cy, z0, z1, r, col, edge, nseg=28, zo=0, lw=0.5, dark=1.0):
+    """thin cylinder (disc) between heights z0<z1 centred above (cx,cy); side + top + bottom"""
+    t = np.linspace(0, 2 * np.pi, nseg + 1)
+    xs, ys = cx + r * np.cos(t), cy + r * np.sin(t)
+    polys, fcs = [], []
+    for k in range(nseg):
+        polys.append([(xs[k], ys[k], z0), (xs[k + 1], ys[k + 1], z0), (xs[k + 1], ys[k + 1], z1), (xs[k], ys[k], z1)])
+        fcs.append(shade(col, dark * (0.86 + 0.14 * np.cos(0.5 * (t[k] + t[k + 1]) + 0.6))))
+    top = list(zip(xs[:-1], ys[:-1], [z1] * nseg)); bot = list(zip(xs[:-1], ys[:-1], [z0] * nseg))
+    ax.add_collection3d(Poly3DCollection(polys, facecolors=fcs, edgecolors=fcs, linewidths=0.25, zorder=zo))
+    ax.add_collection3d(Poly3DCollection([bot], facecolors=[shade(col, 0.9 * dark)], edgecolors=edge, linewidths=lw, zorder=zo))
+    ax.add_collection3d(Poly3DCollection([top], facecolors=[shade(col, dark)], edgecolors=edge, linewidths=lw, zorder=zo))
+
+def checkerboard(ax, n=4, thick=0.10, alpha=0.55, zo=0):
+    """thin checkerboard slab centred on z=0 (semi-transparent)"""
+    for i in range(n):
+        for j in range(n):
+            x0, y0 = j - (n - 1) / 2 - .5, (n - 1) / 2 - i - .5
+            c = '#8F8A80' if (i + j) % 2 == 0 else '#FFFFFF'
+            top = [(x0, y0, thick / 2), (x0 + 1, y0, thick / 2), (x0 + 1, y0 + 1, thick / 2), (x0, y0 + 1, thick / 2)]
+            ax.add_collection3d(Poly3DCollection([top], facecolor=c, edgecolor='#888888', linewidths=0.5, alpha=alpha, zorder=zo))
+    lim = n / 2
+    for (a, b, c_, d) in [((-lim, -lim), (lim, -lim), 0, 0), ((lim, -lim), (lim, lim), 0, 0), ((lim, lim), (-lim, lim), 0, 0), ((-lim, lim), (-lim, -lim), 0, 0)]:
+        side = [(a[0], a[1], -thick / 2), (b[0], b[1], -thick / 2), (b[0], b[1], thick / 2), (a[0], a[1], thick / 2)]
+        ax.add_collection3d(Poly3DCollection([side], facecolor='#9A958A', edgecolor='#666666', linewidths=0.5, alpha=0.75, zorder=zo))

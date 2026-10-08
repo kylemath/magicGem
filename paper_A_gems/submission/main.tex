@@ -148,6 +148,7 @@ We also prove, with computer assistance, that the Siamese square of every odd or
 
 \noindent\textbf{Keywords:} magic squares, convex polyhedra, symmetry, combinatorial geometry, moment of inertia
 \end{abstract}
+
 \section{Introduction}
 \label{sec:introduction}
 
@@ -173,7 +174,7 @@ The \emph{Magic Gem} $\mathcal G(S)$ is the convex hull of the tips of the $n^2$
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{fig_vectors.pdf}
-\caption{D\"urer's square $S=\begin{smallmatrix}16&3&2&13\\5&10&11&8\\9&6&7&12\\4&15&14&1\end{smallmatrix}$ as vectors from the centroid $O$. (a)~The $16$ vectors $\mathbf p_{ij}=(x_{ij},y_{ij},z_{ij})$ alone: each points from $O$ over the cell $(x_{ij},y_{ij})$ of the floor grid (dotted drop lines) to a tip at height $z_{ij}=s_{ij}-8.5$, labelled by the entry $s_{ij}$ and coloured by height (orange: above $O$, blue: below). (b)~The same vectors inside their convex hull, the Magic Gem: $12$ tips are vertices (filled dots) and $4$ lie in the interior (open dots). The vectors sum to $\mathbf 0$ for every arrangement of $1,\dots,16$ (\Cref{prop:centroid}); what singles out magic squares is how the heights cancel along lines (\Cref{fig:lines}).}
+\caption{D\"urer's square as vectors from the centroid $O$. (a)~The square as a heat map of the heights $z_{ij}=s_{ij}-8.5$ (orange: above $O$, blue: below), with the entries $s_{ij}$ printed in the cells; every row, column and both diagonals sum to $34$. (b)~The $16$ vectors $\mathbf p_{ij}=(x_{ij},y_{ij},z_{ij})$: each points from $O$ over the cell $(x_{ij},y_{ij})$ of the floor grid (dotted drop lines) to a tip at height $z_{ij}$, labelled by the entry $s_{ij}$. (c)~The same vectors inside their convex hull, the Magic Gem: $12$ tips are vertices (filled dots) and $4$ lie in the interior (open dots). The colour bar is shared by (a) and (b). The vectors sum to $\mathbf 0$ for every arrangement of $1,\dots,16$ (\Cref{prop:centroid}); what singles out magic squares is how the heights cancel along lines (\Cref{fig:lines}).}
 \label{fig:vectors}
 \end{figure}
 
@@ -196,6 +197,7 @@ The symmetry classification, the exact geometry of the $880$ gems and the Siames
 The reading of the line conditions as orthogonality conditions on the height function, the hierarchy of moment conditions, the statistics of random arrangements and the enumeration of low-energy squares are developed in the companion paper \cite{mathewson_companion}; none of its results is used here.
 
 \Cref{sec:gem} defines the gem, \Cref{sec:balance} treats balance, \Cref{sec:symmetry} symmetry, \Cref{sec:results} the exact geometry of the order-four and Siamese gems, \Cref{sec:discussion} open questions, and the appendices contain the computational methods and the remaining steps of the Siamese proof.
+
 \section{The Magic Gem}
 \label{sec:gem}
 
@@ -286,6 +288,7 @@ Magic squares are mapped to magic squares by $D_4$ (lines go to lines), so every
     All eight gems are drawn from the same viewpoint; by \Cref{prop:symmetry_invariance} they are the images of one another under the isometries $\hat g$, so they are congruent, and all have $f$-vector $(8,16,10)$ and volume $18$.}
     \label{fig:construction}
 \end{figure}
+
 \section{Balance: what the vectors from the centroid do and do not say}
 \label{sec:balance}
 
@@ -331,13 +334,20 @@ Conversely, if $\sum z\,\varphi(x)=\sum z\,\varphi(y)=0$ for all $\varphi$, then
 Exact enumeration over the $880$ essentially different magic squares of order $4$ gives $|P_{xy}|\in\{0,\dots,60\}$ with $48$ distinct values; it vanishes for $56$ classes and is non-zero for the other $824$.
 \end{proof}
 
-\Cref{fig:moments} shows both halves of \Cref{prop:signed_mass}: each column of heights has zero total mass, so the lever of signed masses balances, while the mixed moment $\sum z\,xy$ takes the value $0$ for D\"urer's square and $+60$ for another magic square.
+\Cref{fig:moments} shows both halves of \Cref{prop:signed_mass}. Picture the signed masses as piles of checkers on a checkerboard (panel~a): positive heights are piled up from the board, negative heights hang below it, and each row and column has as much height piled up as hanging down, which is $\rho_i=\gamma_j=0$. Hence each column of heights has zero total mass and the lever of signed masses balances, while the mixed moment $\sum z\,xy$ takes the value $0$ for D\"urer's square and $+60$ for another magic square. The same weighted balance in vector form is \Cref{fig:weighted}.
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=\textwidth]{fig_moments.pdf}
-\caption{Height-weighted moments, order $n=4$. (a)~The height function of D\"urer's square with row sums $\rho_i$ and column sums $\gamma_j$, all zero. (b)~Reading $z_{ij}$ as a force at position $x_j$ on a lever (up $+$, down $-$): every column has net force $\gamma_j=0$, hence $\sum z\,x=\sum_jx_j\gamma_j=0$ (\Cref{prop:signed_mass}(2)); the same holds for $y$ and the rows. (c)~The mixed moment is not forced: for two magic squares, the heights $z$ and the cell contributions $z\,x\,y$ (rounded to integers), which sum to $0$ for D\"urer's square and to $+60$ for the square $\begin{smallmatrix}1&6&11&16\\8&15&2&9\\12&3&14&5\\13&10&7&4\end{smallmatrix}$ (so $P_{xy}=-60$).}
+\includegraphics[width=0.88\textwidth]{fig_moments.pdf}
+\caption{Height-weighted moments, order $n=4$. (a)~D\"urer's square as piles of checkers on a $4\times4$ checkerboard, seen from the front right: the pile on cell $(i,j)$ has height $|z_{ij}|$, built of discs of height $1$ and one half-height disc for the half unit ($z=s-8.5$ takes half-integer values); positive piles stand on the board in orange, negative piles hang below it in blue, and $O$ (red) is the board centre at height $0$. Every row and column has as much height piled up as hanging down. (b)~The heights with row sums $\rho_i$ and column sums $\gamma_j$, all zero. (c)~Reading $z_{ij}$ as a force at position $x_j$ on a lever (up $+$, down $-$): every column has net force $\gamma_j=0$, hence $\sum z\,x=\sum_jx_j\gamma_j=0$ (\Cref{prop:signed_mass}(2)); the same holds for $y$ and the rows. (d)~The mixed moment is not forced: for two magic squares, the heights $z$ and the cell contributions $z\,x\,y$ (rounded to integers), which sum to $0$ for D\"urer's square and to $+60$ for the square $\begin{smallmatrix}1&6&11&16\\8&15&2&9\\12&3&14&5\\13&10&7&4\end{smallmatrix}$ (so $P_{xy}=-60$).}
 \label{fig:moments}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.9\textwidth]{fig_weighted_sum.pdf}
+\caption{The height-weighted vector sum $\sum_{i,j}z_{ij}\,(x_{ij},y_{ij})=(0,0)$ for two magic squares: D\"urer's square and square \#45 of the $880$ (the second square of \Cref{fig:moments}d). The $16$ moment arms $z_{ij}(x_{ij},y_{ij})$ (orange for $z>0$, blue for $z<0$) are laid head to tail in order of direction; the chain closes at $O$ in both cases, which is $\sum z\,x=\sum z\,y=0$ (\Cref{prop:signed_mass}(2)). The right-hand tables give $\sum z\,xy$ for the four quadrants of the grid; they add to $0$ for D\"urer's square and to $+60$ for square \#45, so the weighted balance does not determine the mixed moment (\Cref{prop:signed_mass}(3)).}
+\label{fig:weighted}
 \end{figure}
 
 Thus the height-weighted statements guaranteed by the line sums are exactly the pure axial ones: the vanishing of the first moment along each axis and Loly's invariant below.
@@ -363,6 +373,7 @@ By \Cref{lem:lines} and \Cref{prop:signed_mass}(2), $I_{xx}=I_{yy}=n^{2}(n^{2}-1
 The diagonal entries are the same for all $N!$ arrangements and the tensor is diagonal for every semi-magic square, so the inertia of the unit-mass point set does not depend on the square.
 The informative planar object is Loly's value-weighted body: its diagonal entries are fixed by the row and column sums (\Cref{cor:loly}), whereas the product of inertia $P_{xy}=-\sum s_{ij}x_{ij}y_{ij}$ is a mixed moment, fixed by no line sum; $D_4$ changes at most its sign.
 \end{remark}
+
 \section{Symmetry of the gems}
 \label{sec:symmetry}
 
@@ -401,7 +412,7 @@ The formulas for $\iota_g$ follow from \Cref{lem:complement}, and the determinan
 \end{proof}
 
 By \Cref{prop:selfcomp}, associative squares give gems with a point reflection: \emph{centrally symmetric} gems.
-(Every Siamese square is associative, which explains the symmetric vertex list in \Cref{prop:siamese-12}; D\"urer's square is associative and its gem is centrally symmetric, \Cref{fig:symmetry}a.)
+(Every Siamese square is associative, which explains the symmetric vertex list in \Cref{prop:siamese-12}; D\"urer's square is associative and its gem is centrally symmetric, \Cref{fig:symmetry}a, \Cref{fig:pointsets}a.)
 Self-complementary squares that are not associative give gems with a half-turn symmetry.
 For order four we determine the complete isometry group of every gem.
 For a finite set $X\subset\R^3$ let $\operatorname{Iso}(X)$ be the group of isometries of $\R^3$ mapping $X$ to itself.
@@ -471,6 +482,16 @@ The counts are those of the exact computation.
 (c)~A square with no symmetry (square \#102): the gem is chiral, and its mirror image in $z=0$ is the gem of the complement $17-S$.}
 \label{fig:symmetry}
 \end{figure}
+
+\Cref{fig:pointsets} shows the same three squares as point sets in the height picture: for the associative square the $16$ points form $8$ antipodal pairs $\{\mathbf p,-\mathbf p\}$ whose segments all pass through $O$; for the self-complementary square the half-turn about the dashed horizontal axis exchanges the $8$ pairs, each segment meeting the axis perpendicularly at its midpoint; the third square has no such pairing, in agreement with \Cref{thm:symmetry}.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{fig_pointsets.pdf}
+\caption{The $16$ points $\mathbf p_{ij}$ as spheres on stems over the floor grid, coloured by height $z$ (same squares and viewpoint as \Cref{fig:symmetry}; $O$ red). (a)~D\"urer's square: the points form $8$ antipodal pairs $\{\mathbf p,-\mathbf p\}$, joined by segments through $O$. (b)~Square \#124: the half-turn $(x,y,z)\mapsto(x,-y,-z)$ about the dashed $x$-axis exchanges $8$ pairs of points, each pair joined by a segment perpendicular to the axis; this gem is chiral. (c)~Square \#102: no non-trivial isometry preserves the point set.}
+\label{fig:pointsets}
+\end{figure}
+
 \section{Exact geometry: the order-four gems and the Siamese gems}
 \label{sec:results}
 
@@ -668,6 +689,7 @@ polygons $T,U,M,D,B$ outlined and the twelve vertex cells $v_1,\dots,v_{12}$ cir
 combinatorial type is constant for all odd $n\ge5$.}
 \label{fig:siamese-layers}
 \end{figure}
+
 \section{Discussion and open questions}
 \label{sec:discussion}
 
@@ -683,6 +705,7 @@ The coarse invariants, the vertex count (nine values) and the volume ($155$ valu
 \item \emph{Bounded hull-vertex counts.} Siamese gems have twelve vertices for every odd $n\ge5$ because, affinely, they are hulls of five lattice polygons whose shapes do not depend on $n$ (\Cref{prop:siamese-12}). Do the LUX, Strachey or diagonal-complement constructions have the same property, and is the fraction of vertices for a uniformly random magic square of large order bounded away from zero?
 \item \emph{Other square families.} The construction applies verbatim to semi-magic, pandiagonal and Franklin squares \cite{loly2007franklin}; the statements of \Cref{prop:signed_mass} already cover the semi-magic case. The gems of these families have not been examined.
 \end{enumerate}
+
 
 \bibliographystyle{plain}
 \bibliography{references}
@@ -753,5 +776,6 @@ by (c) this family of facets is closed under edge-adjacency, and since the facet
 these are all the facets, so $P=Q$.  With (a), $P\subseteq\Phi(\mathcal G(S))\subseteq Q=P$, whose vertex set is
 $\{v_1,\dots,v_{12}\}$ by (d); mapping back by $\Phi^{-1}$ gives the statement, with $(V,E,F)=(12,26,16)$ read off from (b)--(c).
 For $m=1$ the triangles degenerate to points and the same argument gives the $8$-vertex Lo Shu gem.
+
 
 \end{document}

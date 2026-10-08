@@ -43,13 +43,20 @@ Conversely, if $\sum z\,\varphi(x)=\sum z\,\varphi(y)=0$ for all $\varphi$, then
 Exact enumeration over the $880$ essentially different magic squares of order $4$ gives $|P_{xy}|\in\{0,\dots,60\}$ with $48$ distinct values; it vanishes for $56$ classes and is non-zero for the other $824$.
 \end{proof}
 
-\Cref{fig:moments} shows both halves of \Cref{prop:signed_mass}: each column of heights has zero total mass, so the lever of signed masses balances, while the mixed moment $\sum z\,xy$ takes the value $0$ for D\"urer's square and $+60$ for another magic square.
+\Cref{fig:moments} shows both halves of \Cref{prop:signed_mass}. Picture the signed masses as piles of checkers on a checkerboard (panel~a): positive heights are piled up from the board, negative heights hang below it, and each row and column has as much height piled up as hanging down, which is $\rho_i=\gamma_j=0$. Hence each column of heights has zero total mass and the lever of signed masses balances, while the mixed moment $\sum z\,xy$ takes the value $0$ for D\"urer's square and $+60$ for another magic square. The same weighted balance in vector form is \Cref{fig:weighted}.
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=\textwidth]{figures/fig_moments.pdf}
-\caption{Height-weighted moments, order $n=4$. (a)~The height function of D\"urer's square with row sums $\rho_i$ and column sums $\gamma_j$, all zero. (b)~Reading $z_{ij}$ as a force at position $x_j$ on a lever (up $+$, down $-$): every column has net force $\gamma_j=0$, hence $\sum z\,x=\sum_jx_j\gamma_j=0$ (\Cref{prop:signed_mass}(2)); the same holds for $y$ and the rows. (c)~The mixed moment is not forced: for two magic squares, the heights $z$ and the cell contributions $z\,x\,y$ (rounded to integers), which sum to $0$ for D\"urer's square and to $+60$ for the square $\begin{smallmatrix}1&6&11&16\\8&15&2&9\\12&3&14&5\\13&10&7&4\end{smallmatrix}$ (so $P_{xy}=-60$).}
+\includegraphics[width=0.88\textwidth]{figures/fig_moments.pdf}
+\caption{Height-weighted moments, order $n=4$. (a)~D\"urer's square as piles of checkers on a $4\times4$ checkerboard, seen from the front right: the pile on cell $(i,j)$ has height $|z_{ij}|$, built of discs of height $1$ and one half-height disc for the half unit ($z=s-8.5$ takes half-integer values); positive piles stand on the board in orange, negative piles hang below it in blue, and $O$ (red) is the board centre at height $0$. Every row and column has as much height piled up as hanging down. (b)~The heights with row sums $\rho_i$ and column sums $\gamma_j$, all zero. (c)~Reading $z_{ij}$ as a force at position $x_j$ on a lever (up $+$, down $-$): every column has net force $\gamma_j=0$, hence $\sum z\,x=\sum_jx_j\gamma_j=0$ (\Cref{prop:signed_mass}(2)); the same holds for $y$ and the rows. (d)~The mixed moment is not forced: for two magic squares, the heights $z$ and the cell contributions $z\,x\,y$ (rounded to integers), which sum to $0$ for D\"urer's square and to $+60$ for the square $\begin{smallmatrix}1&6&11&16\\8&15&2&9\\12&3&14&5\\13&10&7&4\end{smallmatrix}$ (so $P_{xy}=-60$).}
 \label{fig:moments}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/fig_weighted_sum.pdf}
+\caption{The height-weighted vector sum $\sum_{i,j}z_{ij}\,(x_{ij},y_{ij})=(0,0)$ for two magic squares: D\"urer's square and square \#45 of the $880$ (the second square of \Cref{fig:moments}d). The $16$ moment arms $z_{ij}(x_{ij},y_{ij})$ (orange for $z>0$, blue for $z<0$) are laid head to tail in order of direction; the chain closes at $O$ in both cases, which is $\sum z\,x=\sum z\,y=0$ (\Cref{prop:signed_mass}(2)). The right-hand tables give $\sum z\,xy$ for the four quadrants of the grid; they add to $0$ for D\"urer's square and to $+60$ for square \#45, so the weighted balance does not determine the mixed moment (\Cref{prop:signed_mass}(3)).}
+\label{fig:weighted}
 \end{figure}
 
 Thus the height-weighted statements guaranteed by the line sums are exactly the pure axial ones: the vanishing of the first moment along each axis and Loly's invariant below.
