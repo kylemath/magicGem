@@ -34,17 +34,17 @@ def grid(ax, vals, texts, cmap=CMAP, norm=NORM, fs=9, tcol=None):
 # (a) piles of checkers: one disc = height 1 (last disc = half), up = orange, down = blue, board = plane z=0, O = centre
 import matplotlib.patheffects as pe
 HALO = [pe.withStroke(linewidth=2.5, foreground='white')]
-ZS = 0.11                                    # drawn thickness of one checker
+ZS = 0.075                                    # drawn thickness of one checker
 P1 = coords(S1)
 cnt = S1                                     # the pile on cell (i,j) has s_ij checkers
 assert cnt.sum(0).tolist() == [34] * 4 and cnt.sum(1).tolist() == [34] * 4           # 34 checkers in every row and column
 assert (cnt.ravel() * P1[:, 0]).sum() == 0 and (cnt.ravel() * P1[:, 1]).sum() == 0     # centre of mass of the checkers lies over O
 assert P1[:, 0].sum() == 0 and P1[:, 1].sum() == 0
 axp = A(0.2, 0.6, 3.6, 2.0, projection='3d')
-style3d(axp, elev=42, azim=-50); axp.set_zlim(-0.1, 2.2); axp.set_box_aspect((1, 1, 0.6), zoom=1.12); axp.computed_zorder = False
+style3d(axp, elev=48, azim=-80); axp.set_zlim(-0.1, 1.6); axp.set_box_aspect((1, 1, 0.45), zoom=1.2); axp.computed_zorder = False
 checkerboard(axp, alpha=0.9)
-cam = np.array([np.cos(np.radians(-50)), np.sin(np.radians(-50))]); depth = lambda k: P1[k, :2] @ cam
-Rr = 0.40
+cam = np.array([np.cos(np.radians(-80)), np.sin(np.radians(-80))]); depth = lambda k: P1[k, :2] @ cam
+Rr = 0.38
 for k in sorted(range(16), key=depth):
     x, y, z = P1[k]; col = CMAP(NORM(cnt.ravel()[k] - 8.5))[:3]    # same colour mapping as panels (b)-(d)
     for q in range(int(cnt.ravel()[k])):
@@ -52,7 +52,7 @@ for k in sorted(range(16), key=depth):
 for k in range(16):
     axp.text(P1[k, 0], P1[k, 1], 0.05 + cnt.ravel()[k] * ZS + 0.01, str(cnt.ravel()[k]), fontsize=6.5, weight='bold', ha='center', va='center', zorder=40, path_effects=[pe.withStroke(linewidth=1.8, foreground='white')])
 axp.scatter([0], [0], [0.06], s=55, color='#E4002B', edgecolor='k', linewidths=0.8, depthshade=False, zorder=50)
-axp.text(0.12, -0.05, 0.12, '$O$', fontsize=11, color='#E4002B', weight='bold', zorder=60, path_effects=HALO, ha='left', va='bottom')
+axp.text(-0.08, 0.08, 0.1, '$O$ ', fontsize=11, color='#E4002B', weight='bold', zorder=60, path_effects=HALO, ha='left', va='bottom')
 T(0.1, 0.1, "(a)  checkers on a checkerboard", fontsize=9.5, weight='bold', va='top')
 T(0.1, 0.38, 'cell $(i,j)$ carries $s_{ij}$ checkers (number and\ncolour = the entry $s_{ij}$)', fontsize=7.8, va='top', color='#333333')
 T(1.95, 2.62, r'$34$ checkers in every row and column;' + '\n' + r'their centre of mass lies over $O$ ($\sum s\,x=\sum s\,y=0$)', fontsize=7.8, ha='center', va='top', color='#333333')
