@@ -1,11 +1,12 @@
 \begin{abstract}
-A magic square can be read as an arrangement of vectors from the centroid whose vertical components cancel along every row, column and both diagonals.
-The \emph{Magic Gem} of an $n\times n$ magic square is the convex hull of the tips $\mathbf p_{ij}=(x_{ij},y_{ij},z_{ij})$ of these vectors, where $(x_{ij},y_{ij})$ is the centred cell and $z_{ij}$ the centred entry.
-We show that $\sum\mathbf p_{ij}=\mathbf 0$ for every arrangement, so unweighted vector balance is not specific to magic squares; the magic-specific consequences are the height-weighted moments $\sum z\,\varphi(x)=\sum z\,\varphi(y)=0$, which include Loly's invariant, while $\sum z\,xy$ is not forced.
-For order four we compute the $880$ gems exactly ($8$ to $16$ vertices, $39$ $f$-vectors, $352$ combinatorial types, $155$ volumes, $616$ congruence classes) and, by an exact computer-assisted calculation, determine all their isometry groups: the $48$ associative squares give centrally symmetric gems, the $304$ remaining self-complementary squares give gems with exactly one half-turn symmetry, and the other $528$ gems have none; every gem is chiral except the $48$ centrally symmetric ones.
-Every gem lies in a box that depends only on $n$, certain corner and side-extreme points are always vertices, and the $880$ gems have $554$ distinct Ehrhart polynomials.
-We also prove, with computer assistance, that the Siamese square of every odd order $n\ge5$ has a gem with exactly twelve vertices.
+To an $n\times n$ magic square $S$ we attach the points $\mathbf p_{ij}=(x_{ij},y_{ij},z_{ij})\in\R^3$, where $(x_{ij},y_{ij})$ is the centred cell and $z_{ij}$ the centred entry, and call their convex hull the \emph{Magic Gem} $\mathcal G(S)$; its lower and upper faces project onto the regular subdivisions of the $n\times n$ grid induced by the heights $z$ and $-z$.
+For every semi-magic square of every order the covariance matrix of the point set is $\operatorname{diag}(a_n,a_n,b_n)$ with $a_n\neq b_n$; we deduce that the point set has a non-trivial isometry exactly when the square is self-complementary, and that the point sets of two semi-magic squares are congruent exactly when the squares agree up to the dihedral group and complementation.
+For the $880$ magic squares of order four we compute the gems exactly and show that no gem has an isometry beyond those of its point set: $48$ gems are centrally symmetric, $304$ have a single half-turn, the other $528$ are asymmetric and chiral, and the gems fall into $616$ congruence classes, $352$ combinatorial types and $39$ $f$-vectors, with $8$ to $16$ vertices.
+For the Siamese (de la Loub\`ere) square of every odd order $n\ge5$ we prove that the gem has no vertices other than the twelve that the boundary of the grid forces (the four corners and, on each side, the cells of the smallest and largest entry), that the gem has $f$-vector $(12,26,16)$, and that its isometry group is $\{\pm\mathrm{id}\}$; the proof reduces to a table of slack polynomials in $m=(n-1)/2$.
+Over all linear magic squares of orders $5$, $7$, $9$, $11$ the largest vertex count is $18$, $25$, $31$, $36$, so bounded vertex counts are not a feature of linear constructions in general.
 \medskip
 
-\noindent\textbf{Keywords:} magic squares, convex polyhedra, symmetry, combinatorial geometry, moment of inertia
+\noindent\textbf{Keywords:} magic squares, convex polytopes, regular subdivisions, symmetry groups, Siamese method
+
+\noindent\textbf{MSC 2020:} 05B15, 52B05, 52B15, 52B20
 \end{abstract}

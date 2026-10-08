@@ -11,11 +11,11 @@ W.~S. Andrews.
 \newblock {\em Magic Squares and Cubes}.
 \newblock Dover Publications, 2nd edition, 1960.
 
-\bibitem{beck2007computing}
-Matthias Beck and Sinai Robins.
-\newblock {\em Computing the Continuous Discretely: Integer-Point Enumeration
-  in Polyhedra}.
-\newblock Undergraduate Texts in Mathematics. Springer, New York, 2007.
+\bibitem{barany1993random}
+Imre B{\'a}r{\'a}ny and Christian Buchta.
+\newblock Random polytopes in a convex polytope, independence of shape, and
+  concentration of vertices.
+\newblock {\em Mathematische Annalen}, 297:467--497, 1993.
 
 \bibitem{beck2010enumeration}
 Matthias Beck and Andrew van Herick.
@@ -33,6 +33,18 @@ Ian Cameron, Adam Rogers, and Peter~D. Loly.
   indexing.
 \newblock {\em Discussiones Mathematicae Probability and Statistics},
   33(1-2):121--149, 2013.
+
+\bibitem{loubere1693}
+Simon de~La~Loub{\`e}re.
+\newblock {\em A New Historical Relation of the Kingdom of Siam}.
+\newblock T. Horne, London, 1693.
+\newblock English translation of \emph{Du Royaume de Siam}, Paris, 1691.
+
+\bibitem{deloera2010triangulations}
+Jes{\'u}s~A. De~Loera, J{\"o}rg Rambau, and Francisco Santos.
+\newblock {\em Triangulations: Structures for Algorithms and Applications},
+  volume~25 of {\em Algorithms and Computation in Mathematics}.
+\newblock Springer, Berlin, 2010.
 
 \bibitem{diaconis1995rectangular}
 Persi Diaconis and Anil Gangolli.
@@ -52,16 +64,30 @@ Eug{\`e}ne Ehrhart.
 \newblock {\em Comptes Rendus de l'Acad{\'e}mie des Sciences, S{\'e}rie A},
   277:651--654, 1973.
 
+\bibitem{frenicle1693}
+Bernard Fr{\'e}nicle~de Bessy.
+\newblock Des quarrez ou tables magiques.
+\newblock In {\em Divers ouvrages de math{\'e}matique et de physique, par
+  Messieurs de l'Acad{\'e}mie Royale des Sciences}. Imprimerie Royale, Paris,
+  1693.
+
 \bibitem{gardner1976}
 Martin Gardner.
 \newblock Mathematical games: A breakthrough in magic squares, and the first
   perfect magic cube.
 \newblock {\em Scientific American}, 234(1):118--123, 1976.
 
-\bibitem{goldstein2002classical}
-Herbert Goldstein, Charles~P. Poole, and John~L. Safko.
-\newblock {\em Classical Mechanics}.
-\newblock Addison-Wesley, San Francisco, 3rd edition, 2002.
+\bibitem{gelfand1994discriminants}
+I.~M. Gelfand, M.~M. Kapranov, and A.~V. Zelevinsky.
+\newblock {\em Discriminants, Resultants, and Multidimensional Determinants}.
+\newblock Birkh{\"a}user, Boston, 1994.
+
+\bibitem{grunbaum1963measures}
+Branko Gr{\"u}nbaum.
+\newblock Measures of symmetry for convex sets.
+\newblock In {\em Convexity}, volume~7 of {\em Proceedings of Symposia in Pure
+  Mathematics}, pages 233--270. American Mathematical Society, Providence, RI,
+  1963.
 
 \bibitem{loly2004invariance}
 Peter~D. Loly.
@@ -83,7 +109,7 @@ Peter~D. Loly, Ian Cameron, Walter Trump, and Daniel Schindel.
 \bibitem{mathewson_companion}
 Kyle~Elliott Mathewson.
 \newblock Magic squares as orthogonality conditions on a height function, 2026.
-\newblock In preparation.
+\newblock Manuscript.
 
 \bibitem{nordgren2012properties}
 R.~P. Nordgren.
@@ -95,10 +121,21 @@ R.~P. Nordgren.
 \newblock Spectra of order-4 special magic squares.
 \newblock {\em Linear Algebra and its Applications}, 455:320--331, 2014.
 
+\bibitem{ollerenshaw1998most}
+Kathleen Ollerenshaw and David~S. Br{\'e}e.
+\newblock {\em Most-Perfect Pandiagonal Magic Squares: Their Construction and
+  Enumeration}.
+\newblock Institute of Mathematics and its Applications, Southend-on-Sea, 1998.
+
 \bibitem{pickover2002zen}
 Clifford~A. Pickover.
 \newblock {\em The Zen of Magic Squares, Circles, and Stars}.
 \newblock Princeton University Press, 2002.
+
+\bibitem{pinn1998number}
+Klaus Pinn and Christian Wieczerkowski.
+\newblock Number of magic squares from parallel tempering {M}onte {C}arlo.
+\newblock {\em International Journal of Modern Physics C}, 9(4):541--546, 1998.
 
 \bibitem{rogers2004inertia}
 Adam Rogers and Peter~D. Loly.
@@ -109,6 +146,11 @@ Adam Rogers and Peter~D. Loly.
 Adam Rogers and Peter~D. Loly.
 \newblock The electric multipole expansion for a magic cube.
 \newblock {\em European Journal of Physics}, 26(5):809--813, 2005.
+
+\bibitem{rogers1957difference}
+C.~A. Rogers and G.~C. Shephard.
+\newblock The difference body of a convex body.
+\newblock {\em Archiv der Mathematik}, 8:220--233, 1957.
 
 \bibitem{schneider2014convex}
 Rolf Schneider.
@@ -122,17 +164,11 @@ Richard~P. Stanley.
   graphs.
 \newblock {\em Duke Mathematical Journal}, 40:607--632, 1973.
 
-\bibitem{stanley1980decompositions}
-Richard~P. Stanley.
-\newblock Decompositions of rational convex polytopes.
-\newblock In {\em Combinatorial Mathematics, Optimal Designs and Their
-  Applications}, volume~6 of {\em Annals of Discrete Mathematics}, pages
-  333--342. 1980.
-
 \bibitem{trump2012enumeration}
 Walter Trump.
-\newblock Notes on magic squares and cubes.
-\newblock \url{https://www.trump.de/magic-squares/}.
+\newblock How many magic squares are there?
+\newblock \url{https://www.trump.de/magic-squares/howmany.html}, 2024.
+\newblock Accessed October 2026.
 
 \bibitem{ziegler1995lectures}
 G{\"u}nter~M. Ziegler.

@@ -1,65 +1,24 @@
 \section{Computational methods}
 \label{sec:appendix}
 
-\paragraph{Hardware and software.}
-All computations were run on an Apple M4 Max (16 cores, 128\,GB) under macOS, with Python 3.9.6, NumPy 2.0.2, SciPy 1.13.1 (Quickhull only seeds the exact hull computation) and NetworkX 3.2.1.
-The scalar identities of \Cref{sec:balance} (the value $n^2(n^4-1)/12$ for the semi-magic squares and the product-of-inertia statistics over the $880$ classes) were checked in exact integer arithmetic.
+All computations use Python 3.9 with NumPy 2.0, SciPy 1.13 (Quickhull), SymPy 1.13 and NetworkX 3.2; the scripts and data are the ancillary files in \texttt{anc/}, whose \texttt{README} lists the commands.
 
-\paragraph{Exact hulls and their classification.}
-Doubling all coordinates makes every point of a gem an integer vector.
-Facet planes are recovered from an initial Quickhull triangulation as primitive integer equations, coplanar triangles are merged into faces, vertices are the points on at least three facet planes, edges are vertex pairs sharing two facets, and volumes are exact rationals; Euler's relation $V-E+F=2$ is checked for every gem.
+\paragraph{Exact hulls.}
+Doubling all coordinates makes every point an integer vector.
+A floating-point Quickhull triangulation is used only to propose candidate facet planes, which are recomputed as primitive integer equations from three points each; coplanar triangles are merged.
+The hull is then certified in integer arithmetic: every one of the $N$ points satisfies every facet inequality, every edge of every facet polygon lies in exactly two facets (so the facets form a closed surface and are all the facets), and $V-E+F=2$.
+Vertices are the points on at least three facet planes, interior points are those satisfying every facet inequality strictly, and volumes are exact rationals.
+For the $880$ order-four gems this takes about $6$\,s in total.
+
+\paragraph{Combinatorial types, isometries, congruence.}
 Combinatorial types are the isomorphism classes of the bipartite vertex--facet incidence graphs, grouped by a Weisfeiler--Lehman hash and confirmed by explicit isomorphism tests.
-Isometry groups (\Cref{thm:symmetry}) are computed exactly as follows: the vertex set $V$ ($k$ points, doubled integer coordinates) is centred by $\mathbf q\mapsto k\mathbf q-\sum V$; an isometry of $V$ is an orthogonal map fixing the origin, determined by the images of three linearly independent vertices, which are searched among the vertices with the same squared norm and mutual inner products; each candidate is accepted only if the induced bijection of $V$ preserves all pairwise integer squared distances. Congruence is decided exactly by testing for a bijection of hull-vertex sets preserving all integer squared distances (grouping by the sorted distance multiset, then an edge-labelled graph isomorphism), with a floating-point Kabsch superposition as a cross-check.
-For the Siamese proof (\Cref{prop:siamese-12}, \Cref{sec:app_siamese}) the finitely many polynomial identities and inequalities in $m$ are verified by exact integer polynomial arithmetic, an inequality $p(m)>0$ for all integers $m\ge2$ being certified by positivity of the coefficients of $p(2+t)$ or, failing that, by exact evaluation up to a Cauchy root bound.
+Isometry groups of a finite set $X$ (a vertex set or a full point set) are computed exactly: $X$ is centred at its centroid, every isometry is then orthogonal and determined by the images of three linearly independent points, which are searched among the points with the same squared norms and mutual inner products, and a candidate is accepted only if the induced permutation of $X$ preserves all pairwise integer squared distances.
+Two finite sets are congruent if and only if there is a bijection between them preserving all pairwise distances; this is tested by grouping by the sorted multiset of squared distances and then by an isomorphism test of the complete graphs with squared distances as edge labels.
+The point-set statements of \Cref{thm:pointset} are checked in the same way for all $880$ squares and for the Siamese squares of orders $3$ to $15$.
 
-\paragraph{Reproducibility.}
-The scripts for every table and figure and the JSON files containing all reported numbers are provided as ancillary files in the directory \texttt{anc/}, with a \texttt{README} listing the commands that regenerate them. Squares are numbered $0,\dots,879$ in the order of \texttt{anc/squares880.txt}.
-The web application at \url{https://kylemath.github.io/MagicGemWebpage/} displays the $880$ essentially different order-four squares and renders the gem of a selected one.
+\paragraph{Polynomial identities.}
+The slack polynomials of \Cref{tab:slacks} are computed with SymPy; a polynomial $p$ is certified positive for all integers $m\ge2$ by non-negativity of all coefficients of $p(2+t)$ and $p(2)>0$.
+The same script checks the closure of the facet list, the convexity of the quadrilaterals for $m\le60$, and the norms and inner products of Step~5.
 
-
-\section{Siamese gems: the remaining steps of the proof}
-\label{sec:app_siamese}
-
-We continue the proof of \Cref{prop:siamese-12} from the closed form $s(i,j)=n\langle i+j-m\rangle+\langle i+2j-2m\rangle+1$.
-
-\emph{Step 2: affine reduction to five layers.}  In gem coordinates $x=j-m$, $y=m-i$, with $\langle t\rangle=t-n\lfloor t/n\rfloor$,
-\[
-z=\underbrace{n(x-y+m)+(2x-y+m)+1-\tfrac{n^2+1}{2}}_{L(x,y)\ \text{affine}}+\;n\,\zeta(x,y),\quad
-\zeta:=-n\Big\lfloor\tfrac{x-y+m}{n}\Big\rfloor-\Big\lfloor\tfrac{2x-y+m}{n}\Big\rfloor .
-\]
-The map $\Phi(x,y,z)=(x,y,(z-L(x,y))/n)$ is an affine bijection, so $\Phi(\mathcal G(S))=\operatorname{conv}\{(x,y,\zeta)\}$ has the
-same face lattice and vertex cells as $\mathcal G(S)$.  In the box $|x|,|y|\le m$ both floors lie in $\{-1,0,1\}$, the pairs
-$(-1,1),(-1,0)$ and, by the central symmetry $\zeta(-x,-y)=-\zeta(x,y)$, $(1,-1),(1,0)$ are impossible, so $\zeta$ takes the
-five values $\pm(n+1),\pm1,0$ on the lattice points of five convex lattice polygons (\Cref{fig:siamese-layers}a):
-$T=\operatorname{conv}\{(-m,m),(-1,m),(-m,1)\}$ at $\zeta=n+1$ (cut out by $y\ge x+m+1$),
-$U=\operatorname{conv}\{(-m,1-m),(-m,0),(-1,m-1)\}$ at $\zeta=1$ (by $2x+m+1\le y\le x+m$),
-$M=\operatorname{conv}\{(-m,-m),(0,m),(m,m),(0,-m)\}$ at $\zeta=0$ (by $|y-2x|\le m$), and $D=-U$, $B=-T$ at $\zeta=-1,-(n+1)$.
-
-\emph{Step 3: the twelve points and sixteen planes.}  Let
-$v_1=(-m,m,n{+}1)$, $v_2=(-1,m,n{+}1)$, $v_3=(-m,1,n{+}1)$, $v_4=(-m,0,1)$,
-$v_5=(-m,-m,0)$, $v_6=(0,-m,0)$, $v_7=(0,m,0)$, $v_8=(m,m,0)$, $v_9=(m,0,-1)$,
-$v_{10}=-v_1$, $v_{11}=-v_3$, $v_{12}=-v_2$ (the cells listed in the statement), and consider the inequalities
-\begin{align*}
-&(1)\ \zeta\le 2m+2, \qquad (2)\ y\le m, \qquad (3)\ x\ge -m, \qquad (8)\ -2y+\zeta\le 2m,\\
-&(4)\ -2(m{+}1)x+(2m{+}1)y-m\zeta\le m(2m{+}1),\\
-&(5)\ 2(m{+}1)x-2(m{+}1)y+(2m{+}1)\zeta\le 2m(m{+}1),\\
-&(6)\ 2m(m{+}2)x-(2m^2{+}2m{-}1)y+m(2m{+}1)\zeta\le m(2m^2{+}2m{-}1),\\
-&(7)\ 2mx-y+m\zeta\le m(2m{-}1),
-\end{align*}
-together with their images $(1')$--$(8')$ under $(x,y,\zeta)\mapsto-(x,y,\zeta)$; let $Q$ be the polyhedron they define.
-The script \texttt{siamese\_proof.py} verifies, as polynomial identities and inequalities in $m$ valid for all integers $m\ge2$
-(\Cref{sec:appendix}): (a)~every vertex of $T,U,M,D,B$ at its height satisfies all $16$ inequalities, so
-$\Phi(\mathcal G(S))\subseteq Q$; (b)~each plane contains exactly the following $v$'s, all others lying strictly inside:
-\[
-\begin{array}{llll}
-(1)\colon v_1v_2v_3, & (2)\colon v_1v_2v_8v_7, & (3)\colon v_1v_3v_5v_4, & (4)\colon v_1v_4v_7,\\
-(5)\colon v_2v_3v_6, & (6)\colon v_2v_6v_9, & (7)\colon v_2v_8v_9, & (8)\colon v_3v_5v_6,
-\end{array}
-\]
-with centrally symmetric lists for $(1')$--$(8')$; (c)~the quadrilaterals are in convex position in the cyclic order given, so
-the $16$ face polygons have $26$ distinct edges, each shared by exactly two polygons; (d)~each $v_k$ lies on three planes with
-independent normals.  By (b) each plane supports $P:=\operatorname{conv}\{v_1,\dots,v_{12}\}$ in a facet with the stated vertices;
-by (c) this family of facets is closed under edge-adjacency, and since the facet-adjacency graph of a $3$-polytope is connected
-these are all the facets, so $P=Q$.  With (a), $P\subseteq\Phi(\mathcal G(S))\subseteq Q=P$, whose vertex set is
-$\{v_1,\dots,v_{12}\}$ by (d); mapping back by $\Phi^{-1}$ gives the statement, with $(V,E,F)=(12,26,16)$ read off from (b)--(c).
-For $m=1$ the triangles degenerate to points and the same argument gives the $8$-vertex Lo Shu gem.
+\paragraph{Sampling.}
+The random-arrangement statistics of \Cref{sec:discussion} use Qhull in floating point, with the vertex sets of the first $100$ hulls of each batch rechecked in exact arithmetic; the magic squares for $n=5,\dots,8$ were generated by simulated annealing on the sum of squared line deviations (\texttt{anc/sa\_magic.c}).

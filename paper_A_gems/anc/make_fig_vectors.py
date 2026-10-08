@@ -57,10 +57,9 @@ for k in range(N):
 ax2.scatter([0], [0], [0], s=36, color='k', depthshade=False, zorder=30)
 ax2.text(-0.3, -0.2, -2.6, '$O$', fontsize=11, zorder=30, ha='right', path_effects=HALO)
 fig.text(0.655, 0.965, '(c)  their hull: the Magic Gem', fontsize=9, weight='bold', va='top')
-fig.text(0.655, 0.905, r'$\bullet$ vertex (12)    $\circ$ strictly interior (4)', fontsize=7.8, color='#444444', va='top')
-fig.text(0.66, 0.012, r'$\sum\,\vec{p}_{ij}=\vec{0}$ for every arrangement:  $O$ is the centroid of the 16 tips', ha='center', fontsize=9)
+fig.text(0.655, 0.905, r'$\bullet$ vertex (12)    $\circ$ interior (4)', fontsize=7.8, color='#444444', va='top')
 # shared colourbar
 cax = fig.add_axes([0.05, 0.145, 0.22, 0.02])
 cb = fig.colorbar(ScalarMappable(NORM, CMAP), cax=cax, orientation='horizontal'); cb.set_ticks([-7.5, 0, 7.5])
 cb.ax.tick_params(labelsize=7, length=2); cb.set_label('height $z=s-8.5$', fontsize=7.5, labelpad=1)
-fig.savefig(f'{FIGDIR}/fig_vectors.pdf'); print('ok', len(V))
+fig.savefig(f'{FIGDIR}/fig_vectors.pdf', bbox_inches='tight', pad_inches=0.03); print('ok', len(V))

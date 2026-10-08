@@ -22,7 +22,7 @@ assert (siamese(n) == siamese_closed_form(n)).all()
 pts = zeta_points(n)                     # (x, y, zeta), integers
 zeta = pts[:, 2]
 levels = [n + 1, 1, 0, -1, -(n + 1)]
-names = {n + 1: 'T', 1: 'U', 0: 'M', -1: 'D', -(n + 1): 'B'}
+names = {n + 1: r'$\Lambda_{+2}$', 1: r'$\Lambda_{+1}$', 0: r'$\Lambda_{0}$', -1: r'$\Lambda_{-1}$', -(n + 1): r'$\Lambda_{-2}$'}
 cols = {n + 1: '#b0433a', 1: '#e0904a', 0: '#3b6fb6', -1: '#6aa36a', -(n + 1): '#7a4fa0'}
 assert sorted(set(zeta.tolist())) == sorted(levels)
 

@@ -1,14 +1,15 @@
 """Figure 5: the 16 points of three order-four squares as spheres on stems over the floor grid (height picture),
-with the symmetry made visible: (a) antipodal pairs through O, (b) pairs exchanged by a half-turn about a horizontal axis, (c) no symmetry.
+with the symmetry made visible: (d) antipodal pairs through O, (e) pairs exchanged by a half-turn about a horizontal axis, (f) no symmetry
+(lower half of Figure 6; the upper half is fig_symmetry.pdf).
 Same squares and viewpoint as fig_symmetry.pdf (Duerer, #124, #102)."""
 from vecfig import *
 import matplotlib.patheffects as pe
 HALO = [pe.withStroke(linewidth=2.2, foreground='white')]
 ELEV, AZIM = 20, -64
 ZF = -8.9
-CASES = [(DURER, 'a', 'point reflection', r'$(x,y,z)\mapsto(-x,-y,-z)$', 'associative: Dürer'),
-         (SQ[124], 'b', 'half-turn about axis', r'$(x,y,z)\mapsto(x,-y,-z)$', 'self-complementary: #124'),
-         (SQ[102], 'c', 'no symmetry', '', 'generic: #102')]
+CASES = [(DURER, 'd', 'point reflection', r'$(x,y,z)\mapsto(-x,-y,-z)$', 'associative: Dürer'),
+         (SQ[124], 'e', 'half-turn about axis', r'$(x,y,z)\mapsto(x,-y,-z)$', 'self-complementary: #124'),
+         (SQ[102], 'f', 'no symmetry', '', 'generic: #102')]
 PAIRCOL = ['#2E7D32', '#8E44AD', '#C2185B', '#00838F', '#6D4C41', '#7B8D00', '#455A64', '#E0A800']
 RED = '#E4002B'
 # ---- exact checks of the pairings drawn ----

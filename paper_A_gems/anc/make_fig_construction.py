@@ -1,5 +1,5 @@
-"""Figure 1 (round 1): construction of the Magic Gem (a-d) and the eight D4 images of the Lo Shu (e-l).
-Vector PDF, 6.5 in wide.  Hull faces from the exact hull code of Analysis/revision/gem_geometry."""
+"""Figure 3: construction of the Magic Gem of the Lo Shu: (a) square, (b) centred cells and heights, (c) point set, (d) gem.
+Vector PDF, 6.5 in wide; hull faces from the exact hull code gem_geometry.py."""
 import os, sys
 import numpy as np
 import matplotlib
@@ -65,9 +65,8 @@ def draw_square(ax, S, title, cell=True):
     ax.set_title(title, loc='left', pad=2)
 
 
-fig = plt.figure(figsize=(6.5, 5.3))
-gs = fig.add_gridspec(3, 4, height_ratios=[1.25, 0.95, 0.95], hspace=0.28, wspace=0.12,
-                      left=0.01, right=0.99, top=0.96, bottom=0.03)
+fig = plt.figure(figsize=(6.5, 1.75))
+gs = fig.add_gridspec(1, 4, wspace=0.12, left=0.01, right=0.99, top=0.88, bottom=0.02)
 
 # (a) the Lo Shu
 ax = fig.add_subplot(gs[0, 0]); draw_square(ax, LOSHU, '(a) Lo Shu $S$')
@@ -101,19 +100,7 @@ h = draw_gem(ax, LOSHU)
 V, E, F = h['f_vector']
 ax.set_title(f'(d) gem, $f=({V},{E},{F})$', loc='left', pad=2)
 
-# (e)-(l): the D4 strip
-images = [('$e$', LOSHU), ('$r$ (rot $90^\\circ$)', np.rot90(LOSHU, -1)), ('$r^2$', np.rot90(LOSHU, 2)),
-          ('$r^3$', np.rot90(LOSHU, 1)), ('$h$ (left-right)', np.fliplr(LOSHU)), ('$v$ (top-bottom)', np.flipud(LOSHU)),
-          ('$t$ (transpose)', LOSHU.T), ('$t\\,r^2$ (anti-transpose)', np.rot90(LOSHU, 2).T)]
-for k, (name, S) in enumerate(images):
-    row, col = 1 + k // 4, k % 4
-    ax = fig.add_subplot(gs[row, col], projection='3d')
-    hh = draw_gem(ax, S, alpha=0.3)
-    assert hh['f_vector'] == (8, 16, 10) and hh['volume'] == h['volume']
-    ax.set_title(f'({"efghijkl"[k]}) {name}', loc='left', pad=0, fontsize=7.5)
-    ax.text2D(0.5, -0.02, '  '.join(' '.join(str(v) for v in r) for r in S), transform=ax.transAxes,
-              fontsize=6.5, ha='center', va='top', family='monospace')
-
-outpdf = f'{FIGDIR}/fig01_construction_d4.pdf'
+assert h['f_vector'] == (8, 16, 10) and h['volume'] == 18
+outpdf = f'{FIGDIR}/fig_construction.pdf'
 fig.savefig(outpdf)
 print('wrote', outpdf)

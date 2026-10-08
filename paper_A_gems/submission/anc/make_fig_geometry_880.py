@@ -82,10 +82,10 @@ vc = {int(k): v for k, v in R['vertex_count_distribution'].items()}
 ks = sorted(vc)
 ax.bar(ks, [vc[k] for k in ks], color=BAR, width=0.8)
 for k in ks:
-    ax.text(k, vc[k] + 5, str(vc[k]), ha='center', va='bottom', fontsize=8, color='#222222')
-ax.set_xlabel('hull vertices $V$'); ax.set_ylabel('number of squares')
-ax.set_xticks(ks); ax.set_xticklabels([str(k) for k in ks], fontsize=7); ax.set_ylim(0, 430)
-ax.set_title('(a) hull vertex count', loc='left')
+    ax.text(k, vc[k] + 5, str(vc[k]), ha='center', va='bottom', fontsize=6.5, color='#222222')
+ax.set_xlabel('vertices $V$'); ax.set_ylabel('number of squares')
+ax.set_xticks(ks[::2]); ax.set_xticklabels([str(k) for k in ks[::2]], fontsize=7); ax.set_ylim(0, 430)
+ax.set_title('(a) number of vertices $V$', loc='left')
 
 # (b) volumes
 ax = fig.add_subplot(gs[0, 1])

@@ -1,97 +1,51 @@
-\section{Balance: what the vectors from the centroid do and do not say}
-\label{sec:balance}
+\section{Moments of the point set}
+\label{sec:moments}
 
-\paragraph{Unweighted balance holds for every arrangement.}
+By \Cref{lem:lines}(1) the origin is the centroid of the $N$ points for every arrangement, so the unweighted balance of the vectors $\mathbf p_{ij}$ carries no information about $S$.
+The line conditions are statements about moments weighted by the heights.
+Write $R_i=\sum_jz_{ij}$ and $C_j=\sum_iz_{ij}$ for the row and column deviations; $S$ is semi-magic if and only if all $R_i$ and $C_j$ vanish.
 
-\begin{proposition}[Centroid]
-\label{prop:centroid}
-For every arrangement $S$ of order $n$, $\sum_{i,j}\mathbf p_{ij}=\mathbf 0$: the origin is the centroid of the $N$ points, each of which is a vector from it. Moreover $\mathbf 0$ lies in the interior of $\mathcal G(S)$.
-\end{proposition}
+\paragraph{Row and column sums as moment conditions.}
+For every function $\varphi\colon\R\to\R$, grouping the cells by column and by row gives
+\begin{equation}
+\sum_{i,j}z_{ij}\,\varphi(x_{ij})=\sum_j\varphi(x_j)\,C_j,\qquad
+\sum_{i,j}z_{ij}\,\varphi(y_{ij})=\sum_i\varphi(y_i)\,R_i .
+\label{eq:moments}
+\end{equation}
+Since the functions $\varphi(x)$ on the grid span the indicator functions of the columns, $S$ is semi-magic if and only if both sums vanish for every $\varphi$.
+For $\varphi(t)=t$ this says that the \emph{dipole moment} $\sum z\,(x,y)$ of the signed masses $z_{ij}$ (total mass $0$) vanishes, in the multipole language of Rogers and Loly \cite{rogers2005multipole}; for $\varphi(t)=t^2$ it gives Loly's invariant below.
+The diagonal conditions are not of this form.
+The mixed moment $\sum z\,xy$ is not forced: over the $880$ order-four magic squares, $8\sum z\,xy$ takes $48$ distinct absolute values between $0$ and $480$ and vanishes for $56$ classes (\Cref{fig:moments}b, \Cref{fig:weighted}).
+It vanishes whenever $S$ is associative, since then $z$ is odd under $(x,y)\mapsto(-x,-y)$; this accounts for $48$ of the $56$.
 
-\begin{proof}
-The sum vanishes by \Cref{lem:lines}(1). The centroid of a finite point set that is not contained in a plane is an interior point of its convex hull, as a convex combination with all weights positive; the points $\mathbf p_{ij}$ span $\R^3$ since the positions $(x_{ij},y_{ij})$ do and the heights are not all equal for $n\ge2$.
-\end{proof}
-
-This is a consequence of centring the coordinates and carries no information about $S$; in particular it does not distinguish magic squares from arbitrary arrangements.
-It is a statement about the point set with unit weights, and not about the solid: the hull depends only on its vertex set, points that are not vertices do not affect it, and the centre of mass of the solid $\mathcal G(S)$ need not be the origin (for $829$ of the $880$ gems of order four it is not).
-The hull records the extent of the point set (extreme points, faces, volume), not how the heights are distributed over the cells.
-
-\paragraph{Height-weighted balance is what magic means.}
-Take the \emph{signed mass} $m_{ij}=z_{ij}$ at the planar position $(x_{ij},y_{ij})$, with total mass $0$.
-Write $\rho_i=\sum_jz_{ij}$ and $\gamma_j=\sum_iz_{ij}$ for the row and column mass sums; by \Cref{lem:lines}(3) they are the row and column deviations of $S$.
-
-\begin{proposition}[Height-weighted moments]
-\label{prop:signed_mass}
-Let $S$ be an arrangement of order $n\ge3$.
-\begin{enumerate}
-\item $S$ is semi-magic if and only if $\rho_i=0$ for every row and $\gamma_j=0$ for every column.
-\item For every function $\varphi\colon\R\to\R$,
-\[
-\sum_{i,j}z_{ij}\,\varphi(x_{ij})=\sum_j\varphi(x_j)\gamma_j,\qquad
-\sum_{i,j}z_{ij}\,\varphi(y_{ij})=\sum_i\varphi(y_i)\rho_i .
-\]
-Hence if $S$ is semi-magic, $\sum z\,\varphi(x)=\sum z\,\varphi(y)=0$ for every $\varphi$ (for $\varphi(t)=t^k$, all $k\ge0$; for $k=1$ the height-weighted centroid is the origin).
-Conversely, if $\sum z\,\varphi(x)=\sum z\,\varphi(y)=0$ for all $\varphi$, then $S$ is semi-magic.
-\item The mixed moment is not forced: for $n=4$ there are magic squares with $\sum z\,xy\neq0$.
-\end{enumerate}
-\end{proposition}
+\begin{corollary}[Loly \cite{loly2004invariance}]
+\label{cor:loly}
+For every arrangement, $J(S):=\sum_{i,j}s_{ij}(x_{ij}^2+y_{ij}^2)=\sum_jx_j^2C_j+\sum_iy_i^2R_i+\frac{n^2(n^4-1)}{12}$; in particular $J(S)=n^2(n^4-1)/12$ for every semi-magic square.
+\end{corollary}
 
 \begin{proof}
-(1) By \Cref{lem:lines}(3), a row sums to $M(n)$ if and only if its heights sum to $0$; likewise for columns.
-(2) Grouping the cells by column, $\sum_{i,j}z_{ij}\varphi(x_j)=\sum_j\varphi(x_j)\gamma_j$; the row identity is the same with $y_i,\rho_i$. If $\gamma=\rho=0$ both vanish. Conversely take $\varphi$ to be the indicator of a single value $x_{j_0}$ (the $x_j$ are distinct): then $\gamma_{j_0}=0$; likewise $\rho_{i_0}=0$, and (1) applies.
-(3) Since $\sum xy=0$, $\sum z\,xy=\sum s\,xy=-P_{xy}$, the product of inertia of Loly's value-weighted planar body.
-Exact enumeration over the $880$ essentially different magic squares of order $4$ gives $|P_{xy}|\in\{0,\dots,60\}$ with $48$ distinct values; it vanishes for $56$ classes and is non-zero for the other $824$.
+Substitute $s_{ij}=z_{ij}+\bar s$, apply \eqref{eq:moments} with $\varphi(t)=t^2$ to the first part and \Cref{lem:lines}(2) to $\bar s\sum(x^2+y^2)=\bar s\cdot2Na_n$.
 \end{proof}
 
-\Cref{fig:moments} shows both halves of \Cref{prop:signed_mass}. In panel~a the entries themselves are piles of checkers on a checkerboard, $s_{ij}$ checkers on cell $(i,j)$: every row and column carries $34$ checkers, so the horizontal centre of mass of all the checkers lies over the centre $O$ ($\sum s\,x=\sum s\,y=0$, which for $n=4$ is the height-weighted statement because $\sum x=\sum y=0$). Hence each column of heights has zero total mass and the lever of signed masses balances, while the mixed moment $\sum z\,xy$ takes the value $0$ for D\"urer's square and $+60$ for another magic square. The same weighted balance in vector form is \Cref{fig:weighted}.
+\begin{lemma}[Covariance]
+\label{lem:cov}
+The covariance matrix $\Sigma=\frac1N\sum_{i,j}\mathbf p_{ij}\mathbf p_{ij}^{\top}$ of the points of an arrangement $S$ has $\Sigma_{xx}=\Sigma_{yy}=a_n$, $\Sigma_{zz}=b_n$, $\Sigma_{xy}=0$, $N\Sigma_{xz}=\sum_jx_jC_j$ and $N\Sigma_{yz}=\sum_iy_iR_i$. If $S$ is semi-magic, $\Sigma=\operatorname{diag}(a_n,a_n,b_n)$, and $a_n<b_n$ for $n\ge2$.
+\end{lemma}
+
+\begin{proof}
+\Cref{lem:lines}(1)--(2) and \eqref{eq:moments} with $\varphi(t)=t$.
+\end{proof}
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.8\textwidth]{figures/fig_moments.pdf}
-\caption{Height-weighted moments, order $n=4$. (a)~D\"urer's square as checkers on a $4\times4$ checkerboard, seen from the front: the pile on cell $(i,j)$ has $s_{ij}$ checkers (labelled, and coloured by the entry $s_{ij}$ with the colour bar shown); every row and column carries $34$ checkers, and the centre of mass of all the checkers lies over the board centre $O$ (red), $\sum s\,x=\sum s\,y=0$. (b)~The heights with row sums $\rho_i$ and column sums $\gamma_j$, all zero. (c)~Reading $z_{ij}$ as a force at position $x_j$ on a lever (up $+$, down $-$): every column has net force $\gamma_j=0$, hence $\sum z\,x=\sum_jx_j\gamma_j=0$ (\Cref{prop:signed_mass}(2)); the same holds for $y$ and the rows. (d)~The mixed moment is not forced: for two magic squares, the heights $z$ and the cell contributions $z\,x\,y$ (rounded to integers), which sum to $0$ for D\"urer's square and to $+60$ for the square $\begin{smallmatrix}1&6&11&16\\8&15&2&9\\12&3&14&5\\13&10&7&4\end{smallmatrix}$ (so $P_{xy}=-60$).}
+\includegraphics[width=0.86\textwidth]{figures/fig_moments.pdf}
+\caption{(a)~D\"urer's square as piles of checkers, $s_{ij}$ on cell $(i,j)$, seen from the front of the board in the orientation of the square; each row and column carries $34$ checkers, so their centre of mass lies over the centre $O$. (b)~The mixed moment: for D\"urer's square and for square \#45 the integers $8\,z\,x\,y$ per cell; they sum to $0$ and to $480$.}
 \label{fig:moments}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.9\textwidth]{figures/fig_weighted_sum.pdf}
-\caption{The height-weighted vector sum $\sum_{i,j}z_{ij}\,(x_{ij},y_{ij})=(0,0)$ for two magic squares: D\"urer's square and square \#45 of the $880$ (the second square of \Cref{fig:moments}d). The $16$ moment arms $z_{ij}(x_{ij},y_{ij})$ (orange for $z>0$, blue for $z<0$) are laid head to tail in order of direction; the chain closes at $O$ in both cases, which is $\sum z\,x=\sum z\,y=0$ (\Cref{prop:signed_mass}(2)). The right-hand tables give $\sum z\,xy$ for the four quadrants of the grid; they add to $0$ for D\"urer's square and to $+60$ for square \#45, so the weighted balance does not determine the mixed moment (\Cref{prop:signed_mass}(3)).}
+\includegraphics[width=0.86\textwidth]{figures/fig_weighted_sum.pdf}
+\caption{The dipole moment $\sum z_{ij}\,(x_{ij},y_{ij})$ for D\"urer's square and square \#45 (\Cref{fig:moments}b): the $16$ vectors $z_{ij}(x_{ij},y_{ij})$ (orange for $z>0$, blue for $z<0$), sorted by direction and laid head to tail, close up at $O$. The tables give $\sum z\,xy$ over the four quadrants of the grid; the totals are $0$ and $60$.}
 \label{fig:weighted}
 \end{figure}
-
-Thus the height-weighted statements guaranteed by the line sums are exactly the pure axial ones: the vanishing of the first moment along each axis and Loly's invariant below.
-The mixed moment can vanish for structural reasons: if $S$ is associative, $z$ is odd under $(x,y)\mapsto(-x,-y)$ (\Cref{sec:symmetry}) and $xy$ is even, so $\sum z\,xy=0$ (this accounts for the order-$3$ square and for $48$ of the $56$ vanishing classes of order $4$).
-
-\begin{corollary}[Loly's moment of inertia]
-\label{cor:loly}
-For every arrangement, $I(S):=\sum_{i,j}s_{ij}(x_{ij}^2+y_{ij}^2)=\sum_jx_j^2\gamma_j+\sum_iy_i^2\rho_i+\frac{n^2(n^4-1)}{12}$.
-In particular $I(S)=n^2(n^4-1)/12$ for every semi-magic square.
-\end{corollary}
-
-\begin{proof}
-Substitute $s_{ij}=z_{ij}+\frac{N+1}2$. The first part is $\sum z\,(x^2+y^2)$, equal to $\sum_jx_j^2\gamma_j+\sum_iy_i^2\rho_i$ by \Cref{prop:signed_mass}(2); the second is $\frac{N+1}2\sum(x^2+y^2)=\frac{N+1}2\cdot2N\frac{n^2-1}{12}=\frac{n^2(n^4-1)}{12}$ by \Cref{lem:lines}(2).
-\end{proof}
-
-This is Loly's invariance \cite{loly2004invariance}, which he derived from the row and column sums.
-For $n=3,\dots,9$ the value is $60,340,1300,3885,9800,21840,44280$.
-
-\begin{remark}[Inertia tensor of the unit-mass point set]
-\label{rem:inertia}
-With unit masses at the $N$ points, the centre of mass is the origin and the inertia tensor about it is $I_{jk}=N(\delta_{jk}\operatorname{tr}\Sigma-\Sigma_{jk})$, where $\Sigma$ is the covariance matrix of the points \cite{goldstein2002classical}.
-By \Cref{lem:lines} and \Cref{prop:signed_mass}(2), $I_{xx}=I_{yy}=n^{2}(n^{2}-1)(n^{2}+2)/12$, $I_{zz}=n^{2}(n^{2}-1)/6$, $I_{xy}=0$, $I_{xz}=-\sum_jx_j\gamma_j$ and $I_{yz}=-\sum_iy_i\rho_i$.
-The diagonal entries are the same for all $N!$ arrangements and the tensor is diagonal for every semi-magic square, so the inertia of the unit-mass point set does not depend on the square.
-The informative planar object is Loly's value-weighted body: its diagonal entries are fixed by the row and column sums (\Cref{cor:loly}), whereas the product of inertia $P_{xy}=-\sum s_{ij}x_{ij}y_{ij}$ is a mixed moment, fixed by no line sum; $D_4$ changes at most its sign.
-\end{remark}
-
-\begin{remark}[Covariance determinant]
-\label{rem:detcov}
-Let $\Sigma$ be the covariance matrix of $(x,y,z)$ over the $N$ points.
-Since $\Sigma_{xy}=0$ and $\Sigma_{xx}=\Sigma_{yy}=:a$, $\Sigma_{zz}=:c$ are the same for all arrangements (\Cref{lem:lines}),
-\[
-\det\Sigma=a\,a\,c-a\,\Sigma_{xz}^2-a\,\Sigma_{yz}^2=a\bigl(ac-\Sigma_{xz}^2-\Sigma_{yz}^2\bigr),
-\]
-with $N\Sigma_{xz}=\sum z\,x$ and $N\Sigma_{yz}=\sum z\,y$.
-So among all arrangements of order $n$ the determinant, which is proportional to the squared volume of the covariance ellipsoid, is largest exactly when $\sum z\,x=\sum z\,y=0$, in particular for every semi-magic square (\Cref{prop:signed_mass}(2) with $\varphi(t)=t$).
-This concerns the point set, not its hull.
-Numerically ($n=4$, $10^5$ uniformly random arrangements, \texttt{anc/vertex\_statistics.py}), the hull volume of a random arrangement has mean $75.7$ and is positively rank-correlated with $\det\Sigma$ (Spearman $0.65$), and the median of the $880$ magic gem volumes ($85.2$; mean $84.05$) lies at the $91$st percentile of the random volumes, numerical statements about samples only.
-\end{remark}

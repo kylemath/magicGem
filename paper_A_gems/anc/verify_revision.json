@@ -1,0 +1,72 @@
+{
+ "regular_subdivisions": {
+  "n_distinct_lower_up_to_D4": 417,
+  "n_lower_triangulations": 548,
+  "vertical_facets": {
+   "4": 856,
+   "3": 20,
+   "2": 4
+  }
+ },
+ "types_composition": {
+  "0self+1pairs": 177,
+  "0self+2pairs": 16,
+  "0self+3pairs": 3,
+  "0self+4pairs": 1,
+  "0self+5pairs": 2,
+  "1self+0pairs": 93,
+  "1self+1pairs": 3,
+  "1self+2pairs": 1,
+  "2self+0pairs": 24,
+  "2self+1pairs": 2,
+  "3self+0pairs": 5,
+  "3self+1pairs": 2,
+  "4self+0pairs": 2,
+  "4self+1pairs": 2,
+  "4self+2pairs": 1,
+  "5self+0pairs": 1,
+  "5self+1pairs": 2,
+  "6self+0pairs": 2,
+  "6self+1pairs": 1,
+  "6self+4pairs": 1,
+  "7self+0pairs": 2,
+  "7self+3pairs": 1,
+  "8self+0pairs": 2,
+  "8self+1pairs": 1,
+  "10self+0pairs": 2,
+  "14self+1pairs": 1,
+  "18self+4pairs": 1,
+  "26self+3pairs": 1
+ },
+ "forced_count_880": {
+  "4": 8,
+  "5": 8,
+  "6": 104,
+  "7": 16,
+  "8": 332,
+  "9": 164,
+  "10": 132,
+  "11": 36,
+  "12": 72,
+  "13": 8
+ },
+ "I_distribution": {
+  "0": 37,
+  "1": 32,
+  "2": 353,
+  "3": 178,
+  "4": 280,
+  "5": 0,
+  "6": 0
+ },
+ "B_distribution": {
+  "0": 357,
+  "1": 204,
+  "2": 257,
+  "3": 40,
+  "4": 21,
+  "5": 0,
+  "6": 1
+ },
+ "runtime_seconds": 7.4
+}

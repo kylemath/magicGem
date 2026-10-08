@@ -1,26 +1,16 @@
 \documentclass[11pt,a4paper]{article}
 
-% Packages
 \usepackage[utf8]{inputenc}
-% T1 fontenc removed: basic TeX Live has no cm-super, so T1 text was rendered as bitmap Type 3 fonts.
 \PassOptionsToPackage{hyphens}{url}
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{mathtools}
 \usepackage{graphicx}
 \usepackage{booktabs}
-% Hyperlinks (disable duplicate anchor names)
-\usepackage[hypertexnames=false]{hyperref}
-% \usepackage{cleveref}  % Not available in basic TeX Live
-% \usepackage{algorithm}  % Not needed
-% \usepackage{algorithmic}  % Not needed
-% \usepackage{natbib}  % Not available in basic TeX Live
+\usepackage[hypertexnames=false,colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
 \usepackage{geometry}
 \usepackage{float}
-% \usepackage{subcaption}  % Not available in basic TeX Live
-% \usepackage{xcolor}  % Not available in basic TeX Live
 
-% Minimal reference helpers (cleveref not available in basic TeX Live).
-% We infer the reference type from the label prefix (e.g., fig:..., thm:..., sec:...).
+% \Cref / \cref: reference with the type name inferred from the label prefix (fig:, thm:, sec:, ...).
 \makeatletter
 \def\Cref@getprefix#1:#2\relax{#1}
 \def\Cref@prefix@sec{sec}
@@ -89,15 +79,13 @@
 \makeatother
 
 \geometry{margin=0.9in}
-\setlength{\emergencystretch}{2em} % reduce overfull lines without \sloppy
+\setlength{\emergencystretch}{2em}
 \setlength{\textfloatsep}{10pt plus 2pt minus 2pt}
 \setlength{\intextsep}{8pt plus 2pt minus 2pt}
 \setlength{\abovecaptionskip}{4pt}
-% captions in \small
 \makeatletter
 \long\def\@makecaption#1#2{\vskip\abovecaptionskip\small\sbox\@tempboxa{#1: #2}\ifdim\wd\@tempboxa>\hsize #1: #2\par\else\global\@minipagefalse\hb@xt@\hsize{\hfil\box\@tempboxa\hfil}\fi\vskip\belowcaptionskip}
 \makeatother
-% Float placement parameters (reduce float-page waste)
 \renewcommand{\topfraction}{0.9}
 \renewcommand{\bottomfraction}{0.6}
 \renewcommand{\textfraction}{0.07}
@@ -144,6 +132,7 @@
 \input{sections/balance}
 \input{sections/symmetry}
 \input{sections/geometry}
+\input{sections/siamese}
 \input{sections/discussion}
 
 \bibliographystyle{plain}
