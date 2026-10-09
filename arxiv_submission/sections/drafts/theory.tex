@@ -1,0 +1,625 @@
+% ---------------------------------------------------------------------------
+% sections/drafts/theory.tex  --  theory section for Magic Gems v5
+%
+% Assumes the preamble of main.tex: amsthm environments theorem/lemma/
+% proposition/corollary/definition/remark/example, and the macros
+% \Cov, \Var, \R.  (Note: \N is \mathbb{N} in main.tex, so the number of cells
+% is written as a plain N throughout.)
+% All exact statements below are checked in Analysis/revision/theory/verify_theory.py.
+% ---------------------------------------------------------------------------
+
+\section{Magic squares as orthogonality conditions on a height function}
+\label{sec:theory}
+
+Throughout, $n\ge 3$, $N=n^{2}$, and a cell of the $n\times n$ grid is a pair
+$c=(i,j)$ with $0\le i,j\le n-1$.  An \emph{arrangement} is a bijection
+$S=(s_{ij})$ from the cells onto $\{1,\dots,N\}$.  We use the centred
+coordinates of \Cref{def:gem_coords},
+\[
+x_{ij}=j-\tfrac{n-1}{2},\qquad y_{ij}=\tfrac{n-1}{2}-i,\qquad
+z_{ij}=s_{ij}-\tfrac{N+1}{2},
+\]
+and refer to $z=z(S)$ as the \emph{height function} of $S$.
+A \emph{line} is one of the $n$ rows, the $n$ columns, the main diagonal
+$\{i=j\}$ or the anti-diagonal $\{i+j=n-1\}$; there are $2n+2$ lines, each
+containing exactly $n$ cells.  With $M(n)=n(N+1)/2$ the magic constant, the
+\emph{deviation} of a line $L$ is
+\begin{equation}
+\delta_L(S)\;=\;\sum_{c\in L}s_c-M(n)\;=\;\sum_{c\in L}z_c ,
+\label{eq:line_dev}
+\end{equation}
+the second equality because $|L|=n$ and $M(n)=n\cdot\frac{N+1}{2}$.
+$S$ is \emph{semi-magic} if $\delta_L=0$ for the $2n$ rows and columns, and
+\emph{magic} if $\delta_L=0$ for all $2n+2$ lines.  We write $\rho_k=\delta_{\text{row }k}$,
+$\gamma_\ell=\delta_{\text{col }\ell}$, $\delta_{\mathrm{m}}$ and $\delta_{\mathrm{a}}$ for the
+row, column, main-diagonal and anti-diagonal deviations.
+
+\subsection{Height functions, the inner product, and the energies}
+\label{sec:theory_setup}
+
+Let $\mathcal F=\R^{\text{cells}}$ be the $N$-dimensional space of real
+functions on the grid, with the normalised inner product and norm
+\begin{equation}
+\langle f,g\rangle=\frac1N\sum_{i,j}f_{ij}g_{ij},\qquad \|f\|^{2}=\langle f,f\rangle .
+\label{eq:inner}
+\end{equation}
+The mean of $f$ is $\bar f=\langle f,\mathbf 1\rangle$ and its centring is
+$\tilde f=f-\bar f\mathbf 1$.  For two functions (``test function'' $\varphi$ and
+height $f$) the empirical covariance over the $N$ cells is
+$\Cov(\varphi,f)=\langle\tilde\varphi,\tilde f\rangle=\langle\tilde\varphi,f\rangle=\langle\varphi,\tilde f\rangle$;
+the last two equalities hold because $\tilde\varphi\perp\mathbf 1$ and $\tilde f\perp\mathbf 1$.
+
+\begin{lemma}[Means, variances, and covariance as an inner product]
+\label{lem:variances}
+For every arrangement $S$ of $\{1,\dots,N\}$:
+\begin{enumerate}
+\item $\bar x=\bar y=\bar z=0$, so $z$ is centred and $\Cov(\varphi,Z)=\langle\tilde\varphi,z\rangle=\langle\varphi,z\rangle$ for every $\varphi\in\mathcal F$;
+\item $\Var(X)=\Var(Y)=\dfrac{n^{2}-1}{12}$, \quad $\Var(Z)=\dfrac{N^{2}-1}{12}=\dfrac{n^{4}-1}{12}$, \quad $\Cov(X,Y)=0$;
+\item for every line $L$ with indicator $\mathbf 1_L$,\quad $\Cov(\mathbf 1_L,Z)=\dfrac{\delta_L(S)}{N}$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) $\sum_{i,j}x_{ij}=n\sum_{j=0}^{n-1}\bigl(j-\frac{n-1}2\bigr)=0$, and likewise for $y$;
+$\sum_{i,j}z_{ij}=\sum_{v=1}^{N}v-N\frac{N+1}2=0$.  Since $\bar z=0$,
+$\Cov(\varphi,Z)=\langle\tilde\varphi,z\rangle=\langle\varphi,z\rangle-\bar\varphi\langle\mathbf 1,z\rangle=\langle\varphi,z\rangle$.
+
+(2) $\Var(X)=\frac1N\sum_{i,j}x_{ij}^{2}=\frac1n\sum_{j=0}^{n-1}\bigl(j-\frac{n-1}2\bigr)^{2}$,
+which is the variance of the uniform distribution on $n$ equally spaced points, $(n^{2}-1)/12$;
+the same for $Y$.  $\Var(Z)=\frac1N\sum_{v=1}^{N}\bigl(v-\frac{N+1}2\bigr)^{2}=(N^{2}-1)/12$ by the same
+formula with $N$ points.  Finally $\sum_{i,j}x_{ij}y_{ij}=\bigl(\sum_j x_{\cdot j}\bigr)\bigl(\sum_i y_{i\cdot}\bigr)=0$
+because $x$ depends only on $j$ and $y$ only on $i$.
+
+(3) By (1), $\Cov(\mathbf 1_L,Z)=\langle\mathbf 1_L,z\rangle=\frac1N\sum_{c\in L}z_c=\delta_L/N$ by \eqref{eq:line_dev}.
+\end{proof}
+
+We write $R_k=\mathbf 1_{\{i=k\}}$, $C_\ell=\mathbf 1_{\{j=\ell\}}$,
+$D_{\mathrm{m}}=\mathbf 1_{\{i=j\}}$, $D_{\mathrm{a}}=\mathbf 1_{\{i+j=n-1\}}$ for the $2n+2$ line indicators.
+
+\begin{definition}[Complete and low-mode energies]
+\label{def:energies}
+For an arrangement $S$ with height function $z$,
+\begin{align}
+E_{\mathrm{full}}(S)&=\sum_{k=0}^{n-1}\Cov(R_k,Z)^{2}+\sum_{\ell=0}^{n-1}\Cov(C_\ell,Z)^{2}
++\Cov(D_{\mathrm m},Z)^{2}+\Cov(D_{\mathrm a},Z)^{2},\label{eq:Efull}\\
+E_{\mathrm{low}}(S)&=\Cov(X,Z)^{2}+\Cov(Y,Z)^{2}+\Cov(D_{\mathrm m},Z)^{2}+\Cov(D_{\mathrm a},Z)^{2}.\label{eq:Elow}
+\end{align}
+\end{definition}
+
+Note that \eqref{eq:Efull} sums over \emph{all} $n$ rows and \emph{all} $n$ columns.
+By \Cref{lem:variances}(3) it has the following elementary description, which we use constantly:
+\begin{equation}
+N^{2}E_{\mathrm{full}}(S)=\sum_{L}\delta_L(S)^{2}
+=\sum_k\rho_k^{2}+\sum_\ell\gamma_\ell^{2}+\delta_{\mathrm m}^{2}+\delta_{\mathrm a}^{2},
+\label{eq:Efull_devs}
+\end{equation}
+the sum of the squared line-sum deviations over all $2n+2$ lines.  In particular $N^{2}E_{\mathrm{full}}(S)$ is a
+non-negative integer.
+
+\paragraph{The dihedral action.}
+The dihedral group $D_4$ (order $8$) acts on the grid by the rotations and reflections of the square;
+each $g\in D_4$ is a bijection of the set of cells.  It acts on arrangements by $(gS)_c=s_{g^{-1}c}$
+and on functions by $(gf)_c=f_{g^{-1}c}$, so that $z(gS)=g\,z(S)$ and $\langle gf,gh\rangle=\langle f,h\rangle$.
+Every $g$ maps lines to lines: it permutes the set of $2n$ rows and columns among themselves and
+permutes the two diagonals among themselves.  Moreover, $g$ acts on the centred coordinates by
+a signed permutation: $gx\in\{\pm x,\pm y\}$ and $gy\in\{\pm x,\pm y\}$ with $\{gx,gy\}=\{\pm x,\pm y\}$
+as unordered pairs up to sign (a rotation by $90^\circ$ sends $(x,y)\mapsto(-y,x)$, a reflection
+sends $(x,y)\mapsto(-x,y)$, and so on).
+
+\begin{proposition}[$D_4$-invariance of the energies]
+\label{prop:d4_energy}
+For every $g\in D_4$ and every arrangement $S$: $E_{\mathrm{full}}(gS)=E_{\mathrm{full}}(S)$ and
+$E_{\mathrm{low}}(gS)=E_{\mathrm{low}}(S)$.
+\end{proposition}
+
+\begin{proof}
+For any line $L$, $\delta_{gL}(gS)=\sum_{c\in gL}(gS)_c=\sum_{c\in L}s_{c}=\delta_L(S)$ after the
+substitution $c\mapsto gc$.  Since $L\mapsto gL$ is a bijection of the set of all $2n+2$ lines,
+the multiset $\{\delta_L(gS)\}_L$ equals $\{\delta_L(S)\}_L$ and \eqref{eq:Efull_devs} gives
+$E_{\mathrm{full}}(gS)=E_{\mathrm{full}}(S)$.
+For $E_{\mathrm{low}}$: $\Cov(X,gZ)=\langle x,gz\rangle=\langle g^{-1}x,z\rangle$ and $g^{-1}x\in\{\pm x,\pm y\}$,
+and similarly for $y$, with $\{g^{-1}x,g^{-1}y\}$ being $\{\pm x,\pm y\}$ in some order; hence
+$\Cov(X,gZ)^{2}+\Cov(Y,gZ)^{2}=\Cov(X,Z)^{2}+\Cov(Y,Z)^{2}$.  Since $g$ permutes the two diagonals,
+$\Cov(D_{\mathrm m},gZ)^{2}+\Cov(D_{\mathrm a},gZ)^{2}$ is invariant as well.
+\end{proof}
+
+\begin{remark}[Why the $v4$ definition was not $D_4$-invariant]
+\label{rem:v4_not_invariant}
+The previous version of this paper omitted the last row and the last column from \eqref{eq:Efull},
+i.e.\ used $E_{v4}=E_{\mathrm{full}}-\bigl(\rho_{n-1}^{2}+\gamma_{n-1}^{2}\bigr)/N^{2}$, on the grounds
+that $\sum_k\rho_k=\sum_\ell\gamma_\ell=0$ makes one row and one column ``redundant''.  Redundant for the
+\emph{zero set}, yes; but not for the \emph{values}: the horizontal reflection $h:(i,j)\mapsto(i,n-1-j)$
+maps column $n-1$ to column $0$ and fixes the set of rows, so
+$E_{v4}(hS)-E_{v4}(S)=\bigl(\gamma_{n-1}^{2}-\gamma_{0}^{2}\bigr)/N^{2}$, which is nonzero
+whenever $|\gamma_0|\ne|\gamma_{n-1}|$.  Example: swapping the entries $1,2$ in the first row of the
+$4\times4$ magic square $\begin{smallmatrix}1&2&15&16\\12&14&3&5\\13&7&10&4\\8&11&6&9\end{smallmatrix}$
+gives $\gamma=(1,-1,0,0)$ and $\delta_{\mathrm m}=1$, so $N^{2}E_{\mathrm{full}}=3$ for the whole $D_4$ orbit while $N^{2}E_{v4}$ takes the
+values $2$ and $3$ on it.  All $E_{\mathrm{full}}$ statistics in this paper use the symmetric
+definition~\eqref{eq:Efull}.
+\end{remark}
+
+\subsection{The projection lemma}
+\label{sec:theory_projection}
+
+Let $\tilde R_k=R_k-\frac1n\mathbf 1$, $\tilde C_\ell=C_\ell-\frac1n\mathbf 1$,
+$\tilde D_{\mathrm m}=D_{\mathrm m}-\frac1n\mathbf 1$, $\tilde D_{\mathrm a}=D_{\mathrm a}-\frac1n\mathbf 1$
+be the centred line indicators (each line has $n$ of the $N$ cells, so each mean is $1/n$), and set
+\[
+W_R=\operatorname{span}\{\tilde R_k\},\quad W_C=\operatorname{span}\{\tilde C_\ell\},\quad
+W_D=\operatorname{span}\{\tilde D_{\mathrm m},\tilde D_{\mathrm a}\},\quad
+W=W_R+W_C+W_D\subset\mathbf 1^{\perp}.
+\]
+
+\begin{lemma}[Structure of $W$]
+\label{lem:W_structure}
+For $n\ge 3$:
+\begin{enumerate}
+\item $W_R=\{f:\ f_{ij}=a_i,\ \sum_i a_i=0\}$ and $W_C=\{f:\ f_{ij}=b_j,\ \sum_j b_j=0\}$; both have dimension $n-1$.
+\item $\langle\tilde R_k,\tilde R_{k'}\rangle=\frac1N(n\delta_{kk'}-1)$, and the same for columns.
+\item $W_R\perp W_C$, $W_R\perp W_D$, $W_C\perp W_D$.
+\item $\langle\tilde D_{\mathrm m},\tilde D_{\mathrm m}\rangle=\langle\tilde D_{\mathrm a},\tilde D_{\mathrm a}\rangle=\frac{n-1}{N}$ and
+$\langle\tilde D_{\mathrm m},\tilde D_{\mathrm a}\rangle=\frac{\epsilon_n}{N}$ with $\epsilon_n=0$ for $n$ odd and
+$\epsilon_n=-1$ for $n$ even; in particular $\tilde D_{\mathrm m},\tilde D_{\mathrm a}$ are linearly independent and $\dim W_D=2$.
+\item $W=W_R\oplus W_C\oplus W_D$ is an orthogonal direct sum and $\dim W=2n$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+For two lines $L,L'$, $N\langle\tilde{\mathbf 1}_L,\tilde{\mathbf 1}_{L'}\rangle
+=\sum_c(\mathbf 1_L-\tfrac1n)(\mathbf 1_{L'}-\tfrac1n)=|L\cap L'|-\tfrac{n}{n}-\tfrac{n}{n}+\tfrac{N}{n^{2}}=|L\cap L'|-1$.
+Two distinct rows are disjoint and a row meets itself in $n$ cells, giving (2).  A row meets every column
+and each diagonal in exactly one cell, and so does a column; hence all those inner products vanish, which
+is (3).  A diagonal meets itself in $n$ cells; the two diagonals meet in one cell (the centre) when $n$ is
+odd and in none when $n$ is even, giving (4); the Gram matrix $\frac1N\bigl(\begin{smallmatrix}n-1&\epsilon_n\\ \epsilon_n&n-1\end{smallmatrix}\bigr)$
+has determinant $\bigl((n-1)^{2}-\epsilon_n^{2}\bigr)/N^{2}>0$ for $n\ge3$, so the two vectors are independent.
+For (1): $\sum_k a_k\tilde R_k$ is the function $(i,j)\mapsto a_i-\bar a$, a function of $i$ alone with
+zero mean, and every such function arises (take $a$ itself); the map $a\mapsto a-\bar a$ has rank $n-1$.
+Finally (5) follows from (1), (3) and (4): the three subspaces are mutually orthogonal, hence independent,
+and $\dim W=(n-1)+(n-1)+2=2n$.
+\end{proof}
+
+\begin{remark}
+\label{rem:redundancy}
+$E_{\mathrm{full}}$ is a sum of $2n+2$ squares but $\dim W=2n$: the two identities
+$\sum_k\Cov(R_k,Z)=\sum_\ell\Cov(C_\ell,Z)=0$ (equivalently $\sum_k\tilde R_k=\sum_\ell\tilde C_\ell=0$)
+are the only linear relations among the centred indicators.  Dropping one row and one column removes the
+redundancy at the price of $D_4$-invariance (\Cref{rem:v4_not_invariant}); the symmetric sum keeps both.
+\end{remark}
+
+For a subspace $V\subset\mathcal F$ let $P_V$ denote the orthogonal projection with respect to \eqref{eq:inner}.
+
+\begin{lemma}[Projection lemma]
+\label{lem:projection}
+Let $S$ be an arrangement with height function $z$, and let $\rho,\gamma\in\R^{n}$ and
+$\delta=(\delta_{\mathrm m},\delta_{\mathrm a})\in\R^{2}$ be its line deviations.  Then
+\begin{enumerate}
+\item $P_{W_R}z$ is the function $(i,j)\mapsto\rho_i/n$ (the row means of $z$), $P_{W_C}z$ is $(i,j)\mapsto\gamma_j/n$, and
+\[
+\sum_{k}\Cov(R_k,Z)^{2}=\frac{\|\rho\|_{\R^{n}}^{2}}{N^{2}}=\frac1n\|P_{W_R}z\|^{2},\qquad
+\sum_{\ell}\Cov(C_\ell,Z)^{2}=\frac{\|\gamma\|_{\R^{n}}^{2}}{N^{2}}=\frac1n\|P_{W_C}z\|^{2}.
+\]
+\item With $G=\bigl(\begin{smallmatrix}n-1&\epsilon_n\\ \epsilon_n&n-1\end{smallmatrix}\bigr)$ as in \Cref{lem:W_structure}(4),
+$\|P_{W_D}z\|^{2}=\frac1N\,\delta^{\mathsf T}G^{-1}\delta$, while
+$\Cov(D_{\mathrm m},Z)^{2}+\Cov(D_{\mathrm a},Z)^{2}=\delta^{\mathsf T}\delta/N^{2}$.
+\item Consequently
+\begin{equation}
+E_{\mathrm{full}}(S)=\frac1n\Bigl(\|P_{W_R}z\|^{2}+\|P_{W_C}z\|^{2}\Bigr)+\frac{\delta^{\mathsf T}\delta}{N^{2}}
+=Q\bigl(P_Wz\bigr),
+\label{eq:Efull_projection}
+\end{equation}
+where $Q$ is the positive-definite quadratic form on $W$ given by
+$Q(w)=\frac1n\|P_{W_R}w\|^{2}+\frac1n\|P_{W_C}w\|^{2}+\frac1{N^{2}}\,w_D^{\mathsf T}G^{2}\,w_D$,
+$w_D\in\R^{2}$ denoting the coordinates of $P_{W_D}w$ in the basis $(\tilde D_{\mathrm m},\tilde D_{\mathrm a})$
+(so that $\|P_{W_D}w\|^{2}=\frac1N w_D^{\mathsf T}Gw_D$).
+In particular $E_{\mathrm{full}}$ depends on $z$ only through $P_Wz$, and
+\begin{equation}
+\frac{n-1-|\epsilon_n|}{n^{2}}\;\|P_Wz\|^{2}\;\le\;E_{\mathrm{full}}(S)\;\le\;\frac1n\;\|P_Wz\|^{2}.
+\label{eq:Efull_bounds}
+\end{equation}
+\item $E_{\mathrm{full}}\ne\|P_Wz\|^{2}$ in general: the weights $1/n$ on the row and column components and
+$(n-1\pm|\epsilon_n|)/N$ on the diagonal components differ, because the centred indicators are not an
+orthonormal system (\Cref{lem:W_structure}(2),(4)).  For odd $n$ the diagonal part is exactly
+$\frac{n-1}{N}\|P_{W_D}z\|^{2}$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) By \Cref{lem:W_structure}(1), $W_R$ is the space of zero-mean functions of $i$ alone.  The orthogonal
+projection of $z$ onto the space of all functions of $i$ alone is the function of row means,
+$(i,j)\mapsto\frac1n\sum_j z_{ij}=\rho_i/n$ by \eqref{eq:line_dev}; this already has zero mean because $z$ does
+(\Cref{lem:variances}(1)), so it equals $P_{W_R}z$.  Its squared norm is
+$\frac1N\sum_i n(\rho_i/n)^{2}=\|\rho\|^{2}/n^{3}$, while $\sum_k\Cov(R_k,Z)^{2}=\sum_k\rho_k^{2}/N^{2}=\|\rho\|^{2}/n^{4}$
+by \Cref{lem:variances}(3).  Columns are identical with $i\leftrightarrow j$.
+
+(2) Write $\Phi=(\tilde D_{\mathrm m},\tilde D_{\mathrm a})$.  The Gram matrix of $\Phi$ is $G/N$ and
+$\langle\tilde D_{\mathrm m},z\rangle=\Cov(D_{\mathrm m},Z)=\delta_{\mathrm m}/N$, so the vector of inner products is $\delta/N$.
+The standard formula $\|P_{\operatorname{span}\Phi}z\|^{2}=b^{\mathsf T}\Gamma^{-1}b$ with Gram matrix $\Gamma=G/N$
+and $b=\delta/N$ gives $\|P_{W_D}z\|^{2}=\frac1N\delta^{\mathsf T}G^{-1}\delta$.  The second statement is
+\Cref{lem:variances}(3).
+
+(3) Summing (1) and (2) gives the first equality in \eqref{eq:Efull_projection}.  Since the three subspaces
+are orthogonal (\Cref{lem:W_structure}(5)), $P_{W_R}z=P_{W_R}P_Wz$ etc.  If $P_{W_D}z=w_{\mathrm m}\tilde D_{\mathrm m}+w_{\mathrm a}\tilde D_{\mathrm a}$
+then $\delta_{\mathrm m}/N=\langle\tilde D_{\mathrm m},z\rangle=\langle\tilde D_{\mathrm m},P_{W_D}z\rangle=\bigl((n-1)w_{\mathrm m}+\epsilon_nw_{\mathrm a}\bigr)/N$
+and similarly for $\delta_{\mathrm a}$, i.e.\ $\delta=G\,w_D$; thus $\delta^{\mathsf T}\delta/N^{2}=w_D^{\mathsf T}G^{2}w_D/N^{2}$,
+which is the third piece of $Q$.  Each piece of $Q$ is positive definite on its orthogonal summand ($G^{2}$ is positive definite
+because $G$ is invertible), so $Q$ is positive definite on $W$.
+For the bounds, $\delta^{\mathsf T}\delta$ lies between $\lambda_{\min}(G)\,\delta^{\mathsf T}G^{-1}\delta$ and
+$\lambda_{\max}(G)\,\delta^{\mathsf T}G^{-1}\delta$, and the eigenvalues of $G$ are $n-1\pm\epsilon_n$, i.e.\
+$n-1\mp|\epsilon_n|$; hence the diagonal part of $E_{\mathrm{full}}$ lies between
+$\frac{n-1-|\epsilon_n|}{N}\|P_{W_D}z\|^{2}$ and $\frac{n-1+|\epsilon_n|}{N}\|P_{W_D}z\|^{2}$.
+Since $\frac{n-1+|\epsilon_n|}{n^{2}}\le\frac{n}{n^{2}}=\frac1n$ and
+$\|P_Wz\|^{2}=\|P_{W_R}z\|^{2}+\|P_{W_C}z\|^{2}+\|P_{W_D}z\|^{2}$ by orthogonality, \eqref{eq:Efull_bounds} follows.
+(4) is a restatement of the weights computed above.
+\end{proof}
+
+\begin{lemma}[Zero set of the energies]
+\label{lem:zero_set}
+For every arrangement $S$ of $\{1,\dots,N\}$:
+\begin{enumerate}
+\item $E_{\mathrm{full}}(S)=0\iff P_Wz=0\iff z\perp W\iff S$ is a magic square.
+\item $\sum_k\Cov(R_k,Z)^{2}+\sum_\ell\Cov(C_\ell,Z)^{2}=0\iff z\perp W_R\oplus W_C\iff S$ is semi-magic.
+\item $E_{\mathrm{low}}(S)=0\implies$ both diagonals sum to $M(n)$; the implication
+``$E_{\mathrm{low}}(S)=0\implies S$ magic'' holds for $n=3$ and fails for $n=4$ (\Cref{rem:n3_lowmode}).
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) $E_{\mathrm{full}}(S)=0$ iff $Q(P_Wz)=0$ iff $P_Wz=0$ (positive definiteness) iff $z\perp W$.
+By \eqref{eq:Efull_devs}, $E_{\mathrm{full}}(S)=0$ iff all $2n+2$ line deviations vanish, i.e.\ iff $S$ is magic.
+(2) is the same argument with the diagonal terms removed.  (3) The two diagonal terms of $E_{\mathrm{low}}$
+are $\delta_{\mathrm m}^{2}/N^{2}$ and $\delta_{\mathrm a}^{2}/N^{2}$; the rest is \Cref{rem:n3_lowmode}.
+\end{proof}
+
+\begin{remark}[What the projection lemma does and does not say]
+\label{rem:tautology}
+\Cref{lem:zero_set}(1) is the definition of a magic square rewritten in the language of orthogonality:
+``all line sums equal $M(n)$'' is literally ``$z\perp\tilde{\mathbf 1}_L$ for every line $L$''.  It is not a
+theorem about magic squares, and we do not present it as one.  Its use is as a change of viewpoint.
+Once the constraints are read as orthogonality of the height function to a $2n$-dimensional test space $W$,
+three things become available that are not visible in the line-sum formulation:
+(i) $W$ can be truncated or enlarged in natural ways (polynomial test functions, \Cref{sec:theory_hierarchy}),
+which produces a hierarchy of relaxations with Loly's inertia invariance as the degree-two member;
+(ii) for a uniformly random arrangement the quantities $\langle\varphi,z\rangle$ are permutation statistics in
+the sense of Hoeffding, whose exact moments and limiting law are computable (see the section on random arrangements);% TODO integrator: \Cref{sec:random_energy}
+
+(iii) a single swap changes $z$ by a multiple of a difference of two cell indicators, and \eqref{eq:Efull_devs}
+turns the change of $E_{\mathrm{full}}$ into a two-line count (\Cref{sec:theory_swap}).
+\end{remark}
+
+\subsection{The moment hierarchy}
+\label{sec:theory_hierarchy}
+
+The functions $x$ and $y$ are the degree-one polynomials in the column and row index.  Replacing them by
+higher powers gives a natural family of relaxations of the semi-magic condition.
+
+\begin{definition}[Degree-$k$ conditions]
+\label{def:degree_k}
+Let $f\in\mathcal F$ be centred ($\langle f,\mathbf 1\rangle=0$) and $k\ge1$.  We say $f$ satisfies the
+\emph{degree-$k$ conditions} if
+\[
+\langle x^{m},f\rangle=0\quad\text{and}\quad\langle y^{m},f\rangle=0\qquad\text{for all }1\le m\le k .
+\]
+For $f=z(S)$ these read $\Cov(X^{m},Z)=\Cov(Y^{m},Z)=0$ for $1\le m\le k$, by \Cref{lem:variances}(1).
+\end{definition}
+
+Write $x_j=j-\frac{n-1}2$ and $y_i=\frac{n-1}2-i$ for the $n$ distinct values taken by $x$ and $y$, and
+for centred $f$ let $\gamma_j(f)=\sum_i f_{ij}$ and $\rho_i(f)=\sum_j f_{ij}$ be its column and row sums
+(for $f=z(S)$ these are the deviations $\gamma,\rho$ of \eqref{eq:line_dev}).
+
+\begin{theorem}[Moment hierarchy]
+\label{thm:hierarchy}
+Let $n\ge3$ and let $f\in\mathcal F$ be centred.
+\begin{enumerate}
+\item[(a)] For every function $\varphi$ that depends only on the column index, $\langle\varphi,f\rangle=\frac1N\sum_j\varphi(j)\gamma_j(f)$;
+in particular $\langle x^{m},f\rangle=\frac1N\sum_j x_j^{m}\gamma_j(f)$ and $\langle y^{m},f\rangle=\frac1N\sum_i y_i^{m}\rho_i(f)$ for all $m\ge0$.
+Hence if $\gamma(f)=0$ and $\rho(f)=0$ (for $f=z(S)$: if $S$ is semi-magic), then
+$\langle x^{m},f\rangle=\langle y^{m},f\rangle=0$ for \emph{every} $m\ge0$.
+\item[(b)] If $k\ge n-1$, the degree-$k$ conditions imply $\gamma(f)=\rho(f)=0$.
+\item[(c)] If $1\le k\le n-2$, there is a centred $f$ satisfying the degree-$k$ conditions with $\gamma(f)\ne0$;
+explicitly, $f_{ij}=\frac1n(-1)^{j}\binom{k+1}{j}$ for $0\le j\le k+1$ and $f_{ij}=0$ for $j>k+1$.
+This $f$ violates the degree-$(k+1)$ condition.
+\end{enumerate}
+Thus, for real-valued height functions, the degree-$k$ conditions are equivalent to ``equal row sums and equal
+column sums'' exactly when $k\ge n-1$.
+\end{theorem}
+
+\begin{proof}
+(a) $\langle\varphi,f\rangle=\frac1N\sum_j\varphi(j)\sum_i f_{ij}=\frac1N\sum_j\varphi(j)\gamma_j(f)$; the row statement is symmetric.
+The last sentence is immediate.
+
+(b) Suppose $\langle x^{m},f\rangle=0$ for $1\le m\le k$ with $k\ge n-1$.  Together with
+$\sum_j\gamma_j(f)=\sum_{i,j}f_{ij}=0$ (the case $m=0$), part (a) says that $\gamma(f)\in\R^{n}$ is orthogonal to the
+$n$ vectors $(x_j^{m})_{j}$, $m=0,\dots,n-1$.  These are the columns of the Vandermonde matrix of the $n$
+\emph{distinct} nodes $x_0,\dots,x_{n-1}$, which is invertible; hence they span $\R^{n}$ and $\gamma(f)=0$.
+The same argument with the nodes $y_i$ gives $\rho(f)=0$.
+
+(c) Let $v_j=(-1)^{j}\binom{k+1}{j}$ for $0\le j\le k+1$ and $v_j=0$ for $k+1<j\le n-1$ (this needs
+$k+1\le n-1$).  For a polynomial $p$ define the forward difference $(\Delta p)(t)=p(t+1)-p(t)$; $\Delta$
+lowers the degree of a nonconstant polynomial by exactly one and kills constants, so $\Delta^{k+1}p=0$ whenever
+$\deg p\le k$.  Writing $E$ for the shift $(Ep)(t)=p(t+1)$ we have $\Delta=E-1$, and since $E$ and $1$ commute
+the binomial theorem gives $\Delta^{k+1}=\sum_{j=0}^{k+1}\binom{k+1}{j}(-1)^{k+1-j}E^{j}$, i.e.
+\begin{equation}
+(\Delta^{k+1}p)(0)=(-1)^{k+1}\sum_{j=0}^{k+1}(-1)^{j}\binom{k+1}{j}\,p(j)=(-1)^{k+1}\sum_{j=0}^{n-1}v_j\,p(j).
+\label{eq:finite_diff}
+\end{equation}
+Taking $p(t)=(t-\frac{n-1}2)^{m}$ with $0\le m\le k$ shows $\sum_j v_jx_j^{m}=0$; in particular ($m=0$)
+$\sum_jv_j=0$.  Now set $f_{ij}=v_j/n$.  Then $\sum_{i,j}f_{ij}=\sum_jv_j=0$, so $f$ is centred;
+$\rho_i(f)=\frac1n\sum_jv_j=0$ for every $i$, so all $\langle y^{m},f\rangle$ vanish by (a);
+$\gamma_j(f)=v_j$, so $\langle x^{m},f\rangle=\frac1N\sum_jv_jx_j^{m}=0$ for $1\le m\le k$ by \eqref{eq:finite_diff};
+and $\gamma_0(f)=v_0=1\ne0$.  Finally, for $p(t)=(t-\frac{n-1}2)^{k+1}$ we have $\Delta^{k+1}p\equiv(k+1)!\ne0$,
+so $\langle x^{k+1},f\rangle=\pm(k+1)!/N\ne0$.
+\end{proof}
+
+\begin{corollary}[$E_{\mathrm{low}}$ is the degree-one truncation]
+\label{cor:Elow_degree1}
+$E_{\mathrm{low}}(S)=\langle x,z\rangle^{2}+\langle y,z\rangle^{2}+\bigl(\delta_{\mathrm m}^{2}+\delta_{\mathrm a}^{2}\bigr)/N^{2}$:
+its first two terms are the degree-$1$ conditions of \Cref{def:degree_k} in squared form, and
+$E_{\mathrm{low}}(S)=0$ iff $z$ satisfies the degree-$1$ conditions and both diagonals sum to $M(n)$.
+By \Cref{thm:hierarchy}(a), every magic square has $E_{\mathrm{low}}=0$; by \Cref{thm:hierarchy}(c) the degree-$1$
+conditions characterise equal line sums (among real height functions) only when $n-1\le1$, i.e.\ never for $n\ge3$.
+\end{corollary}
+
+\begin{proof}
+Immediate from \Cref{lem:variances}(1),(3) and \Cref{thm:hierarchy}.
+\end{proof}
+
+\begin{corollary}[Loly's moment-of-inertia invariance is the degree-two statement]
+\label{cor:loly}
+Place a mass $s_{ij}$ at the planar point $(x_{ij},y_{ij})$ and let
+$I(S)=\sum_{i,j}s_{ij}\bigl(x_{ij}^{2}+y_{ij}^{2}\bigr)$ be the moment of inertia about the centre.  Then for every arrangement
+\begin{equation}
+I(S)=N\,\Cov\bigl(Z,\,X^{2}+Y^{2}\bigr)+\frac{N+1}{2}\sum_{i,j}\bigl(x_{ij}^{2}+y_{ij}^{2}\bigr)
+=\sum_j x_j^{2}\gamma_j+\sum_i y_i^{2}\rho_i+\frac{n^{2}(n^{2}+1)(n^{2}-1)}{12}.
+\label{eq:loly_identity}
+\end{equation}
+Consequently $I(S)=\dfrac{n^{2}(n^{4}-1)}{12}$ for every semi-magic square $S$ (no diagonal condition is needed),
+and more generally for every arrangement satisfying the degree-$2$ conditions.
+The values $60,340,1300,3885,9800,21840,44280$ for $n=3,\dots,9$ are OEIS~A126275 (Loly~\cite{loly2004invariance}).
+\end{corollary}
+
+\begin{proof}
+Substitute $s_{ij}=z_{ij}+\frac{N+1}2$:
+$I(S)=\sum_{i,j}z_{ij}(x_{ij}^{2}+y_{ij}^{2})+\frac{N+1}2\sum_{i,j}(x_{ij}^{2}+y_{ij}^{2})$.
+The first sum is $N\langle x^{2}+y^{2},z\rangle=N\Cov(X^{2}+Y^{2},Z)$ by \Cref{lem:variances}(1), and equals
+$\sum_jx_j^{2}\gamma_j+\sum_iy_i^{2}\rho_i$ by \Cref{thm:hierarchy}(a).  For the second,
+$\sum_{i,j}x_{ij}^{2}=N\Var(X)=n^{2}\frac{n^{2}-1}{12}$ and the same for $y$ (\Cref{lem:variances}(2)), so
+$\frac{N+1}2\cdot2\cdot\frac{n^{2}(n^{2}-1)}{12}=\frac{n^{2}(n^{2}+1)(n^{2}-1)}{12}=\frac{n^{2}(n^{4}-1)}{12}$.
+If $S$ satisfies the degree-$2$ conditions---in particular if $S$ is semi-magic, by \Cref{thm:hierarchy}(a)---the
+first two terms vanish.
+\end{proof}
+
+\Cref{thm:hierarchy} is a statement about real-valued height functions.  For arrangements, i.e.\ for
+$f=z(S)$ with $S$ a permutation of $\{1,\dots,N\}$, the integrality and boundedness of the line sums
+change the picture in an interesting way.
+
+\begin{proposition}[The hierarchy for permutations]
+\label{prop:perm_threshold}
+For $n\ge3$ let $k^{*}(n)$ be the least $k$ such that every arrangement $S$ of $\{1,\dots,N\}$ satisfying
+the degree-$k$ conditions is semi-magic.  Then:
+\begin{enumerate}
+\item $k^{*}(n)\le n-1$ for all $n$.
+\item $k^{*}(3)=2$ and $k^{*}(4)=3$.  Witnesses for the lower bounds:
+\begin{align*}
+n=3,\ \text{degree }1:&\quad
+\begin{pmatrix}1&3&9\\8&6&5\\7&4&2\end{pmatrix},\qquad \gamma=(1,-2,1),\ \rho=(-2,4,-2);\\[2pt]
+n=4,\ \text{degree }2:&\quad
+\begin{pmatrix}14&2&5&13\\8&15&7&4\\12&3&9&10\\1&11&16&6\end{pmatrix},\qquad \gamma=(1,-3,3,-1),\ \rho=0.
+\end{align*}
+\item $k^{*}(n)\le n-2$ for all $n\ge14$: for such $n$ the degree-$(n-2)$ conditions already force equal row and column sums.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(1) is \Cref{thm:hierarchy}(b).
+
+(2) Lower bounds.  For the $3\times3$ array, the column sums are $16,13,16$ and the row sums $13,19,13$, so
+$\gamma=(1,-2,1)$, $\rho=(-2,4,-2)$ and $\sum_jx_j\gamma_j=(-1)(1)+0+(1)(1)=0$, $\sum_iy_i\rho_i=(1)(-2)+0+(-1)(-2)=0$:
+the degree-$1$ conditions hold but the square is not semi-magic, so $k^{*}(3)\ge2$.
+For the $4\times4$ array, every row sums to $34$ and the column sums are $35,31,37,33$, so $\rho=0$ and
+$\gamma=(1,-3,3,-1)$, which is the vector $v$ of \Cref{thm:hierarchy}(c) with $k=2$; hence
+$\sum_jx_j^{m}\gamma_j=0$ for $m=1,2$ by \eqref{eq:finite_diff}, the degree-$2$ conditions hold, and the square
+is not semi-magic, so $k^{*}(4)\ge3$.  The upper bounds are (1).
+
+(3) Let $S$ satisfy the degree-$(n-2)$ conditions.  By \Cref{thm:hierarchy}(a), $\gamma$ is orthogonal to the
+$n-1$ linearly independent vectors $(x_j^{m})_j$, $m=0,\dots,n-2$, so it lies in their one-dimensional orthogonal
+complement in $\R^{n}$.  By \eqref{eq:finite_diff} with $k+1=n-1$, this complement is spanned by
+$v_j=(-1)^{j}\binom{n-1}{j}$, $j=0,\dots,n-1$ (which is orthogonal to all polynomials of degree $\le n-2$ and
+nonzero).  So $\gamma=tv$ with $t=\gamma_0\in\Z$ because $v_0=1$ and $\gamma$ is an integer vector.
+On the other hand every column sum of a permutation of $\{1,\dots,N\}$ lies between the sum of the $n$ smallest
+and the sum of the $n$ largest values, so
+\[
+|\gamma_j|\le\sum_{v=N-n+1}^{N}v-M(n)=\frac{n(2N-n+1)}{2}-\frac{n(N+1)}{2}=\frac{n(N-n)}{2}=\frac{n^{2}(n-1)}{2}.
+\]
+If $t\ne0$ then $\max_j|\gamma_j|\ge\binom{n-1}{\lfloor(n-1)/2\rfloor}$.  We claim
+$\binom{n-1}{\lfloor(n-1)/2\rfloor}>\frac{n^{2}(n-1)}2$ for all $n\ge14$.  For $n=14$: $\binom{13}{6}=1716>1274=\frac{14^{2}\cdot13}{2}$.
+Passing from $n$ to $n+1$ multiplies the left side by $\binom{n}{\lfloor n/2\rfloor}/\binom{n-1}{\lfloor(n-1)/2\rfloor}$,
+which equals $2$ for $n$ even and $\frac{2n}{n+1}\ge\frac{28}{15}$ for odd $n\ge14$, while it multiplies the right side by
+$\frac{(n+1)^{2}n}{n^{2}(n-1)}=\frac{(n+1)^{2}}{n(n-1)}\le\frac{225}{182}<\frac{28}{15}$ for $n\ge14$; the claim follows by induction.
+Hence $t=0$ and $\gamma=0$; the same argument applied to the rows gives $\rho=0$.
+\end{proof}
+
+\begin{remark}[Values of $k^{*}(n)$ for $5\le n\le13$]
+\label{rem:kstar_search}
+For $5\le n\le13$ a randomised swap search (\texttt{verify\_theory.py}) found, for each $n$, an arrangement
+with all row sums equal to $M(n)$ and column deviations $\gamma_j=(-1)^{j}\binom{n-1}{j}$; such an arrangement
+satisfies the degree-$(n-2)$ conditions without being semi-magic, so $k^{*}(n)=n-1$ for all $3\le n\le13$.
+Combined with \Cref{prop:perm_threshold}(3), the permutation threshold agrees with the linear-algebra threshold
+$n-1$ exactly for $n\le13$ and drops below it from $n=14$ on; determining $k^{*}(n)$ for $n\ge14$ is open.
+We note this because it illustrates concretely what the ``permutation constraint'' adds to the orthogonality
+reformulation: for real heights the test space of degree $\le n-2$ is too small, whereas for large $n$ the integer
+heights cannot realise the one direction it misses.
+\end{remark}
+
+\begin{remark}[Why the low-mode energy appeared to work for $n=3$]
+\label{rem:n3_lowmode}
+For $n=3$ an exhaustive enumeration of all $9!=362{,}880$ arrangements (\texttt{verify\_theory.py}, exact integer arithmetic) gives:
+$760$ arrangements satisfy the degree-$1$ conditions $\Cov(X,Z)=\Cov(Y,Z)=0$; exactly $72$ (the semi-magic squares)
+satisfy the degree-$2$ conditions, in accordance with $k^{*}(3)=2$; and exactly $8$ satisfy the degree-$1$ conditions
+\emph{together with} both diagonal conditions---and these $8$ are the magic squares.  So for $n=3$,
+$E_{\mathrm{low}}(S)=0\iff S$ is magic, but for the ``wrong'' reason: the degree-$1$ conditions leave the one-parameter
+families $\gamma=t(1,-2,1)$, $\rho=u(1,-2,1)$ open, and it is the two diagonal conditions combined with the requirement
+that the entries be a permutation of $1,\dots,9$ that happen to force $t=u=0$.  Nothing of the sort survives for $n=4$:
+the arrangement $\begin{smallmatrix}9&4&12&3\\16&1&14&7\\10&15&11&8\\2&5&6&13\end{smallmatrix}$ of \Cref{rem:four_term_insufficient}
+has $E_{\mathrm{low}}=0$ (both diagonals sum to $34$, $\gamma=(3,-9,9,-3)$, $\rho=(-6,4,10,-8)$) and is not even
+semi-magic; it satisfies the degree-$2$ condition in $x$ but not in $y$ ($\sum_iy_i^{2}\rho_i=-28$).
+\end{remark}
+
+\subsection{The single-swap formula}
+\label{sec:theory_swap}
+
+Let $a\ne b$ be two cells and let $S^{ab}$ be the arrangement obtained from $S$ by exchanging the entries in
+$a$ and $b$.  Define
+\begin{align*}
+m(a,b)&=\#\{\text{lines }L:\ L\text{ contains exactly one of }a,b\},\\
+u_S(c)&=\sum_{L\ni c}\delta_L(S)\qquad(\text{sum over the lines through }c).
+\end{align*}
+
+\begin{theorem}[Single-swap formula]
+\label{thm:swap}
+For every arrangement $S$ and cells $a\ne b$, with $d=s_b-s_a$,
+\begin{equation}
+N^{2}\bigl(E_{\mathrm{full}}(S^{ab})-E_{\mathrm{full}}(S)\bigr)=d^{2}\,m(a,b)+2d\,\bigl(u_S(a)-u_S(b)\bigr).
+\label{eq:swap_general}
+\end{equation}
+In particular, if $S$ is a magic square then, with $d=|s_a-s_b|$,
+\begin{equation}
+E_{\mathrm{full}}(S^{ab})=\frac{d^{2}\,m(a,b)}{N^{2}} .
+\label{eq:swap_magic}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+The swap changes the height function by $z(S^{ab})=z(S)+d(\mathbf 1_a-\mathbf 1_b)$.  For a line $L$,
+$\delta_L(S^{ab})=\delta_L(S)+d\bigl(\mathbf 1_L(a)-\mathbf 1_L(b)\bigr)$: the deviation increases by $d$ if $L$
+contains $a$ but not $b$, decreases by $d$ if $L$ contains $b$ but not $a$, and is unchanged if $L$ contains both
+or neither.  By \eqref{eq:Efull_devs},
+\begin{align*}
+N^{2}\Delta E_{\mathrm{full}}&=\sum_{L\ni a,\,L\not\ni b}\bigl[(\delta_L+d)^{2}-\delta_L^{2}\bigr]
++\sum_{L\ni b,\,L\not\ni a}\bigl[(\delta_L-d)^{2}-\delta_L^{2}\bigr]\\
+&=d^{2}m(a,b)+2d\Bigl(\sum_{L\ni a,\,L\not\ni b}\delta_L-\sum_{L\ni b,\,L\not\ni a}\delta_L\Bigr).
+\end{align*}
+Adding and subtracting the lines containing both $a$ and $b$ turns the bracket into $u_S(a)-u_S(b)$.
+If $S$ is magic, all $\delta_L(S)=0$, so $u_S\equiv0$ and $E_{\mathrm{full}}(S)=0$, giving \eqref{eq:swap_magic}.
+\end{proof}
+
+\begin{lemma}[The multiplicity $m(a,b)$]
+\label{lem:m_values}
+For distinct cells $a=(i,j)$, $b=(i',j')$:
+\begin{align*}
+m(a,b)=2\cdot[i\ne i']+2\cdot[j\ne j']&+[\text{exactly one of }a,b\text{ on the main diagonal}]\\
+&+[\text{exactly one of }a,b\text{ on the anti-diagonal}].
+\end{align*}
+Hence $2\le m(a,b)\le6$, and $m(a,b)=2$ if and only if $a$ and $b$ lie in a common row or a common column and
+neither of them lies on a diagonal.  Such pairs exist for every $n\ge3$ (for $n=3$ exactly one pair up to $D_4$:
+the two non-central cells of the middle row or column; for $n\ge4$ any two off-diagonal cells of a row).
+\end{lemma}
+
+\begin{proof}
+Rows: if $i=i'$ the common row contains both cells and no other row contains either; if $i\ne i'$ the row of $a$
+contains $a$ only and the row of $b$ contains $b$ only.  Columns likewise.  Each diagonal contributes $1$ or $0$
+according to whether it separates $a$ from $b$.  Since $a\ne b$, not both $i=i'$ and $j=j'$, so the row/column
+contribution is $2$ or $4$ and $m\ge2$; the maximum $6$ is $4+1+1$.  Now $m=2$ forces $i=i'$ or $j=j'$ (not both) and
+no diagonal separating $a$ from $b$.  If $i=i'$ and $j\ne j'$, both cells on the main diagonal would mean $j=i=j'$,
+impossible; so ``not separated by the main diagonal'' means neither is on it, and likewise for the anti-diagonal.
+The column case is symmetric.  For existence: a row $i$ contains the diagonal cells $(i,i)$ and $(i,n-1-i)$ (which
+coincide iff $n$ is odd and $i=\frac{n-1}2$), so it has at least $n-2\ge2$ off-diagonal cells when $n\ge4$, and the
+middle row of the $3\times3$ grid has the two off-diagonal cells $(1,0),(1,2)$.
+\end{proof}
+
+\begin{corollary}[Strict local minimality and the exact gap]
+\label{cor:local_min}
+Let $S$ be a magic square of order $n\ge3$.
+\begin{enumerate}
+\item Every single swap strictly increases the energy: $E_{\mathrm{full}}(S^{ab})\ge 2/N^{2}>0$ for all $a\ne b$.
+Thus every magic square is a strict local minimum of $E_{\mathrm{full}}$ on the set of arrangements with respect to transpositions, for every $n$.
+\item The smallest energy reachable by one swap is
+\[
+\Delta_{\min}(S)=\min_{a\ne b}\frac{(s_a-s_b)^{2}\,m(a,b)}{N^{2}},\qquad
+\frac{2}{N^{2}}\le\Delta_{\min}(S)\le\frac{6}{N^{2}} .
+\]
+The lower bound is attained iff some two cells with consecutive values share a row or column and are both off the
+diagonals; the upper bound follows by swapping any two consecutive values ($d=1$, $m\le6$).
+In particular $\Delta_{\min}(S)=\Theta(n^{-4})$ with explicit constants, uniformly over all magic squares of order $n$.
+\item The possible values of $N^{2}E_{\mathrm{full}}(S^{ab})$ are the integers $d^{2}m$ with $1\le d\le N-1$ and $2\le m\le6$.
+For the $880$ magic squares of order $4$, the multiset of $N^{2}\Delta_{\min}$ is $\{2:432,\ 3:420,\ 4:28\}$, and for the
+$8$ squares of order $3$ it is $\{3:8\}$ (computation; every one of the $105{,}888$ single swaps satisfies \eqref{eq:swap_magic} exactly).
+\end{enumerate}
+\end{corollary}
+
+\begin{proof}
+(1) and (2): by \eqref{eq:swap_magic}, $N^{2}E_{\mathrm{full}}(S^{ab})=d^{2}m(a,b)$ with $d\ge1$ and $m\ge2$
+(\Cref{lem:m_values}).  The pair of cells carrying the values $v,v+1$ has $d=1$ and $m\le6$, giving the upper bound;
+the characterisation of equality in the lower bound is \Cref{lem:m_values}.  (3) is immediate from \eqref{eq:swap_magic}
+and the computation reported in \Cref{sec:results}.
+\end{proof}
+
+\begin{remark}
+\label{rem:v4_gap}
+Version $4$ of this paper reported a ``trimodal'' distribution of swap gaps and a $1/n^{2}$ scaling of the minimum gap.
+Both were artifacts: the gaps are the integers $d^{2}m$ divided by $N^{2}=n^{4}$, and the three ``modes'' were the
+values $d^{2}m\in\{2,3,4\}$ (with the asymmetric $E_{v4}$, $\{1,2,3\}$).
+\end{remark}
+
+\begin{proposition}[Swap formula for $E_{\mathrm{low}}$]
+\label{prop:swap_low}
+For every arrangement $S$ and cells $a\ne b$ with $d=s_b-s_a$,
+\begin{align*}
+\Cov(X,Z^{ab})&=\Cov(X,Z)+\frac{d\,(x_a-x_b)}{N},\qquad
+\Cov(Y,Z^{ab})=\Cov(Y,Z)+\frac{d\,(y_a-y_b)}{N},\\
+\Cov(D,Z^{ab})&=\Cov(D,Z)+\frac{d\,(D(a)-D(b))}{N}
+\end{align*}
+for $D\in\{D_{\mathrm m},D_{\mathrm a}\}$.  If $E_{\mathrm{low}}(S)=0$ (in particular if $S$ is magic),
+\[
+E_{\mathrm{low}}(S^{ab})=\frac{d^{2}}{N^{2}}\Bigl[(x_a-x_b)^{2}+(y_a-y_b)^{2}+\bigl(D_{\mathrm m}(a)-D_{\mathrm m}(b)\bigr)^{2}+\bigl(D_{\mathrm a}(a)-D_{\mathrm a}(b)\bigr)^{2}\Bigr],
+\]
+i.e.\ $d^{2}/N^{2}$ times the squared planar distance between the two cells plus the number of diagonals separating them.
+Since $a\ne b$ the bracket is at least $1$, so magic squares are strict local minima of $E_{\mathrm{low}}$ as well, with
+$E_{\mathrm{low}}(S^{ab})\ge1/N^{2}$; the squared planar distance is bounded by $2(n-1)^{2}$, so
+$E_{\mathrm{low}}(S^{ab})\le d^{2}\bigl(2(n-1)^{2}+2\bigr)/N^{2}$.
+\end{proposition}
+
+\begin{proof}
+$\Cov(\varphi,Z^{ab})=\langle\varphi,z+d(\mathbf 1_a-\mathbf 1_b)\rangle=\Cov(\varphi,Z)+\frac dN(\varphi(a)-\varphi(b))$
+for every $\varphi$ (\Cref{lem:variances}(1)); apply it to $\varphi=x,y,D_{\mathrm m},D_{\mathrm a}$ and square.
+\end{proof}
+
+\subsection{The inertia tensor of the Magic Gem}
+\label{sec:theory_inertia}
+
+Place unit masses at the $N$ points $\mathbf p_{ij}=(x_{ij},y_{ij},z_{ij})$.  Because all three coordinates have mean
+zero (\Cref{lem:variances}(1)), the centre of mass is the origin, and the inertia tensor about it is
+$I=\sum_{i,j}\bigl(\|\mathbf p_{ij}\|^{2}\mathrm{Id}-\mathbf p_{ij}\mathbf p_{ij}^{\mathsf T}\bigr)=N\bigl(\operatorname{tr}(\Sigma)\mathrm{Id}-\Sigma\bigr)$,
+where $\Sigma$ is the $3\times3$ covariance matrix of $(X,Y,Z)$.
+
+\begin{proposition}[Inertia tensor]
+\label{prop:inertia}
+For every arrangement $S$ of $\{1,\dots,N\}$,
+\[
+I_{xx}=I_{yy}=\frac{n^{2}(n^{2}-1)(n^{2}+2)}{12},\qquad I_{zz}=\frac{n^{2}(n^{2}-1)}{6},\qquad I_{xy}=0,
+\]
+\[
+I_{xz}=-N\Cov(X,Z)=-\sum_jx_j\gamma_j,\qquad I_{yz}=-N\Cov(Y,Z)=-\sum_iy_i\rho_i .
+\]
+In particular the diagonal entries are the same for all $N!$ arrangements, and for a magic square (indeed for any
+arrangement satisfying the degree-$1$ conditions) the tensor is diagonal with principal moments
+$\frac{n^{2}(n^{2}-1)(n^{2}+2)}{12}$ (twice) and $\frac{n^{2}(n^{2}-1)}{6}$.
+\end{proposition}
+
+\begin{proof}
+$I_{xx}=\sum_{i,j}(y_{ij}^{2}+z_{ij}^{2})=N(\Var Y+\Var Z)=n^{2}\bigl[\frac{n^{2}-1}{12}+\frac{n^{4}-1}{12}\bigr]=\frac{n^{2}(n^{2}-1)(n^{2}+2)}{12}$
+by \Cref{lem:variances}(2), using $(n^{2}-1)+(n^{4}-1)=(n^{2}-1)(n^{2}+2)$; $I_{yy}$ is the same by symmetry, and
+$I_{zz}=N(\Var X+\Var Y)=\frac{n^{2}(n^{2}-1)}{6}$.  The off-diagonal entries are $-N\Cov(\cdot,\cdot)$ by definition;
+$\Cov(X,Y)=0$ by \Cref{lem:variances}(2), and $N\Cov(X,Z)=\sum_jx_j\gamma_j$ by \Cref{thm:hierarchy}(a).
+All three diagonal entries depend only on the multisets $\{x_{ij}\},\{y_{ij}\},\{z_{ij}\}$, which are the same for every arrangement.
+\end{proof}
+
+\begin{remark}[What the inertia tensor does and does not detect]
+\label{rem:inertia_modest}
+\Cref{prop:inertia} is a modest statement.  The principal moments of the three-dimensional Magic Gem carry no
+information about $S$ beyond $n$, and the only arrangement-dependent entries are the two covariances $\Cov(X,Z)$,
+$\Cov(Y,Z)$, which are exactly the degree-$1$ conditions---satisfied by all $760$ of the $9!$ arrangements for $n=3$
+and by a strictly larger-than-magic class for every $n$ (\Cref{prop:perm_threshold}).  The deeper
+inertia statement is Loly's two-dimensional one (\Cref{cor:loly}): with the \emph{values} as masses, the planar
+moment of inertia is the degree-$2$ cross-moment $\Cov(Z,X^{2}+Y^{2})$ up to an additive constant, and its invariance
+over all semi-magic squares is the $m=2$ case of \Cref{thm:hierarchy}(a).
+\end{remark}

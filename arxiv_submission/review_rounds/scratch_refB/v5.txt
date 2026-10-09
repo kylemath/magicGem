@@ -1,0 +1,2177 @@
+         Magic Gems: Magic Squares as Orthogonality
+
+                                             Conditions
+
+                                   on a Height Function
+
+                                         Kyle Elliott Mathewson
+
+                              Faculty of Science, University of Alberta
+                                    kyle.mathewson@ualberta.ca
+                                              October 7, 2026
+
+
+
+
+                                                   Abstract
+
+           We study Magic Gems : the convex hull of the points obtained by placing the entries of an n × n
+      magic square as heights over a centred grid. The representation is D4 -invariant, so each essentially
+      dierent square has one gem. Reading the centred entries as a height function z , the magic conditions
+      are exactly the orthogonality of z to a 2n-dimensional space of centred line indicators; we treat this
+      as a change of viewpoint, not a theorem, and use it to obtain: (i) a moment hierarchy: for real height
+      functions, Cov(X m , Z) = Cov(Y m , Z) = 0 for m ≤ k is equivalent to equal row and column sums
+      exactly when k ≥ n − 1; Loly's moment-of-inertia invariance is the degree-two case; (ii) exact mean
+      and variance of two energies on a uniformly random arrangement, with a Hoeding-type limit law;
+      (iii) an exact single-swap formula, giving strict local minimality and gaps d2 m/n4 ; (iv) the exact
+      count 14,639,440 of 4 × 4 arrangements satisfying the four low-mode conditions; (v) a classication of
+      the 880 order-four gems (39 f -vectors, 352 combinatorial types, 616 congruence classes) and a proof
+      that Siamese gems have twelve vertices.
+      Keywords:    magic squares, convex polyhedra, permutation statistics, moment of inertia, combina-
+      torial geometry
+
+
+1     Introduction
+Magic squares are among the oldest objects of recreational mathematics:             the 3 × 3 Lo Shu appears
+in Chinese sources more than two millennia old, a 4 × 4 square is engraved in Dürer's Melencolia I
+(1514) [8], and systematic constructions for every order have been known since the seventeenth century
+[2, 18]. The modern literature treats them from several directions: enumeration and the geometry of the
+associated polytopes [20, 9, 1, 4, 3], spectral and matrix properties [15, 16, 17], and, in work of Loly and
+collaborators, physical invariants such as the moment of inertia [13, 19, 5].
+
+
+Denition 1.1 (Magic square). An arrangement of order n is a bijection S = (sij ) from the cells of the
+n × n grid onto {1, . . . , n2 }. It is a magic square if every row, every column and both main diagonals
+                                            2
+sum to the magic constant M (n) = n(n + 1)/2, and semi-magic if only the rows and columns do.
+
+
+    This paper studies a three-dimensional representation of an arrangement: place the centred entry
+sij −(n2 +1)/2 as a height over the centred cell (j− n−1
+                                                      2 ,
+                                                          n−1                                     2
+                                                           2 −i) and take the convex hull of the n points.
+We call the hull the Magic Gem of S (Section 3). The representation is invariant under the dihedral
+group D4 of the square, so each essentially dierent magic square has a single gem (Proposition 3.3);
+an interactive web application that lists the 880 order-four squares and renders the gem of a selected
+square (points, convex hull, vectors from the centre, rotatable and with orthographic views) is available
+at https://kylemath.github.io/MagicGemWebpage/.
+    The useful part of the construction is not the hull but the height function z itself. Once the entries are
+read as a function on the grid, every line-sum condition row k sums to M (n) becomes  z is orthogonal to
+                                                                                                 2
+the centred indicator of row k , i.e. Cov(Rk , Z) = 0 for the empirical covariance over the n       cells. A magic
+square is therefore an arrangement whose height function is orthogonal to a xed 2n-dimensional space
+                                                                        2
+                                                              P
+W of test functions, and the natural energy Efull (S) =  L Cov(1L , Z) over the 2n + 2 lines vanishes
+exactly on magic squares (Lemma 4.8). We are explicit that this is a reformulation of the denition and
+
+
+
+                                                        1
+not a theorem about magic squares (Remark 4.9). Its value is that it suggests questions whose answers
+are not visible in the line-sum formulation, and the paper is organised around those answers.
+
+
+Contributions.
+   1. The moment hierarchy (Theorem 4.11).                        Replacing the line indicators by the polynomial test
+           functions   xm , y m gives, for each degree k , the conditions Cov(X m , Z) = Cov(Y m , Z) = 0 for
+           m ≤ k.      For real-valued height functions these are equivalent to equal row and column sums if
+           and only if k ≥ n − 1. The four-term low-mode energy Elow studied in earlier versions of this
+           paper is the degree-one truncation; Loly's invariance of the moment of inertia [13] is the degree-two
+           statement and holds for all semi-magic squares (Corollary 4.13). For permutations the threshold
+           k ∗ (n) equals n − 1 for 3 ≤ n ≤ 13 and is at most n − 2 for n ≥ 14 (Proposition 4.14).
+   2. Exact statistics of a random arrangement (Proposition 5.1). For a uniformly random arrangement,
+           E[Elow ] = (n2 + 1)(n4 − n2 + 12n − 12)/(72n2 ) and E[Efull ] = (n4 − 1)/(6n2 ), with exact variances;
+           Elow /E[Elow ] converges to an Exp(1) law by Hoeding's combinatorial central limit theorem. Monte
+                          8                                                     −4
+           Carlo with 10 samples per order agrees for n ≤ 8 to within 5 × 10        relative error.
+
+
+   3. The single-swap formula (Theorem 4.17). Exchanging two entries of a magic square that dier by
+           d raises Efull by exactly d2 m/n4 , where m ∈ {2, . . . , 6} counts the lines separating the two cells.
+                                                                                                                 4
+           Hence every magic square is a strict local minimum for every n, with minimum gap between 2/n
+                    4
+           and 6/n .
+
+
+   4. The low-mode class for n = 4 (Proposition 5.5). Exactly 14,639,440 of the 16! arrangements satisfy
+           Elow = 0; 7,040 of them are magic. The count is obtained by a meet-in-the-middle enumeration
+           and agrees with a Gaussian local-limit estimate to within 20%.
+
+
+   5. Geometry of the 880 order-four gems (Section 5.5). The gems have 8 to 16 hull vertices, 39 distinct
+           f -vectors, 352 combinatorial types and 616 congruence classes; the congruence classes are exactly
+           the orbits of the complement map S 7→ 17 − S , and no two gems coincide as point sets. The
+           Siamese squares of every odd order n ≥ 5 have gems with exactly twelve vertices (Proposition 5.8,
+           computer-assisted proof ).
+
+
+What is and is not new.                 The polyhedral geometry of magic squares is classical: semi-magic squares
+with line sum t are the lattice points of the t-th dilate of the Birkho polytope, their counting function
+is an Ehrhart quasi-polynomial [20, 9], the cones of magic squares and cubes have been described by
+Hilbert bases [1], and the 4 × 4 magic squares were enumerated by inside-out polytopes [4, 3].                              The
+Magic Gem is a dierent object: not the polytope whose lattice points are the squares, but a polyhedron
+attached to one square. The orthogonality reading of the constraints is elementary and implicit in Loly's
+work; what is new here is the hierarchy theorem, which identies the degree at which polynomial test
+functions become equivalent to line sums, the exact random-arrangement moments, the swap formula,
+the exact low-mode count, and the classication of the 880 gems. We make no claim that the energy
+reformulation by itself is a result.
+
+
+Corrections relative to version 4.                   This version corrects several statements of arXiv:2512.09170v4.
+(a) The complete energy used there omitted one row and one column and was not D4 -invariant; all
+statistics now use the symmetric sum over all 2n + 2 lines (Remark 4.5). (b) The sampled landscape
+statistics of v4 (means 4.44, 12.04, 26.00 for n = 3, 4, 5) were computed with the diagonal terms weighted
+       2
+by n       relative to the stated denition; the correct values are given in closed form by Proposition 5.1. The
+landscape entropy and the quadratic ts to three points are withdrawn. (c) The trimodal distribution
+                                                                                                                  2
+of swap gaps was an arithmetic artifact of the asymmetric energy; the gaps are the integers d m divided
+       4
+by n       (Remark 4.20). (d) The count of 24 local minima of Efull for n = 3 referred to the asymmetric
+energy; the symmetric energy has 16. (e) The probability that a random 4 × 4 arrangement has Elow = 0
+                                   −8                      −7
+was estimated as below 10               ; it is 7.0 × 10        (Proposition 5.5).
+
+
+Organisation.            Section   2    collects    the    enumeration      facts,   the   covarianceinertia   relation,   the
+permutation-statistic tools and the polytope literature that we use.                          Section 3 denes the Magic
+Gem and proves its D4 -invariance.                 Section 4 contains the projection lemma, the moment hierarchy,
+the swap formula and the inertia tensor.                    Section 5 reports the computations:          exhaustive   n = 3,
+
+
+                                                                     2
+random-arrangement energies, swap gaps, the low-mode class for n = 4, the geometry of the 880 gems
+and the cross-order comparison. Section 6 and Section 7 discuss what the viewpoint does and does not
+buy, local search on the energy, and open questions. Computational methods are in Section A.
+
+
+
+2      Background
+2.1 Enumeration and symmetry
+There are 8 magic squares of order 3, all images of the Lo Shu under the dihedral group D4 of the square
+(four rotations, four reections); there are 7,040 of order 4, forming 880 D4 -orbits rst listed by Frénicle
+de Bessy in 1693 and veried many times since [3]; and 275,305,224 of order 5 (Schroeppel, 1973), i.e.
+34,413,153 orbits. For n ≥ 6 only statistical estimates are known; see Trump's compilation [21]. Since
+D4 maps lines to lines and preserves the entry set, it maps magic squares to magic squares, and two
+squares in the same orbit are called essentially dierent from squares in other orbits. The 880 order-four
+squares were further sorted by Dudeney into twelve groups according to the pattern of complementary
+pairs (a, 17 − a) [7]; we use these groups only as a classical reference partition in Section 5.5. Classical
+constructionsthe Siamese (de la Loubère) method for odd n, the diagonal-complement method for
+n ≡ 0 (mod 4), and the LUX or Strachey methods for n ≡ 2 (mod 4)show that magic squares exist
+for all n ≥ 3 [2]; we use the Siamese squares as a family on which hull computations can be pushed to
+large n.
+
+
+
+2.2 Covariance and the inertia tensor
+                                         3                                            1
+                                                                                               P
+For a nite point set p1 , . . . , pN ∈ R    with mean p̄, the covariance matrix is Σjk =           i (pi,j − p̄j )(pi,k −
+                                                                                     N
+p̄k ). With unit masses at the points, the inertia tensor about the centre of mass is
+                            X
+                                 ∥pi − p̄∥2 δjk − (pi,j − p̄j )(pi,k − p̄k ) = N δjk tr Σ − Σjk ,
+                                                                                              
+                    Ijk =                                                                                             (1)
+                            i
+
+where δjk is the Kronecker delta [10]. Thus the o-diagonal entries of I are −N times the covariances
+and the diagonal entries are N times the sum of the two other variances. Loly's planar moment of inertia
+[13] is a dierent object: it places the value sij as a mass at the planar point (xij , yij ) and computes
+    sij (x2ij + yij
+                 2
+P
+                    ); we return to it in Corollary 4.13.
+
+2.3 Two tools from permutation statistics
+                                                                                  N
+Let π be a uniformly random permutation of {1, . . . , N } and a, b ∈ R               xed vectors.     The quantity
+       P
+Ta =       i ai bπ(i) is a linear permutation statistic. Its mean is N āb̄ and, for two such statistics with the
+same b (WaldWolfowitz [22], polarised),
+
+                                                 1 X                        X
+                            Cov(Ta , Ta′ ) =          (ai − ā)(a′i − ā′ )   (bj − b̄)2 .                            (2)
+                                               N −1 i                       j
+                                                                                                     P
+Hoeding's combinatorial central limit theorem [11, Thm. 3] gives asymptotic normality of              i cN (i, π(i))
+                                −1                          −1
+                                   P          r
+                                                               P             2 r/2
+                                                                                   
+when, for every r ≥ 3, N         i,j dN (i, j) is O (N              d
+                                                                 i,j N (i, j) )      , dN being the doubly  centred
+array; for product arrays cN (i, j) = ai bj the condition reduces to a bound on the standardised moments
+of a and b.     The distribution of a quadratic form in Gaussian variables is computed numerically by
+Imhof 's inversion formula [12]. In Section 5.2 the energies of a random arrangement are quadratic forms
+in such statistics, and (2) gives their means exactly.
+
+
+
+2.4 Polytopes of magic squares
+The polytope literature on magic squares concerns a dierent polytope from the one studied here. An
+n × n nonnegative integer matrix with all row and column sums equal to t is a lattice point of the t-th
+dilate of the Birkho polytope of doubly stochastic matrices; their number is a polynomial in t of degree
+(n−1)2 (Stanley [20], Ehrhart [9]; see Ziegler [23] for the polytope background). Adding the two diagonal
+conditions and the requirement of distinct entries leads to the inside-out polytopes of Beck and Zaslavsky
+[4], which gave the rst enumeration of 4 × 4 magic squares of arbitrary magic sum [3]; Ahmed, De Loera
+and Hemmecke described the cones of magic squares and cubes by Hilbert bases [1]. Contingency tables
+
+
+
+                                                            3
+with xed margins, i.e. the same lattice points studied as a sample space, are surveyed by Diaconis and
+Gangolli [6]. In all of these the magic squares are the points of a polytope. The Magic Gem attaches a
+polyhedron to a single square; the two constructions share nothing beyond the word. Spectral properties
+of the matrix of a magic square [15, 16, 17] and Loly's physical invariants [13, 19, 14, 5] are closer to our
+viewpoint: they, too, attach a quantity to one square and ask what it reveals.
+
+
+
+3     The Magic Gem
+Let S = (sij ) be an arrangement of order n, with cells indexed by i, j ∈ {0, . . . , n − 1} (i the row from
+                                                             2
+the top, j the column from the left), and write N = n .
+
+
+Denition 3.1 (Gem coordinates). To the cell (i, j) assign the point pij = (xij , yij , zij ) ∈ R3 with
+                                      n−1               n−1                          N +1
+                         xij = j −        ,     yij =       − i,       zij = sij −        .                (3)
+                                       2                 2                             2
+The Magic Gem of S is the convex hull G(S) = conv{pij }.
+
+
+    The horizontal coordinates centre the grid at the origin, with the x-axis along the columns and the
+y -axis along the rows (top row at positive y ); the vertical coordinate centres the entries so that the
+mean entry (N + 1)/2 sits at height zero. All three coordinates then have mean zero over the N cells
+(Lemma 4.1), so the origin is the centroid of the point set. Each pij may equally be read as a vector
+from the centroid, and with unit masses at the points the point set is a rigid body whose centre of mass
+is the origin; Section 4.5 computes its inertia tensor. Throughout the paper, the function z = (zij ) on
+the grid is called the height function of S .
+                                                                       
+                                                2                  7   6
+Example 3.2 (Lo Shu). For the Lo Shu square S = 9
+                                                                  5   1, n = 3 and the centre value is 5, so
+                                                4                  3   8
+the nine points are
+
+
+                          p00 = (−1, 1, −3),      p01 = (0, 1, 2),       p02 = (1, 1, 1),
+                          p10 = (−1, 0, 4),       p11 = (0, 0, 0),       p12 = (1, 0, −4),
+                          p20 = (−1, −1, −1),     p21 = (0, −1, −2),     p22 = (1, −1, 3).
+
+The centre cell maps to the origin and is the only point not on the hull; the gem has f -vector (8, 16, 10)
+and volume 18 (Figure 1).
+
+
+Proposition 3.3 (D4 -invariance). Let g ∈ D4 act on the grid and let gS be the arrangement with
+(gS)c = sg−1 c . Then G(gS) = ĝ G(S), where ĝ(x, y, z) = (g(x, y), z) is the isometry of R3 that applies
+the orthogonal map g of the (x, y)-plane and xes z . In particular G(gS) and G(S) are congruent, and
+the gem is an invariant of the D4 -orbit of S .
+
+Proof. In the centred coordinates (3), each g ∈ D4 acts on the cell positions (xij , yij ) as an orthogonal
+                                                 ◦
+map of the plane (a rotation by a multiple of 90          or a reection in a coordinate axis or a diagonal),
+and (xgc , ygc ) = g(xc , yc ).                                                  = sc = zc + N2+1 , i.e.
+                                  The point of gS over the cell gc has height (gS)gc
+the same height as the point of S over c. Hence the point set of gS is {(g(xc , yc ), zc )}c = ĝ{pc }c . An
+ane bijection maps the convex hull of a set to the convex hull of the image, so G(gS) = ĝ G(S); ĝ is an
+isometry because g is orthogonal.
+
+
+    Since the eight images are congruent, every essentially dierent magic square has one gem up to
+congruence; Section 5.5 shows that for n = 4 the converse also holds except for the complement map
+S 7→ 17 − S , which reects the gem in the plane z = 0.
+
+
+4     Orthogonality conditions on the height function
+                                  2
+Throughout, n ≥ 3, N = n , and a cell of the n × n grid is a pair c = (i, j) with 0 ≤ i, j ≤ n − 1. An
+arrangement is a bijection S = (sij ) from the cells onto {1, . . . , N }. We use the centred coordinates of
+Denition 3.1,
+                            xij = j − n−1
+                                       2 ,       yij = n−1
+                                                        2 − i,         zij = sij − N2+1 ,
+
+
+                                                         4
+                                                                                       Construction and D Symmetry Structure
+                                                             Top: Construction process. Bottom: All eight D symmetries produce the same 3D Magic Gem.
+
+
+       (a) Lo Shu Magic Square                                                       (b) Centered Grid                                                         (c) Add Z (values)                                                                         (d) Magic Gem
+                    2               7                6                          1
+                                                                                        (-1,1)        (0,1)         (1,1)                                                                                                                 4
+                                                                                                                                                                                                                    8
+                                                                                                                                                                                                                    6   Z                 2
+
+                    9               5                1                          0                                                                                                                                   4             Z       0
+
+
+
+
+                                                                            Y
+                                                                                        (-1,0)        (0,0)         (1,0)                                                                                           2
+                                                                                                                                                                                                                                              2
+
+                    4               3                8                          1
+                                                                                        (-1,-1)      (0,-1)        (1,-1)                                      1.0 0.5
+                                                                                                                                                                                                            1.0
+                                                                                                                                                                                                          0.5
+                                                                                                                                                                                                        0.0
+                                                                                                                                                                                                                                              4
+
+
+                                                                                                                                                                            0.0 0.5                   0.5
+                                                                                                                                                                                                    1.0       Y                                   1.51.0                                      1.5
+                                                                                                                                                                                                                                                                                         0.51.0
+                                                                                             1          0             1                                                               1.0                                                              0.5
+                                                                                                                                                                                                                                                         0.00.5
+                                                                                                                                                                                                                                                              1.01.5              0.50.0
+                                                                                                                                                                                                                                                                             1.51.0
+                                                                                                        X                                                               X
+                                                                                                                                                                                                                                                          Y                               X
+
+                                                                             D Symmetry Group: Eight Magic Squares One 3D Magic Gem
+
+                                 (i)(e)H-flip
+                                        R0°                                                           (j)
+                                                                                                      (f) V-flip
+                                                                                                          R90°                                                                (k)(g) D1-flip
+                                                                                                                                                                                     R180°                                                                           (l)
+                                                                                                                                                                                                                                                                     (h)D2-flip
+                                                                                                                                                                                                                                                                         R270°
+                             26 71 68                                                             26 97 42                                                                    48 31 86                                                                            48 93 24
+                              97 5 13                                                              71 5 39                                                                     93 5 17                                                                             31 5 79
+                               42 39 84                                                             68 13 84                                                                    24 79 62                                                                            86 17 62
+
+
+
+                     3D view (az=45°)                                                    3D view (az=135°)                                                         3D view (az=225°)                                                                  3D view (az=315°)
+
+        4                                                                                                                           4                  4                                                                                                                                              4
+
+        2                                                                                                                           2                  2                                                                                                                                              2
+   Z    0                                                                                                                           0   Z          Z   0                                                                                                                                              0   Z
+
+            2                                                                                                                       2                      2                                                                                                                                          2
+
+            4                                                                                                                       4                      4                                                                                                                                          4
+
+
+                1.51.0                                           1.5                1.51.0                                    1.5                              1.51.0                                         1.5                             1.51.0                                            1.5
+                      0.50.0                               0.51.0                         0.50.0                        0.51.0                                       0.50.0                             0.51.0                                      0.50.0                                0.51.0
+                            0.51.0                0.50.0                                         0.51.0          0.50.0                                                     0.51.0                0.50.0                                                  0.51.0                    0.50.0
+                                  1.5       1.51.0                                                     1.5 1.51.0                                                                 1.5       1.51.0                                                              1.5           1.51.0
+                    Y                                      X                             X                                Y                                         Y                                    X                                            X                                    Y
+                     3D view (az=90°)                                                    3D view (az=180°)                                                         3D view (az=270°)                                                                      3D view (az=0°)
+                    4                                                                                                                                                                                     4
+
+                    2                                                                                                                                                                                    2
+                Z                                                                                                             4                                                                               Z                                   4
+                    0                                                                                                                                                                                    0
+                                                                                                                              2                                                                                                                   2
+                     2                                                                                                                                                                                    2
+
+                        4                                                                                                     0     Z                                                                     4                           Z           0
+
+                                                                                                                              2                                                                                                                       2
+                    1.5
+                    1.0                                                                  1.5
+                                                                                        1.0                                                                                                       1.5
+                                                                                                                                                                                                  1.0                                                                                      1.5
+                                                                                                                                                                                                                                                                                           1.0
+                    0.5                                                                 0.5                             4                                                                          0.5                                                4                                    0.5
+                   0.0                                                                  0.0                                                                                                        0.0                                                                                     0.0
+                  0.5                                                                   0.5                                                                                                         0.5                                                                                    0.5
+                  1.0                                                                   1.0                                                                                                         1.0                                                                                    1.0
+                Y 1.5 1.5 1.0 0.5 0.0 0.5 1.0 1.5                                   X   1.5
+                                                                                            1.5 1.0 0.5 0.0 0.5 1.0 1.5                                                 1.5 1.0 0.50.0 0.5 1.0 1.5
+                                                                                                                                                                                                     1.5 Y
+                                                                                                                                                                                                                                                              1.5 1.0 0.50.0 0.5 1.0 1.5
+                                                                                                                                                                                                                                                                                            1.5 X
+
+
+                                        X                                                                Y                                                                            X                                                                                  Y
+
+
+
+
+Figure 1: Construction of the Magic Gem and its D4 -invariance. Top row (ad): the Lo Shu square; the
+centred grid; the entries as heights zij = sij −5; the point set with its convex hull (Example 3.2). Bottom
+(el): the D4 stripthe eight images of the Lo Shu under rotations and reections, each shown with its
+gem. The eight point sets are the images of one another under the isometries ĝ of Proposition 3.3, so
+the eight gems are congruent; the panels draw them from dierent viewing angles.
+
+
+
+and refer to z = z(S) as the height function of S . A line is one of the n rows, the n columns, the main
+diagonal {i = j} or the anti-diagonal {i + j = n − 1}; there are 2n + 2 lines, each containing exactly n
+cells. With M (n) = n(N + 1)/2 the magic constant, the deviation of a line L is
+                                                                                                                                  X                                           X
+                                                                                          δL (S) =                                          sc − M (n) =                                      zc ,                                                                                                            (4)
+                                                                                                                                  c∈L                                         c∈L
+                                                   N +1
+the second equality because |L| = n and M (n) = n ·
+                                                    2 . S is semi-magic if δL = 0 for the 2n rows and
+columns, and magic if δL = 0 for all 2n + 2 lines. We write ρk = δ  k , γℓ = δ   ℓ , δm and δa for the                                                                                              row                     col
+row, column, main-diagonal and anti-diagonal deviations.
+
+
+
+4.1 Height functions, the inner product, and the energies
+Let F               = Rcells be the N -dimensional space of real functions on the grid, with the normalised inner
+product and norm
+                                                                                                                1 X
+                                                                                    ⟨f, g⟩ =                          fij gij ,                        ∥f ∥2 = ⟨f, f ⟩.                                                                                                                                       (5)
+                                                                                                                N i,j
+
+The mean of f is f¯ = ⟨f, 1⟩ and its centring is f˜ = f − f¯1. For two functions (test function                                                                                                                                                                                                   φ and
+height f ) the empirical covariance over the N cells is Cov(φ, f ) = ⟨φ̃, f˜⟩ = ⟨φ̃, f ⟩ = ⟨φ, f˜⟩; the last two
+equalities hold because φ̃ ⊥ 1 and f˜ ⊥ 1.
+
+
+
+                                                                                                                                              5
+Lemma 4.1 (Means, variances, and covariance as an inner product). For every arrangement S of
+{1, . . . , N }:
+   1. x̄ = ȳ = z̄ = 0, so z is centred and Cov(φ, Z) = ⟨φ̃, z⟩ = ⟨φ, z⟩ for every φ ∈ F ;
+
+                                   n2 − 1                     N2 − 1   n4 − 1
+   2. Var(X) = Var(Y ) =                  ,    Var(Z) =              =        ,                Cov(X, Y ) = 0;
+                                     12                        12        12
+                                                                               δL (S)
+   3. for every line L with indicator 1L ,              Cov(1L , Z) =                 .
+                                                                                 N
+                                                                                     PN
+                        = n j (j − n−1                                        zij = v=1 v − N N2+1 = 0; then
+               P             P                                          P
+Proof. (1)         i,j xij                2 ) = 0, likewise for y , and   i,j
+Cov(φ, Z) = ⟨φ, z⟩ − φ̄⟨1, z⟩ = ⟨φ, z⟩. (2) Var(X) = n1 j (j − n−1                 2
+                                                                     P
+                                                                                2 ) is the variance of the uni-
+                                                        2
+form distribution on n equally spaced points, (n − 1)/12; the same for Y , and for Z with N points.
+                                                                      1
+P                 P         P                                           P
+   i,j xij yij = (  j x·j )(  i yi· ) = 0. (3) By (1), Cov(1L , Z) = N   c∈L zc = δL /N by (4).
+
+    We write Rk = 1{i=k} , Cℓ = 1{j=ℓ} , Dm = 1{i=j} , Da = 1{i+j=n−1} for the 2n + 2 line indicators.
+
+Denition 4.2 (Complete and low-mode energies). For an arrangement S with height function z ,
+                                 n−1
+                                 X                      n−1
+                                                        X
+                   Efull (S) =         Cov(Rk , Z)2 +         Cov(Cℓ , Z)2 + Cov(Dm , Z)2 + Cov(Da , Z)2 ,                             (6)
+                                 k=0                    ℓ=0
+                   Elow (S) = Cov(X, Z)2 + Cov(Y, Z)2 + Cov(Dm , Z)2 + Cov(Da , Z)2 .                                                  (7)
+
+    Note that (6) sums over all             n rows and all n columns.                     By Lemma 4.1(3) it has the following
+elementary description, which we use constantly:
+                                                    X                 X             X
+                                  N 2 Efull (S) =       δL (S)2 =          ρ2k +           γℓ2 + δm
+                                                                                                  2
+                                                                                                    + δa2 ,                            (8)
+                                                    L                 k              ℓ
+
+                                                                                                          2
+the sum of the squared line-sum deviations over all 2n+2 lines. In particular N                               Efull (S) is a non-negative
+integer.
+
+Remark 4.3 (The four-term energy does not characterise magic squares for n ≥ 4). Elow = 0 imposes four
+linear conditions on the (N − 1)-dimensional space of centred height functions, while magic imposes 2n
+independent ones (Lemma 4.6); for n ≥ 4 the two cannot agree even before the permutation constraint
+is taken into account. A concrete witness for n = 4 is
+                                                                                   
+                                                        9         4       12      3
+                                                      16         1       14     7
+                                                    S=
+                                                      10
+                                                                                    ,
+                                                                 15       11     8
+                                                        2         5        6     13
+whose diagonals both sum to        34 while the row sums are (28, 38, 44, 26) and the column sums
+(37, 25, 43, 31); nevertheless Cov(X, Z) = Cov(Y, Z) = 0, so Elow (S) = 0 although Efull (S) = 396/256.
+Proposition 5.5 counts all such arrangements, and Remark 4.16 explains why none exist for n = 3.
+
+
+The dihedral action.              The dihedral group D4 (order 8) acts on the grid by the rotations and reections
+of the square; each g ∈ D4 is a bijection of the set of cells. It acts on arrangements by (gS)c = sg −1 c
+and on functions by (gf )c = fg −1 c , so that z(gS) = g z(S) and ⟨gf, gh⟩ = ⟨f, h⟩. Every g maps lines to
+lines: it permutes the set of 2n rows and columns among themselves and permutes the two diagonals
+among themselves. Moreover, g acts on the centred coordinates by a signed permutation: gx ∈ {±x, ±y}
+                                                                                                                                 ◦
+and gy ∈ {±x, ±y} with {gx, gy} = {±x, ±y} as unordered pairs up to sign (a rotation by 90                                           sends
+(x, y) 7→ (−y, x), a reection sends (x, y) 7→ (−x, y), and so on).
+Proposition 4.4 (D4 -invariance of the energies). For every g ∈ D4 and every arrangement S :
+Efull (gS) = Efull (S) and Elow (gS) = Elow (S).
+                                    P              P
+Proof. For any line L, δgL (gS) =     c∈gL (gS)c =   c∈L sc = δL (S) after the substitution c 7→ gc. Since
+L 7→ gL is a bijection of the set of all 2n + 2 lines, the multiset {δL (gS)}L equals {δL (S)}L and (8)
+                                                                     −1
+gives Efull (gS) = Efull (S). For Elow : Cov(X, gZ) = ⟨x, gz⟩ = ⟨g      x, z⟩ and g −1 x ∈ {±x, ±y}, and
+                          −1     −1
+similarly for y , with {g    x, g y} being {±x, ±y} in some order; hence Cov(X, gZ)2 + Cov(Y, gZ)2 =
+Cov(X, Z) +Cov(Y, Z) . Since g permutes the two diagonals, Cov(Dm , gZ)2 +Cov(Da , gZ)2 is invariant
+            2             2
+
+as well.
+
+
+
+                                                                  6
+Remark 4.5 (Why the version-4 energy was not D4 -invariant). The previous version of this paper omitted
+                                                                     2       2
+                                                                                 2
+the last row and the last column from (6), i.e. used Ev4 = Efull − ρn−1 + γn−1 /N , on the grounds
+     P         P
+that    k ρk =   ℓ γℓ = 0 makes one row and one column redundant. Redundant for the zero set,
+yes; but not for the values : the horizontal reection h : (i, j) 7→ (i, n − 1 − j) maps column n − 1 to
+                                                                                2
+                                                                                         
+column 0 and xes the set of rows, so Ev4 (hS) − Ev4 (S) =                     γn−1 − γ02 /N 2 , which is nonzero whenever
+                                                                                                                1 2 15 16
+|γ0 | ̸= |γn−1 |. Example: swapping the entries 1, 2 in the rst row of the 4 × 4 magic square 12 14 3 5
+                                                                                               13 7 10 4
+                                                                                                                8 11 6 9
+                                                2
+gives γ = (1, −1, 0, 0) and δm = 1, so N   Efull = 3 for the whole D4 orbit while N 2 Ev4 takes the values 2
+and 3 on it. The symmetric sum has 2n + 2 terms for a 2n-dimensional constraint space (Lemma 4.6);
+                    P        P
+the two identities    k ρk =   ℓ γℓ = 0 are the only linear relations, and keeping the redundant terms is
+the price of D4 -invariance. All Efull statistics in this paper use (6).
+
+
+
+4.2 The projection lemma
+                 1               1                1              1
+Let R̃k = Rk −
+                 n 1, C̃ℓ = Cℓ − n 1, D̃m = Dm − n 1, D̃a = Da − n 1 be the centred line indicators (each
+line has n of the N cells, so each mean is 1/n), and set
+
+      WR = span{R̃k },          WC = span{C̃ℓ },        WD = span{D̃m , D̃a },         W = WR + WC + WD ⊂ 1⊥ .
+Lemma 4.6 (Structure of W ). For n ≥ 3:
+                                  P                                               P
+   1. WR = {f :     fij = ai ,      i ai = 0} and WC = {f :       fij = bj ,         j bj = 0}; both have dimension n − 1.
+
+                      1
+   2. ⟨R̃k , R̃k′ ⟩ = N (nδkk′ − 1), and the same for columns.
+
+   3. WR ⊥ WC , WR ⊥ WD , WC ⊥ WD .
+
+                                  n−1                   ϵn
+   4. ⟨D̃m , D̃m ⟩ = ⟨D̃a , D̃a ⟩ =N and ⟨D̃m , D̃a ⟩ = N with ϵn = 0 for n odd and ϵn = −1 for n even;
+      in particular D̃m , D̃a are linearly independent and dim WD = 2.
+
+   5. W = WR ⊕ WC ⊕ WD is an orthogonal direct sum and dim W = 2n.
+                         ′                           1          1          ′   n   n   N          ′
+                                                    P
+Proof. For two lines L, L , N ⟨1̃L , 1̃L′ ⟩ =c (1L − n )(1L − n ) = |L ∩ L | − n − n + n2 = |L ∩ L | − 1. Two
+                                                            ′
+
+distinct rows are disjoint and a row meets itself in n cells, giving (2). A row meets every column and each
+diagonal in exactly one cell, and so does a column; hence all those inner products vanish, which is (3). A
+diagonal meets itself in n cells; the two diagonals meet in one cell (the centre) when n is odd and in none
+                                                         1   n−1 ϵn
+                                                                                            
+when n is even, giving (4); the Gram matrix
+                                                         N    ϵn n−1           (n − 1)2 − ϵ2n /N 2 > 0 for
+                                                                           has determinant
+                                                    P
+n ≥ 3, so the two vectors are independent. For (1):   k ak R̃k is the function (i, j) 7→ ai − ā, a function
+of i alone with zero mean, and every such function arises (take a itself ); the map a 7→ a − ā has rank
+n − 1. Finally (5) follows from (1), (3) and (4): the three subspaces are mutually orthogonal, hence
+independent, and dim W = (n − 1) + (n − 1) + 2 = 2n.
+
+   For a subspace V          ⊂ F let PV denote the orthogonal projection with respect to (5).
+Lemma 4.7 (Projection lemma). Let S be an arrangement with height function z , and let ρ, γ ∈ Rn
+                         2
+and δ = (δm , δa ) ∈ R       be its line deviations. Then
+
+   1. PWR z is the function (i, j) 7→ ρi /n (the row means of z ), PWC z is (i, j) 7→ γj /n, and
+
+             X                        ∥ρ∥2Rn  1                        X                        ∥γ∥2Rn  1
+                   Cov(Rk , Z)2 =        2
+                                             = ∥PWR z∥2 ,                      Cov(Cℓ , Z)2 =      2
+                                                                                                       = ∥PWC z∥2 .
+                                       N      n                                                  N      n
+               k                                                           ℓ
+
+                       n−1 ϵn                                                          1 T −1
+                                                      2
+   2. With G =      ϵn n−1  as in Lemma 4.6(4), ∥PWD z∥  =                             N δ G  δ , while   Cov(Dm , Z)2 +
+                 2   T    2
+      Cov(Da , Z) = δ δ/N .
+   3. Consequently
+                                       1                      δT δ
+                                          ∥PWR z∥2 + ∥PWC z∥2 + 2 = Q PW z ,
+                                                                               
+                                  Efull (S) =                                                  (9)
+                                       n                          N
+                                                                            1         2 1      2
+      where Q is the positive-denite quadratic form on W given by Q(w) = n ∥PWR w∥ + n ∥PWC w∥ +
+       1   T 2                  2
+      N 2 wD G wD , wD ∈ R denoting the coordinates of PWD w in the basis (D̃m , D̃a ) (so that
+      ∥PWD w∥2 = N1 wDT
+                        GwD ). In particular Efull depends on z only through PW z , and
+                                      n − 1 − |ϵn |                       1
+                                                    ∥PW z∥2 ≤ Efull (S) ≤   ∥PW z∥2 .                                 (10)
+                                          n2                              n
+
+                                                              7
+                            2
+        Thus Efull ̸= ∥PW z∥ in general, because the centred indicators are not an orthonormal system
+                                                                   n−1       2
+        (Lemma 4.6(2),(4)); for odd n the diagonal part is exactly N ∥PWD z∥ .
+
+Proof. (1) By Lemma 4.6(1), WR is the space of zero-mean functions of i alone. The orthogonal projection
+                                                                                        1
+                                                                                          P
+of z onto the space of all functions of i alone is the function of row means, (i, j) 7→    j zij = ρi /n by
+                                                                                        n
+(4); this already has zero mean because z does (Lemma 4.1(1)), so it equals PWR z . Its squared norm is
+ 1              2      2  3                         2
+   P                               P                    P 2 2           2  4
+N     i n(ρi /n) = ∥ρ∥ /n , while    k Cov(Rk , Z) =      k ρk /N = ∥ρ∥ /n by Lemma 4.1(3). Columns
+are identical with i ↔ j .
+   (2) Write Φ = (D̃m , D̃a ). The Gram matrix of Φ is G/N and ⟨D̃m , z⟩ = Cov(Dm , Z) = δm /N , so
+the vector of inner products is δ/N .
+                                                                   2
+                                                                     = bT Γ−1 b with Gram matrix
+                                                 The standard formula ∥Pspan Φ z∥
+                                      1 T −1 2
+Γ = G/N and b = δ/N gives ∥PWD z∥ = N δ G δ . The second statement is Lemma 4.1(3).
+   (3) Summing (1) and (2) gives the rst equality in (9). Since the three subspaces are orthogo-
+nal (Lemma 4.6(5)), PWR z = PWR PW z etc. If PWD z = wm D̃m + wa D̃a then δm /N = ⟨D̃m , z⟩ =
+                                     
+⟨D̃m , PWD z⟩ = (n − 1)wm + ϵn wa /N and similarly for δa , i.e. δ = G wD ; thus δ T δ/N 2 = wD       T 2
+                                                                                                        G wD /N 2 ,
+                                                                                                                2
+which is the third piece of Q. Each piece of Q is positive denite on its orthogonal summand (G is
+                                                                                                  T
+positive denite because G is invertible), so Q is positive denite on W . For the bounds, δ δ lies between
+λmin (G) δ T G−1 δ and λmax (G) δ T G−1 δ , and the eigenvalues of G are n − 1 ± ϵn , i.e. n − 1 ∓ |ϵn |; hence the
+                                       n−1−|ϵn |                      n|                             n|
+diagonal part of Efull lies between
+                                            N    ∥PWD z∥2 and n−1+|ϵ
+                                                                   N     ∥PWD z∥2 . Since n−1+|ϵ n2      ≤ nn2 = n1
+             2           2             2            2
+and ∥PW z∥ = ∥PWR z∥ + ∥PWC z∥ + ∥PWD z∥ by orthogonality, (10) follows.
+
+
+Lemma 4.8 (Zero set of the energies). For every arrangement S of {1, . . . , N }:
+   1. Efull (S) = 0  ⇐⇒ PW z = 0 ⇐⇒ z ⊥ W ⇐⇒ S is a magic square.
+                       2                 2
+        P                 P
+   2.     k Cov(Rk , Z) +   ℓ Cov(Cℓ , Z) = 0 ⇐⇒ z ⊥ WR ⊕ WC ⇐⇒ S is semi-magic.
+
+   3. Elow (S) = 0    =⇒ both diagonals sum to M (n); the implication  Elow (S) = 0 =⇒ S magic holds
+        for n = 3 and fails for n = 4 (Remark 4.16).
+
+Proof. (1) Efull (S) = 0 i Q(PW z) = 0 i PW z = 0 (positive deniteness) i z ⊥ W . By (8), Efull (S) = 0
+i all 2n + 2 line deviations vanish, i.e. i S is magic. (2) is the same argument with the diagonal terms
+                                                              2     2        2   2
+removed. (3) The two diagonal terms of Elow are δm /N                   and δa /N ; the rest is Remark 4.16.
+
+
+Remark 4.9 (What the projection lemma does and does not say). Lemma 4.8(1) is the denition of a
+magic square rewritten in the language of orthogonality: all line sums equal M (n) is literally  z ⊥ 1̃L
+for every line L. It is not a theorem about magic squares, and we do not present it as one. Its use is
+as a change of viewpoint. Once the constraints are read as orthogonality of the height function to a 2n-
+dimensional test space W , three things become available that are not visible in the line-sum formulation:
+(i) W can be truncated or enlarged in natural ways (polynomial test functions, Section 4.3), which
+produces a hierarchy of relaxations with Loly's inertia invariance as the degree-two member; (ii) for a
+uniformly random arrangement the quantities ⟨φ, z⟩ are permutation statistics in the sense of Hoeding,
+whose exact moments and limiting law are computable (Section 5.2); (iii) a single swap changes z by
+a multiple of a dierence of two cell indicators, and (8) turns the change of Efull into a two-line count
+(Section 4.4).
+
+
+
+4.3 The moment hierarchy
+The functions x and y are the degree-one polynomials in the column and row index. Replacing them by
+higher powers gives a natural family of relaxations of the semi-magic condition.
+
+
+Denition 4.10 (Degree-k conditions). Let f ∈ F be centred (⟨f, 1⟩ = 0) and k ≥ 1. We say f satises
+the degree-k conditions if
+
+
+                             ⟨xm , f ⟩ = 0       and   ⟨y m , f ⟩ = 0      for all 1 ≤ m ≤ k.
+
+                                    m
+For f = z(S) these read Cov(X           , Z) = Cov(Y m , Z) = 0 for 1 ≤ m ≤ k , by Lemma 4.1(1).
+                   n−1           n−1
+   Write xj = j −            i = 2 − i for the n distinct values taken by x and y , and for centred f let
+            P       2 and yP
+γj (f ) = i fij and ρi (f ) = j fij be its column and row sums (for f = z(S) these are the deviations
+γ, ρ of (4)).
+
+Theorem 4.11 (Moment hierarchy). Let n ≥ 3 and let f ∈ F be centred.
+
+                                                              8
+                                                                               1
+                                                                                 P
+ (a) For every function φ that depends only on the column index, ⟨φ, f ⟩ = N         j φ(j)γj (f ); in particular
+     ⟨xm , f ⟩ = N1 j xm                 m         1
+                    P                                P m
+                          γ
+                        j j (f ) and  ⟨y   , f ⟩ = N   y ρ
+                                                      i i i (f ) for all  m   ≥  0 .  Hence if γ(f ) = 0 and
+     ρ(f ) = 0 (for f = z(S): if S is semi-magic), then ⟨xm , f ⟩ = ⟨y m , f ⟩ = 0 for every m ≥ 0.
+ (b) If k ≥ n − 1, the degree-k conditions imply γ(f ) = ρ(f ) = 0.
+
+ (c) If 1 ≤ k ≤ n − 2, there is a centred f satisfying the degree-k conditions with γ(f ) ̸= 0; explicitly,
+     fij = n1 (−1)j k+1
+                        
+                     j    for 0 ≤ j ≤ k + 1 and fij = 0 for j > k + 1. This f violates the degree-(k + 1)
+     condition.
+
+Thus, for real-valued height functions, the degree-k conditions are equivalent to equal row sums and equal
+column sums exactly when k ≥ n − 1.
+
+                     1
+                                          = N1
+                       P       P                   P
+Proof. (a) ⟨φ, f ⟩ = N  j φ(j)  i fij                 j φ(j)γj (f ); the row statement is symmetric.       The last
+sentence is immediate.
+                     m
+                                                                                P           P
+   (b) Suppose ⟨x    , f ⟩ = 0 for 1 ≤ m ≤ k with k ≥ n − 1. Together with j γj (f ) = i,j fij = 0 (the
+                                             n                                  m
+case m = 0), part (a) says that γ(f ) ∈ R is orthogonal to the n vectors (xj )j , m = 0, . . . , n − 1. These
+are the columns of the Vandermonde matrix of the n distinct nodes x0 , . . . , xn−1 , which is invertible;
+                   n
+hence they span R and γ(f ) = 0. The same argument with the nodes yi gives ρ(f ) = 0.
+                      j k+1
+                              
+    (c) Let vj = (−1)           for 0 ≤ j ≤ k + 1 and vj = 0 for k + 1 < j ≤ n − 1 (this needs k + 1 ≤ n − 1).
+                           j
+For a polynomial p dene the forward dierence (∆p)(t) = p(t + 1) − p(t); ∆ lowers the degree of a
+                                                                      k+1
+nonconstant polynomial by exactly one and kills constants, so ∆           p = 0 whenever deg p ≤ k . Writing
+E for the shift (Ep)(t) = p(t + 1) we have ∆ = E − 1, and since E and 1 commute the binomial theorem
+               Pk+1
+             = j=0 k+1
+        k+1
+                                  k+1−j j
+gives ∆
+                         j (−1)          E , i.e.
+
+                                             k+1                                   n−1
+                                             X                   k+1                 X
+                     (∆k+1 p)(0) = (−1)k+1         (−1)j              p(j) = (−1)k+1     vj p(j).              (11)
+                                             j=0
+                                                                  j                  j=0
+
+                     n−1 m                                   m
+                                                        P                                       P
+Taking p(t) = (t −        )   with 0 ≤ m ≤ k shows     j vj xj = 0; in particular  (m = 0)   j vj = 0. Now set
+                     P2
+fij = vj /n. Then i,j fij = j vj = 0, so f is centred; ρi (f ) = n1 j vj = 0 for every i, so all ⟨y m , f ⟩
+                                 P                                       P
+                                   m        1         m
+                                              P
+vanish by (a); γj (f ) = vj , so ⟨x , f ⟩ =     j vj xj = 0 for 1 ≤ m ≤ k by (11); and γ0 (f ) = v0 = 1 ̸= 0.
+                                            N
+                         n−1 k+1              k+1
+Finally, for p(t) = (t −
+                           2 )     we have ∆      p ≡ (k + 1)! ̸= 0, so ⟨xk+1 , f ⟩ = ±(k + 1)!/N ̸= 0.
+Corollary 4.12 (Elow is the degree-one truncation). Elow (S) = ⟨x, z⟩2 + ⟨y, z⟩2 + δm2 + δa2 /N 2 : its rst
+                                                                                                      
+
+two terms are the degree-1 conditions of Denition 4.10 in squared form, and Elow (S) = 0 i z satises
+the degree-1 conditions and both diagonals sum to M (n). By Theorem 4.11(a), every magic square has
+Elow = 0; by Theorem 4.11(c) the degree-1 conditions characterise equal line sums (among real height
+functions) only when n − 1 ≤ 1, i.e. never for n ≥ 3.
+
+Proof. Immediate from Lemma 4.1(1),(3) and Theorem 4.11.
+
+Corollary 4.13 (Loly's moment-of-inertiaPinvariance is the degree-two statement). Place a mass sij at
+the planar point (xij , yij ) and let I(S) =       i,j sij   x2ij + yij
+                                                                     2
+                                                                          be the moment of inertia about the centre.
+Then for every arrangement
+
+                           N +1X 2            X 2        X          n2 (n2 + 1)(n2 − 1)
+ I(S) = N Cov Z, X 2 + Y 2 +               2
+                                    xij + yij  =   xj γj +   yi2 ρi +                     .                    (12)
+                              2 i,j              j         i
+                                                                              12
+
+                       n2 (n4 − 1)
+Consequently I(S) =                for every semi-magic square S (no diagonal condition is needed), and
+                             12
+more generally for every arrangement satisfying the degree-2 conditions. The values for n = 3, . . . , 9 are
+60, 340, 1300, 3885, 9800, 21840, 44280 (OEIS A126275; Loly [13]).
+                                N +1                        2     2      N +1        2
+                                                                                       + y 2 ). The rst sum is
+                                                P                             P
+Proof. Substitute sij = zij + 2 : I(S) =          i,j zij (xij + yij ) +P 2    i,j (x
+    2    2                 2    2                                            2
+                                                                                   Pij 2 ij
+N ⟨x + y , z⟩ = N Cov(X + Y , Z) by Lemma 4.1(1), and equals j xj γj + i yi ρi by Theorem 4.11(a).
+                P      2                  2 n2 −1                                             N +1   n2 (n2 −1)
+For the second,   i,j xij = N Var(X) = n     12 and the same for y (Lemma 4.1(2)), so 2 ·2·              12     =
+n2 (n2 +1)(n2 −1)    2   4
+
+        12        = n (n12−1) . If S satises the degree-2 conditionsin particular if S is semi-magic, by
+Theorem 4.11(a)the rst two terms vanish.
+
+
+
+
+                                                             9
+   Theorem 4.11 is a statement about real-valued height functions. For arrangements, i.e. for f = z(S)
+with S a permutation of {1, . . . , N }, the integrality and boundedness of the line sums change the picture
+in an interesting way.
+
+
+Proposition 4.14 (The hierarchy for permutations). For n ≥ 3 let k∗ (n) be the least k such that every
+arrangement S of {1, . . . , N } satisfying the degree-k conditions is semi-magic. Then:
+
+      ∗
+  1. k (n) ≤ n − 1 for all n.
+
+      ∗             ∗
+  2. k (3) = 2 and k (4) = 3. Witnesses for the lower bounds:
+                                                   
+                                               1 3 9
+                       n = 3, degree 1 :      8 6 5 ,   γ = (1, −2, 1), ρ = (−2, 4, −2);
+                                               7 4 2
+                                                         
+                                               14 2 5 13
+                                               8 15 7 4 
+                       n = 4, degree 2 :      12 3 9 10 ,
+                                                                γ = (1, −3, 3, −1), ρ = 0.
+                                                1 11 16 6
+
+      ∗
+  3. k (n) ≤ n − 2 for all n ≥ 14: for such n the degree-(n − 2) conditions already force equal row and
+      column sums.
+
+Proof. (1) is Theorem 4.11(b).
+   (2) Lower bounds. For the 3 × 3 array, the column sums are 16, 13, 16 and the row sums 13, 19, 13,
+                                              P                                    P
+so γ = (1, −2, 1), ρ = (−2, 4, −2) and j xj γj = (−1)(1) + 0 + (1)(1) = 0,   i yi ρi = (1)(−2) + 0 +
+(−1)(−2) = 0: the degree-1 conditions hold but the square is not semi-magic, so k ∗ (3) ≥ 2. For the
+4 × 4 array, every row sums to 34 and the column sums are 35, 31,  P 37,m33, so ρ = 0 and γ = (1, −3, 3, −1),
+which is the vector v of Theorem 4.11(c) with k = 2; hence            j xj γj = 0 for m = 1, 2 by (11), the
+                                                                    ∗
+degree-2 conditions hold, and the square is not semi-magic, so k (4) ≥ 3. The upper bounds are (1).
+    (3) Let S satisfy the degree-(n − 2) conditions. By Theorem 4.11(a), γ is orthogonal to the n − 1
+                                     m
+linearly independent vectors (xj )j , m = 0, . . . , n − 2, so it lies in their one-dimensional orthogonal
+                                                                                                     j n−1
+                     n
+                                                                                                           
+complement in R . By (11) with k + 1 = n − 1, this complement is spanned by vj = (−1)                        ,
+                                                                                                         j
+j = 0, . . . , n − 1 (which is orthogonal to all polynomials of degree ≤ n − 2 and nonzero). So γ = tv
+with t = γ0 ∈ Z because v0 = 1 and γ is an integer vector. On the other hand every column sum of a
+permutation of {1, . . . , N } lies between the sum of the n smallest and the sum of the n largest values, so
+
+                       N
+                       X                      n(2N − n + 1) n(N + 1)   n(N − n)   n2 (n − 1)
+           |γj | ≤              v − M (n) =                −         =          =            .
+                                                   2           2          2            2
+                     v=N −n+1
+
+                                 n−1
+                                                      n−1
+                                                                  n2 (n−1)
+If t ̸= 0 then maxj |γj | ≥                                                 for all n ≥ 14. For n = 14:
+                              ⌊(n−1)/2⌋ . We claim ⌊(n−1)/2⌋ >         2
+ 13                     142 ·13                                                           n         n−1
+                                                                                                         
+  6   = 1716 > 1274 = 2 . Passing from n to n + 1 multiplies the left side by ⌊n/2⌋            / ⌊(n−1)/2⌋   ,
+
+                                  2n     28                                                       (n+1)2 n
+which equals 2 for n even and
+                                 n+1 ≥ 15 for odd n ≥ 14, while it multiplies the right side by n2 (n−1) =
+(n+1)2    225    28
+n(n−1) ≤ 182 < 15 for n ≥ 14; the claim follows by induction. Hence t = 0 and γ = 0; the same argument
+applied to the rows gives ρ = 0.
+
+
+Remark 4.15 (Values of   k ∗ (n) for 5 ≤ n ≤ 13). For 5 ≤ n ≤ 13 a randomised swap search
+(verify_theory.py) found, for each n, an arrangement with all row sums equal to M (n) and
+                            j n−1
+                                   
+column deviations γj = (−1)          ; such an arrangement satises the degree-(n − 2) conditions without
+                                j
+                       ∗
+being semi-magic, so k (n) = n − 1 for all 3 ≤ n ≤ 13. Combined with Proposition 4.14(3), the
+permutation threshold agrees with the linear-algebra threshold n − 1 exactly for n ≤ 13 and drops below
+                                  ∗
+it from n = 14 on; determining k (n) for n ≥ 14 is open. We note this because it illustrates concretely
+what the permutation constraint adds to the orthogonality reformulation:          for real heights the test
+space of degree ≤      n − 2 is too small, whereas for large n the integer heights cannot realise the one
+direction it misses.
+
+Remark 4.16 (Why the low-mode energy appeared to work for n = 3). For n = 3 an exhaustive enu-
+meration of all 9!     = 362,880 arrangements (verify_theory.py, exact integer arithmetic) gives: 760
+arrangements satisfy the degree-1 conditions Cov(X, Z) = Cov(Y, Z) = 0; exactly 72 (the semi-magic
+
+
+
+                                                        10
+                                                                         ∗
+squares) satisfy the degree-2 conditions, in accordance with k (3) = 2; and exactly 8 satisfy the degree-1
+conditions together with both diagonal conditionsand these 8 are the magic squares.        So for n = 3,
+Elow (S) = 0 ⇐⇒ S is magic, but for the wrong reason: the degree-1 conditions leave the one-
+parameter families γ = t(1, −2, 1), ρ = u(1, −2, 1) open, and it is the two diagonal conditions combined
+with the requirement that the entries be a permutation of 1, . . . , 9 that happen to force t = u = 0.
+Nothing of the sort survives for n = 4: the arrangement of Remark 4.3 has Elow = 0 (both diagonals
+sum to 34, γ = (3, −9, 9, −3), ρ = (−6, 4, 10, −8)) and is not even semi-magic; it satises the degree-2
+                             P 2
+condition in x but not in y (  i yi ρi = −28).
+
+
+4.4 The single-swap formula
+                                    ab
+Let a ̸= b be two cells and let S         be the arrangement obtained from S by exchanging the entries in a
+and b. Dene
+
+
+                           m(a, b) = #{lines L : L contains exactly one of a, b},
+                                     X
+                            uS (c) =    δL (S)    (sum over the lines through c).
+                                         L∋c
+
+Theorem 4.17 (Single-swap formula). For every arrangement S and cells a ̸= b, with d = sb − sa ,
+                        N 2 Efull (S ab ) − Efull (S) = d2 m(a, b) + 2d uS (a) − uS (b) .
+                                                                                      
+                                                                                                         (13)
+
+
+In particular, if S is a magic square then, with d = |sa − sb |,
+
+                                                                 d2 m(a, b)
+                                               Efull (S ab ) =              .                            (14)
+                                                                    N2
+                                                      ab
+Proof. The swap changes the height function by z(S
+                                                        ) = z(S) + d(1a − 1b ). For a line L, δL (S ab ) =
+δL (S) + d 1L (a) − 1L (b) : the deviation increases by d if L contains a but not b, decreases by d if L
+contains b but not a, and is unchanged if L contains both or neither. By (8),
+
+                                   X                          X 
+                     N 2 ∆Efull =         (δL + d)2 − δL
+                                                       2
+                                                                     (δL − d)2 − δL
+                                                                                  2
+                                                                                   
+                                                           +
+                                    L∋a, L̸∋b                           L∋b, L̸∋a
+                                                        X                      X         
+                                      2
+                                 = d m(a, b) + 2d                    δL −               δL .
+                                                         L∋a, L̸∋b          L∋b, L̸∋a
+
+Adding and subtracting the lines containing both a and b turns the bracket into uS (a) − uS (b). If S is
+magic, all δL (S) = 0, so uS ≡ 0 and Efull (S) = 0, giving (14).
+
+Lemma 4.18 (The multiplicity m(a, b)). For distinct cells a = (i, j), b = (i′ , j ′ ):
+               m(a, b) = 2 · [i ̸= i′ ] + 2 · [j ̸= j ′ ] + [exactly one of a, b on the main diagonal]
+                                                      + [exactly one of a, b on the anti-diagonal].
+
+Hence 2 ≤ m(a, b) ≤ 6, and m(a, b) = 2 if and only if a and b lie in a common row or a common column
+and neither of them lies on a diagonal. Such pairs exist for every n ≥ 3 (for n = 3 exactly one pair up
+to D4 : the two non-central cells of the middle row or column; for n ≥ 4 any two o-diagonal cells of a
+row).
+
+                     ′                                                                              ′
+Proof. Rows: if i = i the common row contains both cells and no other row contains either; if i ̸= i the
+row of a contains a only and the row of b contains b only. Columns likewise. Each diagonal contributes
+1 or 0 according to whether it separates a from b. Since a ̸= b, not both i = i′ and j = j ′ , so the
+                                                                                                         ′
+row/column contribution is 2 or 4 and m ≥ 2; the maximum 6 is 4 + 1 + 1. Now m = 2 forces i = i
+          ′                                                           ′         ′
+or j = j (not both) and no diagonal separating a from b. If i = i and j ̸= j , both cells on the main
+                                  ′
+diagonal would mean j = i = j , impossible; so not separated by the main diagonal means neither is
+on it, and likewise for the anti-diagonal. The column case is symmetric. For existence: a row i contains
+                                                                                  n−1
+the diagonal cells (i, i) and (i, n − 1 − i) (which coincide i n is odd and i =
+                                                                                   2 ), so it has at least
+n − 2 ≥ 2 o-diagonal cells when n ≥ 4, and the middle row of the 3 × 3 grid has the two o-diagonal
+cells (1, 0), (1, 2).
+
+Corollary 4.19 (Strict local minimality and the exact gap). Let S be a magic square of order n ≥ 3.
+
+                                                            11
+  1. Every single swap strictly increases the energy:    Efull (S ab ) ≥ 2/N 2 > 0 for all a ̸= b. Thus
+        every magic square is a strict local minimum of Efull on the set of arrangements with respect to
+        transpositions, for every n.
+
+  2. The smallest energy reachable by one swap is
+
+                                                 (sa − sb )2 m(a, b)         2               6
+                              ∆min (S) = min                         ,          ≤ ∆min (S) ≤ 2 .
+                                            a̸=b        N2                  N 2             N
+        The lower bound is attained i some two cells with consecutive values share a row or column and
+        are both o the diagonals; the upper bound follows by swapping any two consecutive values (d = 1,
+        m ≤ 6). In particular ∆min (S) = Θ(n−4 ) with explicit constants, uniformly over all magic squares
+        of order n.
+
+                                2
+  3. The possible values of N     Efull (S ab ) are the integers d2 m with 1 ≤ d ≤ N − 1 and 2 ≤ m ≤ 6. For
+                                                                2
+        the 880 magic squares of order 4, the multiset of N ∆min is {2 : 432, 3 : 420, 4 : 28}, and for the
+        8 squares of order 3 it is {3 : 8} (computation; every one of the 105,888 single swaps satises (14)
+        exactly).
+
+                                    2
+Proof. (1) and (2): by (14), N          Efull (S ab ) = d2 m(a, b) with d ≥ 1 and m ≥ 2 (Lemma 4.18). The pair of
+cells carrying the values v, v + 1 has d = 1 and m ≤ 6, giving the upper bound; the characterisation of
+equality in the lower bound is Lemma 4.18. (3) is immediate from (14) and the computation reported
+in Section 5.
+
+                                                                                                                2
+Remark 4.20. Version 4 of this paper reported a trimodal distribution of swap gaps and a 1/n                      scaling
+                                                                      2                2     4
+of the minimum gap. Both were artifacts: the gaps are the integers d m divided by N                        = n , and the
+                                        2
+three modes were the values d m ∈ {2, 3, 4} (with the asymmetric Ev4 , {1, 2, 3}).
+
+Remark 4.21 (Swap formula for Elow ). Since Cov(φ, Z  ) = Cov(φ, Z) + Nd (φ(a) − φ(b)) for every test
+                                                                  ab
+
+function φ (Lemma 4.1(1)), the same computation gives, for Elow (S) = 0 and in particular for S magic,
+
+
+                             d2 h                                            2                2 i
+            Elow (S ab ) =     2
+                                  (xa − xb )2 + (ya − yb )2 + Dm (a) − Dm (b) + Da (a) − Da (b) ,
+                             N
+     2      2
+i.e. d /N       times the squared planar distance between the cells plus the number of diagonals separating
+                                                                                                                     ab
+them. The bracket is at least 1, so magic squares are strict local minima of Elow as well, with Elow (S                   )≥
+    2
+1/N .
+
+4.5 The inertia tensor of the Magic Gem
+Place unit masses at the N points pij = (xij , yij , zij ). Because all three coordinates P
+                                                                                          have mean zero
+                                                                                                      2
+(Lemma 4.1(1)), the centre of mass is the origin, and the inertia tensor about it is I =
+                                                                                          i,j ∥pij ∥ Id −
+     T
+pij pij = N tr(Σ)Id − Σ , where Σ is the 3 × 3 covariance matrix of (X, Y, Z).
+Proposition 4.22 (Inertia tensor). For every arrangement S of {1, . . . , N },
+                                 n2 (n2 − 1)(n2 + 2)                      n2 (n2 − 1)
+                      Ixx = Iyy =                     ,           Izz =               ,   Ixy = 0,
+                                         12                                    6
+                                            X                                               X
+                    Ixz = −N Cov(X, Z) = −      xj γj ,           Iyz = −N Cov(Y, Z) = −         yi ρi .
+                                                   j                                         i
+
+In particular the diagonal entries are the same for all N ! arrangements, and for a magic square (indeed
+for any arrangement satisfying the degree-1 conditions) the tensor is diagonal with principal moments
+n2 (n2 −1)(n2 +2)             n2 (n2 −1)
+        12        (twice) and      6     .
+
+                  P     2     2                           2 n2 −1
+                                                                  n4 −1
+                                                                          n2 (n2 −1)(n2 +2)
+Proof. Ixx =      i,j (yij + zij ) = N (VarY + VarZ) = n     12 + 12      =        12        by Lemma 4.1(2),
+        2
+using (n    − 1) + (n4 − 1) = (n2 − 1)(n2 + 2); Iyy is the same by symmetry, and Izz = N (VarX + VarY ) =
+n2 (n2 −1)
+           . The o-diagonal entries are −N Cov(·, ·) by denition; Cov(X, Y ) = 0 by Lemma 4.1(2), and
+     6            P
+N Cov(X, Z) = j xj γj by Theorem 4.11(a). All three diagonal entries depend only on the multisets
+{xij }, {yij }, {zij }, which are the same for every arrangement.
+
+
+
+                                                             12
+5     Computations
+This section reports the computations behind the statements of Section 4 and the two enumerative results
+of the paper. All counts and all swap gaps were computed in exact integer or rational arithmetic; Monte
+Carlo results are reported with standard errors.       Hardware, software and algorithms are described in
+Section A.
+
+
+
+5.1 Exhaustive enumeration for n = 3
+All 9! = 362,880 arrangements of order 3 were enumerated in exact integer arithmetic (Table 1). Exactly
+8 arrangements have Efull = 0 (the Lo Shu orbit), and the same 8 are the zeros of Elow , in accordance with
+Remark 4.16: 760 arrangements satisfy the degree-one conditions, 4,224 have both diagonals summing
+to 15, and the intersection of the two classes is the set of magic squares. Both energies have mean
+40/27 (Proposition 5.1; the coincidence is special to n = 3). Counting local minima with respect to
+single swaps, the symmetric Efull has 16: the 8 magic squares and 8 non-magic arrangements, all at
+Efull = 2/81 (N 2 Efull = 2: two line deviations of ±1). Elow is more rugged, with 344 local minima, 336
+of them non-magic.
+
+
+                                                                                 Efull            Elow
+          zeros (= magic squares)                                               8              8
+          local minima under single swaps (magic + non-magic)               8+8          8 + 336
+          distinct values (all multiples of 1/81)                             177            346
+          mean                                                   40/27 = 1.4815 40/27 = 1.4815
+          standard deviation                                               0.4266         0.8370
+          mode                                                   138/81 = 1.704    90/81 = 1.111
+          maximum                                                180/81 = 2.222 360/81 = 4.444
+          arrangements with Cov(X, Z) = Cov(Y, Z) = 0 (degree-one conditions): 760
+          arrangements with both diagonal sums equal to 15: 4 224
+          semi-magic squares (= degree-two conditions, Proposition 4.14): 72
+
+Table 1: Exhaustive statistics of the two energies over all 9! arrangements of order 3. The non-magic
+                                   2
+local minima of Efull all have N       Efull = 2.
+
+
+5.2 The energy of a random arrangement
+Let S be a uniformly random arrangement, i.e. the values 1, . . . , N are placed in the grid by a uniformly
+                                                                                                P
+random permutation π .      For a test function φ on the grid write Tφ       := Cov(φ, Z) =        c ac zπ(c) with
+ac = (φc − φ̄)/N ; this is a linear permutation statistic in the sense of Section 2.3, and its rst two moments
+follow from (2). Throughout, Var(φ) and Cov(φ, ψ) denote population variances and covariances over
+the N cells, and
+                                  Var(Z)    N +1      n2 + 1                    N2 − 1
+                          σn2 :=         =         =          ,     Var(Z) =            .
+                                  N −1        12         12                       12
+Proposition 5.1 (Exact moments of the random energies). For a uniformly random arrangement and
+any test functions φ, ψ ,
+                                   E[Tφ ] = 0,      E[Tφ Tψ ] = σn2 Cov(φ, ψ).                               (15)
+
+Consequently, with Elow as in (7) and the symmetric Efull (all n rows, all n columns, both diagonals;
+2n + 2 terms),
+
+                                      n4 − 1                                     (n − 1)(n2 + 1)
+    E Cov(X, Z)2 = E Cov(Y, Z)2 =            ,   E Cov(D, Z)2 = E Cov(Rk , Z)2 =                 ,           (16)
+                                        144                                           12 n2
+                     (n2 + 1) (n4 − n2 + 12n − 12)   n4   n 13      1      1
+         E[Elow ] =                                =    + −       +    −      ,                              (17)
+                                  72 n2              72    6   72 6n 6n2
+                     n4 − 1    n2      1
+         E[Efull ] =     2
+                            =      − 2.                                                                      (18)
+                      6n        6     6n
+                                  2                                  2
+The covariance matrix Σn := σn G of the vector of covariances is σn times the Gram matrix G of the
+                                            n2 −1 n2 −1 n−1 n−1
+                                                                
+centred test functions. For Elow , G = diag  12 , 12 , n2 , n2    except that the two diagonal indicators
+
+
+
+                                                       13
+                          2
+have Cov(Dm , Da ) = −1/n when n is even (they are uncorrelated when n is odd). For Efull , G is block
+                                               1       1
+diagonal: the n row indicators have Gram block n (I − n J), the columns likewise, every rowcolumn,
+rowdiagonal and columndiagonal covariance vanishes, and the diagonal block is as for Elow . Hence the
+eigenvalues of Σn are
+                            n 2                          o                        n                       o
+                             n −1
+               Elow : σn2              n−1
+                              12 (×2), n2 (×2)            ,         Efull : σn2       1             n−1
+                                                                                      n (× 2n − 2), n2 (×2)         (19)
+
+
+                                     n−1 n−1                     1 n−2
+for odd n; for even n the last pair { n2 , n2 } is replaced by { n , n2 }. Finally, the variances are the
+rational functions
+
+               (n − 1)(n2 + 1) Po (n)                                               (n − 1)(n2 + 1) Qo (n)
+                                                                                 
+                                                   (n odd),                                                   (n odd),
+             
+                                                                                 
+                                                                                  
+                     129600 n6                                                              180 n6
+                                                                                 
+Var(Elow ) =     2
+                                                                    Var(Efull ) =             2
+              (n + 1) Pe (n)                                                      (n − 2)(n + 1) Qe (n)
+                                                                                 
+                                                   (n even),                                                  (n even),
+                                                                                 
+                 129600 n4                                                                  180 n5
+                                                                                                                    (20)
+with
+
+
+   Po (n) = 25n11 + 25n10 − 82n9 − 82n8 − 9n7 − 1209n6 + 3738n5
+               − 5862n4 + 2160n3 − 2880n2 − 4320n + 4320,
+    Pe (n) = 25n10 − 107n8 + 73n6 − 1200n5 + 4947n4 − 9600n3 + 13782n2 − 13680n + 10080,
+   Qo (n) = 5n6 − 5n5 − 17n4 + 11n3 − 24n2 + 18n + 6,                       Qe (n) = 5n5 − 12n3 + 12n2 − 23n + 12,
+                      8           7                     3         2
+so that Var(Elow ) = n /5184 + O(n ) and Var(Efull ) = n /36 + O(n ).
+              P                                P                                                              P
+Proof. Since    c ac = 0, E[Tφ ] = z̄   c ac = 0. For two linear permutation       statistics Ta =     ab ,
+                                                                                                  P i i π(i)
+Ta′ = i a′i bπ(i) the classical identity (2) reads Cov(Ta , Ta′ ) = N 1−1 i (ai − ā)(a′i − ā′ ) j (bj − b̄)2 .
+       P                                                                     P
+                         ′                                 1    N Cov(φ,ψ)
+With a = (φ − φ̄)/N , a = (ψ − ψ̄)/N , b = z this is
+                                                         N −1 ·    N2       · N Var(Z) = σn2 Cov(φ, ψ), which
+                                                                      1          n−1 2      n2 −1
+                                                                        P
+is (15). The entries of G are elementary: Var(X) = Var(Y ) =
+                                                                     n     j (j − 2 ) =      12 ; an indicator
+L of a line of n cells has Var(L) = n1 (1 − n1 ); two lines meeting in m cells have Cov(L, L′ ) = m         1
+                                                                                                      N − n2 ,
+which is  0 for a row and a column, a row and a diagonal, or a column and a diagonal (m = 1),
+−1/n2 for two parallel lines (m = 0),Pand for the two diagonals m = 1 (n odd) or 0 (n even); nally
+Cov(X, Y ) = 0 and Cov(X, D) = N1 c∈D xc = 0 for either diagonal, since a diagonal contains every
+column coordinate exactly once (likewise Cov(Y, D) = 0). (X is not orthogonal to the column indicators,
+Cov(X, Cj ) = xj /n, but X, Y and the line indicators never occur in the same energy.) Taking traces of
+                                        2
+Σn gives (16)(18): E[Elow ] = σn2 2 · n 12−1 + 2 · n−1                              n−1
+                                                                          2
+                                                          and E[Efull ] = σn (2n + 2) 2 . The eigenvalues (19)
+                                                     n2                               n
+                                  1        1                        1
+follow from the block structure,
+                                  n (I − n J) having eigenvalue n with multiplicity n − 1 and 0 once.
+                                                        2
+    The variances are obtained by expanding E[E ] over the equality patterns of cell quadruples and
+using the exact fourth moments of a uniform permutation (Section A); the result is a rational number
+for each n, and the closed forms (20) were obtained by exact rational interpolation on n = 3, . . . , 45,
+veried on 511 further orders each and against the exhaustive n = 3 values Var(Elow ) = 1532/2187,
+Var(Efull ) = 398/2187.
+                                    4                 2                                            1
+                                                                                                     P
+Remark 5.2. The growth E[Elow ] ∼ n /72, E[Efull ] ∼ n /6 is a property of the normalisation Cov = N  ,
+not of the landscape; these exact statements replace the empirical quadratic scaling ts of the previous
+                                                                         n2 −1                     n−1
+version.   For n = 3 the two means coincide (40/27) because Var(X) =            equals nVar(Cj ) =
+                                                                           12                       n
+exactly when n = 3; the two distributions are nevertheless dierent (Figure 2).
+
+
+Corollary 5.3 (Limiting law). As n → ∞, the standardised vector
+                                         p          p           p           p    
+                                  TX /    Σ11 , TY / Σ22 , TDm / Σ33 , TDa / Σ44
+                                                            4
+converges in distribution to a standard Gaussian vector in R , and therefore
+
+                         Elow              d                                       Elow      d
+                       4
+                                         −−→ χ22 ,       equivalently                      −−→ Exp(1).              (21)
+                     (n − 1)/144                                                  E[Elow ]
+                                                            2                     2
+                                                               P
+For nite n the Gaussian approximation gives E ≈      j wj χ1,j with independent χ1 variables and weights
+wj the eigenvalues (19); its density is computed by Imhof 's inversion formula [12] in Figure 2.
+
+
+                                                               14
+                                              P                                                      P
+Proof. Each xed linear combination          k αk Tφk is again a linear permutation statistic      c ac zπ(c) . Ho-
+eding's combinatorial central limit theorem [11, Thm. 3] (Section 2.3) asserts asymptotic normality
+                                                                    −1                                         2 r/2
+   P                                                                   P               r
+                                                                                          −1 P                 
+of    i cN (i, π(i)) provided that for every r ≥ 3 the ratio N            i,j dN (i, j)   N     i,j dN (i, j)
+remains bounded, where dN is the doubly centred array. In the product case cN (i, j) = ai zj the
+                  1−r/2
+ratio equals N          κr (a)κr (z) with κr the standardised r-th absolute moments. For z (uniform on
+{1, . . . , N } centred) κr (z) = O(1). For a a combination of X , Y and the two diagonal indicators,
+κr (a) = O(nr/2−1 ) = O(N r/4−1/2 ) (the worst case being a pure indicator of n out of N cells, a
+                                              1/2−r/4
+Bernoulli(1/n) variable), so the ratio is O(N         ) → 0 for r ≥ 3 and Hoeding's condition holds (it
+even tends to zero). By the CramérWold device the vector is asymptotically Gaussian with covariance
+Σn ; for even n the only nonzero correlation is corr(TDm , TDa ) = −1/(n − 1) → 0, so the standard-
+                                           2     2           2         2
+ised limit is N (0, I4 ). In Elow = Σ11 (T̃X + T̃Y ) + Σ33 T̃D + Σ44 T̃D the diagonal terms carry weight
+                                                               m         a
+Σ33 /Σ11 = 12(n − 1)/(n (n − 1)) → 0, giving (21); the second form uses E[Elow ]/((n4 − 1)/72) → 1.
+                           2 2
+
+
+Remark 5.4. For Efull the number of statistics grows with n, so the corollary does not apply verbatim;
+                                                                                   2 1 2        n−1 2
+                                                                                                     
+the 2n + 2 line sums are each asymptotically normal, but the Gaussian mixture σn
+                                                                                      n χ2n−2 + n2 χ2
+is only a heuristic at the orders we can simulate.            The exact variance (20) quanties this:          the ratio
+of the exact to the Gaussian-mixture variance is            0.24, 0.45, 0.56, 0.64, 0.69, 0.73 for n = 3, . . . , 8 (for
+Elow : 0.51, 0.76, 0.86, 0.90, 0.93, 0.95), reecting the nite-population fourth-moment corrections, and
+the Kolmogorov distances in Table 2 decrease accordingly. For n = 3 the two energies take 346 and 177
+distinct values respectively, all multiples of 1/81 (Section 5.1).
+
+
+                                                         √
+     n   energy                E[E] exact   MC mean       VarE exact       MC std     Gauss. std    |δmean |      KS
+     3   Elow              40/27 = 1.4815     1.4814             0.8370     0.8369        1.171    6 × 10−5
+                                                                                                                0.103
+     3   Efull             40/27 = 1.4815     1.4815             0.4266     0.4266        0.869    8 × 10−6     0.200
+     4   Elow             391/96 = 4.0729     4.0736             3.1284     3.1288        3.586    2 × 10−4     0.037
+     4   Efull             85/32 = 2.6562     2.6564             0.9074     0.9073        1.349    7 × 10−5     0.107
+     5   Elow             234/25 = 9.3600     9.3605             8.0483     8.0482        8.694    6 × 10−5     0.019
+     5   Efull            104/25 = 4.1600     4.1600             1.3966     1.3966        1.867    9 × 10−6     0.078
+     6   Elow           2035/108 = 18.843     18.843             17.122     17.122       18.007    4 × 10−5     0.012
+     6   Efull          1295/216 = 5.9954     5.9957             1.9671     1.9671        2.459    6 × 10−5     0.061
+     7   Elow           5050/147 = 34.354     34.349             32.174     32.167       33.349    1 × 10−4     0.008
+     7   Efull            400/49 = 8.1633     8.1631             2.5697     2.5698        3.089    2 × 10−5     0.050
+     8   Elow          22295/384 = 58.060     58.058             55.377     55.381       56.888    3 × 10−5     0.007
+     8   Efull          1365/128 = 10.664     10.664             3.2352     3.2353        3.777    3 × 10−5     0.042
+                                                                                 8
+Table 2: Exact moments of Proposition 5.1 against Monte Carlo (10                    uniformly random arrangements
+per order; for n = 3 the exact values were also conrmed by enumerating all 9! arrangements).                    |δmean |
+is the relative error of the MC mean; all MC means and variances agree with the exact values to within
+5 × 10−4 relative error, consistent with the sampling
+                                                 P standard     errors (|z| ≤ 2.3). Gauss. std is the
+                                                         2
+standard deviation of the Gaussian-limit mixture     w χ
+                                                    j j 1  of Corollary 5.3, and KS is the Kolmogorov
+distance between the MC sample and that mixture.
+
+
+
+
+5.3 Swap gaps: exact verication
+                                                                                                                    ab
+Theorem 4.17 gives, for a magic square S and the swap of two cells a, b with d = |sa − sb |, Efull (S                    )=
+ 2                2
+d m(a, b)/N           with m(a, b) ∈ {2, . . . , 6} the number of lines separating a from b. We veried the formula
+in exact rational arithmetic, with the symmetric energy evaluated directly from the denition, on every
+                16                                                                                9
+                                                                                                               
+one of the 880·
+                 2 = 105,600 single swaps of the 880 essentially dierent order-4 squares, the 8· 2 = 288
+swaps of the eight order-3 squares, and all swaps of the Siamese squares of orders 5, 7 and 9: agreement
+in every case, and Efull (S) = 0 exactly for every magic square.              The gap spectrum is arithmetic, not
+                                                                    2
+banded: over the 105,600 order-4 swaps the quantity N                 ∆E = d2 m takes exactly 70 distinct integer
+values from 2 to 980, and the three smallest, 2, 3, 4, are precisely the three values that occur as the
+minimum gap of a square (Table 3; cf. Corollary 4.19(3) and Remark 4.20).
+
+
+5.4 The low-mode balanced class for n = 4
+Write Ln for the set of arrangements of {1, . . . , N } with Cov(X, Z) = Cov(Y, Z) = Cov(Dm , Z) =
+Cov(Da , Z) = 0, i.e. Elow = 0 (Corollary 4.12). Each of the four conditions is a linear statistic of the
+
+
+                                                            15
+                 (a) Elow                                                  (b) Efull                                                (c) exact moments
+           1.2              n = 3 (exact, all 9! )                  2.0                n = 3 (exact, all 9! )                            mean Elow
+                            n = 5 (MC, 108)                                            n = 5 (MC, 108)                     104           std Elow
+           1.0              n = 8 (MC, 108)                                            n = 8 (MC, 108)
+                                                                    1.5                                                                  mean Efull
+                            n → ∞: Exp(1)                                              Gaussian-limit law                  103                     mean ∼ n 4/72
+           0.8                                                                                                                           std Efull
+                            Gaussian-limit law
+ density
+
+
+
+
+                                                          density
+
+
+
+
+                                                                                                                  energy
+                                                                                                                                         Monte Carlo mean ∼ n 2/6
+           0.6                                                      1.0                                                    102
+
+           0.4                                                                                                             101
+                                                                    0.5                                                                                 std ∼ n 3/2/6
+           0.2                                                                                                                  0
+                                                                                                                           10
+           0.0                                                      0.0
+                 0    1      2      3      4         5                    0.0   0.5    1.0    1.5    2.0    2.5                     3    5      10      20      40
+                             E/[E]                                                     E/[E]                                                      n
+
+
+
+
+Figure 2: Energy of a uniformly random arrangement. (a) Distribution of Elow /E[Elow ] for n = 3 (exact,
+                                                                     8
+all 9! arrangements) and n = 5, 8 (10                                     Monte Carlo samples each), with the Gaussian-limit mixture
+densities (dashed, Imhof inversion with the weights (19)) and the n → ∞ limit Exp(1) of Corollary 5.3
+(dotted). (b) The same for the symmetric Efull ; here the Gaussian mixture is only a slowly improving
+approximation (see the remark after Corollary 5.3).                                           (c) Exact mean (solid) and standard deviation
+(dashed) of both energies from Proposition 5.1, 3 ≤ n ≤ 40, with the Monte Carlo values for n = 3, . . . , 8
+(open markers).                 Elow grows like n4 /72 and its standard deviation like n4 /72 as well
+                              The mean of
+                                                                          2
+(an exponential limit has unit coecient of variation); Efull has mean ∼ n /6 and standard deviation
+    3/2
+∼ n /6.
+
+
+Table 3: Minimum single-swap gap ∆min (S) = mina̸=b ∆E (exact) over the magic squares of orders
+3 and 4 and the Siamese squares of orders 59. All values are k/N 2 with k ∈ {2, 3, 4}, as forced by
+∆E = d2 m/N 2 with d = 1.
+                                         squares                                N2        N 2 ∆min         multiplicity
+
+                                         all 8 of order 3                         81        3              8
+                                         all 880 of order 4                      256      2/3/4            432 / 420 / 28
+                                         Siamese, n = 5                          625        3              
+                                         Siamese, n = 7                         2401        2              
+                                         Siamese, n = 9                         6561        2              
+
+
+
+                                                                                                    2
+                                                                                                                                                        P
+arrangement: with cells indexed by (i, j) ∈ {0, . . . , n − 1} , Cov(X, Z) = 0                 i,j j sij =                              ⇐⇒ T1 :=
+n−1   N (N +1)                                 P
+ 2 ·     2     , Cov(Y, Z) = 0
+                          P        ⇐⇒ T2 P :=     i,j i sij equals the same target, and the two diagonal
+conditions say that T3 =    i sii and T4 =  i si,n−1−i equal M (n) = n(N + 1)/2.
+
+Proposition 5.5 (Exact size of L4 ). |L3 | = 8 (the Lo Shu orbit; the class with only Cov(X, Z) =
+Cov(Y, Z) = 0 has 760 members), and
+
+                                                         |L4 | = 14 639 440 = 8 × 1 829 930,
+
+of which exactly 7040 are magic squares. The class is D4 -invariant and D4 acts freely on it (1 829 930
+orbits of size 8). The rst-moment class {Cov(X, Z) = Cov(Y, Z) = 0} has 6 697 177 424 members for
+n = 4, and the class with both diagonals equal to 34 has 49 932 288 000 members.
+
+Computation. Meet in the middle. Split the 16 cells into the top two rows A and the bottom two rows
+B . For each of the 16
+                              
+                            8 = 12 870 value sets V and each of the 8! bijections V → A, the partial vector
+                                                                                                   V c and each
+(T1 , T2 , T3 , T4 ) restricted to A is packed into a 27-bit integer key; for the complementary setP
+                c
+bijection V           → B the vector (target − partial) is formed, and the number of arrangements is                                                       (matching
+key multiplicities), obtained by sorting both key lists and merging. This touches 2 × 12 870 × 40 320 ≈
+1.04 × 109 partial vectors, against 16! ≈ 2.1 × 1013 arrangements for brute force; it runs in 9 s on 16
+threads of an Apple M4 Max. Matching pairs are expanded explicitly to obtain the row- and column-sum
+breakdown of Table 4. The same program validates on n = 3 (where brute force is feasible: 8, 760, 4224,
+
+
+
+                                                                                       16
+8 magic, 72 semi-magic) and, with the 2n line sums in place of T1 , T2 , reproduces the 7040 magic squares
+and the 549 504 = 8 × 68 688 semi-magic squares of order 4; the diagonal-only count was also veried by
+                                                                    9
+direct combinatorics, and the probability |L4 |/16! by 2 × 10           Monte Carlo samples (1373 hits; relative
+error 2.7%).
+
+
+
+
+Table 4: Breakdown of L4 by the number of row sums and column sums equal to M (4) = 34. Exactly
+                                                                              P               P
+two or three equal row sums are impossible: if Ri = 34 + ei then     i ei = 0 and    i i ei = 0 (this is
+T2 ), which cannot hold with exactly one or two nonzero ei ; the same holds for columns. The table is
+symmetric under transposition.
+
+                                                          columns equal to 34
+
+                  rows equal to 34                 0            1                 4         total
+
+                  0                        9 637 312   2 172 824             100 728   11 910 864
+                  1                        2 172 824    429 312                9 336    2 611 472
+                  4                          100 728       9 336    7 040 (magic)        117 104
+
+                  total                   11 910 864   2 611 472             117 104   14 639 440
+
+
+
+   Thus only 7040/14 639 440         = 0.048% of the low-mode balanced arrangements are magic; 110 064
+members have all row sums equal to 34 but not all column sums (and symmetrically), and 9 637 312
+(66%) have no row or column summing to 34 at all. The arrangement of Remark 4.3 belongs to the last
+class. Figure 3 shows one member from each of six classes.
+
+
+Why random sampling never found a counterexample.                 |L4 |/16! = 6.997 × 10−7 , about one
+arrangement in 1.43 million: 460 million uniform samples are expected to contain about 322 members
+                                                              −8
+of L4 (but only 0.15 magic squares), so the estimate below 10    given in the previous version of this
+paper was too small by a factor of about 70, and the absence of non-magic zeros in the earlier sampling
+                                                8
+runs cannot be explained by rarity alone (the 10 -sample runs of Section 5.2 contain 61 members of L4 ,
+consistent with the exact probability). A Gaussian local-limit estimate explains the order of magnitude:
+under a uniform random permutation the vector (T1 , . . . , T4 ) has mean equal to the target vector and
+covariance Σ given by (2) (T1 , T2 are uncorrelated with each other and with the diagonals; the two
+                                      2
+diagonals have correlation −1/(n −1) for even n and 0 for odd n), and the achievable values of (T1 , . . . , T4 )
+                          4
+form the full lattice Z       (Smith normal form of the single-transposition steps, n ≤ 8), so
+
+
+                                           |Ln | ≈ N ! (2π)−2 det(Σ)−1/2 .
+
+The estimate gives 13.6 for n = 3 (true:   8, ratio 0.59) and 1.82 × 107 for n = 4 (true: 14 639 440, ratio
+0.80); for the two-condition classes the ratios are 0.59/0.91 (rst moments) and 1.10/0.96 (diagonals), so
+the Gaussian approximation improves with n as the local limit theorem predicts. For larger n we have
+no exact count; the estimate and a Monte Carlo check are
+
+
+        |L5 | ≈ 6.7 × 1017 (Gaussian),             5.1 × 1017 (Monte Carlo, 1010 samples, ±6%),
+        |L6 | ≈ 1.5 × 1033 (Gaussian),             1.2 × 1033 (Monte Carlo, 2 × 1010 samples, ±13%),
+
+to be read as conjectural orders of magnitude (25!            ≈ 1.6 × 1025 , 36! ≈ 3.7 × 1041 ).    In every case
+the magic squares are a vanishing fraction of Ln : the four low-mode conditions cost a factor of order
+det(Σ)1/2 ∝ n13 (two rst-moment statistics of standard deviation ∼ n4 /12 and two diagonal sums of
+                        5/2
+standard deviation ∼ n      ), while a magic square requires 2n independent line conditions, each costing
+                            5/2
+a further factor of order n     .
+
+
+
+5.5 Geometry of the 880 order-4 gems
+For each of the 880 essentially dierent order-4 magic squares we computed the Magic Gem G(S) exactly:
+doubling all coordinates makes every point an integer vector, facet planes are recovered as primitive
+integer equations (so coplanar triangles returned by       qhull are merged into true faces), vertices are the
+points lying on at least three facet planes, edges are pairs of vertices sharing two facets, and volumes
+are computed as exact rationals. Euler's relation V − E + F             = 2 holds for all 880 gems. Figure 4 and
+Table 5 summarise the results.
+
+
+
+                                                         17
+    no row or column equals 34                        one row equals 34                       one column equals 34
+
+        9     4     12     3     28                   3      7         6    16    32          15     8     5     11      39
+
+        16    1     14     7     38                   15     9     12       1     37           1     7     6     9       23
+
+        10    15    11     8     44                   13     2     14       5     34          12     3    10     16      41
+
+        2     5      6    13     26                   4      10    11       8     33          14     4    13     2       33
+
+  ↙34   37    25    43    31     ↘34         ↙34      35     28    43       30    ↘34   ↙34   42    22     34    38      ↘34
+
+
+
+
+ one row and one column equal 34                 all rows equal 34 (no column)           all columns equal 34 (no row)
+
+        1     16    10     5     32                   10     3         8    13    34          10     2    13     5       30
+
+        9     14     8     3     34                   16     5         1    12    34          15     7    12     4       38
+
+        2     15    12    11     40                   9      14        4    7     34           8    16     3     11      38
+
+        6     13     4     7     30                   6      11        2    15    34           1     9     6     14      30
+
+  ↙34   18    58    34    26     ↘34         ↙34      41     33    15       47    ↘34   ↙34    34    34    34    34      ↘34
+
+
+
+
+     Row sums (right) and column sums (below); red bold = sum ≠ 34. Both diagonals (corners) sum to 34 in every panel.
+
+
+
+
+Figure 3: Six non-magic members of L4 , one from each class of Table 4 other than the magic squares
+and the two mixed classes (4, 1), (1, 4). Row sums are printed to the right of each square and column
+sums below it; sums dierent from 34 are in red.                   Both diagonals (corner annotations) sum to 34 in
+                                       P              P
+every panel, and in every panel            j j Cj =        i i Ri = 204, so Elow = 0 although Efull > 0. Top left: the
+arrangement of Remark 4.3.
+
+
+
+
+Table 5: Face structure of the 880 order-4 gems by number of hull vertices V . types is the number of
+distinct combinatorial types (face lattices up to isomorphism) and vols the number of distinct exact
+volumes among the squares with that V . The f -vector column lists (V, E, F ) with multiplicities.
+
+               V    squares    types    vols       f -vectors (V, E, F ): count
+               8           7       4         4     (8,14,8):1, (8,16,10):1, (8,17,11):1, (8,18,12):4
+               9          10       1         5     (9,20,13):10
+              10         103      27        51     (10,19,11):1, (10,20,12):3, (10,21,13):11, (10,22,14):75,
+                                                   (10,23,15):11, (10,24,16):2
+              11          80      32        33     (11,22,13):2, (11,23,14):6, (11,24,15):28, (11,25,16):38,
+                                                   (11,26,17):6
+              12         380     129       111     (12,22,12):1, (12,24,14):37, (12,25,15):25, (12,26,16):164,
+                                                   (12,27,17):75, (12,28,18):77, (12,29,19):1
+              13         106      52        40     (13,27,16):4, (13,28,17):12, (13,29,18):46, (13,30,19):42,
+                                                   (13,31,20):2
+              14         162      85        65     (14,28,16):1, (14,29,17):2, (14,30,18):36, (14,31,19):17,
+                                                   (14,32,20):106
+              15          14       7         6     (15,32,19):4, (15,33,20):6, (15,34,21):4
+              16          18      15        14     (16,32,18):1, (16,34,20):8, (16,36,22):9
+
+              all        880     352       155     39 distinct f -vectors
+
+
+
+
+                                                                  18
+Vertex counts, f -vectors, volumes.         Between 8 and all 16 of the points are hull vertices; V       = 12 is
+modal (380/880). There are 39 distinct f -vectors, and the multiset of facet sizes (number of triangles,
+quadrilaterals, . . . ) is determined by the f -vector in every case. The exact volume takes 155 distinct
+values, from 58 (square #427) to 292/3 (square #379), mean 84.05; denominators are 1, 2, 3, 6 as they
+must be for lattice polytopes of the doubled lattice. Surface areas range from 116.5 to 148.6.
+
+
+Combinatorial types.        Two gems have the same combinatorial type if their vertexfacet incidence
+structures (equivalently, their face lattices) are isomorphic. Grouping by a WeisfeilerLehman hash of
+the bipartite vertexfacet graph and conrming every group by an explicit graph isomorphism test gives
+
+
+                                          352 combinatorial types
+
+among the 880 gems (the hash was already exact: no hash class had to be split). Their sizes are very
+uneven:  93 types occur once, 201 twice, 8 three times, 20 four times, and the remaining 30 types have
+between 5 and 32 members; the largest type, with f       = (10, 22, 14) (12 triangles, 2 quadrilaterals), is
+shared by 32 squares, and the second largest, f = (12, 24, 14), by 26. The 7 gems with 8 vertices fall into
+4 types, including a single (8, 14, 8) gem with four triangular and four quadrilateral faces (square #54,
+Fig. 4d) and four (8, 18, 12) gems sharing one simplicial type with 12 triangular faces. The 18 gems with
+all 16 points extreme belong to 15 types.
+
+
+Congruence classes and injectivity.          Two gems are congruent if an isometry of R
+                                                                                               3
+                                                                                                   (rotations, re-
+ections, translations) maps one onto the other. Because a distance-preserving bijection between nite
+point sets extends to an isometry, congruence of gems is decided exactly by testing for a bijection of
+hull-vertex sets preserving all pairwise (integer) squared distances; we grouped candidates by the sorted
+multiset of squared distances and conrmed each group by an edge-labelled graph isomorphism, with a
+                                                                               −14
+oating-point Kabsch superposition as a cross-check (maximal RMSD 2 · 10             ).
+
+Proposition 5.6 (class → gem).       1. The 880 hull-vertex point sets are pairwise distinct: the map
+                                                                        3
+      from D4 -classes of order-4 magic squares to gems (as subsets of R ) is injective.
+
+  2. Up to congruence there are exactly 616 gems. The congruence classes are precisely the orbits of
+      the complement map S 7→ 17 − S , which acts on gems as the reection z 7→ −z :            352 squares are
+      self-complementary (their gems are mirror-symmetric up to a lattice symmetry) and the other 528
+      form 264 mirror pairs. No two gems of non-complementary squares are congruent, and the same
+      holds for the full 16-point sets.
+
+   Part (2) is the only failure of injectivity, and it is the expected one: 17−S is magic whenever S is, and
+the gem of 17 − S is the mirror image of G(S) in the plane z = 0. The 352 self-complementary classes are
+                                                                                          ◦
+exactly Dudeney's group III (the 48 associated squares, whose complement is the 180           rotation) together
+with all 304 squares of Dudeney's group VI [7]; the complement map preserves every Dudeney group.
+The coincidence 352 = #{combinatorial types} = #{self-complementary squares} is numerical only: the
+type partition (93 singletons) and the complement partition (352 singletons) are dierent partitions of
+the 880.
+
+
+Dudeney groups.        Crossing the hull-vertex count with Dudeney's twelve groups (full table in the
+ancillary les) shows that geometry is only loosely tied to Dudeney type: every group with more than
+eight members spans at least four vertex counts and at least 20 combinatorial types, while the two 8-
+member groups XI and XII are conned to V    ∈ {12, 13} and V ∈ {10, 12, 13} with 4 types each. The
+8-vertex gems occur only in groups VI (three) and VIII (four), and V = 9 occurs only in groups VIII
+and IX.
+
+Remark 5.7. Groups III and VI, the self-complementary ones, have only even vertex counts; this is
+forced: for a self-complementary square the reection z 7→ −z composed with the element of D4 that
+realises 17 − S is an isometry of the gem of order 2 or 4 without xed hull vertices (no point has z = 0
+when N is even), so hull vertices fall into orbits of size 2 or 4.
+
+
+
+5.6 Siamese gems have twelve vertices
+For the Siamese (de la Loubère) squares of odd order the hull-vertex count does not grow with n. We
+computed the gems for n = 3, 5, . . . , 21: the Lo Shu gem has f = (8, 16, 10), and every Siamese gem with
+
+
+
+                                                      19
+                           (a) hull vertex count                                  (b) volume (155 distinct values) (c) 352 combinatorial types
+
+                     400             380                                            min 58       max 292/3                           201
+                                                                            120                                                200
+ number of squares
+
+
+
+
+                                                        number of squares
+
+
+
+
+                                                                                                             number of types
+                                                                            100
+                     300
+                                                                                                                               150
+                                                                             80
+                     200                                                     60                                                100   93
+                                           162
+                                103  106                                     40
+                     100          80                                                                                            50
+                                                                             20                                                            20
+                            7 10              1418                                                                                        8 4745511111
+                       0                                                      0                                                  0
+                            8 9 10 11 12 13 14 15 16                                60          80
+
+
+
+
+                                                                                                                                      1
+                                                                                                                                      2
+                                                                                                                                      3
+                                                                                                                                      4
+                                                                                                                                      5
+                                                                                                                                      6
+                                                                                                                                      7
+                                                                                                                                      8
+                                                                                                                                     10
+                                                                                                                                     13
+                                                                                                                                     14
+                                                                                                                                     16
+                                                                                                                                     26
+                                                                                                                                     32
+                                hull vertices V                                          volume of gem                          squares per combinatorial type
+                           (d) V = 8 (square #54)                                 (e) V = 16 (square #802)                      (f) max volume (square #379)
+
+
+
+
+                           f = (8, 14, 8), V/N = 8/16                         f = (16, 36, 22), V/N = 16/16                      f = (12, 26, 16), V/N = 12/16
+                                   volume 84                                         volume 242/3                                        volume 292/3
+
+
+
+
+Figure 4: Geometry of the 880 order-4 Magic Gems. (a) Number of hull vertices (8 to 16; modal value
+12). (b) Exact hull volume (155 distinct values between 58 and 292/3). (c) Sizes of the 352 combinatorial
+types: 93 types occur once, 201 twice, and one type is shared by 32 squares. (d)(f ) Three extreme gems,
+drawn with translucent faces after merging coplanar triangles: the unique (8, 14, 8) gem (square #54;
+the eight interior points are shown in red), a gem with all 16 points extreme (square #802, Dürer's
+square with its rst two rows exchanged and its last two rows exchanged), and the gem of largest volume
+(square #379).
+
+
+
+n ≥ 5 has f = (12, 26, 16) with 12 triangular and 4 quadrilateral facets, so the hull fraction 12/n2 tends
+to zero (Fig. 5). This is a theorem, with a short computer-assisted proof.
+
+
+Proposition 5.8 (Siamese gems). Let n = 2m + 1 ≥ 5 and let S be the Siamese square of order n (1 in
+the middle cell of the top row, successive entries one step up and to the right modulo n, one step down
+when blocked). Then G(S) has exactly 12 vertices, 26 edges and 16 facets (12 triangles, 4 quadrilaterals).
+                                      2
+With 0-indexed cells (i, j) and c = (n + 1)/2, the vertices are the points over the cells
+
+
+                                    (0, 0) : c + m + 2,   (0, m − 1) : n2 − 1, (0, m) : 1,
+                                    (0, 2m) : c + m,      (m − 1, 0) : n2 − m, (m, 0) : m + 2,
+                                    (m, 2m) : n2 − m − 1, (m + 1, 2m) : m + 1, (2m, 0) : c − m,
+                                    (2m, m) : n2 ,        (2m, m + 1) : 2,     (2m, 2m) : c − m − 2,
+
+i.e. the four corners, and on each side of the square the two cells holding the side's extreme values. For
+n = 3 the same construction gives the Lo Shu gem, with 8 vertices (all cells except the centre).
+Proof. Step 1: closed form. Write ⟨t⟩ ∈ {0, . . . , n − 1} for t mod n. We claim s(i, j) = n⟨i + j − m⟩ +
+⟨i + 2j − 2m⟩ + 1. Indeed, along a run of n consecutive entries the move (i, j) → (i − 1, j + 1) xes i + j
+and increases i + 2j by 1 modulo n, while the blocked move (i, j) → (i + 1, j) increases both i + j and
+i + 2j by 1; the entry 1 sits at (0, m) where both expressions vanish. Hence by induction the entry k lies
+in a cell with ⟨i + j − m⟩ = ⌊(k − 1)/n⌋ and ⟨i + 2j − 2m⟩ = ⟨k − 1⟩; since (i, j) 7→ (i + j, i + 2j) is a
+               2
+bijection of Zn (determinant 1), this determines the cell, which proves the claim.
+
+
+
+
+                                                                                            20
+   Step 2: ane reduction to ve layers. In gem coordinates x = j − m, y = m − i put u = i + j − m =
+x − y + m and w = i + 2j − 2m = 2x − y + m. Since ⟨t⟩ = t − n⌊t/n⌋,
+                 2                           2
+                                                                              jx − y + mk           j 2x − y + m k
+        z = s − n 2+1 = nu + w + 1 − n 2+1 + n ζ(x, y),             ζ := −n                    −                  .
+                                                                                      n                   n
+                                      ane
+                        |      {z        }
+                             L(x,y)
+
+                                                                                3
+The map Φ(x, y, z) = (x, y, (z −L(x, y))/n) is an ane bijection of R , so Φ(G(S)) = conv{(x, y, ζ(x, y))}
+has the same face lattice as G(S) and the same vertex cells.         Because −m ≤ x − y + m ≤ 3m and
+−2m ≤ 2x − y + m ≤ 4m, both oors lie in {−1, 0, 1}; the oor of (x − y + m)/n equals −1 i
+y ≥ x + m + 1 and 1 i y ≤ x − m − 1, that of (2x − y + m)/n equals −1 i y ≥ 2x + m + 1 and 1 i
+y ≤ 2x − m − 1. The combinations (−1, 1) and (−1, 0) are impossible in the box |x|, |y| ≤ m (they force
+x ≥ 2m + 2, resp. x ≥ 1 together with y > m), and by the central symmetry ζ(−x, −y) = −ζ(x, y) so
+are (1, −1), (1, 0). The point set therefore consists of the lattice points of ve convex lattice polygons at
+ve heights:
+
+
+                 T = conv{(−m, m), (−1, m), (−m, 1)},         ζ = n + 1;
+                 U = conv{(−m, 1 − m), (−m, 0), (−1, m − 1)}, ζ = 1;
+                 M = conv{(−m, −m), (0, m), (m, m), (0, −m)}, ζ = 0;
+                 D = −U, B = −T,                              ζ = −1, ζ = −(n + 1).
+
+(For T : y ≥ x + m + 1 with y ≤ m forces x ≤ −1 and then implies y ≥ 2x + m + 1; for U : 2x + m + 1 ≤
+y ≤ x + m forces x ≤ −1 and implies the other constraints; M is cut out by y ≤ 2x + m, y ≥ 2x − m,
+|y| ≤ m.)
+    Step 3: the twelve points and sixteen planes. Let v1 = (−m, m, n+1), v2 = (−1, m, n+1), v3 =
+(−m, 1, n+1), v4 = (−m, 0, 1), v5 = (−m, −m, 0), v6 = (0, −m, 0), v7 = (0, m, 0), v8 = (m, m, 0),
+v9 = (m, 0, −1), v10 = −v1 , v11 = −v3 , v12 = −v2 (so v10 = (m, −m, −n − 1), v11 = (m, −1, −n − 1),
+v12 = (1, −m, −n − 1); these are the cells listed in the statement). Consider the eight inequalities
+
+                (1) ζ ≤ 2m + 2,            (2) y ≤ m,      (3) x ≥ −m,              (8) − 2y + ζ ≤ 2m,
+                (4) − 2(m+1)x + (2m+1)y − mζ ≤ m(2m+1),
+                (5) 2(m+1)x − 2(m+1)y + (2m+1)ζ ≤ 2m(m+1),
+                (6) 2m(m+2)x − (2m2 +2m−1)y + m(2m+1)ζ ≤ m(2m2 +2m−1),
+                (7) 2mx − y + mζ ≤ m(2m−1),
+                                ′      ′
+together with their images (1 )(8 ) under (x, y, ζ) 7→ (−x, −y, −ζ), and let Q be the polyhedron they
+dene. The following facts are nitely many polynomial identities and inequalities in m, veried exactly
+for all integers m ≥ 2 by the script siamese_proof.py (an inequality p(m) > 0 is certied by non-
+negativity of the coecients of p(2 + t), or by exact evaluation up to a Cauchy root bound): (a) every
+vertex of T, U, M, D, B at its height satises all 16 inequalities, so by convexity Φ(G(S)) ⊆ Q; (b) each
+plane contains exactly the following v 's, every other vk lying strictly inside (centrally symmetric lists for
+(1′ )(8′ )):
+                        (1) : v1 v2 v3 , (2) : v1 v2 v8 v7 , (3) : v1 v3 v5 v4 , (4) : v1 v4 v7 ,
+                        (5) : v2 v3 v6 , (6) : v2 v6 v9 ,    (7) : v2 v8 v9 ,    (8) : v3 v5 v6 ;
+(c) the quadrilaterals are in convex position in the cyclic order given, so the 16 face polygons have 26
+distinct edges, each shared by exactly two polygons, and 12 − 26 + 16 = 2; (d) each vk lies on three
+planes with linearly independent normals. By (b), each of the 16 planes supports P := conv{v1 , . . . , v12 }
+in a facet with the stated vertices; by (c) this family of facets is closed under edge-adjacency, and since
+the facet-adjacency graph of a 3-polytope is connected these are all the facets, so P      = Q. With (a),
+P ⊆ Φ(G(S)) ⊆ Q = P , so Φ(G(S)) = P , whose vertex set is {v1 , . . . , v12 } by (d). Mapping back by Φ−1
+gives the statement, and the facet counts are read o from (b)(c).
+
+
+Remark 5.9. For m = 1 (n = 3) the triangles T , U , D , B degenerate to single points, v1 = v2 = v3 and
+v10 = v11 = v12 , and the same argument gives the 8-vertex Lo Shu gem. The proof shows more than the
+count: up to an ane map, every Siamese gem is the convex hull of ve parallel lattice polygons whose
+shapes do not depend on n except through scale, which is why the combinatorial type is constant for all
+n ≥ 5. Whether other classical constructions (e.g. the LUX or Strachey methods for n ≡ 0, 2 (mod 4))
+have bounded hull-vertex counts is open.
+
+
+
+
+                                                           21
+5.7 Cross-order comparison
+Figure 5 places the gems of the Lo Shu, of Dürer's square and of the Siamese square of order 5 side by
+side. The hull fractions are 8/9, 12/16 and 12/25 and the exact volumes 18, 92 and 830/3. Dürer's own
+gem has twelve vertices, but exchanging its rst two rows and its last two rows (which preserves the magic
+property) gives a square whose gem has all sixteen points extreme (square #802 in the numbering of the
+ancillary les, Figure 4e): the hull-vertex count is a property of the square, not of the Dudeney group or
+                                                                            2
+of the construction method. For the Siamese family the fraction 12/n            tends to zero (Proposition 5.8);
+whether the hull fraction of a typical magic square of large order tends to zero is open.
+
+
+
+          (a) Lo Shu (n = 3)                  (b) Dürer (n = 4)                      (c) Siamese (n = 5)
+
+
+
+
+       f = (8, 16, 10), V/N = 8/9        f = (12, 24, 14), V/N = 12/16           f = (12, 26, 16), V/N = 12/25
+               volume 18                           volume 92                            volume 830/3
+
+
+
+
+Figure 5: Magic Gems across orders, drawn with coplanar triangles merged into true faces (translucent)
+and interior points in red: (a) the Lo Shu (n = 3, 8 of 9 points extreme), (b) Dürer's square (n = 4, 12
+of 16), (c) the Siamese square of order 5 (12 of 25; Proposition 5.8). Exact volumes 18, 92, 830/3.
+
+
+
+
+6    Discussion
+6.1 What the orthogonality viewpoint buys
+Reading the line-sum conditions as z ⊥ W changes nothing about which arrangements are magic, but
+it changes which questions are natural. Three of them have been answered above. First, the test space
+                                                                             m
+can be varied. Replacing the 2n line indicators by the 2k polynomials x          , y m (m ≤ k ) gives the moment
+hierarchy, and Theorem 4.11 locates the degree k = n − 1 at which polynomial test functions become
+equivalent to line sums for real heights.   This places two earlier observations in one frame: the four-
+term energy Elow of the previous versions of this paper is the degree-one member and is weaker than
+magic for every n ≥ 4, while Loly's invariance of the moment of inertia [13] is the degree-two member
+                                                        2   4
+and holds for every semi-magic squarethe value n (n            − 1)/12 is the constant term of (12), and the
+                                                                              2
+arrangement-dependent part is the degree-two cross-moment Cov(Z, X              + Y 2 ). Proposition 4.14 adds
+that the permutation constraint is not idle: for n ≥ 14 integrality forces equal line sums one degree
+earlier than linear algebra does.   Second, each covariance Cov(φ, Z) is a linear permutation statistic,
+so the energies of a random arrangement have exact moments (17)(20) and a Hoeding limit law
+                                          4                      2
+(Corollary 5.3). The growth E[Elow ] ∼ n /72 and E[Efull ] ∼ n /6 is a property of the normalisation
+       1
+Cov = N , not of the arrangements; we see no content in tting it. Third, because N 2 Efull is a sum of
+         P
+squared integer deviations, a swap changes it by the two-line formula (13), which gives local minimality
+and the exact gap spectrum for all n at once (Corollary 4.19).
+
+
+
+6.2 What it does not buy
+The projection lemma is a restatement of the denition (Remark 4.9); it proves nothing about magic
+squares that the line sums do not already say, and we have not used it to count anything. The count-
+ing in this paper is done by the meet-in-the-middle enumeration of Proposition 5.5 and by exact hull
+
+
+
+
+                                                      22
+computations, neither of which needs the orthogonality language. The low-mode energy is a poor proxy
+for the magic property: for n = 4 its zero set is 2080 times larger than the set of magic squares, and
+                                                                                                 9                   10
+even its two-condition sub-classes (rst moments only, diagonals only) have 6.7 × 10                 and 5.0 × 10
+members (Proposition 5.5).   The gem itself is injective on the 880 order-four classes only up to the
+complement map S    7→ 17 − S (Proposition 5.6); its coarse invariants are not: the hull-vertex count
+takes nine values and the volume 155 on the 880 squares, so neither identies a square, and neither is
+well aligned with Dudeney's groups (Section 5.5). Finally, the three-dimensional inertia tensor of the
+unit-mass gem is uninformative: its diagonal entries are the same for all N ! arrangements and its only
+arrangement-dependent entries are the two degree-one covariances (Proposition 4.22); the informative
+inertia statement is Loly's planar one.
+
+
+
+6.3 Local search on the energy
+Searching the landscape.               By Theorem 4.17 a single swap changes Efull by an explicit quadratic
+expression in the swapped values, so local search is cheap.               We ran two elementary searches on the
+symmetric Efull from uniformly random starting arrangements (Table 6): steepest swap descent (always
+take the swap with the largest decrease; stop when no swap decreases the energy) and a plain simulated
+annealing (random swap proposals, Metropolis acceptance, geometric cooling from T0 = the median
+                              2
+uphill increment of N   Efull at a random arrangement to T1 = 1/2, over 2 × 104 N proposals). Greedy
+descent reaches a magic square (Efull = 0) from 19.5% of random starts for n = 4 but from only 1.2%
+(n = 5) and 0.8% (n = 6); in all other runs it stops after 815 swaps in a non-magic local minimum,
+                                                                     2
+typically with a single diagonal o by one (the smallest residual N Efull was 1 for n = 5, 6 and 2 for
+n = 4). Annealing succeeds in every run for n = 4 and in 78% (n = 5) and 50% (n = 6) of runs within
+                               5        5            5
+the budget, after ≈ 1.5 × 10 , 4 × 10 and 6.6 × 10 proposals respectively; its failures again end at
+  2
+N Efull ∈ {1, 2}. The landscape of Efull is thus easy to descend but, exactly as the exhaustive n = 3
+count of non-magic local minima suggests (eight of them, all at Efull = 2/81; Table 1), it is riddled with
+diagonal-only defects that a swap move cannot repair.
+
+
+              steepest swap descent (2 × 105 runs)                        simulated annealing (400 runs)
+  n             success mean swaps stuck (Efull > 0)                 success median proposals accepted swaps
+  4       0.195 ± 0.001           8.1              80.5%                1.000        1.5 × 105           4.2 × 104
+  5     0.0115 ± 0.0002          11.2              98.9%          0.78 ± 0.02        4.2 × 105           8.0 × 104
+  6     0.0079 ± 0.0002          14.1              99.2%          0.50 ± 0.03        6.6 × 105           1.1 × 105
+
+Table 6: Local search on the symmetric Efull from uniformly random arrangements.                     Success is the
+fraction of runs reachingEfull = 0 (a magic square), ± one standard error; stuck is the fraction
+                                                                          4
+of descents ending in a non-magic local minimum. Annealing budget 2 × 10 N proposals; median
+proposals and accepted swaps refer to successful runs.
+
+
+      The experiment is small and the two algorithms are the most elementary ones; it is included only to
+show what the swap formula makes cheap and what the local-minimum structure costs. Neither method
+competes with the classical constructions or with the backtracking enumerations of [3, 21]; the energy is
+a search objective, not a counting tool.
+
+
+
+6.4 Open questions
+  1. Size of the low-mode class.       |L3 | = 8, |L4 | = 14,639,440, and the Gaussian local-limit estimate
+        N !(2π)−2 det(Σ)−1/2 is within 20% at n = 4 with ratio apparently increasing in n (Section 5.4). Is
+        |Ln |/N ! ∼ c n−13 with an explicit constant, i.e. does a local limit theorem hold for the four lattice
+        statistics (T1 , . . . , T4 )?
+
+  2. The permutation threshold.        k ∗ (n) = n − 1 for 3 ≤ n ≤ 13 and k ∗ (n) ≤ n − 2 for n ≥ 14
+                                         ∗
+        (Proposition 4.14). What is k (n) for large n? The proof compares the entries of the integer
+                                                                                                 2
+        vectors orthogonal to all polynomials of degree ≤ k with the largest possible deviation n (n − 1)/2;
+        if the smallest such vectors are always shifted alternating binomial vectors, this comparison would
+                 ∗
+        give k       (n) = O(log n), but we have no proof.
+  3. Combinatorial types for n = 5. The 880 order-four gems have 352 types; the 34,413,153 order-ve
+        classes are within reach of the exact hull algorithm, and the number of types, the modal f -vector
+
+
+
+                                                             23
+      and whether the complement map is again the only source of congruence are all computable.
+
+
+    4. Bounded hull-vertex counts.   Siamese gems have twelve vertices for every odd      n ≥ 5 because,
+      anely, they are hulls of ve lattice polygons whose shapes do not depend on n (Proposition 5.8).
+      Do the LUX or Strachey constructions for n ≡ 2 (mod 4), or the diagonal-complement construction
+      for n ≡ 0 (mod 4), have the same property, and is the hull fraction of a uniformly random magic
+      square of large order bounded away from zero?
+
+
+    5. Other square families. The construction and the theory of Section 4 apply verbatim to semi-magic,
+      pandiagonal and Franklin squares [14], with W replaced by the span of the relevant line indicators;
+      the inertia invariance of Corollary 4.13 already covers the semi-magic case.     The gems of these
+      families have not been examined.
+
+
+
+7     Conclusion
+The Magic Gem is the convex hull of a magic square's height function over the centred grid, and it is the
+same polyhedron for all eight images of the square under D4 . Reading the entries as a height function
+makes the magic conditions the orthogonality of that function to a 2n-dimensional space of test functions.
+We have treated this reading as a viewpoint, not a result, and have used it to obtain a moment hierarchy
+that contains Loly's inertia invariance as its degree-two case and identies k = n−1 as the degree at which
+polynomial test functions become equivalent to line sums; exact means, variances and a limit law for the
+                                                                                         2      4
+energies of a random arrangement; an exact single-swap formula with the gap spectrum d m/n ; the exact
+count 14,639,440 of 4×4 arrangements satisfying the four low-mode conditions; and a classication of the
+880 order-four gems into 39 f -vectors, 352 combinatorial types and 616 congruence classes, together with
+a proof that Siamese gems have twelve vertices for every odd order. Several statements of the previous
+versionthe trimodal gap structure, the landscape entropy, the sampled landscape statistics and the
+local-minimum countwere artifacts of an asymmetric energy and are withdrawn. What remains is a
+small set of exact statements about a classical object, and a polyhedron that is pleasant to look at.
+
+
+
+References
+ [1] Maya M. Ahmed, Jesús A. De Loera, and Raymond Hemmecke. Polyhedral cones of magic cubes
+     and squares. In Discrete and Computational Geometry, volume 25 of Algorithms and Combinatorics,
+     pages 2541. Springer, 2003.
+
+
+ [2] W. S. Andrews. Magic Squares and Cubes. Dover Publications, 2nd edition, 1960.
+
+
+ [3] Matthias Beck and Andrew van Herick.       Enumeration of 4 × 4 magic squares.          Mathematics of
+     Computation, 80(273):617621, 2011.
+
+ [4] Matthias Beck and Thomas Zaslavsky. Inside-out polytopes. Advances in Mathematics, 205(1):134
+     162, 2006. MR 2254310.
+
+
+ [5] Ian Cameron, Adam Rogers, and Peter D. Loly.         Signatura of magic and Latin integer squares:
+     isentropic clans and indexing. Discussiones Mathematicae Probability and Statistics, 33(1-2):121
+     149, 2013.
+
+
+ [6] Persi Diaconis and Anil Gangolli. Rectangular arrays with xed margins. In Discrete Probability
+     and Algorithms (Minneapolis, MN, 1993), volume 72 of The IMA Volumes in Mathematics and its
+     Applications, pages 1541. Springer, New York, 1995.
+
+ [7] Henry E. Dudeney. Amusements in Mathematics. Thomas Nelson and Sons, London, 1917.
+
+
+ [8] Albrecht Dürer. Melencolia I, 1514. Engraving featuring a 4×4 magic square.
+
+
+ [9] Eugène Ehrhart. Sur les carrés magiques. Comptes Rendus de l'Académie des Sciences, Série A,
+     277:651654, 1973.
+
+
+[10] Herbert Goldstein, Charles P. Poole, and John L. Safko. Classical Mechanics. Addison-Wesley, San
+     Francisco, 3rd edition, 2002.
+
+
+
+
+                                                    24
+[11] Wassily Hoeding.     A combinatorial central limit theorem.    Annals of Mathematical Statistics,
+    22(4):558566, 1951.
+
+
+[12] J. P. Imhof.   Computing the distribution of quadratic forms in normal variables.        Biometrika,
+    48(3/4):419426, 1961.
+
+
+[13] Peter D. Loly. 88.30 The invariance of the moment of inertia of magic squares. The Mathematical
+    Gazette, 88(511):151153, 2004.
+
+[14] Peter D. Loly. Franklin squares: A chapter in the scientic studies of magical squares. Complex
+    Systems, 17(2):143157, 2007.
+
+[15] Peter D. Loly, Ian Cameron, Walter Trump, and Daniel Schindel. Magic square spectra. Linear
+    Algebra and its Applications, 430(10):26592680, 2009.
+
+[16] R. P. Nordgren. On properties of special magic square matrices. Linear Algebra and its Applications,
+    437(8):20092025, 2012.
+
+
+[17] R. P. Nordgren.   Spectra of order-4 special magic squares.    Linear Algebra and its Applications,
+    455:320331, 2014.
+
+
+[18] Cliord A. Pickover. The Zen of Magic Squares, Circles, and Stars. Princeton University Press,
+    2002.
+
+
+[19] Adam Rogers and Peter D. Loly. The inertia tensor of a magic cube. American Journal of Physics,
+    72(6):786789, 2004.
+
+
+[20] Richard P. Stanley. Linear homogeneous Diophantine equations and magic labelings of graphs. Duke
+    Mathematical Journal, 40:607632, 1973.
+
+[21] Walter Trump. Notes on magic squares and cubes.      http://www.trump.de/magic-squares/. Ac-
+    cessed 7 October 2026.
+
+
+[22] Abraham Wald and Jacob Wolfowitz. Statistical tests based on permutations of the observations.
+    Annals of Mathematical Statistics, 15(4):358372, 1944.
+
+[23] Günter M. Ziegler. Lectures on Polytopes, volume 152 of Graduate Texts in Mathematics. Springer,
+    New York, 1995.
+
+
+
+A     Computational methods
+Hardware and software.        All computations were run on an Apple M4 Max (16 cores, 128 GB) under
+macOS, with Python 3.9.6, NumPy 2.0.2 and SciPy 1.13.1 (Quickhull via scipy.spatial.ConvexHull
+is used only to seed the exact hull computation), and C code compiled with Apple clang 17. Uniformly
+random arrangements were generated by FisherYates shues (NumPy's default generator for the Python
+code, xoshiro256** for the C Monte Carlo); the Monte Carlo of Table 2 uses 10
+                                                                                8
+                                                                                    arrangements per order
+on 16 processes. All energies are evaluated from the denition (6) with the symmetric sum over 2n + 2
+lines; the exact statements of Section 4 are checked by a stand-alone script (verify_theory.py) in exact
+integer or rational arithmetic, including the 105,888 single swaps of the 880 + 8 squares, the n      = 3
+enumeration, and the degree-(n − 2) witnesses of Remark 4.15 for n ≤ 13.
+
+
+Exact moments and variances.          The means in Proposition 5.1 are traces of the covariance matrix
+σn2 G. The variances were computed as exact rationals for each n ≤ 45 by expanding E[E 2 ] over the 15
+equality patterns of a cell quadruple, with the fourth-moment expectations of the uniform permutation
+expressed through the power sums p2 , p4 of the centred values; the rational functions (20) were then
+obtained by interpolation separately for odd and even n and veried on 511 further orders each, and
+against the exhaustive n = 3 values. Densities of the Gaussian-limit mixtures in Figure 2 were computed
+by Imhof 's inversion formula [12].
+
+
+
+
+                                                   25
+Meet-in-the-middle enumeration of L4 .
+                                                                                   P                 P
+                                                      The four statistics T1 =       ij j sij , T2 =    ij i sij , T3 =
+P          P
+   i sii , T4 = i si,n−1−i      are additive over cells. The 16 cells are split into  the  top   two rows  A and the
+                                             16
+                                               
+bottom two rows B . For each of the              = 12,870 value sets V and each of the 8! bijections V → A the
+                                             8
+partial vector (T1 , . . . , T4 )|A is packed into a 27-bit key; for the complementary set and each bijection
+V c → B the key of (target − partial) is formed; the two key lists are sorted and merged, and the sum
+                                                                                           9
+over matching keys of the product of multiplicities is |L4 |. This touches 1.04 × 10 partial vectors instead
+                  13
+of 16! ≈ 2.1 × 10     arrangements and runs in 9 s on 16 threads. Matching pairs are expanded explicitly
+to obtain the 14,639,440 members, which are then classied by row and column sums and by D4 -orbit.
+Validation is described in the proof of Proposition 5.5.
+
+
+Exact hulls and their classication.            Doubling all coordinates makes every point of a gem an integer
+vector. Facet planes are recovered from an initial Quickhull triangulation as primitive integer equations,
+coplanar triangles are merged into faces, vertices are the points on at least three facet planes, edges
+are vertex pairs sharing two facets, and volumes are computed as exact rationals; Euler's relation is
+checked for every gem. Combinatorial types are the isomorphism classes of the bipartite vertexfacet
+incidence graphs, grouped by a WeisfeilerLehman hash and conrmed by explicit isomorphism tests.
+Congruence is decided exactly by testing for a bijection of hull-vertex sets preserving all integer squared
+distances (grouping by the sorted distance multiset, then an edge-labelled graph isomorphism), with a
+oating-point Kabsch superposition as a cross-check. For the Siamese proof (Proposition 5.8) the nitely
+many polynomial identities and inequalities in m are veried by exact integer polynomial arithmetic, an
+inequality p(m) > 0 for all integers m ≥ 2 being certied by positivity of the coecients of p(2 + t) or,
+failing that, by exact evaluation up to a Cauchy root bound.
+
+
+Reproducibility.       The scripts for every table and gure, the C enumerator and Monte Carlo code,
+the verication script for Section 4, and the JSON les containing all reported numbers are provided as
+ancillary les; each directory contains a summary listing the numbers it produces and the commands that
+regenerate them. The web application at https://kylemath.github.io/MagicGemWebpage/ renders the
+gem of any of the 880 order-four squares.
+
+
+
+
+                                                          26
+

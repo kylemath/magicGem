@@ -1,0 +1,3 @@
+n=3: Var(Efull) mine=398/2187 paper=398/2187 eq=True;  Var(Elow) mine=89164/177147 paper=1532/2187 eq=False
+n=4: Var(Efull) mine=527/640 paper=527/640 eq=True;  Var(Elow) mine=436145353/47185920 paper=14093/1440 eq=False
+doneB

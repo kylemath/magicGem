@@ -1,55 +1,7 @@
 \section{Conclusion}
 \label{sec:conclusion}
 
-We have introduced Magic Gems, a geometric framework for representing magic squares 
-as three-dimensional polyhedra.
-This framework reveals deep connections between the classical algebraic definition of magic squares
-and concepts from statistics, optimization, and statistical mechanics,
-opening new avenues for understanding these ancient mathematical objects.
-
-Our central theoretical contribution is the Complete Energy Characterization Theorem 
-(\Cref{thm:complete_energy_char}), which establishes that an arrangement of integers in a square grid 
-is a magic square if and only if its covariance with every row, column, and diagonal indicator vanishes.
-Equivalently, magic squares are precisely the ground states of the complete energy functional 
-$E_{\mathrm{full}}$, valid for all orders $n \geq 3$.
-This characterization transforms the discrete, combinatorial magic property
-into a statistical orthogonality condition with physical meaning.
-
-The proof is elementary once the right framework is established:
-each row/column covariance vanishes if and only if that line sums to $M(n)$,
-and similarly for the diagonals.
-The perturbation analysis confirms that magic squares are isolated local minima,
-with every single-swap perturbation strictly increasing the energy.
-
-We also investigated a natural simplification---the four-term ``low-mode'' energy 
-using aggregate position coordinates $X$, $Y$ and diagonal indicators.
-This characterizes magic squares for $n = 3$ (verified exhaustively),
-but defines a strictly larger class of ``low-mode balanced'' arrangements for $n \geq 4$.
-The existence of non-magic zeros of the low-mode energy, while initially surprising,
-follows from a dimensional argument: four linear constraints cannot determine 
-all $2n$ line-sum conditions.
-Explicit counterexamples (\Cref{rem:four_term_insufficient}) and comparative energy analysis (\Cref{fig:energy_comparison})
-illuminate this distinction,
-highlighting the necessity of the complete row/column indicator basis for a rigorous characterization.
-
-The energy landscape perspective offers the most compelling conceptual insight.
-Magic squares are not merely configurations satisfying arithmetic constraints;
-they are equilibrium states where an imbalance energy vanishes.
-Like stones that have rolled to rest at the bottoms of valleys,
-magic squares occupy the deepest wells in a rugged terrain of arrangements.
-This view connects magic squares to optimization theory, statistical mechanics, and dynamical systems,
-suggesting new algorithmic and theoretical approaches.
-
-The Magic Gem framework opens several directions for future research.
-The geometric classification of magic squares, particularly for $n = 4$ where 880 essentially different squares exist,
-could complement traditional algebraic approaches.
-Extensions to magic hypercubes, semi-magic squares, and pandiagonal squares 
-would test the generality of our framework.
-The ``low-mode balanced'' class identified by $E_{\mathrm{low}} = 0$ for $n \geq 4$
-is itself an interesting mathematical object worthy of further study.
-
-The Lo Shu square has fascinated humanity for nearly five thousand years,
-its balanced arrangement of numbers inspiring mythology, art, and mathematics across cultures.
-By transforming this arrangement into a three-dimensional object---a gem 
-that sits at the bottom of an energy well, whose very shape encodes perfect equilibrium---we 
-hope to have added a new facet to its enduring mathematical beauty.
+The Magic Gem is the convex hull of a magic square's height function over the centred grid, the same polyhedron for all eight $D_4$-images of the square.
+Reading the entries as a height function makes the magic conditions the orthogonality of that function to a $2n$-dimensional space of test functions; we have treated this as a viewpoint, not a result, and used it to obtain a moment hierarchy whose degree-two level implies Loly's inertia invariance and whose permutation threshold drops below the Vandermonde value $n-1$ from $n=14$ on; exact moments and a limit law for the energies of a random arrangement, and the null distribution of Loly's moment of inertia; an exact single-swap formula with gap spectrum $d^2m/n^4$; the exact count $14{,}639{,}440$ of $4\times4$ arrangements satisfying the four low-mode conditions; and an exact computation of the geometry of the $880$ order-four gems, with a proof that Siamese gems have twelve vertices for every odd order.
+Several statements of the previous version were artifacts of an asymmetric energy and are withdrawn (\Cref{sec:introduction}).
+What remains is a small set of exact statements about a classical object, and a polyhedron that is pleasant to look at.

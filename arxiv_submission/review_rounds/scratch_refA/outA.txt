@@ -1,0 +1,6 @@
+n=3 Efull mean,var,#distinct,max,mode: (Fraction(40, 27), Fraction(398, 2187), 177, Fraction(20, 9), (Fraction(46, 27), 8736))
+n=3 Elow  mean,var,#distinct,max,mode: (Fraction(40, 27), Fraction(1532, 2187), 346, Fraction(40, 9), (Fraction(10, 9), 5216))
+n=3 local minima Efull (total, nonmagic): (16, 8)
+n=3 local minima Elow  (total, nonmagic): (344, 336)
+zeros: 8 8
+doneA

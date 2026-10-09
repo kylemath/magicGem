@@ -1,0 +1,2129 @@
+     Magic Gems: A Polyhedral Framework for Magic
+
+                                              Squares
+                 Connecting Combinatorics, Geometry, and Linear Algebra
+
+
+
+                                         Kyle Elliott Mathewson
+
+                            Faculty of Science, University of Alberta
+                                  kyle.mathewson@ualberta.ca
+                                           December 28, 2025
+
+
+
+
+                                                Abstract
+
+         We introduce    Magic Gems, a geometric representation of magic squares as three-
+      dimensional polyhedra. By mapping an n × n magic square onto a centered coordinate grid
+      with cell values as vertical displacements, we construct a point cloud whose convex hull
+      denes the Magic Gem. Building on prior work connecting magic squares to physical prop-
+      erties such as moment of inertia, this construction reveals an explicit statistical structure:
+      we show that magic squares have vanishing covariances between position and value.         We
+      develop a covariance energy functionalthe sum of squared covariances with individual row,
+      column, and diagonal indicator variablesand prove that for all n ≥ 3, an arrangement
+      is a magic square if and only if this complete energy vanishes.        This characterization
+      transforms the classical line-sum denition into a statistical orthogonality condition.   We
+      also study a simpler low-mode relaxation using only four aggregate position indicators;
+      this coincides with the complete characterization for    n = 3 (veried exhaustively) but
+      denes a strictly larger class for n ≥ 4 (explicit counterexamples computed). Perturbation
+      analysis demonstrates that magic squares are isolated local minima in the energy landscape.
+      The representation is invariant under dihedral symmetry D4 , yielding canonical geometric
+      objects for equivalence classes.
+
+      Keywords: Magic squares, convex polyhedra, covariance, energy landscape, combinatorial
+      geometry
+
+
+
+
+1    Introduction
+Magic squares have fascinated mathematicians, artists, and mystics for millennia [13], appearing
+famously in Albrecht Dürer's 1514 engraving Melencolia I [7]. The oldest known example, the
+Lo Shu square, appears in Chinese legend dating back to 2800 BCE and remains the unique (up
+to symmetry) 3 × 3 magic square using the integers 1 through 9. Despite this ancient pedigree
+and centuries of intensive study [3], magic squares continue to yield new mathematical insights,
+with recent work connecting them to algebraic structures, eigenvalue problems, and statistical
+mechanics.
+
+
+Denition 1.1 (Magic Square). An n × n magic square is an arrangement of the integers
+1, 2, . . . , n2 in a square grid such that the sum of each row, each column, and both main diagonals
+equals the magic constant
+                                                     n(n2 + 1)
+                                           M (n) =             .                                       (1)
+                                                         2
+    In this paper, we develop a geometric perspective on magic squares by representing them
+as three-dimensional polyhedra, which we call Magic Gems.             The construction arises from a
+natural physical analogy: imagine placing checkers on an n × n board, where the height of each
+
+
+
+                                                     1
+stack corresponds to the number occupying that cell. This creates a topography over the grid,
+and centering this conguration in three-dimensional space yields a point cloud whose convex
+hull denes the Magic Gem.      This geometric approach complements prior work by Loly and
+collaborators on the physical properties of magic squares [8, 10].
+   The central insight of this work is that the dening algebraic property of magic squares
+equal row, column, and diagonal sumsmanifests geometrically as a precise statistical condition.
+Specically, we show that magic squares are characterized by the vanishing of a covariance energy
+functional that measures correlations between spatial position and assigned value across all four
+structural directions (rows, columns, and both diagonals). This energy characterization builds
+on earlier work connecting magic squares to physical properties such as moment of inertia [8],
+providing an explicit statistical framework that bridges classical combinatorics and multivariate
+analysis.
+
+
+
+1.1 Main Contributions
+This paper develops the Magic Gem framework through several interconnected results.           We
+begin by formalizing the construction of Magic Gems from magic squares and establishing that
+symmetry-equivalent squares yield geometrically identical polyhedra, thus providing a canonical
+geometric representative for each equivalence class under the dihedral group D4 .
+   Our main theoretical contribution is the Complete Energy Characterization Theorem (The-
+orem 3.17), which establishes that magic squares correspond exactly to zeros of a covariance
+energy functional using individual row, column, and diagonal indicator variables. This result
+holds for all n ≥ 3 and follows from elementary properties of covariances. We also identify a nat-
+ural four-term low-mode relaxation using aggregate position coordinates; this simpler energy
+characterizes magic squares for n = 3 but denes a strictly larger class for n ≥ 4, with explicit
+counterexamples computed.      This result extends the physical interpretation of magic squares
+initiated by Loly [8], who showed that the moment of inertia tensor of a magic square (treating
+entries as masses) exhibits special invariance properties. Our covariance formulation makes this
+connection explicit and enables systematic perturbation analysis, conrming that magic squares
+are isolated points in the arrangement space.
+   We complement these theoretical results with extensive computational experiments on magic
+squares of orders three, four, and ve. These experiments validate our theoretical predictions
+and reveal the geometric structure of both the Magic Gems themselves and the broader space
+of arrangements in which they reside.      The rarity of magic squaresapproximately one in
+45,000 random 3 × 3 arrangementscorresponds to their isolation as zero-covariance cong-
+urations in a landscape where generic arrangements exhibit substantial covariance. An interac-
+tive web application for exploring Magic Gems is available at https://kylemath.github.io/
+MagicGemWebpage/.
+
+1.2 Paper Organization
+The remainder of this paper proceeds as follows. Section 2 reviews classical results on magic
+squares and establishes notation for the geometric and statistical concepts we employ. Section 3
+presents the Magic Gem construction, proves the Complete Energy Characterization Theorem,
+introduces the low-mode relaxation, and develops the perturbation analysis framework. Section 4
+describes our computational experiments, validating theoretical predictions and exploring the
+structure of the arrangement space for n = 3, 4, and 5. Section 5 interprets our ndings and
+discusses connections to related areas.    Finally, Section 6 summarizes our contributions and
+outlines directions for future research.
+
+
+
+
+                                                2
+2    Background
+This section establishes the mathematical foundations for our work, reviewing classical results on
+magic squares and introducing the geometric and statistical concepts that underpin the Magic
+Gem framework.
+
+
+2.1 Magic Squares: Classical Results
+The enumeration of magic squares reveals a rapid growth in complexity with the order n [14, 5].
+For n = 3, there exist exactly eight magic squares, all related by rotations and reections, yield-
+ing a single essentially dierent magic squarethe Lo Shu. The situation changes dramatically
+                 n = 4 admits 7,040 magic squares forming 880 equivalence classes under the
+for larger orders:
+dihedral group, while n = 5 yields approximately 275 million magic squares comprising roughly
+34 million equivalence classes.   This explosive growth poses signicant challenges for enumer-
+ation and classication, motivating the search for structural insights that transcend explicit
+construction.
+    The magic constant M (n) = n(n
+                                        2 + 1)/2 admits a simple derivation from rst principles.
+                                Pn2        2 2
+The sum of all entries equals     k=1 k = n (n + 1)/2, which must be distributed equally among
+the n rows, yielding M (n) per row. The same argument applies to columns, and the diagonal
+constraints provide additional structure that severely restricts the space of valid congurations.
+    Classical construction methods provide algorithmic approaches to generating magic squares
+of various orders [3]. The Siamese method, attributed to de la Loubère, constructs magic squares
+for odd n by starting in the middle of the top row and moving diagonally up-right, wrapping
+around edges and moving down when blocked. For doubly-even orders (n divisible by 4), one
+lls the grid sequentially and then swaps diagonal elements with their complements. Singly-even
+orders (n = 4k+2) require more sophisticated techniques combining quadrant-based construction
+with targeted transpositions. These methods demonstrate that magic squares exist for all n ≥ 3,
+though they produce only a tiny fraction of all possible magic squares for larger orders.
+
+
+2.2 Symmetry and the Dihedral Group
+The dihedral group D4 acts naturally on n × n grids through rotations and reections [1]. This
+                                                            ◦    ◦         ◦          ◦
+group comprises eight elements: four rotations (by 0 , 90 , 180 , and 270 ) and four reections
+(horizontal, vertical, and along both diagonals). Since the magic square conditions treat rows,
+columns, and diagonals symmetrically under these operations, D4 permutes magic squares among
+themselves.
+
+Proposition 2.1. If S is a magic square, then g · S is also a magic square for any g ∈ D4 .
+Proof. The D4 action preserves the set of row sums, column sums, and diagonal sums, merely
+permuting which lines play which roles.           Since the action also preserves the set of entries
+{1, . . . , n2 }, it maps magic squares to magic squares.
+    This symmetry motivates the notion of essentially dierent magic squares: two squares are
+essentially the same if one can be obtained from the other by a D4 transformation. For n = 3,
+all eight magic squares form a single equivalence class, while larger orders admit multiple classes
+with distinct structural properties.
+
+
+2.3 Convex Hulls and Polyhedra
+The convex hull of a nite point set P ⊂ R
+                                                d is the smallest convex set containing P , equivalently
+
+characterized as the set of all convex combinations of points in P :
+                                      ( k                                       )
+                                       X                               X
+                        conv(P ) =           λi pi : pi ∈ P, λi ≥ 0,       λi = 1 .
+                                       i=1                             i
+
+
+                                                     3
+                          3
+For nite point sets in R , the convex hull is a convex polyhedron whose vertices form a subset
+of the original points. The remaining points lie in the interior or on faces of the polyhedron.
+    Key geometric quantities associated with a convex polyhedron include its volume, surface
+area, and the number of vertices, edges, and faces. These invariants provide a coarse characteri-
+zation of the polyhedron's shape and will serve as descriptors for comparing Magic Gems across
+dierent arrangements.
+
+
+2.4 Covariance and the Moment of Inertia
+For a discrete collection of points     {(xi )}N                        d
+                                               i=1 with positions xi ∈ R , the covariance matrix
+captures the second-order statistical structure:
+
+                                              N
+                                      1 X
+                                Σjk =     (xi,j − x̄j )(xi,k − x̄k ),                          (2)
+                                      N
+                                              i=1
+             1 P
+where x̄j =       i xi,j denotes the mean ofP
+                                            the j -th coordinate. When the point cloud is centered
+             N
+                                          1
+so that x̄ = 0, this simplies to Σjk =       i xi,j xi,k .
+                                         N
+    The diagonal entries Σjj measure the variance along each coordinate axis, while the o-
+diagonal entries Σjk (j ̸= k ) measure the covariance between coordinates. A zero o-diagonal
+entry indicates that the corresponding coordinates are uncorrelated: knowing one provides no
+linear information about the other.
+    Closely related is the moment of inertia tensor from classical mechanics. For point masses
+{(mi , xi )} with positions xi ∈ R3 , the inertia tensor is given by
+                                        N
+                                        X
+                                              mi ∥xi ∥2 δjk − xi,j xi,k .
+                                                                       
+                                Ijk =                                                          (3)
+                                        i=1
+
+The eigenvalues of I , called the principal moments of inertia, characterize the rotational prop-
+erties of the point conguration and are invariant under rigid rotations. For equal unit masses,
+the inertia tensor and covariance matrix are closely related, diering by a trace term and sign
+conventions.
+
+
+
+3    Methodology: The Magic Gem Framework
+We now develop the Magic Gem framework, beginning with the construction of three-dimensional
+point clouds from magic squares and culminating in our main theoretical result connecting magic
+squares to zero-covariance congurations.
+
+
+3.1 From Magic Square to Point Cloud
+                                                                            2
+Let S = (sij ) be an n × n magic square with entries sij ∈ {1, 2, . . . , n }. We construct a point
+           3
+cloud P ⊂ R by assigning three-dimensional coordinates to each cell of the grid.
+
+Denition 3.1 (Magic Gem Coordinates). For each cell (i, j) with i, j ∈ {0, 1, . . . , n−1}, dene
+the point
+                                         pij = (xij , yij , zij ) ,                            (4)
+
+where the coordinates are given by
+
+                                                     n−1
+                                         xij = j −         ,                                   (5)
+                                                      2
+                                                n−1
+                                          yij =       − i,                                     (6)
+                                                   2
+                                                      n2 + 1
+                                          zij = sij −        .                                 (7)
+                                                         2
+
+                                                     4
+   The horizontal coordinates x and y place the grid centered at the origin, with the x-axis
+aligned with columns and the y -axis aligned with rows (inverted so that the top row has positive
+y ). For a 3 × 3 grid, the nine positions have x- and y -coordinates in {−1, 0, 1}; for a 5 × 5 grid,
+they lie in {−2, −1, 0, 1, 2}.
+                                                                                            2
+     The vertical coordinate z encodes the cell's value, shifted so that the mean value (n + 1)/2
+maps to zero. This centering ensures that the point cloud has zero mean in all three coordinates,
+a property that will prove essential for the covariance analysis.
+
+
+Example 3.2 (Lo Shu Square). For the Lo Shu square
+                                                   
+                                              2 7 6
+                                         S = 9 5 1  ,
+                                              4 3 8
+
+with n = 3 and center value 5, the nine points are
+
+
+          p00 = (−1, 1, −3),              p01 = (0, 1, 2),               p02 = (1, 1, 1),
+          p10 = (−1, 0, 4),               p11 = (0, 0, 0),               p12 = (1, 0, −4),
+          p20 = (−1, −1, −1),             p21 = (0, −1, −2),             p22 = (1, −1, 3).
+
+Note that the center cell, containing the value 5, maps to the origin.
+
+
+   Figure 1 illustrates the four-step construction process, progressing from the magic square
+through the centered grid to the nal three-dimensional representation, along with all eight D4
+symmetry variants of the Lo Shu square.
+
+
+
+
+                                                  5
+                                                                                       Construction and D Symmetry Structure
+                                                             Top: Construction process. Bottom: All eight D symmetries produce the same 3D Magic Gem.
+
+
+       (a) Lo Shu Magic Square                                                      (b) Centered Grid                                                       (c) Add Z (values)                                                                   (d) Magic Gem
+                    2               7                6                          1
+                                                                                        (-1,1)        (0,1)         (1,1)                                                                                                        4
+                                                                                                                                                                                                                 8
+                                                                                                                                                                                                                 6   Z           2
+
+                    9               5                1                          0                                                                                                                                4       Z       0
+
+
+
+
+                                                                            Y
+                                                                                        (-1,0)        (0,0)         (1,0)                                                                                        2
+                                                                                                                                                                                                                                     2
+
+                    4               3                8                          1
+                                                                                        (-1,-1)      (0,-1)        (1,-1)                                   1.0 0.5
+                                                                                                                                                                                                         1.0
+                                                                                                                                                                                                       0.5
+                                                                                                                                                                                                     0.0
+                                                                                                                                                                                                                                     4
+
+
+                                                                                                                                                                         0.0 0.5                   0.5
+                                                                                                                                                                                                 1.0       Y                             1.51.0                                      1.5
+                                                                                                                                                                                                                                                                                0.51.0
+                                                                                             1          0             1                                                            1.0                                                        0.5
+                                                                                                                                                                                                                                                0.00.5
+                                                                                                                                                                                                                                                     1.01.5              0.50.0
+                                                                                                                                                                                                                                                                    1.51.0
+                                                                                                        X                                                            X
+                                                                                                                                                                                                                                                 Y                               X
+
+                                                                             D Symmetry Group: Eight Magic Squares One 3D Magic Gem
+
+                                 (i)(e)H-flip
+                                        R0°                                                           (j)
+                                                                                                      (f) V-flip
+                                                                                                          R90°                                                             (k)(g) D1-flip
+                                                                                                                                                                                  R180°                                                                     (l)
+                                                                                                                                                                                                                                                            (h)D2-flip
+                                                                                                                                                                                                                                                                R270°
+                             26 71 68                                                             26 97 42                                                                 48 31 86                                                                      48 93 24
+                              97 5 13                                                              71 5 39                                                                  93 5 17                                                                       31 5 79
+                               42 39 84                                                             68 13 84                                                                 24 79 62                                                                      86 17 62
+
+
+
+                     3D view (az=45°)                                                    3D view (az=135°)                                                      3D view (az=225°)                                                            3D view (az=315°)
+
+        4                                                                                                                           4               4                                                                                                                                        4
+
+        2                                                                                                                           2               2                                                                                                                                        2
+   Z    0                                                                                                                           0   Z       Z   0                                                                                                                                        0   Z
+
+            2                                                                                                                       2                   2                                                                                                                                    2
+
+            4                                                                                                                       4                   4                                                                                                                                    4
+
+
+                1.51.0                                           1.5                1.51.0                                    1.5                           1.51.0                                         1.5                       1.51.0                                            1.5
+                      0.50.0                               0.51.0                         0.50.0                        0.51.0                                    0.50.0                             0.51.0                                0.50.0                                0.51.0
+                            0.51.0                0.50.0                                         0.51.0          0.50.0                                                  0.51.0                0.50.0                                            0.51.0                    0.50.0
+                                  1.5       1.51.0                                                     1.5 1.51.0                                                              1.5       1.51.0                                                        1.5           1.51.0
+                    Y                                      X                             X                                Y                                      Y                                    X                                      X                                    Y
+                     3D view (az=90°)                                                    3D view (az=180°)                                                      3D view (az=270°)                                                                3D view (az=0°)
+                    4                                                                                                                                                                                  4
+
+                    2                                                                                                                                                                                 2
+                Z                                                                                                             4                                                                            Z                             4
+                    0                                                                                                                                                                                 0
+                                                                                                                              2                                                                                                          2
+                     2                                                                                                                                                                                 2
+
+                        4                                                                                                     0     Z                                                                  4                     Z           0
+
+                                                                                                                              2                                                                                                              2
+                    1.5
+                    1.0                                                                  1.5
+                                                                                        1.0                                                                                                    1.5
+                                                                                                                                                                                               1.0                                                                                1.5
+                                                                                                                                                                                                                                                                                  1.0
+                    0.5                                                                 0.5                             4                                                                       0.5                                          4                                    0.5
+                   0.0                                                                  0.0                                                                                                     0.0                                                                               0.0
+                  0.5                                                                   0.5                                                                                                      0.5                                                                              0.5
+                  1.0                                                                   1.0                                                                                                      1.0                                                                              1.0
+                Y 1.5 1.5 1.0 0.5 0.0 0.5 1.0 1.5                                   X   1.5
+                                                                                            1.5 1.0 0.5 0.0 0.5 1.0 1.5                                              1.5 1.0 0.50.0 0.5 1.0 1.5
+                                                                                                                                                                                                  1.5 Y
+                                                                                                                                                                                                                                                     1.5 1.0 0.50.0 0.5 1.0 1.5
+                                                                                                                                                                                                                                                                                   1.5 X
+
+
+                                        X                                                                Y                                                                         X                                                                            Y
+
+
+
+
+Figure 1:                        Construction process and D4 symmetry structure. Top row (ad): Construc-
+tion of a Magic Gem from the Lo Shu square. (a) The Lo Shu magic squarethe unique (up to
+symmetry) 3 × 3 magic square, with each row, column, and diagonal summing to M (3) = 15.
+(b) Placement on a centered coordinate grid with origin at center. (c) Assignment of z -values
+from cell entries. (d) Centered Magic Gem point cloud with convex hull. Bottom section (el):
+The eight D4 symmetries of the 3 × 3 magic square. Each panel shows a compact 2D magic
+square (top) paired with its corresponding 3D Magic Gem (bottom, large and prominent). The
+gems are shown from dierent viewing angles to emphasize their three-dimensional structure.
+Despite their distinct numerical arrangements, all eight D4 variants yield the same 3D Magic
+Gem polyhedron, demonstrating the geometric invariance of the Magic Gem representation un-
+der the symmetry group.
+
+
+
+3.2 The Magic Gem Polyhedron
+With the point cloud dened, we construct the Magic Gem as its convex hull [4].
+
+
+Denition 3.3 (Magic Gem). The Magic Gem associated with a magic square S is the convex
+hull of the corresponding point cloud:
+
+
+                                                                                     G(S) = conv ({pij : 0 ≤ i, j < n}) .
+
+       A fundamental property of this construction is its invariance under the symmetry operations
+of the magic square.
+
+
+
+
+                                                                                                                                            6
+Proposition 3.4 (Symmetry Invariance). If S ′ is obtained from S by a symmetry operation
+g ∈ D4 , then G(S) = G(S ′ ).
+Proof. Each element g     ∈ D4 acts on the grid as an orthogonal transformation of the (x, y)
+plane, which extends naturally to an isometry of R
+                                                     3 that xes the z -axis direction. Under this
+
+action, the z -coordinates are permuted according to the relabeling of cells, but the set of z -values
+remains unchanged. Since convex hulls are invariant under isometries and depend only on the
+set of points (not their labeling), we have G(S) = G(S ).
+                                                                    ′
+
+
+   This invariance means that all eight D4 variants of a magic square produce the same Magic
+Gem. For n = 3, this implies that the single essentially dierent magic square yields a unique
+Magic Gem, while for larger orders, each equivalence class corresponds to a distinct geometric
+object.
+   The construction gure (Figure 1, bottom rows) displays all eight symmetry variants of the
+3 × 3 magic square, illustrating how these numerically distinct arrangements share a common
+geometric representation.
+
+
+3.3 The Vector Representation
+The centering of our coordinate system invites an interpretation of each point as a vector from
+the origin. Since the origin coincides with the centroid of the point cloud (as we shall verify),
+this vector representation captures the deviation of each cell from the balanced center.
+
+Denition 3.5 (Magic Gem Vectors). The vector representation of a Magic Gem is the collection
+                                V(S) = {vij = pij : 0 ≤ i, j < n} ,
+where each point is interpreted as a vector emanating from the origin.
+
+   This interpretation connects the Magic Gem to the classical physics of rigid bodies: if unit
+masses are placed at each vertex, the resulting conguration has its center of mass at the origin,
+and the vectors vij describe the displacement of each mass from this center.
+
+
+3.3.1 Vectors and Covariance
+The vector representation provides a geometric interpretation of the zero-covariance condition.
+Consider the weighted sum of vectors where each vector is weighted by its x-coordinate:
+                                  X                 X
+                                        xij vij =         xij (xij , yij , zij ).
+                                  i,j               i,j
+
+The z -component of this weighted sum is precisely n
+                                                                        2 · Cov(X, Z).   Thus, zero covariance is
+equivalent to the statement that vectors, when weighted by their horizontal positions, have no
+net vertical tendency.
+   More explicitly, dene the position-weighted vector sums :
+                                                     X
+                                           Wx =               xij vij ,                                       (8)
+                                                      i,j
+                                                     X
+                                            Wy =              yij vij .                                       (9)
+                                                      i,j
+
+Then Cov(X, Z) = 0 if and only if (Wx )z = 0, and Cov(Y, Z) = 0 if and only if (Wy )z = 0.
+   This formulation reveals that magic squares achieve a form of directional balance : the z -
+values are distributed so that neither horizontal direction exhibits any systematic correlation
+with value magnitude. The vectors in Figure panels showing the vector representation visually
+manifest this balancevectors pointing in each horizontal direction have z -components that
+cancel out when weighted by position.
+
+
+
+                                                          7
+3.4 The Covariance Structure of Magic Squares
+We now establish our main theoretical results, revealing a deep connection between the algebraic
+denition of magic squares and the statistical structure of Magic Gems.
+
+
+3.4.1 Forward Direction: Magic Implies Zero Covariance
+The following result holds for all n ≥ 3 and admits a clean algebraic proof.
+
+
+Proposition 3.6 (Magic Implies Zero Covariance). Let S be an n × n magic square, and let
+P = {pij } be the corresponding point cloud. Then Cov(X, Z) = Cov(Y, Z) = 0.
+
+Proof. We rst verify that the means of all three coordinates vanish. For the x-coordinate,
+
+                                              n−1         
+                    1 X       1 X     n−1     n X        n−1
+               X̄ = 2   xij = 2    j−       = 2       j−       = 0,
+                   n         n         2     n            2
+                          i,j              i,j                   j=0
+
+        Pn−1
+since    j=0 j = n(n − 1)/2. An analogous argument shows Ȳ = 0, and
+
+                                                      n2 + 1
+                                                            
+                                           1 X
+                                      Z̄ = 2    sij −          =0
+                                          n              2
+                                                 i,j
+
+since the entries sum to n (n
+                                2   2 + 1)/2.
+                                           1 P                         Pn−1
+   With zero means, Cov(X, Z) =               i,j xij zij . Dene Cj =  i=0 sij as the sum of column
+                                           n2
+j . Then:
+                                                  n−1        
+                                                1 X       n−1
+                                    Cov(X, Z) = 2      j−       Cj .
+                                               n           2
+                                                       j=0
+
+For a magic square, all column sums equal M (n), so
+
+                                                  n−1         
+                                            M (n) X        n−1
+                                Cov(X, Z) =             j−       = 0.
+                                             n2             2
+                                                       j=0
+
+The argument for Cov(Y, Z) = 0 via row sums is analogous.
+
+
+Corollary 3.7. For any magic square, the covariance matrix of the Magic Gem coordinates has
+the block-diagonal form
+                                                                 
+                                      Var(X)    Cov(X, Y )   0
+                                Σ = Cov(X, Y )  Var(Y )     0 .
+                                         0          0      Var(Z)
+
+In particular, the z -coordinate is uncorrelated with both horizontal coordinates.
+
+
+3.4.2 On the Insuciency of Aggregate Covariances
+It is natural to ask whether the conditions Cov(X, Z) = Cov(Y, Z) = 0 alone suce to char-
+acterize magic squares, or at least semi-magic squares (those with equal row and column sums
+but possibly failing the diagonal conditions). Perhaps surprisingly, the answer is no and un-
+derstanding why reveals a crucial distinction that motivates our energy functional approach.
+
+
+
+
+                                                        8
+Remark 3.8 (Why Cov(X, Z) = 0 Is Not Enough). The condition Cov(X, Z) = 0 is equivalent to
+                                                         Pn−1
+a single rst-moment constraint on column sums. Let Cj =  i=0 sij denote the sum of column
+j , and let δj = Cj − M (n) be the deviation from the magic constant. Then Cov(X, Z) = 0 is
+equivalent to
+                                      n−1
+                                      X                  
+                                                n−1
+                                             j−               δj = 0.
+                                                 2
+                                      j=0
+                                  P
+Combined with the constraint        j δj = 0 (which follows from the total sum being xed), this
+leaves an (n − 2)-dimensional space of possible deviation patterns.           For n    = 3, the nonzero
+deviations must have the form (δ0 , δ1 , δ2 ) = t(1, −2, 1); for n ≥ 4, the space of balanced but
+unequal column patterns grows rapidly.
+
+Remark 3.9 (Counterexamples Exist for n = 3). Exhaustive enumeration for n = 3 reveals that
+760 arrangements of {1, . . . , 9} satisfy both Cov(X, Z) = 0 and Cov(Y, Z) = 0, yet only 8 of
+these are magic squares. For instance, the arrangement
+                                                      
+                                                 1 3 9
+                                            S = 8 6 5
+                                                 7 4 2
+has    row     (13, 19, 13) and column
+             sums                               sums      (16, 13, 16)far   from   equalyet   achieves
+Cov(X, Z) = Cov(Y, Z) = 0 exactly.
+Remark 3.10 (The Four-Term Energy Is Insucient for n ≥ 4). Even more strikingly, adding
+the diagonal covariance conditions does not resolve the issue for n ≥ 4. The four covariances
+Cov(X, Z), Cov(Y, Z), Cov(Dmain , Z), Cov(Danti , Z) impose only four linear constraints on the
+(n2 − 1)-dimensional space of mean-zero value functions. For n = 4, this leaves an (n2 − 5) = 11-
+dimensional nullspace.
+      Consequently, there exist 4 × 4 permutations with all four covariances equal to zero that are
+not magic squares. For example:
+                                                   
+                                          9 4 12 3
+                                        16 1 14 7 
+                                      S=           
+                                        10 15 11 8 
+                                          2 5 6 13
+has   both diagonal sums equal to 34, but row sums (28, 38, 44, 26) and                    column     sums
+(37, 25, 43, 31). All four covariances vanish, yet the arrangement is not magic.
+      This analysis reveals that aggregate position coordinates X and Y             are too coarse:   they
+capture only the rst moment of the row and column sum distributions. A true characterization
+requires testing against individual row and column indicators, which we develop in Section 3.7.
+
+
+3.5 Diagonal Conditions as Covariances
+The row and column constraints can be elegantly expressed via covariance with position coor-
+dinates.     We extend this framework to diagonal constraints by introducing indicator random
+variables.
+
+Denition 3.11 (Diagonal Indicators). Dene indicator variables for the main and anti-
+diagonals:
+                                               (
+                                                1       if i = j,
+                                Dmain (i, j) =                                                        (10)
+                                                0       otherwise,
+                                               (
+                                                1       if i + j = n − 1,
+                                Danti (i, j) =                                                        (11)
+                                                0       otherwise.
+
+
+
+                                                    9
+    These indicators allow us to express diagonal constraints in covariance form.
+
+
+Proposition 3.12 (Diagonal Covariance Characterization). For an arrangement S with centered
+z -values:
+
+    1.   Cov(Dmain , Z) = 0 if and only if the main diagonal sum equals M (n).
+
+    2.   Cov(Danti , Z) = 0 if and only if the anti-diagonal sum equals M (n).
+                                                       2
+Proof. The mean of Dmain over all cells is D̄main = n/n = 1/n. With Z̄ = 0, we have:
+
+                                                                                        n−1
+                                   1 X                                    1 X
+                  Cov(Dmain , Z) = 2   Dmain (i, j) · zij − D̄main · Z̄ = 2   zii .
+                                  n                                      n
+                                          i,j                                           i=0
+
+                      2 + 1)/2, the sum                                  2 + 1)/2. This vanishes if and only if
+                                          P               P
+Since zii = sii − (n                            i zii =    i sii − n(n
+P
+  i sii = M (n). The anti-diagonal case is analogous.
+
+    This reformulation expresses the diagonal constraints in the same statistical language as
+the row/column constraints. Together with the aggregate position covariances Cov(X, Z) and
+Cov(Y, Z), these diagonal covariances dene the four-term low-mode energy Elow (Deni-
+tion 3.18). For n = 3, Elow (S) = 0 is already sucient to characterize magic squares (veried by
+exhaustive enumeration; Proposition 3.19), but for n ≥ 4 it is only a necessary relaxation (see
+Remark 3.10). A complete characterization requires testing against individual row and column
+indicators, developed in Section 3.7.
+
+
+
+3.6 Perturbation Analysis
+The zero-covariance characterization suggests that magic squares occupy special positions in the
+space of all arrangements. We formalize this intuition through perturbation analysis.
+
+
+Proposition 3.13 (Local Optimality). Let S be a magic square with corresponding point cloud
+P , and let P̃ be obtained by perturbing the z -coordinates by amounts ϵij . Dene the o-diagonal
+covariance magnitude
+                                  Φ(P̃ ) = Cov(X, Z̃)2 + Cov(Y, Z̃)2 .
+Then Φ(P ) = 0, and for generic perturbations ϵ, we have Φ(P̃ ) > 0.
+
+    This result shows that magic squares lie at Φ = 0, and that generic perturbations of the
+z -values destroy this balance. Importantly, Φ = 0 is not unique to magic squares: already for
+n = 3 there exist many non-magic arrangements with Cov(X, Z) = Cov(Y, Z) = 0 (Remark 3.9).
+Thus Φ provides a useful rst-order diagnostic of balance, but not a complete characterization.
+The complete energy Efull introduced next resolves this by having zeros exactly at magic squares
+for all n ≥ 3 (Theorem 3.17).
+
+
+
+3.7 The Covariance Energy Landscape
+The perturbation analysis invites a deeper interpretation of magic squares as equilibrium cong-
+urations in an energy landscape. This perspective connects the discrete combinatorics of magic
+squares to continuous optimization and statistical mechanics.
+    As established in Section 3.4.2, the aggregate covariances with X , Y , and diagonal indicators
+are insucient to characterize magic squares for n ≥ 4. We now develop the complete covariance
+energy using individual row and column indicators.
+
+
+
+
+                                                          10
+3.7.1 Row and Column Indicator Variables
+Denition 3.14 (Row and Column Indicators). For k, ℓ ∈ {0, 1, . . . , n − 1}, dene the indicator
+variables:
+                                                         (
+                                                          1       if i = k,
+                                             Rk (i, j) =                                                   (12)
+                                                          0       otherwise,
+                                                         (
+                                                          1       if j = ℓ,
+                                             Cℓ (i, j) =                                                   (13)
+                                                          0       otherwise.
+
+
+These functions select the cells in row k or column ℓ, respectively.
+
+
+Proposition 3.15 (Row/Column Covariance Characterization). For an arrangement S with
+centered z -values:
+
+   1.    Cov(Rk , Z) = 0 for all k ∈ {0, . . . , n − 1} if and only if all row sums equal M (n).
+
+   2.    Cov(Cℓ , Z) = 0 for all ℓ ∈ {0, . . . , n − 1} if and only if all column sums equal M (n).
+                                                 2
+Proof. The mean of Rk over all cells is R̄k = n/n = 1/n. With Z̄ = 0, we have:
+
+                                                                               n−1
+                                               1 X                   1 X
+                                 Cov(Rk , Z) = 2   Rk (i, j) · zij = 2   zkj .
+                                              n                     n
+                                                       i,j                     j=0
+
+                            2 +1)/2, the covariance vanishes if and only if                     2
+                                                                                P
+Since zkj = skj −(n                                                                  j skj = n(n +1)/2 = M (n),
+i.e., row k sums to the magic constant. The column case is analogous.
+
+
+3.7.2 The Complete Magic Energy Functional
+Denition 3.16 (Complete Covariance Energy). For an arrangement S , dene the complete
+magic energy as:
+
+                      n−2
+                      X                      n−2
+                                             X
+        Efull (S) =         Cov(Rk , Z)2 +         Cov(Cℓ , Z)2 + Cov(Dmain , Z)2 + Cov(Danti , Z)2 .      (14)
+                      k=0                    ℓ=0
+
+This involves 2(n − 1) + 2 = 2n terms (one row/column indicator is redundant due to the xed
+total sum).
+
+
+Theorem 3.17 (Complete Energy Characterization). For all n ≥ 3, an arrangement S of
+{1, . . . , n2 } is a magic square if and only if Efull (S) = 0.
+
+Proof.    Forward direction: If S is a magic square, all rows, columns, and both diagonals
+sum to M (n). By Proposition 3.15 and Proposition 3.12, all covariances in (14) vanish, hence
+Efull (S) = 0.
+    Converse: If Efull (S) = 0, then each squared covariance term must be zero (as they are all
+non-negative). By Proposition 3.15, Cov(Rk , Z) = 0 for k = 0, . . . , n − 2 implies rows 0 through
+n − 2 sum to M (n); since the total sum is xed at n2 (n2 + 1)/2 = nM (n), row n − 1 also sums to
+M (n). Similarly, all columns sum to M (n). By Proposition 3.12, both diagonals sum to M (n).
+Thus S is a magic square.
+
+
+    This theorem establishes a complete characterization : magic squares are precisely the zeros
+of the energy functional Efull , valid for all orders n ≥ 3. The energy landscape interpretation is
+now rigorous: magic squares are the unique ground states.
+
+
+
+
+                                                             11
+3.7.3 The Low-Mode Relaxation
+For comparison, we also dene the simpler four-term energy:
+
+Denition 3.18 (Low-Mode Energy). The low-mode energy uses aggregate position coordi-
+nates:
+            Elow (S) = Cov(X, Z)2 + Cov(Y, Z)2 + Cov(Dmain , Z)2 + Cov(Danti , Z)2 .            (15)
+
+Proposition 3.19 (Low-Mode Characterization). For n = 3, Elow (S) = 0 if and only if S is a
+magic square (veried by exhaustive enumeration of all 362,880 permutations). For n ≥ 4, the
+condition Elow (S) = 0 denes a strictly larger class of low-mode balanced arrangements that
+properly contains the magic squares.
+
+    The low-mode energy is computationally simpler and provides a useful rst-order diagnostic,
+but it cannot serve as a characterization for n ≥ 4. The complete energy Efull is required for
+the full characterization.
+    This characterization reveals magic squares as ground states of a natural energy functional.
+Just as physical systems minimize their energy to reach equilibrium, arrangements of integers
+settle into magic congurations when the imbalance energy vanishes.            The analogy extends
+further: the discrete nature of permutations creates a rough landscape with isolated minima,
+making magic squares rare and dicult to nd.
+
+Proposition 3.20 (Isolation of Magic Squares). For n = 3 and n = 4, every magic square is
+a strict local minimum of Efull over the discrete space of permutations. That is, for any magic
+                                 ′
+square S and any arrangement S diering from S by a single transposition of two elements, we
+             ′
+have Efull (S ) > Efull (S) = 0.
+
+    The proof follows from direct computation: swapping any two elements in a magic square
+necessarily destroys the equal-sum property, introducing nonzero covariance.           This isolation
+property explains the rarity of magic squares:         they occupy zero-energy wells surrounded by
+arrangements of strictly positive energy, with no gradual path between magic congurations.
+
+
+3.8 The Moment of Inertia Tensor
+The moment of inertia tensor provides another geometric invariant of Magic Gems that connects
+to the rotational dynamics of physical objects.
+    For a Magic Gem with equal unit masses at each vertex, the inertia tensor takes the form
+                                     2      2       −xij yij     −xij zij
+                                                                             
+                                 X   yij + zij
+                             I=      −xij yij       x2ij + zij
+                                                             2    −yij zij  .
+                                i,j   −xij zij       −yij zij     x2ij + yij
+                                                                          2
+
+    The eigenvalues of I the principal moments of inertiaare invariant under rotation and
+characterize the intrinsic shape of the mass distribution. By Proposition 3.6, the o-diagonal
+                    2                            2
+elements Ixz = −n Cov(X, Z) and Iyz = −n Cov(Y, Z) vanish for magic squares, simplifying
+the tensor structure.
+    This connection to rigid body mechanics suggests physical interpretations of the Magic Gem:
+a solid object with mass concentrated at the Magic Gem vertices would exhibit balanced rota-
+tional properties reecting the underlying magic square structure.
+
+
+
+4    Computational Results
+We implemented the Magic Gem framework in Python and conducted comprehensive computa-
+tional experiments to validate our theoretical results across magic squares of orders three, four,
+and ve. This progression from odd to even to odd orders allows us to examine the framework's
+behavior under the structural dierences between even and odd magic squares, which arise from
+distinct construction methods and symmetry properties.
+
+
+
+                                                 12
+4.1 The 3Ö3 Case: Foundation and Validation
+The 3 × 3 magic square provides the ideal starting point for validating our framework, as it
+admits a unique solution (up to symmetry) and allows exhaustive analysis. The small size of
+the arrangement space9!     = 362,880 permutationspermits complete enumeration, provid-
+ing denitive verication of the low-mode characterization for n = 3 (Proposition 3.19) and a
+baseline for the energy landscape viewpoint.
+
+
+4.1.1 Exhaustive Verication of the Energy Characterization
+We computed the low-mode energy Elow (S) for all 362,880 permutations of {1, . . . , 9}.       This
+exhaustive analysis conrms the Low-Mode Characterization (Proposition 3.19) for n = 3: an
+arrangement has zero low-mode energy if and only if it is a magic square.
+     The energy distribution across all permutations (see Figure 6) conrms this characterization.
+The vast majority of arrangements exhibit substantial positive energy, with the distribution
+spanning from zero to a maximum of about 12 (maximum observed: 12.10).             Precisely eight
+congurationsthe Lo Shu and its seven D4 symmetry variantsachieve Elow (S) = 0 exactly,
+corresponding to the single essentially dierent magic square. No false positives (zero energy but
+non-magic) or false negatives (magic but nonzero energy) exist, providing complete verication
+of the theorem for n = 3.
+     The energy landscape reveals the exceptional nature of magic squares. While generic permu-
+tations cluster around a mode near 3.12 and have mean energy ≈ 4.44, magic squares are isolated
+at the absolute minimum. The gap between zero and the smallest positive energy provides a
+quantitative measure of the stability of the magic property (see Figure 6 in Section 4.5).
+
+
+4.1.2 Perturbation Isolation Analysis
+To verify that magic squares are strict local minima, we analyzed the eect of single-swap
+perturbations. For each of the eight magic squares, we computed the energy after every possible
+                                  9
+                                  
+swap of two elements, yielding
+                                  2   = 36 perturbed arrangements per square.
+     Figure 2 presents a comprehensive nine-panel analysis of perturbation gaps across orders
+n = 3, 4, 5, testing all magic squares for n = 3 and n = 4 (all 8 variants of the Lo Shu for n = 3
+and all 880 n = 4 equivalence classes under D4 ), and 35 representative n = 5 squares generated
+via the Siamese method with D4 symmetries. Across all 116,388 tested perturbations, every
+single swap increases the energy, providing strong numerical evidence that magic squares are
+isolated local minima in the covariance landscape.
+     The analysis reveals several interesting ndings.   First, for n = 3, all eight magic squares
+exhibit exactly the same minimum gap : ∆3 = 0.0988. This remarkable invariance arises because
+the perturbation gap is determined solely by the embedding geometry, which is preserved under
+D4 symmetries.     Second, the 880    n = 4 magic squares cluster into three distinct bands of
+perturbation resistance (visible in the middle-right panel as horizontal stratication): highly
+isolated squares (∆ ≈ 0.0040.008), moderately isolated (∆ ≈ 0.0100.020), and weakly isolated
+(∆  ≈ 0.0250.040). This trimodal structure suggests the existence of geometric subclasses
+within n = 4 magic squares, potentially correlated with convex hull congurationsa nding
+                                                                                           2
+that warrants further investigation. Third, the minimum gap scales approximately as ∆ ∝ 1/n ,
+consistent with the quadratic scaling of peak energy observed in the large-scale analysis.
+
+
+
+
+                                                13
+Figure 2:    Perturbation Analysis: Magic Squares as Isolated Minima. Analysis of single-
+swap perturbations for magic squares using the complete energy Efull : n = 3 (all 8 D4 variants,
+36 swaps each), n = 4 (all 880 equivalence-class representatives, 120 swaps each), and n = 5 (35
+representative squares, 300 swaps each).   Top row: Minimum gap distributions reveal geometric
+invariance for n = 3 (all squares identical, ∆3 = 0.0988 exactly), substantial heterogeneity for
+n = 4, and clustering for n = 5.      Middle row: (Left) Top 6 smallest gaps showing high
+degeneracymany swaps produce identical energy increases.        (Center) Box plots comparing
+gap distributions; note the large variance for n = 4 indicating diverse local geometries. (Right)
+Scaling trend shows gaps decrease approximately as ∆ ∝ 1/n .
+                                                            2   Bottom row: (Left) Cumulative
+distributions exhibit similar sigmoid forms on log scale. (Center) Gap variation across magic
+square population reveals three distinct bands for n = 4, suggesting geometric subclasses with
+dierent perturbation resistance. (Right) Summary statistics. All 116,388 tested perturbations
+strictly increased energy, supporting the conclusion that magic squares are isolated local minima
+of Efull .
+
+
+    Table 1 summarizes the perturbation gap statistics. The inverse-square scaling of minimum
+                 2
+gaps (∆ ∝ 1/n ) has a natural physical interpretation: as the grid size increases, the energy
+wells containing magic squares become progressively shallower, though all tested squares remain
+strictly isolated from single-swap perturbations.
+
+
+
+
+                                                14
+                  n   Squares      Swaps Tested       Min Gap        Mean Gap           Std Gap
+
+                  3       8             288               0.0988         0.0988         0.0000
+                  4       880         105,600             0.0039         0.0127         0.0096
+                  5       35          10,500              0.0016         0.0026         0.0008
+
+                  Total               116,388                                              
+
+
+Table 1: Perturbation gap statistics from comprehensive analysis of all n = 3 and n = 4 magic
+squares and a representative sample for n = 5. For n = 3, the zero standard deviation conrms
+that all D4 variants have identical gap structure. The minimum gap scales approximately as
+∆min ∝ 1/n2 .
+
+4.1.3 Covariance Verication and Geometric Structure
+We computed the covariance matrices for all eight D4 variants of the Lo Shu square. As predicted
+by Proposition 3.6, every variant achieves Cov(X, Z) = Cov(Y, Z) = 0 to machine precision.
+   Notably,     exhaustive      enumeration     reveals    that    760   arrangements        of   {1, . . . , 9} satisfy
+Cov(X, Z) = Cov(Y, Z) = 0, yet only 8 of these are magic squares.                             The remaining 752
+arrangements fail the diagonal conditions or have unequal row/column sums despite achieving
+zero row and column covariance. This conrms that all four covariance conditions (including
+diagonals), not merely the row and column covariances, are required to characterize magic
+squares.
+   To contextualize this result, we generated 5,000 random arrangements by permuting the
+integers 1 through 9 and computed covariances for each.
+   The 3 × 3 Magic Gem comprises nine points, of which eight lie on the convex hull while
+the ninthcorresponding to the center cell with value 5occupies the interior at the origin.
+Figure 3 presents a comprehensive four-panel analysis of the geometric and statistical structure.
+   The vector representation (panel b) directly manifests the zero-covariance property. Each
+                                                                                                     P
+vector vij = (xij , yij , zij ) emanates from the origin. The position-weighted sum
+                                                                                 i,j xij vij has
+                       2
+z -component equal to n ·Cov(X, Z) = 0, meaning vectors weighted by their horizontal positions
+exhibit no net vertical tendencya visual conrmation of the statistical balance.
+   Furthermore, the moment of inertia tensor for the Magic Gem (treating each vertex as
+                                                                                    2
+unit mass) has the form where the o-diagonal elements Ixz = −n Cov(X, Z) = 0 and Iyz =
+−n2 Cov(Y, Z) = 0 vanish identically. This simplication of the inertia tensor reects the physical
+manifestation of zero covariance: a rigid body with this mass distribution has principal axes that
+partially align with the coordinate system.
+
+
+4.1.4 Extended Statistical Properties
+Beyond the zero-covariance result, the Magic Gem coordinates exhibit additional statistical
+regularities that follow from the magic square structure.
+
+
+Exact Variance Formulas.             The variances of the Magic Gem coordinates admit exact closed
+forms.     Since the z -values are a permutation of centered integers {1 − µ, . . . , n
+                                                                                                       2 − µ} where
+
+µ = (n2 + 1)/2, and the x- and y -coordinates form symmetric grids, standard calculations yield:
+
+                                     n4 − 1                                       n2 − 1
+                          Var(Z) =          ,        Var(X) = Var(Y ) =                  .                        (16)
+                                       12                                           12
+We veried these formulas computationally for n = 3, 4, 5, 7 with exact agreement. Combined
+with the zero o-diagonal covariances from Proposition 3.6, this completely determines the
+covariance matrix for Magic Gems of any order.
+
+
+
+
+                                                      15
+Higher-Order Moment Vanishing.                                         E[XZ] = E[Y Z] = 0
+                                              The zero-covariance property
+extends to all higher powers. Since X depends only on the column index j , we have
+
+                                                !
+                              1  X        X           1 X k
+                   E[X k Z] = 2     Xjk ·    Zij = 2        Xj · (Cj − nµ),
+                              n                      n
+                                   j            i             j
+
+
+where Cj is the sum of column j . For magic squares, Cj = M (n) = nµ for all j , so E[X
+                                                                                            k Z] = 0
+
+for any power k . Similarly, E[Y
+                                   k Z] = 0 follows from equal row sums. We veried E[X 2 Z] =
+
+E[Y 2 Z] = E[X 3 Z] = E[Y 3 Z] = 0 for all tested magic squares across orders n = 3, 4, 5, 7.
+
+Energy Landscape Local Minima.                Exhaustive enumeration for   n = 3 reveals the ne
+structure of the energy landscape. Under the complete energy Efull , there are exactly 24 local
+minima: 8 global minima (the magic squares with Efull = 0) and 16 non-global local minima
+where no single swap decreases energy but Efull > 0. Under the simpler low-mode energy Elow ,
+the landscape is more rugged, with     344 local minima (8 global, 336 non-global). This dierence
+reects the fact that Efull has more terms (2n vs. 4), providing more escape directions from
+non-magic congurations.
+
+
+
+
+                                                    16
+                              (a) 3×3 Magic Gem                                                                                 (b) Vector Representation
+
+
+                                  9                                                                                                                                           4
+                                                                               4
+                                                      7                                                                                                                       3
+                                                                               2                                                                                              2
+
+
+
+
+                                                                                   Z (Value)
+                                                                  6                                                                                                           1
+                                          2                                    0                                                                                              0 Z
+                                              5                                                                                                                                1
+                                                  8
+                                                                               2                                                                                              2
+                          4
+                                                                                                                                                                              3
+                                                                               4                                                                                              4
+                                      3
+                                                          1    1.5                                                                                                     1.00
+                                                            1.0                                                                                                      0.75
+                                                         0.5                                                                                                       0.50
+                1.5                                                                                                                                              0.25
+                    1.0                               0.0                                                               1.00.75                                0.00
+
+
+
+                                                                      w)
+                         0.5                        0.5                                                                       0.500.25                        0.25 Y
+
+                                                                      Ro
+                        X (Co 0.0 0.5                                                                                                0.00                   0.50
+                                                                                                                                    X 0.250.500.75
+                                                                  Y(
+                             lumn                1.0                                                                                                      0.75
+                                  )   1.0                                                                                                        1.00   1.00
+                                          1.5 1.5
+
+
+                    (c) Covariance: Magic vs 5000 Random                                                                      (d) Hull Volume Distribution
+          0.7                                                     Cov(X,Z) Random                         0.200       Random
+                                                                  Cov(Y,Z) Random                                     Magic (18.00)
+                                                                  Magic (all = 0)
+          0.6                                                                                             0.175
+
+                                                                                                          0.150
+          0.5
+                                                                                                          0.125
+          0.4
+Density
+
+
+
+
+                                                                                                Density
+
+
+
+
+                                                                                                          0.100
+          0.3
+                                                                                                          0.075
+          0.2
+                                                                                                          0.050
+          0.1                                                                                             0.025
+
+          0.0                                                                                             0.000
+                2             1               0               1            2                                      2     4       6      8    10     12      14     16      18
+                                      Covariance                                                                                      Convex Hull Volume
+
+
+
+Figure 3:            Geometric analysis of the 3 × 3 Magic Gem. (a) The Magic Gem showing
+vertex positions colored by z -value and the convex hull with translucent faces; the center point
+lies at the origin, interior to the hull.                                   (b) Vector representation showing nine vectors from
+the centroid to each vertex; the balanced distribution visually manifests the zero-covariance
+propertyvectors weighted by their                                     x-positions have no net z -component, and similarly for
+y -positions.           (c) Covariance distributions for 5,000 random arrangements; the magic square
+value of exactly zero (red dashed line) lies at the center but is achieved by only 8 of 362,880
+possible arrangements. (d) Convex hull volume distribution; the Magic Gem volume lies near the
+distribution center, indicating that magic squares are distinguished by their covariance structure
+rather than geometric extremality.
+
+
+
+4.2 The 4Ö4 Case and the Low-Mode Relaxation
+The transition to n = 4 introduces several important changes. First, 4 × 4 magic squares require
+dierent construction methods than odd ordersthe doubly-even method replaces the Siamese
+method.             Second, there exist 880 essentially dierent 4 × 4 magic squares, providing a richer
+landscape for geometric study. Third, the even grid size means no cell occupies the geometric
+center, potentially aecting the structure of the Magic Gem.
+           Proposition 3.6 makes no distinction between even and odd orders, predicting Cov(X, Z) =
+Cov(Y, Z) = 0 for all magic squares. Our computations conrm this prediction for the 4 × 4
+
+
+                                                                                               17
+case: all magic squares achieve exactly zero aggregate covariance to machine precision.
+   However, as discussed in Section 3.4.2, the four-term low-mode energy Elow does not char-
+acterize magic squares for n ≥ 4.                                             Explicit counterexamples can be constructed: a 4 × 4 ar-
+rangement with all four low-mode covariances equal to zero (hence Elow = 0), yet with row and
+column sums far from the magic constant. Such arrangements achieve zero covariance with the
+aggregate position coordinates X and Y by balancing the deviations in a rst-moment sense,
+without requiring equal sums.
+   To contrast the two energies, Figure 4 presents a scatter plot comparing                                                               Elow and Efull
+across 5,000 random 4 × 4 arrangements plus magic squares. Magic squares (gold stars) sit at
+the origin under both measures. The scatter reveals that the two energies measure genuinely
+dierent aspects of arrangement structure: small Elow does not guarantee small Efull .
+
+
+                                                               Comparing Low-Mode and Complete Energies (n = 4)
+                                                            Random arrangements
+                                                            Magic squares
+                                                            Elow = 0, not magic
+                                               17.5         Elow = Efull
+
+                                               15.0
+      Complete energy Efull (2n covariances)
+
+
+
+
+                                               12.5
+
+
+                                               10.0
+
+
+                                                7.5
+                                                                                                              4
+
+                                                5.0                                                           3
+
+                                                                                                              2
+                                                                                                      Efull
+
+
+
+
+                                                2.5                                                           1
+
+                                                                                                              0
+                                                0.0                                                               0.00 0.25 0.50 0.75 1.00
+                                                                                                                            Elow
+                                                      0.0         2.5      5.0      7.5        10.0               12.5    15.0     17.5
+                                                                          Low-mode energy Elow (4 covariances)
+
+Figure 4:                                      Comparing low-mode and complete energies for n = 4. Scatter plot of Elow
+(4-term aggregate) versus Efull (using 2n individual indicators) for 5,000 random arrangements
+(blue dots) and magic squares (gold stars at origin). The inset zooms near the origin. The two
+energies are correlated but measure dierent balance properties; only Efull                                                         = 0 characterizes
+magic squares for n ≥ 4.
+
+
+
+4.3 Geometric Structure of the n = 4 Magic Square Population
+Beyond validating the zero-covariance theorem, the                                                    n = 4 case provides an opportunity to
+explore geometric diversity within the magic square population. The 880 essentially dierent 4×4
+magic squares, while all satisfying the same covariance conditions, exhibit varying polyhedral
+structures and perturbation resistance.
+   The comprehensive perturbation analysis (Figure 2) revealed a striking trimodal distribution
+
+
+
+
+                                                                                          18
+of minimum gaps for n = 4, suggesting that the 880 squares cluster into geometric subclasses
+with dierent stability properties.                                                                       This geometric diversity, combined with the trimodal gap
+structure, indicates that the 880 essentially dierent 4×4 magic squares may admit a meaningful
+geometric classication beyond D4 equivalence.
+
+
+
+4.4 Cross-Order Comparison and Scaling Analysis
+The zero-covariance theorem holds universally across orders, but the geometric and energy land-
+scape properties evolve systematically with n. Figure 5 presents a unied view of Magic Gems
+across orders 3, 4, and 5, along with key scaling metrics.
+
+
+                                    (a) 3×3 Magic Gem                                                                    (b) 4×4 Magic Gem                                                                   (c) 5×5 Magic Gem
+                                        (Odd order)                                                                          (Even order)                                                                        (Odd order)
+
+
+                                                                               4                                                                             7.5                                                                                       10
+                                                                               2                                                                             5.0
+                                                                                                                                                             2.5 Z                                                                                     5
+                                                                               0 Z                                                                           0.0                                                                                       0 Z
+                                                                               2                                                                              2.5                                                                                       5
+                                                                                                                                                             5.0                                                                                       10
+                                                                               4                                                                             7.5
+                                                                         1.0                                                                               1.5                                                                                     2
+                                                                      0.5                                                                                1.0                                                                                   1
+                                                                                                                                                       0.5
+                    1.0                                            0.0                                        1.5 1.0                                0.0                                        2                                         0
+                              0.5
+                                     0.0                         0.5 Y                                                  0.50.0                     0.5 Y
+                                                                                                                                                 1.0
+                                                                                                                                                                                                         1
+                                                                                                                                                                                                                 0                    1        Y
+                                           0.5                                                                                 0.5                                                                                   1
+                                    X                1.0   1.0                                                            X          1.0 1.5   1.5                                                           X                2   2
+
+
+
+                          (d) Convex Hull Volume                                                        1.0
+                                                                                                                   (e) Hull Vertex Fraction                                                                  (f) Magic Constant
+                                                                 276.7                                                                                                                                                                    65
+                                                                                                                0.89
+              250                                                                                                                                                                          60
+                                                                                                        0.8                          0.75
+                                                                                                                                                                                           50
+                                                                                                                                                                     Magic Constant M(n)
+
+
+              200
+                                                                                     Fraction on Hull
+
+
+
+
+                                                                                                        0.6
+Hull Volume
+
+
+
+
+                                                                                                                                                                                           40
+              150                                                                                                                                  0.48                                                                  34
+                                                                                                                                                                                           30
+                                                                                                        0.4
+              100                            95.0
+                                                                                                                                                                                           20
+                                                                                                                                                                                                    15
+              50                                                                                        0.2
+                                                                                                                                                                                           10
+                      18.0
+               0                                                                                        0.0                                                                                0
+                          3                      4                 5                                              3                   4              5                                              3                    4                5
+                                           Order n                                                                              Order n                                                                              Order n
+
+
+
+
+Figure 5:                       Cross-order comparison and scaling analysis. Top row (ac): Side-by-side
+comparison of 3×3, 4×4, and 5×5 Magic Gems. The odd-even-odd progression reveals structural
+dierences (e.g., central vs. o-center grids) while the zero-covariance property persists across
+all orders. Bottom row (df ): Scaling properties. (d) Convex hull volume increases with order,
+reecting the larger range of z -values. (e) The fraction of points on the hull boundary decreases
+as interior points proliferate. (f ) The magic constant M (n) = n(n
+                                                                                                                                                                                  2 + 1)/2 grows quadratically.
+
+
+
+                Several systematic patterns emerge. The convex hull volume grows rapidly with n, from 18.0
+for n = 3 to 276.7 for n = 5, reecting both the expanding z -value range (−4 to 4 for n = 3,
+versus −12 to 12 for n = 5) and the increasing number of vertices. The fraction of points lying
+on the hull boundary decreases from 8/9 ≈ 0.89 for n = 3 to roughly 0.64 for n = 5, as the hull
+interior becomes more populated.
+                Table 2 summarizes key properties across orders, demonstrating both the growth in com-
+plexity and the invariance of the zero-covariance characterization.
+
+
+
+
+                                                                                                                               19
+             Property                         n=3          n=4            n=5
+             Order parity                     Odd          Even           Odd
+             Total vertices                     9           16             25
+             Hull vertices (typical)            8           12             16
+             Magic constant M (n)              15           34             65
+             Cov(X, Z)                          0            0              0
+             Cov(Y, Z)                          0            0              0
+             Essentially dierent squares       1           880       ∼ 3.4 × 107
+             Elow = 0 is sucient?             Yes          No             No
+             Construction method            Siamese    Doubly-even      Siamese
+
+
+Table 2: Comparison of Magic Gem properties across orders 3, 4, and 5.          All orders exhibit
+the zero aggregate covariance property (Proposition 3.6).    n = 3, the low-mode energy
+                                                              For
+Elow suces to characterize magic squares; for n ≥ 4, the complete energy Efull is required
+(Remark 3.10).
+
+
+   The even-order case (n = 4) demonstrates that the zero-covariance property does not depend
+on having a central cell at the origin. The algebraic proofthat equal row and column sums
+imply vanishing aggregate covariancesholds regardless of the grid's parity, conrming the
+universality of the framework. However, the insuciency of Elow for n ≥ 4 (Figure 4) underscores
+the necessity of the complete indicator-based energy Efull for a rigorous characterization.
+
+
+
+4.5 Large-Scale Energy Landscape Analysis
+With the Complete Energy Characterization Theorem (Theorem 3.17) established, we turn to
+exploring the structure of the energy landscape and its scaling properties. Leveraging modern
+multi-core hardware (Mac Studio M5 with 128GB RAM), we analyzed over 460 million arrange-
+ments across orders n = 3, 4, 5: exhaustive enumeration for n = 3 (362,880 arrangements), 60
+million samples for n = 4 (from 20.9 trillion total), and 400 million samples for n = 5 (from
+approximately 15.5 × 10
+                          24 total).
+
+   Note that this sampling uses the low-mode energy Elow (Denition 3.18), which coincides
+with the complete energy for n = 3 but denes a relaxed notion for larger orders. The analysis
+characterizes the landscape structure and the rarity of near-zero congurations.
+
+
+4.5.1 Energy Distribution Evolution
+Figure 6 presents a comprehensive 9-panel analysis of the energy landscape across orders n =
+3, 4, 5, revealing a dramatic evolution in landscape structure. For n = 3, the exhaustive enumer-
+ation conrms that exactly eight arrangements (the Lo Shu and its D4 variants) achieve zero
+energy, with a clear gap separating them from all other arrangements.
+
+
+
+
+                                               20
+Figure 6:   Low-mode energy (Elow ) landscape analysis across orders n = 3, 4, 5. Based
+on exhaustive enumeration (n = 3: 362,880), and extensive sampling (n = 4:      6 × 107 ; n = 5:
+4 × 108 ). Top row: Individual distributions (log scale) showing modal energy shifting from 3.12
+to 15.12.   Middle row: Overlaid comparison, normalized PDFs, and cumulative distributions.
+Bottom row: Mean energy with error bars, landscape entropy (varying modestly across orders,
+                                                   2
+H ≈ 4.35.0), and peak shift with quadratic t (R > 0.99). The red dashed line marks
+Elow = 0. For n = 3, this coincides with magic squares; for n ≥ 4, it also includes non-magic
+low-mode balanced congurations (see Remark 3.10). The complete energy Efull characterizes
+magic squares exactly for all n.
+
+
+   The key statistics from this analysis are summarized in Table 3.     For n   = 3, exhaustive
+enumeration conrms that exactly 8 of 362,880 arrangements achieve zero low-mode energy,
+corresponding precisely to the D4 variants of the Lo Shu square. For n = 4 and n = 5, no zero-
+energy congurations were found by random samplinghowever, this should not be interpreted
+as evidence that magic squares are the only zeros of Elow . As discussed in Remark 3.10, non-
+magic zeros exist for n ≥ 4, but they are suciently rare that uniform random sampling is
+unlikely to discover them.
+
+
+
+
+                                              21
+              Statistic                        n=3                   n=4          n=5
+              Arrangements analyzed     362,880 (exhaustive)       60,000,000   400,000,000
+              Mean energy µ                     4.44                 12.04         26.00
+              Std deviation σ                   2.51                  8.18         17.07
+              Peak energy (mode)                3.12                  6.53         15.12
+              Maximum observed                 12.10                 74.64        155.10
+              Landscape entropy                 5.03                  4.34         4.37
+              Zero-energy fraction           2.2 × 10−5             < 10−7        < 10−8
+              Low-mode zeros found               8                     0            0
+
+
+Table 3: Low-mode energy (Elow ) landscape statistics from large-scale computational analysis.
+Based on exhaustive enumeration for n = 3 and extensive random sampling for n = 4, 5. For
+n ≥ 4, the low-mode energy has non-magic zeros (see Remark 3.10), but these are too rare for
+random sampling to detect. The complete energy Efull correctly characterizes magic squares for
+all orders.
+
+
+4.5.2 Scaling Laws
+Several systematic scaling patterns emerge from this analysis:
+
+
+Peak Energy Scaling.            The modal (most common) energy appears to scale approximately
+quadratically with order. The observed peaks of 3.12, 6.53, and 15.12 for n = 3, 4, 5 respectively
+t a quadratic curve with R
+                                 2 > 0.99, though we note that with only three data points, other
+
+functional forms could t equally well. This apparent quadratic growth suggests increasing dif-
+culty of achieving balance as the grid size expandstypical arrangements become increasingly
+imbalanced.
+
+
+Distribution Broadening.     The standard deviation grows from 2.51 for n = 3 to 17.07 for
+n = 5, while the ratio σ/µ remains relatively constant (≈ 0.560.68). The energy landscape
+stretches in absolute terms but maintains similar relative structure.
+
+
+Landscape Entropy Invariance.            We quantify distributional complexity using the landscape
+entropy, dened as the Shannon entropy of the energy histogram:
+                                                X
+                                         H=−         pk log pk ,
+                                                 k
+
+where pk is the fraction of arrangements falling in energy bin k (using 200 equally-spaced bins
+covering the observed energy range).        Remarkably, the landscape entropy remains within a
+narrow band across orders (≈ 4.35.0), decreasing from n = 3 to n = 4 and then stabilizing.
+This suggests that the relative structure of the landscape is scale-invariant: the diculty of
+navigating the landscape by local search methods does not fundamentally change with order,
+though the absolute energy scales increase substantially.
+
+
+4.5.3 Scaling Properties Summary
+Figure 7 provides a compact four-panel summary of how energy landscape properties scale with
+magic square order, synthesizing the key quantitative ndings. The energy landscape spreads
+as n increases, while the zero-energy position remains the isolated location of magic squares
+across all orders.
+
+
+
+
+                                                  22
+Figure 7:   Low-Mode Energy Scaling Properties.             (A) Peak low-mode energy follows
+quadratic scaling with R
+                           2 > 0.99. (B) Mean energy with standard deviation error bars, show-
+
+ing increasing variance. (C) Landscape entropy varies modestly across orders (H       ≈ 4.35.0),
+suggesting scale-invariant structure despite dramatic energy range expansion. (D) Sample sizes
+tested (blue, log scale) versus magic square probability (red, log scale), demonstrating the com-
+putational challenge of nding magic squares at larger n. Note: These statistics characterize
+the low-mode energy Elow landscape; the complete energy Efull has qualitatively similar scaling
+behavior.
+
+
+4.5.4 Computational Verication Summary
+This large-scale analysis provides computational insight into the energy landscape structure:
+
+
+  1.   Complete Characterization Theorem: Proven analytically in Theorem 3.17for all
+       n ≥ 3, Efull (S) = 0 if and only if S is a magic square.   This follows directly from the
+       row/column covariance characterization (Proposition 3.15, Proposition 3.12).
+
+
+  2.   Low-Mode Characterization (n=3 only): Exhaustively veriedexactly 8 of 362,880
+       arrangements have zero low-mode energy Elow , all of which are magic squares. Notably,
+       760 arrangements satisfy   Cov(X, Z) = Cov(Y, Z) = 0, but only the 8 magic squares
+       additionally satisfy the diagonal conditions.
+
+
+  3.   Low-Mode Non-Characterization (n≥4): The four-term energy Elow denes a broader
+
+                                                23
+         low-mode balanced class for n ≥ 4 that strictly contains magic squares. These additional
+         zeros are too rare for random sampling to detect, but can be found by targeted search.
+
+
+    4.   Scaling Behavior: The low-mode energy landscape exhibits systematic scaling, with the
+         peak energy appearing to grow approximately quadratically with order based on the three
+         data points available (n = 3, 4, 5).
+
+
+    5.   Scale-Invariant Complexity: Despite the dramatic growth in conguration space (n!2
+         arrangements for order n), the relative landscape structure remains approximately con-
+         stant, as evidenced by the stable entropy measure.
+
+
+    These computational results complement the theoretical analysis of Section 3, characteriz-
+ing the structure of the energy landscape and establishing quantitative scaling laws for future
+investigation.
+
+
+
+5        Discussion
+The Magic Gem framework provides a new perspective on magic squares, connecting their
+classical algebraic denition to geometric and statistical concepts. In this section, we interpret
+our ndings, discuss their implications, and identify limitations and directions for future research.
+
+
+
+5.1 The Meaning of Zero Covariance
+The zero-covariance property of magic squares (Proposition 3.6) admits several complementary
+interpretations that illuminate their structure.
+    From a statistical perspective, zero covariance means that position and value are uncor-
+related: knowing where a cell is located provides no linear information about what number it
+contains. This is a strong form of balancethe high numbers are distributed so that they do not
+systematically favor any direction from the center, and similarly for the low numbers. Random
+arrangements typically violate this balance, exhibiting positive or negative covariance depending
+on how the high values happen to cluster spatially.
+
+
+5.1.1 The Vector Interpretation
+The vector representation of the Magic Gem (Section 3.3) provides a particularly intuitive ge-
+ometric interpretation.       Each vertex denes a vector vij        = (xij , yij , zij ) from the origin. The
+zero-covariance condition states that these vectors, when weighted by their x-coordinates, have
+no net z -component:
+                                     X
+                                           xij zij = n2 · Cov(X, Z) = 0.
+                                     i,j
+
+    Geometrically, this means that vectors pointing to the right (positive x) do not systemat-
+ically point higher or lower than vectors pointing to the left (negative x). The magic square
+achieves perfect directional balance: no horizontal direction predicts vertical tendency.
+    This     interpretation   extends      to   the   diagonal   conditions.    The   diagonal   covariances
+Cov(Dmain , Z) and Cov(Danti , Z) measure whether diagonal positions predict value.                       For
+magic squares, all four directional indicatorshorizontal position, vertical position, main diag-
+onal membership, and anti-diagonal membershipare uncorrelated with value. The low-mode
+energy     Elow (S) is the sum of squared correlations with these four aggregate directions; the
+complete energy Efull (S) extends this to individual row and column indicators.
+
+
+
+
+                                                         24
+5.1.2 Physical and Algebraic Interpretations
+From a physical perspective, the zero-covariance property implies that the Magic Gem, viewed
+as a rigid body with masses at its vertices, has a simplied inertia tensor.    The vanishing of
+Ixz = −n2 Cov(X, Z) and Iyz = −n2 Cov(Y, Z) means that the xz and yz products of inertia are
+zero. This implies the z -axis is aligned with a principal axis of the inertia tensor, simplifying
+the rotational dynamics about this direction.
+   The variances themselves admit exact closed forms: since the z -values are a permutation of
+{1−µ, 2−µ, . . . , n2 −µ} where µ = (n2 +1)/2, a standard calculation yields Var(Z) = (n4 −1)/12
+                              2
+and Var(X) = Var(Y ) = (n − 1)/12. Combined with the zero o-diagonal covariances, this
+completely determines the covariance matrix of the Magic Gem coordinates for any order n.
+   From an algebraic perspective, the zero-covariance condition is equivalent to the den-
+ing property of magic squaresequal row and column sumsexpressed in the language of
+moments.   The rst moment (mean) of each coordinate vanishes by construction; the zero-
+covariance condition asserts that certain second moments (cross-terms) also vanish.       In fact,
+this extends to higher-order moments:        X depends only on column index j , we have
+                                          since
+    k       1 P      k
+E[X Z] = n2 j Xj · (columnj sum − nµ) = 0 for any power k , because all column sums
+                                 k
+equal M (n) = nµ. Similarly E[Y Z] = 0 for all k follows from equal row sums. Thus magic
+                                           k          k
+squares exhibit vanishing cross-moments E[X Z] = E[Y Z] = 0 at all ordersa stronger form
+of statistical balance than the covariance condition alone. This suggests a hierarchy: might there
+be super-magic squares characterized by additional vanishing moments beyond those implied
+by equal line sums?
+
+
+
+5.2 Magic Squares as Ground States
+The energy landscape perspective developed in Section 3.7 oers perhaps the most illuminating
+interpretation of our results. The complete covariance energy Efull (S) provides a natural imbal-
+ance measure for arrangements, and magic squares emerge as the unique congurations where
+this imbalance vanishes completely.
+   Consider the analogy to physical systems. Just as a ball rolling on a landscape eventually
+comes to rest at a local minimum of potential energy, arrangements of integers can be imagined
+as settling into congurations that minimize imbalance.      The magic squares are the ground
+statescongurations of perfect equilibrium where the geometric balance is absolute.
+   This perspective connects magic squares to several areas of mathematics and physics:
+   The connection to optimization theory is immediate.         Gradient descent in the covariance
+landscape would guide arrangements toward magic congurations, though the discrete nature
+of permutations prevents continuous descent. Simulated annealing or other combinatorial op-
+timization methods could exploit the energy function to search for magic squares, potentially
+providing alternatives to classical construction algorithms.
+   From the perspective of statistical mechanics, magic squares occupy a special thermodynamic
+role. In a system where arrangements are weighted by e
+                                                         −βE(S) for some inverse temperature β ,
+
+magic squares would dominate at low temperatures as the ground-state congurations. The den-
+sity of states near zero energyessentially zero, given the isolation of magic squaresexplains
+why thermal uctuations cannot easily create or destroy the magic property.
+   The dynamical systems interpretation is equally rich. Each magic square denes a basin of
+attraction in the discrete conguration space, though these basins have measure zero. The com-
+prehensive perturbation analysis (Figure 2) conrms that there are no at directions around
+magic congurations: across 116,388 tested perturbations of 923 magic squares, every single
+swap increases the energy, supporting the conclusion that magic squares are strict local min-
+ima. Notably, while magic squares are the unique global minima (with energy zero), preliminary
+analysis for n = 3 reveals additional local minima where no single swap decreases energy. Ex-
+haustive enumeration nds 16 such non-global local minima under Efull , and 336 under the
+
+
+
+                                                  25
+simpler Elow .   This ruggedness has algorithmic implications:    gradient-based search methods
+may become trapped in local minima, and the choice of energy functional aects the landscape
+structure.
+   The perturbation analysis reveals additional structure within the magic square popula-
+tion. For n = 3, all eight magic squares exhibit exactly the same minimum perturbation gap
+(∆3 = 0.0988), a consequence of the D4 symmetry preserving the embedding geometry. More
+surprisingly, the 880   n = 4 magic squares cluster into three distinct bands of perturbation
+resistance, suggesting the existence of geometric subclasses with dierent stability properties.
+This trimodal structure appears to correlate with convex hull geometry, indicating a connection
+between polyhedral structure and energy landscape stability. This nding warrants further in-
+vestigation across the full n = 4 equivalence-class population. The minimum gap decreases with
+nfrom 0.099 for n = 3 to 0.004 for n = 4 to 0.002 for n = 5quantifying how the energy wells
+become progressively shallower as order increases. The precise scaling law requires investigation
+at additional orders.
+   This energy landscape view also illuminates why magic squares are rare.         They are not
+merely unusual congurations among many similar ones, but isolated singularities in a landscape
+dominated by positive-energy arrangements. Finding a magic square by random search is not
+like nding a needle in a haystack (where at least the needle is surrounded by hay); it is like
+nding a single point at the bottom of a deep well in a vast, rugged terrain.
+
+
+
+5.3 Scaling Laws and Landscape Evolution
+The large-scale computational analysis of Section 4.5 reveals systematic scaling behavior that
+deepens our understanding of the energy landscape. Three key observations merit discussion.
+
+
+Peak Energy Scaling.        The limited data (n = 3, 4, 5) suggests the modal energy may scale
+                    2
+approximately as O(n ), though with only three data points, this conclusion remains tentative.
+If conrmed, this would have a natural interpretation:       the typical imbalance of a random
+                                                         2
+arrangement grows quadratically because there are O(n ) cells to distribute and the variance
+accumulates. Such scaling would imply that the search for magic squares becomes progressively
+harder in absolute termsthe energy well containing magic congurations lies at increasingly
+greater depth relative to typical arrangements.
+
+
+Scale-Invariant Complexity.        Despite the dramatic growth in conguration space (n!
+                                                                                            2 ar-
+
+rangements), the landscape entropy remains within a narrow band (≈ 4.35.0), decreasing from
+n = 3 to n = 4 and then stabilizing.     This invariance suggests that the relative diculty of
+local optimization is independent of scale: the ruggedness of the landscape, measured by the
+distribution's shape rather than its position, does not fundamentally change with n. This has
+practical implications for algorithm design: local search heuristics that work for small orders
+may transfer to larger ones, with the primary challenge being the absolute energy scale rather
+than landscape structure.
+
+
+Low-Mode Energy Landscape.            Across over 460 million sampled arrangementsincluding
+exhaustive enumeration for n = 3, 60 million samples for n = 4, and 400 million for n = 5no
+zero-energy congurations of the low-mode energy Elow were discovered by random sampling.
+However, this does not imply that magic squares are the only zeros of Elow for n ≥ 4; as shown
+in Remark 3.10, non-magic zeros exist but are too rare for random sampling to detect.       The
+low-mode and complete energies measure dierent aspects of balance, and only the complete
+energy Efull (Theorem 3.17) provides a rigorous characterization for all orders. The probability
+of discovering a magic square by random sampling decreases super-exponentially with n, from
+
+
+
+
+                                               26
+roughly 1 in 45,000 for n = 3 to about 2 × 10
+                                                  −17 for n = 5 (roughly one in 5 × 1016 ). This
+
+quanties the needle in a haystack intuition with concrete numbers.
+
+
+
+5.4 Even versus Odd Orders
+Our analysis across orders 3, 4, and 5 illuminates the robustness of the Magic Gem framework
+with respect to the parity of n. Odd and even orders dier in several respects: odd orders admit
+construction via the Siamese method while even orders require dierent techniques; odd orders
+have a central cell that maps to the origin while even orders do not; and the symmetry structure
+of the equivalence classes diers subtly.
+   Despite these dierences, magic squares of all orders exhibit zero covariance (Proposition 3.6).
+The 4 × 4 case demonstrates that this property does not depend on the existence of a central
+cell at the origin.   The algebraic contentthat equal row and column sums imply vanishing
+covarianceis purely a statement about weighted sums and holds regardless of grid parity.
+   This universality suggests that Magic Gems capture something fundamental about magic
+squares that transcends the particulars of construction methods or grid geometry. The covariance
+condition distills the magic property to its statistical essence.
+
+
+
+5.5 The Rarity of Magic Congurations
+Our computational experiments quantify the exceptional nature of magic squares within the
+space of all arrangements. For n = 3, only 8 of the 362,880 possible arrangements are magic,
+a proportion of approximately 2.2 × 10
+                                         −5 , or roughly one in 45,000. For n = 4, the proportion
+
+falls to approximately 3.4 × 10
+                                −10 , and for n = 5 it drops further to approximately 1.8 × 10−17 ,
+
+reecting the increasingly stringent constraints imposed by the magic conditions at larger orders.
+   In the geometric picture provided by Magic Gems, this rarity corresponds to isolation in
+the covariance landscape.    Magic squares are the unique arrangements achieving exactly zero
+o-diagonal covariance; any perturbation moves away from this special point.         The basin of
+attraction around each magic square has measure zerothere is no continuous path through
+arrangements of positive probability that leads to a magic conguration.
+   This isolation has implications for search algorithms seeking magic squares. Random sam-
+pling is eectively hopeless for n > 3, and local search methods face the challenge of navigating
+a landscape where the target congurations are isolated points surrounded by vast regions of
+non-magic arrangements. The covariance perspective might inform the design of guided search
+procedures that explicitly seek to minimize o-diagonal covariance.
+
+
+
+5.6 Connections to Related Work
+The Magic Gem framework builds upon and extends several existing lines of research on magic
+squares.
+
+
+5.6.1 Physical Interpretations
+Loly and collaborators have extensively developed the physical interpretation of magic squares
+[8, 9, 10]. In seminal work, Loly [8] showed that when the entries of a magic square are treated
+as point masses, the moment of inertia tensor about the center exhibits remarkable invariance
+properties:   all three principal moments are equal, making the conguration equivalent to a
+spherical top. This invariance is a direct consequence of the balanced row, column, and diagonal
+sums.
+   Our covariance formulation provides a complementary statistical perspective on this same
+phenomenon.     The moment of inertia tensor and the covariance matrix are mathematically
+relatedboth are second-moment tensors measuring the distribution of mass (or value) about
+the center. Loly's result that the inertia tensor is proportional to the identity matrix corresponds
+
+
+
+                                                 27
+precisely to our nding that the covariance between position coordinates and values vanishes.
+The Magic Gem construction makes this connection geometrically explicit through the three-
+dimensional point cloud representation.
+
+
+5.6.2 Spectral Properties
+Previous work has also characterized magic squares through their eigenvalue structure, showing
+that the matrix of a magic square has predictable spectral properties [10, 11, 12]. Connections to
+permutation matrices and polytope enumeration have also been explored [6, 2]. Our covariance
+characterization complements these algebraic approaches: while eigenvalues describe the linear
+operator dened by the matrix, covariances describe the statistical structure of the associated
+point cloud. Both perspectives capture aspects of the balance that denes magic squares.
+   The connection to moment of inertia tensors and physics suggests links to rigid body dynam-
+ics and to moment problems in probability theory. The constraint that certain moments vanish
+places magic squares within a broader class of balanced congurations that arise in diverse
+mathematical contexts, from equal-weight quadrature rules to orthogonal Latin squares.
+
+
+
+5.7 Limitations and Extensions
+Several limitations of our current work suggest directions for future research.
+   Our analysis focuses primarily on orders three and ve, with limited attention to order four.
+The n   = 4 case is particularly rich, with 880 essentially dierent magic squares that could
+provide a testing ground for geometric classication schemes. Do dierent 4 × 4 magic squares
+yield geometrically distinct Magic Gems, and if so, how are they distributed in the space of
+possible polyhedra?   Addressing these questions would require systematic computation across
+all equivalence classes.
+   The restriction to standard magic squaresusing integers 1 through n
+                                                                             2 with the standard
+
+magic constantexcludes many interesting generalizations. Magic squares with dierent entry
+sets, semi-magic squares (lacking diagonal constraints), and pandiagonal magic squares (with
+additional diagonal constraints) all admit Magic Gem representations. Extending our theoretical
+results to these variants would test the robustness of the covariance characterization.
+   Higher-dimensional generalizations also beckon. Magic hypercubes extend magic squares to
+three or more dimensions, and their Magic Gem analogues would be point clouds in four or
+more dimensions. While visualization becomes challenging, the algebraic structureparticularly
+the covariance characterizationshould generalize naturally.
+   Finally, the computational complexity of our methods limits their applicability to large
+orders. For n ≥ 6, even generating a single magic square by the Siamese method is trivial, but
+systematic exploration of the arrangement space becomes infeasible. Theoretical advances that
+predict properties of Magic Gems without exhaustive computation would signicantly extend
+the reach of the framework.
+
+
+
+5.8 Potential Applications
+Beyond its intrinsic mathematical interest, the Magic Gem framework may have practical ap-
+plications.
+   In education, the three-dimensional visualization of magic squares provides an accessible
+entry point to concepts from linear algebra, statistics, and geometry. The physical intuition of
+balance helps students understand why magic squares are special and motivates the algebraic
+constraints that dene them.
+   In computational design, the covariance characterization could inform algorithms for con-
+structing or recognizing magic squares. Gradient-descent methods minimizing o-diagonal co-
+
+
+
+
+                                               28
+variance might provide an alternative to combinatorial search, though the non-convexity of the
+landscape poses challenges.
+    In recreational mathematics and art, Magic Gems oer a new way to visualize and appreciate
+magic squares. The polyhedra could be 3D-printed as physical objects, their shapes encoding
+the magic property in tangible form.
+
+
+
+5.9 Algorithmic Implications
+The energy landscape perspective suggests natural algorithmic strategies for magic square gen-
+eration beyond classical backtracking. Since magic squares are isolated local minima, gradient-
+based descent in the Efull (S) objective becomes viable. The challenge lies not in navigating a
+rugged landscape (entropy is modest, H ≈ 4.35.0), but in the sheer breadth of the search space
+and the rarity of solutions.
+    Simulated annealing with the covariance energy as a temperature-dependent objective, or
+basin-hopping methods that leverage the isolation property, merit investigation. If the apparent
+quadratic scaling of peak energy is conrmed at larger orders, temperature schedules for such
+algorithms should also scale quadratically with order.
+    The isolation property (every swap increases energy) suggests that local search from a near-
+magic conguration could be eectiveif such starting points can be found. Continuous relax-
+ations of the discrete optimization problem, followed by projection onto the nearest permutation,
+oer another avenue enabled by the energy landscape framework.
+
+
+
+6    Conclusion
+We have introduced Magic Gems, a geometric framework for representing magic squares as
+three-dimensional polyhedra.    This framework reveals deep connections between the classical
+algebraic denition of magic squares and concepts from statistics, optimization, and statistical
+mechanics, opening new avenues for understanding these ancient mathematical objects.
+    Our central theoretical contribution is the Complete Energy Characterization Theorem (The-
+orem 3.17), which establishes that an arrangement of integers in a square grid is a magic square if
+and only if its covariance with every row, column, and diagonal indicator vanishes. Equivalently,
+magic squares are precisely the ground states of the complete energy functional Efull , valid for
+all orders n ≥ 3. This characterization transforms the discrete, combinatorial magic property
+into a statistical orthogonality condition with physical meaning.
+    The proof is elementary once the right framework is established: each row/column covariance
+vanishes if and only if that line sums to M (n), and similarly for the diagonals. The perturba-
+tion analysis conrms that magic squares are isolated local minima, with every single-swap
+perturbation strictly increasing the energy.
+    We also investigated a natural simplicationthe four-term low-mode energy using ag-
+gregate position coordinates X , Y and diagonal indicators.     This characterizes magic squares
+for n = 3 (veried exhaustively), but denes a strictly larger class of low-mode balanced ar-
+rangements for n ≥ 4. The existence of non-magic zeros of the low-mode energy, while initially
+surprising, follows from a dimensional argument: four linear constraints cannot determine all 2n
+line-sum conditions. Explicit counterexamples (Remark 3.10) and comparative energy analysis
+(Figure 4) illuminate this distinction, highlighting the necessity of the complete row/column
+indicator basis for a rigorous characterization.
+    The energy landscape perspective oers the most compelling conceptual insight.          Magic
+squares are not merely congurations satisfying arithmetic constraints; they are equilibrium
+states where an imbalance energy vanishes. Like stones that have rolled to rest at the bottoms
+of valleys, magic squares occupy the deepest wells in a rugged terrain of arrangements. This view
+
+
+
+
+                                                   29
+connects magic squares to optimization theory, statistical mechanics, and dynamical systems,
+suggesting new algorithmic and theoretical approaches.
+   The Magic Gem framework opens several directions for future research.        The geometric
+classication of magic squares, particularly for n = 4 where 880 essentially dierent squares
+exist, could complement traditional algebraic approaches.    Extensions to magic hypercubes,
+semi-magic squares, and pandiagonal squares would test the generality of our framework. The
+low-mode balanced class identied by Elow = 0 for n ≥ 4 is itself an interesting mathematical
+object worthy of further study.
+   The Lo Shu square has fascinated humanity for nearly ve thousand years, its balanced
+arrangement of numbers inspiring mythology, art, and mathematics across cultures. By trans-
+forming this arrangement into a three-dimensional objecta gem that sits at the bottom of an
+energy well, whose very shape encodes perfect equilibriumwe hope to have added a new facet
+to its enduring mathematical beauty.
+
+
+
+References
+ [1] Maya M. Ahmed. How many squares are there, mr. Franklin?: Constructing and enumer-
+    ating Franklin squares. The American Mathematical Monthly, 111(5):394410, 2004.
+
+
+ [2] Maya M. Ahmed, Jesús A. De Loera, and Raymond Hemmecke. Polyhedral cones of magic
+    cubes and squares. In Discrete and Computational Geometry, volume 25 of Algorithms and
+    Combinatorics, pages 2541. Springer, 2003.
+
+ [3] W. S. Andrews. Magic Squares and Cubes. Dover Publications, 2nd edition, 1960.
+
+
+ [4] Alexander Barvinok. A Course in Convexity. Graduate Studies in Mathematics. American
+    Mathematical Society, 2002.
+
+
+ [5] Matthias Beck and Andrew van Herick. Enumeration of 4 × 4 magic squares. Mathematics
+    of Computation, 80(273):617621, 2011.
+
+ [6] Matthias Beck and Thomas Zaslavsky.      Inside-out polytopes.   Advances in Mathematics,
+    205(1):134162, 2006. MR 2254310.
+
+
+ [7] Albrecht Dürer. Melencolia I, 1514. Engraving featuring a 4×4 magic square.
+
+
+ [8] Peter D. Loly. 88.30 the invariance of the moment of inertia of magic squares. The Mathe-
+    matical Gazette, 88(511):113119, 2004.
+
+ [9] Peter D. Loly.   Franklin squares: A chapter in the scientic studies of magical squares.
+    Complex Systems, 17(2):143157, 2007.
+
+[10] Peter D. Loly, Ian Cameron, Walter Trump, and Daniel Schindel. Magic square spectra.
+    Linear Algebra and its Applications, 430(10):26592680, 2009.
+
+[11] R. P. Nordgren. On properties of special magic square matrices. Linear Algebra and its
+    Applications, 437(8):20092025, 2012.
+
+[12] R. P. Nordgren. Spectra of order-4 special magic squares. Linear Algebra and its Applica-
+    tions, 455:320331, 2014.
+
+[13] Cliord A. Pickover. The Zen of Magic Squares, Circles, and Stars. Princeton University
+    Press, 2002.
+
+
+[14] Walter Trump.     Enumeration of magic squares.     Available at   http://www.trump.de/
+    magic-squares/, 2012.
+
+                                              30
+A       Appendix: Technical Details
+This appendix provides additional technical details supporting the main text, including a com-
+plete proof of the forward direction of the covariance characterization and discussion of the
+energy functional approach.
+
+
+
+A.1 Proof Strategy Overview
+The Complete Energy Characterization Theorem (Theorem 3.17) is established via two comple-
+mentary approaches:
+    Forward Direction (Algebraic): Direct proof that magic squares have zero energy, fol-
+lowing from the algebraic relationship between covariances and line sums.
+    Converse Direction: For the complete energy Efull , the converse follows directly from the
+row/column covariance characterization (Proposition 3.15, Proposition 3.12). For the low-mode
+energy Elow , the converse holds only for n = 3 (veried by exhaustive enumeration of all 362,880
+arrangements).
+
+
+
+A.2 Detailed Proof: Magic Implies Zero Covariance
+We provide a complete proof of Proposition 3.6, showing that every magic square has vanishing
+row and column covariances.
+
+
+Detailed Proof of Proposition 3.6. Let S = (sij ) be an n×n magic square, and dene coordinates
+as in Denition 3.1:
+
+                                                             n−1
+                                                  xij = j −        ,
+                                                              2
+                                                        n−1
+                                                  yij =       − i,
+                                                           2
+                                                              n2 + 1
+                                                  zij = sij −        .
+                                                                 2
+
+Step 1: Verication that means vanish.                      For the x-coordinate, we compute
+
+                                 n−1 n−1                    n−1
+                                                              X          
+                              1 XX             n−1     1              n−1
+                       x̄ =                j −       =    · n     j −       .
+                              n2                2      n2              2
+                                 i=0 j=0                                       j=0
+
+        Pn−1
+Since    j=0 j = n(n − 1)/2, we have
+
+                              n−1
+                              X                   
+                                         n−1               n(n − 1)     n−1
+                                      j−               =            −n·     = 0,
+                                          2                   2          2
+                              j=0
+
+establishing x̄ = 0. An identical argument shows ȳ = 0.
+    For the z -coordinate,
+
+                                                                                                    
+                                              n2 + 1                                        n2 + 1
+                                                      
+                              1 X                              1        X
+                   z̄ =               sij −                =                   sij − n2 ·            .
+                          n2                       2           n2                             2
+                                i,j                                      i,j
+
+                                              2                             2 2
+                                                                 P
+Since S is a permutation of {1, . . . , n }, we have             i,j sij = n (n + 1)/2, yielding z̄ = 0.
+
+
+
+
+                                                            31
+Step 2: Expression for Cov(X, Z).                       With zero means, the covariance is
+
+
+                                                             n2 + 1
+                                                                 
+                           1 X           1 X     n−1
+               Cov(X, Z) = 2   xij zij = 2    j−       sij −          .
+                          n             n         2             2
+                                          i,j                       i,j
+
+   Expanding the product and separating terms:
+
+                                                  X                        n−1X
+                        n2 · Cov(X, Z) =                     j · sij −          sij
+                                                                            2
+                                                       i,j                          i,j
+                                                         n2 + 1 X                 (n − 1)(n2 + 1) 2
+                                                  −                        j+                    n .
+                                                              2                          4
+                                                                     i,j
+
+                                                                                                                     Pn−1
+                                                                  = n2 (n2 + 1)/2.
+                                                P                                                   P
+   We evaluate each term.           First,           i,j sij                              Second,      i,j j   = n    j=0 j   =
+n · n(n − 1)/2 = n2 (n − 1)/2. Substituting these and simplifying:
+                        X                 (n − 1)n2 (n2 + 1) (n2 + 1)n2 (n − 1) (n − 1)(n2 + 1)n2
+   n2 · Cov(X, Z) =           j · sij −                     −                  +
+                                                  4                  4                  4
+                        i,j
+                        X                 (n − 1)(n2 + 1)n2
+                    =         j · sij −                     .
+                                                  4
+                        i,j
+
+
+Step 3: Connection to column sums.
+                                                                                  Pn−1
+                                                                  Let Cj      =      i=0 sij denote the sum of column j .
+Then
+                                                X                       n−1
+                                                                        X
+                                                        j · sij =             j · Cj .
+                                                 i,j                    j=0
+
+   Since S is a magic square, all column sums equal M (n) = n(n
+                                                                                            2 + 1)/2. Then
+
+
+              n−1                     n−1
+              X                       X                n(n2 + 1) n(n − 1)   n2 (n − 1)(n2 + 1)
+                    j · Cj = M (n)              j=              ·         =                    ,
+                                                           2        2                4
+              j=0                     j=0
+
+which exactly equals the second term above. Hence Cov(X, Z) = 0.
+   The argument for Cov(Y, Z) = 0 is entirely analogous, using row sums in place of column
+sums.
+
+
+
+A.3 Why Row and Column Covariances Alone Are Insucient
+A natural question is whether the conditions Cov(X, Z) = Cov(Y, Z) = 0 alone characterize
+magic squares (or even semi-magic squares with equal row and column sums). The answer is
+negative, and understanding why is instructive.
+   Let δj = Cj − M (n) denote the deviation of column j from the magic sum. The constraint
+Cov(X, Z) = 0 is equivalent to j (j − n−1
+                                     P
+P                                              2 )δj = 0. Combined with the total sum constraint
+   j δ j = 0 , this leaves an (n − 2) -dimensional space of possible deviation patterns.
+     For n = 3, the deviation pattern must be (δ0 , δ1 , δ2 ) = t(1, −2, 1) for some t. While the t = 0
+case corresponds to equal column sums, non-zero values of t are achievable : exhaustive enumer-
+ation reveals 128 arrangements with column sums (16, 13, 16) (i.e., t = 1) that simultaneously
+satisfy Cov(Y, Z) = 0.
+     The total count is 760 arrangements with both Cov(X, Z) = Cov(Y, Z) = 0, of which only
+8 are magic squares. The remaining 752 arrangements satisfy the row and column covariance
+conditions but fail to achieve equal row sums, equal column sums, or the diagonal conditions.
+
+
+
+
+                                                                   32
+A.4 Complete vs. Low-Mode Energy Characterization
+The main text establishes two energy functionals with dierent characterization properties.
+
+
+A.4.1 Complete Energy (Theorem)
+The complete magic energy uses individual row and column indicator covariances:
+
+                   n−2
+                   X                      n−2
+                                          X
+     Efull (S) =         Cov(Rk , Z)2 +         Cov(Cℓ , Z)2 + Cov(Dmain , Z)2 + Cov(Danti , Z)2 ,   (17)
+                   k=0                    ℓ=0
+
+where Rk (i, j) = 1{i = k} and Cℓ (i, j) = 1{j = ℓ}.
+
+
+Theorem A.1 (Complete Energy CharacterizationAll n). For all n ≥ 3, an arrangement S
+                   2
+of {1, 2, . . . , n } in an n × n grid is a magic square if and only if Efull (S) = 0.
+
+   This is proven in Theorem 3.17 of the main text.                 The proof follows directly from the
+row/column covariance characterization: each row covariance vanishes i that row sums to M (n),
+each column covariance vanishes i that column sums to M (n), and each diagonal covariance
+vanishes i that diagonal sums to M (n).
+
+
+A.4.2 Low-Mode Energy (Partial Characterization)
+The simpler low-mode energy uses aggregate position coordinates:
+
+
+            Elow (S) = Cov(X, Z)2 + Cov(Y, Z)2 + Cov(Dmain , Z)2 + Cov(Danti , Z)2 .                 (18)
+
+
+   For n = 3: Exhaustive enumeration conrms that Elow (S) = 0 if and only if S is a magic
+square. Exactly 8 of 362,880 arrangements achieve zero energy, all being the Lo Shu and its D4
+symmetry variants.
+   For n ≥ 4: The condition Elow (S) = 0 denes a strictly larger class of low-mode balanced
+arrangements that properly contains the magic squares. Counterexamples exist: for example,
+the 4 × 4 arrangement
+                                                           
+                                                  9 4 12 3
+                                                16 1 14 7 
+                                                           
+                                                10 15 11 8 
+                                                  2 5 6 13
+has Elow (S) = 0 (both diagonals sum to 34, and the rst-moment conditions are satised), but
+row sums (28, 38, 44, 26) and column sums (37, 25, 43, 31) are not equal. This demonstrates that
+the four-term energy is insucient for n ≥ 4.
+   Why random sampling failed to detect counterexamples: The probability of a uni-
+formly random permutation achieving Elow               = 0 is extremely low (estimated below 10−8 for
+n = 4), so 460 million samples are unlikely to encounter such congurations. However, targeted
+search methods (e.g., hill-climbing on the constraint residuals) readily nd them. This illustrates
+a fundamental limitation of random sampling for disproving if and only if  conjectures.
+
+
+
+A.5 Computational Methods
+All computations were performed in Python 3 using the NumPy and SciPy libraries for numerical
+computation and the Matplotlib library for visualization.             Convex hulls were computed using
+SciPy's implementation of the Quickhull algorithm.
+   Random arrangements were generated by applying the Fisher-Yates shue to the array
+[1, 2, . . . , n2 ] and reshaping to an n × n grid. This procedure samples uniformly from the n2 !
+possible arrangements.
+
+
+
+                                                        33
+   Magic squares were generated using classical construction methods:        the Siamese (de la
+Loubère) method for odd orders (n = 3, 5) and the doubly-even diagonal method for n = 4. This
+choice of methods ensures that we test the framework across both parity classes, which dier in
+their geometric structure (presence or absence of a central cell) and construction algorithms. The
+zero-covariance property was veried to hold within oating-point precision (typically < 10
+                                                                                             −14 )
+
+for all generated magic squares of all three orders.
+   Source code for all analyses and gures is available in the supplementary materials. An inter-
+active web application for visualizing Magic Gems is available at https://kylemath.github.
+io/MagicGemWebpage/.
+
+A.6 Summary Statistics
+Table 4 summarizes key statistics for magic squares of orders 3, 4, and 5.
+
+
+          n   Arrangements     Magic Squares     Equiv. Classes    Probability   M (n)
+          3     3.6 × 105             8                   1        2.2 × 10−5     15
+          4     2.1 × 1013          7,040                880       3.4 × 10−10    34
+          5     1.6 × 1025        2.8 × 108            3.4 × 107   1.8 × 10−17    65
+
+
+Table 4: Statistics for magic squares of orders 3, 4, and 5, showing the total number of ar-
+rangements, number of magic squares, number of equivalence classes under D4 , probability of a
+random arrangement being magic, and the magic constant M (n).
+
+
+
+
+                                                34
+

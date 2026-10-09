@@ -1,11 +1,5 @@
 \begin{thebibliography}{10}
 
-\bibitem{ahmed2004franklin}
-Maya~M. Ahmed.
-\newblock How many squares are there, mr. {F}ranklin?: Constructing and
-  enumerating {F}ranklin squares.
-\newblock {\em The American Mathematical Monthly}, 111(5):394--410, 2004.
-
 \bibitem{ahmed2003polyhedral}
 Maya~M. Ahmed, Jes{\'u}s~A. De~Loera, and Raymond Hemmecke.
 \newblock Polyhedral cones of magic cubes and squares.
@@ -17,11 +11,6 @@ W.~S. Andrews.
 \newblock {\em Magic Squares and Cubes}.
 \newblock Dover Publications, 2nd edition, 1960.
 
-\bibitem{barvinok2002course}
-Alexander Barvinok.
-\newblock {\em A Course in Convexity}.
-\newblock Graduate Studies in Mathematics. American Mathematical Society, 2002.
-
 \bibitem{beck2010enumeration}
 Matthias Beck and Andrew van Herick.
 \newblock Enumeration of 4 $\times$ 4 magic squares.
@@ -31,17 +20,58 @@ Matthias Beck and Andrew van Herick.
 Matthias Beck and Thomas Zaslavsky.
 \newblock Inside-out polytopes.
 \newblock {\em Advances in Mathematics}, 205(1):134--162, 2006.
-\newblock MR 2254310.
 
-\bibitem{durer1514melencolia}
-Albrecht D{\"u}rer.
-\newblock Melencolia {I}, 1514.
-\newblock Engraving featuring a 4$\times$4 magic square.
+\bibitem{cameron2013signatura}
+Ian Cameron, Adam Rogers, and Peter~D. Loly.
+\newblock Signatura of magic and {L}atin integer squares: isentropic clans and
+  indexing.
+\newblock {\em Discussiones Mathematicae Probability and Statistics},
+  33(1-2):121--149, 2013.
+
+\bibitem{diaconis1995rectangular}
+Persi Diaconis and Anil Gangolli.
+\newblock Rectangular arrays with fixed margins.
+\newblock In {\em Discrete Probability and Algorithms (Minneapolis, MN, 1993)},
+  volume~72 of {\em The IMA Volumes in Mathematics and its Applications}, pages
+  15--41. Springer, New York, 1995.
+
+\bibitem{dudeney1917amusements}
+Henry~E. Dudeney.
+\newblock {\em Amusements in Mathematics}.
+\newblock Thomas Nelson and Sons, London, 1917.
+
+\bibitem{ehrhart1973magic}
+Eug{\`e}ne Ehrhart.
+\newblock Sur les carr{\'e}s magiques.
+\newblock {\em Comptes Rendus de l'Acad{\'e}mie des Sciences, S{\'e}rie A},
+  277:651--654, 1973.
+
+\bibitem{gardner1976}
+Martin Gardner.
+\newblock Mathematical games: A breakthrough in magic squares, and the first
+  perfect magic cube.
+\newblock {\em Scientific American}, 234(1):118--123, 1976.
+
+\bibitem{goldstein2002classical}
+Herbert Goldstein, Charles~P. Poole, and John~L. Safko.
+\newblock {\em Classical Mechanics}.
+\newblock Addison-Wesley, San Francisco, 3rd edition, 2002.
+
+\bibitem{hoeffding1951}
+Wassily Hoeffding.
+\newblock A combinatorial central limit theorem.
+\newblock {\em Annals of Mathematical Statistics}, 22(4):558--566, 1951.
+
+\bibitem{imhof1961}
+J.~P. Imhof.
+\newblock Computing the distribution of quadratic forms in normal variables.
+\newblock {\em Biometrika}, 48(3/4):419--426, 1961.
 
 \bibitem{loly2004invariance}
 Peter~D. Loly.
-\newblock 88.30 the invariance of the moment of inertia of magic squares.
-\newblock {\em The Mathematical Gazette}, 88(511):113--119, 2004.
+\newblock The invariance of the moment of inertia of magic squares.
+\newblock {\em The Mathematical Gazette}, 88(511):151--153, 2004.
+\newblock Note 88.30.
 
 \bibitem{loly2007franklin}
 Peter~D. Loly.
@@ -69,9 +99,37 @@ Clifford~A. Pickover.
 \newblock {\em The Zen of Magic Squares, Circles, and Stars}.
 \newblock Princeton University Press, 2002.
 
+\bibitem{rogers2004inertia}
+Adam Rogers and Peter~D. Loly.
+\newblock The inertia tensor of a magic cube.
+\newblock {\em American Journal of Physics}, 72(6):786--789, 2004.
+
+\bibitem{rogers2005multipole}
+Adam Rogers and Peter~D. Loly.
+\newblock The electric multipole expansion for a magic cube.
+\newblock {\em European Journal of Physics}, 26(5):809--813, 2005.
+
+\bibitem{stanley1973magic}
+Richard~P. Stanley.
+\newblock Linear homogeneous {D}iophantine equations and magic labelings of
+  graphs.
+\newblock {\em Duke Mathematical Journal}, 40:607--632, 1973.
+
 \bibitem{trump2012enumeration}
 Walter Trump.
-\newblock Enumeration of magic squares.
-\newblock Available at \url{http://www.trump.de/magic-squares/}, 2012.
+\newblock Notes on magic squares and cubes.
+\newblock \url{https://www.trump.de/magic-squares/}.
+\newblock Accessed 7 October 2026.
+
+\bibitem{waldwolfowitz1944}
+Abraham Wald and Jacob Wolfowitz.
+\newblock Statistical tests based on permutations of the observations.
+\newblock {\em Annals of Mathematical Statistics}, 15(4):358--372, 1944.
+
+\bibitem{ziegler1995lectures}
+G{\"u}nter~M. Ziegler.
+\newblock {\em Lectures on Polytopes}, volume 152 of {\em Graduate Texts in
+  Mathematics}.
+\newblock Springer, New York, 1995.
 
 \end{thebibliography}

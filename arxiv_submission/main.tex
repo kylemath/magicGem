@@ -2,7 +2,8 @@
 
 % Packages
 \usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
+% T1 fontenc removed: basic TeX Live has no cm-super, so T1 text was rendered as bitmap Type 3 fonts.
+\PassOptionsToPackage{hyphens}{url}
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{mathtools}
 \usepackage{graphicx}
@@ -87,8 +88,22 @@
 }
 \makeatother
 
-\geometry{margin=1in}
+\geometry{margin=0.9in}
 \setlength{\emergencystretch}{2em} % reduce overfull lines without \sloppy
+\setlength{\textfloatsep}{10pt plus 2pt minus 2pt}
+\setlength{\intextsep}{8pt plus 2pt minus 2pt}
+\setlength{\abovecaptionskip}{4pt}
+% captions in \small
+\makeatletter
+\long\def\@makecaption#1#2{\vskip\abovecaptionskip\small\sbox\@tempboxa{#1: #2}\ifdim\wd\@tempboxa>\hsize #1: #2\par\else\global\@minipagefalse\hb@xt@\hsize{\hfil\box\@tempboxa\hfil}\fi\vskip\belowcaptionskip}
+\makeatother
+% Float placement parameters (reduce float-page waste)
+\renewcommand{\topfraction}{0.9}
+\renewcommand{\bottomfraction}{0.6}
+\renewcommand{\textfraction}{0.07}
+\renewcommand{\floatpagefraction}{0.85}
+\setcounter{topnumber}{3}
+\setcounter{totalnumber}{5}
 
 % Theorem environments
 \theoremstyle{plain}
@@ -111,21 +126,12 @@
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Cov}{\mathrm{Cov}}
 \newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Efull}{E_{\mathrm{full}}}
+\newcommand{\Elow}{E_{\mathrm{low}}}
+\newcommand{\E}{\mathbb{E}}
 
-% Stats placeholders (populated by script)
-\newcommand{\numMagicThree}{8}
-\newcommand{\totalArrangementsThree}{362880}
-\newcommand{\magicProbabilityThree}{45,360}
-\newcommand{\hullVolumeThree}{18.0000}
-\newcommand{\hullAreaThree}{46.2750}
-\newcommand{\covXZMagic}{0}
-\newcommand{\covYZMagic}{0}
-\newcommand{\covXZRandomMean}{0_RANDOM}
-\newcommand{\covXZRandomStd}{0_STD}
-\newcommand{\perturbPropLarger}{100.0}
 
-\title{\textbf{Magic Gems: A Polyhedral Framework for Magic Squares}\\
-\large Connecting Combinatorics, Geometry, and Linear Algebra}
+\title{\textbf{Magic Gems:\\ Magic Squares as Orthogonality Conditions on a Height Function}}
 
 \author{Kyle Elliott Mathewson\\
 \textit{Faculty of Science, University of Alberta}\\
@@ -143,9 +149,11 @@
 
 \input{sections/background}
 
-\input{sections/methodology}
+\input{sections/gem}
 
-\input{sections/results}
+\input{sections/theory}
+
+\input{sections/computations}
 
 \input{sections/discussion}
 

@@ -1,102 +1,46 @@
 \section{Background}
 \label{sec:background}
 
-This section establishes the mathematical foundations for our work, 
-reviewing classical results on magic squares and introducing the geometric and statistical concepts 
-that underpin the Magic Gem framework.
+\subsection{Enumeration and symmetry}
 
-\subsection{Magic Squares: Classical Results}
+There are $8$ magic squares of order $3$, all images of the Lo Shu under the dihedral group $D_4$ of the square (four rotations, four reflections); there are $7{,}040$ of order $4$, forming $880$ $D_4$-orbits first listed by Fr\'enicle de Bessy (published posthumously in 1693) and verified many times since \cite{beck2010enumeration}; and $275{,}305{,}224$ of order $5$, counted by Schroeppel in 1973 and reported by Gardner \cite{gardner1976}, i.e.\ $34{,}413{,}153$ orbits.
+For $n\ge6$ only statistical estimates are known; see Trump's compilation \cite{trump2012enumeration}.
+Since $D_4$ maps lines to lines and preserves the entry set, it maps magic squares to magic squares, and two squares in the same orbit are called \emph{essentially different} from squares in other orbits.
+The $880$ order-four squares were further sorted by Dudeney into twelve groups according to the pattern of complementary pairs $(a,17-a)$ \cite{dudeney1917amusements}; we use these groups only as a classical reference partition in \Cref{sec:gem-geometry-880}.
+Classical constructions (Siamese for odd $n$, diagonal-complement for $n\equiv0\pmod 4$, LUX or Strachey for $n\equiv2\pmod4$) show that magic squares exist for all $n\ge3$ \cite{andrews1960magic}; we use the Siamese squares as a family on which hull computations can be pushed to large $n$.
 
-The enumeration of magic squares reveals a rapid growth in complexity with the order $n$ \cite{trump2012enumeration, beck2010enumeration}.
-For $n = 3$, there exist exactly eight magic squares, all related by rotations and reflections,
-yielding a single essentially different magic square---the Lo Shu.
-The situation changes dramatically for larger orders: 
-$n = 4$ admits 7,040 magic squares forming 880 equivalence classes under the dihedral group,
-while $n = 5$ yields approximately 275 million magic squares comprising roughly 34 million equivalence classes.
-This explosive growth poses significant challenges for enumeration and classification,
-motivating the search for structural insights that transcend explicit construction.
+\subsection{Covariance and the inertia tensor}
+\label{sec:bg_inertia}
 
-The magic constant $M(n) = n(n^2 + 1)/2$ admits a simple derivation from first principles.
-The sum of all entries equals $\sum_{k=1}^{n^2} k = n^2(n^2 + 1)/2$,
-which must be distributed equally among the $n$ rows, yielding $M(n)$ per row.
-The same argument applies to columns, and the diagonal constraints provide additional structure
-that severely restricts the space of valid configurations.
-
-Classical construction methods provide algorithmic approaches to generating magic squares of various orders \cite{andrews1960magic}.
-The Siamese method, attributed to de la Loubère, constructs magic squares for odd $n$
-by starting in the middle of the top row and moving diagonally up-right,
-wrapping around edges and moving down when blocked.
-For doubly-even orders ($n$ divisible by 4), one fills the grid sequentially 
-and then swaps diagonal elements with their complements.
-Singly-even orders ($n = 4k + 2$) require more sophisticated techniques
-combining quadrant-based construction with targeted transpositions.
-These methods demonstrate that magic squares exist for all $n \geq 3$,
-though they produce only a tiny fraction of all possible magic squares for larger orders.
-
-\subsection{Symmetry and the Dihedral Group}
-
-The dihedral group $D_4$ acts naturally on $n \times n$ grids through rotations and reflections \cite{ahmed2004franklin}.
-This group comprises eight elements: four rotations (by $0^\circ$, $90^\circ$, $180^\circ$, and $270^\circ$) 
-and four reflections (horizontal, vertical, and along both diagonals).
-Since the magic square conditions treat rows, columns, and diagonals symmetrically 
-under these operations, $D_4$ permutes magic squares among themselves.
-
-\begin{proposition}
-If $S$ is a magic square, then $g \cdot S$ is also a magic square for any $g \in D_4$.
-\end{proposition}
-
-\begin{proof}
-The $D_4$ action preserves the set of row sums, column sums, and diagonal sums,
-merely permuting which lines play which roles.
-Since the action also preserves the set of entries $\{1, \ldots, n^2\}$,
-it maps magic squares to magic squares.
-\end{proof}
-
-This symmetry motivates the notion of \emph{essentially different} magic squares:
-two squares are essentially the same if one can be obtained from the other by a $D_4$ transformation.
-For $n = 3$, all eight magic squares form a single equivalence class,
-while larger orders admit multiple classes with distinct structural properties.
-
-\subsection{Convex Hulls and Polyhedra}
-
-The convex hull of a finite point set $P \subset \R^d$ is the smallest convex set containing $P$,
-equivalently characterized as the set of all convex combinations of points in $P$:
-\[
-\text{conv}(P) = \left\{ \sum_{i=1}^{k} \lambda_i p_i : p_i \in P, \lambda_i \geq 0, \sum_i \lambda_i = 1 \right\}.
-\]
-For finite point sets in $\R^3$, the convex hull is a convex polyhedron 
-whose vertices form a subset of the original points.
-The remaining points lie in the interior or on faces of the polyhedron.
-
-Key geometric quantities associated with a convex polyhedron include its volume, 
-surface area, and the number of vertices, edges, and faces.
-These invariants provide a coarse characterization of the polyhedron's shape
-and will serve as descriptors for comparing Magic Gems across different arrangements.
-
-\subsection{Covariance and the Moment of Inertia}
-
-For a discrete collection of points $\{(\mathbf{x}_i)\}_{i=1}^{N}$ with positions $\mathbf{x}_i \in \R^d$,
-the covariance matrix captures the second-order statistical structure:
+For a finite point set $\mathbf p_1,\dots,\mathbf p_N\in\R^3$ with mean $\bar{\mathbf p}$, the covariance matrix is $\Sigma_{jk}=\frac1N\sum_i(p_{i,j}-\bar p_j)(p_{i,k}-\bar p_k)$.
+With unit masses at the points, the inertia tensor about the centre of mass is
 \begin{equation}
-\Sigma_{jk} = \frac{1}{N} \sum_{i=1}^{N} (x_{i,j} - \bar{x}_j)(x_{i,k} - \bar{x}_k),
+I_{jk}=\sum_i\bigl(\|\mathbf p_i-\bar{\mathbf p}\|^2\delta_{jk}-(p_{i,j}-\bar p_j)(p_{i,k}-\bar p_k)\bigr)
+=N\bigl(\delta_{jk}\operatorname{tr}\Sigma-\Sigma_{jk}\bigr),
+\label{eq:inertia_cov}
 \end{equation}
-where $\bar{x}_j = \frac{1}{N} \sum_i x_{i,j}$ denotes the mean of the $j$-th coordinate.
-When the point cloud is centered so that $\bar{\mathbf{x}} = \mathbf{0}$, 
-this simplifies to $\Sigma_{jk} = \frac{1}{N} \sum_i x_{i,j} x_{i,k}$.
+where $\delta_{jk}$ is the Kronecker delta \cite{goldstein2002classical}.
+Thus the off-diagonal entries of $I$ are $-N$ times the covariances and the diagonal entries are $N$ times the sum of the two other variances.
+Loly's planar moment of inertia \cite{loly2004invariance} is a different object: it places the \emph{value} $s_{ij}$ as a mass at the planar point $(x_{ij},y_{ij})$ and computes $\sum s_{ij}(x_{ij}^2+y_{ij}^2)$.
+The two are nevertheless related through the gem's point set: Loly's quantity is an affine function of the single degree-two cross-moment $\Cov(Z,X^2+Y^2)$ of that point set (\Cref{cor:loly}), and this is the only ingredient of the three-dimensional covariance $\Sigma$ that it uses.
 
-The diagonal entries $\Sigma_{jj}$ measure the variance along each coordinate axis,
-while the off-diagonal entries $\Sigma_{jk}$ ($j \neq k$) measure the covariance between coordinates.
-A zero off-diagonal entry indicates that the corresponding coordinates are uncorrelated:
-knowing one provides no linear information about the other.
+\subsection{Two tools from permutation statistics}
+\label{sec:bg_perm}
 
-Closely related is the moment of inertia tensor from classical mechanics.
-For point masses $\{(m_i, \mathbf{x}_i)\}$ with positions $\mathbf{x}_i \in \R^3$, 
-the inertia tensor is given by
+Let $\pi$ be a uniformly random permutation of $\{1,\dots,N\}$ and $a,b\in\R^N$ fixed vectors.
+The quantity $T_a=\sum_i a_i b_{\pi(i)}$ is a \emph{linear permutation statistic}.
+Its mean is $N\bar a\bar b$ and, for two such statistics with the same $b$ (Wald--Wolfowitz \cite{waldwolfowitz1944}, polarised),
 \begin{equation}
-I_{jk} = \sum_{i=1}^{N} m_i \left( \|\mathbf{x}_i\|^2 \delta_{jk} - x_{i,j} x_{i,k} \right).
+\Cov(T_a,T_{a'})=\frac{1}{N-1}\sum_i(a_i-\bar a)(a'_i-\bar a')\sum_j(b_j-\bar b)^2 .
+\label{eq:ww_identity}
 \end{equation}
-The eigenvalues of $I$, called the principal moments of inertia, 
-characterize the rotational properties of the point configuration
-and are invariant under rigid rotations.
-For equal unit masses, the inertia tensor and covariance matrix are closely related,
-differing by a trace term and sign conventions.
+Hoeffding's combinatorial central limit theorem \cite[Thm.~3]{hoeffding1951} gives asymptotic normality of $\sum_i c_N(i,\pi(i))$ when, for every integer $r\ge3$, $N^{-1}\sum_{i,j}|d_N(i,j)|^r$ is $O\bigl((N^{-1}\sum_{i,j}d_N(i,j)^2)^{r/2}\bigr)$, $d_N$ being the doubly centred array; for product arrays $c_N(i,j)=a_ib_j$ the condition reduces to a bound on the standardised absolute moments of $a$ and $b$.
+In \Cref{sec:random_energy} the energies of a random arrangement are quadratic forms in such statistics; \eqref{eq:ww_identity} gives their means exactly, and the distribution of a quadratic form in Gaussian variables is computed by Imhof's inversion formula \cite{imhof1961}.
+
+\subsection{Polytopes of magic squares}
+\label{sec:bg_polytopes}
+
+The polytope literature on magic squares concerns a different polytope from the one studied here.
+An $n\times n$ nonnegative integer matrix with all row and column sums equal to $t$ is a lattice point of the $t$-th dilate of the Birkhoff polytope of doubly stochastic matrices, and their number is a polynomial in $t$ of degree $(n-1)^2$ \cite{stanley1973magic,ehrhart1973magic,ziegler1995lectures}; adding the diagonal conditions and distinct entries leads to the inside-out polytopes of Beck and Zaslavsky \cite{beck2006insideout}, which gave the first enumeration of $4\times4$ magic squares of arbitrary magic sum \cite{beck2010enumeration}; the cones of magic squares and cubes have Hilbert-basis descriptions \cite{ahmed2003polyhedral}; and contingency tables with fixed margins are the same lattice points studied as a sample space \cite{diaconis1995rectangular}.
+In all of these the magic squares are the \emph{points} of a polytope, whereas the Magic Gem attaches a polyhedron to a \emph{single} square; the two constructions share nothing beyond the word.
+Spectral and matrix properties of a magic square \cite{loly2009spectra,nordgren2012properties,nordgren2014spectra}, the singular-value signatures and entropies of Cameron, Rogers and Loly \cite{cameron2013signatura}, and Loly's physical invariants---the moment of inertia \cite{loly2004invariance}, the inertia tensor and the multipole moments of a magic cube \cite{rogers2004inertia,rogers2005multipole}, and the study of Franklin squares \cite{loly2007franklin}---are closer to our viewpoint: they, too, attach a quantity to one square and ask what it reveals.

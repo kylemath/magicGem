@@ -1,77 +1,46 @@
 \section{Introduction}
 \label{sec:introduction}
 
-Magic squares have fascinated mathematicians, artists, and mystics for millennia \cite{pickover2002zen},
-appearing famously in Albrecht D\"urer's 1514 engraving \emph{Melencolia I} \cite{durer1514melencolia}.
-The oldest known example, the \emph{Lo Shu} square, appears in Chinese legend dating back to 2800 BCE
-and remains the unique (up to symmetry) $3 \times 3$ magic square using the integers $1$ through $9$.
-Despite this ancient pedigree and centuries of intensive study \cite{andrews1960magic}, magic squares continue to yield new mathematical insights,
-with recent work connecting them to algebraic structures, eigenvalue problems, and statistical mechanics.
+Magic squares are among the oldest objects of recreational mathematics: the $3\times3$ Lo Shu appears in Chinese sources more than two millennia old, a $4\times4$ square is engraved in D\"urer's \emph{Melencolia~I} (1514), and systematic constructions for every order have been known since the seventeenth century \cite{andrews1960magic,pickover2002zen}.
+The modern literature treats them from several directions: enumeration and the geometry of the associated polytopes \cite{stanley1973magic,ehrhart1973magic,ahmed2003polyhedral,beck2006insideout,beck2010enumeration}, spectral and matrix properties \cite{loly2009spectra,nordgren2012properties,nordgren2014spectra,cameron2013signatura}, and, in work of Loly and collaborators, physical invariants such as the moment of inertia and the multipole moments \cite{loly2004invariance,rogers2004inertia,rogers2005multipole}.
 
-\begin{definition}[Magic Square]
+\begin{definition}[Magic square]
 \label{def:magic_square}
-An $n \times n$ \emph{magic square} is an arrangement of the integers $1, 2, \ldots, n^2$ in a square grid
-such that the sum of each row, each column, and both main diagonals equals the \emph{magic constant}
-\begin{equation}
-M(n) = \frac{n(n^2 + 1)}{2}.
-\end{equation}
+An \emph{arrangement} of order $n$ is a bijection $S=(s_{ij})$ from the cells of the $n\times n$ grid onto $\{1,\dots,n^2\}$.
+It is a \emph{magic square} if every row, every column and both main diagonals sum to the magic constant $M(n)=n(n^2+1)/2$, and \emph{semi-magic} if only the rows and columns do.
 \end{definition}
 
-In this paper, we develop a geometric perspective on magic squares by representing them 
-as three-dimensional polyhedra, which we call \emph{Magic Gems}.
-The construction arises from a natural physical analogy: imagine placing checkers on an $n \times n$ board,
-where the height of each stack corresponds to the number occupying that cell.
-This creates a ``topography'' over the grid, and centering this configuration in three-dimensional space
-yields a point cloud whose convex hull defines the Magic Gem.
-This geometric approach complements prior work by Loly and collaborators on the physical properties 
-of magic squares \cite{loly2004invariance, loly2009spectra}.
+This paper studies a three-dimensional representation of an arrangement: place the centred entry $s_{ij}-(n^2+1)/2$ as a height over the centred cell $(j-\frac{n-1}2,\ \frac{n-1}2-i)$ and take the convex hull of the $n^2$ points, the \emph{Magic Gem} of $S$ (\Cref{sec:gem}).
+The representation is invariant under the dihedral group $D_4$ of the square, so each essentially different magic square has a single gem (\Cref{prop:symmetry_invariance}); an interactive web application displays the $880$ essentially different order-four squares and renders the gem of a selected one (points, convex hull, vectors from the centre, coordinate axes; rotatable, with orthographic views) at \url{https://kylemath.github.io/MagicGemWebpage/}.
+The convex hull itself is the object of Sections~\ref{sec:gem-geometry-880}--\ref{sec:siamese-gems} (the geometry of the $880$ order-four gems and of the Siamese gems); everywhere else the object is the height function $z$.
+Once the entries are read as a function on the grid, every line-sum condition ``row $k$ sums to $M(n)$'' becomes ``$z$ is orthogonal to the centred indicator of row $k$'', i.e.\ $\Cov(R_k,Z)=0$ for the empirical covariance over the $n^2$ cells.
+A magic square is therefore an arrangement whose height function is orthogonal to a fixed $2n$-dimensional space $W$ of test functions, and the natural \emph{energy} $\Efull(S)=\sum_L\Cov(\mathbf 1_L,Z)^2$ over the $2n+2$ lines vanishes exactly on magic squares (\Cref{lem:zero_set}).
+We are explicit that this is a reformulation of the definition and not a theorem about magic squares (\Cref{rem:tautology}); its value is that it suggests questions whose answers are not visible in the line-sum formulation, and the paper is organised around those answers.
 
-The central insight of this work is that the defining algebraic property of magic squares---equal row, column, and diagonal sums---manifests geometrically as a precise statistical condition.
-Specifically, we show that magic squares are characterized by the vanishing of a covariance energy functional
-that measures correlations between spatial position and assigned value across all four structural directions
-(rows, columns, and both diagonals).
-This energy characterization builds on earlier work connecting magic squares to physical properties
-such as moment of inertia \cite{loly2004invariance}, providing an explicit statistical framework
-that bridges classical combinatorics and multivariate analysis.
+\paragraph{Contributions.}
+\begin{enumerate}\setlength\itemsep{1pt}
+\item \emph{The moment hierarchy} (\Cref{prop:hierarchy}, \Cref{thm:perm_threshold}). Replacing the line indicators by the polynomial test functions $x^m,y^m$ gives, for each degree $k$, the conditions $\Cov(X^m,Z)=\Cov(Y^m,Z)=0$ for $m\le k$. For real-valued height functions these are equivalent to equal row and column sums if and only if $k\ge n-1$; this is the invertibility of a Vandermonde matrix and we state it as a proposition. The result of the section is \Cref{thm:perm_threshold}: for permutations of $1,\dots,n^2$, integrality and the bound on line sums force the threshold $k^*(n)$ down to at most $n-2$ for every $n\ge14$, whereas $k^*(n)=n-1$ for $3\le n\le13$ (computer-verified witnesses, \Cref{rem:kstar_search}). The ``low-mode'' energy $\Elow$ of earlier versions of this paper is the degree-one truncation. Loly's invariance of the moment of inertia \cite{loly2004invariance}, which Loly derived from the row and column sums alone and so stated for semi-magic squares, is the single condition $\Cov(Z,X^2+Y^2)=0$: implied by the degree-two conditions, but much weaker than them (\Cref{cor:loly}). The same identity gives the null distribution of the moment of inertia of a random arrangement (\Cref{cor:loly_null}).
+\item \emph{Exact statistics of a random arrangement} (\Cref{prop:random_energy_moments}). $\E[\Elow]=(n^2+1)(n^4-n^2+12n-12)/(72n^2)$ and $\E[\Efull]=(n^4-1)/(6n^2)$, with exact variances; $\Elow/\E[\Elow]\to\mathrm{Exp}(1)$ by Hoeffding's combinatorial central limit theorem. Monte Carlo with $10^8$ samples per order agrees for $n\le 8$ to within $5\times10^{-4}$ relative error.
+\item \emph{The single-swap formula} (\Cref{thm:swap}). Exchanging two entries of a magic square that differ by $d$ raises $\Efull$ by exactly $d^2m/n^4$, where $m\in\{2,\dots,6\}$ counts the lines separating the two cells; every magic square is a strict local minimum, with minimum gap between $2/n^4$ and $6/n^4$.
+\item \emph{The low-mode class for $n=4$} (\Cref{prop:L4}). Exactly $14{,}639{,}440$ of the $16!$ arrangements satisfy $\Elow=0$, $7{,}040$ of them magic; the count is a meet-in-the-middle enumeration and agrees with a Gaussian local-limit estimate to within $20\%$.
+\item \emph{Geometry of the $880$ order-four gems} (\Cref{sec:gem-geometry-880}). $8$ to $16$ hull vertices, $39$ $f$-vectors, $352$ combinatorial types and $616$ congruence classes, which are exactly the orbits of the complement map $S\mapsto17-S$; no two gems have the same hull-vertex set. The Siamese squares of every odd order $n\ge5$ have gems with exactly twelve vertices (\Cref{prop:siamese-12}, computer-assisted proof).
+\end{enumerate}
 
-\subsection{Main Contributions}
+\paragraph{What is and is not new.}
+The polyhedral geometry of magic squares is classical: nonnegative integer matrices with all line sums equal to $t$ are the lattice points of the $t$-th dilate of the Birkhoff polytope and their number is a polynomial in $t$ \cite{stanley1973magic,ehrhart1973magic}; the count of magic squares with distinct entries is an Ehrhart quasi-polynomial of an inside-out polytope \cite{beck2006insideout,beck2010enumeration}; the cones of magic squares and cubes have Hilbert-basis descriptions \cite{ahmed2003polyhedral}.
+The Magic Gem is a different object: not the polytope whose lattice points are the squares, but a polyhedron attached to one square.
+The orthogonality reading of the constraints is elementary and implicit in Loly's work, and the hierarchy itself is elementary: that the axial moments $\sum_{ij}s_{ij}x_j^m$ of a semi-magic object vanish for every $m$ is, in physical language, the vanishing of its multipole moments, as Rogers and Loly observed for the dipole and quadrupole moments of a magic cube \cite{rogers2005multipole}.
+What is new is the converse threshold and its permutation refinement (\Cref{thm:perm_threshold}), the exact random-arrangement moments, the swap formula, the exact low-mode count, and the exact geometry of the $880$ gems.
+We make no claim that the energy reformulation by itself is a result.
 
-This paper develops the Magic Gem framework through several interconnected results.
-We begin by formalizing the construction of Magic Gems from magic squares
-and establishing that symmetry-equivalent squares yield geometrically identical polyhedra,
-thus providing a canonical geometric representative for each equivalence class under the dihedral group $D_4$.
+\paragraph{Corrections relative to version 4 (arXiv:2512.09170v4).}
+\begin{itemize}\setlength\itemsep{0pt}
+\item[(a)] The complete energy used there omitted one row and one column and was not $D_4$-invariant; all statistics now use the symmetric sum \eqref{eq:Efull}.
+\item[(b)] The sampled statistics (means $4.44$, $12.04$, $26.00$), the ``landscape entropy'' and the quadratic fits had the diagonal terms weighted by $n^2$; withdrawn, replaced by \Cref{prop:random_energy_moments}.
+\item[(c)] The ``trimodal'' swap gaps and the ``$1/n^2$'' minimum-gap scaling were artifacts: gaps are $d^2m/n^4$ and $\Delta_{\min}=\Theta(n^{-4})$ with constants $2$, $6$ (\Cref{cor:local_min}).
+\item[(d)] The $24$ local minima of $\Efull$ for $n=3$ referred to the asymmetric energy; the symmetric one has $16$ (\Cref{sec:n3_exhaustive}).
+\item[(e)] ``$\Elow=0$ characterises magic (or semi-magic) squares'' is withdrawn (\Cref{rem:four_term_insufficient}, \Cref{prop:L4}); $P(\Elow=0)$ for $n=4$ is $7.0\times10^{-7}$, not ``below $10^{-8}$'', and the statement that $6\times10^7$ samples for $n=4$ and $4\times10^8$ for $n=5$ contained no zero is unsupported by the archived data, which hold $10^5$ samples per order; the cause cannot be reconstructed from the repository (\Cref{sec:lowmode_n4}).
+\item[(f)] Table~2 of v4 (``typical'' $16$ hull vertices for $n=5$, volume $95.0$ for $n=4$) is replaced by exact values for named squares (\Cref{sec:gem-geometry-880}); the hardware statement is corrected (\Cref{sec:appendix}).
+\end{itemize}
 
-Our main theoretical contribution is the Complete Energy Characterization Theorem (\Cref{thm:complete_energy_char}), 
-which establishes that magic squares correspond exactly to zeros of a covariance energy functional
-using individual row, column, and diagonal indicator variables.
-This result holds for all $n \geq 3$ and follows from elementary properties of covariances.
-We also identify a natural four-term ``low-mode'' relaxation using aggregate position coordinates;
-this simpler energy characterizes magic squares for $n=3$ but defines a strictly larger class for $n \geq 4$,
-with explicit counterexamples computed.
-This result extends the physical interpretation of magic squares initiated by 
-Loly \cite{loly2004invariance}, who showed that the moment of inertia tensor of a magic square 
-(treating entries as masses) exhibits special invariance properties.
-Our covariance formulation makes this connection explicit and enables systematic perturbation analysis,
-confirming that magic squares are isolated points in the arrangement space.
-
-We complement these theoretical results with extensive computational experiments on magic squares 
-of orders three, four, and five.
-These experiments validate our theoretical predictions and reveal the geometric structure 
-of both the Magic Gems themselves and the broader space of arrangements in which they reside.
-The rarity of magic squares---approximately one in 45,000 random $3 \times 3$ arrangements---corresponds 
-to their isolation as zero-covariance configurations in a landscape where generic arrangements 
-exhibit substantial covariance.
-An interactive web application for exploring Magic Gems is available at
-\url{https://kylemath.github.io/MagicGemWebpage/}.
-
-\subsection{Paper Organization}
-
-The remainder of this paper proceeds as follows.
-\Cref{sec:background} reviews classical results on magic squares and establishes notation 
-for the geometric and statistical concepts we employ.
-\Cref{sec:methodology} presents the Magic Gem construction, proves the Complete Energy Characterization Theorem,
-introduces the low-mode relaxation, and develops the perturbation analysis framework.
-\Cref{sec:results} describes our computational experiments, validating theoretical predictions 
-and exploring the structure of the arrangement space for $n = 3$, $4$, and $5$.
-\Cref{sec:discussion} interprets our findings and discusses connections to related areas.
-Finally, \Cref{sec:conclusion} summarizes our contributions and outlines directions for future research.
+\Cref{sec:background} collects the facts we use; \Cref{sec:gem} defines the gem; \Cref{sec:theory} contains the projection lemma, the hierarchy and the swap formula; \Cref{sec:results} the computations; \Cref{sec:discussion} what the viewpoint does and does not buy, local search, and open questions; the appendices the methods, the variance closed forms, the witnesses and the remaining steps of the Siamese proof.
