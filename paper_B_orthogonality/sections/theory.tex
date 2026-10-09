@@ -307,7 +307,7 @@ $n^2(n-1)/2$ & 10584&11774&13050&14415&15872&17424&19074&20825&22680&24642&26714
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.72\textwidth]{figures/fig_kstar.pdf}
-\caption{The permutation threshold. Exact values of $k^*(n)$ for $3\le n\le40$ (dots), computer-assisted upper bounds for $41\le n\le100$ (one implementation, not certified; open circles), the linear-algebra threshold $n-1$, the bound of \Cref{thm:perm_threshold}(a), the lower bound given by \eqref{eq:box} (open squares, shown where it gives $K\ge2$; for odd $n$ with small $r_q$ it is trivial and is not plotted), and $\sqrt{2n}$, the asymptotic order of (b), which \eqref{eq:box} approaches slowly.}
+\caption{The permutation threshold. Exact values of $k^*(n)$ for $3\le n\le40$ (dots), computer-assisted upper bounds for $41\le n\le100$ (two independent implementations agree, not certified; open circles), the linear-algebra threshold $n-1$, the bound of \Cref{thm:perm_threshold}(a), the lower bound given by \eqref{eq:box} (open squares, shown where it gives $K\ge2$; for odd $n$ with small $r_q$ it is trivial and is not plotted), and $\sqrt{2n}$, the asymptotic order of (b), which \eqref{eq:box} approaches slowly.}
 \label{fig:kstar}
 \end{figure}
 
@@ -317,4 +317,4 @@ Starting from a semi-magic square of \Cref{lem:twin_squares} (or a Siamese (de l
 For each $14\le n\le40$ the witness search succeeded at the last $k$ at which $\Lambda_{n,k}$ still contains a nonzero vector satisfying \eqref{eq:col_feasible}, so $k^*(n)$ equals the least $k$ for which $\Lambda_{n,k}$ contains no such vector.
 We do not know whether this holds for all $n$.
 Some witnesses come close to the bound of \Cref{lem:col_feasible}: $\max_j|\gamma_j|=924$ against $1014$ at $n=13$, and $24150$ against $24642$ at $n=37$.
-Beyond $n=40$ we computed only upper bounds (computer-assisted, single implementation; \Cref{fig:kstar}); for instance $k^*(50)\le30$, $k^*(80)\le39$ and $k^*(100)\le45$.
+Beyond $n=40$ we computed only upper bounds (computer-assisted; two independent implementations agree for every $n\le100$, but the values carry no certificate; \Cref{fig:kstar}); for instance $k^*(50)\le30$, $k^*(80)\le39$ and $k^*(100)\le45$.

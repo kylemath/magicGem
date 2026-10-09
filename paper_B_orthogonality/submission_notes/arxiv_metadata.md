@@ -1,8 +1,8 @@
 # arXiv metadata, Paper B
 
-**Title:** Magic squares as orthogonality conditions: the permutation moment threshold and random line-sum energies
+**Title:** Moments of Magic Squares: Line-Sum Conditions, a Permutation Threshold, and Random Energies
 
-(Title changed from "Magic squares as orthogonality conditions on a height function": the main result is now the two-sided bound for the permutation threshold k*(n), and "height function" clashes with the established meaning of the term for tilings.)
+(Title chosen by the author: broad to specific, from moments of magic squares to the line-sum conditions, the permutation threshold and the random energies.)
 
 **Author:** Kyle Elliott Mathewson (Faculty of Science, University of Alberta)
 
@@ -24,4 +24,3 @@ An $n\times n$ arrangement of $1,\dots,n^2$ is semi-magic if all its row and col
 
 **Before upload (author):** check the date line (`\today`).
 
-**Title (author decision pending):** a shorter alternative is "Moments of line sums of magic squares: a permutation threshold and random line-sum energies".

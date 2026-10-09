@@ -1,4 +1,4 @@
-# Ancillary files for "Magic squares as orthogonality conditions: the permutation moment threshold and random line-sum energies"
+# Ancillary files for "Moments of Magic Squares: Line-Sum Conditions, a Permutation Threshold, and Random Energies"
 
 Python 3.9+ with NumPy, SciPy, SymPy, Matplotlib (and mpmath, which ships with SymPy); a C compiler for the enumerator and the annealer.
 `bash run_all.sh` regenerates the quick items below; every script is run from this directory.
@@ -35,3 +35,5 @@ In the code, `E_low` and "low mode" denote the four-term energy E_4 of the paper
 Local search (Section 5.2): steepest descent (`algorithms.py::greedy_run`: at each step the transposition with the most negative change of N^2 E_full, ties broken by the first cell pair in row-major order; stop when no transposition lowers it) reaches a magic square from 19.5%, 1.2%, 0.8% of 2x10^5 uniformly random starts for n = 4, 5, 6; simulated annealing (geometric cooling over 2x10^4 N proposals) succeeds in 100%, 78%, 50% of runs. The reduced-scale rerun gives 0.193, 0.011, 0.008 and 1.00, 0.81, 0.45. Local minima with respect to transpositions (`verify_numbers.py`): for n = 3, E_full has 16 (8 magic, 8 with N^2 E_full = 2), all strict; E_4 has 344 weak minima (no transposition lowers it), 336 of them non-magic, and 72 strict minima (64 non-magic).
 
 Single-swap census (supplementary; source `verify_numbers.py`, figure `fig_swap_spectrum.pdf`): over the 880 x C(16,2) = 105,600 transpositions of the 880 magic squares of order 4 up to D_4, the increase d^2 lambda of N^2 E_full takes 70 distinct values from 2 to 980; the smallest increase g_min(S) is 2 for 432 squares, 3 for 420 and 4 for 28. For the 8 magic squares of order 3, g_min = 3.
+
+| `kstar_upper_second/` | second, independent implementation of the upper bounds U(n), 14 <= n <= 100 (exact LLL + enumeration with F1, F2); `python3 kstar_upper_second/compare.py` checks agreement with `kstar_verify.json` for every n | `kstar_upper_second/upper_bounds_14_100.json` |

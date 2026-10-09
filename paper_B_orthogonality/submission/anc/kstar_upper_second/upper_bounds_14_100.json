@@ -1,0 +1,350 @@
+{
+ "14": {
+  "upper": 12,
+  "status": "ok"
+ },
+ "15": {
+  "upper": 13,
+  "status": "ok"
+ },
+ "16": {
+  "upper": 14,
+  "status": "ok"
+ },
+ "17": {
+  "upper": 15,
+  "status": "ok"
+ },
+ "18": {
+  "upper": 15,
+  "status": "ok"
+ },
+ "19": {
+  "upper": 16,
+  "status": "ok"
+ },
+ "20": {
+  "upper": 16,
+  "status": "ok"
+ },
+ "21": {
+  "upper": 17,
+  "status": "ok"
+ },
+ "22": {
+  "upper": 17,
+  "status": "ok"
+ },
+ "23": {
+  "upper": 18,
+  "status": "ok"
+ },
+ "24": {
+  "upper": 18,
+  "status": "ok"
+ },
+ "25": {
+  "upper": 19,
+  "status": "ok"
+ },
+ "26": {
+  "upper": 19,
+  "status": "ok"
+ },
+ "27": {
+  "upper": 20,
+  "status": "ok"
+ },
+ "28": {
+  "upper": 21,
+  "status": "ok"
+ },
+ "29": {
+  "upper": 21,
+  "status": "ok"
+ },
+ "30": {
+  "upper": 22,
+  "status": "ok"
+ },
+ "31": {
+  "upper": 22,
+  "status": "ok"
+ },
+ "32": {
+  "upper": 23,
+  "status": "ok"
+ },
+ "33": {
+  "upper": 23,
+  "status": "ok"
+ },
+ "34": {
+  "upper": 23,
+  "status": "ok"
+ },
+ "35": {
+  "upper": 24,
+  "status": "ok"
+ },
+ "36": {
+  "upper": 24,
+  "status": "ok"
+ },
+ "37": {
+  "upper": 25,
+  "status": "ok"
+ },
+ "38": {
+  "upper": 25,
+  "status": "ok"
+ },
+ "39": {
+  "upper": 26,
+  "status": "ok"
+ },
+ "40": {
+  "upper": 26,
+  "status": "ok"
+ },
+ "41": {
+  "upper": 26,
+  "status": "ok"
+ },
+ "42": {
+  "upper": 27,
+  "status": "ok"
+ },
+ "43": {
+  "upper": 27,
+  "status": "ok"
+ },
+ "44": {
+  "upper": 27,
+  "status": "ok"
+ },
+ "45": {
+  "upper": 28,
+  "status": "ok"
+ },
+ "46": {
+  "upper": 28,
+  "status": "ok"
+ },
+ "47": {
+  "upper": 28,
+  "status": "ok"
+ },
+ "48": {
+  "upper": 29,
+  "status": "ok"
+ },
+ "49": {
+  "upper": 29,
+  "status": "ok"
+ },
+ "50": {
+  "upper": 30,
+  "status": "ok"
+ },
+ "51": {
+  "upper": 30,
+  "status": "ok"
+ },
+ "52": {
+  "upper": 30,
+  "status": "ok"
+ },
+ "53": {
+  "upper": 31,
+  "status": "ok"
+ },
+ "54": {
+  "upper": 31,
+  "status": "ok"
+ },
+ "55": {
+  "upper": 31,
+  "status": "ok"
+ },
+ "56": {
+  "upper": 32,
+  "status": "ok"
+ },
+ "57": {
+  "upper": 32,
+  "status": "ok"
+ },
+ "58": {
+  "upper": 32,
+  "status": "ok"
+ },
+ "59": {
+  "upper": 33,
+  "status": "ok"
+ },
+ "60": {
+  "upper": 33,
+  "status": "ok"
+ },
+ "61": {
+  "upper": 33,
+  "status": "ok"
+ },
+ "62": {
+  "upper": 34,
+  "status": "ok"
+ },
+ "63": {
+  "upper": 34,
+  "status": "ok"
+ },
+ "64": {
+  "upper": 35,
+  "status": "ok"
+ },
+ "65": {
+  "upper": 35,
+  "status": "ok"
+ },
+ "66": {
+  "upper": 35,
+  "status": "ok"
+ },
+ "67": {
+  "upper": 35,
+  "status": "ok"
+ },
+ "68": {
+  "upper": 36,
+  "status": "ok"
+ },
+ "69": {
+  "upper": 36,
+  "status": "ok"
+ },
+ "70": {
+  "upper": 36,
+  "status": "ok"
+ },
+ "71": {
+  "upper": 37,
+  "status": "ok"
+ },
+ "72": {
+  "upper": 37,
+  "status": "ok"
+ },
+ "73": {
+  "upper": 37,
+  "status": "ok"
+ },
+ "74": {
+  "upper": 38,
+  "status": "ok"
+ },
+ "75": {
+  "upper": 38,
+  "status": "ok"
+ },
+ "76": {
+  "upper": 38,
+  "status": "ok"
+ },
+ "77": {
+  "upper": 39,
+  "status": "ok"
+ },
+ "78": {
+  "upper": 39,
+  "status": "ok"
+ },
+ "79": {
+  "upper": 39,
+  "status": "ok"
+ },
+ "80": {
+  "upper": 39,
+  "status": "ok"
+ },
+ "81": {
+  "upper": 40,
+  "status": "ok"
+ },
+ "82": {
+  "upper": 40,
+  "status": "ok"
+ },
+ "83": {
+  "upper": 40,
+  "status": "ok"
+ },
+ "84": {
+  "upper": 40,
+  "status": "ok"
+ },
+ "85": {
+  "upper": 41,
+  "status": "ok"
+ },
+ "86": {
+  "upper": 41,
+  "status": "ok"
+ },
+ "87": {
+  "upper": 41,
+  "status": "ok"
+ },
+ "88": {
+  "upper": 42,
+  "status": "ok"
+ },
+ "89": {
+  "upper": 42,
+  "status": "ok"
+ },
+ "90": {
+  "upper": 42,
+  "status": "ok"
+ },
+ "91": {
+  "upper": 42,
+  "status": "ok"
+ },
+ "92": {
+  "upper": 43,
+  "status": "ok"
+ },
+ "93": {
+  "upper": 43,
+  "status": "ok"
+ },
+ "94": {
+  "upper": 43,
+  "status": "ok"
+ },
+ "95": {
+  "upper": 43,
+  "status": "ok"
+ },
+ "96": {
+  "upper": 44,
+  "status": "ok"
+ },
+ "97": {
+  "upper": 44,
+  "status": "ok"
+ },
+ "98": {
+  "upper": 44,
+  "status": "ok"
+ },
+ "99": {
+  "upper": 44,
+  "status": "ok"
+ },
+ "100": {
+  "upper": 45,
+  "status": "ok"
+ }
+}
