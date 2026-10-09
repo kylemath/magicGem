@@ -1,11 +1,86 @@
-\section{The order-four census}
+\section{The exact geometry of the order-four gems}
 \label{sec:census}
+
+The isometry groups of \Cref{sec:symmetry} are one invariant of a gem.
+This section computes the others, exactly, for all $880$ gems of order four: vertices, faces, volumes, combinatorial types and congruence classes.
+To read these numbers one needs two facts that hold for every order: some points are vertices of every gem, and the faces of a gem are two regular subdivisions of the grid.
+
+\subsection{Forced vertices and regular subdivisions}
+\label{sec:forced}
+
+The \emph{sides} of the grid are its first and last rows and columns.
+Every gem lies in the box $\mathcal B_n=[-\frac{n-1}2,\frac{n-1}2]^2\times[-\frac{N-1}2,\frac{N-1}2]$ and meets each of its six faces: the top and the bottom face in the points of the entries $N$ and $1$, and the vertical face over a side $e$ of the grid in the polygon $\operatorname{conv}\{\mathbf p_c: c\in e\}$.
+Each contact is a face of $\mathcal G(S)$, so its vertices are vertices of $\mathcal G(S)$; the lemma below names those that can be read off from the entries.
+
+\begin{lemma}[Forced vertices]
+\label{lem:forced}
+Let $S$ be an arrangement of order $n\ge2$. The following points are vertices of $\mathcal G(S)$; we call them the \emph{forced vertices} of $S$: the points over the four corner cells; the points carrying the entries $1$ and $N$; and, for each side, the points over the cells of the smallest and of the largest entry on that side.
+\end{lemma}
+
+\begin{proof}
+A point that is the unique maximiser of a linear functional over the $N$ points is a vertex.
+The entries are distinct, so $\mp z$ have unique maximisers where $s=1$ and $s=N$.
+The functional $-x+y$ attains its maximum only at the top-left corner, and similarly for the other corners.
+On the left column $x=-\frac{n-1}2$, while $x\ge-\frac{n-1}2+1$ elsewhere; for $\varepsilon=1/N$ the functional $-x+\varepsilon z$ exceeds $\frac{n-1}2-\frac12$ on the left column and is less than $\frac{n-1}2-\frac12$ elsewhere, so its unique maximiser is the point of largest height on the left column; $-x-\varepsilon z$ gives the smallest, and the other sides follow by symmetry.
+\end{proof}
+
+For order four the forced vertices number between $4$ and $13$, and in general other points are vertices as well (\Cref{sec:census-4}).
+
+\paragraph{Gems and regular subdivisions.}
+\label{sec:subdivisions}
+The gem is two regular subdivisions of the grid, by $z$ and by $-z$, glued along the boundary of the grid (with vertical facets over the sides where the entries are not in arithmetic progression); \Cref{fig:construction}e shows the two subdivisions for the Lo Shu.
+Let $A$ be the $n\times n$ grid of cell positions.
+For a height function $\omega\colon A\to\R$, the \emph{regular subdivision} $\mathcal S(\omega)$ of $A$ is obtained by projecting to the plane the lower faces of $\operatorname{conv}\{(c,\omega(c))\}$, i.e.\ the faces whose outer normals have negative last coordinate; its cells are the sets of grid points whose lifts lie on a common lower face \cite[Ch.~2]{deloera2010triangulations}, \cite[Ch.~7]{gelfand1994discriminants}.
+Cells are marked: a cell is a set of grid points, and its convex hull may contain grid points that are not in it.
+$\mathcal S(\omega)$ does not change if $\omega$ is multiplied by a positive scalar or an affine function of $(x,y)$ is added to it; the height functions inducing a given subdivision form a relatively open polyhedral cone, its \emph{secondary cone}.
+By definition, $\mathcal G(S)$ is the lift of $A$ by the height function $z$ of $S$, and its upper faces are the reflections in $z=0$ of the lower faces of the lift by $-z$.
+
+\begin{proposition}[Gems as pairs of regular subdivisions]
+\label{prop:subdivisions}
+Let $S$ be an arrangement of order $n\ge2$ that is not a $D_4$-image of the natural square.
+\begin{enumerate}
+\item Every facet of $\mathcal G(S)$ is a lower facet, an upper facet or a vertical facet. Projection to the plane maps the lower facets onto the maximal cells of $\mathcal S(z)$ and the upper facets onto the maximal cells of $\mathcal S(-z)$.
+\item The vertical facets lie in the four planes $x=\pm\frac{n-1}2$, $y=\pm\frac{n-1}2$; the plane over a side of the grid contains a facet if and only if the entries along that side, in cell order, are not an arithmetic progression.
+\item $\mathbf p_c$ is a vertex of $\mathcal G(S)$ if and only if $c$ is a vertex of a cell of $\mathcal S(z)$ or of $\mathcal S(-z)$.
+\item The face lattice of $\mathcal G(S)$, with vertices labelled by cells, is determined by the pair $(\mathcal S(z),\mathcal S(-z))$, hence by the secondary cones containing $z$ and $-z$. The complement $N+1-S$ exchanges the two subdivisions.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(1) is the definition of $\mathcal S(z)$ and, after reflecting in $z=0$, of $\mathcal S(-z)$.
+(2) A vertical facet lies in a plane $\ell(x,y)=\max_A\ell$ for a linear form $\ell$; the maximisers of $\ell$ on the grid are a corner or the $n$ cells of a side, and the face is $2$-dimensional only in the second case and only if the lifts of the side are not collinear, i.e.\ if the heights along the side are not an affine function of the position.
+(3) The vertical line through a vertex $\mathbf p_c$ meets $\mathcal G(S)$ in a segment with endpoint $\mathbf p_c$, so $\mathbf p_c$ lies on a lower or an upper face, of which it is a vertex; conversely the vertices of a face are vertices of the polytope.
+(4) Let $U$ and $L$ be the upper and lower boundary functions of $\mathcal G(S)$ over $\operatorname{conv}A$.
+$U-L$ is concave, non-negative, and positive at the projection of an interior point, hence positive on $\operatorname{int}\operatorname{conv}A$.
+So a lower face and an upper face meet only over $\partial\operatorname{conv}A$.
+Over a side $e$ of the grid, $\mathcal G(S)$ meets the vertical plane in $\operatorname{conv}\{\mathbf p_c: c\in e\}$.
+This polygon is bounded by the restrictions of the two boundary chains to $e$, and it is a vertical facet exactly when these chains differ, i.e.\ (by (2)) when the entries along $e$ are not an arithmetic progression.
+A lower or upper facet projects bijectively onto its cell, so its vertices are the lifts of the vertices of the convex hull of the cell.
+Hence the marked cells of $\mathcal S(z)$ and $\mathcal S(-z)$, together with the vertical facets, determine every vertex--facet incidence.
+The complement has height function $-z$.
+\end{proof}
+
+\begin{example}[Lo Shu, continuing \Cref{ex:loshu}]
+\label{ex:loshu-subdiv}
+Writing each grid point as its entry, $\mathcal S(z)$ has the maximal cells $\{1,2,6\}$, $\{1,3,8\}$, $\{1,2,3,4\}$, and $\mathcal S(-z)$ has $\{2,7,9\}$, $\{4,8,9\}$, $\{6,7,8,9\}$.
+The vertical facets are the triangles $\{2,4,9\}$, $\{2,6,7\}$, $\{1,6,8\}$, $\{3,4,8\}$.
+The centre point (height $0$) lies in the convex hull of each quadrilateral cell but belongs to no cell: the plane of $\{1,2,3,4\}$ is $z=-x-y-3$, which is $-3<0$ at the centre.
+\end{example}
+
+In this language, the four corner cells are vertices of $\operatorname{conv}A$ and so give vertices of every gem.
+The other forced vertices of \Cref{lem:forced} are, for each side $e$ of the grid, the lowest and the highest lifted point over $e$; these are vertices of the polygon $\operatorname{conv}\{\mathbf p_c: c\in e\}$, the face of $\mathcal G(S)$ over $e$.
+For the $880$ order-four gems, $856$ have four vertical facets, $20$ have three and $4$ have two; the height functions of the $7040$ order-four magic squares induce $417$ distinct regular subdivisions of the $4\times4$ grid up to $D_4$, and for $548$ of the $880$ classes $\mathcal S(z)$ is a triangulation (\texttt{anc/verify\_structure.py}).
+The combinatorial types of \Cref{sec:census-4} are a coarse invariant of the pair $(\mathcal S(z),\mathcal S(-z))$ (face lattices without cell labels).
+In the proof of the Siamese theorem (\Cref{sec:siamese-gems}), the shear $\Phi$ of Step~3 uses the fact that $\mathcal S(\pm z)$ is unchanged when an affine function of $(x,y)$ is subtracted from $z$ and the result is divided by $n$.
+
+\subsection{The census}
+\label{sec:census-4}
 
 There are $8$ magic squares of order $3$, all images of the Lo Shu under $D_4$, and $7{,}040$ of order $4$, forming $880$ $D_4$-classes; the order-four squares were listed by Fr\'enicle de Bessy \cite{frenicle1693} and have been recounted by computer \cite{beck2010enumeration}.
 Dudeney sorted them into twelve groups according to the pattern of complementary pairs $(a,17-a)$ \cite{dudeney1917amusements}; since the numbering of the groups differs between reproductions of his table, we list the labels used here, for all $7040$ squares together with the number $\#$ of their class, in \texttt{anc/all7040\_dudeney.tsv}.
 The number $275{,}305{,}224$ of magic squares of order five up to $D_4$ is due to Schroeppel (1973) \cite{gardner1976}; for order six the count was estimated by Monte Carlo methods \cite{pinn1998number} and was computed exactly by H.~Mino in 2024, as announced on his web page \cite{mino2024order6} and reported in \cite{trump_howmany}.
 
-For each of the $880$ squares we computed $\mathcal G(S)$ exactly (integer facet inequalities, rational volumes; \Cref{sec:appendix}).
+For each of the $880$ squares we computed $\mathcal G(S)$ exactly (integer facet inequalities, rational volumes; Appendix~\ref{sec:appendix}).
 \Cref{tab:census} and \Cref{fig:gem-geometry-880} summarise the results.
 
 \begin{table}[htbp]
@@ -43,13 +118,13 @@ gems with $V^\partial=k$ & 357 & 204 & 257 & 40 & 21 & 0 & 1\\
 Between $8$ and all $16$ points are vertices; $V=12$ is the most frequent value ($380$ gems), and the mean is $269/22\approx12.23$.
 The $39$ $f$-vectors range from $(8,14,8)$ (one gem) to $(16,36,22)$ (nine gems); the most frequent is $(12,26,16)$ ($164$ gems).
 The volume takes $155$ distinct values, from $58$ to $292/3$, with mean $84.05$; its denominators are $1,2,3,6$, because for even $n$ all coordinates are half-odd integers, so that $\mathcal G(S)+(\frac12,\frac12,\frac12)$ is a lattice polytope.
-The Ehrhart polynomials of these lattice polytopes take $554$ distinct values (\texttt{anc/ehrhart\_880.py}); for lattice $3$-polytopes this polynomial is equivalent to the volume, the lattice-normalised surface area and the number of lattice points.
-Every gem lies in the box $\mathcal B_n=[-\frac{n-1}2,\frac{n-1}2]^2\times[-\frac{N-1}2,\frac{N-1}2]$, and the gems of order four fill between $43\%$ and $72\%$ of it.
+The Ehrhart polynomials of these lattice polytopes take $554$ distinct values (Appendix~\ref{sec:ehrhart}).
+The gems of order four fill between $43\%$ and $72\%$ of the box $\mathcal B_4$ (\Cref{sec:forced}).
 At most four points are interior, and at most six are non-vertex boundary points.
 
 \paragraph{Combinatorial types.}
 Two gems have the same combinatorial type if their vertex--facet incidence graphs are isomorphic by an isomorphism that maps vertices to vertices and facets to facets.
-Testing pairs of incidence graphs for isomorphism gives $352$ types (\Cref{sec:appendix}).
+Testing pairs of incidence graphs for isomorphism gives $352$ types (Appendix~\ref{sec:appendix}).
 By \eqref{eq:complement} the gems of $S$ and $\overline S$ are mirror images, so every type is a union of complement orbits; the $93$ types with one member are self-complementary squares, and of the $201$ types with two members, $177$ are mirror pairs and $24$ consist of two self-complementary squares.
 The numbers of types with $1,2,3,\dots$ members are
 \[

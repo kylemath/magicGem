@@ -1,5 +1,5 @@
 """
-siamese_slacks.py -- the hand-checkable form of the Siamese theorem (Section 5, Table 3 of the paper).
+siamese_slacks.py -- the hand-checkable form of the Siamese theorem (Section 6, Table 3 of the paper).
 
 For n = 2m+1, after the shear (x,y,z) -> (x,y,zeta) the lifted points lie on five level
 polygons Lambda_{+2}, Lambda_{+1}, Lambda_0, Lambda_{-1}, Lambda_{-2} with 16 polygon vertices q1..q16 in total.

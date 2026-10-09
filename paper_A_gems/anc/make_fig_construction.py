@@ -1,5 +1,6 @@
-"""Figure 3: construction of the Magic Gem of the Lo Shu: (a) square, (b) cell positions (measured from the centre) and heights, (c) point set, (d) gem.
-Vector PDF, 6.5 in wide; hull faces from the exact hull code gem_geometry.py."""
+"""Figure 3: construction of the Magic Gem of the Lo Shu: (a) square, (b) cell positions (measured from the centre) and heights, (c) point set, (d) gem,
+(e) the regular subdivisions S(z) and S(-z) of the 3x3 grid (projections of the lower and upper facets; Example 5.3), with the
+vertical facets checked as well.  Vector PDF, 6.5 in wide; hull faces from the exact hull code gem_geometry.py."""
 import os, sys
 import numpy as np
 import matplotlib
@@ -62,11 +63,12 @@ def draw_square(ax, S, title, cell=True):
         for j in range(n):
             ax.add_patch(plt.Rectangle((j, n - 1 - i), 1, 1, facecolor='#eef3fb', edgecolor='#555555', lw=0.6))
             ax.text(j + 0.5, n - 1 - i + 0.5, str(S[i, j]), ha='center', va='center', fontsize=9)
-    ax.set_title(title, loc='left', pad=2)
+    TITLES.append((ax, title))
 
 
-fig = plt.figure(figsize=(6.5, 1.75))
-gs = fig.add_gridspec(1, 4, wspace=0.12, left=0.01, right=0.99, top=0.88, bottom=0.02)
+fig = plt.figure(figsize=(6.5, 1.65))
+gs = fig.add_gridspec(1, 5, width_ratios=[0.72, 0.98, 0.95, 0.95, 1.5], wspace=0.06, left=0.005, right=0.995, top=0.86, bottom=0.02)
+TITLES = []
 
 # (a) the Lo Shu
 ax = fig.add_subplot(gs[0, 0]); draw_square(ax, LOSHU, '(a) Lo Shu $S$')
@@ -82,7 +84,7 @@ for i in range(n):
 ax.annotate('', xy=(1.65, -1.55), xytext=(-1.55, -1.55), arrowprops=dict(arrowstyle='->', lw=0.6))
 ax.annotate('', xy=(-1.55, 1.65), xytext=(-1.55, -1.55), arrowprops=dict(arrowstyle='->', lw=0.6))
 ax.text(1.55, -1.45, '$x$', fontsize=7); ax.text(-1.45, 1.5, '$y$', fontsize=7)
-ax.set_title('(b) cell positions, $z_{ij}=s_{ij}-5$', loc='left', pad=2)
+TITLES.append((ax, '(b) positions, $z=s-5$'))
 # (c) heights as stems
 ax = fig.add_subplot(gs[0, 2], projection='3d')
 P = points(LOSHU)
@@ -93,14 +95,47 @@ for k, p in enumerate(P):
     ax.text(p[0], p[1], p[2] + 0.45, str(int(LOSHU.ravel()[k])), fontsize=6, ha='center')
 gx, gy = np.meshgrid([-1.5, -.5, .5, 1.5], [-1.5, -.5, .5, 1.5])
 ax.plot_wireframe(gx, gy, np.zeros_like(gx), color='#bbbbbb', lw=0.4)
-style3d(ax, 3, 9); ax.set_title('(c) the point set', loc='left', pad=2)
+style3d(ax, 3, 9); TITLES.append((ax, '(c) the point set'))
 # (d) hull
 ax = fig.add_subplot(gs[0, 3], projection='3d')
 h = draw_gem(ax, LOSHU)
 V, E, F = h['f_vector']
-ax.set_title(f'(d) gem, $f=({V},{E},{F})$', loc='left', pad=2)
+TITLES.append((ax, f'(d) gem, $f=({V},{E},{F})$'))
 
 assert h['f_vector'] == (8, 16, 10) and h['volume'] == 18
+
+# (e) the regular subdivisions S(z) (lower facets) and S(-z) (upper facets), cells labelled by entries
+Pd = h['P']; ent = LOSHU.ravel()
+cells = {'lower': [], 'upper': [], 'vertical': []}
+for key in h['faces']:
+    a, b, c, d = key
+    on = frozenset(int(ent[k]) for k in range(9) if a * Pd[k, 0] + b * Pd[k, 1] + c * Pd[k, 2] + d == 0)   # marked cell
+    cells['lower' if c < 0 else 'upper' if c > 0 else 'vertical'].append(on)
+EXPECT = {'lower': {frozenset({1, 2, 6}), frozenset({1, 3, 8}), frozenset({1, 2, 3, 4})},
+          'upper': {frozenset({2, 7, 9}), frozenset({4, 8, 9}), frozenset({6, 7, 8, 9})},
+          'vertical': {frozenset({2, 4, 9}), frozenset({2, 6, 7}), frozenset({1, 6, 8}), frozenset({3, 4, 8})}}
+for k in EXPECT:
+    assert set(cells[k]) == EXPECT[k] and len(cells[k]) == len(EXPECT[k]), (k, cells[k])
+pos = {int(LOSHU[i, j]): (j - 1, 1 - i) for i in range(3) for j in range(3)}
+FILLS = ['#cfe0f5', '#f6d9b8', '#d4ecd9']
+sub = gs[0, 4].subgridspec(1, 2, wspace=0.18)
+for col, (kind, lab) in enumerate((('lower', r'$\mathcal{S}(z)$'), ('upper', r'$\mathcal{S}(-z)$'))):
+    ax = fig.add_subplot(sub[0, col]); ax.set_xlim(-1.45, 1.45); ax.set_ylim(-1.75, 1.45); ax.set_aspect('equal'); ax.axis('off')
+    for t, cell in enumerate(sorted(cells[kind], key=lambda c: (len(c), sorted(c)))):
+        pts = np.array([pos[e] for e in cell], float); cen = pts.mean(0)
+        pts = pts[np.argsort(np.arctan2(pts[:, 1] - cen[1], pts[:, 0] - cen[0]))]
+        ax.add_patch(plt.Polygon(pts, closed=True, facecolor=FILLS[t % 3], edgecolor=EDGE, lw=0.7))
+    used = set().union(*cells[kind])
+    for e, (xx, yy) in pos.items():
+        if e in used:
+            ax.scatter([xx], [yy], s=10, c=PT, zorder=3)
+        else:
+            ax.scatter([xx], [yy], s=10, facecolors='white', edgecolors='#b0433a', linewidths=0.8, zorder=3)
+        ax.text(xx + (0.13 if xx < 1 else -0.13), yy + 0.13, str(e), fontsize=6.5, ha='left' if xx < 1 else 'right', va='bottom', zorder=4)
+    ax.text(0, -1.42, lab, ha='center', va='center', fontsize=8)
+TITLES.append((fig.axes[-2], '(e) the subdivisions'))
+for ax_, t_ in TITLES:
+    fig.text(ax_.get_position().x0 + 0.004, 0.975, t_, fontsize=8, va='top', ha='left')
 outpdf = f'{FIGDIR}/fig_construction.pdf'
 fig.savefig(outpdf)
 print('wrote', outpdf)

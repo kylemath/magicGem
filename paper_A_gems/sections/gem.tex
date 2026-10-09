@@ -82,22 +82,6 @@ Finally, if $S$ is semi-magic and $z=\alpha x+\beta y+\gamma$, then $\gamma=0$ b
 
 The natural square of order $3$ shows that the hypothesis is needed: its gem is a parallelogram.
 
-The \emph{sides} of the grid are its first and last rows and columns.
-
-\begin{lemma}[Forced vertices]
-\label{lem:forced}
-Let $S$ be an arrangement of order $n\ge2$. The following points are vertices of $\mathcal G(S)$; we call them the \emph{forced vertices} of $S$: the points over the four corner cells; the points carrying the entries $1$ and $N$; and, for each side, the points over the cells of the smallest and of the largest entry on that side.
-\end{lemma}
-
-\begin{proof}
-A point that is the unique maximiser of a linear functional over the $N$ points is a vertex.
-The entries are distinct, so $\mp z$ have unique maximisers where $s=1$ and $s=N$.
-The functional $-x+y$ attains its maximum only at the top-left corner, and similarly for the other corners.
-On the left column $x=-\frac{n-1}2$, while $x\ge-\frac{n-1}2+1$ elsewhere; for $\varepsilon=1/N$ the functional $-x+\varepsilon z$ exceeds $\frac{n-1}2-\frac12$ on the left column and is less than $\frac{n-1}2-\frac12$ elsewhere, so its unique maximiser is the point of largest height on the left column; $-x-\varepsilon z$ gives the smallest, and the other sides follow by symmetry.
-\end{proof}
-
-For order four the forced vertices number between $4$ and $13$, and in general other points are vertices as well (\Cref{sec:census}).
-
 \begin{example}[Lo Shu]
 \label{ex:loshu}
 For the Lo Shu square $S=\begin{pmatrix}2&7&6\\9&5&1\\4&3&8\end{pmatrix}$, $\bar s=5$ and the nine points are
@@ -114,54 +98,10 @@ The origin is the only non-vertex point and is interior; the gem has $f$-vector 
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=\textwidth]{figures/fig_construction.pdf}
-    \caption{The gem of the Lo Shu square: (a)~the square; (b)~the cell positions $(x_{ij},y_{ij})$, measured from the centre, with the heights $z_{ij}=s_{ij}-5$; (c)~the nine points, labelled by the entries; (d)~their convex hull, with $f$-vector $(8,16,10)$ and the interior point $\mathbf 0$.}
+    \caption{The gem of the Lo Shu square: (a)~the square; (b)~the cell positions $(x_{ij},y_{ij})$, measured from the centre, with the heights $z_{ij}=s_{ij}-5$; (c)~the nine points, labelled by the entries; (d)~their convex hull, with $f$-vector $(8,16,10)$ and the interior point $\mathbf 0$; (e)~the regular subdivisions $\mathcal S(z)$ and $\mathcal S(-z)$ of the grid, the projections of the lower and the upper facets (\Cref{ex:loshu-subdiv}); grid points that belong to no cell are drawn as open circles.}
     \label{fig:construction}
 \end{figure}
 
-\subsection{Gems and regular subdivisions}
-\label{sec:subdivisions}
-
-The gem is two regular subdivisions of the grid, by $z$ and by $-z$, glued along the boundary of the grid (with vertical facets over the sides where the entries are not in arithmetic progression).
-Let $A$ be the $n\times n$ grid of cell positions.
-For a height function $\omega\colon A\to\R$, the \emph{regular subdivision} $\mathcal S(\omega)$ of $A$ is obtained by projecting to the plane the lower faces of $\operatorname{conv}\{(c,\omega(c))\}$, i.e.\ the faces whose outer normals have negative last coordinate; its cells are the sets of grid points whose lifts lie on a common lower face \cite[Ch.~2]{deloera2010triangulations}, \cite[Ch.~7]{gelfand1994discriminants}.
-Cells are marked: a cell is a set of grid points, and its convex hull may contain grid points that are not in it.
-$\mathcal S(\omega)$ does not change if $\omega$ is multiplied by a positive scalar or an affine function of $(x,y)$ is added to it; the height functions inducing a given subdivision form a relatively open polyhedral cone, its \emph{secondary cone}.
-By definition, $\mathcal G(S)$ is the lift of $A$ by the height function $z$ of $S$, and its upper faces are the reflections in $z=0$ of the lower faces of the lift by $-z$.
-
-\begin{proposition}[Gems as pairs of regular subdivisions]
-\label{prop:subdivisions}
-Let $S$ be an arrangement of order $n\ge2$ that is not a $D_4$-image of the natural square.
-\begin{enumerate}
-\item Every facet of $\mathcal G(S)$ is a lower facet, an upper facet or a vertical facet. Projection to the plane maps the lower facets onto the maximal cells of $\mathcal S(z)$ and the upper facets onto the maximal cells of $\mathcal S(-z)$.
-\item The vertical facets lie in the four planes $x=\pm\frac{n-1}2$, $y=\pm\frac{n-1}2$; the plane over a side of the grid contains a facet if and only if the entries along that side, in cell order, are not an arithmetic progression.
-\item $\mathbf p_c$ is a vertex of $\mathcal G(S)$ if and only if $c$ is a vertex of a cell of $\mathcal S(z)$ or of $\mathcal S(-z)$.
-\item The face lattice of $\mathcal G(S)$, with vertices labelled by cells, is determined by the pair $(\mathcal S(z),\mathcal S(-z))$, hence by the secondary cones containing $z$ and $-z$. The complement $N+1-S$ exchanges the two subdivisions.
-\end{enumerate}
-\end{proposition}
-
-\begin{proof}
-(1) is the definition of $\mathcal S(z)$ and, after reflecting in $z=0$, of $\mathcal S(-z)$.
-(2) A vertical facet lies in a plane $\ell(x,y)=\max_A\ell$ for a linear form $\ell$; the maximisers of $\ell$ on the grid are a corner or the $n$ cells of a side, and the face is $2$-dimensional only in the second case and only if the lifts of the side are not collinear, i.e.\ if the heights along the side are not an affine function of the position.
-(3) The vertical line through a vertex $\mathbf p_c$ meets $\mathcal G(S)$ in a segment with endpoint $\mathbf p_c$, so $\mathbf p_c$ lies on a lower or an upper face, of which it is a vertex; conversely the vertices of a face are vertices of the polytope.
-(4) Let $U$ and $L$ be the upper and lower boundary functions of $\mathcal G(S)$ over $\operatorname{conv}A$.
-$U-L$ is concave, non-negative, and positive at the projection of an interior point, hence positive on $\operatorname{int}\operatorname{conv}A$.
-So a lower face and an upper face meet only over $\partial\operatorname{conv}A$.
-Over a side $e$ of the grid, $\mathcal G(S)$ meets the vertical plane in $\operatorname{conv}\{\mathbf p_c: c\in e\}$.
-This polygon is bounded by the restrictions of the two boundary chains to $e$, and it is a vertical facet exactly when these chains differ, i.e.\ (by (2)) when the entries along $e$ are not an arithmetic progression.
-A lower or upper facet projects bijectively onto its cell, so its vertices are the lifts of the vertices of the convex hull of the cell.
-Hence the marked cells of $\mathcal S(z)$ and $\mathcal S(-z)$, together with the vertical facets, determine every vertex--facet incidence.
-The complement has height function $-z$.
-\end{proof}
-
-\begin{example}[Lo Shu, continuing \Cref{ex:loshu}]
-\label{ex:loshu-subdiv}
-Writing each grid point as its entry, $\mathcal S(z)$ has the maximal cells $\{1,2,6\}$, $\{1,3,8\}$, $\{1,2,3,4\}$, and $\mathcal S(-z)$ has $\{2,7,9\}$, $\{4,8,9\}$, $\{6,7,8,9\}$.
-The vertical facets are the triangles $\{2,4,9\}$, $\{2,6,7\}$, $\{1,6,8\}$, $\{3,4,8\}$.
-The centre point (height $0$) lies in the convex hull of each quadrilateral cell but belongs to no cell: the plane of $\{1,2,3,4\}$ is $z=-x-y-3$, which is $-3<0$ at the centre.
-\end{example}
-
-In this language, the four corner cells are vertices of $\operatorname{conv}A$ and so give vertices of every gem.
-The other forced vertices of \Cref{lem:forced} are, for each side $e$ of the grid, the lowest and the highest lifted point over $e$; these are vertices of the polygon $\operatorname{conv}\{\mathbf p_c: c\in e\}$, the face of $\mathcal G(S)$ over $e$.
-For the $880$ order-four gems, $856$ have four vertical facets, $20$ have three and $4$ have two; the height functions of the $7040$ order-four magic squares induce $417$ distinct regular subdivisions of the $4\times4$ grid up to $D_4$, and for $548$ of the $880$ classes $\mathcal S(z)$ is a triangulation (\texttt{anc/verify\_revision.py}).
-The combinatorial types of \Cref{sec:census} are a coarse invariant of the pair $(\mathcal S(z),\mathcal S(-z))$ (face lattices without cell labels).
-In the proof of the Siamese theorem (\Cref{sec:siamese-gems}), the shear $\Phi$ of Step~3 uses the fact that $\mathcal S(\pm z)$ is unchanged when an affine function of $(x,y)$ is subtracted from $z$ and the result is divided by $n$.
+The figures of this section show two things at once: the vectors $\mathbf p_{ij}$ balance about the origin, and their heights cancel along every line.
+Only the second is a property of magic squares.
+\Cref{sec:balance} separates the balance statements that hold for every arrangement from those that the line conditions force, and these moment identities are what the symmetry results of \Cref{sec:symmetry} rest on.

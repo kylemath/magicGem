@@ -1,4 +1,4 @@
-"""Figure 5: the 16 points of three order-four squares as spheres on stems over the floor grid (height picture),
+"""Figure 6 (lower half): the 16 points of three order-four squares as spheres on stems over the floor grid (height picture),
 with the symmetry made visible: (d) antipodal pairs through O, (e) pairs exchanged by a half-turn about a horizontal axis, (f) no symmetry
 (lower half of Figure 6; the upper half is fig_symmetry.pdf).
 Same squares and viewpoint as fig_symmetry.pdf (Duerer, #124, #102)."""

@@ -1,12 +1,12 @@
 """
-verify_revision.py -- exact checks of the structural statements of the paper (every statement asserted).
+verify_structure.py -- exact checks of the structural statements of the paper (every statement asserted).
 
   A  coplanar point sets: for n = 2, 3 (all arrangements) the points p_ij are coplanar exactly for the
      8 D4-images of the natural square s_ij = n i + j + 1; for n = 4..6 these 8 are coplanar and
      random arrangements are not; no semi-magic square is coplanar (all 880 of order 4 checked).
   B  covariance matrix of the point set of every semi-magic square = diag(a, a, b), a=(n^2-1)/12, b=(N^2-1)/12
      (880 order-4 squares, Siamese n = 3..21).
-  C  isometries of the point set (Theorem 4.1): for all 880 order-4 squares and the Siamese squares n = 3..15
+  C  isometries of the point set (Theorem 4.2): for all 880 order-4 squares and the Siamese squares n = 3..15
      |Iso({p_ij})| = 2 iff S is self-complementary, else 1; at hull level (vertex sets) the same for the 880
      and for the Siamese gems n = 5..15.
   D  injectivity: the 880 vertex sets are pairwise distinct up to the action of D4 (D4-canonical forms),
@@ -22,7 +22,7 @@ verify_revision.py -- exact checks of the structural statements of the paper (ev
   I  Siamese gems n = 3..41: vertex cells = forced cells (corners, entries 1 and N, side extremes).
   J  squares880.txt lists the Frenicle standard forms in lexicographic order.
   K  census numbers by number of vertices (strictly interior / non-vertex boundary counts, k = 0..6).
-Writes verify_revision.json and verify_revision.log.
+Writes verify_structure.json and verify_structure.log.
 """
 import itertools, math, json, os, sys, time
 from collections import Counter, defaultdict
@@ -207,7 +207,7 @@ for k in range(880):
 orbits = {frozenset((k, comp_idx[k])) for k in range(880)}
 assert {frozenset(c) for c in classes.values()} == orbits and len(orbits) == 616
 log('D: congruence classes of the 880 gems = the 616 complement orbits {S, 17-S} (exact)')
-# certificate used in the paper (Prop. 4.1(2)): the sorted squared-distance multiset is a congruence invariant and
+# certificate used in the paper (Prop. 5.4(2)): the sorted squared-distance multiset is a congruence invariant and
 # takes 616 distinct values, one per complement orbit
 assert len(groups) == 616 and {frozenset(v) for v in groups.values()} == orbits
 log('D: the sorted squared-distance multisets of the 880 vertex sets take 616 distinct values, one per complement orbit')
@@ -355,7 +355,7 @@ OUT['I_distribution'] = {k: Ic.get(k, 0) for k in range(7)}
 OUT['B_distribution'] = {k: Bc.get(k, 0) for k in range(7)}
 log(f'K: strictly interior counts {OUT["I_distribution"]}; non-vertex boundary counts {OUT["B_distribution"]}')
 OUT['runtime_seconds'] = round(time.time() - T0, 1)
-json.dump(OUT, open(os.path.join(HERE, 'verify_revision.json'), 'w'), indent=1)
+json.dump(OUT, open(os.path.join(HERE, 'verify_structure.json'), 'w'), indent=1)
 
 # ------------------------------------------------------------------ L Siamese vertex table and mixed moments
 for n in range(5, 43, 2):
@@ -377,4 +377,4 @@ log('L: 8*sum z x y over the 880: 48 distinct absolute values in [0, 480], zero 
 for n in range(3, 10):
     assert n * n * (n ** 4 - 1) // 12 == [60, 340, 1300, 3885, 9800, 21840, 44280][n - 3]
 log(f'all checks passed ({time.time() - T0:.1f} s)')
-open(os.path.join(HERE, 'verify_revision.log'), 'w').write('\n'.join(LOG) + '\n')
+open(os.path.join(HERE, 'verify_structure.log'), 'w').write('\n'.join(LOG) + '\n')

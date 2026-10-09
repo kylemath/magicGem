@@ -1,0 +1,69 @@
+\section{Balance: the vectors from the centroid}
+\label{sec:balance}
+
+Figures~\ref{fig:vectors} and~\ref{fig:lines} draw the points $\mathbf p_{ij}$ as vectors from the origin.
+This section asks which balance statements these vectors satisfy and which of them depend on $S$ being magic.
+There are two kinds: the vectors themselves balance for every arrangement, while the balance of the heights as weights on the grid is equivalent to the row and column conditions.
+
+\paragraph{Unweighted balance holds for every arrangement.}
+By \Cref{lem:lines}(1), $\sum_{i,j}\mathbf p_{ij}=\mathbf 0$ for every arrangement: the origin is the centroid of the $N$ points, and by \Cref{prop:fulldim} it is an interior point of $\mathcal G(S)$ unless $S$ is a $D_4$-image of the natural square.
+This is a consequence of centring the coordinates and carries no information about $S$; it does not distinguish magic squares from other arrangements.
+It is also a statement about the points with unit weights and not about the solid: the centre of mass of the solid $\mathcal G(S)$ need not be the origin, and for $829$ of the $880$ order-four gems it is not (\texttt{anc/solid\_centroid.py}).
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.6\textwidth]{figures/fig_moments.pdf}
+\caption{D\"urer's square as piles of checkers, $s_{ij}$ on cell $(i,j)$, seen from the front of the board in the orientation of the square; each row and column carries $34$ checkers, so the centre of mass of all the checkers lies over the centre $O$ of the board.}
+\label{fig:moments}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.86\textwidth]{figures/fig_weighted_sum.pdf}
+\caption{The dipole moment $\sum z_{ij}\,(x_{ij},y_{ij})$ for D\"urer's square and square \#45: the $16$ vectors $z_{ij}(x_{ij},y_{ij})$ (orange for $z>0$, blue for $z<0$), sorted by direction and laid head to tail, close up at $O$. The tables give the mixed moment $\sum z\,xy$ over the four quadrants of the grid; the totals are $0$ and $60$.}
+\label{fig:weighted}
+\end{figure}
+
+\paragraph{Height-weighted balance is the row and column conditions.}
+Now give each cell $(x_{ij},y_{ij})$ of the grid the signed weight $z_{ij}$; the total weight is $0$.
+Write $R_i=\sum_jz_{ij}$ and $C_j=\sum_iz_{ij}$ for the \emph{row and column excesses}; by \Cref{lem:lines}(3), $S$ is semi-magic if and only if all $R_i$ and $C_j$ vanish.
+For every function $\varphi\colon\R\to\R$, grouping the cells by column and by row gives
+\begin{equation}
+\sum_{i,j}z_{ij}\,\varphi(x_{ij})=\sum_j\varphi(x_j)\,C_j,\qquad
+\sum_{i,j}z_{ij}\,\varphi(y_{ij})=\sum_i\varphi(y_i)\,R_i .
+\label{eq:moments}
+\end{equation}
+Since the functions $\varphi(x)$ on the grid span the indicator functions of the columns, $S$ is semi-magic if and only if both sums vanish for every $\varphi$.
+For $\varphi(t)=t$ this says that the first moments $\sum z_{ij}x_{ij}$ and $\sum z_{ij}y_{ij}$ of the heights vanish; in the multipole language of Rogers and Loly \cite{rogers2005multipole} the \emph{dipole moment} $\sum z\,(x,y)$ of the signed weights is zero.
+\Cref{fig:moments} shows this with the raw entries: since $\sum x_{ij}=\sum y_{ij}=0$, the dipole moment equals $\sum s_{ij}(x_{ij},y_{ij})$, the first moment of a pile of $s_{ij}$ checkers on each cell, and it vanishes because every row and every column carries the same number of checkers.
+\Cref{fig:weighted} shows it in vector form: the sixteen vectors $z_{ij}(x_{ij},y_{ij})$, laid head to tail, close up.
+For $\varphi(t)=t^2$, \eqref{eq:moments} gives Loly's invariant.
+
+\begin{corollary}[Loly \cite{loly2004invariance}]
+\label{cor:loly}
+For every arrangement, $J(S):=\sum_{i,j}s_{ij}(x_{ij}^2+y_{ij}^2)=\sum_jx_j^2C_j+\sum_iy_i^2R_i+\frac{n^2(n^4-1)}{12}$; in particular $J(S)=n^2(n^4-1)/12$ for every semi-magic square.
+\end{corollary}
+
+\begin{proof}
+Substitute $s_{ij}=z_{ij}+\bar s$, apply \eqref{eq:moments} with $\varphi(t)=t^2$ to the first part and \Cref{lem:lines}(2) to $\bar s\sum(x^2+y^2)=\bar s\cdot2Na_n$.
+\end{proof}
+
+\paragraph{The mixed moment is not forced.}
+The diagonal conditions are not of the form \eqref{eq:moments}, and the line conditions do not determine the mixed moment $\sum z\,xy$.
+Over the $880$ order-four magic squares, $|\sum z\,xy|$ takes $48$ distinct values between $0$ and $60$, and it vanishes for $56$ classes (tables in \Cref{fig:weighted}).
+It vanishes whenever $S$ is associative ($s_{ij}+s_{n-1-i,\,n-1-j}=N+1$ for every cell), since then $z$ is odd under $(x,y)\mapsto(-x,-y)$ (\Cref{sec:symmetry}) while $xy$ is even; this accounts for $48$ of the $56$.
+
+\paragraph{Second moments.}
+The second moments of the point set are as rigid as the first: for a semi-magic square they do not depend on the square at all.
+
+\begin{lemma}[Covariance]
+\label{lem:cov}
+The covariance matrix $\Sigma=\frac1N\sum_{i,j}\mathbf p_{ij}\mathbf p_{ij}^{\top}$ of the points of an arrangement $S$ has $\Sigma_{xx}=\Sigma_{yy}=a_n$, $\Sigma_{zz}=b_n$, $\Sigma_{xy}=0$, $N\Sigma_{xz}=\sum_jx_jC_j$ and $N\Sigma_{yz}=\sum_iy_iR_i$. If $S$ is semi-magic, $\Sigma=\operatorname{diag}(a_n,a_n,b_n)$, and $a_n<b_n$ for $n\ge2$.
+\end{lemma}
+
+\begin{proof}
+\Cref{lem:lines}(1)--(2) and \eqref{eq:moments} with $\varphi(t)=t$.
+\end{proof}
+
+So the first and second moments of the point set are the same for all semi-magic squares of order $n$.
+\Cref{sec:symmetry} turns this rigidity into a description of the symmetries of the point set.

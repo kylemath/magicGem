@@ -3,7 +3,7 @@ linear_squares.py -- vertex counts of the gems of all linear ("cyclic") magic sq
     s(i,j) = n*<a1 i + a2 j + alpha> + <b1 i + b2 j + beta> + 1,   <t> = t mod n,
 over all a1,a2,b1,b2,alpha,beta in Z_n that give a magic square (rows, columns, both diagonals), up to D4.
 Exact hulls (gem_geometry.exact_hull).  Usage: python3 linear_squares.py 5 7 9 11   (n = 11 takes about 2-3 min)
-Writes results_linear_squares.json and linear_squares.log.  The Siamese square is linear (Section 5) and is checked
+Writes results_linear_squares.json and linear_squares.log.  The Siamese square is linear (Section 6) and is checked
 to be among the classes with the minimal vertex count for n >= 7.
 """
 import sys, os, json, itertools, time

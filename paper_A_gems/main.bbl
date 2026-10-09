@@ -17,6 +17,12 @@ Imre B{\'a}r{\'a}ny and Christian Buchta.
   concentration of vertices.
 \newblock {\em Mathematische Annalen}, 297:467--497, 1993.
 
+\bibitem{beck2007computing}
+Matthias Beck and Sinai Robins.
+\newblock {\em Computing the Continuous Discretely: Integer-Point Enumeration
+  in Polyhedra}.
+\newblock Undergraduate Texts in Mathematics. Springer, New York, 2007.
+
 \bibitem{beck2010enumeration}
 Matthias Beck and Andrew van Herick.
 \newblock Enumeration of 4 $\times$ 4 magic squares.
@@ -108,8 +114,8 @@ Peter~D. Loly, Ian Cameron, Walter Trump, and Daniel Schindel.
 
 \bibitem{mathewson_companion}
 Kyle~Elliott Mathewson.
-\newblock Magic squares as orthogonality conditions: the permutation moment
-  threshold and random line-sum energies, 2026.
+\newblock {Moments of Magic Squares: Line-Sum Conditions, a Permutation
+  Threshold, and Random Energies}, 2026.
 \newblock Manuscript.
 
 \bibitem{mino2024order6}
@@ -170,6 +176,13 @@ Richard~P. Stanley.
 \newblock Linear homogeneous {D}iophantine equations and magic labelings of
   graphs.
 \newblock {\em Duke Mathematical Journal}, 40:607--632, 1973.
+
+\bibitem{stanley1980decompositions}
+Richard~P. Stanley.
+\newblock Decompositions of rational convex polytopes.
+\newblock In {\em Combinatorial Mathematics, Optimal Designs and Their
+  Applications}, volume~6 of {\em Annals of Discrete Mathematics}, pages
+  333--342. North-Holland, Amsterdam, 1980.
 
 \bibitem{trump_howmany}
 Walter Trump.
