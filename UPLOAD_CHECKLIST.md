@@ -17,7 +17,7 @@ Branch `split-papers-a-b`. Both tarballs build from a clean directory with `pdfl
 
 ## Order
 
-0. **Finish the "Use of AI systems" statement in each paper** (last section before the references; source in `paper_*/sections/ai_statement.tex`, and inline in `paper_A_gems/submission/main.tex`). Each has a bold bracketed `[Author to confirm ...]` sentence that only you can write: which proofs you have checked yourself by hand (both papers), which AI tools were used for v1 to v4 (Paper A). Paper A's "Changes from earlier versions" item (v) says v4's 6x10^7-sample run reported 0 zeros where about 42 were expected; if you find that run's output on your machine, check it before upload. Do not upload while any bracketed text is in either PDF. After editing, ask Claude to rebuild both tarballs.
+0. **Finish the "Use of AI systems" statement in each paper** (last section before the references; source in `paper_*/sections/ai_statement.tex`, and inline in `paper_A_gems/submission/main.tex`). Each has a bold bracketed `[Author to confirm ...]` sentence that only you can write: which proofs you have checked yourself by hand (both papers). Paper A's "Changes from earlier versions" item (v) says v4's 6x10^7-sample run reported 0 zeros where about 42 were expected; if you find that run's output on your machine, check it before upload. Do not upload while any bracketed text is in either PDF. After editing, ask Claude to rebuild both tarballs.
 1. **Read both PDFs once yourself.** Check your name, affiliation and email on page 1. Both use `\today`, so arXiv stamps the date it compiles.
 2. **Submit Paper B first, as a new submission.**
    - Upload `paperB_arxiv.tar.gz`. arXiv picks up `anc/` as ancillary files automatically.
