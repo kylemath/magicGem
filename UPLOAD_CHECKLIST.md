@@ -7,7 +7,7 @@ Branch `split-papers-a-b`. Both tarballs build from a clean directory with `pdfl
 | Title | Magic Gems: A Polyhedral Framework for Magic Squares | Moments of Magic Squares: Line-Sum Conditions, a Permutation Threshold, and Random Energies |
 | arXiv action | **Replace** arXiv:2512.09170 (becomes v5) | **New submission** |
 | PDF | `paper_A_gems/paperA.pdf` (23 pp, 8 figures) | `paper_B_orthogonality/paperB.pdf` (23 pp, 3 figures, 4 tables) |
-| Upload file | `paper_A_gems/paperA_arxiv.tar.gz` (745 KB) | `paper_B_orthogonality/paperB_arxiv.tar.gz` (384 KB) |
+| Upload file | `paper_A_gems/paperA_arxiv.tar.gz` (746 KB) | `paper_B_orthogonality/paperB_arxiv.tar.gz` (384 KB) |
 | Ancillary files | `anc/` at the top of the tarball (65 files) | `anc/` at the top of the tarball (72 files) |
 | Metadata text | `paper_A_gems/submission_notes/arxiv_comments.md` | `paper_B_orthogonality/submission_notes/arxiv_metadata.md` |
 | Abstract length | 1824 characters (limit 1920) | 1740 characters (limit 1920) |
@@ -17,7 +17,7 @@ Branch `split-papers-a-b`. Both tarballs build from a clean directory with `pdfl
 
 ## Order
 
-0. **Finish the "Use of AI systems" statement in each paper** (last section before the references; source in `paper_*/sections/ai_statement.tex`, and inline in `paper_A_gems/submission/main.tex`). Each has a bold bracketed `[Author to confirm ...]` sentence that only you can write: which proofs you have checked yourself by hand (both papers), and which AI tools were used for v1 to v4 (Paper A). Do not upload while any bracketed text is in either PDF. After editing, ask Claude to rebuild both tarballs.
+0. **Finish the "Use of AI systems" statement in each paper** (last section before the references; source in `paper_*/sections/ai_statement.tex`, and inline in `paper_A_gems/submission/main.tex`). Each has a bold bracketed `[Author to confirm ...]` sentence that only you can write: which proofs you have checked yourself by hand (both papers), which AI tools were used for v1 to v4 (Paper A), and, in Paper A's "Changes from earlier versions" paragraph, whether v4's hardware statement and its 460-million-arrangement sampling were accurate. Do not upload while any bracketed text is in either PDF. After editing, ask Claude to rebuild both tarballs.
 1. **Read both PDFs once yourself.** Check your name, affiliation and email on page 1. Both use `\today`, so arXiv stamps the date it compiles.
 2. **Submit Paper B first, as a new submission.**
    - Upload `paperB_arxiv.tar.gz`. arXiv picks up `anc/` as ancillary files automatically.
