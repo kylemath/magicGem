@@ -1,0 +1,15 @@
+\section*{Use of AI systems}
+\label{sec:ai_statement}
+
+This paper was developed with extensive use of generative AI, and we state how so that readers can weigh the results accordingly.
+The author posed the questions, starting from the orthogonality formulation of the line conditions in the companion paper \cite{mathewson_gems}, chose the directions to pursue, and is responsible for the content.
+Large language models (Anthropic's Claude, used through the agentic tool Claude Code in October 2026) did most of the technical work under the author's direction: they proposed and wrote out proofs and constructions, wrote and ran all of the code in \texttt{anc/}, searched the literature, and drafted and revised the text.
+Separate AI sessions then acted as adversarial referees; their objections and the changes made in response are recorded, and the record is available from the author.
+AI systems are not authors of this paper.
+
+Because of this, no result relies on an AI system being correct.
+Every number in the paper is recomputed by the scripts in \texttt{anc/}, in exact arithmetic where stated.
+The computer-assisted results, namely the upper bounds on $k^*(n)$ for $18\le n\le40$ and the count $|L_4|$, were each obtained by two separately written implementations; both implementations of each were themselves written with AI assistance, so they are independent of each other but not of the tools.
+The upper bounds on $k^*(n)$ are backed by a certificate (\texttt{anc/kstar\_certificates.json}) that a standard-library script of under 40 lines checks in exact arithmetic, so that checking them does not require trusting the enumeration code.
+\textbf{[Author to confirm or edit before submission: which proofs the author has checked line by line, for example: ``The author has checked every proof in Sections~3 and~4 and the appendices by hand.'']}
+The bibliography was checked entry by entry against the published sources.

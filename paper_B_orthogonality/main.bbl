@@ -113,7 +113,7 @@ Peter~D. Loly.
 Peter~D. Loly.
 \newblock Franklin squares: A chapter in the scientific studies of magical
   squares.
-\newblock {\em Complex Systems}, 17(2):143--157, 2007.
+\newblock {\em Complex Systems}, 17(2):143--161, 2007.
 
 \bibitem{loly2009spectra}
 Peter~D. Loly, Ian Cameron, Walter Trump, and Daniel Schindel.
@@ -129,7 +129,7 @@ Nathan Mantel.
 \bibitem{mathewson_gems}
 Kyle~Elliott Mathewson.
 \newblock Magic gems: A polyhedral framework for magic squares.
-\newblock arXiv:2512.09170, 2026.
+\newblock arXiv:2512.09170, 2025.
 
 \bibitem{motoo1957}
 Minoru Motoo.
@@ -150,7 +150,7 @@ R.~P. Nordgren.
 \bibitem{nordgren2014spectra}
 R.~P. Nordgren.
 \newblock Spectra of order-4 special magic squares.
-\newblock {\em Linear Algebra and its Applications}, 455:320--331, 2014.
+\newblock {\em Linear Algebra and its Applications}, 458:80--98, 2014.
 
 \bibitem{pickover2002zen}
 Clifford~A. Pickover.
@@ -177,12 +177,6 @@ Richard~P. Stanley.
 \newblock Linear homogeneous {D}iophantine equations and magic labelings of
   graphs.
 \newblock {\em Duke Mathematical Journal}, 40:607--632, 1973.
-
-\bibitem{stanley2012ec1}
-Richard~P. Stanley.
-\newblock {\em Enumerative Combinatorics, Volume 1}, volume~49 of {\em
-  Cambridge Studies in Advanced Mathematics}.
-\newblock Cambridge University Press, Cambridge, 2nd edition, 2012.
 
 \bibitem{thurston1990conway}
 William~P. Thurston.
