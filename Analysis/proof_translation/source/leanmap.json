@@ -1,0 +1,17 @@
+{
+ "S0": {"note": "Definitions plus a check that the n = 5 witness has P_γ = (1 − t)^4."},
+ "S1a": {"note": "Over ℝ; the 1/N normalisation is dropped since it is a constant factor."},
+ "S1b": {"note": "Proved for x_j = j − c with any constant c, so it covers the centred coordinates."},
+ "S1c": {"note": "Proved over any commutative ring, via Mathlib's Taylor expansion at 1."},
+ "S2a": {"note": "Two theorems: the sum of m distinct values in {1..N}, and the full column bound for an injective filling of the grid."},
+ "S2b": {"note": "Lean proves the AM–GM step a(N − a) ≤ N²/4. Combining it with S2a to get ‖γ‖₁ ≤ N²/4 is not formalized; check that line by hand."},
+ "S3a": {"note": "Stated with Mathlib's circle average, which is the same integral reparametrised. Uses Mathlib's theorem that a nonzero integer polynomial has Mahler measure ≥ 1."},
+ "S3b": {"note": "Proved for all |z| ≤ 1, slightly more than needed."},
+ "S3c": {"note": "Same bound as the paper, proved algebraically (a discrete Taylor remainder and the hockey-stick identity) instead of with an integral."},
+ "S3d": {"note": "Holds for all m and K ≥ 1."},
+ "S3e": {"note": "The chord bound. Turning S3b–S3e into the pointwise log bound is a short step that is not separately formalized."},
+ "S3f": {"note": "Exact value −2/β for β ≥ 2."},
+ "S3g": {"note": "Lean checks the arithmetic. Integrating the pointwise bound of S3e around the circle to get I ≤ log L − 2K/β is not formalized; check that line by hand."},
+ "S4a": {"note": "Lean checks the final contradiction from the three inequalities; the inputs are S3g, S2b and S1c."},
+ "S4b": {"note": "For real n ≥ 3."}
+}

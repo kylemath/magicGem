@@ -1,0 +1,413 @@
+<title>Proof Translation: k*(n) Upper Bound</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<script>
+window.MathJax = { tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] }, svg: { fontCache: 'global' }, startup: { typeset: false } };
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/brython@3.12.4/brython.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/brython@3.12.4/brython_stdlib.js"></script>
+<style>
+/* Layout: step rail on the left, one step at a time in five parallel columns (Lean | TeX | Python | English | Demo), like a parallel-text edition. */
+:root {
+  --bg: #f5f6f8; --panel: #ffffff; --ink: #1a1f2b; --muted: #5b6474; --line: #dde1e8;
+  --accent: #2b5d9b; --accent-soft: #e5edf7; --ok: #1f7a4d; --ok-soft: #e1f2e9; --warn: #9a5b00; --warn-soft: #fbefd9;
+  --plot-a: #2b5d9b; --plot-b: #c0562f; --plot-c: #6b7a8f; --code-bg: #f0f2f6;
+  --f-display: "Source Serif 4", Georgia, serif; --f-body: "IBM Plex Sans", system-ui, sans-serif; --f-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #12151b; --panel: #1a1e26; --ink: #e6e9ef; --muted: #9aa3b2; --line: #2c323d;
+  --accent: #7fb0ee; --accent-soft: #1f2c3f; --ok: #6fcf9b; --ok-soft: #173326; --warn: #f0b45a; --warn-soft: #3a2a12;
+  --plot-a: #7fb0ee; --plot-b: #f08a62; --plot-c: #8792a4; --code-bg: #141820; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #12151b; --panel: #1a1e26; --ink: #e6e9ef; --muted: #9aa3b2; --line: #2c323d;
+  --accent: #7fb0ee; --accent-soft: #1f2c3f; --ok: #6fcf9b; --ok-soft: #173326; --warn: #f0b45a; --warn-soft: #3a2a12;
+  --plot-a: #7fb0ee; --plot-b: #f08a62; --plot-c: #8792a4; --code-bg: #141820; color-scheme: dark }
+* { box-sizing: border-box }
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 15px; line-height: 1.55;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 20px 48px }
+.wrap { max-width: 1720px; margin: 0 auto; display: grid; gap: 20px }
+header h1 { font-family: var(--f-display); font-weight: 600; font-size: clamp(1.6rem, 3vw, 2.3rem); margin: 0; text-wrap: balance; line-height: 1.15 }
+header p { margin: 6px 0 0; max-width: 78ch; color: var(--muted) }
+.eyebrow { text-transform: uppercase; letter-spacing: .08em; font-size: 12px; color: var(--accent); font-weight: 600 }
+.claim { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 14px 18px; max-width: 100%; overflow-x: auto }
+.legend { display: flex; flex-wrap: wrap; gap: 10px 18px; font-size: 13px; color: var(--muted); align-items: center }
+.pill { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; padding: 2px 9px; border-radius: 999px; white-space: nowrap }
+.pill.ok { background: var(--ok-soft); color: var(--ok) } .pill.gap { background: var(--warn-soft); color: var(--warn) }
+.main { display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 20px; align-items: start }
+nav.rail { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 12px); display: grid; gap: 2px; max-height: calc(100vh - 24px); overflow: auto }
+nav.rail .part { font-size: 11px; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); margin: 12px 0 4px 8px }
+nav.rail button { all: unset; cursor: pointer; display: grid; grid-template-columns: 34px 1fr auto; gap: 6px; align-items: center; padding: 6px 8px; border-radius: 7px; font-size: 13.5px }
+nav.rail button:hover { background: var(--accent-soft) }
+nav.rail button[aria-current="true"] { background: var(--accent-soft); color: var(--accent); font-weight: 600 }
+nav.rail button:focus-visible { outline: 2px solid var(--accent) }
+nav.rail .sid { font-family: var(--f-mono); font-size: 12px; color: var(--muted) }
+nav.rail .dot { width: 8px; height: 8px; border-radius: 50% } .dot.ok { background: var(--ok) } .dot.gap { background: var(--warn) }
+.stephead { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; align-items: end }
+.stephead h2 { font-family: var(--f-display); font-weight: 600; font-size: 1.5rem; margin: 2px 0 0; text-wrap: balance }
+.navbtns { display: flex; gap: 8px }
+.btn { font: inherit; font-size: 13.5px; border: 1px solid var(--line); background: var(--panel); color: var(--ink); padding: 6px 12px; border-radius: 7px; cursor: pointer }
+.btn:hover { border-color: var(--accent) } .btn:focus-visible { outline: 2px solid var(--accent) } .btn:disabled { opacity: .4; cursor: default }
+.btn.primary { background: var(--accent); color: var(--panel); border-color: var(--accent) }
+.cols { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; margin-top: 14px }
+.col { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; display: flex; flex-direction: column; min-width: 0 }
+.col > h3 { margin: 0; padding: 10px 14px; font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; gap: 8px }
+.col .body { padding: 12px 14px; min-width: 0; overflow-x: auto; flex: 1 }
+pre.code { margin: 0; font-family: var(--f-mono); font-size: 12.3px; line-height: 1.5; white-space: pre-wrap; overflow-wrap: anywhere; background: var(--code-bg); border-radius: 7px; padding: 10px; overflow-x: auto; max-height: 520px; overflow-y: auto }
+.tex mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100% }
+.tex { font-size: 14.5px } .tex p { margin: 0 0 8px }
+.en p { margin: 0 0 10px; max-width: 65ch }
+.small { font-size: 12.5px; color: var(--muted) }
+.linkrow { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; align-items: center }
+a { color: var(--accent) }
+.demo label { display: grid; gap: 2px; font-size: 12.5px; color: var(--muted) }
+.demo input[type=range] { width: 100% }
+.demo .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 8px }
+.demo canvas { width: 100%; height: auto; display: block; background: var(--code-bg); border-radius: 7px }
+.demo .out { font-family: var(--f-mono); font-size: 12.5px; white-space: pre-wrap; margin-top: 8px; font-variant-numeric: tabular-nums }
+.demo .good { color: var(--ok); font-weight: 600 } .demo .bad { color: var(--plot-b); font-weight: 600 }
+.grid { display: grid; gap: 2px; margin: 4px 0 }
+.grid .cell { font-family: var(--f-mono); font-size: 12px; text-align: center; padding: 4px 0; border-radius: 4px; background: var(--code-bg); cursor: pointer; font-variant-numeric: tabular-nums; border: 1px solid transparent }
+.grid .cell.sel { border-color: var(--accent); background: var(--accent-soft) }
+.grid .cell.foot { background: transparent; cursor: default; color: var(--muted) }
+.grid .cell.on { background: var(--accent-soft) }
+.vec { display: flex; flex-wrap: wrap; gap: 4px } .vec input { width: 54px; font-family: var(--f-mono); font-size: 12.5px; padding: 3px 4px; border: 1px solid var(--line); border-radius: 5px; background: var(--panel); color: var(--ink) }
+select { font: inherit; font-size: 13px; padding: 4px 6px; border-radius: 6px; border: 1px solid var(--line); background: var(--panel); color: var(--ink) }
+table.mini { border-collapse: collapse; font-family: var(--f-mono); font-size: 12px; font-variant-numeric: tabular-nums }
+table.mini td, table.mini th { padding: 2px 6px; text-align: right; border-bottom: 1px solid var(--line) }
+textarea.code { width: 100%; resize: vertical; min-height: 220px; max-height: none; border: 1px solid var(--line); color: var(--ink); white-space: pre; overflow: auto; tab-size: 4 }
+textarea.code:focus-visible { outline: 2px solid var(--accent) }
+pre.out-py { margin-top: 8px; background: var(--panel); border: 1px dashed var(--line); min-height: 2.5em; max-height: 320px }
+pre.out-py.err { color: var(--plot-b) }
+details.pre summary { cursor: pointer; font-size: 12.5px; color: var(--muted); margin-top: 8px }
+.footnote { color: var(--muted); font-size: 13px; max-width: 90ch }
+@media (max-width: 1500px) { .cols { grid-template-columns: repeat(2, minmax(0, 1fr)) } .col.demo-col { grid-column: 1 / -1 } }
+@media (max-width: 900px) { .main { grid-template-columns: minmax(0, 1fr) } nav.rail { position: static; max-height: none; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)) } nav.rail .part { grid-column: 1 / -1 } .cols { grid-template-columns: minmax(0, 1fr) } }
+@media (prefers-reduced-motion: no-preference) { .cols { transition: opacity .15s } }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Paper B · Theorem 3.7(a) · proof translation</div>
+    <h1>Why k*(n) ≤ √(πe(n−1) log(n⁴/4))</h1>
+    <p>The proof of the upper bound, split into fifteen steps. Each step is shown five ways: a Lean 4 statement checked against Mathlib, the TeX the paper uses, Python you can edit and run here, plain English, and a live demo on real numbers. Use the arrow keys or the step list to go through it in order.</p>
+  </header>
+
+  <div class="claim tex" id="claim">
+    $$k^*(n)\le\Bigl\lfloor\sqrt{\pi e\,(n-1)\log(n^4/4)}\Bigr\rfloor\le 2\sqrt{\pi e}\,\sqrt{n\log n}\qquad(n\ge3)$$
+  </div>
+
+  <div class="legend">
+    <span><span class="pill ok">Lean: proved</span> Lean accepts the step's statement with a complete proof (no <code>sorry</code>).</span>
+    <span><span class="pill gap">Lean: stated only</span> The statement compiles but its proof is left as <code>sorry</code>; check this step by hand.</span>
+    <span>__LEANVERSION__</span>
+  </div>
+
+  <div class="main">
+    <nav class="rail" id="rail" aria-label="Proof steps"></nav>
+    <section aria-live="polite">
+      <div class="stephead">
+        <div><div class="eyebrow" id="part"></div><h2 id="title"></h2></div>
+        <div class="navbtns"><button class="btn" id="prev">← Previous</button><button class="btn primary" id="next">Next →</button></div>
+      </div>
+      <div class="cols" id="cols">
+        <div class="col"><h3>Lean 4 <span id="leanpill"></span></h3><div class="body"><textarea class="code" id="lean" spellcheck="false" aria-label="Lean code"></textarea>
+          <div class="linkrow"><button class="btn primary" id="leanrun" hidden>Check ▶</button><a class="btn" id="leanopen" href="#" target="_blank" rel="noopener">Check in Lean web editor ↗</a><button class="btn" id="leancopy">Copy</button><button class="btn" id="leanreset">Reset</button></div>
+          <pre class="code out-py" id="leanout" aria-live="polite" hidden></pre>
+          <div class="small" id="leanhelp">Lean with Mathlib needs a server, so it cannot run inside this page. Edit here, then the button sends your edited file to the Lean web editor. Run the page locally with <code>server.py</code> to check Lean right here.</div>
+          <div class="small" id="leannote"></div></div></div>
+        <div class="col"><h3>TeX <button class="btn" id="texsrc" style="font-size:11px;padding:2px 8px">Source</button></h3><div class="body"><div class="tex" id="tex"></div><pre class="code" id="texraw" hidden></pre></div></div>
+        <div class="col"><h3>Python <span class="small" id="pystate">loading…</span></h3><div class="body"><textarea class="code" id="py" spellcheck="false" aria-label="Python code"></textarea>
+          <div class="linkrow"><button class="btn primary" id="pyrun">Run ▶</button><button class="btn" id="pyreset">Reset</button><span class="small">Ctrl+Enter runs</span></div>
+          <pre class="code out-py" id="pyout" aria-live="polite"></pre>
+          <details class="pre"><summary>Shared setup code (runs first)</summary><pre class="code" id="prelude"></pre></details></div></div>
+        <div class="col"><h3>English</h3><div class="body en" id="en"></div></div>
+        <div class="col demo-col"><h3>Demo</h3><div class="body demo" id="demo"></div></div>
+      </div>
+    </section>
+  </div>
+
+  <p class="footnote"><strong>What Lean does not check yet.</strong> Each step is checked on its own. Three short joins between steps are not formalized: combining S2a and S2b into ‖γ‖₁ ≤ n⁴/4, turning S3b–S3e into the pointwise bound on log|P|, and integrating that bound around the circle in S3g. Those are the lines to check by hand; the step notes under each Lean panel say where.</p>
+  <p class="footnote">The Lean editor link opens the step's file on live.lean-lang.org, which runs a recent Mathlib; small name changes between Mathlib versions can make a file that compiled here show an error there. The page covers part (a) of Theorem 3.7 only; parts (b) and (c) are not included yet. Source: <code>paper_B_orthogonality/sections/theory.tex</code>, Lemmas 3.1, 3.8, 3.9.</p>
+</div>
+
+<script type="text/python" id="pyrunner">
+from browser import window
+import sys, traceback
+
+def run_code(src):
+    out = []
+    class _W:
+        def write(self, s): out.append(s)
+        def flush(self): pass
+    old = (sys.stdout, sys.stderr)
+    sys.stdout = sys.stderr = _W()
+    ok = True
+    try:
+        exec(src, {"__name__": "__main__"})
+    except BaseException:
+        traceback.print_exc()
+        ok = False
+    finally:
+        sys.stdout, sys.stderr = old
+    return [ok, "".join(out)]
+
+window.pyRunCode = run_code
+</script>
+<script>
+const STEPS = __STEPS__;
+const WIT = __WITNESSES__;
+const $ = id => document.getElementById(id);
+let cur = 0;
+try { const s = parseInt(localStorage.getItem('pt-step')); if (s >= 0 && s < STEPS.length) cur = s; } catch (e) {}
+try { const h = location.hash.slice(1); const k = STEPS.findIndex(s => s.id === h); if (k >= 0) cur = k; } catch (e) {}
+
+// ---------- shared math helpers ----------
+const fact = k => { let r = 1; for (let i = 2; i <= k; i++) r *= i; return r; };
+function comb(n, k) { if (k < 0 || k > n) return 0; let r = 1; for (let i = 1; i <= k; i++) r = r * (n - k + i) / i; return Math.round(r); }
+function combBig(n, k) { if (k < 0 || k > n) return 0n; let r = 1n; for (let i = 1n; i <= BigInt(k); i++) r = r * (BigInt(n) - BigInt(k) + i) / i; return r; }
+function taylorAt1(g) { return g.map((_, r) => g.reduce((a, gj, j) => a + BigInt(gj) * combBig(j, r), 0n)); }
+function orderAt1(g) { if (g.every(v => v === 0)) return Infinity; const B = taylorAt1(g); let K = 0; while (K < B.length && B[K] === 0n) K++; return K; }
+function polyAbs(g, th) { let re = 0, im = 0; for (let j = 0; j < g.length; j++) { re += g[j] * Math.cos(2 * Math.PI * th * j); im += g[j] * Math.sin(2 * Math.PI * th * j); } return Math.hypot(re, im); }
+const L1 = g => g.reduce((a, v) => a + Math.abs(v), 0);
+function roots(g) { // Durand-Kerner on the trimmed polynomial
+  let c = g.slice(); while (c.length && c[c.length - 1] === 0) c.pop(); const d = c.length - 1; if (d < 1) return [];
+  const a = c.map(v => v / c[d]); let z = []; for (let i = 0; i < d; i++) { const ang = 2 * Math.PI * i / d + 0.4; z.push([0.9 * Math.cos(ang), 0.9 * Math.sin(ang)]); }
+  const mul = (p, q) => [p[0] * q[0] - p[1] * q[1], p[0] * q[1] + p[1] * q[0]], div = (p, q) => { const m = q[0] * q[0] + q[1] * q[1]; return [(p[0] * q[0] + p[1] * q[1]) / m, (p[1] * q[0] - p[0] * q[1]) / m]; };
+  for (let it = 0; it < 500; it++) { for (let i = 0; i < d; i++) { let v = [1, 0]; for (let k = d - 1; k >= 0; k--) v = [v[0] * z[i][0] - v[1] * z[i][1] + a[k], v[0] * z[i][1] + v[1] * z[i][0]]; let den = [1, 0]; for (let k = 0; k < d; k++) if (k !== i) den = mul(den, [z[i][0] - z[k][0], z[i][1] - z[k][1]]); const s = div(v, den); z[i] = [z[i][0] - s[0], z[i][1] - s[1]]; } }
+  return { z, lead: c[d] };
+}
+function css(v) { return getComputedStyle(document.documentElement).getPropertyValue(v).trim(); }
+
+// ---------- tiny plotting ----------
+function plot(canvas, opts) {
+  const dpr = window.devicePixelRatio || 1, W = canvas.clientWidth || 300, H = Math.round(W * (opts.aspect || 0.62));
+  canvas.width = W * dpr; canvas.height = H * dpr; canvas.style.height = H + 'px';
+  const c = canvas.getContext('2d'); c.scale(dpr, dpr); c.clearRect(0, 0, W, H);
+  const pad = { l: 44, r: 10, t: 10, b: 26 }, [x0, x1] = opts.x, [y0, y1] = opts.y;
+  const X = x => pad.l + (x - x0) / (x1 - x0) * (W - pad.l - pad.r), Y = y => H - pad.b - (y - y0) / (y1 - y0) * (H - pad.t - pad.b);
+  c.font = '11px ' + css('--f-mono'); c.fillStyle = css('--muted'); c.strokeStyle = css('--line'); c.lineWidth = 1;
+  (opts.yt || []).forEach(t => { c.beginPath(); c.moveTo(pad.l, Y(t)); c.lineTo(W - pad.r, Y(t)); c.stroke(); c.textAlign = 'right'; c.fillText(opts.yf ? opts.yf(t) : t, pad.l - 4, Y(t) + 4); });
+  (opts.xt || []).forEach(t => { c.textAlign = 'center'; c.fillText(opts.xf ? opts.xf(t) : t, X(t), H - 8); });
+  (opts.fills || []).forEach(f => { c.fillStyle = f.color; c.globalAlpha = 0.25; c.beginPath(); c.moveTo(X(f.pts[0][0]), Y(f.base)); f.pts.forEach(p => c.lineTo(X(p[0]), Y(Math.max(y0, Math.min(y1, p[1]))))); c.lineTo(X(f.pts[f.pts.length - 1][0]), Y(f.base)); c.closePath(); c.fill(); c.globalAlpha = 1; });
+  (opts.lines || []).forEach(l => { c.strokeStyle = l.color; c.lineWidth = l.w || 2; c.setLineDash(l.dash || []); c.beginPath(); let st = false; l.pts.forEach(p => { if (!isFinite(p[1])) { st = false; return; } const yy = Y(Math.max(y0 - (y1 - y0), Math.min(y1 + (y1 - y0), p[1]))); if (!st) { c.moveTo(X(p[0]), yy); st = true; } else c.lineTo(X(p[0]), yy); }); c.stroke(); c.setLineDash([]); });
+  (opts.dots || []).forEach(d => { c.fillStyle = d.color; d.pts.forEach(p => { c.beginPath(); c.arc(X(p[0]), Y(p[1]), d.r || 3, 0, 7); if (d.hollow) { c.strokeStyle = d.color; c.lineWidth = 1.5; c.stroke(); } else c.fill(); }); });
+  (opts.labels || []).forEach(t => { c.fillStyle = t.color; c.textAlign = t.align || 'left'; c.font = '12px ' + css('--f-body'); c.fillText(t.text, X(t.x), Y(t.y)); });
+  return { X, Y };
+}
+const linspace = (a, b, m) => Array.from({ length: m }, (_, i) => a + (b - a) * i / (m - 1));
+const fmt = (v, d = 3) => Number.isFinite(v) ? (Math.abs(v) >= 1e5 || (Math.abs(v) < 1e-3 && v !== 0) ? v.toExponential(2) : (+v.toFixed(d)).toString()) : '∞';
+function el(html) { const t = document.createElement('div'); t.innerHTML = html; return t; }
+
+// Example γ vectors shared by several demos (all real column-deviation vectors from the paper).
+const EXAMPLES = {
+  'n=5 witness, γ=(1,−4,6,−4,1)': [1, -4, 6, -4, 1],
+  'n=14 witness (k*=12)': WIT['14'].gamma, 'n=16 witness (k*=14)': WIT['16'].gamma,
+  'n=18 witness (k*=15)': WIT['18'].gamma, 'n=20 witness (k*=16)': WIT['20'].gamma,
+  'Thue–Morse, n=8': [1, -1, -1, 1, -1, 1, 1, -1],
+  'Random-looking, n=6': [5, -3, 0, 2, -7, 3]
+};
+function exampleSelect(id, def) { return `<label>Vector γ<select id="${id}">${Object.keys(EXAMPLES).map(k => `<option${k === def ? ' selected' : ''}>${k}</option>`).join('')}</select></label>`; }
+
+// ---------- demos ----------
+const DEMOS = {
+  grid(root) {
+    const sq0 = [[1, 22, 11, 24, 7], [23, 3, 12, 2, 25], [18, 6, 19, 17, 5], [4, 21, 14, 10, 16], [20, 9, 15, 8, 13]];
+    let S = sq0.map(r => r.slice()), sel = null; const n = 5, N = 25, M = 65;
+    root.innerHTML = `<div class="small">The order-5 witness of Appendix C. Click two cells to swap them.</div><div class="grid" id="g"></div><div class="row"><button class="btn" id="rs">Reset</button><button class="btn" id="sh">Shuffle</button></div><div class="out" id="o"></div>`;
+    const draw = () => {
+      const g = root.querySelector('#g'); g.style.gridTemplateColumns = `repeat(${n + 1}, minmax(0,1fr))`; g.innerHTML = '';
+      S.forEach((r, i) => { r.forEach((v, j) => { const d = document.createElement('div'); d.className = 'cell' + (sel && sel[0] === i && sel[1] === j ? ' sel' : ''); d.textContent = v; d.tabIndex = 0; d.onclick = () => { if (!sel) sel = [i, j]; else { const t = S[i][j]; S[i][j] = S[sel[0]][sel[1]]; S[sel[0]][sel[1]] = t; sel = null; } draw(); }; g.appendChild(d); }); const f = document.createElement('div'); f.className = 'cell foot'; f.textContent = 'ρ ' + (r.reduce((a, b) => a + b) - M); g.appendChild(f); });
+      const gam = [...Array(n).keys()].map(j => S.reduce((a, r) => a + r[j], 0) - M);
+      gam.forEach(v => { const f = document.createElement('div'); f.className = 'cell foot'; f.textContent = 'γ ' + v; g.appendChild(f); }); g.appendChild(Object.assign(document.createElement('div'), { className: 'cell foot' }));
+      const K = orderAt1(gam), rho = S.map(r => r.reduce((a, b) => a + b) - M), Kr = orderAt1(rho);
+      root.querySelector('#o').innerHTML = `γ = (${gam.join(', ')})   Σγ = ${gam.reduce((a, b) => a + b)}\nP_γ(t) = ${gam.map((g, j) => g ? `${g}t^${j}` : '').filter(Boolean).join(' + ').replace(/\+ -/g, '− ') || '0'}\nDegree-k conditions hold for k ≤ ${Math.min(K, Kr) === Infinity ? '∞ (semi-magic)' : Math.min(K, Kr) - 1}\n` + (K === Infinity && Kr === Infinity ? '<span class="good">semi-magic</span>' : '<span class="bad">not semi-magic</span>');
+    };
+    root.querySelector('#rs').onclick = () => { S = sq0.map(r => r.slice()); sel = null; draw(); };
+    root.querySelector('#sh').onclick = () => { const a = S.flat(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1));[a[i], a[j]] = [a[j], a[i]]; } S = [...Array(n)].map((_, i) => a.slice(i * n, i * n + n)); sel = null; draw(); };
+    draw();
+  },
+  colfun(root) {
+    const S = [[1, 22, 11, 24, 7], [23, 3, 12, 2, 25], [18, 6, 19, 17, 5], [4, 21, 14, 10, 16], [20, 9, 15, 8, 13]], n = 5;
+    let phi = [2, -1, 0, 1, 3];
+    root.innerHTML = `<div class="small">Pick a weight φ(j) for each column. The cell-by-cell sum (25 terms) always equals the column sum (5 terms).</div><div class="vec" id="ph"></div><div class="out" id="o"></div>`;
+    const ph = root.querySelector('#ph'); phi.forEach((v, j) => { const i = document.createElement('input'); i.type = 'number'; i.value = v; i.id = 'phi' + j; i.setAttribute('aria-label', 'phi ' + j); i.oninput = () => { phi[j] = +i.value || 0; upd(); }; ph.appendChild(i); });
+    const upd = () => { const z = S.map(r => r.map(v => v - 13)); const gam = [0, 1, 2, 3, 4].map(j => z.reduce((a, r) => a + r[j], 0)); let lhs = 0; z.forEach(r => r.forEach((v, j) => lhs += phi[j] * v)); const rhs = gam.reduce((a, g, j) => a + phi[j] * g, 0); root.querySelector('#o').innerHTML = `Σ_ij φ(j) z_ij = ${lhs}   (25 terms)\nΣ_j φ(j) γ_j   = ${rhs}   (5 terms, γ = ${gam.join(',')})\n` + (lhs === rhs ? '<span class="good">equal</span>' : '<span class="bad">different</span>'); };
+    upd();
+  },
+  basis(root) {
+    root.innerHTML = `<div class="row">${exampleSelect('ex', 'n=5 witness, γ=(1,−4,6,−4,1)')}<label>k<input type="range" id="k" min="0" max="8" value="3"></label></div><div id="t"></div><div class="small">Both columns vanish for exactly the same values of k: the zero rows line up.</div>`;
+    const upd = () => { const g = EXAMPLES[root.querySelector('#ex').value]; const n = g.length, k = Math.min(+root.querySelector('#k').value, n - 1); const c = (n - 1) / 2; let h = '<table class="mini"><tr><th>m</th><th>Σ x_j^m γ_j</th><th>Σ C(j,m) γ_j</th></tr>'; for (let m = 0; m <= k; m++) { const pm = g.reduce((a, v, j) => a + Math.pow(j - c, m) * v, 0), bm = g.reduce((a, v, j) => a + comb(j, m) * v, 0); h += `<tr><td>${m}</td><td>${fmt(pm, 2)}</td><td>${bm}</td></tr>`; } root.querySelector('#t').innerHTML = h + '</table>'; };
+    root.querySelector('#ex').onchange = upd; root.querySelector('#k').oninput = upd; upd();
+  },
+  taylor(root) {
+    root.innerHTML = `<div class="row">${exampleSelect('ex', 'n=14 witness (k*=12)')}</div><div class="vec" id="v"></div><div class="out" id="o"></div><canvas id="c"></canvas><div class="small">Edit any entry: the zero of order K at t = 1 is destroyed unless the Taylor coefficients stay 0.</div>`;
+    let g = [];
+    const load = () => { g = EXAMPLES[root.querySelector('#ex').value].slice(); const v = root.querySelector('#v'); v.innerHTML = ''; g.forEach((x, j) => { const i = document.createElement('input'); i.type = 'number'; i.value = x; i.id = 'tg' + j; i.setAttribute('aria-label', 'gamma ' + j); i.oninput = () => { g[j] = Math.round(+i.value || 0); upd(); }; v.appendChild(i); }); upd(); };
+    const upd = () => { const B = taylorAt1(g), K = orderAt1(g); root.querySelector('#o').innerHTML = `B_r = Σ_j C(j,r) γ_j : ${B.slice(0, Math.min(B.length, (K === Infinity ? B.length : K + 2))).join(', ')}${B.length > K + 2 ? ', …' : ''}\nOrder of the zero at t = 1:  K = ${K === Infinity ? '∞ (γ = 0)' : K}`;
+      const xs = linspace(0, 2, 300), ys = xs.map(t => g.reduce((a, v, j) => a + v * Math.pow(t, j), 0)); const m = Math.max(1e-9, ...ys.map(Math.abs).filter(isFinite)); const lim = Math.min(m, Math.max(...ys.slice(0, 160).map(Math.abs)) * 1.2 || 1);
+      plot(root.querySelector('#c'), { x: [0, 2], y: [-lim, lim], xt: [0, 0.5, 1, 1.5, 2], yt: [-lim, 0, lim], yf: v => fmt(v, 1), lines: [{ pts: xs.map((t, i) => [t, ys[i]]), color: css('--plot-a') }], dots: [{ pts: [[1, 0]], color: css('--plot-b'), r: 4 }], labels: [{ x: 1.03, y: lim * 0.8, text: 'P_γ(t) is flat at t = 1', color: css('--muted') }] }); };
+    root.querySelector('#ex').onchange = load; load();
+  },
+  major(root) {
+    const S = [[1, 22, 11, 24, 7], [23, 3, 12, 2, 25], [18, 6, 19, 17, 5], [4, 21, 14, 10, 16], [20, 9, 15, 8, 13]], n = 5, N = 25, M = 65; let J = new Set([2]);
+    root.innerHTML = `<div class="small">Click column headers to choose the set J of columns.</div><div class="grid" id="g"></div><div class="out" id="o"></div>`;
+    const upd = () => { const g = root.querySelector('#g'); g.style.gridTemplateColumns = `repeat(${n},minmax(0,1fr))`; g.innerHTML = ''; for (let j = 0; j < n; j++) { const h = document.createElement('div'); h.className = 'cell' + (J.has(j) ? ' sel' : ''); h.textContent = 'col ' + j; h.onclick = () => { J.has(j) ? J.delete(j) : J.add(j); upd(); }; g.appendChild(h); } S.forEach(r => r.forEach((v, j) => { const d = document.createElement('div'); d.className = 'cell' + (J.has(j) ? ' on' : ''); d.style.cursor = 'default'; d.textContent = v; g.appendChild(d); }));
+      const p = J.size, sum = [...J].reduce((a, j) => a + S.reduce((b, r) => b + r[j], 0), 0), dev = sum - p * M, maxs = p * n * (2 * N - p * n + 1) / 2, b = p * n * (N - p * n) / 2;
+      root.querySelector('#o').innerHTML = `p = ${p} columns, ${p * n} cells\nsum of their entries       = ${sum}\nsum of the ${p * n} largest values = ${maxs}\nΣ_J γ_j = ${sum} − ${p}·${M} = ${dev}\nbound pn(N−pn)/2           = ${b}   ` + (Math.abs(dev) <= b ? '<span class="good">|Σ_J γ_j| ≤ bound</span>' : '<span class="bad">violated</span>'); };
+    upd();
+  },
+  l1(root) {
+    root.innerHTML = `<label>n<input type="range" id="n" min="3" max="20" value="5"></label><canvas id="c"></canvas><div class="out" id="o"></div>`;
+    const upd = () => { const n = +root.querySelector('#n').value, N = n * n; const ps = [...Array(n + 1).keys()]; const f = p => p * n * (N - p * n); const best = Math.max(...ps.map(f));
+      plot(root.querySelector('#c'), { x: [0, n], y: [0, N * N / 4 * 1.1], xt: ps.filter(p => n <= 10 || p % 2 === 0), yt: [0, N * N / 4], yf: v => fmt(v, 0), lines: [{ pts: linspace(0, n, 200).map(p => [p, f(p)]), color: css('--plot-c'), w: 1.5 }, { pts: [[0, N * N / 4], [n, N * N / 4]], color: css('--plot-b'), dash: [5, 4] }], dots: [{ pts: ps.map(p => [p, f(p)]), color: css('--plot-a') }], labels: [{ x: 0.2, y: N * N / 4 * 1.04, text: 'N²/4 = n⁴/4', color: css('--plot-b') }] });
+      root.querySelector('#o').textContent = `max over p of pn(N−pn) = ${best}  ≤  N²/4 = ${N * N / 4}\nSo every arrangement of order ${n} has ‖γ‖₁ ≤ ${best}.`; };
+    root.querySelector('#n').oninput = upd; upd();
+  },
+  mahler(root) {
+    root.innerHTML = `<div class="row">${exampleSelect('ex', 'Random-looking, n=6')}</div><canvas id="c"></canvas><div class="out" id="o"></div><div class="small">Roots of P_γ in the complex plane; the dashed circle is |z| = 1. Only roots outside it count.</div>`;
+    const upd = () => { const g = EXAMPLES[root.querySelector('#ex').value]; const R = roots(g); const zs = R.z || []; const M = Math.abs(R.lead) * zs.reduce((a, z) => a * Math.max(1, Math.hypot(z[0], z[1])), 1);
+      const m = 4000; let s = 0; for (let i = 0; i < m; i++) { const v = polyAbs(g, (i + 0.5) / m - 0.5); s += Math.log(Math.max(v, 1e-300)); } s /= m;
+      const ext = Math.max(1.6, ...zs.map(z => Math.max(Math.abs(z[0]), Math.abs(z[1])) * 1.15)); const circ = linspace(0, 2 * Math.PI, 120).map(a => [Math.cos(a), Math.sin(a)]);
+      plot(root.querySelector('#c'), { aspect: 0.75, x: [-ext, ext], y: [-ext * 0.75, ext * 0.75], xt: [-1, 0, 1], yt: [-1, 0, 1], lines: [{ pts: circ, color: css('--plot-c'), dash: [4, 4], w: 1.5 }], dots: [{ pts: zs.map(z => [z[0], z[1]]), color: css('--plot-a'), r: 4 }] });
+      root.querySelector('#o').innerHTML = `leading coefficient a = ${R.lead}\nMahler measure M(P) = |a|·Π max(1,|α|) = ${fmt(M)}\nlog M(P)            = ${fmt(Math.log(M))}\nmean of log|P| on the circle (numerical) = ${fmt(s)}\n` + (s > -1e-6 ? '<span class="good">≥ 0, as S3a says</span>' : '<span class="bad">negative?</span>') + `\n(zeros at t = 1 sit on the circle and contribute 1)`; };
+    root.querySelector('#ex').onchange = upd; upd();
+  },
+  circle(root) {
+    root.innerHTML = `<div class="row">${exampleSelect('ex', 'n=14 witness (k*=12)')}<label><span>log scale</span><input type="checkbox" id="lg" checked></label></div><canvas id="c"></canvas><div class="out" id="o"></div>`;
+    const upd = () => { const g = EXAMPLES[root.querySelector('#ex').value], L = L1(g), lg = root.querySelector('#lg').checked; const th = linspace(-0.5, 0.5, 800), v = th.map(t => polyAbs(g, t)); const tr = y => lg ? Math.log10(Math.max(y, 1e-12)) : y; const mx = Math.max(...v);
+      plot(root.querySelector('#c'), { x: [-0.5, 0.5], y: lg ? [-8, Math.log10(L) + 0.5] : [0, L * 1.1], xt: [-0.5, 0, 0.5], yt: lg ? [-8, -4, 0, Math.round(Math.log10(L))] : [0, L], yf: y => lg ? '1e' + y : fmt(y, 0), lines: [{ pts: th.map((t, i) => [t, tr(v[i])]), color: css('--plot-a') }, { pts: [[-0.5, tr(L)], [0.5, tr(L)]], color: css('--plot-b'), dash: [5, 4] }], labels: [{ x: -0.48, y: (lg ? tr(L) : L) * (lg ? 1 : 1) + (lg ? 0.2 : 0), text: 'L = ‖γ‖₁', color: css('--plot-b') }] });
+      root.querySelector('#o').innerHTML = `θ on the horizontal axis, z = e^{2πiθ}\nL = ${L}, max |P(z)| = ${fmt(mx, 1)}  ` + (mx <= L + 1e-9 ? '<span class="good">≤ L</span>' : '<span class="bad">> L</span>'); };
+    root.querySelector('#ex').onchange = upd; root.querySelector('#lg').onchange = upd; upd();
+  },
+  near1(root) {
+    root.innerHTML = `<div class="row">${exampleSelect('ex', 'n=14 witness (k*=12)')}<label>K used in the bound<input type="range" id="k" min="1" max="20" value="12"></label></div><canvas id="c"></canvas><div class="out" id="o"></div><div class="small">Log scale. Blue: |P(e^{2πiθ})|. Orange: L·C(n−1,K)|z−1|^K. The bound is valid only for K up to the true order of the zero.</div>`;
+    const upd = () => { const g = EXAMPLES[root.querySelector('#ex').value], n = g.length, L = L1(g), Ktrue = orderAt1(g); const ks = root.querySelector('#k'); ks.max = n - 1; const K = Math.min(+ks.value, n - 1);
+      const th = linspace(-0.5, 0.5, 801), v = th.map(t => polyAbs(g, t)), b = th.map(t => L * comb(n - 1, K) * Math.pow(2 * Math.abs(Math.sin(Math.PI * t)), K)); const lg = y => Math.log10(Math.max(y, 1e-14));
+      const ok = v.every((x, i) => x <= b[i] * (1 + 1e-9) + 1e-9);
+      plot(root.querySelector('#c'), { x: [-0.5, 0.5], y: [-12, Math.log10(L * comb(n - 1, K)) + 1], xt: [-0.5, -0.25, 0, 0.25, 0.5], yt: [-12, -6, 0, 6], yf: y => '1e' + y, lines: [{ pts: th.map((t, i) => [t, lg(b[i])]), color: css('--plot-b'), dash: [5, 4] }, { pts: th.map((t, i) => [t, lg(v[i])]), color: css('--plot-a') }] });
+      root.querySelector('#o').innerHTML = `true order of the zero at 1: K = ${Ktrue}\nusing K = ${K}: ` + (K <= Ktrue ? (ok ? '<span class="good">bound holds on the whole circle</span>' : '<span class="bad">bound fails</span>') : (ok ? 'bound happens to hold here' : '<span class="bad">bound fails: K exceeds the true order</span>')); };
+    root.querySelector('#ex').onchange = upd; root.querySelector('#k').oninput = upd; upd();
+  },
+  binom(root) {
+    root.innerHTML = `<label>n<input type="range" id="n" min="3" max="60" value="20"></label><canvas id="c"></canvas><div class="out" id="o"></div>`;
+    const upd = () => { const n = +root.querySelector('#n').value; const Ks = [...Array(n - 1).keys()].map(k => k + 1); const a = Ks.map(K => Math.log10(comb(n - 1, K))), b = Ks.map(K => K * Math.log10(Math.E * (n - 1) / K)); const top = Math.max(...b) * 1.08;
+      plot(root.querySelector('#c'), { x: [1, n - 1], y: [0, top], xt: [1, Math.round((n - 1) / 2), n - 1], yt: [0, Math.round(top / 2), Math.round(top)], yf: y => '1e' + y, lines: [{ pts: Ks.map((K, i) => [K, b[i]]), color: css('--plot-b'), dash: [5, 4] }], dots: [{ pts: Ks.map((K, i) => [K, a[i]]), color: css('--plot-a'), r: 2.5 }] });
+      root.querySelector('#o').innerHTML = `dots: C(n−1, K)    dashed: (e(n−1)/K)^K    (log scale)\n` + (a.every((x, i) => x <= b[i] + 1e-9) ? '<span class="good">C(n−1,K) ≤ (e(n−1)/K)^K for every K</span>' : '<span class="bad">fails</span>'); };
+    root.querySelector('#n').oninput = upd; upd();
+  },
+  chord(root) {
+    root.innerHTML = `<label>θ<input type="range" id="t" min="-50" max="50" value="12"></label><canvas id="c"></canvas><div class="out" id="o"></div>`;
+    const upd = () => { const t = +root.querySelector('#t').value / 100; const xs = linspace(-0.5, 0.5, 300);
+      plot(root.querySelector('#c'), { x: [-0.5, 0.5], y: [0, Math.PI], xt: [-0.5, 0, 0.5], yt: [0, 1, 2, 3], lines: [{ pts: xs.map(x => [x, 2 * Math.PI * Math.abs(x)]), color: css('--plot-b'), dash: [5, 4] }, { pts: xs.map(x => [x, 2 * Math.abs(Math.sin(Math.PI * x))]), color: css('--plot-a') }], dots: [{ pts: [[t, 2 * Math.abs(Math.sin(Math.PI * t))]], color: css('--plot-a'), r: 4 }, { pts: [[t, 2 * Math.PI * Math.abs(t)]], color: css('--plot-b'), r: 4 }] });
+      root.querySelector('#o').textContent = `θ = ${t}\nchord |e^{2πiθ} − 1| = ${fmt(2 * Math.abs(Math.sin(Math.PI * t)))}\narc   2π|θ|          = ${fmt(2 * Math.PI * Math.abs(t))}`; };
+    root.querySelector('#t').oninput = upd; upd();
+  },
+  integral(root) {
+    root.innerHTML = `<label>β<input type="range" id="b" min="20" max="400" value="60"></label><canvas id="c"></canvas><div class="out" id="o"></div>`;
+    const upd = () => { const beta = +root.querySelector('#b').value / 10; const xs = linspace(-0.5, 0.5, 1001); const f = x => Math.log(Math.min(1, beta * Math.abs(x)));
+      const m = 200000; let s = 0; for (let i = 0; i < m; i++) s += f(-0.5 + (i + 0.5) / m); s /= m;
+      plot(root.querySelector('#c'), { x: [-0.5, 0.5], y: [-5, 0.5], xt: [-0.5, -1 / beta, 1 / beta, 0.5].filter((v, i, a) => i === 0 || i === 3 || 1 / beta < 0.4), xf: v => Math.abs(Math.abs(v) - 1 / beta) < 1e-9 ? (v < 0 ? '−1/β' : '1/β') : v, yt: [-4, -2, 0], fills: [{ pts: xs.map(x => [x, f(x)]), base: 0, color: css('--plot-a') }], lines: [{ pts: xs.map(x => [x, f(x)]), color: css('--plot-a') }] });
+      root.querySelector('#o').innerHTML = `β = ${beta}\nnumerical integral = ${fmt(s, 5)}\n−2/β               = ${fmt(-2 / beta, 5)}`; };
+    root.querySelector('#b').oninput = upd; upd();
+  },
+  combine(root) {
+    root.innerHTML = `<div class="row">${exampleSelect('ex', 'n=20 witness (k*=16)')}</div><div class="out" id="o"></div><canvas id="c"></canvas><div class="small">Bars: the order K of the zero at 1 (blue) against the lemma's ceiling √(πe(n−1) log L) (orange).</div>`;
+    const upd = () => { const g = EXAMPLES[root.querySelector('#ex').value], n = g.length, L = L1(g), K = orderAt1(g); const cap = Math.sqrt(Math.PI * Math.E * (n - 1) * Math.log(L)); const beta = 2 * Math.PI * Math.E * (n - 1) / K;
+      const m = 20000; let s = 0; for (let i = 0; i < m; i++) s += Math.log(Math.max(polyAbs(g, (i + 0.5) / m - 0.5), 1e-300)); s /= m;
+      root.querySelector('#o').innerHTML = `n = ${n}, K = ${K}, L = ‖γ‖₁ = ${L}\n0 ≤ mean log|P| = ${fmt(s)}  ≤  log L − 2K/β = ${fmt(Math.log(L))} − ${fmt(2 * K / beta)} = ${fmt(Math.log(L) - 2 * K / beta)}\nK² = ${K * K}  ≤  πe(n−1) log L = ${fmt(cap * cap, 1)}  ` + (K * K <= cap * cap ? '<span class="good">holds</span>' : '<span class="bad">fails</span>');
+      plot(root.querySelector('#c'), { aspect: 0.35, x: [0, 2], y: [0, cap * 1.2], xt: [], yt: [0, Math.round(cap)], lines: [{ pts: [[0.4, 0], [0.4, K]], color: css('--plot-a'), w: 26 }, { pts: [[1.4, 0], [1.4, cap]], color: css('--plot-b'), w: 26 }], labels: [{ x: 0.4, y: K + cap * 0.05, text: 'K = ' + K, color: css('--ink'), align: 'center' }, { x: 1.4, y: cap * 1.05, text: '√(πe(n−1)log L) = ' + fmt(cap, 2), color: css('--ink'), align: 'center' }] }); };
+    root.querySelector('#ex').onchange = upd; upd();
+  },
+  theorem(root) {
+    const exact = { 3: 2, 4: 3, 5: 4, 6: 5, 7: 6, 8: 7, 9: 8, 10: 9, 11: 10, 12: 11, 13: 12, 14: 12, 15: 13, 16: 14, 17: 15, 18: 15, 19: 16, 20: 16, 21: 17, 22: 17, 23: 18, 24: 18, 25: 19, 26: 19, 27: 20, 28: 21, 29: 21, 30: 22, 31: 22, 32: 23, 33: 23, 34: 23, 35: 24, 36: 24, 37: 25, 38: 25, 39: 26, 40: 26 };
+    root.innerHTML = `<label>largest n shown<input type="range" id="n" min="40" max="400" value="200"></label><canvas id="c"></canvas><div class="out" id="o"></div><div class="small">Dots: exact k*(n) from Table 1 (n ≤ 40). Orange: the bound of part (a). Grey: the trivial bound n − 1.</div>`;
+    const ub = n => Math.floor(Math.sqrt(Math.PI * Math.E * (n - 1) * Math.log(Math.pow(n, 4) / 4)));
+    const upd = () => { const nm = +root.querySelector('#n').value; const ns = linspace(3, nm, nm - 2).map(Math.round);
+      plot(root.querySelector('#c'), { x: [3, nm], y: [0, Math.max(ub(nm), 60) * 1.05], xt: [3, Math.round(nm / 2), nm], yt: [0, 50, 100, 150].filter(v => v < ub(nm) * 1.05 || v === 0), lines: [{ pts: ns.map(n => [n, n - 1]), color: css('--plot-c'), dash: [4, 4], w: 1.5 }, { pts: ns.map(n => [n, ub(n)]), color: css('--plot-b') }], dots: [{ pts: Object.entries(exact).map(([n, k]) => [+n, k]), color: css('--plot-a'), r: 2.5 }] });
+      let cross = 3; while (ub(cross) >= cross - 1) cross++;
+      root.querySelector('#o').textContent = `bound at n = ${nm}: k*(n) ≤ ${ub(nm)}   (n − 1 = ${nm - 1})\nThe bound beats n − 1 from n = ${cross} on; it is of asymptotic interest.`; };
+    root.querySelector('#n').oninput = upd; upd();
+  },
+  simplify(root) {
+    root.innerHTML = `<label>largest n shown<input type="range" id="n" min="10" max="2000" value="300"></label><canvas id="c"></canvas><div class="out" id="o"></div>`;
+    const upd = () => { const nm = +root.querySelector('#n').value; const ns = linspace(3, nm, 300); const a = n => (n - 1) * Math.log(Math.pow(n, 4) / 4), b = n => 4 * n * Math.log(n); const top = b(nm) * 1.05;
+      plot(root.querySelector('#c'), { x: [3, nm], y: [0, top], xt: [3, Math.round(nm / 2), nm], yt: [0, Math.round(top / 2), Math.round(top)], yf: v => fmt(v, 0), lines: [{ pts: ns.map(n => [n, b(n)]), color: css('--plot-b'), dash: [5, 4] }, { pts: ns.map(n => [n, a(n)]), color: css('--plot-a') }] });
+      root.querySelector('#o').innerHTML = `blue: (n−1) log(n⁴/4)    dashed: 4n log n\nat n = ${nm}: ${fmt(a(nm), 1)} < ${fmt(b(nm), 1)}  <span class="good">✓</span>\n2√(πe) = ${fmt(2 * Math.sqrt(Math.PI * Math.E), 4)}`; };
+    root.querySelector('#n').oninput = upd; upd();
+  }
+};
+
+// ---------- rendering ----------
+function renderRail() {
+  const rail = $('rail'); rail.innerHTML = ''; let lastPart = null;
+  STEPS.forEach((s, i) => { if (s.part !== lastPart) { rail.appendChild(Object.assign(document.createElement('div'), { className: 'part', textContent: s.part })); lastPart = s.part; }
+    const b = document.createElement('button'); b.innerHTML = `<span class="sid">${s.id}</span><span>${s.title}</span><span class="dot ${s.leanStatus}" title="${s.leanStatus === 'ok' ? 'Lean: proved' : 'Lean: stated only'}"></span>`; b.onclick = () => go(i); if (i === cur) b.setAttribute('aria-current', 'true'); rail.appendChild(b); });
+}
+function go(i) { cur = Math.max(0, Math.min(STEPS.length - 1, i)); try { localStorage.setItem('pt-step', cur); } catch (e) {} render(); }
+function render() {
+  const s = STEPS[cur]; $('part').textContent = s.part; $('title').textContent = `${s.id} · ${s.title}`;
+  $('lean').value = edits['lean' + cur] ?? s.leanCode; $('leanpill').innerHTML = s.leanStatus === 'ok' ? '<span class="pill ok">proved</span>' : '<span class="pill gap">stated only</span>';
+  $('leannote').textContent = s.leanNote || ''; setLeanHref();
+  $('tex').innerHTML = s.tex.trim().split(/\n(?=\S)/).join('\n'); $('texraw').textContent = s.tex.trim();
+  $('py').value = edits['py' + cur] ?? s.py; $('pyout').textContent = ''; $('pyout').classList.remove('err'); $('leanout').textContent = ''; $('leanout').classList.remove('err'); $('en').innerHTML = s.en;
+  const d = $('demo'); d.innerHTML = ''; try { DEMOS[s.demo](d); } catch (e) { d.textContent = 'Demo error: ' + e.message; }
+  $('prev').disabled = cur === 0; $('next').disabled = cur === STEPS.length - 1;
+  renderRail();
+  if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([$('tex')]).catch(() => {});
+}
+$('prev').onclick = () => go(cur - 1); $('next').onclick = () => go(cur + 1);
+$('texsrc').onclick = () => { const raw = $('texraw'); raw.hidden = !raw.hidden; $('tex').hidden = !raw.hidden; $('texsrc').textContent = raw.hidden ? 'Source' : 'Rendered'; };
+$('leancopy').onclick = () => { navigator.clipboard.writeText($('lean').value).then(() => { $('leancopy').textContent = 'Copied'; setTimeout(() => $('leancopy').textContent = 'Copy', 1200); }).catch(() => { $('lean').select(); }); };
+const edits = {};
+const PRELUDE = __PRELUDE__;
+$('prelude').textContent = PRELUDE;
+function setLeanHref() { $('leanopen').href = 'https://live.lean-lang.org/#code=' + encodeURIComponent($('lean').value); }
+$('lean').addEventListener('input', () => { edits['lean' + cur] = $('lean').value; setLeanHref(); });
+$('py').addEventListener('input', () => { edits['py' + cur] = $('py').value; });
+$('leanreset').onclick = () => { delete edits['lean' + cur]; $('lean').value = STEPS[cur].leanCode; setLeanHref(); };
+$('pyreset').onclick = () => { delete edits['py' + cur]; $('py').value = STEPS[cur].py; $('pyout').textContent = ''; };
+for (const id of ['py', 'lean']) $(id).addEventListener('keydown', e => {
+  if (e.key === 'Tab') { e.preventDefault(); const t = e.target, a = t.selectionStart; t.setRangeText('    ', a, t.selectionEnd, 'end'); t.dispatchEvent(new Event('input')); }
+  if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) { e.preventDefault(); if (id === 'py') runPy(); else if (LOCAL) runLean(); } });
+let LOCAL = false;
+async function initLocal() {
+  try { const r = await fetch('api/health', { cache: 'no-store' }); const j = await r.json(); if (!j.ok) return; LOCAL = true; } catch (e) { return; }
+  pyReady = true; $('pystate').textContent = 'runs in Python ' + 'on this computer'; $('pyrun').disabled = false;
+  $('leanrun').hidden = false; $('leanout').hidden = false; $('leanhelp').textContent = 'Checked by Lean ' + (await (await fetch('api/health')).json()).lean + ' on this computer (Ctrl+Enter). The first check after starting takes longer while Mathlib loads.';
+}
+async function post(path, code) { const r = await fetch(path, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ code }) }); return r.json(); }
+async function runLean() {
+  const out = $('leanout'); out.classList.remove('err'); out.textContent = 'checking…'; const t0 = performance.now();
+  try { const j = await post('api/lean', $('lean').value); out.classList.toggle('err', !j.ok); out.textContent = (j.ok ? (j.sorry ? '⚠ compiles, but uses sorry' : '✓ no errors') : '✗ Lean reports errors') + (j.output ? '\n\n' + j.output : '') + '\n\n[' + Math.round(performance.now() - t0) + ' ms]'; }
+  catch (e) { out.classList.add('err'); out.textContent = 'Could not reach the local server: ' + e.message; }
+}
+$('leanrun').onclick = runLean;
+let pyReady = false;
+function initPy() {
+  try { if (typeof brython !== 'function') throw new Error('Python runtime did not load'); brython({ debug: 1, ids: ['pyrunner'] }); let tries = 0;
+    const wait = () => { if (LOCAL) return; if (typeof window.pyRunCode === 'function') { pyReady = true; $('pystate').textContent = 'runs in your browser'; $('pyrun').disabled = false; return; }
+      if (++tries > 100) { $('pystate').textContent = 'unavailable'; $('pyrun').disabled = true; $('pyout').textContent = 'The in-page Python runtime did not start. Copy the code into any Python 3 to run it.'; return; } setTimeout(wait, 100); };
+    $('pyrun').disabled = true; $('pystate').textContent = 'starting Python…'; wait(); }
+  catch (e) { $('pystate').textContent = 'unavailable'; $('pyrun').disabled = true; $('pyout').textContent = 'The in-page Python runtime could not start here (' + e.message + '). Copy the code into any Python 3 to run it.'; }
+}
+async function runPy() {
+  if (!pyReady) return;
+  if (LOCAL) { const out = $('pyout'); out.classList.remove('err'); out.textContent = 'running…'; const t0 = performance.now();
+    try { const j = await post('api/python', PRELUDE + '\n' + $('py').value); out.classList.toggle('err', !j.ok); out.textContent = (j.output.trim() || '(no output)') + '\n\n[' + Math.round(performance.now() - t0) + ' ms]'; }
+    catch (e) { out.classList.add('err'); out.textContent = 'Could not reach the local server: ' + e.message; } return; } const out = $('pyout'); out.textContent = 'running…'; out.classList.remove('err');
+  setTimeout(() => {
+    const t0 = performance.now(); let res;
+    try { res = window.pyRunCode(PRELUDE + '\n' + $('py').value); } catch (e) { res = [false, String(e && e.message || e)]; }
+    out.classList.toggle('err', !res[0]); out.textContent = (String(res[1]).trim() || '(no output)') + '\n\n[' + Math.round(performance.now() - t0) + ' ms]';
+  }, 20);
+}
+$('pyrun').onclick = runPy;
+document.addEventListener('keydown', e => { if (e.target.closest('input,select,textarea')) return; if (e.key === 'ArrowRight') go(cur + 1); if (e.key === 'ArrowLeft') go(cur - 1); });
+let rt; window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { const d = $('demo'); d.innerHTML = ''; DEMOS[STEPS[cur].demo](d); }, 200); });
+initPy();
+initLocal();
+render();
+if (window.MathJax && MathJax.startup) MathJax.startup.promise.then(() => MathJax.typesetPromise([$('claim'), $('tex')]));
+</script>
