@@ -10,9 +10,11 @@ Provides
     scaled_points(S)            -> (N,3) int array (doubled coordinates)
     exact_hull(S)               -> dict with vertices, faces (exact planes), edges,
                                    f-vector, exact volume (Fraction), area (float);
-                                   every hull is certified: all points satisfy all facet
-                                   inequalities, V - E + F = 2, and every facet edge lies in
-                                   exactly two facets (certify_closure)
+                                   every hull is certified in exact integer arithmetic
+                                   (certify_closure): pairwise distinct facet planes, all points
+                                   satisfy all facet inequalities, each facet is the exact 2D hull
+                                   of the points on its plane (2-dimensional), every facet edge lies
+                                   in exactly two facets, strict convexity at every edge, V - E + F = 2
     bipartite_graph(hull)       -> networkx graph of vertex-facet incidences
     combinatorial_hash(hull)    -> WL hash (first pass)
     congruent(P, Q)             -> exact test: distance-preserving bijection exists
@@ -62,6 +64,7 @@ def exact_hull(S):
         a, b, c, d = _plane(p0, p1, p2)
         # orientation: evaluate at centroid of all points (interior) -> must be < 0
         val = a * int(P[:, 0].sum()) + b * int(P[:, 1].sum()) + c * int(P[:, 2].sum()) + d * N
+        assert val != 0, "degenerate plane through the centroid"
         if val > 0:
             a, b, c, d = -a, -b, -c, -d
         key = (a, b, c, d)
@@ -115,24 +118,60 @@ def exact_hull(S):
                 volume=volume, area=area)
 
 
+def _hull2d(pts):
+    """Exact 2D convex hull (Andrew's monotone chain, integer cross products) of [(u, v, idx)]:
+    the indices of the strict hull vertices in counter-clockwise order (collinear points dropped)."""
+    pts = sorted(set(pts))
+    if len(pts) < 3:
+        return [p[2] for p in pts]
+    cross = lambda o, a, b: (a[0] - o[0]) * (b[1] - o[1]) - (a[1] - o[1]) * (b[0] - o[0])
+    lower, upper = [], []
+    for p in pts:
+        while len(lower) >= 2 and cross(lower[-2], lower[-1], p) <= 0:
+            lower.pop()
+        lower.append(p)
+    for p in reversed(pts):
+        while len(upper) >= 2 and cross(upper[-2], upper[-1], p) <= 0:
+            upper.pop()
+        upper.append(p)
+    return [p[2] for p in lower[:-1] + upper[:-1]]
+
+
 def certify_closure(P, faces, edges):
-    """Closure certificate: order the vertices of each facet cyclically in its plane; every edge of every facet
-    polygon must lie in exactly two facets (so the facets form a closed surface and are all the facets of the hull),
-    and these polygon edges must be exactly the edges found from the incidences."""
-    from collections import Counter
-    ecount = Counter()
-    for (a, b, c, d), fv in faces.items():
-        fv = list(fv)
-        nrm = np.array([a, b, c], dtype=float)
-        Q = P[fv].astype(float); cen = Q.mean(0)
-        e1 = Q[0] - cen; e1 -= nrm * (e1 @ nrm) / (nrm @ nrm); e1 /= np.linalg.norm(e1)
-        e2 = np.cross(nrm / np.linalg.norm(nrm), e1)
-        ang = np.arctan2((Q - cen) @ e2, (Q - cen) @ e1)
-        cyc = [fv[i] for i in np.argsort(ang)]
+    """Exact closure certificate (integer arithmetic only), for faces = {outward primitive plane (a,b,c,d): vertex set}:
+    (1) the planes are pairwise distinct and every point satisfies every facet inequality;
+    (2) each facet is 2-dimensional: the exact 2D convex hull of ALL points on its plane (projected to the coordinate
+        plane dropping a coordinate with nonzero normal component) has >= 3 vertices, and these are exactly the facet's
+        vertices; its cyclic order gives the facet polygon;
+    (3) every polygon edge lies in exactly two facets, and these edges are exactly the edges found from the incidences;
+    (4) local strict convexity: at every edge, the vertices of each of the two facets not on the edge satisfy the
+        other facet's inequality strictly (so no true facet is split into coplanar pieces).
+    Returns the dict edge -> (plane, plane)."""
+    from collections import defaultdict
+    # a plane has exactly one outward representation with primitive (a,b,c), so distinct keys = distinct planes
+    keys = list(faces)
+    assert len(set(keys)) == len(keys), "facet planes not pairwise distinct"
+    for (a, b, c, d) in keys:
+        assert gcd(gcd(abs(a), abs(b)), abs(c)) == 1, "normal not primitive"
+    Pi = [tuple(int(t) for t in p) for p in P]
+    val = lambda key, p: key[0] * p[0] + key[1] * p[1] + key[2] * p[2] + key[3]
+    efaces = defaultdict(list)
+    for key, fv in faces.items():
+        assert all(val(key, p) <= 0 for p in Pi), "point strictly outside a facet plane"
+        on = [k for k, p in enumerate(Pi) if val(key, p) == 0]
+        drop = next(i for i in (2, 0, 1) if key[i] != 0)        # coordinate with nonzero normal component
+        cyc = _hull2d([tuple(Pi[k][i] for i in range(3) if i != drop) + (k,) for k in on])
+        assert len(cyc) >= 3, "facet is not 2-dimensional"
+        assert set(cyc) == set(fv), "facet vertices differ from the exact 2D hull of the points on its plane"
         for i in range(len(cyc)):
-            ecount[frozenset((cyc[i], cyc[(i + 1) % len(cyc)]))] += 1
-    assert all(v == 2 for v in ecount.values()), "facet edge not in exactly two facets"
-    assert sorted(tuple(sorted(e)) for e in ecount) == sorted(tuple(sorted(e)) for e in edges), "edge sets differ"
+            efaces[frozenset((cyc[i], cyc[(i + 1) % len(cyc)]))].append(key)
+    assert all(len(f) == 2 for f in efaces.values()), "facet edge not in exactly two facets"
+    assert sorted(tuple(sorted(e)) for e in efaces) == sorted(tuple(sorted(e)) for e in edges), "edge sets differ"
+    for e, (k1, k2) in efaces.items():
+        assert k1 != k2
+        for ka, kb in ((k1, k2), (k2, k1)):
+            assert all(val(kb, Pi[v]) < 0 for v in faces[ka] if v not in e), "not strictly convex at an edge"
+    return dict(efaces)
 
 
 def classify_points(h):

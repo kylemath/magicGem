@@ -9,7 +9,10 @@ at each of the 16 level-polygon vertices p as a polynomial in m (sympy, exact), 
   * every other slack is a polynomial that is > 0 for all integers m >= 2
     (certified by non-negative coefficients after the substitution m = 2 + t, constant term > 0),
   * the 16 facets (8 listed + their images under -id) form a closed surface: every edge of every
-    facet polygon lies in exactly two facets, (V,E,F) = (12,26,16).
+    facet polygon lies in exactly two facets, (V,E,F) = (12,26,16);
+  * the 16 facet planes are pairwise distinct, each facet is 2-dimensional and its listed cycle is the strictly
+    convex polygon of all incident points (q13..q16 never vertices), and the surface is strictly convex across
+    each of the 26 edges (all for every m >= 2).
 By central symmetry of the set of level-polygon vertices, checking (k) at all 16 points also checks (k') = -(k).
 Writes siamese_slacks.tex (the table printed in the paper) and siamese_slacks.log.
 """
@@ -95,6 +98,58 @@ assert (V, E, F) == (12, 26, 16)
 sizes = Counter(len(c) for c in all_facets)
 assert sizes == Counter({3: 12, 4: 4})
 log.append(f'closed surface: (V,E,F) = {(V, E, F)}, facet sizes {dict(sizes)}; all nonzero slacks > 0 for every integer m >= 2')
+
+# ---------------------------------------------------------------- the rest of the facet certificate, symbolic in m
+# the 16 facets as (normal, rhs, cycle); (k') = -(k) has normal -a and the same rhs
+FAC = {str(k): (a, b, FACETS[k]) for k, (a, b) in INEQ.items()}
+FAC.update({f"{k}'": (tuple(-c for c in a), b, [NEG[v] for v in FACETS[k]]) for k, (a, b) in INEQ.items()})
+slack = lambda f, q: sp.expand(FAC[f][1] - sum(FAC[f][0][i] * P[q][i] for i in range(3)))
+for f in FAC:   # (k') at q is (k) at -q: every slack is 0 or > 0 for all m >= 2 (checked above for (k))
+    assert all(slack(f, q) == 0 or positive_for_m_ge_2(slack(f, q)) for q in ORDER)
+INC = {f: [q for q in ORDER if slack(f, q) == 0] for f in FAC}       # all level-polygon vertices on the plane
+sub = lambda u, v: [sp.expand(u[i] - v[i]) for i in range(3)]
+cross = lambda u, v: [sp.expand(u[1] * v[2] - u[2] * v[1]), sp.expand(u[2] * v[0] - u[0] * v[2]),
+                      sp.expand(u[0] * v[1] - u[1] * v[0])]
+dot = lambda u, v: sp.expand(sum(u[i] * v[i] for i in range(3)))
+pos = lambda p: p != 0 and positive_for_m_ge_2(p)
+# (a) pairwise distinct planes: for each pair some q_k has zero slack on one and positive slack on the other
+for f, g in itertools.combinations(FAC, 2):
+    assert any(slack(f, q) == 0 and pos(slack(g, q)) for q in ORDER), (f, g)
+# (b) each facet is 2-dimensional and its listed cycle is the convex polygon of ALL incident points:
+#     for every cycle edge (u, v), det(a, v - u, w - u) has one strict sign for all m >= 2 at every other cycle
+#     vertex w (strictly convex polygon in this cyclic order), and every incident non-vertex point w is on the
+#     same side or on the open segment (u, v).  Any lattice point of the gem on the plane lies in the convex hull of
+#     the incident q's of its level polygon, so the polygon is the whole facet.
+n_onedge, nonvert = 0, set()
+for f, (a, b, cyc) in FAC.items():
+    assert len(cyc) >= 3 and set(cyc) <= set(INC[f]) and all(int(q[1:]) > 12 for q in set(INC[f]) - set(cyc)), f
+    assert any(pos(c) or pos(-c) for c in cross(sub(P[cyc[1]], P[cyc[0]]), sub(P[cyc[2]], P[cyc[0]]))), f  # rank 2
+    sgn = 1 if pos(dot(a, cross(sub(P[cyc[1]], P[cyc[0]]), sub(P[cyc[2]], P[cyc[0]])))) else -1   # orientation
+    for i in range(len(cyc)):
+        u, v = P[cyc[i]], P[cyc[(i + 1) % len(cyc)]]
+        for w in INC[f]:
+            if w in (cyc[i], cyc[(i + 1) % len(cyc)]):
+                continue
+            o = dot(a, cross(sub(v, u), sub(P[w], u)))
+            if w in cyc or o != 0:
+                assert pos(sgn * o), (f, cyc[i], w, o)
+            else:                                            # non-vertex point on the edge line: inside the segment
+                assert pos(dot(sub(P[w], u), sub(v, u))) and pos(dot(sub(P[w], v), sub(u, v))), (f, w)
+                n_onedge += 1
+    nonvert |= {(f, w) for w in set(INC[f]) - set(cyc)}
+# (c) strict convexity across each of the 26 edges: vertices of each adjacent facet off the edge have
+#     positive slack on the neighbour
+EF = {}
+for f, (a, b, cyc) in FAC.items():
+    for i in range(len(cyc)):
+        EF.setdefault(frozenset((cyc[i], cyc[(i + 1) % len(cyc)])), []).append(f)
+assert len(EF) == 26 and all(len(x) == 2 for x in EF.values())
+for e, (f, g) in EF.items():
+    for f1, g1 in ((f, g), (g, f)):
+        assert all(pos(slack(g1, q)) for q in FAC[f1][2] if q not in e), (e, f1, g1)
+log.append(f'facet certificate for every m >= 2: the 16 planes are pairwise distinct; each facet is 2-dimensional and its '
+           f'cycle is the strictly convex polygon of all incident level-polygon vertices (non-vertex incidences '
+           f'{sorted(nonvert)}, {n_onedge} of them on an open polygon edge, the others in the relative interior); strictly convex across each of the 26 edges')
 
 # numerical cross-check of the inequalities against the actual reduced point sets
 import sys

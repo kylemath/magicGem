@@ -12,8 +12,9 @@ verify_structure.py -- exact checks of the structural statements of the paper (e
   D  injectivity: the 880 vertex sets are pairwise distinct up to the action of D4 (D4-canonical forms),
      and the congruence classes of the 880 gems are the 616 complement orbits.
   E  parity for the 48 associative squares (V, B, I even) and the failure for the natural square.
-  F  certification of the exact hulls: every point satisfies every facet inequality, and every edge of
-     every facet polygon lies in exactly two facets (closed facet complex), for all 880 gems.
+  F  certification of the exact hulls (integer arithmetic): pairwise distinct facet planes, every point satisfies
+     every facet inequality, each facet is 2-dimensional and its polygon is the exact 2D hull of the points on its
+     plane, every polygon edge lies in exactly two facets (closed facet complex), strict convexity at every edge.
   G  regular subdivisions: lower / upper / vertical facets; vertical facets only over the four sides,
      present iff the heights along that side are not in arithmetic progression; every vertex is a vertex of
      the lower or the upper hull; number of distinct regular subdivisions of the 4x4 grid induced by the
@@ -233,7 +234,9 @@ for k, h in enumerate(hulls):
     for (a, b, c, d) in h['faces']:
         assert (a * P[:, 0] + b * P[:, 1] + c * P[:, 2] + d <= 0).all()
     certify_closure(P, h['faces'], h['edges'])
-log('F: all 880 hulls certified: every point satisfies every integer facet inequality; every facet edge lies in exactly two facets')
+log('F: all 880 hulls certified: distinct facet planes; every point satisfies every integer facet inequality; '
+    'each facet = exact 2D hull of the points on its plane (2-dimensional); every facet edge lies in exactly two facets; '
+    'strictly convex at every edge')
 
 # ------------------------------------------------------------------ G regular subdivisions
 def lifted_faces(S, h):

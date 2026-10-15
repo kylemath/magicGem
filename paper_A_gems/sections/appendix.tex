@@ -6,7 +6,14 @@ All computations use Python 3.9 with NumPy 2.0, SciPy 1.13 (Quickhull), SymPy 1.
 \paragraph{Exact hulls.}
 Doubling all coordinates makes every point an integer vector.
 A floating-point Quickhull triangulation is used only to propose candidate facet planes, which are recomputed as primitive integer equations from three points each; coplanar triangles are merged.
-The hull is then certified in integer arithmetic: every one of the $N$ points satisfies every facet inequality, every edge of every facet polygon lies in exactly two facets (so the facets form a closed surface and are all the facets), and $V-E+F=2$.
+The hull is then certified in integer arithmetic.
+(i) The candidate planes, each written as the unique primitive integer equation $ax+by+cz+d=0$ with outward normal, are pairwise distinct, so no facet is split into coplanar pieces.
+(ii) Every one of the $N$ points satisfies every facet inequality.
+(iii) For each plane, the points lying on it are projected to a coordinate plane on which the projection is injective, and their convex hull is computed exactly (monotone chain with integer cross products); it must have at least three vertices, so the points on the plane span it affinely, and its vertices, in cyclic order, form the facet polygon.
+(iv) Every edge of every facet polygon lies in exactly two facets, so the facets form a closed surface.
+(v) At every edge the vertices of each of the two facets that are not on the edge satisfy the inequality of the other facet strictly, so the surface is strictly convex across every edge.
+By (ii) and (iii) each listed plane is a supporting plane meeting the point set in a $2$-dimensional polygon, hence a facet of the hull with that polygon; by (iv) the list contains, with each facet, all facets adjacent to it across an edge, and since the facet-adjacency graph of a $3$-polytope is connected the list contains every facet. Condition (v) and $V-E+F=2$ are checked as redundant consistency tests.
+An independent implementation that enumerates the supporting planes through all triples of points, without Quickhull, gives the same vertex sets, $f$-vectors and volumes for all $880$ order-four gems, the Siamese squares of orders $3$ to $21$ and the order-five squares of \Cref{rem:linear}. For the Siamese family the script that generates \Cref{tab:slacks} checks (i) and (iii)--(v) symbolically for every $m\ge2$.
 This certificate is applied to every exact hull in the paper (order four, Siamese, digit-exchanged and linear squares, and the $15$ ten-vertex order-five squares).
 Vertices are the points on at least three facet planes, interior points are those satisfying every facet inequality strictly, and volumes are exact rationals.
 For the $880$ order-four gems this takes about $15$\,s in total.
