@@ -15,11 +15,12 @@
    (F2) has ||gamma||^2 <= n^5(n^2-1)/12 (majorisation), so it suffices to enumerate the lattice vectors in
    that ball.  LLL reduction (sympy, exact) followed by Fincke--Pohst enumeration with exact rational
    Gram--Schmidt.  Feasibility is monotone in k, so U(n) := 1 + (largest k with a feasible vector).
-3. Level n-3 for 18 <= n <= 400 (rank-2 lattices, explicit box), and Theorem A for n >= 166.
+3. Level n-3 for 18 <= n <= 400 (rank-2 lattices, explicit box), and the range n >= 27 in which the bound
+   floor(sqrt(2(n-1) log(n^4/4))) of Theorem 3.7(a) (Schur's bound, Lemma 3.9) gives k*(n) <= n-3.
 """
 import json, os, sys, time
 from fractions import Fraction as Fr
-from math import comb, isqrt, floor, ceil, log, pi, e
+from math import comb, isqrt, floor, ceil, log
 from sympy import Matrix
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -154,11 +155,11 @@ def main():
     print('level n-3 not excluded by F1 for n in [14,400]:', bad)
     first = None
     for n in range(3, 10 ** 6 + 1):
-        ok = (n - 2) ** 2 > pi * e * (n - 1) * log(n ** 4 / 4)
+        ok = (n - 2) ** 2 > 2 * (n - 1) * log(n ** 4 / 4)
         if ok and first is None: first = n
         if not ok: first = None
-    out['theoremA_gives_n_minus_3_from'] = first
-    print('Theorem A gives k* <= n-3 for all n in [%d, 10^6]' % first)
+    out['theorem_a_gives_n_minus_3_from'] = first
+    print('Theorem 3.7(a) gives k* <= n-3 for all n in [%d, 10^6]' % first)
     # 2. upper bounds
     U = {}
     for n in range(14, NMAX + 1):

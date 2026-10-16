@@ -34,6 +34,6 @@ int main(int argc,char**argv){
       E+=dE; if(E<best)best=E;
     }
   }
-  if(E!=0){ printf("FAIL %lld best %lld\n",E,best); return 0; }
+  if(E!=0){ printf("FAIL %lld best %lld\n",E,best); for(int i=0;i<N;i++) printf("%d ",s[i]); printf("\n"); return 0; }  /* final state, for restarts */
   for(int i=0;i<N;i++) printf("%d ",s[i]); printf("\n"); return 0;
 }

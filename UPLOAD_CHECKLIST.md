@@ -6,9 +6,9 @@ Branch `split-papers-a-b`. Both tarballs build from a clean directory with `pdfl
 |---|---|---|
 | Title | Magic Gems: A Polyhedral Framework for Magic Squares | Moments of Magic Squares: Line-Sum Conditions, a Permutation Threshold, and Random Energies |
 | arXiv action | **Replace** arXiv:2512.09170 (becomes v5) | **New submission** |
-| PDF | `paper_A_gems/paperA.pdf` (23 pp, 8 figures) | `paper_B_orthogonality/paperB.pdf` (23 pp, 3 figures, 4 tables) |
-| Upload file | `paper_A_gems/paperA_arxiv.tar.gz` (750 KB) | `paper_B_orthogonality/paperB_arxiv.tar.gz` (384 KB) |
-| Ancillary files | `anc/` at the top of the tarball (68 files) | `anc/` at the top of the tarball (72 files) |
+| PDF | `paper_A_gems/paperA.pdf` (23 pp, 8 figures) | `paper_B_orthogonality/paperB.pdf` (27 pp, 3 figures, 4 tables) |
+| Upload file | `paper_A_gems/paperA_arxiv.tar.gz` (750 KB) | `paper_B_orthogonality/paperB_arxiv.tar.gz` (418 KB) |
+| Ancillary files | `anc/` at the top of the tarball (68 files) | `anc/` at the top of the tarball (78 files) |
 | Metadata text | `paper_A_gems/submission_notes/arxiv_comments.md` | `paper_B_orthogonality/submission_notes/arxiv_metadata.md` |
 | Abstract length | 1824 characters (limit 1920) | 1740 characters (limit 1920) |
 | Primary category | math.CO | math.CO |

@@ -100,7 +100,6 @@ By \Cref{lem:W_structure}, with $\delta=(\delta_{\mathrm m},\delta_{\mathrm a})$
 \]
 and since the eigenvalues of $\Gamma_D$ are $n-1,n-1$ for odd $n$ and $n-2,n$ for even $n$, comparison with \eqref{eq:Efull_devs} gives $n\Efull\le\|P_Wz\|^2\le\lambda_n\Efull$, with $\lambda_n=n^2/(n-1)$ for odd $n$ and $\lambda_n=n^2/(n-2)$ for even $n$.
 Hence $|\sum_cz_c\varphi_c|=N|\langle\varphi,P_Wz\rangle|\le N\|\varphi\|\sqrt{\lambda_n\Efull}$ for every $\varphi\in W$; for instance $x,y\in W_C\oplus W_R$, so the centre of mass $\sum_cz_c(x_c,y_c)$ is controlled by $\Efull$.
-Nonlinear functionals are not controlled: with $u_c$ the unit vector from the centre to cell $c$ ($u_c=0$ at the centre), $|\sum_cz_cu_c|=2(2-\sqrt2)\sqrt5$ for every magic square of order $3$ and is positive for all $880$ of order $4$ (\texttt{anc/balance\_check.py}).
 \end{remark}
 
 \begin{figure}[htbp]
@@ -162,9 +161,9 @@ $\sigma_n^2$ & $(n^2+1)/12$ \eqref{eq:sigma}\\
 $P_\gamma(t)$ & $\sum_j\gamma_jt^j$ (\Cref{sec:theory_hierarchy})\\
 $\Lambda_{n,k}$ & $\{\gamma\in\Z^n:(t-1)^{k+1}\mid P_\gamma\}$ (\Cref{sec:kstar})\\
 $k^*(n)$ & permutation threshold (\Cref{def:kstar})\\
-$B_r(g)$ & binomial moment $\sum_j\binom jrg_j$ of a vector $g$ (\Cref{sec:kstar_upper})\\
-$H$ & $\lfloor n^3/4\rfloor$ (\Cref{sec:kstar_upper})\\
-$r_q$, $F_q$ & number of pairs of complementary rows covering the $q$-th column pair; set of subset sums (\Cref{prop:box})\\
+$U(n)$ & least $k$ such that no nonzero vector of $\Lambda_{n,k}$ satisfies \eqref{eq:col_feasible} (\Cref{sec:kstar_exact})\\
+$r_q$, $d_{q,i}$, $F_q$ & number of pairs of complementary rows used for the $q$-th column pair; their swap differences; the set of subset sums of the $d_{q,i}$ (\Cref{prop:box})\\
+$B_s(g)$ & binomial moment $\sum_q\binom qsg_q$ of a vector $g$ (proof of \Cref{prop:box})\\
 \midrule
 $T_\varphi$, $\tau_\ell$ & $\langle\varphi,z\rangle$ for a random arrangement; standard deviation of $T_\ell=T_{\varphi_\ell}$ (\Cref{sec:random_energy})\\
 $\Gamma$, $C_n$ & Gram matrix of the centred test functions of an energy; correlation matrix of the four statistics of $\Efour$ (\Cref{prop:random_energy_moments}, \Cref{cor:random_energy_clt})\\

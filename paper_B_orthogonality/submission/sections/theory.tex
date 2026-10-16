@@ -93,22 +93,25 @@ By \Cref{lem:poly_form}, an arrangement satisfies the degree-$k$ conditions if a
 \]
 (identifying $\gamma$ with $P_\gamma$; the quotient of an integer polynomial by the monic polynomial $(t-1)^{k+1}$ has integer coefficients), a lattice of rank $n-k-1$.
 Writing $\gamma=\gamma^+-\gamma^-$ with $\gamma^\pm\ge0$, the condition $\gamma\in\Lambda_{n,k}$ says that the multisets in which $j$ occurs $\gamma^+_j$, resp.\ $\gamma^-_j$, times have equal power sums of degrees $0,\dots,k$: a Prouhet--Tarry--Escott system \cite{wright1959prouhet,borwein2002computational}.
-Small vectors in $\Lambda_{n,k}$ are classical: the Prouhet--Thue--Morse vector $\bigl((-1)^{s_2(j)}\bigr)_{0\le j<2^{k+1}}$ ($s_2$ the binary digit sum) has entries $\pm1$ and lies in $\Lambda_{2^{k+1},k}$ \cite{wright1959prouhet,allouche1999ubiquitous}, and Borwein, Erd\'elyi and K\'os construct polynomials of degree $n$ with coefficients in $\{-1,0,1\}$ vanishing to order $\ge c\sqrt{n/\log n}$ at $1$ \cite[Thm.~2.7]{BEK1999}.
+Small vectors in $\Lambda_{n,k}$ are classical: the Prouhet--Thue--Morse vector $\bigl((-1)^{s_2(j)}\bigr)_{0\le j<2^{k+1}}$ ($s_2$ the binary digit sum) has entries $\pm1$ and lies in $\Lambda_{2^{k+1},k}$ \cite{wright1959prouhet,allouche1999ubiquitous}, and Borwein, Erd\'elyi and K\'os construct polynomials of degree $n$ with coefficients in $\{-1,0,1\}$ vanishing to order $\ge c\sqrt{n/\log n}$ at $1$ \cite[Thm.~2.7]{BEK1999}; Borwein and Mossinghoff determine the least degree of such a polynomial with a zero of order $m$ at $1$ for $m\le10$ \cite{borwein2000height}.
 The question is therefore how large $k$ can be for vectors that are column-deviation vectors of arrangements.
 
 \begin{theorem}[The permutation threshold]
 \label{thm:perm_threshold}
 \leavevmode
 \begin{enumerate}
-\item[(a)] For all $n\ge3$, $\displaystyle k^{*}(n)\le\Bigl\lfloor\sqrt{\pi e\,(n-1)\log(n^{4}/4)}\Bigr\rfloor\le 2\sqrt{\pi e}\,\sqrt{n\log n}$.
-\item[(b)] $\displaystyle\liminf_{n\to\infty}\frac{k^{*}(n)}{\sqrt n}\ge\sqrt2$.
-\item[(c)] $k^{*}(n)=n-1$ for $3\le n\le13$, $k^{*}(n)=n-2$ for $14\le n\le17$, and $k^{*}(n)\le n-3$ for every $n\ge18$.  The values for $14\le n\le40$ are those of \Cref{tab:kstar}.
+\item[(a)] For all $n\ge3$, $\displaystyle k^{*}(n)\le\Bigl\lfloor\sqrt{2(n-1)\log(n^{4}/4)}\Bigr\rfloor\le 2\sqrt2\,\sqrt{n\log n}$.
+\item[(b)] $\displaystyle\liminf_{n\to\infty}\frac{k^{*}(n)}{\sqrt n}\ge\sqrt2$, and $\displaystyle\liminf_{n\to\infty,\ 4\mid n}\frac{k^{*}(n)}{\sqrt n}\ge\sqrt6$.
+\item[(c)] $k^{*}(n)=n-1$ for $3\le n\le13$, $k^{*}(n)=n-2$ for $14\le n\le17$, and $k^{*}(n)\le n-3$ for every $n\ge18$.
+\item[(d)] \textup{(Computer-assisted.)} For $18\le n\le40$, $k^*(n)$ is the value given in \Cref{tab:kstar}.
 \end{enumerate}
 \end{theorem}
 
-The constant $2\sqrt{\pi e}$ is about $5.84$.
-Part (a) gives $k^*(n)\le n-3$ from $n=166$ on and improves on it from $n=169$; it is of asymptotic interest only, since part (c) gives $k^*(n)\le n-3$ for all $n\ge18$.
-In part (c) the lower bounds rest on explicit witness arrangements, checkable in exact arithmetic; $k^*(n)\le n-1$, $k^*(n)\le n-2$ ($n\ge14$) and $k^*(n)\le n-3$ ($n\ge18$) are proved by hand; only the upper bounds of \Cref{tab:kstar} for $18\le n\le40$ are computer-assisted (\Cref{sec:kstar_exact}).
+Part (a) is Schur's bound on real zeros applied to $P_\gamma$ (\Cref{lem:schur}) and does not use that $\gamma$ comes from an arrangement beyond the bound $\|\gamma\|_1\le n^4/4$ of \Cref{lem:col_feasible}; the constant $2\sqrt2$ is about $2.83$.
+It is below $n-1$ from $n=24$ on, gives $k^*(n)\le n-3$ from $n=27$ on and improves on (c) from $n=30$ on; at $n=40$ and $n=100$ it gives $32$ and $58$, against the exact value $26$ and the computed upper bound $45$ (\Cref{fig:kstar}).
+To our knowledge, parts (b)--(d) are new.
+In part (c) the lower bounds rest on witness arrangements, checkable in exact arithmetic (printed in Appendix~\ref{sec:app_witnesses} for $n\le13$, in \texttt{anc/kstar\_witnesses.json} for $14\le n\le17$), and the upper bounds are proved by hand.
+Part (d) is computer-assisted: its upper bounds come from an exact lattice enumeration backed by a certificate, its lower bounds from witness arrangements found by computer search and checked in exact arithmetic (\Cref{sec:kstar_exact}).
 
 \subsection{Proof of the upper bound}
 \label{sec:kstar_upper}
@@ -129,43 +132,37 @@ With $p$ the number of positive $\gamma_j$, $\|\gamma\|_1=2\sum_{\gamma_j>0}\gam
 Finally, $\gamma$ is majorised by the vector $v$ with $v_p=n(N-(2p-1)n)/2$, $1\le p\le n$ (equal totals, $\sum_pv_p=0=\sum_j\gamma_j$, and \eqref{eq:col_feasible} bounds the partial sums of $\gamma$ sorted in decreasing order by $\sum_{p\le P}v_p=Pn(N-Pn)/2$); $\|v\|_2^2=n^5(n^2-1)/12$, and $\|\cdot\|_2^2$ is Schur-convex.
 \end{proof}
 
-\begin{lemma}[Order of vanishing of an integer polynomial at $1$]
-\label{lem:jensen}
-Let $\gamma\in\Z^{n}\setminus\{0\}$ with $(t-1)^{K}\mid P_\gamma$ for some $K\ge1$.  Then $K^{2}\le \pi e\,(n-1)\log\|\gamma\|_1$.
+\begin{lemma}[Schur's bound at $t=1$]
+\label{lem:schur}
+Let $\gamma\in\Z^{n}\setminus\{0\}$ with $(t-1)^{K}\mid P_\gamma$ for some $K\ge1$.  Then $K^{2}\le 2(n-1)\log\|\gamma\|_1$.
 \end{lemma}
 
 \begin{proof}
-Write $P=P_\gamma$ and $L=\|\gamma\|_1$; note $K\le\deg P\le n-1$.
-The Mahler measure $\mathcal M(P)=|a|\prod_\alpha\max(1,|\alpha|)$ of a nonzero $P\in\Z[t]$, with $a$ its leading coefficient and the product over its roots $\alpha$, is at least $1$, because $|a|\ge1$, and Jensen's formula gives $\log\mathcal M(P)=\int_{-1/2}^{1/2}\log|P(e^{2\pi i\theta})|\,d\theta$.
-A root at $0$ (when $\gamma_0=0$) contributes $\max(1,0)=1$, so no condition on $\gamma_0$ is needed.
-Hence $\int_{-1/2}^{1/2}\log|P(e^{2\pi i\theta})|\,d\theta\ge0$.
-On $|z|=1$ we have $|P(z)|\le L$.
-Since $P^{(i)}(1)=0$ for $i<K$, Taylor's formula with integral remainder along the segment $[1,z]$, which lies in the closed unit disc when $|z|=1$, gives
-\[
-|P(z)|\le\frac{|z-1|^{K}}{K!}\max_{|w|\le1}|P^{(K)}(w)|\le L\binom{n-1}{K}|z-1|^{K}\le L\Bigl(\frac{e(n-1)|z-1|}{K}\Bigr)^{K},
-\]
-because $|P^{(K)}(w)|\le\sum_j|\gamma_j|\,j(j-1)\cdots(j-K+1)$ for $|w|\le1$.
-With $|e^{2\pi i\theta}-1|\le2\pi|\theta|$ and $\beta=2\pi e(n-1)/K\ge2\pi e$ we get $\log|P(e^{2\pi i\theta})|\le\log L+K\log\min(1,\beta|\theta|)$, and
-$\int_{-1/2}^{1/2}\log\min(1,\beta|\theta|)\,d\theta=-2/\beta$.
-Hence $0\le\log L-2K/\beta=\log L-K^{2}/(\pi e(n-1))$.
+By a theorem of Schur \cite{schur1933} (see \cite[(1.4)]{erdosturan1950}), a polynomial $f=\sum_{j=0}^ma_jt^j$ with $a_0a_m\ne0$ has at most $\bigl(4m\log\bigl(\sum_j|a_j|/\sqrt{|a_0a_m|}\bigr)\bigr)^{1/2}$ real zeros, counted with multiplicity.
+Write $P_\gamma=t^{\nu}Q$ with $Q(0)\ne0$, and let $d=\deg Q\le n-1$.
+The nonzero coefficients of $Q$ are the nonzero entries of $\gamma$, so the product of its constant and leading coefficients is a nonzero integer, the sum of their absolute values is $\|\gamma\|_1$, and $(t-1)^K\mid Q$.
+The polynomial $Q(t^2)$ has degree $2d$, the same nonzero coefficients, and is divisible by $(t^2-1)^K$, so it has the real zeros $\pm1$, each of multiplicity at least $K$.
+Hence $(2K)^2\le8d\log\|\gamma\|_1$.
 \end{proof}
 
+The same argument gives the form of Schur's theorem for positive zeros in \cite[Thm.~A]{BEK1999}.
+Mignotte's lower bound $h\ge K^2/(4D)-\log D$ for the logarithmic height $h$ of a nonzero integer polynomial of degree less than $D$ with a zero of order $K$ at $1$ \cite{mignotte1982}, quoted in \cite[Sect.~1]{amoroso1995}, rests on the same theorem; with $h\le\log\max_j|\gamma_j|$ and \Cref{lem:col_feasible} it gives $K\le(4+o(1))\sqrt{n\log n}$.
+The order $\sqrt{n\log n}$ also follows from \cite[Thms.~2.1 and 2.8]{BEK1999}, applied to $P_\gamma(t)/(t^{\nu}\max_j|\gamma_j|)$.
+
 \begin{proof}[Proof of \Cref{thm:perm_threshold}(a)]
-Let $S$ satisfy the degree-$k$ conditions with $(k+1)^2>\pi e(n-1)\log(n^4/4)$.
-If $\gamma\ne0$, then $(t-1)^{k+1}\mid P_\gamma$ (\Cref{lem:poly_form}) and $\|\gamma\|_1\le n^4/4$ (\Cref{lem:col_feasible}), contradicting \Cref{lem:jensen}.
+Let $S$ satisfy the degree-$k$ conditions with $(k+1)^2>2(n-1)\log(n^4/4)$.
+If $\gamma\ne0$, then $(t-1)^{k+1}\mid P_\gamma$ (\Cref{lem:poly_form}) and $\|\gamma\|_1\le n^4/4$ (\Cref{lem:col_feasible}), contradicting \Cref{lem:schur}.
 So $\gamma=0$, and likewise $\rho=0$.
 The second inequality follows from $(n-1)\log(n^4/4)<4n\log n$.
 \end{proof}
 
-The order $\sqrt{n\log n}$ also follows from \cite[Thm.~2.1]{BEK1999}, applied to $P_\gamma(t)/(t^{r}\max_j|\gamma_j|)$ with $r$ the index of the first nonzero $\gamma_j$; that theorem bounds the number of zeros at $1$ of $\sum_{j\le n}a_jt^j$ with $|a_j|\le1$ by $c\sqrt{n(1-\log|a_0|)}$, with an unspecified absolute constant.
-\Cref{lem:jensen} is a self-contained version for integer coefficients.
-
-The hypothesis $\|\gamma\|_1\le n^4/4$ alone cannot give an upper bound of smaller order than $\sqrt n$.
-For a vector $g=(g_0,\dots,g_{n-1})$ write $B_r(g)=\sum_j\binom jrg_j$ for its binomial moments, and let $H=\lfloor n^3/4\rfloor$.
-The $(H+1)^n$ vectors $g\in\{0,\dots,H\}^n$ have $B_r(g)\in\bigl[0,H\binom n{r+1}\bigr]$.
-If $(H+1)^n>\prod_{r<K}\bigl(H\binom n{r+1}+1\bigr)$, two of them, $g\ne g'$, share $B_0,\dots,B_{K-1}$; then $\gamma=g-g'\ne0$, $\|\gamma\|_1\le nH\le n^4/4$, and $(t-1)^K\mid P_\gamma$ by \Cref{lem:poly_form}.
-Since $\prod_{r<K}\bigl(H\binom n{r+1}+1\bigr)\le(2H)^Kn^{K(K+1)/2}$, for $K=\lfloor2\sqrt n\rfloor$ the logarithm of the right side is $2n\log n+O(\sqrt n\log n)$, while that of the left side is at least $n\log H=3n\log n-O(n)$.
-So for all large $n$ there are such vectors with $K=\lfloor2\sqrt n\rfloor$.\footnote{Estimating the product as in the proof of \Cref{thm:perm_threshold}(b) below, with $\binom n{r+1}\le n^{r+1}/(r+1)!$, gives such vectors with $K=(\sqrt{12}-o(1))\sqrt n$.}
+\Cref{lem:schur} uses only that $\gamma$ is a nonzero integer vector with $\|\gamma\|_1\le n^4/4$, and \Cref{lem:col_feasible} does not restrict the order of vanishing much further.
+By Amoroso's upper bound \cite[Thm.~2]{amoroso1995}, obtained from the Bombieri--Vaaler form of Siegel's lemma \cite{bombieri1987low}, as $D,K\to\infty$ with $K/D\to0$ and $K\sqrt{\log D/D}\to\infty$ there are nonzero integer polynomials of degree less than $D$ with a zero of order $K$ at $1$ whose coefficients are at most $\exp\bigl((\frac14+o(1))\frac{K^2}D\log\frac DK\bigr)$ in absolute value.
+For $D=n$ and $K=\lfloor\alpha\sqrt n\rfloor$ with $\alpha<\sqrt{24}$ this is $n^{\alpha^2/8+o(1)}<n^3/4$ for large $n$; then $\|\gamma\|_1\le n^4/4$, and $|\sum_{j\in J}\gamma_j|\le pn^3/4\le pn(N-pn)/2$ for $|J|=p\le n/2$, and also for $p>n/2$ since $\sum_j\gamma_j=0$.
+So for large $n$ the lattice $\Lambda_{n,k}$ with $k=(\sqrt{24}-o(1))\sqrt n$ contains nonzero vectors satisfying \eqref{eq:col_feasible}, and an upper bound for $k^*(n)$ below this order must use more than \Cref{lem:col_feasible}.
+The pigeonhole principle alone, as in the proof of (b) below, gives the constant $\sqrt{12}$ in place of $\sqrt{24}$.
+Between $\sqrt{24n}$ and \Cref{lem:schur} lies the gap, by a factor of order $\log(D/K)$ in the height, between the known lower and upper bounds for the least height of an integer polynomial of degree less than $D$ with a zero of order $K$ at $1$ \cite{mignotte1982,bombieri1987low,amoroso1995}; for coefficients in $\{-1,0,1\}$ the analogous gap is between the orders $\sqrt{n/\log n}$ and $\sqrt n$, and closing it ``looks quite difficult'' \cite[Sect.~2]{BEK1999}.
+Arguments that use integrality only through the size of one coefficient cannot close it: rescaled, \cite[Thm.~2.3]{BEK1999} gives real polynomials of degree $n$ with constant coefficient $1$ and all coefficients at most $H\ge1$ in absolute value that have a zero of order at least $\min\{\frac16\sqrt{n(1+\log H)}-1,n\}$ at $1$; see \cite[Thms.~2.1 and 2.2]{erdelyi2016} for explicit constants in the $\ell^p$ normalisations.
 
 \subsection{Proof of the lower bound}
 \label{sec:kstar_lower}
@@ -202,20 +199,18 @@ The proof is a direct construction, given in Appendix~\ref{sec:app_twin}.
 
 \begin{proposition}[Pigeonhole criterion]
 \label{prop:box}
-Let $S$ be a square of \Cref{lem:twin_squares}.
-Pair the columns as $(j_q,j_q+1)$, where $j_q=2q$ for $q<Q=n/2$ ($n$ even) and $j_q=2q+1$ for $q<Q=(n-3)/2$ ($n$ odd), and let $r_q$ be the number of pairs of complementary rows of \Cref{lem:twin_squares} that are complementary on both columns of the $q$-th pair: $r_q=n/2$ for even $n$, and $r_q=\min(2q,\,n-4-2q,\,(n-9)/2)+1$ for odd $n$.
-For odd $n$ the $q$-th pair consists of the columns $2q+1,2q+2$, and the complementary rows $\ell,n-1-\ell$ of \Cref{lem:twin_squares}(2) cover both columns if and only if $\ell\le2q$ and $\ell\le n-4-2q$; with $0\le\ell\le(n-9)/2$ this gives the formula for $r_q$.
+Let $S$ be a semi-magic square of order $n$, let $Q\ge1$ and $j_0\ge0$ with $j_0+2Q\le n$, and put $j_q=j_0+2q$ for $q<Q$.
+For each $q<Q$ let $r_q$ pairwise disjoint pairs of rows be complementary on the columns $j_q,j_q+1$, let $d_{q,1},\dots,d_{q,r_q}$ be the differences $s_{i,j_q+1}-s_{i,j_q}$ for the first rows $i$ of these pairs, and let $F_q$ be the set of subset sums $\sum_{i\in I}d_{q,i}$, $I\subseteq\{1,\dots,r_q\}$.
 If $K\ge2$ and
 \begin{equation}
-\prod_{q<Q}\Bigl(\Bigl\lceil\frac{r_q}2\Bigr\rceil+1\Bigr)\ >\ \prod_{s=0}^{K-2}\Bigl((N-1)\sum_{q<Q}r_q\binom qs+1\Bigr),
+\prod_{q<Q}|F_q|\ >\ \prod_{s=0}^{K-2}\Bigl((N-1)\sum_{q<Q}r_q\binom qs+1\Bigr),
 \label{eq:box}
 \end{equation}
 then there is an arrangement with all row sums $M(n)$ and $\gamma\ne0$ that satisfies the degree-$(K-1)$ conditions; hence $k^*(n)\ge K$.
 \end{proposition}
 
 \begin{proof}
-For each $q$, \Cref{lem:twin} gives $r_q$ nonzero integers $d_{q,1},\dots,d_{q,r_q}$ with $|d_{q,i}|\le N-1$, one for each pair of complementary rows covering the $q$-th column pair.
-At least $\lceil r_q/2\rceil$ of them have the same sign, and their partial sums, together with $0$, form a set $F_q$ of $\lceil r_q/2\rceil+1$ distinct subset sums lying in an interval of length at most $r_q(N-1)$.
+The elements of $F_q$ lie in an interval of length $\sum_i|d_{q,i}|\le r_q(N-1)$.
 For $g\in\prod_qF_q$ the binomial moments $B_s(g)=\sum_qg_q\binom qs$, $0\le s\le K-2$, are integers in intervals of lengths at most $(N-1)\sum_qr_q\binom qs$, so by \eqref{eq:box} there are $g\ne g'$ with $B_s(g)=B_s(g')$ for all $s\le K-2$.
 Write $g_q=\sum_{i\in I_q}d_{q,i}$ and $g'_q=\sum_{i\in I'_q}d_{q,i}$.
 For every $q$, perform the exchange of \Cref{lem:twin} in the first row of each pair in $I_q\setminus I'_q$ and in the second row of each pair in $I'_q\setminus I_q$; all these exchanges involve disjoint cells.
@@ -225,8 +220,11 @@ Since $B_s(\zeta)=0$ for $s\le K-2$, \Cref{lem:poly_form} gives $(u-1)^{K-1}\mid
 With $\rho=0$, the arrangement satisfies the degree-$(K-1)$ conditions, and $\gamma\ne0$.
 \end{proof}
 
-\begin{proof}[Proof of \Cref{thm:perm_threshold}(b)]
-Fix $\alpha<\sqrt2$ and let $K-1=k=\lfloor\alpha\sqrt n\rfloor$; we show that \eqref{eq:box} holds for all large $n$ covered by \Cref{lem:twin_squares} (every $n\ge14$ is covered).
+The $d_{q,i}$ are nonzero, and at least $\lceil r_q/2\rceil$ of them have the same sign; their partial sums, together with $0$, are distinct, so $|F_q|\ge\lceil r_q/2\rceil+1$.
+For the squares of \Cref{lem:twin_squares} we take $j_0=0$, $Q=n/2$ and $r_q=n/2$ for even $n$, and $j_0=1$, $Q=(n-3)/2$ and $r_q=\min(2q,\,n-4-2q,\,(n-9)/2)+1$ for odd $n$: the $q$-th pair then consists of the columns $2q+1,2q+2$, and the complementary rows $\ell,n-1-\ell$ of \Cref{lem:twin_squares}(2) cover both columns if and only if $\ell\le2q$ and $\ell\le n-4-2q$.
+
+\begin{proof}[Proof of \Cref{thm:perm_threshold}(b), first part]
+Fix $\alpha<\sqrt2$ and let $K-1=k=\lfloor\alpha\sqrt n\rfloor$; we show that \eqref{eq:box} holds, with $|F_q|$ replaced by $\lceil r_q/2\rceil+1$, for all large $n$ covered by \Cref{lem:twin_squares} (every $n\ge14$ is covered).
 
 \emph{Right side.} $\sum_{q<Q}\binom qs=\binom Q{s+1}\le\binom n{s+1}$, $r_q\le n$ and $N\le n^2$, so each factor is at most $n^4\binom n{s+1}\le n^4\,n^{s+1}/(s+1)!$.
 From $\log s!\ge s\log s-s$ and $\sum_{s\le k}s\log s\ge\int_0^kx\log x\,dx=\frac{k^2}2\log k-\frac{k^2}4$,
@@ -238,7 +236,7 @@ hence $\sum_{s=1}^{k}(s\log n-\log s!)\le\frac{k^2}2\log\frac nk+O(k^2+k\log n)$
 \log(\text{right side})\le4k\log n+\sum_{s=1}^{k}\bigl(s\log n-\log s!\bigr)\le\frac{k^2}2\log\frac nk+O(k^2+k\log n)=\frac{\alpha^2}4\,n\log n+O(n).
 \]
 
-\emph{Left side.} For even $n$ it equals $(\lceil n/4\rceil+1)^{n/2}$, with logarithm $\frac n2\log n-O(n)$.
+\emph{Left side.} For even $n$ it is at least $(\lceil n/4\rceil+1)^{n/2}$, with logarithm $\frac n2\log n-O(n)$.
 For odd $n$, with $Q=(n-3)/2$, $r_q=\min(2q+1,\,2(Q-q),\,Q-2)\ge\min(q+1,\,Q-q)$ once $Q\ge5$ ($n\ge13$), so $\lceil r_q/2\rceil+1\ge\min(q+1,Q-q)/2$.
 Hence
 \[
@@ -247,12 +245,50 @@ Hence
 Since $\alpha^2/4<1/2$, \eqref{eq:box} holds for large $n$, and $k^*(n)\ge\lfloor\alpha\sqrt n\rfloor+1$.
 \end{proof}
 
-The convergence in (b) is slow: \eqref{eq:box} itself gives only $k^*(n)\ge2$ at $n=14$ and $k^*(n)\ge7$ at $n=100$ (\Cref{fig:kstar}).
+The odd case thus gives the same constant $\sqrt2$ as the even case, but more slowly: \eqref{eq:box} with $|F_q|\ge\lceil r_q/2\rceil+1$ first gives $k^*(n)\ge2$ at $n=14$ for even $n$ and only at $n=21$ for odd $n$, and $k^*(n)\ge29$ at $n=999$ and $n=1001$ against $k^*(1000)\ge32$.
+For $n\equiv0\pmod 4$ a square with controlled differences $d_{q,i}$ makes the sets $F_q$ much larger.
+
+\begin{proposition}[All subset sums]
+\label{prop:subset}
+Let $n=2h$ with $h\ge4$ even, and for $0\le q,r<h$ put $\theta=qh+r$ and $\epsilon_q=(-1)^q$.
+\begin{enumerate}
+\item[(i)] The square with $s_{r,2q}=\frac12\bigl(N+1+\epsilon_q(4\theta+1)\bigr)$, $s_{r,2q+1}=\frac12\bigl(N+1-\epsilon_q(4\theta+3)\bigr)$ and $s_{h+r,j}=N+1-s_{r,j}$ is semi-magic, and its rows $r$ and $h+r$ are complementary on all columns.
+\item[(ii)] With $j_0=0$, $Q=h$ and the $r_q=h$ pairs of rows $(r,h+r)$, the sets $F_q$ of \Cref{prop:box} satisfy $|F_q|\ge qh^2/40$ for $1\le q<h$.
+\item[(iii)] Hence $k^*(n)\ge(\sqrt6-o(1))\sqrt n$ as $n\to\infty$ with $4\mid n$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(i) As $\theta$ runs over $0,\dots,h^2-1$, the numbers $4\theta+1$ and $4\theta+3$ run over the odd numbers $1,\dots,N-1$, so the entries $\frac12(N+1\pm(4\theta+1))$, $\frac12(N+1\pm(4\theta+3))$ of rows $r$ and $h+r$ are $1,\dots,N$, each once.
+In row $r$ the two entries in columns $2q,2q+1$ add up to $N+1-\epsilon_q$, so the row sum is $h(N+1)=M(n)$ since $h$ is even; the same holds for row $h+r$.
+Each column contains $h$ pairs of entries adding up to $N+1$.
+
+(ii) Here $d_{q,r}=s_{r,2q+1}-s_{r,2q}=-2\epsilon_q(2qh+2r+1)$, so $|F_q|$ is the number of subset sums of $A_q=\{2qh+2r+1:0\le r<h\}$.
+For $0\le\kappa\le h$ the sums of the $\kappa$-element subsets of $\{0,\dots,h-1\}$ are all integers in $[\frac{\kappa(\kappa-1)}2,\frac{\kappa(\kappa-1)}2+\kappa(h-\kappa)]$ (pass from $\{0,\dots,\kappa-1\}$ to $\{h-\kappa,\dots,h-1\}$ by raising one element by $1$ at a time), so the sums of the $\kappa$-element subsets of $A_q$ form a set $E_\kappa$ of $\kappa(h-\kappa)+1$ integers in $[2qh\kappa+\kappa^2,\,2qh\kappa+\kappa^2+2\kappa(h-\kappa)]$.
+Let $\lambda=\lceil h/(4q)\rceil$.
+If $\kappa'\ge\kappa+\lambda$, then $\min E_{\kappa'}\ge2qh(\kappa+\lambda)+(\kappa+\lambda)^2>2qh\kappa+\frac{h^2}2+\kappa^2\ge\max E_\kappa$, since $2qh\lambda\ge h^2/2$ and $2\kappa(h-\kappa)\le h^2/2$.
+So the sets $E_\kappa$ with $\kappa=\lceil h/4\rceil+i\lambda\le 3h/4$, $i\ge0$, are pairwise disjoint; each has more than $\kappa(h-\kappa)\ge3h^2/16$ elements, and their number is
+\[
+\Bigl\lfloor\frac{3h/4-\lceil h/4\rceil}{\lambda}\Bigr\rfloor+1>\frac{2h-3}{4\lambda}\ge\frac{q(2h-3)}{h+4q}\ge\frac{q(2h-3)}{5h},
+\]
+using $\lceil h/4\rceil\le(h+3)/4$, $\lambda\le(h+4q)/(4q)$ and $q<h$.
+Hence $|F_q|>\frac{3h^2}{16}\cdot\frac{q(2h-3)}{5h}=\frac{3qh(2h-3)}{80}\ge\frac{qh^2}{40}$.
+
+(iii) Fix $\alpha<\sqrt6$ and let $K-1=k=\lfloor\alpha\sqrt n\rfloor$.
+By (ii) the logarithm of the left side of \eqref{eq:box} is at least $\log((h-1)!)+(h-1)\log(h^2/40)=3h\log h-O(h)=\frac32n\log n-O(n)$.
+The bound for the right side in the proof of \Cref{thm:perm_threshold}(b) uses only $Q\le n$ and $r_q\le n$, so its logarithm is at most $\frac{\alpha^2}4n\log n+O(n)$.
+Since $\alpha^2/4<3/2$, \eqref{eq:box} holds for large $n$, and \Cref{prop:box} gives $k^*(n)\ge\lfloor\alpha\sqrt n\rfloor+1$.
+\end{proof}
+
+\Cref{prop:subset}(iii) is the second part of \Cref{thm:perm_threshold}(b).
+The proof of (i) uses only that $h$ is even, so it re-proves \Cref{lem:twin_squares}(1) for even $h$.
+For $h$ even, $|F_q|$ is at least $\binom{h+1}2+1$ for every $q$, against $\lceil h/2\rceil+1$ in the count used for the first part.
+The convergence is slow: with $|F_q|\ge\lceil r_q/2\rceil+1$, \eqref{eq:box} gives $k^*(n)\ge2$ at $n=14$ and $k^*(n)\ge7$ at $n=100$, and with the exact $|F_q|$ for the square of \Cref{prop:subset} it gives $k^*(40)\ge8$ and $k^*(100)\ge16$, against $k^*(40)=26$ and $k^*(100)\le45$ (\Cref{fig:kstar}).
 Thus
 \[
-(\sqrt2-o(1))\sqrt n\le k^*(n)\le(2\sqrt{\pi e}+o(1))\sqrt{n\log n}.
+(\sqrt6-o(1))\sqrt n\le k^*(n)\le2\sqrt2\,\sqrt{n\log n}\qquad(4\mid n),
 \]
-The situation resembles that of polynomials with coefficients in $\{-1,0,1\}$ in \cite{BEK1999}: in both settings the upper bound comes from Jensen's formula and the lower construction from the pigeonhole principle, and they differ by a factor $\sqrt{\log n}$.
+with $\sqrt2$ in place of $\sqrt6$ for general $n$.
 
 \subsection{Exact values}
 \label{sec:kstar_exact}
@@ -277,14 +313,18 @@ At $n=18$ this factor is $70{,}715{,}340>50{,}860{,}872=18^5(18^2-1)/12$.
 From $n$ to $n+1$ the left side grows by the factor $2(2n-3)/n\ge11/3$ and the right side by $(n+1)^4(n+2)/(n^4(n-1))<3/2$.
 So for $n\ge18$ the bound $\|\gamma\|_2^2\le n^5(n^2-1)/12$ of \Cref{lem:col_feasible} forces $a=0$, and $k^*(n)\le n-3$.
 
-\emph{Upper bounds for $18\le n\le 40$.}  (For $n\le17$ they were proved above.)  If no nonzero vector of $\Lambda_{n,k}$ satisfies \eqref{eq:col_feasible} for every $p$, then $k^*(n)\le k$.
+\emph{Lower bounds for $14\le n\le17$.}  For each of these $n$ we found an arrangement with all row sums $M(n)$ whose column deviations satisfy $(t-1)^{n-2}\mid P_\gamma$ and $\gamma\ne0$ (\texttt{anc/kstar\_witnesses.json}; verified in exact integer arithmetic, $\max_j|\gamma_j|$ in \Cref{tab:kstar}).
+\end{proof}
+
+\begin{proof}[Proof of \Cref{thm:perm_threshold}(d)]
+\emph{Upper bounds.}  If no nonzero vector of $\Lambda_{n,k}$ satisfies \eqref{eq:col_feasible} for every $p$, then $k^*(n)\le k$.
 By \Cref{lem:col_feasible} only vectors with $\|\gamma\|_2^2\le n^5(n^2-1)/12$ need be examined; we enumerated them exactly with two independent implementations (Appendix~\ref{sec:appendix}).
 At $k=k^*(n)$ the ball contains no nonzero vector for $16$ of the $23$ values of $n$, since the Gram--Schmidt norms of the reduced basis already exceed the radius.
 For $n=20,22,24,26,34,36,38$ it contains $2,2,6,6,6,2,2$ vectors.
 Each violates \eqref{eq:col_feasible}, in every case but one already with $p=1$; the exception is $n=26$, where two of the six vectors need $p=2$.
 The certificate \texttt{anc/kstar\_certificates.json} lists the reduced bases and, for each vector, a violated instance $(p,J)$.
 
-\emph{Lower bounds for $14\le n\le 40$.}  For each $n$ we found a witness for $k^*(n)\ge K$, with $K$ the value of \Cref{tab:kstar}: an arrangement with all row sums $M(n)$ whose column deviations satisfy $(t-1)^{K}\mid P_\gamma$ and $\gamma\ne0$; each was verified in exact integer arithmetic.
+\emph{Lower bounds.}  For each $18\le n\le40$ we found a witness for $k^*(n)\ge K$, with $K$ the value of \Cref{tab:kstar}: an arrangement with all row sums $M(n)$ whose column deviations satisfy $(t-1)^{K}\mid P_\gamma$ and $\gamma\ne0$; each was verified in exact integer arithmetic.
 \end{proof}
 
 \begin{table}[htbp]
@@ -300,21 +340,33 @@ $k^{*}(n)$ & 21&21&22&22&23&23&23&24&24&25&25&26&26&\\
 $\max_j|\gamma_j|$ & 8892&6405&11737&9330&14881&11799&9177&18147&14766&24150&16515&26520&22233&\\
 $n^2(n-1)/2$ & 10584&11774&13050&14415&15872&17424&19074&20825&22680&24642&26714&28899&31200&
 \end{tabular}
-\caption{Exact values of the permutation threshold for $14\le n\le40$ (\Cref{thm:perm_threshold}(c)), the largest column deviation $\max_j|\gamma_j|$ of the witness arrangement, and the bound $n^2(n-1)/2$ of \Cref{lem:col_feasible}. The upper bounds for $18\le n\le40$ were computed by two independent exact lattice enumerations (\texttt{anc/kstar\_verify.py}, \texttt{anc/kstar\_enum\_independent.py}) and, for $n\le33$, also by integer programming (\texttt{anc/kstar\_crosscheck/}); a certificate is in \texttt{anc/kstar\_certificates.json}.}
+\caption{Exact values of the permutation threshold for $14\le n\le40$ (\Cref{thm:perm_threshold}(c),(d)), the largest column deviation $\max_j|\gamma_j|$ of the witness arrangement, and the bound $n^2(n-1)/2$ of \Cref{lem:col_feasible}. The upper bounds for $18\le n\le40$ were computed by two independent exact lattice enumerations (\texttt{anc/kstar\_verify.py}, \texttt{anc/kstar\_enum\_independent.py}) and, for $n\le33$, also by integer programming (\texttt{anc/kstar\_crosscheck/}); a certificate is in \texttt{anc/kstar\_certificates.json}.}
 \label{tab:kstar}
 \end{table}
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.72\textwidth]{figures/fig_kstar.pdf}
-\caption{The permutation threshold. Exact values of $k^*(n)$ for $3\le n\le40$ (dots), computer-assisted upper bounds for $41\le n\le100$ (two independent implementations agree, not certified; open circles), the linear-algebra threshold $n-1$, the bound of \Cref{thm:perm_threshold}(a), the lower bound given by \eqref{eq:box} (open squares, shown where it gives $K\ge2$; for odd $n$ with small $r_q$ it is trivial and is not plotted), and $\sqrt{2n}$, the asymptotic order of (b), which \eqref{eq:box} approaches slowly.}
+\includegraphics[width=\textwidth]{figures/fig_kstar.pdf}
+\caption{The permutation threshold. (a) Exact values of $k^*(n)$ for $3\le n\le40$ (dots), computer-assisted upper bounds $U(n)$ for $41\le n\le100$ (two independent implementations agree, not certified; open circles), the linear-algebra threshold $n-1$, the bound of \Cref{thm:perm_threshold}(a), the lower bounds given by \eqref{eq:box} with $|F_q|\ge\lceil r_q/2\rceil+1$ (open squares, shown where they give $K\ge2$) and for $4\mid n$ with the square of \Cref{prop:subset} (crosses), and $\sqrt{6n}$, the asymptotic order of (b) for $4\mid n$. (b) The same exact values and upper bounds divided by $\sqrt n$ and by $\sqrt{n\log n}$.}
 \label{fig:kstar}
 \end{figure}
 
 \paragraph{The witnesses.}
 The target vectors $\gamma$ were chosen among the shortest vectors of $\Lambda_{n,k^*(n)-1}$ satisfying \eqref{eq:col_feasible}, as produced by the enumeration.
 Starting from a semi-magic square of \Cref{lem:twin_squares} (or a Siamese (de la Loub\`ere) magic square \cite{andrews1960magic}), a steepest-descent search over exchanges within a row, which fix the row sums, minimised $\sum_j(\text{column sum}_j-M(n)-\gamma_j)^2$, with random exchanges to leave local minima; for the hardest cases a simulated annealing over arbitrary exchanges, with energy the squared distance of both row and column sums to their targets, was used.
-For each $14\le n\le40$ the witness search succeeded at the last $k$ at which $\Lambda_{n,k}$ still contains a nonzero vector satisfying \eqref{eq:col_feasible}, so $k^*(n)$ equals the least $k$ for which $\Lambda_{n,k}$ contains no such vector.
-We do not know whether this holds for all $n$.
 Some witnesses come close to the bound of \Cref{lem:col_feasible}: $\max_j|\gamma_j|=924$ against $1014$ at $n=13$, and $24150$ against $24642$ at $n=37$.
-Beyond $n=40$ we computed only upper bounds (computer-assisted; two independent implementations agree for every $n\le100$, but the values carry no certificate; \Cref{fig:kstar}); for instance $k^*(50)\le30$, $k^*(80)\le39$ and $k^*(100)\le45$.
+For each $14\le n\le40$ the witness search succeeded at the last $k$ at which $\Lambda_{n,k}$ still contains a nonzero vector satisfying \eqref{eq:col_feasible}.
+Let $U(n)$ be the least $k$ such that no nonzero vector of $\Lambda_{n,k}$ satisfies \eqref{eq:col_feasible} for every $J$; by \Cref{lem:col_feasible}, $k^*(n)\le U(n)$, and the proofs of (c) and (d) show $k^*(n)=U(n)$ for $3\le n\le40$.
+
+\begin{conjecture}
+\label{conj:lattice}
+$k^*(n)=U(n)$ for every $n\ge3$.
+\end{conjecture}
+
+We tested \Cref{conj:lattice} for $41\le n\le46$, where both implementations give $U(n)=26,27,27,27,28,28$ (not certified).
+For each of these $n$ the same search, run on the vectors of $\Lambda_{n,U(n)-1}$ in the ball $\|\gamma\|_2^2\le n^5(n^2-1)/12$ that satisfy \eqref{eq:col_feasible}, found a witness (\texttt{anc/kstar\_beyond40.json}, verified in exact arithmetic).
+So $k^*(n)\ge U(n)$, i.e.\ $k^*(n)\ge26,27,27,27,28,28$, holds unconditionally for $41\le n\le46$; only the upper bounds $k^*(n)\le U(n)$ are uncertified, and the conjecture holds for these $n$ if they are correct.
+The hardest case was $n=42$, where the ball contains a single such vector up to sign, with slack $7$ in one instance of \eqref{eq:col_feasible} with $p=3$; it and one of the $50$ vectors for $n=46$ were realised only by a longer two-stage annealing.
+Beyond $n=40$ the values $U(n)$ are computer-assisted upper bounds for $k^*(n)$ (two independent implementations agree for every $n\le100$, but the values carry no certificate); for instance $k^*(50)\le30$, $k^*(80)\le39$ and $k^*(100)\le45$.
+In \Cref{fig:kstar}(b), $k^*(n)/\sqrt n$ (and $U(n)/\sqrt n$ beyond $n=40$) grows from $3.2$ at $n=14$ to $4.5$ at $n=100$, while the same values divided by $\sqrt{n\log n}$ stay between $2.06$ and $2.18$ for $20\le n\le100$.
+These data do not discriminate between the orders $\sqrt n$ and $\sqrt{n\log n}$: by \Cref{sec:kstar_upper}, $U(n)\ge(\sqrt{24}-o(1))\sqrt n$, so $U(n)/\sqrt n$ eventually exceeds any constant below $\sqrt{24}\approx4.90$, and a rise of this kind is expected also if $U(n)$ is of order $\sqrt n$.

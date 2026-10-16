@@ -12,10 +12,23 @@ Jean-Paul Allouche and Jeffrey Shallit.
 \newblock In {\em Sequences and Their Applications (Singapore, 1998)}, Springer
   Ser. Discrete Math. Theor. Comput. Sci., pages 1--16. Springer, London, 1999.
 
+\bibitem{amoroso1995}
+Francesco Amoroso.
+\newblock Polynomials with prescribed vanishing at roots of unity.
+\newblock {\em Bollettino della Unione Matematica Italiana B (7)},
+  9(4):1021--1042, 1995.
+
 \bibitem{andrews1960magic}
 W.~S. Andrews.
 \newblock {\em Magic Squares and Cubes}.
 \newblock Dover Publications, 2nd edition, 1960.
+
+\bibitem{barbour2005}
+A.~D. Barbour and Louis H.~Y. Chen.
+\newblock The permutation distribution of matrix correlation statistics.
+\newblock In {\em Stein's Method and Applications}, volume~5 of {\em Lecture
+  Notes Series, Institute for Mathematical Sciences, National University of
+  Singapore}, pages 223--245. Singapore University Press, Singapore, 2005.
 
 \bibitem{beck2010enumeration}
 Matthias Beck and Andrew van Herick.
@@ -27,12 +40,25 @@ Matthias Beck and Thomas Zaslavsky.
 \newblock Inside-out polytopes.
 \newblock {\em Advances in Mathematics}, 205(1):134--162, 2006.
 
+\bibitem{bloemena1964}
+A.~R. Bloemena.
+\newblock {\em Sampling from a Graph}, volume~2 of {\em Mathematical Centre
+  Tracts}.
+\newblock Mathematisch Centrum, Amsterdam, 1964.
+
 \bibitem{bolthausen1984}
 Erwin Bolthausen.
 \newblock An estimate of the remainder in a combinatorial central limit
   theorem.
 \newblock {\em Zeitschrift f{\"u}r Wahrscheinlichkeitstheorie und Verwandte
   Gebiete}, 66:379--386, 1984.
+
+\bibitem{bombieri1987low}
+E.~Bombieri and J.~D. Vaaler.
+\newblock Polynomials with low height and prescribed vanishing.
+\newblock In {\em Analytic Number Theory and Diophantine Problems (Stillwater,
+  1984)}, volume~70 of {\em Progress in Mathematics}, pages 53--73.
+  Birkh{\"a}user, Boston, 1987.
 
 \bibitem{borwein2002computational}
 Peter Borwein.
@@ -44,6 +70,11 @@ Peter Borwein, Tam{\'a}s Erd{\'e}lyi, and G{\'e}za K{\'o}s.
 \newblock Littlewood-type problems on $[0,1]$.
 \newblock {\em Proceedings of the London Mathematical Society (3)},
   79(1):22--46, 1999.
+
+\bibitem{borwein2000height}
+Peter Borwein and Michael~J. Mossinghoff.
+\newblock Polynomials with height 1 and prescribed vanishing at 1.
+\newblock {\em Experimental Mathematics}, 9(3):425--433, 2000.
 
 \bibitem{cameron2013signatura}
 Ian Cameron, Adam Rogers, and Peter~D. Loly.
@@ -58,6 +89,12 @@ E.~Rodney Canfield and Brendan~D. McKay.
   column sums.
 \newblock {\em Combinatorica}, 30:655--680, 2010.
 
+\bibitem{daniels1944}
+H.~E. Daniels.
+\newblock The relation between measures of correlation in the universe of
+  sample permutations.
+\newblock {\em Biometrika}, 33(2):129--135, 1944.
+
 \bibitem{eberhard2019additive}
 Sean Eberhard, Freddie Manners, and Rudi Mrazovi{\'c}.
 \newblock Additive triples of bijections, or the toroidal semiqueens problem.
@@ -69,6 +106,17 @@ Eug{\`e}ne Ehrhart.
 \newblock Sur les carr{\'e}s magiques.
 \newblock {\em Comptes Rendus de l'Acad{\'e}mie des Sciences, S{\'e}rie A},
   277:651--654, 1973.
+
+\bibitem{erdelyi2016}
+Tam{\'a}s Erd{\'e}lyi.
+\newblock Coppersmith--{R}ivlin type inequalities and the order of vanishing of
+  polynomials at 1.
+\newblock {\em Acta Arithmetica}, 172(3):271--284, 2016.
+
+\bibitem{erdosturan1950}
+P.~Erd{\H o}s and P.~Tur{\'a}n.
+\newblock On the distribution of roots of polynomials.
+\newblock {\em Annals of Mathematics (2)}, 51(1):105--119, 1950.
 
 \bibitem{frenicle1693}
 Bernard Fr{\'e}nicle~de Bessy.
@@ -131,6 +179,14 @@ Kyle~Elliott Mathewson.
 \newblock Magic gems: A polyhedral framework for magic squares.
 \newblock arXiv:2512.09170, 2025.
 
+\bibitem{mignotte1982}
+Maurice Mignotte.
+\newblock Estimations {\'e}l{\'e}mentaires effectives sur les nombres
+  alg{\'e}briques.
+\newblock In J.~V. Armitage, editor, {\em Journ{\'e}es Arithm{\'e}tiques 1980},
+  volume~56 of {\em London Mathematical Society Lecture Note Series}, pages
+  364--371. Cambridge University Press, Cambridge, 1982.
+
 \bibitem{motoo1957}
 Minoru Motoo.
 \newblock On the {H}oeffding's combinatorial central limit theorem.
@@ -172,6 +228,12 @@ Adam Rogers and Peter~D. Loly.
 \newblock The electric multipole expansion for a magic cube.
 \newblock {\em European Journal of Physics}, 26(5):809--813, 2005.
 
+\bibitem{schur1933}
+Issai Schur.
+\newblock Untersuchungen {\"u}ber algebraische {G}leichungen.
+\newblock {\em Sitzungsberichte der Preu{\ss}ischen Akademie der
+  Wissenschaften, Physikalisch-Mathematische Klasse}, pages 403--428, 1933.
+
 \bibitem{stanley1973magic}
 Richard~P. Stanley.
 \newblock Linear homogeneous {D}iophantine equations and magic labelings of
@@ -203,5 +265,11 @@ James~E. Ward, III.
 E.~M. Wright.
 \newblock Prouhet's 1851 solution of the {T}arry--{E}scott problem of 1910.
 \newblock {\em American Mathematical Monthly}, 66:199--201, 1959.
+
+\bibitem{zhao1997}
+Lincheng Zhao, Zhidong Bai, Chern-Ching Chao, and Wen-Qi Liang.
+\newblock Error bound in a central limit theorem of double-indexed permutation
+  statistics.
+\newblock {\em Annals of Statistics}, 25(5):2210--2227, 1997.
 
 \end{thebibliography}

@@ -303,8 +303,10 @@ def lower_bound_34(n):
 
 
 def fig_kstar():
-    """k*(n): exact values (n<=40), single-implementation upper bounds (41<=n<=100), Theorem (a) bound, n-1,
-    the lower bound given by (11), and sqrt(2n)."""
+    """k*(n): (a) exact values (n<=40), computer-assisted upper bounds U(n) (41<=n<=100), Theorem (a) bound, n-1,
+    the lower bounds given by the pigeonhole criterion (with |F_q| >= ceil(r_q/2)+1, and with all subset sums for
+    4 | n, kstar_subset_sums.py), and sqrt(6n); (b) the same values divided by sqrt(n) and by sqrt(n log n)."""
+    from kstar_subset_sums import lower_bound_subset
     jp = os.path.join(HERE, 'kstar_verify.json')
     if os.path.exists(jp):
         d = json.load(open(jp))
@@ -315,25 +317,51 @@ def fig_kstar():
     exact = {int(k): v for k, v in d['exact'].items()}
     for n in range(3, 14): exact[n] = n - 1
     up = {int(k): v for k, v in d['upper_bounds'].items() if int(k) > 40}
-    fig, ax = plt.subplots(figsize=(0.72 * TEXTWIDTH, 2.25))
+    fig, (ax, bx) = plt.subplots(1, 2, figsize=(TEXTWIDTH, 2.35), gridspec_kw=dict(width_ratios=[1.35, 1]))
     nmax = max(up) if up else 40
     ns = np.arange(3, nmax + 1)
     ax.plot(ns, ns - 1, color=GREY, lw=0.9, ls='--', label=r'$n-1$ (real-valued $z$)')
-    A = np.floor(np.sqrt(np.pi * np.e * (ns - 1) * np.log(ns ** 4 / 4.0)))
-    ax.plot(ns, A, color=VERM, lw=1.0, label=r'upper bound $\lfloor\sqrt{\pi e(n-1)\log(n^4/4)}\rfloor$')
+    A = np.floor(np.sqrt(2 * (ns - 1) * np.log(ns ** 4 / 4.0)))
+    ax.plot(ns, A, color=VERM, lw=1.0, label=r'upper bound $\lfloor\sqrt{2(n-1)\log(n^4/4)}\rfloor$')
     lb = {n: lower_bound_34(n) for n in range(9, nmax + 1)}
     xl = [n for n in sorted(lb) if lb[n] is not None and lb[n] >= 2]
-    ax.plot(xl, [lb[n] for n in xl], 's', color=GREEN, ms=2.4, mfc='white', mew=0.7, label=r'lower bound from the pigeonhole criterion')
-    ax.plot(ns, np.sqrt(2 * ns), color=GREEN, lw=1.0, ls=':', label=r'$\sqrt{2n}$ (order of the lower bound)')
-    xe = sorted(exact); ax.plot(xe, [exact[n] for n in xe], 'o', color=BLUE, ms=3.2, label=r'$k^*(n)$, exact')
-    xu = sorted(up); ax.plot(xu, [up[n] for n in xu], 'o', color=BLUE, ms=3.2, mfc='white', mew=0.8, label=r'upper bound, computer-assisted (not certified)')
+    ax.plot(xl, [lb[n] for n in xl], 's', color=GREEN, ms=2.2, mfc='white', mew=0.6, label=r'lower bound, $|F_q|\geq\lceil r_q/2\rceil+1$')
+    ls = {n: lower_bound_subset(n) for n in range(8, nmax + 1, 4)}
+    xs = [n for n in sorted(ls) if ls[n] is not None and ls[n] >= 2]
+    ax.plot(xs, [ls[n] for n in xs], 'x', color=GREEN, ms=3.0, mew=0.8, label=r'lower bound, all subset sums ($4\mid n$)')
+    ax.plot(ns, np.sqrt(6 * ns), color=GREEN, lw=1.0, ls=':', label=r'$\sqrt{6n}$')
+    xe = sorted(exact); ax.plot(xe, [exact[n] for n in xe], 'o', color=BLUE, ms=3.0, label=r'$k^*(n)$, exact')
+    xu = sorted(up); ax.plot(xu, [up[n] for n in xu], 'o', color=BLUE, ms=3.0, mfc='white', mew=0.7, label=r'$U(n)\geq k^*(n)$, computed (not certified)')
     ax.set_xlim(0, nmax + 2); ax.set_ylim(0, 0.62 * nmax)
     ax.set_xlabel('$n$'); ax.set_ylabel('degree $k$')
-    ax.legend(loc='upper left', fontsize=6.6, handlelength=1.8, labelspacing=0.2)
+    ax.legend(loc='upper left', fontsize=5.6, handlelength=1.6, labelspacing=0.15)
     ax.grid(True, color=LGREY, lw=0.5); ax.set_axisbelow(True)
-    fig.subplots_adjust(left=0.1, right=0.98, top=0.97, bottom=0.17)
+    panel_label(ax, '(a)', x=-0.13)
+    # (b) normalised values
+    vals = dict(exact); vals.update(up)
+    xx = sorted(vals)
+    r1 = [vals[n] / math.sqrt(n) for n in xx]; r2 = [vals[n] / math.sqrt(n * math.log(n)) for n in xx]
+    fe = [n <= 40 for n in xx]
+    for r, col, lab in ((r1, BLUE, r'$k/\sqrt{n}$'), (r2, VERM, r'$k/\sqrt{n\log n}$')):
+        bx.plot([n for n, f in zip(xx, fe) if f], [v for v, f in zip(r, fe) if f], 'o', color=col, ms=2.4, label=lab + ', exact')
+        bx.plot([n for n, f in zip(xx, fe) if not f], [v for v, f in zip(r, fe) if not f], 'o', color=col, ms=2.4, mfc='white', mew=0.6, label=lab + r', $U(n)$')
+    bx.axhline(2 * math.sqrt(2), color=VERM, lw=0.8, ls='--', label=r'$2\sqrt2$ (\textrm{Thm.\ (a)})' if plt.rcParams.get('text.usetex') else r'$2\sqrt{2}$, bound (a)')
+    bx.set_xlim(0, nmax + 2); bx.set_ylim(0, 5.2)
+    bx.set_xlabel('$n$')
+    bx.legend(loc='lower right', fontsize=5.6, handlelength=1.4, labelspacing=0.15, ncol=1)
+    bx.grid(True, color=LGREY, lw=0.5); bx.set_axisbelow(True)
+    panel_label(bx, '(b)', x=-0.1)
+    fig.subplots_adjust(left=0.065, right=0.99, top=0.91, bottom=0.17, wspace=0.18)
     fig.savefig(os.path.join(FIG, 'fig_kstar.pdf'))
-    plt.close(fig); print('kstar figure written; (11) lower bounds:', {n: lb[n] for n in xl if n in (14, 20, 30, 40, 60, 80, 100)})
+    plt.close(fig)
+    print('kstar figure written; (11) lower bounds:', {n: lb[n] for n in xl if n in (14, 20, 30, 40, 60, 80, 100)},
+          ' all subset sums:', {n: ls[n] for n in xs if n in (16, 20, 40, 60, 80, 100)})
+    r2 = {n: vals[n] / math.sqrt(n * math.log(n)) for n in range(20, nmax + 1)}
+    print('  k/sqrt(n): %.2f at n = 14, %.2f at n = %d;  k/sqrt(n log n) over 20 <= n <= %d: min %.3f (n = %d), max %.3f (n = %d)'
+          % (vals[14] / math.sqrt(14), vals[nmax] / math.sqrt(nmax), nmax, nmax, min(r2.values()), min(r2, key=r2.get),
+             max(r2.values()), max(r2, key=r2.get)))
+    for n in (13, 20, 30, 40, 50, 60, 70, 80, 90, 100):
+        print('  n = %3d  k = %2d  k/sqrt(n) = %.3f  k/sqrt(n log n) = %.3f' % (n, vals[n], vals[n] / math.sqrt(n), vals[n] / math.sqrt(n * math.log(n))))
 
 
 if __name__ == '__main__':

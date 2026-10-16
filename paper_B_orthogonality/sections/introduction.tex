@@ -24,31 +24,40 @@ For arrangements, integrality and the bounded size of the line sums lower this t
 Let $k^*(n)$ be the least $k$ such that every arrangement satisfying the degree-$k$ conditions is semi-magic.
 A \emph{witness} for $k^*(n)\ge K$ is an arrangement that satisfies the degree-$(K-1)$ conditions and is not semi-magic.
 The degree-$k$ conditions say that the polynomial $\sum_j\gamma_jt^j$ formed from the column deviations is divisible by $(t-1)^{k+1}$, and similarly for the rows, so that the positive and negative parts of $\gamma$ form a solution of a Prouhet--Tarry--Escott system \cite{wright1959prouhet,borwein2002computational}.
-Our main result (\Cref{thm:perm_threshold}) is
+Our main result is the lower bound in \Cref{thm:perm_threshold}(b); together with Schur's bound, \Cref{thm:perm_threshold}(a), it gives
 \[
-(\sqrt2-o(1))\sqrt n\ \le\ k^*(n)\ \le\ \sqrt{\pi e\,(n-1)\log(n^4/4)}\ \le\ 2\sqrt{\pi e}\,\sqrt{n\log n},
+(\sqrt2-o(1))\sqrt n\ \le\ k^*(n)\ \le\ \sqrt{2(n-1)\log(n^4/4)}\ \le\ 2\sqrt2\,\sqrt{n\log n},
 \]
-together with the exact values $k^*(n)=n-1$ for $3\le n\le13$ and $k^*(n)=n-2$ for $14\le n\le17$ and the bound $k^*(n)\le n-3$ for all $n\ge18$, all with short proofs, and the exact values for $n\le40$, which are computer-assisted (\Cref{tab:kstar}).
-The upper bound is a Jensen-formula argument of the type used by Borwein, Erd\'elyi and K\'os for polynomials with bounded coefficients \cite{BEK1999}.
-The lower bound needs the converse direction, namely that suitable integer vectors are column-deviation vectors of arrangements whose row sums all equal $M(n)$; we obtain it from semi-magic squares with many pairs of complementary rows, in which swaps realise prescribed column deviations, combined with the pigeonhole principle.
-Whether $k^*(n)$ grows like $\sqrt n$ or like $\sqrt{n\log n}$ remains open.
+with $\sqrt6$ in place of $\sqrt2$ when $4\mid n$.
+We also prove $k^*(n)=n-1$ for $3\le n\le13$, $k^*(n)=n-2$ for $14\le n\le17$ and $k^*(n)\le n-3$ for all $n\ge18$, with short proofs in which the lower bounds rest on explicit witness arrangements (printed in Appendix~\ref{sec:app_witnesses} for $n\le13$), and, separately and with computer assistance, we determine $k^*(n)$ for $18\le n\le40$ (\Cref{tab:kstar}).
+
+The upper bound does not use that $\gamma$ comes from an arrangement, only that it is a nonzero integer vector with $\|\gamma\|_1\le n^4/4$.
+For such vectors it is Schur's bound on the number of real zeros \cite{schur1933,erdosturan1950}; the same order follows from Mignotte's lower bound for the height of an integer polynomial with a zero of high order at $1$ \cite{mignotte1982,amoroso1995} and from \cite[Thm.~2.1]{BEK1999}.
+It is below $n-1$ from $n=24$ on and improves on $k^*(n)\le n-3$ from $n=30$ on.
+In the other direction, Amoroso's upper bound \cite[Thm.~2]{amoroso1995}, obtained from the Bombieri--Vaaler form of Siegel's lemma \cite{bombieri1987low}, gives, for large $n$, such vectors with a zero of order $(\sqrt{24}-o(1))\sqrt n$ at $1$, and between the orders $\sqrt{24n}$ and $\sqrt{8n\log n}$ lies the known gap, by a factor of order $\sqrt{\log n}$, between the constructions and the bounds for integer polynomials with a zero of prescribed order at $1$ \cite{mignotte1982,bombieri1987low,amoroso1995,BEK1999}.
+The new ingredient is the realisability direction behind the lower bound: integer vectors of this kind must be column-deviation vectors of arrangements whose row sums all equal $M(n)$.
+We obtain them from semi-magic squares with many pairs of complementary rows, in which swaps realise prescribed column deviations, combined with the pigeonhole principle.
+Whether $k^*(n)$ grows like $\sqrt n$ or like $\sqrt{n\log n}$ remains open, and the computed values for $14\le n\le100$ (exact for $n\le40$, upper bounds beyond) do not decide it (\Cref{fig:kstar}).
+Let $U(n)$ be the least $k$ for which the lattice of admissible $\gamma$ contains no nonzero vector obeying the size constraints satisfied by column deviations, so that $k^*(n)\le U(n)$.  Then $k^*(n)=U(n)$ for $n\le40$, witnesses prove $k^*(n)\ge U(n)$ for $41\le n\le46$ (with $U(n)$ computed but not certified), and we conjecture that $k^*(n)=U(n)$ for all $n$ (\Cref{conj:lattice}).
 
 \paragraph{Random arrangements.}
-For a uniformly random arrangement each $\langle\varphi,z\rangle$ is a linear permutation statistic, so the energy $\Efull=N^{-2}\sum_L\delta_L^2$ ($N=n^2$, all $2n+2$ lines) and the four-term energy $\Efour$, which combines the degree-$1$ and the two diagonal conditions (\Cref{def:energies}), are quadratic forms in a random permutation of the centred values.
-We specialise the classical variance formula for quadratic assignment statistics \cite{mantel1967,hubert1987assignment} to quadratic forms with zero row sums in the centred entries (\Cref{prop:var_identity}); the variance is then a combination of three invariants of the matrix of the form, and we obtain the exact means and variances of both energies for every $n$ (\Cref{thm:var_closed}).
-By Hoeffding's combinatorial central limit theorem, $\Efour/\E[\Efour]\to\mathrm{Exp}(1)$ (\Cref{cor:random_energy_clt}).
+For a uniformly random arrangement each $\langle\varphi,z\rangle$ is a linear permutation statistic, so the energy $\Efull=N^{-2}\sum_L\delta_L^2$ ($N=n^2$, all $2n+2$ lines) and the four-term energy $\Efour$, which combines the degree-$1$ and the two diagonal conditions (\Cref{def:energies}), are quadratic forms in a random permutation of the centred values, i.e.\ quadratic assignment statistics.
+We specialise the classical variance formula for such statistics \cite{mantel1967,hubert1987assignment} (see \Cref{sec:random_energy} for the background) to quadratic forms with zero row sums in the centred entries (\Cref{prop:var_identity}); the variance is then a combination of three invariants of the matrix of the form, and we obtain the exact means and variances of both energies for every $n$ (\Cref{thm:var_closed}).
+By Hoeffding's combinatorial central limit theorem, $\Efour/\E[\Efour]\to\mathrm{Exp}(1)$ (\Cref{cor:random_energy_clt}); the two diagonal terms are negligible in this limit, which is that of the first-moment terms $\langle x,z\rangle^2+\langle y,z\rangle^2$.
 The same tools give the mean and variance of Loly's moment-of-inertia invariant $I(S)=\sum s_{ij}(x_j^2+y_i^2)$ under a uniformly random arrangement (\Cref{cor:loly_null}); magic squares take exactly the mean value.
 
 \paragraph{The class $L_4$.}
-Exactly $14{,}639{,}440$ of the $16!$ arrangements of order $4$ satisfy the four conditions $\Efour=0$, and $7{,}040$ of them are magic (\Cref{prop:L4}); the count is $0.80$ times a Gaussian local-limit heuristic.
+Exactly $14{,}639{,}440$ of the $16!$ arrangements of order $4$ satisfy the four conditions $\Efour=0$, and $7{,}040$ of them are magic (\Cref{prop:L4}); a Gaussian local-limit heuristic, which is not a theorem, gives an estimate about $1.25$ times larger (\Cref{sec:lowmode_n4}).
 
 \paragraph{Classical and new material.}
-Orthogonality to the line space, the Vandermonde threshold, the vanishing of the moments $\langle a(x)+b(y),z\rangle$ of a semi-magic square, Loly's invariant \cite{loly2004invariance} and the means of the energies are classical or elementary, \Cref{prop:var_identity} is a special case of classical formulas, and the single-swap formula of \Cref{rem:swap} is the incremental evaluation used in local search.
-To our knowledge \Cref{thm:perm_threshold}, the closed forms for the variances in \Cref{thm:var_closed} with the limit law, the variance in \Cref{cor:loly_null} and the count in \Cref{prop:L4} have not appeared before.
+\Cref{sec:theory} is the main contribution.
+Orthogonality to the line space, the Vandermonde threshold, the vanishing of the moments $\langle a(x)+b(y),z\rangle$ of a semi-magic square, Loly's invariant \cite{loly2004invariance} and the means of the energies are classical or elementary, and \Cref{thm:perm_threshold}(a) is an application of Schur's bound.
+\Cref{sec:random_energy} specialises classical results: \Cref{prop:var_identity} is a special case of the permutation variance of a quadratic assignment statistic, \Cref{thm:var_closed} and \Cref{cor:loly_null} evaluate it and the Wald--Wolfowitz formula for particular test functions, and \Cref{cor:random_energy_clt} is a direct consequence of Hoeffding's theorem; the single-swap formula of \Cref{rem:swap} is the incremental evaluation used in local search.
+To our knowledge the lower bounds of \Cref{thm:perm_threshold}(b), the exact values in \Cref{thm:perm_threshold}(c) and~(d), and the count in \Cref{prop:L4} have not appeared before.
 
 \paragraph{Organisation.}
 \Cref{sec:background} fixes notation and collects the tools; \Cref{tab:notation} summarises the notation.
 \Cref{sec:theory} contains the moment conditions and the permutation threshold.
 \Cref{sec:random_energy} treats random arrangements, \Cref{sec:computations} the computations for small $n$, and \Cref{sec:discussion} lists open questions.
-The appendices contain the computational methods (Appendix~\ref{sec:appendix}), the construction of the squares used for the lower bound (Appendix~\ref{sec:app_twin}), the derivation of the variance formulas (Appendix~\ref{sec:app_variance}) and a witness for $n=5$ (Appendix~\ref{sec:app_witnesses}).
+The appendices contain the computational methods (Appendix~\ref{sec:appendix}), the construction of the squares used for the lower bound (Appendix~\ref{sec:app_twin}), the derivation of the variance formulas (Appendix~\ref{sec:app_variance}) and the witnesses for $5\le n\le13$ (Appendix~\ref{sec:app_witnesses}).
 The two parts are independent: \Cref{sec:theory} (with Appendices~\ref{sec:app_twin} and~\ref{sec:app_witnesses}) can be read without Sections~\ref{sec:random_energy} and~\ref{sec:computations} (with Appendix~\ref{sec:app_variance}) and conversely; they share only the notation of \Cref{sec:background}, and Appendix~\ref{sec:appendix} describes the computations for both.

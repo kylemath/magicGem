@@ -395,6 +395,27 @@ def check_L4():
     OUT['L4'] = {'p': 14639440 / math.factorial(16), 'mc_hits': s, 'diag_only': diag}
 
 
+def check_diagonal_share(ns=(3, 4, 5, 6, 7, 8, 9, 10, 11, 12)):
+    """Corollary 4.5 and the note after it: tau_3^2/tau_1^2 = 12/(n^2(n+1)) and the diagonal share
+    tau_3^2/(tau_1^2+tau_3^2) = 12/(n^3+n^2+12) of E[E_4], from the exact permutation variance
+    Var(sum_c a_c b_pi(c)) = sum_c (a_c - abar)^2 sum_v (b_v - bbar)^2 / (N-1), a = centred test function / N."""
+    res = {}
+    for n in ns:
+        N = n * n; b = [Fr(v) - Fr(N + 1, 2) for v in range(1, N + 1)]
+        sb = sum(v * v for v in b)
+        def var_T(phi):
+            m = Fr(sum(phi), N); a = [(f - m) / N for f in phi]
+            return sum(x * x for x in a) * sb / (N - 1)
+        xs = [Fr(j) - Fr(n - 1, 2) for i in range(n) for j in range(n)]
+        dm = [Fr(1) if i == j else Fr(0) for i in range(n) for j in range(n)]
+        t1, t3 = var_T(xs), var_T(dm)
+        assert t3 / t1 == Fr(12, n * n * (n + 1)) and t3 / (t1 + t3) == Fr(12, n ** 3 + n * n + 12)
+        res[n] = t3 / (t1 + t3)
+    print('  tau_3^2/tau_1^2 = 12/(n^2(n+1)) for n =', list(ns), '; diagonal share of E[E_4] at n = 3, 5, 8:',
+          ', '.join('%.3f' % float(res[n]) for n in (3, 5, 8) if n in res))
+    OUT['diagonal_share'] = {n: str(res[n]) for n in res}
+
+
 def main():
     print('[n=3 exhaustive]'); check_n3()
     print('[exact moments]'); check_variances()
@@ -403,6 +424,7 @@ def main():
     print('[product of inertia]'); check_product_inertia(reps4)
     print('[witnesses]'); check_witnesses()
     print('[L4]'); check_L4()
+    print('[diagonal share, Corollary 4.5]'); check_diagonal_share()
     json.dump(OUT, open(os.path.join(HERE, 'verify_numbers.json'), 'w'), indent=1, default=str)
 
 

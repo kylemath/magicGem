@@ -1,15 +1,16 @@
 \section{Open questions}
 \label{sec:discussion}
 
-The main results are the two-sided bound $(\sqrt2-o(1))\sqrt n\le k^*(n)\le(2\sqrt{\pi e}+o(1))\sqrt{n\log n}$ for the permutation threshold, with exact values for $n\le40$ (computer-assisted for the upper bounds when $18\le n\le40$), and exact second moments of the line-sum energies of a random arrangement.
+The main results are the lower bounds $k^*(n)\ge(\sqrt2-o(1))\sqrt n$, and $k^*(n)\ge(\sqrt6-o(1))\sqrt n$ for $4\mid n$, for the permutation threshold, which together with Schur's bound give $(\sqrt2-o(1))\sqrt n\le k^*(n)\le2\sqrt2\,\sqrt{n\log n}$; the exact values for $n\le40$ (computer-assisted when $18\le n\le40$); and exact second moments of the line-sum energies of a random arrangement.
 The following questions remain.
 
 \begin{enumerate}\setlength\itemsep{2pt}
-\item \emph{The order of $k^*(n)$.} Is $k^*(n)\asymp\sqrt n$?
-The upper bound uses only that $\gamma$ is a nonzero integer vector with $\|\gamma\|_1\le n^4/4$.
-In that class the pigeonhole principle produces, for all large $n$, vectors vanishing to order $\ge\lfloor2\sqrt n\rfloor$ at $1$ (\Cref{sec:kstar_upper}), so a bound of smaller order than $\sqrt n$ needs more information about $\gamma$.
-Whether the order $\sqrt{n\log n}$ of \Cref{lem:jensen} is attained within this class is, as far as we know, open; this is separate from realisability, i.e.\ which such vectors are column deviations of arrangements.
-For $14\le n\le40$, $k^*(n)$ is the least $k$ for which $\Lambda_{n,k}$ contains no nonzero vector satisfying \eqref{eq:col_feasible} (\Cref{sec:kstar_exact}).  Is this true for all $n$, and is $k^*(n)$ nondecreasing?
+\item \emph{The order of $k^*(n)$.} Is $k^*(n)$ of order $\sqrt n$ or of order $\sqrt{n\log n}$?
+The question has two parts.
+The upper bound uses only that $\gamma$ is a nonzero integer vector with $\|\gamma\|_1\le n^4/4$, and among the vectors satisfying \eqref{eq:col_feasible} there are, for large $n$, vectors vanishing to order $(\sqrt{24}-o(1))\sqrt n$ at $1$ (\Cref{sec:kstar_upper}); whether there are vectors of larger order, up to $\sqrt{n\log n}$, is the known logarithmic gap between the bounds for the least height of an integer polynomial with a zero of high order at $1$ \cite{mignotte1982,bombieri1987low,amoroso1995}.
+The part specific to arrangements is realisability: which vectors satisfying \eqref{eq:col_feasible} are column-deviation vectors.
+Our constructions realise vectors with a zero of order $(\sqrt2-o(1))\sqrt n$ at $1$, and $(\sqrt6-o(1))\sqrt n$ for $4\mid n$; \Cref{conj:lattice} asserts that realisability is no restriction at the threshold, so that $k^*(n)=U(n)$ and the question reduces to the lattice problem.
+\item \emph{The lattice threshold.} Prove \Cref{conj:lattice}, or find $n$ with $k^*(n)<U(n)$.  It holds for $n\le40$; for $41\le n\le46$ witnesses prove $k^*(n)\ge U(n)$, and equality holds if the uncertified values of $U(n)$ are correct.
 \item \emph{The size of $L_n$.} Is $|L_n|\sim N!\,(2\pi)^{-2}\det(\Sigma_U)^{-1/2}\,c_n$ with $c_n$ bounded away from $0$ and $\infty$, i.e.\ does a local limit theorem hold for the four statistics $(U_1,\dots,U_4)$ of \Cref{sec:lowmode_n4}?  The ratio $c_n$ is $0.59$, $0.80$ for $n=3,4$ and about $0.76$, $0.78$ for $n=5,6$.
 \item \emph{Other families.} The orthogonality formulation applies to pandiagonal and Franklin squares \cite{loly2007franklin}, with $W$ replaced by the span of the relevant line indicators.  The corresponding thresholds and random energies have not been worked out.
 \end{enumerate}
