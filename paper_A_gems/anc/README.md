@@ -1,4 +1,4 @@
-# Ancillary files for "Magic Gems: A Polyhedral Framework for Magic Squares"
+# Ancillary files for "Magic Gems: Convex Hulls of Lifted Magic Squares"
 
 Python 3.9, NumPy 2.0, SciPy 1.13, SymPy 1.13, NetworkX 3.2, matplotlib. Run every command from inside this directory.
 Squares are numbered #0..#879 in the lexicographic order of their Frenicle standard forms, one square per line (row by row)

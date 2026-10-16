@@ -1,6 +1,6 @@
 # Magic Gems
 
-**A Polyhedral Framework for Magic Squares**
+**Convex Hulls of Lifted Magic Squares**
 
 This repository contains the code and paper for *Magic Gems*, a novel geometric representation of magic squares as three-dimensional polyhedra.
 
@@ -150,7 +150,7 @@ If you use this work, please cite:
 
 ```bibtex
 @article{magicgems2024,
-  title={Magic Gems: A Polyhedral Framework for Magic Squares},
+  title={Magic Gems: Convex Hulls of Lifted Magic Squares},
   author={[Author]},
   year={2024}
 }

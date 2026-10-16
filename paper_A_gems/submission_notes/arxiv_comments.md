@@ -1,6 +1,6 @@
 # arXiv metadata and notes for the replacement of arXiv:2512.09170 (for the author only; nothing here is in the paper)
 
-Title (unchanged): Magic Gems: A Polyhedral Framework for Magic Squares
+Title (changed in this version; v1–v4 were titled "Magic Gems: A Polyhedral Framework for Magic Squares"): Magic Gems: Convex Hulls of Lifted Magic Squares
 Replacement version: v5 (cross-list suggestion: math.CO primary; math.MG, math-ph optional).
 
 ## Suggested arXiv "Comments" field

@@ -4,7 +4,7 @@ Branch `split-papers-a-b`. Both tarballs build from a clean directory with `pdfl
 
 | | Paper A | Paper B |
 |---|---|---|
-| Title | Magic Gems: A Polyhedral Framework for Magic Squares | Moments of Magic Squares: Line-Sum Conditions, a Permutation Threshold, and Random Energies |
+| Title | Magic Gems: Convex Hulls of Lifted Magic Squares | Moments of Magic Squares: Line-Sum Conditions, a Permutation Threshold, and Random Energies |
 | arXiv action | **Replace** arXiv:2512.09170 (becomes v5) | **New submission** |
 | PDF | `paper_A_gems/paperA.pdf` (25 pp, 8 figures, 6 tables) | `paper_B_orthogonality/paperB.pdf` (27 pp, 3 figures, 4 tables) |
 | Upload file | `paper_A_gems/paperA_arxiv.tar.gz` (769 KB) | `paper_B_orthogonality/paperB_arxiv.tar.gz` (418 KB) |
@@ -28,7 +28,7 @@ Branch `split-papers-a-b`. Both tarballs build from a clean directory with `pdfl
 4. **Replace arXiv:2512.09170 with Paper A.**
    - Use "Replace", not "New submission", on 2512.09170.
    - Upload the rebuilt `paperA_arxiv.tar.gz`.
-   - Use the comments and abstract from `arxiv_comments.md`. The title is unchanged.
+   - Use the comments and abstract from `arxiv_comments.md`. Change the title field to "Magic Gems: Convex Hulls of Lifted Magic Squares" (v1–v4 were "Magic Gems: A Polyhedral Framework for Magic Squares").
    - Ignore the "Candid list" section in that file; it is private notes.
 5. **After both are announced:** nothing else is needed. Optionally, update the web app at kylemath.github.io/MagicGemWebpage to link both papers.
 
