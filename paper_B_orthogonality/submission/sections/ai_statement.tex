@@ -10,6 +10,6 @@ AI systems are not authors of this paper.
 Because of this, no result relies on an AI system being correct.
 Every number in the paper is recomputed by the scripts in \texttt{anc/}, in exact arithmetic where stated.
 The computer-assisted results, namely the upper bounds on $k^*(n)$ for $18\le n\le40$ and the count $|L_4|$, were each obtained by two separately written implementations; both implementations of each were themselves written with AI assistance, so they are independent of each other but not of the tools.
-The upper bounds on $k^*(n)$ are backed by a certificate (\texttt{anc/kstar\_certificates.json}) that a standard-library script of under 40 lines checks in exact arithmetic, so that checking them does not require trusting the enumeration code.
+The upper bounds on $k^*(n)$ are backed by a certificate (\texttt{anc/kstar\_certificates.json}) that a standard-library script of about 50 lines checks in exact arithmetic, including an exact enumeration of every lattice vector in the ball, so that checking them does not require trusting the enumeration code.
 \textbf{[Author to confirm or edit before submission: which proofs the author has checked line by line, for example: ``The author has checked every proof in Sections~3 and~4 and the appendices by hand.'']}
 The bibliography was checked entry by entry against the published sources.
