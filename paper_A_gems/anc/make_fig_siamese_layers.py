@@ -26,7 +26,7 @@ names = {n + 1: r'$\Lambda_{+2}$', 1: r'$\Lambda_{+1}$', 0: r'$\Lambda_{0}$', -1
 cols = {n + 1: '#b0433a', 1: '#e0904a', 0: '#3b6fb6', -1: '#6aa36a', -(n + 1): '#7a4fa0'}
 assert sorted(set(zeta.tolist())) == sorted(levels)
 
-# the twelve vertices q_1..q_12 of Theorem 6.2 in (x,y,zeta)
+# the twelve vertices q_1..q_12 of Theorem 6.4 in (x,y,zeta)
 V = [(-m, m, n + 1), (-1, m, n + 1), (-m, 1, n + 1), (-m, 0, 1), (-m, -m, 0), (0, -m, 0), (0, m, 0), (m, m, 0),
      (m, 0, -1)]
 V += [tuple(-np.array(V[0])), tuple(-np.array(V[2])), tuple(-np.array(V[1]))]

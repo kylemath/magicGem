@@ -1,9 +1,7 @@
-\section{The exact geometry of the order-four gems}
+\section{Faces of the gem and a census of order four}
 \label{sec:census}
 
-The isometry groups of \Cref{sec:symmetry} are one invariant of a gem.
-This section computes the others, exactly, for all $880$ gems of order four: vertices, faces, volumes, combinatorial types and congruence classes.
-To read these numbers one needs two facts that hold for every order: some points are vertices of every gem, and the faces of a gem are two regular subdivisions of the grid.
+After two facts about the faces of every gem, this section reports a computational census of the gems of the $880$ magic squares of order four (vertices, faces, volumes, combinatorial types, congruence classes) and compares them with the gems of other arrangements.
 
 \subsection{Forced vertices and regular subdivisions}
 \label{sec:forced}
@@ -67,18 +65,14 @@ The vertical facets are the triangles $\{2,4,9\}$, $\{2,6,7\}$, $\{1,6,8\}$, $\{
 The centre point (height $0$) lies in the convex hull of each quadrilateral cell but belongs to no cell: the plane of $\{1,2,3,4\}$ is $z=-x-y-3$, which is $-3<0$ at the centre.
 \end{example}
 
-In this language, the four corner cells are vertices of $\operatorname{conv}A$ and so give vertices of every gem.
-The other forced vertices of \Cref{lem:forced} are, for each side $e$ of the grid, the lowest and the highest lifted point over $e$; these are vertices of the polygon $\operatorname{conv}\{\mathbf p_c: c\in e\}$, the face of $\mathcal G(S)$ over $e$.
 For the $880$ order-four gems, $856$ have four vertical facets, $20$ have three and $4$ have two; the height functions of the $7040$ order-four magic squares induce $417$ distinct regular subdivisions of the $4\times4$ grid up to $D_4$, and for $548$ of the $880$ classes $\mathcal S(z)$ is a triangulation (\texttt{anc/verify\_structure.py}).
-The combinatorial types of \Cref{sec:census-4} are a coarse invariant of the pair $(\mathcal S(z),\mathcal S(-z))$ (face lattices without cell labels).
-In the proof of the Siamese theorem (\Cref{sec:siamese-gems}), the shear $\Phi$ of Step~3 uses the fact that $\mathcal S(\pm z)$ is unchanged when an affine function of $(x,y)$ is subtracted from $z$ and the result is divided by $n$.
 
 \subsection{The census}
 \label{sec:census-4}
 
 There are $8$ magic squares of order $3$, all images of the Lo Shu under $D_4$, and $7{,}040$ of order $4$, forming $880$ $D_4$-classes; the order-four squares were listed by Fr\'enicle de Bessy \cite{frenicle1693} and have been recounted by computer \cite{beck2010enumeration}.
 Dudeney sorted them into twelve groups according to the pattern of complementary pairs $(a,17-a)$ \cite{dudeney1917amusements}; since the numbering of the groups differs between reproductions of his table, we list the labels used here, for all $7040$ squares together with the number $\#$ of their class, in \texttt{anc/all7040\_dudeney.tsv}.
-The number $275{,}305{,}224$ of magic squares of order five up to $D_4$ is due to Schroeppel (1973) \cite{gardner1976}; for order six the count was estimated by Monte Carlo methods \cite{pinn1998number} and was computed exactly by H.~Mino in 2024, as announced on his web page \cite{mino2024order6} and reported in \cite{trump_howmany}.
+The number $275{,}305{,}224$ of magic squares of order five up to $D_4$ is due to Schroeppel (1973) \cite{gardner1976}; for order six see \cite{pinn1998number,mino2024order6,trump_howmany}.
 
 For each of the $880$ squares we computed $\mathcal G(S)$ exactly (integer facet inequalities, rational volumes; Appendix~\ref{sec:appendix}).
 \Cref{tab:census} and \Cref{fig:gem-geometry-880} summarise the results.
@@ -87,7 +81,7 @@ For each of the $880$ squares we computed $\mathcal G(S)$ exactly (integer facet
 \centering
 \caption{The $880$ order-four gems by number $V$ of vertices: numbers of squares, of combinatorial types (face lattices up to isomorphism), of $f$-vectors and of distinct exact volumes, and the volume as a fraction of the box $\mathcal B_4$ ($\operatorname{vol}\mathcal B_4=135$). A volume can occur for several values of $V$, so the volume counts add up to more than $155$. Bottom: numbers of gems with $k$ interior points ($V^\circ=k$) and with $k$ non-vertex boundary points ($V^\partial=k$).}
 \label{tab:census}
-\small
+\footnotesize
 \begin{tabular}{l rrrrrrrrr r}
 \toprule
 $V$ & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15 & 16 & all\\
@@ -119,8 +113,6 @@ Between $8$ and all $16$ points are vertices; $V=12$ is the most frequent value 
 The $39$ $f$-vectors range from $(8,14,8)$ (one gem) to $(16,36,22)$ (nine gems); the most frequent is $(12,26,16)$ ($164$ gems).
 The volume takes $155$ distinct values, from $58$ to $292/3$, with mean $84.05$; its denominators are $1,2,3,6$, because for even $n$ all coordinates are half-odd integers, so that $\mathcal G(S)+(\frac12,\frac12,\frac12)$ is a lattice polytope.
 The Ehrhart polynomials of these lattice polytopes take $554$ distinct values (Appendix~\ref{sec:ehrhart}).
-The gems of order four fill between $43\%$ and $72\%$ of the box $\mathcal B_4$ (\Cref{sec:forced}).
-At most four points are interior, and at most six are non-vertex boundary points.
 
 \paragraph{Combinatorial types.}
 Two gems have the same combinatorial type if their vertex--facet incidence graphs are isomorphic by an isomorphism that maps vertices to vertices and facets to facets.
@@ -134,22 +126,26 @@ The numbers of types with $1,2,3,\dots$ members are
 \end{array}
 \]
 The largest type, with $f=(10,22,14)$ (twelve triangles and two quadrilaterals), has $32$ members.
-Each of Dudeney's groups with more than eight members contains gems with at least three different vertex counts and at least $20$ combinatorial types, and the $8$-vertex gems occur only in groups VI (three) and VIII (four).
-The $48$ pandiagonal squares (Dudeney's group I \cite{ollerenshaw1998most}) have gems with $11$ to $15$ vertices and between one and four interior points; no order-four square is both pandiagonal and associative.
 
-\begin{proposition}[The vertex set determines the square; congruence]
-\label{prop:gem-injective}
-Let $S$ and $T$ be magic squares of order four.
-\begin{enumerate}
-\item If $\hat g\operatorname{vert}\mathcal G(S)=\operatorname{vert}\mathcal G(T)$ for some $g\in D_4$, then $T=gS$. In other words, the vertex set of the gem, up to the action of $D_4$, determines the $D_4$-class of the square.
-\item $\mathcal G(S)$ and $\mathcal G(T)$ are congruent if and only if $T\in D_4S\cup D_4\overline S$. There are $616$ congruence classes of gems: $352$ self-complementary classes and $264$ mirror pairs.
-\end{enumerate}
+\begin{proposition}[Congruence classes of the order-four gems; exact computation]
+\label{prop:congruence}
+Let $S$ and $T$ be magic squares of order four. Then $\mathcal G(S)$ and $\mathcal G(T)$ are congruent if and only if $T\in D_4S\cup D_4\overline S$. There are $616$ congruence classes of gems: $352$ self-complementary classes and $264$ mirror pairs.
 \end{proposition}
 
 \begin{proof}
-(1) The $880$ vertex sets have pairwise distinct $D_4$-canonical forms (exact comparison), so $T=g'S$ for some $g'\in D_4$, and then $\hat g'\operatorname{vert}\mathcal G(S)=\operatorname{vert}\mathcal G(T)=\hat g\operatorname{vert}\mathcal G(S)$ by \eqref{eq:d4}. Thus $\hat g^{-1}\hat g'$ is an isometry of $\mathcal G(S)$ that preserves heights; by \Cref{thm:symmetry} the only such isometry is the identity, so $g'=g$.
-(2) ``If'' is \eqref{eq:d4} and \eqref{eq:complement}. For ``only if'': the sorted multiset of pairwise squared distances of the vertex set is a congruence invariant, and it takes $616$ distinct values over the $880$ gems (exact computation). Gems in one complement orbit are congruent, and there are $616$ orbits ($352$ self-complementary classes and $264$ pairs). Hence the congruence classes are exactly the complement orbits.
+``If'' is \eqref{eq:d4} and \eqref{eq:complement}. For ``only if'': the sorted multiset of pairwise squared distances of the vertex set is a congruence invariant, and it takes $616$ distinct values over the $880$ gems (exact computation). Gems in one complement orbit are congruent, and there are $616$ orbits ($352$ self-complementary classes and $264$ pairs). Hence the congruence classes are exactly the complement orbits.
 \end{proof}
+
+\begin{remark}[The vertex set determines the square]
+\label{rem:vertexset}
+If $S$, $T$ are magic squares of order four and $\hat g\operatorname{vert}\mathcal G(S)=\operatorname{vert}\mathcal G(T)$ for some $g\in D_4$, then $T=gS$.
+This is linear algebra plus a finite check.
+By \eqref{eq:d4}, $gS$ and $T$ have the same vertex set, so they have the same entries on the vertex cells and the same set $U$ of other cells.
+The ten line sums are linear equations for the entries on $U$, with the $0/1$ matrix $A_U$ of incidences between lines and cells of $U$; if $\operatorname{rank}A_U=|U|$, these entries are determined, and $T=gS$.
+This holds for $871$ of the $880$ classes; the rank and everything below are invariant under $D_4$, which permutes the lines.
+For the other nine, $\#45$, $\#46$, $\#47$, $\#49$, $\#50$, $\#54$, $\#165$, $\#166$ and $\#672$, we listed every magic square that has the entries of $S$ on the vertex cells of $S$: for five of them $S$ is the only one, and $\#45$, $\#47$, $\#50$, $\#54$ have $1$, $1$, $7$ and $7$ others (for $\#45$ the square $\#109$), but the gems of all these other squares have different vertex sets (\texttt{anc/vertex\_determination.py}).
+Since $g^{-1}T$ has the vertex set of $\mathcal G(S)$, it is one of these squares, so $g^{-1}T=S$.
+\end{remark}
 
 \paragraph{Forced vertices and named squares.}
 For order four nothing beyond the forced vertices of \Cref{lem:forced} is a vertex of every gem: the only cells that carry a vertex in all $880$ gems are the four corners, and the only entries that always label a vertex are $1$ and $16$.
@@ -158,17 +154,49 @@ The gems of the Lo Shu, of D\"urer's square and of the Siamese square of order $
 The gem of D\"urer's square is centrally symmetric with twelve vertices; exchanging its first two rows and its last two rows gives square \#802, whose gem has all sixteen points as vertices.
 The squares cited in Figures~\ref{fig:weighted}, \ref{fig:symmetry} and~\ref{fig:gem-geometry-880} and in the text are
 {\small\[
-\setlength{\arraycolsep}{2.5pt}
+\setlength{\arraycolsep}{2pt}
 \#45=\begin{pmatrix}1&6&11&16\\8&15&2&9\\12&3&14&5\\13&10&7&4\end{pmatrix}\quad \#54=\begin{pmatrix}1&6&11&16\\15&12&5&2\\14&9&8&3\\4&7&10&13\end{pmatrix}\quad \#102=\begin{pmatrix}1&8&10&15\\13&12&6&3\\16&9&7&2\\4&5&11&14\end{pmatrix}\quad \#124=\begin{pmatrix}1&8&15&10\\13&12&3&6\\4&5&14&11\\16&9&2&7\end{pmatrix}
 \]
 \[
-\setlength{\arraycolsep}{2.5pt}
+\setlength{\arraycolsep}{2pt}
 \#379=\begin{pmatrix}2&12&5&15\\13&7&10&4\\16&6&11&1\\3&9&8&14\end{pmatrix}\quad \#593=\begin{pmatrix}4&1&16&13\\5&15&2&12\\14&8&9&3\\11&10&7&6\end{pmatrix}\quad \#802=\begin{pmatrix}5&10&11&8\\16&3&2&13\\4&15&14&1\\9&6&7&12\end{pmatrix}
 \]}
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.9\textwidth]{figures/fig_gem_geometry_880.pdf}
+\includegraphics[width=0.76\textwidth]{figures/fig_gem_geometry_880.pdf}
 \caption{The $880$ order-four gems. (a)~Number of vertices. (b)~Exact volume. (c)~Sizes of the $352$ combinatorial types (logarithmic scale). (d)--(f)~Three extreme gems with translucent faces: the unique gem with $f=(8,14,8)$ (square \#54; interior points as red discs, non-vertex boundary points as orange squares), a gem with all $16$ points as vertices (square \#802), and the gem of largest volume (square \#379).}
 \label{fig:gem-geometry-880}
 \end{figure}
+
+\subsection{Which invariants see the line conditions}
+\label{sec:magic-vs-random}
+
+To see whether the gem distinguishes magic squares from other arrangements, we compared four nested families of order four (\Cref{tab:magic-vs-random}; \texttt{anc/magic\_vs\_random.py}).
+
+\begin{table}[htbp]
+\centering
+\caption{Mean invariants of the gems of order four. The first three columns are estimates from $10^5$ uniform samples each (standard errors at most $0.006$ for the counts and the fractions, $0.024$ for the volume and $0.001$ for the centroid): arrangements, arrangements with $\sum z\,x=\sum z\,y=0$ (rejection sampling), and semi-magic squares (uniform over all $549{,}504$). The magic column is exact (all $7040$ squares). $d$: difference of the means of magic and semi-magic squares divided by the pooled standard deviation, over all squares and over those that are not self-complementary (s.-c.); its standard error is at most $0.034$ ($0.044$ in the last column). The solid centroid is the centre of mass of the solid $\mathcal G(S)$.}
+\label{tab:magic-vs-random}
+\scriptsize
+\setlength{\tabcolsep}{4pt}
+\input{anc/magic_vs_random.tex}
+\end{table}
+
+The counts barely move.
+The mean vertex count is $12.06$ for random arrangements, $12.12$ for semi-magic squares and $12.23$ for magic squares ($d=0.14$ against random arrangements, $0.08$ against semi-magic squares).
+Self-complementary magic squares have more vertices on average ($12.43$, against $12.09$ for the others; the $48$ associative ones average $11.88$), and they make up $40\%$ of the magic squares but $10\%$ of the semi-magic squares.
+This accounts for almost all of the excess over semi-magic squares: over the squares that are not self-complementary, magic and semi-magic squares differ by $0.017\pm0.004$ ($d=0.01$).
+It does not account for the excess over random arrangements: the magic squares that are not self-complementary still exceed random arrangements by $0.040\pm0.004$, about a quarter of the excess.
+The mean numbers of lower and of upper facets differ by less than $0.08$ between any two of the four families, and the mean number of vertical facets ($3.97$ to $4.00$) by less than $0.03$.
+
+The continuous invariants respond to the hypotheses one at a time.
+Vanishing first moments turn the principal axes of the solid towards the coordinate axes (the tilt $(\Sigma_{xz}^2+\Sigma_{yz}^2)^{1/2}$ of the covariance matrix $\Sigma$ of the solid falls from $0.73$ to $0.24$, $d=-1.82$) and add $6.0$ to the mean volume ($d=0.90$), but do not move the solid centroid; the row and column conditions move it towards the origin (from $0.35$ to $0.16$, $d=-1.16$) and add $1.0$ to the volume; and the diagonal conditions add another $1.4$ to the volume ($d=0.21$) and move the centroid further in ($d=-0.62$), also when the self-complementary squares are left out.
+A non-trivial isometry occurs for $40\%$ of the magic gems, $10\%$ of the semi-magic gems and almost none of the others, in both families exactly for the self-complementary squares (\Cref{prop:iso4}; for the semi-magic sample by computation, consistent with \Cref{prop:pointset}).
+
+At order five all four families are sampled, $2\cdot10^4$ each, and every hull is certified exactly; the semi-magic squares and the magic squares (distinct $D_4$-classes) come from the annealer of Appendix~\ref{sec:vertexstats}, with other seeds than the larger magic sample of \Cref{tab:vertices}, whose hulls are computed in floating point.
+The distribution of the annealer at order five is not known; at order four it hits all $880$ magic classes and reproduces the uniform distribution of the semi-magic squares (Appendix~\ref{sec:vertexstats}).
+The mean vertex counts of random arrangements, arrangements with vanishing first moments, semi-magic and magic squares are $15.40$, $15.42$, $15.36$ and $15.39$ (standard errors $0.012$; $|d|\le0.04$; \Cref{tab:vertices} gives $15.38$ for its magic sample), the mean numbers of lower and of upper facets differ by at most $0.16$, and all but $16$ of the $8\cdot10^4$ gems have four vertical facets (the others have three).
+The volumes are $250.1$, $260.9$, $265.4$ and $268.5$ ($d=0.22$ for magic against semi-magic squares), and the distance of the solid centroid from the origin is $0.47$, $0.47$, $0.24$ and $0.22$ ($d=-0.10$).
+
+So the magic conditions hardly affect the vertex count; they show in the volume, the position of the solid and the frequency of symmetric squares, and beyond the row and column conditions only by a fraction of a standard deviation.

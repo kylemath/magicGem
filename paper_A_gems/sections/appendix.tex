@@ -4,66 +4,90 @@
 All computations use Python 3.9 with NumPy 2.0, SciPy 1.13 (Quickhull), SymPy 1.13 and NetworkX 3.2; the scripts and data are the ancillary files in \texttt{anc/}, whose \texttt{README} lists the commands.
 
 \paragraph{Exact hulls.}
-Doubling all coordinates makes every point an integer vector.
-A floating-point Quickhull triangulation is used only to propose candidate facet planes, which are recomputed as primitive integer equations from three points each; coplanar triangles are merged.
-The hull is then certified in integer arithmetic.
-(i) The candidate planes, each written as the unique primitive integer equation $ax+by+cz+d=0$ with outward normal, are pairwise distinct, so no facet is split into coplanar pieces.
-(ii) Every one of the $N$ points satisfies every facet inequality.
-(iii) For each plane, the points lying on it are projected to a coordinate plane on which the projection is injective, and their convex hull is computed exactly (monotone chain with integer cross products); it must have at least three vertices, so the points on the plane span it affinely, and its vertices, in cyclic order, form the facet polygon.
-(iv) Every edge of every facet polygon lies in exactly two facets, so the facets form a closed surface.
-(v) At every edge the vertices of each of the two facets that are not on the edge satisfy the inequality of the other facet strictly, so the surface is strictly convex across every edge.
-By (ii) and (iii) each listed plane is a supporting plane meeting the point set in a $2$-dimensional polygon, hence a facet of the hull with that polygon; by (iv) the list contains, with each facet, all facets adjacent to it across an edge, and since the facet-adjacency graph of a $3$-polytope is connected the list contains every facet. Condition (v) and $V-E+F=2$ are checked as redundant consistency tests.
-An independent implementation that enumerates the supporting planes through all triples of points, without Quickhull, gives the same vertex sets, $f$-vectors and volumes for all $880$ order-four gems, the Siamese squares of orders $3$ to $21$ and the order-five squares of \Cref{rem:linear}. For the Siamese family the script that generates \Cref{tab:slacks} checks (i) and (iii)--(v) symbolically for every $m\ge2$.
-This certificate is applied to every exact hull in the paper (order four, Siamese, digit-exchanged and linear squares, and the $15$ ten-vertex order-five squares).
+After doubling, all coordinates are integers.
+A floating-point Quickhull triangulation only proposes candidate facet planes, recomputed as primitive integer equations through three points each; the hull is then certified in integer arithmetic:
+(i) the planes are pairwise distinct;
+(ii) every point satisfies every facet inequality;
+(iii) the points on each plane have an exact $2$-dimensional convex hull (monotone chain with integer cross products after an injective projection), the facet polygon;
+(iv) every edge of every facet polygon lies in exactly two facets.
+By \Cref{lem:closing}, (i)--(iv) certify the hull; strict convexity across every edge and $V-E+F=2$ are checked as redundant tests.
+An independent implementation that enumerates the supporting planes through all triples of points, without Quickhull, gives the same vertex sets, $f$-vectors and volumes for all $880$ order-four gems, the Siamese squares of orders $3$ to $21$ and the order-five squares of \Cref{rem:linear}. For the Siamese family the script that generates \Cref{tab:slacks} checks these conditions symbolically for every $m\ge2$.
+This certificate is applied to every exact hull in the paper (order four, Siamese, digit-exchanged and linear squares, the $15$ ten-vertex order-five squares, and the samples of \Cref{sec:magic-vs-random}).
 Vertices are the points on at least three facet planes, interior points are those satisfying every facet inequality strictly, and volumes are exact rationals.
 For the $880$ order-four gems this takes about $15$\,s in total.
 
 \paragraph{Combinatorial types, isometries, congruence.}
 Combinatorial types are the isomorphism classes of the bipartite vertex--facet incidence graphs, under isomorphisms that map vertices to vertices and facets to facets (so a polytope and its dual are not identified); candidates are grouped by a Weisfeiler--Lehman hash and confirmed by explicit isomorphism tests.
 Isometry groups of a finite set $X$ (a vertex set or a full point set) are computed exactly: $X$ is centred at its centroid, every isometry is then orthogonal and determined by the images of three linearly independent points, which are searched among the points with the same squared norms and mutual inner products, and a candidate is accepted only if the induced permutation of $X$ preserves all pairwise integer squared distances.
-Two finite sets are congruent if and only if there is a bijection between them preserving all pairwise distances; this is tested by grouping by the sorted multiset of squared distances and then by an isomorphism test of the complete graphs with squared distances as edge labels. For the $880$ order-four gems the $616$ distinct distance multisets already certify the congruence classes (\Cref{prop:gem-injective}); the all-pairs test is a redundant check.
-The point-set statements of \Cref{thm:pointset} are checked in the same way for all $880$ squares and for the Siamese squares of orders $3$ to $15$.
+Congruence of two finite sets is tested by comparing the sorted multisets of squared distances and then by an isomorphism test of the complete graphs with squared distances as edge labels; for the $880$ gems the multisets alone certify the classes (\Cref{prop:congruence}).
+\Cref{prop:pointset} is checked in the same way for all $880$ squares and for the Siamese squares of orders $3$ to $15$.
 
 \paragraph{Polynomial identities.}
 The slack polynomials of \Cref{tab:slacks} are computed with SymPy; a polynomial $p$ is certified positive for all integers $m\ge2$ by non-negativity of all coefficients of $p(2+t)$ and $p(2)>0$.
 The same script checks the closure of the facet list and the norms and inner products of Step~5.
+For the digit-exchanged square, \texttt{anc/digit\_exchanged\_slacks.py} applies the same certificate, written once for both squares (it reproduces \Cref{thm:siamese} as a cross-check), to the slacks of \Cref{tab:slacks-exchanged}; it also checks, for $n=5,\dots,61$, that the sheared points of $s'$ have the five level sets used in the proof of \Cref{prop:exchanged} and satisfy all fourteen inequalities.
+
+\begin{table}[htbp]
+\centering
+\caption{Proof of \Cref{prop:exchanged}: the sixteen vertices $q_1,\dots,q_{16}$ of the level polygons of the digit-exchanged square after the shear $\Phi'$ (heights $n+1$, $n$, $0$, $-n$, $-(n+1)$) and the slacks of the inequalities $(1)$--$(7)$ at them, as polynomials in $m$; zeros in bold. All non-zero entries are positive for $m\ge2$. The points $q_4,q_{14},q_9,q_{16}$ are not vertices of the gem.}
+\label{tab:slacks-exchanged}
+\scriptsize
+\setlength{\tabcolsep}{4pt}
+\resizebox{0.9\textwidth}{!}{\input{anc/digit_exchanged_slacks.tex}}
+\end{table}
 
 \section{Lattice-point counts and vertex statistics}
 \label{sec:lattice-stats}
 
-\begin{table}[t]
+\begin{table}[htbp]
 \centering
-\caption{Mean number of vertices of the gem. Random: uniformly random arrangements, $10^5$ samples per order (standard errors at most $0.010$). Magic: exact for $n=3,4$; for $n=5,\dots,8$, annealing samples of $59{,}993$, $24{,}000$, $8{,}000$ and $2{,}400$ distinct $D_4$-classes (standard errors $0.007$, $0.013$, $0.025$, $0.054$). Siamese: exact.}
+\caption{Mean number of vertices of the gem. Top: exact values (all $8$ and $7040$ magic squares of orders $3$ and $4$; the Siamese squares). Bottom: estimates from samples. Random: uniformly random arrangements, $10^5$ samples per order (standard errors at most $0.010$). Magic, annealed: $59{,}993$, $24{,}000$, $8{,}000$ and $2{,}400$ distinct $D_4$-classes for $n=5,\dots,8$ (standard errors $0.007$, $0.013$, $0.025$, $0.054$), from a sampler whose distribution is not known; hulls in floating point. The certified order-five samples of \Cref{sec:magic-vs-random} are separate.}
 \label{tab:vertices}
 \small
 \begin{tabular}{l rrrrrrrr}
 \toprule
 $n$ & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10\\
 \midrule
-random & 8.22 & 12.06 & 15.39 & 18.39 & 21.08 & 23.53 & 25.79 & 27.91\\
-magic & 8 & 12.23 & 15.38 & 18.41 & 21.08 & 23.56 & -- & --\\
+\multicolumn{9}{l}{\emph{exact}}\\
+magic, all squares & 8 & 12.23 & -- & -- & -- & -- & -- & --\\
 Siamese & 8 & -- & 12 & -- & 12 & -- & 12 & --\\
+\midrule
+\multicolumn{9}{l}{\emph{estimates}}\\
+random arrangements & 8.22 & 12.06 & 15.39 & 18.39 & 21.08 & 23.53 & 25.79 & 27.91\\
+magic, annealed & -- & -- & 15.38 & 18.41 & 21.08 & 23.56 & -- & --\\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \paragraph{Ehrhart polynomials of the order-four gems.}
 \label{sec:ehrhart}
-For even $n$ all coordinates of every $\mathbf p_{ij}$ are half-odd integers, so $Q(S)=\mathcal G(S)+(\frac12,\frac12,\frac12)$ is a lattice polytope; any other lattice translate has the same Ehrhart polynomial $L_S(t)=\#(tQ\cap\Z^3)=\operatorname{vol}(\mathcal G)\,t^3+c_2t^2+c_1t+1$ \cite{beck2007computing}, and $L_S$ is the same for all images $gS$, $g\in D_4$, since $\hat g$ preserves $\Z^3$ up to an integer translation of $Q$.
-Writing $\sum_{k\ge0}L_S(k)t^k=(h^*_0+h^*_1t+h^*_2t^2+h^*_3t^3)/(1-t)^4$, the $h^*_i$ are non-negative integers \cite{stanley1980decompositions}, $h^*_0=1$, $\sum h^*_i=6\operatorname{vol}$, and $h^*_3$ is the number of interior lattice points of $Q$ \cite{beck2007computing}.
-We computed $L_S$ exactly for all $880$ gems (\texttt{anc/ehrhart\_880.py}): the lattice points of $tQ$ are counted for $t\le6$, the cubic is interpolated from $t\le3$ and checked at $t=4,5,6$, $h^*_3$ is checked against the number of interior lattice points and $\sum h^*_i$ against $6\operatorname{vol}$.
-All $h^*$-vectors are non-negative, with $h^*_1\in[70,136]$, $h^*_2\in[233,403]$ and $h^*_3\in[34,52]$.
-There are $554$ distinct Ehrhart polynomials, against $616$ congruence classes, $352$ combinatorial types, $39$ $f$-vectors and $155$ volumes.
-Congruent gems have equal polynomials (for complement partners, the reflection $z\mapsto-z$ followed by an integer translation is a unimodular affine map of $\Z^3$), but non-congruent gems can share one, and $L_S$ is determined neither by the $f$-vector (it takes several values on $29$ of the $39$ $f$-vectors), nor by the combinatorial type ($81$ of $352$ types), nor by the volume ($104$ of $155$ volumes).
-For the Lo Shu square (odd order: the gem itself is a lattice polytope) $L(t)=1+t+13t^2+18t^3$ and $h^*=(1,29,73,5)$; for D\"urer's square $L(t)=1-3t+44t^2+92t^3$ and $h^*=(1,130,377,44)$; the leading coefficients are the volumes $18$ and $92$.
+For even $n$ all coordinates of every $\mathbf p_{ij}$ are half-odd integers, so $Q(S)=\mathcal G(S)+(\frac12,\frac12,\frac12)$ is a lattice polytope, with Ehrhart polynomial $L_S(t)=\#(tQ\cap\Z^3)$; it is the same for every lattice translate of $Q$ and for all images $gS$, $g\in D_4$.
+For a lattice $3$-polytope, $L_S(t)=c_3t^3+c_2t^2+c_1t+1$, where $c_3$ is the volume and $c_2$ is half the sum of the areas of the facets, each measured relative to the lattice in its plane \cite[Ch.~3 and~5]{beck2015computing}; and $L_S(1)$ is the number of lattice points of $Q$.
+So $L_S$ is determined by the volume, this surface term and the number of lattice points.
+Over the $880$ gems (\texttt{anc/ehrhart\_880.py}) there are $554$ distinct polynomials, against $616$ congruence classes and $155$ volumes; so this count only measures how often non-congruent gems share these three numbers.
+For the Lo Shu square (odd order: the gem itself is a lattice polytope) $L(t)=1+t+13t^2+18t^3$, and for D\"urer's square $L(t)=1-3t+44t^2+92t^3$.
 
 \paragraph{Vertex counts for larger orders (numerical).}
 \label{sec:vertexstats}
-\Cref{tab:vertices} lists the mean vertex counts of the gems of uniformly random arrangements, of magic squares (for $n=5,\dots,8$ found by simulated annealing on the sum of squared line excesses, \texttt{anc/sa\_magic.c}) and of the Siamese squares.
+In \Cref{tab:vertices} the magic squares of orders $5$ to $8$ are found by simulated annealing on the sum of squared line excesses (\texttt{anc/sa\_magic.c}).
 For random arrangements the fraction $\mathbb E[V]/N$ falls from $0.91$ ($n=3$) to $0.28$ ($n=10$).
-At $n=4$ magic gems have slightly more vertices than random ones; for $n=5,\dots,8$ the annealed means are within $1.2$ standard errors of the random ones.
-These are statements about the samples only: the sampling distribution of the annealer for $n\ge5$ is not known (compare \cite{pinn1998number}).
+For $n=5,\dots,8$ the annealed means are within $1.2$ standard errors of the random ones; this is a statement about the samples only, as the sampling distribution of the annealer for $n\ge5$ is not known (compare \cite{pinn1998number}).
+At $n=4$, where all magic squares are known, $2\cdot10^4$ annealed squares hit all $880$ classes, each between $10$ and $41$ times ($\chi^2$ test against the uniform distribution: $p=0.078$; \texttt{anc/vertex\_stats\_sa4.json}), and the annealer for semi-magic squares reproduces the uniform distribution of every invariant of \Cref{tab:magic-vs-random} within two standard errors (\texttt{anc/magic\_vs\_random.log}).
 The smallest annealed vertex counts are $10$, $12$, $14$ and $16$ for $n=5,\dots,8$ (\Cref{rem:linear}).
-The hulls of the samples are computed by Qhull in floating point, with the vertex sets of the first $100$ hulls of each batch rechecked in exact arithmetic; the seeds are $7000n+c$ for random arrangements (\texttt{anc/vertex\_statistics.py}) and $1000s+n$, $s=1,\dots,16$, for the annealer (\texttt{anc/run\_sa.sh}).
+The hulls of these samples are computed by Qhull in floating point, with the vertex sets of the first $100$ hulls of each batch rechecked in exact arithmetic; the seeds are $7000n+c$ for random arrangements (\texttt{anc/vertex\_statistics.py}) and $1000s+n$, $s=1,\dots,16$, for the annealer (\texttt{anc/run\_sa.sh}).
+The order-five samples of \Cref{sec:magic-vs-random} were drawn separately ($2\cdot10^4$ per family, annealer seeds $9000s+5$, $s=1,\dots,8$, every hull certified exactly); their magic sample has mean vertex count $15.39$, against $15.38$ here.
 
+\section{Further order-four data}
+\label{sec:further4}
 
+\paragraph{Solid centroid and mixed moment.}
+The centre of mass of the solid $\mathcal G(S)$ is not the origin for $829$ of the $880$ gems; the other $51$ include the $48$ associative gems (\texttt{anc/solid\_centroid.py}).
+The mixed moment $|\sum z\,xy|$ takes $48$ distinct values between $0$ and $60$ and vanishes for $56$ classes (tables in \Cref{fig:weighted}), among them the $48$ associative ones, for which $z$ is odd under $(x,y)\mapsto(-x,-y)$ and $xy$ is even.
+
+\paragraph{Difference-body ratio.}
+For a convex body $K\subset\R^3$ with non-empty interior let $\sigma(K)=\operatorname{vol}(K-K)/(8\operatorname{vol}K)$. By the Brunn--Minkowski inequality \cite{schneider2014convex}, $\sigma(K)\ge1$, with equality if and only if $K$ is centrally symmetric; by the Rogers--Shephard inequality \cite{rogers1957difference}, $\sigma(K)\le\binom63/8=\frac52$, with equality if and only if $K$ is a simplex; see \cite{grunbaum1963measures,schneider2014convex} for other measures of symmetry.
+By \Cref{prop:iso4}, $\sigma=1$ exactly for the $48$ associative gems; for the other $832$, $\sigma\in[1057/1018,\,145/88]\approx[1.038,\,1.648]$ (exact, \texttt{anc/difference\_body\_ratio.py}).
+
+\paragraph{Dudeney's groups.}
+Each of Dudeney's groups with more than eight members has gems with at least three vertex counts and $20$ combinatorial types; the $8$-vertex gems lie in groups VI (three) and VIII (four) (\texttt{anc/verify\_numbers.py}).
+The $48$ pandiagonal squares (group I \cite{ollerenshaw1998most}) have $11$ to $15$ vertices and one to four interior points, and none is associative.

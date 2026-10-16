@@ -11,17 +11,24 @@ W.~S. Andrews.
 \newblock {\em Magic Squares and Cubes}.
 \newblock Dover Publications, 2nd edition, 1960.
 
+\bibitem{apostol1951}
+T.~M. Apostol and Herbert~S. Zuckerman.
+\newblock On magic squares constructed by the uniform step method.
+\newblock {\em Proceedings of the American Mathematical Society},
+  2(4):557--565, 1951.
+
 \bibitem{barany1993random}
 Imre B{\'a}r{\'a}ny and Christian Buchta.
 \newblock Random polytopes in a convex polytope, independence of shape, and
   concentration of vertices.
 \newblock {\em Mathematische Annalen}, 297:467--497, 1993.
 
-\bibitem{beck2007computing}
+\bibitem{beck2015computing}
 Matthias Beck and Sinai Robins.
 \newblock {\em Computing the Continuous Discretely: Integer-Point Enumeration
   in Polyhedra}.
-\newblock Undergraduate Texts in Mathematics. Springer, New York, 2007.
+\newblock Undergraduate Texts in Mathematics. Springer, New York, 2nd edition,
+  2015.
 
 \bibitem{beck2010enumeration}
 Matthias Beck and Andrew van Herick.
@@ -95,17 +102,22 @@ Branko Gr{\"u}nbaum.
   Mathematics}, pages 233--270. American Mathematical Society, Providence, RI,
   1963.
 
+\bibitem{knecht2012retention}
+Craig~L. Knecht, Walter Trump, Daniel ben Avraham, and Robert~M. Ziff.
+\newblock Retention capacity of random surfaces.
+\newblock {\em Physical Review Letters}, 108:045703, 2012.
+
+\bibitem{lehmer1929}
+D.~N. Lehmer.
+\newblock On the congruences connected with certain magic squares.
+\newblock {\em Transactions of the American Mathematical Society},
+  31(3):529--551, 1929.
+
 \bibitem{loly2004invariance}
 Peter~D. Loly.
 \newblock The invariance of the moment of inertia of magic squares.
 \newblock {\em The Mathematical Gazette}, 88(511):151--153, 2004.
 \newblock Note 88.30.
-
-\bibitem{loly2007franklin}
-Peter~D. Loly.
-\newblock Franklin squares: A chapter in the scientific studies of magical
-  squares.
-\newblock {\em Complex Systems}, 17(2):143--161, 2007.
 
 \bibitem{loly2009spectra}
 Peter~D. Loly, Ian Cameron, Walter Trump, and Daniel Schindel.
@@ -133,6 +145,13 @@ R.~P. Nordgren.
 R.~P. Nordgren.
 \newblock Spectra of order-4 special magic squares.
 \newblock {\em Linear Algebra and its Applications}, 458:80--98, 2014.
+
+\bibitem{oeis_A201126}
+{OEIS Foundation Inc.}
+\newblock The {O}n-{L}ine {E}ncyclopedia of {I}nteger {S}equences, sequence
+  {A201126}: Maximum water retention of a magic square of order $n$, 2011.
+\newblock Contributed by H. Pfoertner, 2011. \url{https://oeis.org/A201126},
+  accessed October 2026.
 
 \bibitem{ollerenshaw1998most}
 Kathleen Ollerenshaw and David~S. Br{\'e}e.
@@ -177,12 +196,10 @@ Richard~P. Stanley.
   graphs.
 \newblock {\em Duke Mathematical Journal}, 40:607--632, 1973.
 
-\bibitem{stanley1980decompositions}
-Richard~P. Stanley.
-\newblock Decompositions of rational convex polytopes.
-\newblock In {\em Combinatorial Mathematics, Optimal Designs and Their
-  Applications}, volume~6 of {\em Annals of Discrete Mathematics}, pages
-  333--342. North-Holland, Amsterdam, 1980.
+\bibitem{travassos2013}
+Jos{\'e}~Ichihara Travassos and Patr{\'\i}cia~Nunes da~Silva.
+\newblock Regularidades associadas ao m{\'e}todo do passo uniforme.
+\newblock {\em Cadernos do IME -- S{\'e}rie Matem{\'a}tica}, 7:15--34, 2013.
 
 \bibitem{trump_howmany}
 Walter Trump.

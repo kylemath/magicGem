@@ -6,12 +6,13 @@ verify_structure.py -- exact checks of the structural statements of the paper (e
      random arrangements are not; no semi-magic square is coplanar (all 880 of order 4 checked).
   B  covariance matrix of the point set of every semi-magic square = diag(a, a, b), a=(n^2-1)/12, b=(N^2-1)/12
      (880 order-4 squares, Siamese n = 3..21).
-  C  isometries of the point set (Theorem 4.2): for all 880 order-4 squares and the Siamese squares n = 3..15
+  C  isometries of the point set (Proposition 4.2): for all 880 order-4 squares and the Siamese squares n = 3..15
      |Iso({p_ij})| = 2 iff S is self-complementary, else 1; at hull level (vertex sets) the same for the 880
      and for the Siamese gems n = 5..15.
   D  injectivity: the 880 vertex sets are pairwise distinct up to the action of D4 (D4-canonical forms),
      and the congruence classes of the 880 gems are the 616 complement orbits.
-  E  parity for the 48 associative squares (V, B, I even) and the failure for the natural square.
+  E  parity (Lemma 4.4): V, B, I even for the 352 self-complementary squares, E and F even for the 48 associative
+     ones, odd F for 18 of the 304 half-turn gems (Remark 4.5); the failure for the natural square.
   F  certification of the exact hulls (integer arithmetic): pairwise distinct facet planes, every point satisfies
      every facet inequality, each facet is 2-dimensional and its polygon is the exact 2D hull of the points on its
      plane, every polygon edge lies in exactly two facets (closed facet complex), strict convexity at every edge.
@@ -208,7 +209,7 @@ for k in range(880):
 orbits = {frozenset((k, comp_idx[k])) for k in range(880)}
 assert {frozenset(c) for c in classes.values()} == orbits and len(orbits) == 616
 log('D: congruence classes of the 880 gems = the 616 complement orbits {S, 17-S} (exact)')
-# certificate used in the paper (Prop. 5.4(2)): the sorted squared-distance multiset is a congruence invariant and
+# certificate used in the paper (Prop. 5.4): the sorted squared-distance multiset is a congruence invariant and
 # takes 616 distinct values, one per complement orbit
 assert len(groups) == 616 and {frozenset(v) for v in groups.values()} == orbits
 log('D: the sorted squared-distance multisets of the 880 vertex sets take 616 distinct values, one per complement orbit')
@@ -221,6 +222,20 @@ for k in range(880):
         assert V % 2 == 0 and I % 2 == 0 and B % 2 == 0
 I_assoc = Counter(len(cls[k][1]) for k in range(880) if assoc[k])
 log(f'E: the 48 associative gems have V, I, B all even; I distribution {dict(sorted(I_assoc.items()))}')
+# Lemma 4.4 for all self-complementary squares (n = 4 even: V, I, B even); F even for the associative ones,
+# and the number of odd F among the 304 half-turn gems (Remark 4.5)
+for k in range(880):
+    if sc[k]:
+        V, I, B = (len(x) for x in cls[k])
+        assert V % 2 == 0 and I % 2 == 0 and B % 2 == 0
+    if assoc[k]:
+        assert hulls[k]['f_vector'][2] % 2 == 0 and hulls[k]['f_vector'][1] % 2 == 0
+oddF_half = sum(1 for k in range(880) if sc[k] and not assoc[k] and hulls[k]['f_vector'][2] % 2 == 1)
+assert oddF_half == 18
+par_other = Counter((len(cls[k][0]) % 2, len(cls[k][1]) % 2) for k in range(880) if not sc[k])
+assert len({a for a, b in par_other}) == 2 and len({b for a, b in par_other}) == 2
+log(f'E: all 352 self-complementary gems have V, I, B even; the 48 associative ones also E, F even; '
+    f'{oddF_half} of the 304 half-turn gems have odd F; the 528 others, (V mod 2, I mod 2): {dict(sorted(par_other.items()))}')
 S3 = natural[3]
 assert (S3 + np.rot90(S3, 2) == 10).all() and np.linalg.matrix_rank(points(S3)) == 2
 log('E: the natural square of order 3 is associative and its point set has rank 2 (parity needs full dimension)')

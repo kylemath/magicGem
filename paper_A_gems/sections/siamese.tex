@@ -1,22 +1,57 @@
-\section{Larger orders: Siamese gems}
+\section{Larger orders: Siamese and linear squares}
 \label{sec:siamese-gems}
 
-Beyond order four an exhaustive computation is out of reach: there are $275{,}305{,}224$ magic squares of order five up to $D_4$ (\Cref{sec:census-4}).
-Samples suggest that the number of vertices grows with $n$, for random arrangements and for magic squares alike (\Cref{tab:vertices}, numerical).
-The classical construction of de la Loub\`ere behaves in the opposite way: for the Siamese square of every odd order $n\ge5$ the vertices of the gem are exactly the twelve forced vertices of \Cref{lem:forced} (\Cref{thm:siamese}).
-The proof combines the tools of the previous sections: an explicit closed form for the square, the invariance of the subdivisions $\mathcal S(\pm z)$ under adding affine functions (\Cref{sec:subdivisions}), the forced vertices, and, for the isometry group, \Cref{thm:pointset}.
+Beyond order four exhaustive computation is out of reach ($275{,}305{,}224$ magic squares of order five up to $D_4$), and samples suggest that the number of vertices grows with $n$ (\Cref{tab:vertices}, estimates).
+The Siamese square behaves in the opposite way (\Cref{thm:siamese}, the main result); its proof uses a closed form, the invariance of $\mathcal S(\pm z)$ under adding affine functions (\Cref{sec:subdivisions}), the forced vertices and \Cref{prop:pointset}, and it also applies to the digit-exchanged square (\Cref{prop:exchanged}); other linear squares have many more vertices (\Cref{rem:linear}).
 
-\subsection{Two linear magic squares}
+\subsection{Linear squares}
 
-The \emph{Siamese} (de la Loub\`ere) square of odd order $n=2m+1$ \cite{loubere1693} has $1$ in the middle cell of the top row; each next entry is placed one step up and one step to the right, cyclically, or one step down if that cell is occupied.
+The \emph{Siamese} square of odd order $n=2m+1$ is de la Loub\`ere's classical construction \cite{loubere1693}: it has $1$ in the middle cell of the top row; each next entry is placed one step up and one step to the right, cyclically, or one step down if that cell is occupied.
 For $n=5$ it is
 \[
 \begin{pmatrix}17&24&1&8&15\\23&5&7&14&16\\4&6&13&20&22\\10&12&19&21&3\\11&18&25&2&9\end{pmatrix},
 \]
 and for $n=3$ it is a $D_4$-image of the Lo Shu.
 Write $\langle t\rangle\in\{0,\dots,n-1\}$ for the residue of $t$ modulo $n$.
+The Siamese square is a \emph{linear} (cyclic) square
+\[
+s(c)=n\langle\mathbf u\cdot c+\alpha\rangle+\langle\mathbf w\cdot c+\beta\rangle+1,\qquad c=(i,j),\quad \mathbf u=(u_1,u_2),\ \mathbf w=(w_1,w_2)\in\Z_n^2,\ \alpha,\beta\in\Z_n,
+\]
+with $\mathbf u=(1,1)$, $\mathbf w=(1,2)$, $\alpha=-m$, $\beta=-2m$ (Step~1 of the proof of \Cref{thm:siamese}).
+If $c\mapsto(\langle\mathbf u\cdot c+\alpha\rangle,\langle\mathbf w\cdot c+\beta\rangle)$ is a bijection of $\Z_n^2$, the cell of the entry $nk_1+k_0+1$ is an affine function of its digits $(k_1,k_0)$, so the linear squares are the squares of the uniform step method: consecutive entries advance by a fixed step, and after every $n$ entries by a fixed break-move \cite[Ch.~I]{andrews1960magic}.
+When this method fills the square and when it gives equal row and column sums was analysed by Lehmer \cite{lehmer1929} (see \cite{travassos2013}), and the method was studied further by Apostol and Zuckerman \cite{apostol1951}; we give a self-contained proof of the following criterion, including the diagonals, and of the count.
 
-\begin{lemma}[Two linear magic squares]
+\begin{proposition}[Linear magic squares]
+\label{prop:linear-magic}
+Let $n$ be odd. The linear square $s$ is a magic square if and only if
+\begin{enumerate}
+\item[(a)] $u_1$, $u_2$, $w_1$, $w_2$ and $u_1w_2-u_2w_1$ are units of $\Z_n$, and
+\item[(b)] for each digit, $(a_1,a_2,\gamma)=(u_1,u_2,\alpha)$ and $(w_1,w_2,\beta)$, and each pair $(\sigma,\tau)=(a_1+a_2,\gamma)$ (main diagonal) and $(a_1-a_2,\gamma-a_2)$ (anti-diagonal): if $d=\gcd(\sigma,n)>1$, then $\tau\equiv\frac{d-1}2\pmod d$.
+\end{enumerate}
+Consequently there are $\varphi(n)^2\sum f(r)f(r')$ linear magic squares of order $n$, the sum over the units $r,r'$ of $\Z_n$ with $r-r'$ a unit, where $f(r)=n/(\gcd(r+1,n)\gcd(r-1,n))$, and one eighth as many $D_4$-classes.
+For a prime $n=p$ this is $(p-1)^3(p^3-6p^2+10p-2)/8$ classes.
+If $3\mid n$, then for every unit $r$ one of $r\pm1$ is divisible by $3$, so that $f(r)\le n/3$.
+\end{proposition}
+
+\begin{proof}
+Write $A(c)=\langle\mathbf u\cdot c+\alpha\rangle$ and $B(c)=\langle\mathbf w\cdot c+\beta\rangle$.
+The map $c\mapsto(A(c),B(c))$ is affine on $\Z_n^2$ with linear part of determinant $u_1w_2-u_2w_1$, so $s$ is a bijection onto $\{1,\dots,N\}$ if and only if the determinant is a unit.
+Along a line $c=c_0+ke$, $k=0,\dots,n-1$, the digit $A$ takes the values $\langle\sigma k+\tau\rangle$ with $\sigma=\mathbf u\cdot e$ and $\tau=\mathbf u\cdot c_0+\alpha$.
+If $d=\gcd(\sigma,n)$, these run $d$ times through the $n/d$ residues $t,t+d,\dots,t+n-d$, where $t\in\{0,\dots,d-1\}$ and $t\equiv\tau\pmod d$.
+So $\sum_kA=d\bigl(\frac ndt+d\binom{n/d}2\bigr)=\frac{n(n-1)}2+n\,e_A$ with $e_A=t-\frac{d-1}2$ and $|e_A|\le\frac{d-1}2<n$, and likewise $\sum_kB=\frac{n(n-1)}2+n\,e_B$.
+The line sum of $s$ is $n\sum A+\sum B+n=\mu_n+n^2e_A+ne_B$; it equals $\mu_n$ only if $n\mid e_B$, i.e.\ $e_B=0$, and then $e_A=0$.
+So a line has sum $\mu_n$ if and only if, for each digit, $\sigma$ is a unit or $\tau\equiv\frac{d-1}2\pmod d$.
+For the row $i$, $e=(0,1)$, $\sigma=u_2$ and $\tau=u_1i+\alpha$; if $d=\gcd(u_2,n)>1$, the condition for the rows $i=0,1$ forces $d\mid u_1$, and then $d$ divides the determinant.
+So, given bijectivity, all rows have sum $\mu_n$ if and only if $u_2$ and $w_2$ are units, and all columns ($e=(1,0)$, $\sigma=u_1$) if and only if $u_1$ and $w_1$ are units.
+The main diagonal has $c_0=(0,0)$, $e=(1,1)$, and the anti-diagonal $c_0=(0,n-1)$, $e=(1,-1)$, so $\tau\equiv\alpha-u_2$ there; this proves (a) and (b).
+For the count write $u_1=ru_2$ and $w_1=r'w_2$ with units $r,r'$; the determinant is $u_2w_2(r-r')$.
+With $d_1=\gcd(r+1,n)$ and $d_2=\gcd(r-1,n)$, (b) prescribes $\alpha$ modulo $d_1$ and modulo $d_2$; $\gcd(d_1,d_2)$ divides $\gcd(2,n)=1$, so exactly $n/(d_1d_2)=f(r)$ values of $\alpha$ are admissible, and likewise $f(r')$ values of $\beta$.
+Summing over $u_2,w_2,r,r'$ gives the count; $D_4$ acts freely on arrangements and maps linear magic squares to linear magic squares, hence the factor $1/8$.
+For $n=p$ prime, $f(r)=p$ unless $r=\pm1$, and $f(\pm1)=1$; so $\sum_rf(r)=(p-1)(p-2)$, $\sum_rf(r)^2=(p-3)p^2+2$, and the sum over $r\ne r'$ is $(p-1)^2(p-2)^2-(p-3)p^2-2=(p-1)(p^3-6p^2+10p-2)$.
+If $3\mid n$ and $r$ is a unit, then $3\nmid r$, so $3$ divides $r-1$ or $r+1$.
+\end{proof}
+
+\begin{corollary}[Two linear magic squares]
 \label{lem:two-linear}
 For odd $n=2m+1$, both
 \[
@@ -24,20 +59,37 @@ s(i,j)=n\langle i+j-m\rangle+\langle i+2j-2m\rangle+1
 \quad\text{and}\quad
 s'(i,j)=n\langle i+2j-2m\rangle+\langle i+j-m\rangle+1
 \]
-are magic squares. We call $s$ the closed form of the Siamese square (Step~1 of the proof of \Cref{thm:siamese}) and $s'$ the \emph{digit-exchanged square}.
+are magic squares. We call $s'$ the \emph{digit-exchanged square}.
+\end{corollary}
+
+\begin{proof}
+The digits have $(a_1,a_2,\gamma)=(1,1,-m)$ and $(1,2,-2m)$; their coefficients are units, as $n$ is odd, and the determinant is $\pm1$.
+For the first, the main diagonal has the unit step $\sigma=2$, and the anti-diagonal $\sigma=0$, $d=n$, $\tau=-m-1\equiv m=\frac{n-1}2$.
+For the second, the anti-diagonal has $\sigma=-1$, and the main diagonal $\sigma=3$, a unit unless $3\mid n$; then $m\equiv1\pmod 3$ and $\tau=-2m\equiv1=\frac{3-1}2\pmod3$.
+\end{proof}
+
+For $n=5,7,11$ the formula gives $184$, $3159$ and $89{,}125$ classes.
+For $n=9$ the units $r\equiv1\pmod3$ have $f(r)=1,3,3$ ($r=1,4,7$), those with $r\equiv2$ have $f=3,3,1$ ($r=2,5,8$), and $r-r'$ is a unit if and only if $r\not\equiv r'\pmod 3$; so there are $6^2\cdot2\cdot7^2=3528$ linear magic squares and $441$ classes.
+This explains the small number at $n=9$: when $3\mid n$ every linear magic square has, for each digit, a diagonal along which the digit is not a permutation of $\Z_n$, and the offsets are restricted accordingly.
+The script \texttt{anc/linear\_magic\_count.py} confirms the criterion and the count against the actual line sums of all $n^6$ parameter choices for $n=3,5,\dots,25$.
+
+\subsection{The Siamese theorem}
+
+Both proofs below end with the following certificate, which is also the one applied to every computed hull (Appendix~\ref{sec:appendix}).
+
+\begin{lemma}[Closing a list of facets]
+\label{lem:closing}
+Let $Q\subset\R^3$ be finite and $W\subseteq Q$, and let $\mathbf a_k\cdot\mathbf p\le b_k$ ($k=1,\dots,K$, $K\ge2$, with pairwise distinct planes) hold at every point of $Q$.
+Suppose that each plane $\mathbf a_k\cdot\mathbf p=b_k$ contains three non-collinear points of $W$, and that every edge of each polygon $F_k=\operatorname{conv}\{\mathbf w\in W:\mathbf a_k\cdot\mathbf w=b_k\}$ is an edge of some other $F_l$.
+Then $\operatorname{conv}Q=\operatorname{conv}W=\{\mathbf p:\mathbf a_k\cdot\mathbf p\le b_k\text{ for all }k\}$, its facets are $F_1,\dots,F_K$, and its vertices are the vertices of these polygons.
 \end{lemma}
 
 \begin{proof}
-The map $(i,j)\mapsto(\langle i+j-m\rangle,\langle i+2j-2m\rangle)$ is a bijection of $\Z_n^2$ (its linear part has determinant $1$), so both squares are bijections onto $\{1,\dots,n^2\}$.
-In every row and every column both digits run over $\Z_n$, since $1$ and $2$ are units modulo $n$.
-On the anti-diagonal $j=2m-i$ one digit is the constant $\langle m\rangle=m$ and the other is $\langle 2m-i\rangle$, a permutation; $n$ copies of $m$ sum to $n(n-1)/2$, as a permutation does.
-On the main diagonal the digits are $\langle 2i-m\rangle$, a permutation since $n$ is odd, and $\langle 3i-2m\rangle$.
-The latter is a permutation if $3\nmid n$.
-If $3\mid n$ then $m\equiv1\pmod 3$, so $\langle3i-2m\rangle$ runs three times over $\{1,4,\dots,n-2\}$, whose sum is again $n(n-1)/2$.
-Hence every line sum is $n\cdot n(n-1)/2+n(n-1)/2+n=\mu_n$.
+Let $\Pi=\operatorname{conv}W$ and let $H$ be the solution set of the inequalities, so $\Pi\subseteq\operatorname{conv}Q\subseteq H$.
+Each plane supports $\Pi$ and meets it in the $2$-dimensional face $F_k$; as there are $K\ge2$ distinct such planes, $\Pi$ is a $3$-polytope and the $F_k$ are distinct facets.
+An edge of $F_k$ is an edge of $\Pi$ and lies in exactly two facets of $\Pi$, $F_k$ and, by hypothesis, some $F_l$; so the list is closed under adjacency across edges.
+The facet-adjacency graph of a $3$-polytope is connected, so $F_1,\dots,F_K$ are all the facets of $\Pi$, and $\Pi=H$.
 \end{proof}
-
-\subsection{The theorem}
 
 \begin{theorem}[Siamese gems]
 \label{thm:siamese}
@@ -61,14 +113,13 @@ So only $12$ of the $n^2$ points are vertices, and the combinatorial type of the
 
 \begin{proof}
 \emph{Step 1: closed form.}
-We show that $S$ is the square $s(i,j)=n\langle i+j-m\rangle+\langle i+2j-2m\rangle+1$ of \Cref{lem:two-linear}; this identification with de la Loub\`ere's construction is classical \cite{andrews1960magic}.
+We show that $S$ is the square $s$ of \Cref{lem:two-linear}.
 The map $\kappa(i,j)=(\langle i+j-m\rangle,\langle i+2j-2m\rangle)$ is a bijection of $\Z_n^2$, and $\kappa(0,m)=(0,0)$.
 Write $k-1=nk_1+k_0$ with $0\le k_0<n$; we prove by induction on $k$ that the entry $k$ is placed in the cell $\kappa^{-1}(k_1,k_0)$.
 This holds for $k=1$. Suppose it holds for $1,\dots,k$, with $k$ in the cell $c=\kappa^{-1}(k_1,k_0)$; the occupied cells are $\kappa^{-1}(k_1',k_0')$ with $nk_1'+k_0'<k$.
 The up-right move $(i,j)\to(i-1,j+1)$ keeps $i+j$ and increases $i+2j$ by $1$, so it leads to $\kappa^{-1}(k_1,\langle k_0+1\rangle)$.
 If $k_0<n-1$, this cell is empty and is the cell prescribed for $k+1$.
 If $k_0=n-1$, i.e.\ $n\mid k$, it is the cell $\kappa^{-1}(k_1,0)$ of the entry $nk_1+1$, so the move is blocked; the downward move $(i,j)\to(i+1,j)$ increases both $i+j$ and $i+2j$ by $1$ and leads to the empty cell $\kappa^{-1}(k_1+1,0)$, the cell prescribed for $k+1=n(k_1+1)+1$.
-(Thus each run of $n$ entries fills one broken diagonal $i+j\equiv\text{const}$.)
 By \Cref{lem:two-linear}, $S$ is magic. It is also associative: by the closed form, $s(i,j)+s(2m-i,2m-j)=N+1$.
 
 \emph{Step 2: the forced vertices.}
@@ -77,7 +128,7 @@ On the top row $i=0$ this gives $j=m-1$ with entry $n(n-1)+\langle-2\rangle+1=N-
 The corner entries follow in the same way.
 The entries $1$ and $N$ are among the side extremes, and for $m\ge2$ the eight side cells are distinct and are not corners; so the forced vertices are the twelve listed points. For $m=1$ the side extremes are the corners and the midpoints of the sides.
 
-\emph{Proof of (a).} For $n=3$ the forced vertices are the eight boundary points, and the only other point is the interior point $\mathbf 0$ (\Cref{ex:loshu}). An isometry of $\mathcal G(S)$ maps its vertex set onto itself and so fixes the centroid $\mathbf 0$ of the vertex set; hence it preserves $P_S$, and $\operatorname{Iso}(P_S)=\{\pm\mathrm{id}\}$ by \Cref{thm:pointset}, since $S$ is associative.
+\emph{Proof of (a).} For $n=3$ the forced vertices are the eight boundary points, and the only other point is the interior point $\mathbf 0$ (\Cref{ex:loshu}). An isometry of $\mathcal G(S)$ maps its vertex set onto itself and so fixes the centroid $\mathbf 0$ of the vertex set; hence it preserves $P_S$, and $\operatorname{Iso}(P_S)=\{\pm\mathrm{id}\}$ by \Cref{prop:pointset}, since $S$ is associative.
 From now on let $m\ge2$. It remains to show that no point other than the twelve forced vertices is a vertex.
 
 \emph{Step 3: shear to five levels.}
@@ -102,7 +153,7 @@ and $\zeta=-1$, $-(n+1)$ on $\Lambda_{-1}=-\Lambda_{+1}$, $\Lambda_{-2}=-\Lambda
 \emph{Step 4: the hull.}
 Let $q_1,\dots,q_{12}$ be the images under $\Phi$ of the twelve forced vertices and $q_{13},\dots,q_{16}$ the remaining four vertices of the level polygons; their coordinates are in \Cref{tab:slacks}.
 Let $H$ be the polyhedron defined by the eight inequalities below and their images $(1')$--$(8')$ under $-\mathrm{id}$.
-Inequality $(k)$ is the plane through three of the twelve points, namely $(1)$ $q_1q_2q_3$, $(2)$ $q_1q_2q_8$, $(3)$ $q_1q_3q_5$, $(4)$ $q_1q_4q_7$, $(5)$ $q_2q_3q_6$, $(6)$ $q_2q_6q_9$, $(7)$ $q_2q_8q_9$, $(8)$ $q_3q_5q_6$; its normal is the cross product of two edge vectors:
+Inequality $(k)$ is the plane through the first three points of its list below (its normal is the cross product of two edge vectors):
 \begin{align*}
 &(1)\ \zeta\le 2m+2, \qquad (2)\ y\le m, \qquad (3)\ -x\le m, \qquad (8)\ -2y+\zeta\le 2m,\\
 &(4)\ -2(m{+}1)x+(2m{+}1)y-m\zeta\le m(2m{+}1),\qquad (7)\ 2mx-y+m\zeta\le m(2m{-}1),\\
@@ -112,7 +163,7 @@ Inequality $(k)$ is the plane through three of the twelve points, namely $(1)$ $
 \Cref{tab:slacks} lists the slack (right-hand side minus left-hand side) of $(1)$--$(8)$ at the sixteen points $q_k$.
 Every non-zero entry is a product of positive constants, of linear factors ($m-1$, $m$, $m+1$, $m+2$, $2m-1$, $2m+1$, $2m+3$, $4m-3$, $4m-1$), which are positive for $m\ge2$, and of the quadratics $2m^2+2m+1$, $2m^2+2m-1$, $4m^2+2m-1$, $4m^2-2m+1$, $4m^2+m+1$, $4m^2-3m+1$, $m^2+m+1$.
 Each of these quadratics is positive at $m=1$ and has its minimum at some $m\le3/8$, hence is positive for all $m\ge1$.
-The set $\{q_1,\dots,q_{16}\}$ is centrally symmetric, so all sixteen inequalities hold at all sixteen points and hence, by convexity, at all points $(x,y,\zeta)$, each of which lies in a level polygon: $\Phi(\mathcal G(S))\subseteq H$.
+The set $\{q_1,\dots,q_{16}\}$ is centrally symmetric, so all sixteen inequalities hold at all sixteen points and hence, by convexity, at all points $(x,y,\zeta)$, each of which lies in a level polygon.
 The zeros of the table show that the planes $(1)$--$(8)$ contain the following $q_k$ ($k\le12$), in cyclic order:
 \[
 \begin{array}{llll}
@@ -127,13 +178,11 @@ In the plane $x=-m$, written in coordinates $(y,\zeta)$, the line through $q_5=(
 This is $m+1>1$ at $y=0$, so $q_4=(0,1)$ lies below the line, and $(m+1)^2/m<2m+2$ at $y=1$, so $q_3=(1,2m+2)$ lies above it.
 Hence $q_1q_5$ is a diagonal and $q_1q_3q_5q_4$ is the cyclic order.
 (The non-vertex point $q_{13}=(-m,1-m,1)$ lies on plane $(3)$ inside this quadrilateral.)
-Let $\Pi=\operatorname{conv}\{q_1,\dots,q_{12}\}$.
-Each of the sixteen planes contains at least three non-collinear points $q_k$ of its list (the zero entries of \Cref{tab:slacks}), so it meets $\Pi\subseteq H$ in a $2$-dimensional face, i.e.\ a facet of $\Pi$.
-These sixteen polygons ($12$ triangles and the $4$ quadrilaterals $(2),(3),(2'),(3')$) have $26$ edges, each shared by exactly two of them; since the facet-adjacency graph of a $3$-polytope is connected, they are all the facets of $\Pi$, and $\Pi=H$.
-As $\Pi\subseteq\Phi(\mathcal G(S))\subseteq H=\Pi$, the gem is the image of $\Pi$ under $\Phi^{-1}$, with vertex set the twelve forced vertices and $f$-vector $(12,26,16)$.
+These sixteen polygons ($12$ triangles and the $4$ quadrilaterals $(2),(3),(2'),(3')$) have $26$ edges, each shared by exactly two of them.
+By \Cref{lem:closing}, with $Q$ the sheared points and $W=\{q_1,\dots,q_{12}\}$, $\Phi(\mathcal G(S))=H$ has exactly these sixteen facets and the vertices $q_1,\dots,q_{12}$; mapping back by $\Phi^{-1}$, the gem has the twelve forced vertices and $f$-vector $(12,26,16)$.
 
 \emph{Step 5: isometries.}
-$S$ is associative (Step~1), so $\operatorname{Iso}(P_S)=\{\pm\mathrm{id}\}$ by \Cref{thm:pointset}.
+$S$ is associative (Step~1), so $\operatorname{Iso}(P_S)=\{\pm\mathrm{id}\}$ by \Cref{prop:pointset}.
 An isometry of $\mathcal G(S)$ fixes the centroid $\mathbf 0$ of its centrally symmetric vertex set and is orthogonal.
 Write $\tilde q_k=\Phi^{-1}(q_k)$ for the forced vertices in the original coordinates:
 $\tilde q_1=(-m,m,m+2)$, $\tilde q_2=(-1,m,2m^2+2m-1)$, $\tilde q_3=(-m,1,2m^2+m)$, $\tilde q_4=(-m,0,-2m^2-m+1)$, $\tilde q_5=(-m,-m,-m)$, $\tilde q_6=(0,-m,2m^2+2m)$, and the other six are their negatives.
@@ -158,22 +207,69 @@ For $m=1$ several entries vanish and the four triangles degenerate.
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.88\textwidth]{figures/fig_siamese_layers.pdf}
+\includegraphics[width=0.72\textwidth]{figures/fig_siamese_layers.pdf}
 \caption{The Siamese gem of order $n=9$ after the shear $\Phi$. (a)~The $81$ cells coloured by the level value $\zeta\in\{\pm10,\pm1,0\}$, with the five level polygons outlined and the twelve vertex cells $q_1,\dots,q_{12}$ circled. (b)~$\Phi(\mathcal G(S))$ with its $12$ vertices and $16$ facets. The combinatorics of the level polygons does not depend on $m\ge2$.}
 \label{fig:siamese-layers}
 \end{figure}
 
-\begin{remark}[Linear squares]
+\subsection{The digit-exchanged square}
+
+The method of the proof applies to other linear squares; for the digit-exchanged square it gives the following.
+
+\begin{proposition}[Digit-exchanged gems]
+\label{prop:exchanged}
+Let $S'$ be the digit-exchanged square $s'$ of \Cref{lem:two-linear}, of odd order $n=2m+1\ge5$.
+The vertices of $\mathcal G(S')$ are the twelve points over the cells
+\[
+\begin{array}{llll}
+(0,0)\colon n+m+2, & (0,m-1)\colon N-n, & (0,m)\colon 1, & (0,2m)\colon N-n+m+1,\\
+(1,2m)\colon m+2, & (m-1,0)\colon n(m+1), & (m+1,2m)\colon nm+1, & (2m-1,0)\colon N-n+m,\\
+(2m,0)\colon m+1, & (2m,m)\colon N, & (2m,m+1)\colon n+1, & (2m,2m)\colon N-2n+m,
+\end{array}
+\]
+listed with their entries; eight of them are forced vertices, and those over $(0,m-1)$, $(m-1,0)$, $(m+1,2m)$, $(2m,m+1)$ are not.
+The $f$-vector is $(12,24,14)$, with $8$ triangular and $6$ quadrilateral facets, and $\operatorname{Iso}(\mathcal G(S'))=\{\pm\mathrm{id}\}$.
+\end{proposition}
+
+\begin{proof}
+Since $\langle 2m-t\rangle=n-1-\langle t\rangle$ and $(x,y)\mapsto(-x,-y)$ maps $\ell_1$, $\ell_2$ to $2m-\ell_1$, $2m-\ell_2$, the square $S'$ is associative.
+In the coordinates of Step~3, $s'=n\langle\ell_2\rangle+\langle\ell_1\rangle+1$, so $z=\lambda'(x,y)+n\zeta'$ with the affine function $\lambda'=n\ell_2+\ell_1+1-\bar s$ and $\zeta'=-n\lfloor\ell_2/n\rfloor-\lfloor\ell_1/n\rfloor$.
+The floors are those of Step~3, so $\zeta'$ is constant on the same level polygons, with the values $n+1$, $n$, $0$, $-n$, $-(n+1)$ on $\Lambda_{+2},\dots,\Lambda_{-2}$.
+Hence the shear $\Phi'(x,y,z)=(x,y,(z-\lambda')/n)$ maps $\mathcal G(S')$ onto the convex hull of the sixteen points $q_k$ of \Cref{tab:slacks} with the third coordinates $\pm1$ replaced by $\pm n$.
+Let $H'$ be defined by the seven inequalities
+\begin{align*}
+&(1)\ \zeta'\le 2m+2,\qquad (2)\ y\le m,\qquad (3)\ -x\le m,\qquad (6)\ 2x-y+\zeta'\le m,\\
+&(4)\ -2(m{+}1)x+(m{+}1)y-m\zeta'\le m(m{+}1),\qquad (5)\ x-y+m\zeta'\le(m{+}1)(2m{-}1),\\
+&(7)\ -(2m{+}1)y+\zeta'\le m(2m{+}1),
+\end{align*}
+and their images $(1')$--$(7')$ under $-\mathrm{id}$.
+\Cref{tab:slacks-exchanged} (Appendix~\ref{sec:appendix}) lists the slacks of $(1)$--$(7)$ at the sixteen points.
+Every non-zero entry is a product of positive constants, of the linear factors $m-1$, $m$, $m+1$, $m+2$, $2m-1$, $2m+1$, $4m+3$ and of the quadratics $2m^2-1$, $2m^2+2m-1$, $2m^2+m+1$, $4m^2+m-1$, each of which is positive at $m=1$ and increasing for $m\ge1$; so all are positive for $m\ge2$, and the inequalities hold at all points as in Step~4.
+The zeros of the table give the facets
+\[
+\begin{array}{llll}
+(1)\colon q_1q_2q_3, & (2)\colon q_1q_2q_8q_7, & (3)\colon q_1q_3q_{13}q_5, & (4)\colon q_1q_5q_7,\\
+(5)\colon q_2q_3q_{13}, & (6)\colon q_2q_{13}q_6q_8, & (7)\colon q_{13}q_5q_6 &
+\end{array}
+\]
+and their antipodes ($q_{15}=-q_{13}$); the points $q_4$ and $q_{14}$ lie on the planes $(3)$ and $(6)$ but are not vertices.
+The quadrilaterals are convex in the listed order: $(2)$ is the trapezoid of Step~4; on the plane $(3)$, in the coordinates $(y,\zeta')$, the four turns $(b-a)\times(c-b)$ of consecutive vertices of $q_1q_3q_{13}q_5$ are $m-1$, $(m+1)(2m-1)$, $2(2m^2-1)$, $2(m^2-1)$; and $(6)$ projects onto the quadrilateral $(-1,m)$, $(-m,1-m)$, $(0,-m)$, $(m,m)$ of the grid, with turns $2m^2-1$, $m(2m+1)$, $2m(m+1)$, $(m+1)(2m-1)$.
+These fourteen polygons have $24$ edges, each shared by exactly two of them, so by \Cref{lem:closing}, with $W$ the twelve points $\pm q_1,\pm q_2,\pm q_3,\pm q_5,\pm q_6,\pm q_{13}$ ($q_7=-q_6$, $q_8=-q_5$), they are the facets of $\Phi'(\mathcal G(S'))=H'$.
+Mapping back by $(i,j)=(m-y,x+m)$ gives the listed cells; the forced ones are the corners, $(0,m)$ and $(2m,m)$ (the entries $1$ and $N$), $(1,2m)$ (the smallest entry of the right column) and $(2m-1,0)$ (the largest of the left column).
+For the isometries argue as in Step~5: the squared norms of the six antipodal pairs of vertices in the original coordinates are $2m^2+1$, $4m^4-4m^3-5m^2+4m+4$, $4m^4-3m^2+2$, $4m^4+4m^3-m^2-4m+2$, $m^2(4m^2+4m+3)$, $m^2(4m^2+8m+5)$ (over $(m-1,0)$, $(0,0)$, $(0,m-1)$, $(2m-1,0)$, $(2m,0)$, $(2m,m)$), pairwise distinct for $m\ge2$, and the inner products of the vertex over $(0,0)$ with the other five are non-zero for $m\ge2$.
+All of this is checked in exact polynomial arithmetic by \texttt{anc/digit\_exchanged\_slacks.py}, which applies the same certificate to the Siamese square as a cross-check.
+\end{proof}
+
+\begin{remark}[Vertex counts of linear squares]
 \label{rem:linear}
-The Siamese square is a \emph{linear} (cyclic) square $s(c)=n\langle\mathbf u\cdot c+\alpha\rangle+\langle\mathbf w\cdot c+\beta\rangle+1$ with $\mathbf u,\mathbf w\in\Z_n^2$ and $\alpha,\beta\in\Z_n$, and for fixed integer vectors $\mathbf u,\mathbf w$ the same shear reduces the lift to a number of levels that does not depend on $n$.
-The gems of linear squares do not share the twelve-vertex count, however.
-Over all $(\mathbf u,\mathbf w,\alpha,\beta)\in\Z_n^2\times\Z_n^2\times\Z_n\times\Z_n$ for which $s$ is a magic square, counted up to $D_4$ (each family is closed under complementation; complements are not identified), the vertex counts (\texttt{anc/linear\_squares.py}, exact hulls) range over $[11,18]$ for $n=5$ ($184$ $D_4$-classes), $[12,25]$ for $n=7$ ($3159$ classes), $[12,31]$ for $n=9$ ($441$ classes) and $[12,36]$ for $n=11$ ($89{,}125$ classes).
+The gems of other linear squares do not share the twelve-vertex count.
+Over all linear magic squares, counted up to $D_4$ (each family is closed under complementation; complements are not identified), the vertex counts (\texttt{anc/linear\_squares.py}, exact hulls) range over $[11,18]$ for $n=5$ ($184$ classes), $[12,25]$ for $n=7$ ($3159$ classes), $[12,31]$ for $n=9$ ($441$ classes) and $[12,36]$ for $n=11$ ($89{,}125$ classes).
 For $n=5$ the minimum $11$ is attained by two classes, complements of each other, both pandiagonal and not associative, with $f$-vector $(11,23,14)$; one is $s=5\langle4i+3j\rangle+\langle4i+2j\rangle+1$ ($\mathbf u=(-1,-2)$, $\mathbf w=(-1,2)$, $\alpha=\beta=0$), the first square below.
 \[
 \begin{pmatrix}1&18&10&22&14\\25&12&4&16&8\\19&6&23&15&2\\13&5&17&9&21\\7&24&11&3&20\end{pmatrix}
 \qquad\qquad
 \begin{pmatrix}1&19&15&13&17\\23&5&14&20&3\\10&21&12&4&18\\24&9&8&22&2\\7&11&16&6&25\end{pmatrix}
 \]
-For $n=7,9,11$ the minimum $12$ is attained by exactly two classes, one of them the Siamese square and the other the digit-exchanged square $s'$ of \Cref{lem:two-linear}; its gem has $f$-vector $(12,24,14)$ for $n=5,7,\dots,31$.
+For $n=7,9,11$ the minimum $12$ is attained by exactly two classes, those of the Siamese and the digit-exchanged square (\Cref{thm:siamese}, \Cref{prop:exchanged}).
 The Siamese gem is not vertex-minimal at order five: simulated annealing (Appendix~\ref{sec:vertexstats}) found $15$ $D_4$-classes of magic squares of order $5$ whose gems have $10$ vertices (\texttt{anc/sa\_n5\_V10.txt}). For example, the second square above has $f$-vector $(10,22,14)$, volume $845/3$ and $8$ interior points.
 \end{remark}

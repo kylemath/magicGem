@@ -1,14 +1,18 @@
 \begin{abstract}
-To an $n\times n$ magic square we attach the $n^2$ points $(x,y,z)$ in $\R^3$, where $(x,y)$ is the position of a cell measured from the centre of the grid and $z$ is its entry minus the mean entry; their convex hull is the \emph{Magic Gem}.
-Read as vectors from their centroid, the points balance for every arrangement of the entries, whereas the heights balance as weights on the grid exactly when the rows and columns have equal sums: the row and column conditions are equivalent to the vanishing of all height-weighted moments along the two axes, among them the dipole moment, while the mixed moment is not forced.
-Consequently the covariance matrix of the points is the same for all semi-magic squares of a given order, and a short argument shows that the point set has a non-trivial isometry exactly when the square equals its complement up to rotation and reflection.
-The lower and upper faces of a gem are the regular subdivisions of the grid induced by the entries and by their negatives.
-For the $880$ magic squares of order four we compute all gems exactly, by computer: no gem has an isometry that its point set lacks; $48$ gems are centrally symmetric, $304$ have a single half-turn symmetry and $528$ have none; the vertex set determines the square; and the gems form $616$ congruence classes and $352$ combinatorial types.
-For larger orders the vertex count can grow: other linear magic squares have up to $18$, $25$, $31$ and $36$ vertices for orders $5$, $7$, $9$ and $11$.
-For the Siamese (de la Loub\`ere) square of every odd order $n\ge5$, however, we prove that the gem has exactly the twelve vertices that the boundary of the grid forces (the four corners and, on each side, the cells of the smallest and largest entry), with $f$-vector $(12,26,16)$ and isometry group $\{\pm\mathrm{id}\}$; the proof reduces to checking the signs of a table of polynomials in $m=(n-1)/2$.
+To an arrangement of $1,\dots,n^2$ in an $n\times n$ grid we attach the $n^2$ points $(x,y,z)$ in $\R^3$, where $(x,y)$ is the position of a cell measured from the centre of the grid and $z$ is its entry minus the mean entry.
+Their convex hull is the \emph{gem} of the arrangement; its lower and upper faces are the regular subdivisions of the grid induced by the heights and by their negatives.
+Magic squares are the motivating case.
+Our main result concerns the Siamese (de la Loub\`ere) square of every odd order $n\ge5$: its gem has exactly the twelve vertices that the boundary of the grid forces (the corners and, on each side, the cells of the smallest and largest entry), with $f$-vector $(12,26,16)$ and isometry group $\{\pm\mathrm{id}\}$.
+The proof shears the lift onto five levels and reduces to the signs of a table of polynomials in $m=(n-1)/2$.
+The same method gives the $f$-vector $(12,24,14)$ for the square with the two base-$n$ digits exchanged, and we determine and count the magic linear squares.
+Most other results need less than magic.
+If the heights have vanishing first moments, as for every semi-magic square, the point set has a non-trivial isometry exactly when the arrangement equals its complement up to rotation and reflection.
+For the $880$ magic squares of order four a computational census gives $616$ congruence classes and $352$ combinatorial types of gems, none with an isometry that its point set lacks.
+The gem hardly sees the magic conditions: at order four the mean numbers of vertices and of lower and upper facets of magic gems differ from those of semi-magic squares and of random arrangements by at most $0.14$ standard deviations, and the excess of vertices over semi-magic squares comes almost entirely from self-complementary squares; at order five, on samples, the mean vertex counts differ by less than $0.07$ vertices.
+The volume and the solid centroid do shift.
 \medskip
 
-\noindent\textbf{Keywords:} magic squares, convex polytopes, regular subdivisions, symmetry groups, Siamese method
+\noindent\textbf{Keywords:} magic squares, convex polytopes, regular subdivisions, symmetry groups, Siamese method, linear magic squares
 
 \noindent\textbf{MSC 2020:} 05B15, 52B05, 52B15, 52B20
 \end{abstract}

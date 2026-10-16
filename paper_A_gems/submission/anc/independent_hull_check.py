@@ -341,7 +341,7 @@ def main():
     tot_ok['sa_n5_V10'] = ok
     log(f'\n[sa_n5_V10.txt] {len(A)} squares, f-vectors {dict(c)}  (claim 14 x (10,22,14), 1 x (10,23,15))  agree: {ok}  ({time.time() - t:.1f} s)')
 
-    # ---------------- Remark 6.3 examples
+    # ---------------- Remark 6.6 examples
     R1 = np.array([[1, 18, 10, 22, 14], [25, 12, 4, 16, 8], [19, 6, 23, 15, 2], [13, 5, 17, 9, 21], [7, 24, 11, 3, 20]])
     R2 = np.array([[1, 19, 15, 13, 17], [23, 5, 14, 20, 3], [10, 21, 12, 4, 18], [24, 9, 8, 22, 2], [7, 11, 16, 6, 25]])
     assert is_magic(R1) and is_magic(R2)
@@ -351,9 +351,9 @@ def main():
     ok1 = h1['f'] == (11, 23, 14)
     ok2 = h2['f'] == (10, 22, 14) and h2['volume'] == Fraction(845, 3) and h2['interior'] == 8
     in_sa = any(any(np.array_equal(T, R2) for T in d4(S)) for S in A)
-    tot_ok['Remark 6.3 first'] = ok1; tot_ok['Remark 6.3 second'] = ok2
-    log(f'\n[Remark 6.3] first : f={h1["f"]} vol={h1["volume"]} interior={h1["interior"]} bnv={h1["bnv"]}  (claim (11,23,14))  agree: {ok1}')
-    log(f'[Remark 6.3] second: f={h2["f"]} vol={h2["volume"]} interior={h2["interior"]} bnv={h2["bnv"]}'
+    tot_ok['Remark 6.6 first'] = ok1; tot_ok['Remark 6.6 second'] = ok2
+    log(f'\n[Remark 6.6] first : f={h1["f"]} vol={h1["volume"]} interior={h1["interior"]} bnv={h1["bnv"]}  (claim (11,23,14))  agree: {ok1}')
+    log(f'[Remark 6.6] second: f={h2["f"]} vol={h2["volume"]} interior={h2["interior"]} bnv={h2["bnv"]}'
         f'  (claim (10,22,14), 845/3, 8 interior)  agree: {ok2};  D4-class listed in sa_n5_V10.txt: {in_sa}')
 
     log('\n[summary]')

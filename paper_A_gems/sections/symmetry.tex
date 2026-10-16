@@ -2,10 +2,6 @@
 \label{sec:symmetry}
 \label{sec:symmetry-congruence}
 
-By \Cref{lem:cov} the point set of every semi-magic square of order $n$ has the same covariance matrix $\operatorname{diag}(a_n,a_n,b_n)$, with a horizontal and a vertical eigenspace.
-An isometry between two such point sets must preserve these eigenspaces, and this reduces every question about symmetry and congruence of the point sets to the dihedral group of the grid and to complementation (\Cref{thm:pointset}).
-Every symmetry of the point set is a symmetry of its gem, and at order four we show by exact computation that the gems have no others (\Cref{thm:symmetry}).
-
 \subsection{Point sets of every order}
 \label{sec:pointsets}
 
@@ -33,15 +29,15 @@ The involutions of $D_4$ are $r^2$, $h$, $v$ and the two diagonal reflections; t
 Finally, the points of $S$ are mapped by $\tau$ to those of $\overline S=gS$, and by $\hat g=\hat g^{-1}$ back to those of $g^2S=S$, by \eqref{eq:d4}.
 \end{proof}
 
-\begin{theorem}[Point sets of semi-magic squares]
-\label{thm:pointset}
+\begin{proposition}[Point sets with vanishing first moments]
+\label{prop:pointset}
 Let $S$ and $T$ be arrangements of order $n\ge2$ with $\sum z_{ij}x_{ij}=\sum z_{ij}y_{ij}=0$ (the first moments of the heights vanish), for instance semi-magic squares, and let $P_S$, $P_T$ be their point sets.
 \begin{enumerate}
 \item Every isometry $\psi$ of $\R^3$ with $\psi(P_S)=P_T$ is of the form $\hat g$ or $\hat g\,\tau$ with $g\in D_4$; $\hat g(P_S)=P_T$ if and only if $T=gS$, and $\hat g\,\tau(P_S)=P_T$ if and only if $T=g\overline S$.
 \item $P_S$ and $P_T$ are congruent if and only if $T\in D_4S\cup D_4\overline S$.
 \item $\operatorname{Iso}(P_S)=\{\mathrm{id}\}$ unless $S$ is self-complementary, and $\operatorname{Iso}(P_S)=\{\mathrm{id},\iota_g\}$ if $\overline S=gS$.
 \end{enumerate}
-\end{theorem}
+\end{proposition}
 
 \begin{proof}
 An isometry of $\R^3$ mapping one finite set onto another maps centroid to centroid, and both centroids are $\mathbf 0$ (\Cref{lem:lines}(1)); so $\psi$ is orthogonal, and $\psi\Sigma_S\psi^{\top}=\Sigma_T$ for the covariance matrices.
@@ -51,7 +47,7 @@ By \eqref{eq:d4}, $\hat g(P_S)=P_{gS}$ and $\hat g\tau(P_S)=P_{g\overline S}$, a
 For (3) take $T=S$: $\hat g(P_S)=P_S$ forces $gS=S$, hence $g=\mathrm{id}$, and $\hat g\tau(P_S)=P_S$ forces $g\overline S=S$, i.e.\ $\overline S=g^{-1}S=gS$ by \Cref{lem:selfcomp}.
 \end{proof}
 
-So for every order the symmetries of the point set of a semi-magic square are exactly those coming from self-complementarity, and congruences between point sets come only from $D_4$ and complementation.
+The diagonal conditions play no role.
 
 \subsection{The isometry groups of the order-four gems}
 \label{sec:iso4}
@@ -59,8 +55,8 @@ So for every order the symmetries of the point set of a semi-magic square are ex
 For the gem, $\operatorname{Iso}(\mathcal G(S))=\operatorname{Iso}(\operatorname{vert}\mathcal G(S))$, since isometries preserve extreme points, and $\operatorname{Iso}(P_S)\subseteq\operatorname{Iso}(\mathcal G(S))$; the inclusion is an equality when every point is a vertex, but in general the gem might have isometries that do not preserve the non-vertex points.
 For order four this does not happen.
 
-\begin{theorem}[Isometry groups of the order-four gems; exact computation]
-\label{thm:symmetry}
+\begin{proposition}[Isometry groups of the order-four gems; exact computation]
+\label{prop:iso4}
 For each of the $880$ $D_4$-classes of magic squares $S$ of order $4$, $\operatorname{Iso}(\mathcal G(S))=\operatorname{Iso}(P_S)$. Hence:
 \begin{enumerate}
 \item for the $48$ associative squares, $\operatorname{Iso}(\mathcal G(S))=\{\mathrm{id},-\mathrm{id}\}$;
@@ -68,24 +64,23 @@ For each of the $880$ $D_4$-classes of magic squares $S$ of order $4$, $\operato
 \item for the remaining $528$ squares, $\operatorname{Iso}(\mathcal G(S))$ is trivial.
 \end{enumerate}
 In particular a gem has an improper isometry if and only if $S$ is associative, and the $832$ gems in cases (2) and (3) are chiral (chiral: having no orientation-reversing isometry).
-\end{theorem}
+\end{proposition}
 
 \begin{proof}
 The squares were sorted into the three cases by comparing $\overline S$ with the eight images $gS$; by \Cref{lem:selfcomp} the complementing element is $r^2$, $h$ or $v$.
-For each square we computed $\operatorname{Iso}(\operatorname{vert}\mathcal G(S))$ in exact integer arithmetic (Appendix~\ref{sec:appendix}); its order is $2$ in cases (1) and (2) and $1$ in case (3), equal to the order of $\operatorname{Iso}(P_S)$ by \Cref{thm:pointset}(3), and $\operatorname{Iso}(P_S)\subseteq\operatorname{Iso}(\mathcal G(S))$.
+For each square we computed $\operatorname{Iso}(\operatorname{vert}\mathcal G(S))$ in exact integer arithmetic (Appendix~\ref{sec:appendix}); its order is $2$ in cases (1) and (2) and $1$ in case (3), equal to the order of $\operatorname{Iso}(P_S)$ by \Cref{prop:pointset}(3), and $\operatorname{Iso}(P_S)\subseteq\operatorname{Iso}(\mathcal G(S))$.
 The maps $\iota_h$, $\iota_v$ are proper.
 \end{proof}
 
 The partition (1)--(3) is classical: the associative squares form Dudeney's group III and the self-complementary non-associative ones his group VI \cite{dudeney1917amusements}.
-What \Cref{thm:symmetry} adds is that the hulls have no further symmetry.
-Likewise the congruence classes of the $880$ gems are the orbits of complementation (\Cref{prop:gem-injective}).
+What \Cref{prop:iso4} adds is that the hulls have no further symmetry.
 \Cref{tab:symmetry} summarises the three cases and \Cref{fig:symmetry} shows one gem of each.
 
 \begin{table}[htbp]
 \centering
 \caption{Symmetry types of the $880$ order-four gems; ``classes'' counts congruence classes.}
 \label{tab:symmetry}
-\small
+\footnotesize
 \begin{tabular}{l c r l r l}
 \toprule
 type of $S$ & Dudeney & squares & $\operatorname{Iso}(\mathcal G)$ & classes & $V$\\
@@ -101,31 +96,28 @@ total & & $880$ & & $616$ &\\
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.94\textwidth]{figures/fig_symmetry.pdf}\\[2pt]
-\includegraphics[width=0.94\textwidth]{figures/fig_pointsets.pdf}
+\includegraphics[width=0.8\textwidth]{figures/fig_symmetry.pdf}\\[2pt]
+\includegraphics[width=0.8\textwidth]{figures/fig_pointsets.pdf}
 \caption{Gems (top) and point sets (bottom) of three order-four squares, all drawn from the same viewpoint, with the square printed above each gem. Interior points: red discs; non-vertex boundary points: orange squares. (a,\,d)~D\"urer's square, associative: a pair of opposite facets (orange, green), and the $8$ antipodal pairs $\{\mathbf p,-\mathbf p\}$ joined through $O$. (b,\,e)~Square \#124, self-complementary and not associative: the half-turn about the dashed axis exchanges the highlighted facets and the $8$ pairs of points. (c,\,f)~Square \#102: no non-trivial isometry; the gem is chiral and its mirror image in $z=0$ is the gem of $17-S$.}
 \label{fig:symmetry}
 \end{figure}
 
-\begin{lemma}[Parity for associative squares]
+\begin{lemma}[Parity]
 \label{lem:parity}
-Let $S$ be associative of order $n$ and not a $D_4$-image of the natural square (for instance, associative and semi-magic). Then $V$ and $V^\partial$ are even and $V^\circ\equiv n\pmod2$.
+Let $S$ be a self-complementary arrangement of order $n$ that is not a $D_4$-image of the natural square (for instance, a self-complementary semi-magic square). Then $V$ and $V^\partial$ are even and $V^\circ\equiv n\pmod2$. If $S$ is associative, $E$ and $F$ are even as well.
 \end{lemma}
 
 \begin{proof}
-The point set is invariant under $-\mathrm{id}$ (\Cref{lem:selfcomp}), which therefore permutes the vertices, the interior points and the non-vertex boundary points of the $3$-polytope $\mathcal G(S)$ (\Cref{prop:fulldim}). Its only fixed point is $\mathbf 0$, which is a point $\mathbf p_c$ exactly when $n$ is odd (the centre cell), and then an interior point.
+Let $\overline S=gS$. Then $N+1-s_{gc}=s_c$, i.e.\ $z_{gc}=-z_c$, so $\iota_g\mathbf p_c=\mathbf p_{gc}$ for every cell $c$.
+The involution $\iota_g$ is an isometry of the $3$-polytope $\mathcal G(S)$ (\Cref{prop:fulldim}), so it permutes the vertices, the interior points and the non-vertex boundary points.
+By \Cref{lem:selfcomp} it fixes $\mathbf p_c$ only if $gc=c$, i.e.\ only for the centre cell of an odd grid, whose point is the interior point $\mathbf 0$.
+If $S$ is associative, $\iota_g=-\mathrm{id}$, and a face fixed by $-\mathrm{id}$ would contain the centroid $\mathbf 0$ of its vertices, which is interior; so $-\mathrm{id}$ pairs the edges and the facets.
 \end{proof}
 
 The hypothesis is needed: the natural square of order $3$ is associative, but its gem is a parallelogram and has no interior points.
-For $n=4$ the $48$ associative gems have $V^\circ\in\{0,2,4\}$ ($4$, $23$ and $21$ gems); among the other squares both parities occur.
+For $n=4$ the $48$ associative gems have $V^\circ\in\{0,2,4\}$ ($4$, $23$ and $21$ gems), and among the $528$ squares that are not self-complementary all four combinations of the parities of $V$ and $V^\circ$ occur (\texttt{anc/verify\_structure.py}).
 
-\begin{remark}[Facet orbits]
+\begin{remark}[Facet orbits of the half-turns]
 \label{rem:facet-orbits}
-For an associative square, $-\mathrm{id}$ fixes no facet, since no facet plane passes through the interior point $\mathbf 0$; so $F$ is even. For the half-turn $\iota_h$ (the case $\iota_v$ is the same after the reflection $d$), $\iota_h$ maps the plane $\mathbf a\cdot\mathbf p=b$ to the plane $\iota_h(\mathbf a)\cdot\mathbf p=b$. The two coincide if and only if $\iota_h(\mathbf a)=\mathbf a$ ($\mathbf a$ parallel to the axis), or $\iota_h(\mathbf a)=-\mathbf a$ and $b=0$. The second case is a plane through $\mathbf 0$, which cannot support the gem, since $\mathbf 0$ is interior (\Cref{prop:fulldim}). So an $\iota_h$-invariant facet plane is one of the vertical planes $y=\pm\frac{n-1}2$ over the top and bottom rows; by \Cref{prop:subdivisions}(2) below, these carry facets unless the row is an arithmetic progression. Among the $304$ order-four gems of case (2), $282$ have two fixed facets, $18$ one and $4$ none. Neither isometry fixes a vertex, so $V$ is even for all $352$ self-complementary squares.
-\end{remark}
-
-\begin{remark}[Difference-body ratio]
-\label{rem:sigma}
-For a convex body $K\subset\R^3$ with non-empty interior let $\sigma(K)=\operatorname{vol}(K-K)/(8\operatorname{vol}K)$, the \emph{difference-body ratio}. By the Brunn--Minkowski inequality \cite{schneider2014convex}, $\sigma(K)\ge1$, with equality if and only if $K$ is centrally symmetric; by the Rogers--Shephard inequality \cite{rogers1957difference}, $\sigma(K)\le\binom63/8=\frac52$, with equality if and only if $K$ is a simplex; see \cite{grunbaum1963measures,schneider2014convex} for this and other measures of symmetry.
-By \Cref{thm:symmetry}, $\sigma=1$ exactly for the $48$ associative gems of order four; for the other $832$, an exact computation (\texttt{anc/difference\_body\_ratio.py}) gives $\sigma\in[1057/1018,\,145/88]\approx[1.038,\,1.648]$.
+The half-turn $\iota_h$ (the case $\iota_v$ is the same after the reflection $d$) maps the plane $\mathbf a\cdot\mathbf p=b$ to $\iota_h(\mathbf a)\cdot\mathbf p=b$. The two coincide if and only if $\iota_h(\mathbf a)=\mathbf a$, or $\iota_h(\mathbf a)=-\mathbf a$ and $b=0$; a plane through the interior point $\mathbf 0$ cannot support the gem. So an $\iota_h$-invariant facet plane is one of the vertical planes $y=\pm\frac{n-1}2$ over the top and bottom rows, which by \Cref{prop:subdivisions}(2) below carry facets unless the row is an arithmetic progression, and $F$ need not be even. Among the $304$ order-four gems of case (2) of \Cref{prop:iso4}, $282$ have two fixed facets, $18$ one (so $F$ is odd) and $4$ none.
 \end{remark}
