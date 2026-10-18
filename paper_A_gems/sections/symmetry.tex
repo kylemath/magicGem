@@ -121,3 +121,11 @@ For $n=4$ the $48$ associative gems have $V^\circ\in\{0,2,4\}$ ($4$, $23$ and $2
 \label{rem:facet-orbits}
 The half-turn $\iota_h$ (the case $\iota_v$ is the same after the reflection $d$) maps the plane $\mathbf a\cdot\mathbf p=b$ to $\iota_h(\mathbf a)\cdot\mathbf p=b$. The two coincide if and only if $\iota_h(\mathbf a)=\mathbf a$, or $\iota_h(\mathbf a)=-\mathbf a$ and $b=0$; a plane through the interior point $\mathbf 0$ cannot support the gem. So an $\iota_h$-invariant facet plane is one of the vertical planes $y=\pm\frac{n-1}2$ over the top and bottom rows, which by \Cref{prop:subdivisions}(2) below carry facets unless the row is an arithmetic progression, and $F$ need not be even. Among the $304$ order-four gems of case (2) of \Cref{prop:iso4}, $282$ have two fixed facets, $18$ one (so $F$ is odd) and $4$ none.
 \end{remark}
+
+\begin{remark}[Congruent facets]
+\label{rem:congruent-facets}
+An isometry of a gem maps facets to congruent facets, so the facets of the $352$ self-complementary gems of order four come in congruent pairs, apart from the facets fixed by a half-turn (\Cref{rem:facet-orbits}), none of which is congruent to another facet.
+These isometries are diagonal matrices, so the pairs stay congruent when the heights are rescaled, as in printed models and paper nets.
+Congruence without symmetry is rare: of the $528$ gems with trivial isometry group, $182$ have congruent facets, $480$ of their $8858$ facets in $230$ classes of triangles and $10$ of quadrilaterals; with the heights scaled by $1/5$ these numbers drop to $130$ gems and $332$ facets.
+The symmetric gems have congruences beyond their symmetry in $28$ cases, and in $9$ after scaling (\texttt{anc/congruent\_facets.py}).
+\end{remark}
