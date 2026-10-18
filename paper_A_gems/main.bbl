@@ -40,6 +40,12 @@ Matthias Beck and Thomas Zaslavsky.
 \newblock Inside-out polytopes.
 \newblock {\em Advances in Mathematics}, 205(1):134--162, 2006.
 
+\bibitem{calegari2013integer}
+Danny Calegari and Alden Walker.
+\newblock Integer hulls of linear polyhedra and scl in families.
+\newblock {\em Transactions of the American Mathematical Society},
+  365(10):5085--5102, 2013.
+
 \bibitem{cameron2013signatura}
 Ian Cameron, Adam Rogers, and Peter~D. Loly.
 \newblock Signatura of magic and {L}atin integer squares: isentropic clans and
@@ -184,6 +190,12 @@ C.~A. Rogers and G.~C. Shephard.
 \newblock The difference body of a convex body.
 \newblock {\em Archiv der Mathematik}, 8:220--233, 1957.
 
+\bibitem{rubin1970}
+David~S. Rubin.
+\newblock On the unlimited number of faces in integer hulls of linear programs
+  with a single constraint.
+\newblock {\em Operations Research}, 18(5):940--946, 1970.
+
 \bibitem{schneider2014convex}
 Rolf Schneider.
 \newblock {\em Convex Bodies: The {B}runn--{M}inkowski Theory}, volume 151 of
@@ -212,5 +224,11 @@ G{\"u}nter~M. Ziegler.
 \newblock {\em Lectures on Polytopes}, volume 152 of {\em Graduate Texts in
   Mathematics}.
 \newblock Springer, New York, 1995.
+
+\bibitem{zolotykh2006vertices}
+Nikolai~Yu. Zolotykh.
+\newblock On the number of vertices in integer linear programming problems,
+  2006.
+\newblock arXiv:math/0611356.
 
 \end{thebibliography}

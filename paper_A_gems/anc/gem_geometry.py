@@ -111,7 +111,7 @@ def exact_hull(S):
                + int(a[2]) * (int(b[0]) * int(c[1]) - int(b[1]) * int(c[0])))
         vol6 += abs(det)
     volume = Fraction(vol6, 6) / 8  # undo the doubling
-    assert abs(float(volume) - hull.volume / 8) < 1e-9
+    assert abs(float(volume) - hull.volume / 8) <= 1e-9 * max(1.0, float(volume))  # relative: volumes reach 1e7 for n ~ 60
     area = hull.area / 4.0
     return dict(P=P, vertices=vertices, faces=faces, edges=sorted(edges),
                 f_vector=(V, E, F), face_sizes=face_sizes,

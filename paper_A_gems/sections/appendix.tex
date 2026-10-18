@@ -91,3 +91,103 @@ By \Cref{prop:iso4}, $\sigma=1$ exactly for the $48$ associative gems; for the o
 \paragraph{Dudeney's groups.}
 Each of Dudeney's groups with more than eight members has gems with at least three vertex counts and $20$ combinatorial types; the $8$-vertex gems lie in groups VI (three) and VIII (four) (\texttt{anc/verify\_numbers.py}).
 The $48$ pandiagonal squares (group I \cite{ollerenshaw1998most}) have $11$ to $15$ vertices and one to four interior points, and none is associative.
+
+\section{Proofs for Section~\ref{sec:fixed-steps}}
+\label{sec:app-fixed-steps}
+
+We use the notation of \Cref{sec:fixed-steps}; $c=(i,j)$ runs over the cells, $t_A(c)=\mathbf u\cdot c+\alpha(n)$ and $t_B(c)=\mathbf w\cdot c+\beta(n)$ are integers for $n\in\mathcal N$, and $f$ denotes the $f$-vector.
+
+\paragraph{Step 1: levels.}
+Since $\langle t\rangle=t-n\lfloor t/n\rfloor$, we have $s(c)-\frac{n^2+1}2=\lambda(c)+n\zeta(c)$ with $\lambda(c)=nt_A(c)+t_B(c)+1-\frac{n^2+1}2$, an affine function of $c$, and $\zeta(c)=-n\lfloor t_A(c)/n\rfloor-\lfloor t_B(c)/n\rfloor$.
+As the cell $c$ is an affine function of $(x_j,y_i)$, the map $\Psi_n(x,y,z)=\bigl(c(x,y),(z-\lambda(c(x,y)))/n\bigr)$ is an affine bijection of $\R^3$ that maps the lifted point over $c$ to $(c,\zeta(c))$; so $\Psi_n(\mathcal G_n)$ has the same $f$-vector as $\mathcal G_n$, and the same vertex cells.
+On the grid $|t_A(c)|\le(|u_1|+|u_2|)n+|\alpha_0|+|\alpha_1|n$, so the pair $(a,b)=(\lfloor t_A/n\rfloor,\lfloor t_B/n\rfloor)$ lies in a finite set $\mathcal L\subset\Z^2$ independent of $n$.
+The cells with a given pair are the lattice points of
+\[
+P_{ab}(n)=\{x\in\R^2:\ 0\le x_1,x_2\le n-1,\ na\le\mathbf u\cdot x+\alpha(n)\le na+n-1,\ nb\le\mathbf w\cdot x+\beta(n)\le nb+n-1\},
+\]
+a polygon of the form $\{x:Mx\le ng^{ab}+h\}$, where the rows of $M\in\Z^{8\times2}$ are $\pm e_1$, $\pm e_2$, $\pm\mathbf u$, $\pm\mathbf w$, the vector $h\in\mathbb Q^8$ does not depend on $(a,b)$ or $n$, and $g^{ab}\in\mathbb Q^8$ does not depend on $n$ and satisfies $\delta g^{ab}\in\Z^8$.
+Since $\operatorname{conv}(X\times\{\zeta\})=\operatorname{conv}(X)\times\{\zeta\}$ for $X\subset\R^2$,
+\begin{equation}
+\label{eq:levels}
+\Psi_n(\mathcal G_n)=\operatorname{conv}\bigcup_{(a,b)\in\mathcal L}\operatorname{conv}\bigl(P_{ab}(n)\cap\Z^2\bigr)\times\{-na-b\}.
+\end{equation}
+Since $P_\infty^{ab}=\{x:Mx\le g^{ab}\}\subseteq[0,1]^2$ is bounded, the following lemma applies to each $P_{ab}(n)$.
+
+\begin{lemma}[Integer hulls of a linear family of polygons]
+\label{lem:linear-polygons}
+Let $M\in\Z^{K\times2}$ have rows $\mathbf r_k$, let $g,h\in\mathbb Q^K$, put $P_n=\{x\in\R^2:Mx\le ng+h\}$, and suppose that $P_\infty=\{x:Mx\le g\}$ is bounded.
+Let $D$ be the least common multiple of the denominators $q_v$ of the vertices $v$ of $P_\infty$ ($q_v$ is the least positive integer with $q_vv\in\Z^2$; $D=1$ if $P_\infty=\emptyset$).
+There are $n_1$ and, for each $r\in\{0,\dots,D-1\}$, a finite set $Z_r\subset\mathbb Q^2\times\mathbb Q^2$ such that for all $n\ge n_1$ with $n\equiv r\pmod D$ the points $np+q$, $(p,q)\in Z_r$, lie in $P_n\cap\Z^2$, and $\operatorname{conv}(P_n\cap\Z^2)=\operatorname{conv}\{np+q:(p,q)\in Z_r\}$.
+\end{lemma}
+
+This is a planar case of a theorem of Calegari and Walker \cite[Thm.~3.5]{calegari2013integer}, which says that the vertices of the integer hulls of a rational family of polyhedra of size $O(n)$ have eventually quasi-polynomial coordinates; the short direct proof below also gives the explicit period $D$, which yields the period $\delta L$ in \Cref{prop:fixed-steps}.
+
+\begin{proof}
+If $P_\infty=\emptyset$, Farkas' lemma gives $y\ge0$ with $yM=0$ and $y\cdot g<0$; then $0=yMx\le n\,y\cdot g+y\cdot h$ fails for large $n$, so $P_n=\emptyset$, and we take $Z_r=\emptyset$.
+Otherwise, for a vertex $v$ of $P_\infty$ let $I_v=\{k:\mathbf r_k\cdot v=g_k\}$, $C_v=\{y:\mathbf r_k\cdot y\le h_k\ (k\in I_v)\}$ and $T_v=\{y:\mathbf r_k\cdot y\le0\ (k\in I_v)\}$.
+
+(i) $P_n\subseteq nv+C_v$ for all $n$, since $\mathbf r_k\cdot(x-nv)=\mathbf r_k\cdot x-ng_k$ for $k\in I_v$.
+
+(ii) Let $\varepsilon>0$ be the least slack $g_k-\mathbf r_k\cdot v$ over all vertices $v$ and $k\notin I_v$ ($\varepsilon=\infty$ if there is no such pair), and $\nu=\max_k|\mathbf r_k|$.
+If $y\in C_v$, $|y|\le\rho$, $n\ge1$ and $n\varepsilon\ge\nu\rho-h_k$ for all $k$, then $nv+y\in P_n$: for $k\notin I_v$, $\mathbf r_k\cdot(nv+y)\le n(g_k-\varepsilon)+\nu\rho\le ng_k+h_k$.
+
+(iii) If some $C_v$ is empty, $P_n=\emptyset$ for all $n$ by (i), and we take $Z_r=\emptyset$.
+Otherwise $C_v=Q_v+T_v$ with $Q_v$ a polytope and $T_v$ the cone spanned by integer vectors $y_1,\dots,y_s$ (Minkowski--Weyl).
+Put $B_v=\{\sum_l\theta_ly_l:0\le\theta_l\le1\}$ and $F_v(n)=(nv+Q_v+B_v)\cap\Z^2$.
+Every lattice point $x=nv+q+\sum_l\lambda_ly_l$ of $nv+C_v$ ($q\in Q_v$, $\lambda_l\ge0$) lies in $F_v(n)+T_v$: subtract $\sum_l\lfloor\lambda_l\rfloor y_l$.
+
+(iv) If $n\equiv r'\pmod{q_v}$, then $(n-r')v\in\Z^2$, so $F_v(n)=nv+E_v(r')$ with the finite set $E_v(r')=F_v(r')-r'v\subset Q_v+B_v$.
+
+(v) Let $\rho$ be the largest norm of a point of the sets $Q_v+B_v$, and $n_1\ge1$ with $n_1\varepsilon\ge\nu\rho-h_k$ for all $k$. By (ii), $F_v(n)\subseteq P_n\cap\Z^2$ for $n\ge n_1$.
+
+(vi) Let $n\ge n_1$, $H_n=\operatorname{conv}(P_n\cap\Z^2)$ and $R_n=\operatorname{conv}\bigcup_vF_v(n)$, so that $R_n\subseteq H_n$ by (v); we may assume $P_n\cap\Z^2\ne\emptyset$.
+For a linear function $\ell$ choose a vertex $v$ of $P_\infty$ at which $\ell$ is maximal on $P_\infty$.
+For $y\in T_v$ and small $\eta>0$ the point $v+\eta y$ lies in $P_\infty$, as the rows $k\notin I_v$ have positive slack at $v$; so $\ell\le0$ on $T_v$.
+By (i) and (iii), $P_n\cap\Z^2\subseteq F_v(n)+T_v$, so $\max_{H_n}\ell\le\max_{F_v(n)}\ell\le\max_{R_n}\ell$.
+As this holds for every $\ell$, $H_n=R_n$.
+Now take $Z_r=\{(v,e):v\text{ a vertex of }P_\infty,\ e\in E_v(r\bmod q_v)\}$.
+\end{proof}
+
+A vertex of $P_\infty^{ab}$ solves two independent equations $\mathbf r_k\cdot v=g^{ab}_k$, and the determinant of two non-parallel rows of $M$ is $\pm1$, $\pm u_1$, $\pm u_2$, $\pm w_1$, $\pm w_2$ or $\pm(u_1w_2-u_2w_1)$; by Cramer's rule and $\delta g^{ab}\in\Z^8$, its denominator divides $\delta$ times the absolute value of the determinant.
+So the number $D_{ab}$ of \Cref{lem:linear-polygons} for $P_{ab}(n)$ divides $\delta L$.
+
+\begin{lemma}[Points moving affinely]
+\label{lem:moving-points}
+Let $\mathcal K$ be finite, $A_\kappa,B_\kappa\in\mathbb Q^3$ and $\pi_\kappa(n)=nA_\kappa+B_\kappa$ for $\kappa\in\mathcal K$.
+There is $n_2$ such that whether $\operatorname{conv}\{\pi_\kappa(n)\}$ is $3$-dimensional is the same for all $n\ge n_2$, and, if it is, so are its $f$-vector and the index sets $\{\kappa:\pi_\kappa(n)\in F\}$ of its facets $F$.
+\end{lemma}
+
+\begin{proof}
+For $\kappa_1,\dots,\kappa_4\in\mathcal K$ the determinant $\Delta_{(\kappa_1,\dots,\kappa_4)}(n)$ of the $4\times4$ matrix with rows $(\pi_{\kappa_l}(n),1)$ is a polynomial in $n$ of degree at most $3$, so for $n\ge n_2$ all these determinants have constant signs; so has the relation $\pi_\kappa(n)=\pi_{\kappa'}(n)$, which holds for all $n$ or for at most one.
+The hull is $3$-dimensional if and only if one of these determinants is non-zero.
+If it is, $S\subseteq\mathcal K$ is the index set of a facet if and only if it contains $\kappa_1,\kappa_2,\kappa_3$ such that some $\Delta_{(\kappa_1,\kappa_2,\kappa_3,\kappa)}(n)\ne0$, $S=\{\kappa:\Delta_{(\kappa_1,\kappa_2,\kappa_3,\kappa)}(n)=0\}$, and the $\Delta_{(\kappa_1,\kappa_2,\kappa_3,\kappa)}(n)$ with $\kappa\notin S$ all have the same sign.
+A point is a vertex if and only if its index lies in at least three facet index sets; $f_0$ is the number of vertices up to coincidence, $f_2$ the number of facet index sets, and $f_1=f_0+f_2-2$.
+All of this depends only on the signs.
+\end{proof}
+
+\begin{proof}[Proof of \Cref{prop:fixed-steps}, (a) and (b)]
+Apply \Cref{lem:linear-polygons} to each $P_{ab}(n)$, $(a,b)\in\mathcal L$, let $n_1$ be the largest of the thresholds and $D=\operatorname{lcm}(\delta,D_{ab}:(a,b)\in\mathcal L)$, which divides $\delta L$.
+For $r\in\{0,\dots,D-1\}$ let $\mathcal K_r$ be the set of $(a,b,p,q)$ with $(a,b)\in\mathcal L$ and $(p,q)\in Z^{ab}_{r\bmod D_{ab}}$, and $\pi_{(a,b,p,q)}(n)=(np+q,-na-b)$.
+By \eqref{eq:levels} and \Cref{lem:linear-polygons}, $\Psi_n(\mathcal G_n)=\operatorname{conv}\{\pi_\kappa(n):\kappa\in\mathcal K_r\}$ for $n\in\mathcal N$, $n\ge n_1$, $n\equiv r\pmod D$.
+So $\mathcal G_n$ has at most $\max_r|\mathcal K_r|$ vertices for $n\ge n_1$, and at most $n_1^2$ before; this is (a).
+Let $n_0$ be the largest of $n_1$ and the thresholds $n_2$ of \Cref{lem:moving-points} for the families $(\pi_\kappa)_{\kappa\in\mathcal K_r}$.
+For $n\in\mathcal N$ with $n\ge n_0$ also $n+D\in\mathcal N$, since $\delta\mid D$, and $n+D\equiv n\pmod D$; so \Cref{lem:moving-points} gives (b) with $D$ in place of $\delta L$, and repeating it $\delta L/D$ times gives (b).
+\end{proof}
+
+\paragraph{Rubin's triangle.}
+Comparing entries in $\begin{pmatrix}1&1\\1&0\end{pmatrix}^t=\begin{pmatrix}F_{t+1}&F_t\\F_t&F_{t-1}\end{pmatrix}$, $t\in\Z$, gives $F_{-t}=(-1)^{t+1}F_t$, so that $F_t\ge1$ for every odd $t$, with equality only for $t=\pm1$, and d'Ocagne's identity
+\begin{equation}
+\label{eq:docagne}
+F_rF_{s+1}-F_{r+1}F_s=(-1)^sF_{r-s}\qquad(r,s\in\Z).
+\end{equation}
+
+\begin{proof}[Proof of \Cref{lem:fib-triangle}]
+Write $P_t=(F_{2t},b-F_{2t-1})$.
+For $0\le j\le k$ put $\mathbf n_j=(F_{2j},F_{2j+1})$ and $c_j=bF_{2j+1}-1$, so that $\mathbf n_k=(a,b)$ and $c_k=R$, and let $H$ be the polygon defined by $x\ge0$, $y\ge0$ and $\mathbf n_j\cdot(x,y)\le c_j$ for $0\le j\le k$; then $H\subseteq T_k$.
+Every lattice point of $T_k$ lies in $H$: the maximum of $\mathbf n_j$ on $T_k$ is attained at a vertex, $(0,0)$, $(R/a,0)$ or $(0,R/b)$, and since $aF_{2j+1}-bF_{2j}=F_{2k-2j}\ge0$ by \eqref{eq:docagne}, it is $F_{2j+1}R/b<bF_{2j+1}$; at a lattice point $\mathbf n_j\cdot(x,y)$ is an integer, hence at most $c_j$.
+By \eqref{eq:docagne}, $c_j-\mathbf n_j\cdot P_t=F_{2t-1}F_{2j+1}-F_{2t}F_{2j}-1=F_{2(t-j)-1}-1\ge0$, with equality exactly for $t\in\{j,j+1\}$.
+The coordinates of $P_t$ are non-negative, as $F_{2t-1}\le F_{2k+1}=b$ for $0\le t\le k+1$; so $(0,0)$ and the $P_t$ lie in $H$.
+Each of these $k+3$ points lies on two non-parallel boundary lines of $H$: $(0,0)$ on $x=0$ and $y=0$, $P_0=(0,b-1)$ on $x=0$ and $\mathbf n_0\cdot(x,y)=c_0$, $P_t$ for $1\le t\le k$ on the lines of $\mathbf n_{t-1}$ and $\mathbf n_t$ (with $\det(\mathbf n_t,\mathbf n_{t-1})=F_2=1$ by \eqref{eq:docagne}), and $P_{k+1}=(F_{2k+2},0)$ on $y=0$ and the line of $\mathbf n_k$.
+So they are $k+3$ vertices of $H$, distinct since the $F_{2t}$ with $t\ge1$ are distinct and positive and $b-1\ge1$; as $H$ is defined by $k+3$ inequalities, it has no others.
+Hence $H$ is the convex hull of lattice points of $T_k$, and $\operatorname{conv}(T_k\cap\Z^2)=H$.
+\end{proof}

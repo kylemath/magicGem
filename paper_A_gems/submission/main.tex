@@ -133,6 +133,7 @@ Magic squares are the motivating case.
 Our main result concerns the Siamese (de la Loub\`ere) square of every odd order $n\ge5$: its gem has exactly the twelve vertices that the boundary of the grid forces (the corners and, on each side, the cells of the smallest and largest entry), with $f$-vector $(12,26,16)$ and isometry group $\{\pm\mathrm{id}\}$.
 The proof shears the lift onto five levels and reduces to the signs of a table of polynomials in $m=(n-1)/2$.
 The same method gives the $f$-vector $(12,24,14)$ for the square with the two base-$n$ digits exchanged, and we determine and count the magic linear squares.
+Along every family of linear squares with fixed steps and offsets affine in $n$ the number of vertices is bounded and the $f$-vector is eventually periodic in $n$, but over all linear magic squares of prime order $n$ the largest number of vertices is at least of order $\ln n$.
 Most other results need less than magic.
 If the heights have vanishing first moments, as for every semi-magic square, the point set has a non-trivial isometry exactly when the arrangement equals its complement up to rotation and reflection.
 For the $880$ magic squares of order four a computational census gives $616$ congruence classes and $352$ combinatorial types of gems, none with an isometry that its point set lacks.
@@ -140,7 +141,7 @@ The gem hardly sees the magic conditions: at order four the mean numbers of vert
 The volume and the solid centroid do shift.
 \medskip
 
-\noindent\textbf{Keywords:} magic squares, convex polytopes, regular subdivisions, symmetry groups, Siamese method, linear magic squares
+\noindent\textbf{Keywords:} magic squares, convex polytopes, regular subdivisions, symmetry groups, Siamese method, linear magic squares, integer hulls
 
 \noindent\textbf{MSC 2020:} 05B15, 52B05, 52B15, 52B20
 \end{abstract}
@@ -182,6 +183,8 @@ The main result is a theorem about one classical family.
 So only $12$ of the $n^2$ points are vertices, whereas the gems of random arrangements and of sampled magic squares have more and more vertices as $n$ grows (\Cref{tab:vertices}, estimates).
 The proof shears the lift onto five levels and reduces to the signs of a table of polynomials in $m=(n-1)/2$.
 The same method shows that the square with the two base-$n$ digits exchanged has a gem with $f$-vector $(12,24,14)$ for every odd $n\ge5$ (\Cref{prop:exchanged}); along the way we give a self-contained criterion for a linear square (a square of the uniform step method) to be magic, and count these squares (\Cref{prop:linear-magic}).
+More generally, along every family of linear squares with fixed steps and offsets affine in $n$ the vertex count is bounded and the $f$-vector is eventually periodic in $n$ (\Cref{prop:fixed-steps}).
+The bound depends on the family: over all linear magic squares of prime order $n$ the largest vertex count is at least $\lceil\ln n/(4\ln\varphi)\rceil+2$, with $\varphi$ the golden ratio (\Cref{cor:many-vertices}), and, by computation, for $7\le n\le21$ the Siamese and the digit-exchanged squares are the only linear magic squares, up to $D_4$, with as few as twelve vertices (\Cref{rem:linear}).
 
 The other results need weaker hypotheses than magic, and most of them hold for every arrangement; \Cref{tab:hypotheses} lists what each one needs.
 The points balance about the origin for every arrangement, and the heights balance as weights on the grid exactly when the rows and columns have equal sums (\Cref{sec:balance}).
@@ -208,6 +211,7 @@ result & statement & hypothesis\\
 \Cref{sec:magic-vs-random} & which invariants see the line conditions & $n=4,5$ (computation)\\
 \Cref{prop:linear-magic} & magic linear squares & linear squares, odd $n$\\
 \Cref{thm:siamese}, \Cref{prop:exchanged} & Siamese and digit-exchanged gems & two magic squares, odd $n\ge5$\\
+\Cref{prop:fixed-steps}, \Cref{cor:many-vertices} & fixed steps; largest vertex count & linear squares; prime $n$\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -218,8 +222,9 @@ In all of these the magic squares are the \emph{points} of a polytope, whereas t
 The lifting construction itself is that of regular subdivisions and secondary fans \cite{gelfand1994discriminants,deloera2010triangulations}.
 The moment identities of \Cref{sec:balance} are due in substance to Loly and Rogers \cite{loly2004invariance,rogers2004inertia,rogers2005multipole}; we record them in the coordinates of the gem for later use.
 The Siamese square is de la Loub\`ere's construction \cite{loubere1693}, and the linear squares are the squares of the uniform step method \cite[Ch.~I]{andrews1960magic}, analysed by Lehmer \cite{lehmer1929} and by Apostol and Zuckerman \cite{apostol1951}; we give a self-contained proof of \Cref{prop:linear-magic} but do not claim priority for it.
+For linear squares with fixed steps we use integer hulls of linear families of polygons, a planar case of a theorem of Calegari and Walker \cite{calegari2013integer}, and the lower bound rests on Rubin's Fibonacci triangle \cite{rubin1970}.
 The partition of the $880$ order-four squares into associative, self-complementary and other squares is Dudeney's \cite{dudeney1917amusements}.
-New are the Siamese theorem and its companion for the digit-exchanged square, the exact order-four census and the comparison of \Cref{sec:magic-vs-random}, together with a short covariance argument that settles symmetry and congruence of the point sets for every order.
+New are the Siamese theorem and its companion for the digit-exchanged square, the results on linear squares with fixed steps and on their largest vertex count, the exact order-four census and the comparison of \Cref{sec:magic-vs-random}, together with a short covariance argument that settles symmetry and congruence of the point sets for every order.
 The moment identities of all orders implied by the row and column sums, the number of them that forces an arrangement to be semi-magic (a permutation threshold), and the line-sum energies of random arrangements are treated in a companion manuscript \cite{mathewson_companion}; no result of it is used here.
 
 Sections~\ref{sec:gem}--\ref{sec:discussion} treat, in turn, the gem, the balance of its vectors, symmetry and congruence, faces and the order-four census, the Siamese and linear squares, and open questions; the appendices describe the computations and collect lattice-point counts, vertex statistics and further order-four data.
@@ -964,16 +969,95 @@ All of this is checked in exact polynomial arithmetic by \texttt{anc/digit\_exch
 \begin{remark}[Vertex counts of linear squares]
 \label{rem:linear}
 The gems of other linear squares do not share the twelve-vertex count.
-Over all linear magic squares, counted up to $D_4$ (each family is closed under complementation; complements are not identified), the vertex counts (\texttt{anc/linear\_squares.py}, exact hulls) range over $[11,18]$ for $n=5$ ($184$ classes), $[12,25]$ for $n=7$ ($3159$ classes), $[12,31]$ for $n=9$ ($441$ classes) and $[12,36]$ for $n=11$ ($89{,}125$ classes).
+Over all linear magic squares, counted up to $D_4$ (each family is closed under complementation; complements are not identified), the vertex counts range over $[11,18]$ for $n=5$ ($184$ classes), $[12,25]$ for $n=7$ ($3159$ classes), $[12,31]$ for $n=9$ ($441$ classes) and $[12,36]$ for $n=11$ ($89{,}125$ classes) (\texttt{anc/linear\_squares.py}, exact hulls), and over $[12,41]$, $[12,38]$, $[12,48]$, $[12,51]$ and $[12,48]$ for $n=13,15,17,19,21$ ($283{,}176$, $1472$, $1{,}713{,}664$, $3{,}558{,}249$ and $25{,}272$ classes; \texttt{anc/linear\_census.py}).
+For $n\ge13$ the counts are floating-point (Quickhull) counts, and every class with at most $13$ vertices or with the largest count is certified with the exact hull; for $n\le11$ the Quickhull vertex sets agree with the exact ones for every class.
 For $n=5$ the minimum $11$ is attained by two classes, complements of each other, both pandiagonal and not associative, with $f$-vector $(11,23,14)$; one is $s=5\langle4i+3j\rangle+\langle4i+2j\rangle+1$ ($\mathbf u=(-1,-2)$, $\mathbf w=(-1,2)$, $\alpha=\beta=0$), the first square below.
 \[
 \begin{pmatrix}1&18&10&22&14\\25&12&4&16&8\\19&6&23&15&2\\13&5&17&9&21\\7&24&11&3&20\end{pmatrix}
 \qquad\qquad
 \begin{pmatrix}1&19&15&13&17\\23&5&14&20&3\\10&21&12&4&18\\24&9&8&22&2\\7&11&16&6&25\end{pmatrix}
 \]
-For $n=7,9,11$ the minimum $12$ is attained by exactly two classes, those of the Siamese and the digit-exchanged square (\Cref{thm:siamese}, \Cref{prop:exchanged}).
+For $7\le n\le21$ the minimum $12$ is attained by exactly two classes, those of the Siamese and the digit-exchanged square (\Cref{thm:siamese}, \Cref{prop:exchanged}); for $n\ge13$ this relies on the floating-point counts of the other classes.
 The Siamese gem is not vertex-minimal at order five: simulated annealing (Appendix~\ref{sec:vertexstats}) found $15$ $D_4$-classes of magic squares of order $5$ whose gems have $10$ vertices (\texttt{anc/sa\_n5\_V10.txt}). For example, the second square above has $f$-vector $(10,22,14)$, volume $845/3$ and $8$ interior points.
 \end{remark}
+
+\subsection{Fixed steps and the largest vertex count}
+\label{sec:fixed-steps}
+
+The Siamese and the digit-exchanged gems have the same type for every odd $n\ge5$.
+Every family of linear squares with fixed steps and offsets affine in $n$ has an eventually periodic $f$-vector, while the largest vertex count over all linear magic squares of order $n$ is unbounded.
+
+Fix $\mathbf u,\mathbf w\in\Z^2\setminus\{0\}$ and rationals $\alpha_0,\alpha_1,\beta_0,\beta_1$, put $\alpha(n)=\alpha_0+\alpha_1n$, $\beta(n)=\beta_0+\beta_1n$ and $\mathcal N=\{n\ge2:\alpha(n),\beta(n)\in\Z\}$, and for $n\in\mathcal N$ let $S_n$ be the array
+\[
+s(c)=n\langle\mathbf u\cdot c+\alpha(n)\rangle+\langle\mathbf w\cdot c+\beta(n)\rangle+1,\qquad c=(i,j)\in\{0,\dots,n-1\}^2,
+\]
+and $\mathcal G_n$ the convex hull of its lifted points $(x_j,y_i,s(c)-\frac{n^2+1}2)$, the gem of $S_n$ when $S_n$ is an arrangement.
+Let $\delta\ge1$ be the least integer with $\delta\alpha_1,\delta\beta_1\in\Z$, and $L$ the least common multiple of the non-zero numbers among $|u_1|$, $|u_2|$, $|w_1|$, $|w_2|$, $|u_1w_2-u_2w_1|$.
+The Siamese squares form the family $\mathbf u=(1,1)$, $\mathbf w=(1,2)$, $\alpha(n)=-m=\frac{1-n}2$, $\beta(n)=-2m=1-n$, with $\mathcal N$ the odd numbers, $\delta=2$ and $L=2$.
+
+\begin{proposition}[Fixed steps]
+\label{prop:fixed-steps}
+\begin{enumerate}
+\item[(a)] The number of vertices of $\mathcal G_n$ is bounded on $\mathcal N$.
+\item[(b)] There is an $n_0$ such that for every $n\in\mathcal N$ with $n\ge n_0$ and $\dim\mathcal G_n=3$ also $n+\delta L\in\mathcal N$, $\dim\mathcal G_{n+\delta L}=3$ and $f(\mathcal G_{n+\delta L})=f(\mathcal G_n)$.
+\item[(c)] If $S_n$ is a semi-magic square, then $\dim\mathcal G_n=3$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}[Proof of (c), and outline of (a) and (b)]
+If all the lifted points lay in a plane, it would not be vertical, as the grid points are not collinear; so $z=Ax+By+C$, equal row sums give $B=0$, equal column sums $A=0$, and then $z$ would be constant.
+For (a) and (b), the proof of \Cref{thm:siamese}, Step~3, generalises: since $\langle t\rangle=t-n\lfloor t/n\rfloor$, one affine bijection of $\R^3$, the same for all cells, maps $\mathcal G_n$ onto the convex hull of the points $(c,\zeta(c))$ with $\zeta(c)=-n\lfloor t_A(c)/n\rfloor-\lfloor t_B(c)/n\rfloor$, where $t_A(c)=\mathbf u\cdot c+\alpha(n)$ and $t_B(c)=\mathbf w\cdot c+\beta(n)$.
+The pairs of floors range over a finite set that does not depend on $n$, and each level set is the set of lattice points of a polygon $\{x\in\R^2:Mx\le ng+h\}$ with $M$, $g$, $h$ independent of $n$.
+For large $n$ in a fixed residue class modulo $\delta L$, the vertices of the hull of the lattice points of such a polygon come from a fixed finite list of points $np+q$ (\Cref{lem:linear-polygons}), and the face lattice of the hull of finitely many points that move affinely with $n$ is eventually constant (\Cref{lem:moving-points}).
+The details are in Appendix~\ref{sec:app-fixed-steps}.
+\end{proof}
+
+So the vertex count along such a family is bounded, as it is for the Siamese and the digit-exchanged squares, but the bound, $n_0$ and the eventual $f$-vectors are not explicit.
+The least period can be smaller than $\delta L$: for the Siamese family $\delta L=4$ and the $f$-vector is constant for $n\ge5$.
+In computations it can equal $\delta L$: for $\mathbf u=(1,3)$, $\mathbf w=(3,1)$, $\alpha=\beta=0$ we have $\delta=1$ and $L=24$, and the exact hulls satisfy $f(\mathcal G_n)=f(\mathcal G_{n+24})$ for $150\le n\le197$, with no smaller shift doing so on that range (\texttt{anc/linear\_fixed\_steps.py}).
+
+The bound depends on the family, and the largest vertex counts in \Cref{rem:linear} grow with $n$.
+That they are unbounded follows from Rubin's example of triangles whose integer hulls have arbitrarily many vertices \cite{rubin1970}.
+Zolotykh's survey \cite[Sect.~3]{zolotykh2006vertices} describes Rubin's triangles by Fibonacci knapsack inequalities with $k+3$ vertices; its printed inequality, with $F_{2k-1}$ in place of $F_{2k+1}$, has fewer vertices, and we have not seen Rubin's paper, so we state and prove the version we use (Appendix~\ref{sec:app-fixed-steps}).
+Here $F_t$ are the Fibonacci numbers, extended to all $t\in\Z$ by $F_0=0$, $F_1=1$, $F_{t+1}=F_t+F_{t-1}$.
+
+\begin{lemma}[Rubin's triangle]
+\label{lem:fib-triangle}
+Let $k\ge1$, $a=F_{2k}$, $b=F_{2k+1}$, $R=b^2-1$ and $T_k=\{(x,y)\in\R^2:x\ge0,\ y\ge0,\ ax+by\le R\}$.
+The convex hull of $T_k\cap\Z^2$ has exactly $k+3$ vertices, $(0,0)$ and $(F_{2t},\,b-F_{2t-1})$ for $0\le t\le k+1$.
+\end{lemma}
+
+\begin{proposition}[Many vertices]
+\label{prop:many-vertices}
+Let $k$, $a$, $b$, $R$ be as in \Cref{lem:fib-triangle}, and let $n$ be a prime with $n>\max(b^2,3b)$.
+Then $s(i,j)=n\langle ai+bj+n-1-R\rangle+\langle i+3j\rangle+1$ is a magic square of order $n$, and the points of its gem over the $k+3$ cells $(i,j)$ that are vertices of $\operatorname{conv}(T_k\cap\Z^2)$ are vertices of the gem.
+\end{proposition}
+
+\begin{proof}
+As $n>3b\ge6$ is prime, every integer $\sigma$ with $0<|\sigma|<n$ is a unit of $\Z_n$.
+The numbers $a$, $b$, $1$, $3$ and $3a-b=F_{2k}+F_{2k-2}$, and the diagonal steps $a+b=F_{2k+2}$, $a-b=-F_{2k-1}$, $4$ and $-2$, are of this kind, since $b^2<n$ and $3b<n$; so (a) of \Cref{prop:linear-magic} holds and (b) is vacuous, and the square is magic.
+Put $t_A=ai+bj+\alpha$ with $\alpha=n-1-R$, which lies in $\{1,\dots,n-1\}$ as $n\ge b^2+1$, and $t_B=i+3j$.
+As in Step~3 of the proof of \Cref{thm:siamese}, $s-\frac{n^2+1}2=\lambda+n\zeta$ with $\lambda=nt_A+t_B+1-\frac{n^2+1}2$ affine and $\zeta=-n\lfloor t_A/n\rfloor-\lfloor t_B/n\rfloor$, so the shear $(x,y,z)\mapsto(x,y,(z-\lambda)/n)$ maps the gem onto the convex hull of the points $(x_j,y_i,\zeta(i,j))$.
+On the grid $t_A,t_B\ge0$, so $\zeta\le0$, with equality if and only if $ai+bj\le R$ and $i+3j\le n-1$.
+Every lattice point $(i,j)$ of $T_k$ is a cell, as $i\le R<n-1$ and $j<b<n$, and satisfies $i+3j\le\max(R/a,3R/b)<\max(b^2,3b)<n$; so the cells with $\zeta=0$ are exactly the lattice points of $T_k$.
+If $Q\subset\R^3$ is finite and $Q_{\rm top}$ is the set of its points of largest third coordinate, every vertex $q$ of $\operatorname{conv}Q_{\rm top}$ is a vertex of $\operatorname{conv}Q$: if a linear function $\ell$ is maximal on $Q_{\rm top}$ only at $q$, then $\zeta+\varepsilon\ell$ is maximal on $Q$ only at $q$ for small $\varepsilon>0$.
+Applied to the sheared points, this proves the claim.
+\end{proof}
+
+\begin{corollary}
+\label{cor:many-vertices}
+For every prime $n\ge7$ some linear magic square of order $n$ has a gem with at least $\lceil\ln n/(4\ln\varphi)\rceil+2\ge0.519\ln n+2$ vertices, where $\varphi=(1+\sqrt5)/2$.
+In particular the largest vertex count of a linear magic square of prime order $n$ is unbounded.
+\end{corollary}
+
+\begin{proof}
+Put $k=\lceil\ln n/(4\ln\varphi)\rceil-1$. Then $k\ge1$, as $n\ge7>\varphi^4$, and $\varphi^{4k}<n$.
+Since $F_t\le\varphi^{t-1}$ for $t\ge1$, $b^2=F_{2k+1}^2\le\varphi^{4k}<n$; and $3b<n$, as $3b=6<n$ for $k=1$ and $3b<b^2$ for $k\ge2$.
+Now apply \Cref{prop:many-vertices}.
+\end{proof}
+
+The bound is far below the computed maxima of \Cref{rem:linear} (the square of the proof has $18$ vertices at $n=7$, where the bound is $4$), it covers only prime orders, and we have no upper bound better than the trivial $n^2$.
+Lemma~\ref{lem:fib-triangle}, Proposition~\ref{prop:many-vertices} and Corollary~\ref{cor:many-vertices} are checked by exact computation for $k\le15$, for $k\le3$ at $n=7,29,173$, and at every prime $7\le n<120$ (\texttt{anc/linear\_fixed\_steps.py}).
 
 \section{Open questions}
 \label{sec:discussion}
@@ -982,7 +1066,7 @@ The Siamese gem is not vertex-minimal at order five: simulated annealing (Append
 \item \emph{Hull versus point set.} Is $\operatorname{Iso}(\mathcal G(S))=\operatorname{Iso}(P_S)$ for every magic, or semi-magic, square $S$, or more generally for every arrangement whose heights have vanishing first moments? By \Cref{prop:pointset} this would determine the isometry groups of all these gems; it holds for order four (\Cref{prop:iso4}) and for the Siamese and digit-exchanged squares (\Cref{thm:siamese}, \Cref{prop:exchanged}). For odd $n$ the self-complementary squares are associative (\Cref{lem:selfcomp}), so the point set of an order-five square has isometry group $\{\pm\mathrm{id}\}$ or trivial; whether the same holds for the gems is open, and an exhaustive check over the $275{,}305{,}224$ classes of order five would take about seven CPU-weeks at the rate of \Cref{sec:census-4}.
 \item \emph{Growth of the vertex count for arbitrary arrangements.} For uniformly random arrangements the mean vertex count grows from $8.22$ at $n=3$ to $27.91$ at $n=10$, and the ratio $\mathbb E[V]/\ln^2N$ decreases slowly from $1.70$ to $1.32$ (\Cref{tab:vertices}; estimates). For $N$ independent uniform points in a $3$-polytope the expected vertex count is $\Theta(\ln^2N)$ \cite{barany1993random}; our points are not independent (the grid is fixed and only the heights are permuted), so this is only a heuristic analogy. Is $\mathbb E[V]=\Theta(\ln^2 N)$ for random arrangements? By \Cref{sec:magic-vs-random} the line conditions hardly change the mean vertex count at orders four and five; do they change its growth rate?
 \item \emph{Secondary cones.} By \Cref{prop:subdivisions} the face lattice of the gem of a height function $z$ is fixed by the secondary cones containing $z$ and $-z$, so the combinatorics of the gems of a family of arrangements is the set of pairs of chambers of the secondary fan of the grid that it meets. Which pairs are met by the permuted heights that satisfy the line conditions?
-\item \emph{Linear squares.} The shear of \Cref{thm:siamese} reduces the lift of a linear square with fixed integer vectors $\mathbf u,\mathbf w$ to a number of levels that does not depend on $n$, but the hull of the lattice points of a level polygon may a priori have more and more vertices as $n$ grows. Is the vertex count of such a family bounded independently of $n$, as it is for the Siamese and the digit-exchanged squares? How does the largest vertex count of a linear magic square of order $n$ ($18$, $25$, $31$, $36$ for $n=5,7,9,11$; \Cref{rem:linear}) grow?
+\item \emph{Linear squares.} By \Cref{prop:fixed-steps} the vertex count is bounded along every family of linear squares with fixed steps and offsets affine in $n$, and the $f$-vector is eventually periodic, but neither the bound nor the onset of periodicity is explicit. Is the vertex count bounded uniformly in the offsets, for fixed steps? The largest vertex count of a linear magic square of prime order $n$ is at least of order $\ln n$ (\Cref{cor:many-vertices}), far below the computed values ($25$, $36$, $41$, $48$, $51$ for $n=7,11,13,17,19$; \Cref{rem:linear}). How does it grow, and what happens for composite $n$?
 \end{enumerate}
 
 \section*{Use of AI systems}
@@ -1104,6 +1188,106 @@ By \Cref{prop:iso4}, $\sigma=1$ exactly for the $48$ associative gems; for the o
 \paragraph{Dudeney's groups.}
 Each of Dudeney's groups with more than eight members has gems with at least three vertex counts and $20$ combinatorial types; the $8$-vertex gems lie in groups VI (three) and VIII (four) (\texttt{anc/verify\_numbers.py}).
 The $48$ pandiagonal squares (group I \cite{ollerenshaw1998most}) have $11$ to $15$ vertices and one to four interior points, and none is associative.
+
+\section{Proofs for Section~\ref{sec:fixed-steps}}
+\label{sec:app-fixed-steps}
+
+We use the notation of \Cref{sec:fixed-steps}; $c=(i,j)$ runs over the cells, $t_A(c)=\mathbf u\cdot c+\alpha(n)$ and $t_B(c)=\mathbf w\cdot c+\beta(n)$ are integers for $n\in\mathcal N$, and $f$ denotes the $f$-vector.
+
+\paragraph{Step 1: levels.}
+Since $\langle t\rangle=t-n\lfloor t/n\rfloor$, we have $s(c)-\frac{n^2+1}2=\lambda(c)+n\zeta(c)$ with $\lambda(c)=nt_A(c)+t_B(c)+1-\frac{n^2+1}2$, an affine function of $c$, and $\zeta(c)=-n\lfloor t_A(c)/n\rfloor-\lfloor t_B(c)/n\rfloor$.
+As the cell $c$ is an affine function of $(x_j,y_i)$, the map $\Psi_n(x,y,z)=\bigl(c(x,y),(z-\lambda(c(x,y)))/n\bigr)$ is an affine bijection of $\R^3$ that maps the lifted point over $c$ to $(c,\zeta(c))$; so $\Psi_n(\mathcal G_n)$ has the same $f$-vector as $\mathcal G_n$, and the same vertex cells.
+On the grid $|t_A(c)|\le(|u_1|+|u_2|)n+|\alpha_0|+|\alpha_1|n$, so the pair $(a,b)=(\lfloor t_A/n\rfloor,\lfloor t_B/n\rfloor)$ lies in a finite set $\mathcal L\subset\Z^2$ independent of $n$.
+The cells with a given pair are the lattice points of
+\[
+P_{ab}(n)=\{x\in\R^2:\ 0\le x_1,x_2\le n-1,\ na\le\mathbf u\cdot x+\alpha(n)\le na+n-1,\ nb\le\mathbf w\cdot x+\beta(n)\le nb+n-1\},
+\]
+a polygon of the form $\{x:Mx\le ng^{ab}+h\}$, where the rows of $M\in\Z^{8\times2}$ are $\pm e_1$, $\pm e_2$, $\pm\mathbf u$, $\pm\mathbf w$, the vector $h\in\mathbb Q^8$ does not depend on $(a,b)$ or $n$, and $g^{ab}\in\mathbb Q^8$ does not depend on $n$ and satisfies $\delta g^{ab}\in\Z^8$.
+Since $\operatorname{conv}(X\times\{\zeta\})=\operatorname{conv}(X)\times\{\zeta\}$ for $X\subset\R^2$,
+\begin{equation}
+\label{eq:levels}
+\Psi_n(\mathcal G_n)=\operatorname{conv}\bigcup_{(a,b)\in\mathcal L}\operatorname{conv}\bigl(P_{ab}(n)\cap\Z^2\bigr)\times\{-na-b\}.
+\end{equation}
+Since $P_\infty^{ab}=\{x:Mx\le g^{ab}\}\subseteq[0,1]^2$ is bounded, the following lemma applies to each $P_{ab}(n)$.
+
+\begin{lemma}[Integer hulls of a linear family of polygons]
+\label{lem:linear-polygons}
+Let $M\in\Z^{K\times2}$ have rows $\mathbf r_k$, let $g,h\in\mathbb Q^K$, put $P_n=\{x\in\R^2:Mx\le ng+h\}$, and suppose that $P_\infty=\{x:Mx\le g\}$ is bounded.
+Let $D$ be the least common multiple of the denominators $q_v$ of the vertices $v$ of $P_\infty$ ($q_v$ is the least positive integer with $q_vv\in\Z^2$; $D=1$ if $P_\infty=\emptyset$).
+There are $n_1$ and, for each $r\in\{0,\dots,D-1\}$, a finite set $Z_r\subset\mathbb Q^2\times\mathbb Q^2$ such that for all $n\ge n_1$ with $n\equiv r\pmod D$ the points $np+q$, $(p,q)\in Z_r$, lie in $P_n\cap\Z^2$, and $\operatorname{conv}(P_n\cap\Z^2)=\operatorname{conv}\{np+q:(p,q)\in Z_r\}$.
+\end{lemma}
+
+This is a planar case of a theorem of Calegari and Walker \cite[Thm.~3.5]{calegari2013integer}, which says that the vertices of the integer hulls of a rational family of polyhedra of size $O(n)$ have eventually quasi-polynomial coordinates; the short direct proof below also gives the explicit period $D$, which yields the period $\delta L$ in \Cref{prop:fixed-steps}.
+
+\begin{proof}
+If $P_\infty=\emptyset$, Farkas' lemma gives $y\ge0$ with $yM=0$ and $y\cdot g<0$; then $0=yMx\le n\,y\cdot g+y\cdot h$ fails for large $n$, so $P_n=\emptyset$, and we take $Z_r=\emptyset$.
+Otherwise, for a vertex $v$ of $P_\infty$ let $I_v=\{k:\mathbf r_k\cdot v=g_k\}$, $C_v=\{y:\mathbf r_k\cdot y\le h_k\ (k\in I_v)\}$ and $T_v=\{y:\mathbf r_k\cdot y\le0\ (k\in I_v)\}$.
+
+(i) $P_n\subseteq nv+C_v$ for all $n$, since $\mathbf r_k\cdot(x-nv)=\mathbf r_k\cdot x-ng_k$ for $k\in I_v$.
+
+(ii) Let $\varepsilon>0$ be the least slack $g_k-\mathbf r_k\cdot v$ over all vertices $v$ and $k\notin I_v$ ($\varepsilon=\infty$ if there is no such pair), and $\nu=\max_k|\mathbf r_k|$.
+If $y\in C_v$, $|y|\le\rho$, $n\ge1$ and $n\varepsilon\ge\nu\rho-h_k$ for all $k$, then $nv+y\in P_n$: for $k\notin I_v$, $\mathbf r_k\cdot(nv+y)\le n(g_k-\varepsilon)+\nu\rho\le ng_k+h_k$.
+
+(iii) If some $C_v$ is empty, $P_n=\emptyset$ for all $n$ by (i), and we take $Z_r=\emptyset$.
+Otherwise $C_v=Q_v+T_v$ with $Q_v$ a polytope and $T_v$ the cone spanned by integer vectors $y_1,\dots,y_s$ (Minkowski--Weyl).
+Put $B_v=\{\sum_l\theta_ly_l:0\le\theta_l\le1\}$ and $F_v(n)=(nv+Q_v+B_v)\cap\Z^2$.
+Every lattice point $x=nv+q+\sum_l\lambda_ly_l$ of $nv+C_v$ ($q\in Q_v$, $\lambda_l\ge0$) lies in $F_v(n)+T_v$: subtract $\sum_l\lfloor\lambda_l\rfloor y_l$.
+
+(iv) If $n\equiv r'\pmod{q_v}$, then $(n-r')v\in\Z^2$, so $F_v(n)=nv+E_v(r')$ with the finite set $E_v(r')=F_v(r')-r'v\subset Q_v+B_v$.
+
+(v) Let $\rho$ be the largest norm of a point of the sets $Q_v+B_v$, and $n_1\ge1$ with $n_1\varepsilon\ge\nu\rho-h_k$ for all $k$. By (ii), $F_v(n)\subseteq P_n\cap\Z^2$ for $n\ge n_1$.
+
+(vi) Let $n\ge n_1$, $H_n=\operatorname{conv}(P_n\cap\Z^2)$ and $R_n=\operatorname{conv}\bigcup_vF_v(n)$, so that $R_n\subseteq H_n$ by (v); we may assume $P_n\cap\Z^2\ne\emptyset$.
+For a linear function $\ell$ choose a vertex $v$ of $P_\infty$ at which $\ell$ is maximal on $P_\infty$.
+For $y\in T_v$ and small $\eta>0$ the point $v+\eta y$ lies in $P_\infty$, as the rows $k\notin I_v$ have positive slack at $v$; so $\ell\le0$ on $T_v$.
+By (i) and (iii), $P_n\cap\Z^2\subseteq F_v(n)+T_v$, so $\max_{H_n}\ell\le\max_{F_v(n)}\ell\le\max_{R_n}\ell$.
+As this holds for every $\ell$, $H_n=R_n$.
+Now take $Z_r=\{(v,e):v\text{ a vertex of }P_\infty,\ e\in E_v(r\bmod q_v)\}$.
+\end{proof}
+
+A vertex of $P_\infty^{ab}$ solves two independent equations $\mathbf r_k\cdot v=g^{ab}_k$, and the determinant of two non-parallel rows of $M$ is $\pm1$, $\pm u_1$, $\pm u_2$, $\pm w_1$, $\pm w_2$ or $\pm(u_1w_2-u_2w_1)$; by Cramer's rule and $\delta g^{ab}\in\Z^8$, its denominator divides $\delta$ times the absolute value of the determinant.
+So the number $D_{ab}$ of \Cref{lem:linear-polygons} for $P_{ab}(n)$ divides $\delta L$.
+
+\begin{lemma}[Points moving affinely]
+\label{lem:moving-points}
+Let $\mathcal K$ be finite, $A_\kappa,B_\kappa\in\mathbb Q^3$ and $\pi_\kappa(n)=nA_\kappa+B_\kappa$ for $\kappa\in\mathcal K$.
+There is $n_2$ such that whether $\operatorname{conv}\{\pi_\kappa(n)\}$ is $3$-dimensional is the same for all $n\ge n_2$, and, if it is, so are its $f$-vector and the index sets $\{\kappa:\pi_\kappa(n)\in F\}$ of its facets $F$.
+\end{lemma}
+
+\begin{proof}
+For $\kappa_1,\dots,\kappa_4\in\mathcal K$ the determinant $\Delta_{(\kappa_1,\dots,\kappa_4)}(n)$ of the $4\times4$ matrix with rows $(\pi_{\kappa_l}(n),1)$ is a polynomial in $n$ of degree at most $3$, so for $n\ge n_2$ all these determinants have constant signs; so has the relation $\pi_\kappa(n)=\pi_{\kappa'}(n)$, which holds for all $n$ or for at most one.
+The hull is $3$-dimensional if and only if one of these determinants is non-zero.
+If it is, $S\subseteq\mathcal K$ is the index set of a facet if and only if it contains $\kappa_1,\kappa_2,\kappa_3$ such that some $\Delta_{(\kappa_1,\kappa_2,\kappa_3,\kappa)}(n)\ne0$, $S=\{\kappa:\Delta_{(\kappa_1,\kappa_2,\kappa_3,\kappa)}(n)=0\}$, and the $\Delta_{(\kappa_1,\kappa_2,\kappa_3,\kappa)}(n)$ with $\kappa\notin S$ all have the same sign.
+A point is a vertex if and only if its index lies in at least three facet index sets; $f_0$ is the number of vertices up to coincidence, $f_2$ the number of facet index sets, and $f_1=f_0+f_2-2$.
+All of this depends only on the signs.
+\end{proof}
+
+\begin{proof}[Proof of \Cref{prop:fixed-steps}, (a) and (b)]
+Apply \Cref{lem:linear-polygons} to each $P_{ab}(n)$, $(a,b)\in\mathcal L$, let $n_1$ be the largest of the thresholds and $D=\operatorname{lcm}(\delta,D_{ab}:(a,b)\in\mathcal L)$, which divides $\delta L$.
+For $r\in\{0,\dots,D-1\}$ let $\mathcal K_r$ be the set of $(a,b,p,q)$ with $(a,b)\in\mathcal L$ and $(p,q)\in Z^{ab}_{r\bmod D_{ab}}$, and $\pi_{(a,b,p,q)}(n)=(np+q,-na-b)$.
+By \eqref{eq:levels} and \Cref{lem:linear-polygons}, $\Psi_n(\mathcal G_n)=\operatorname{conv}\{\pi_\kappa(n):\kappa\in\mathcal K_r\}$ for $n\in\mathcal N$, $n\ge n_1$, $n\equiv r\pmod D$.
+So $\mathcal G_n$ has at most $\max_r|\mathcal K_r|$ vertices for $n\ge n_1$, and at most $n_1^2$ before; this is (a).
+Let $n_0$ be the largest of $n_1$ and the thresholds $n_2$ of \Cref{lem:moving-points} for the families $(\pi_\kappa)_{\kappa\in\mathcal K_r}$.
+For $n\in\mathcal N$ with $n\ge n_0$ also $n+D\in\mathcal N$, since $\delta\mid D$, and $n+D\equiv n\pmod D$; so \Cref{lem:moving-points} gives (b) with $D$ in place of $\delta L$, and repeating it $\delta L/D$ times gives (b).
+\end{proof}
+
+\paragraph{Rubin's triangle.}
+Comparing entries in $\begin{pmatrix}1&1\\1&0\end{pmatrix}^t=\begin{pmatrix}F_{t+1}&F_t\\F_t&F_{t-1}\end{pmatrix}$, $t\in\Z$, gives $F_{-t}=(-1)^{t+1}F_t$, so that $F_t\ge1$ for every odd $t$, with equality only for $t=\pm1$, and d'Ocagne's identity
+\begin{equation}
+\label{eq:docagne}
+F_rF_{s+1}-F_{r+1}F_s=(-1)^sF_{r-s}\qquad(r,s\in\Z).
+\end{equation}
+
+\begin{proof}[Proof of \Cref{lem:fib-triangle}]
+Write $P_t=(F_{2t},b-F_{2t-1})$.
+For $0\le j\le k$ put $\mathbf n_j=(F_{2j},F_{2j+1})$ and $c_j=bF_{2j+1}-1$, so that $\mathbf n_k=(a,b)$ and $c_k=R$, and let $H$ be the polygon defined by $x\ge0$, $y\ge0$ and $\mathbf n_j\cdot(x,y)\le c_j$ for $0\le j\le k$; then $H\subseteq T_k$.
+Every lattice point of $T_k$ lies in $H$: the maximum of $\mathbf n_j$ on $T_k$ is attained at a vertex, $(0,0)$, $(R/a,0)$ or $(0,R/b)$, and since $aF_{2j+1}-bF_{2j}=F_{2k-2j}\ge0$ by \eqref{eq:docagne}, it is $F_{2j+1}R/b<bF_{2j+1}$; at a lattice point $\mathbf n_j\cdot(x,y)$ is an integer, hence at most $c_j$.
+By \eqref{eq:docagne}, $c_j-\mathbf n_j\cdot P_t=F_{2t-1}F_{2j+1}-F_{2t}F_{2j}-1=F_{2(t-j)-1}-1\ge0$, with equality exactly for $t\in\{j,j+1\}$.
+The coordinates of $P_t$ are non-negative, as $F_{2t-1}\le F_{2k+1}=b$ for $0\le t\le k+1$; so $(0,0)$ and the $P_t$ lie in $H$.
+Each of these $k+3$ points lies on two non-parallel boundary lines of $H$: $(0,0)$ on $x=0$ and $y=0$, $P_0=(0,b-1)$ on $x=0$ and $\mathbf n_0\cdot(x,y)=c_0$, $P_t$ for $1\le t\le k$ on the lines of $\mathbf n_{t-1}$ and $\mathbf n_t$ (with $\det(\mathbf n_t,\mathbf n_{t-1})=F_2=1$ by \eqref{eq:docagne}), and $P_{k+1}=(F_{2k+2},0)$ on $y=0$ and the line of $\mathbf n_k$.
+So they are $k+3$ vertices of $H$, distinct since the $F_{2t}$ with $t\ge1$ are distinct and positive and $b-1\ge1$; as $H$ is defined by $k+3$ inequalities, it has no others.
+Hence $H$ is the convex hull of lattice points of $T_k$, and $\operatorname{conv}(T_k\cap\Z^2)=H$.
+\end{proof}
 
 
 \end{document}

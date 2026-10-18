@@ -35,6 +35,8 @@ The main result is a theorem about one classical family.
 So only $12$ of the $n^2$ points are vertices, whereas the gems of random arrangements and of sampled magic squares have more and more vertices as $n$ grows (\Cref{tab:vertices}, estimates).
 The proof shears the lift onto five levels and reduces to the signs of a table of polynomials in $m=(n-1)/2$.
 The same method shows that the square with the two base-$n$ digits exchanged has a gem with $f$-vector $(12,24,14)$ for every odd $n\ge5$ (\Cref{prop:exchanged}); along the way we give a self-contained criterion for a linear square (a square of the uniform step method) to be magic, and count these squares (\Cref{prop:linear-magic}).
+More generally, along every family of linear squares with fixed steps and offsets affine in $n$ the vertex count is bounded and the $f$-vector is eventually periodic in $n$ (\Cref{prop:fixed-steps}).
+The bound depends on the family: over all linear magic squares of prime order $n$ the largest vertex count is at least $\lceil\ln n/(4\ln\varphi)\rceil+2$, with $\varphi$ the golden ratio (\Cref{cor:many-vertices}), and, by computation, for $7\le n\le21$ the Siamese and the digit-exchanged squares are the only linear magic squares, up to $D_4$, with as few as twelve vertices (\Cref{rem:linear}).
 
 The other results need weaker hypotheses than magic, and most of them hold for every arrangement; \Cref{tab:hypotheses} lists what each one needs.
 The points balance about the origin for every arrangement, and the heights balance as weights on the grid exactly when the rows and columns have equal sums (\Cref{sec:balance}).
@@ -61,6 +63,7 @@ result & statement & hypothesis\\
 \Cref{sec:magic-vs-random} & which invariants see the line conditions & $n=4,5$ (computation)\\
 \Cref{prop:linear-magic} & magic linear squares & linear squares, odd $n$\\
 \Cref{thm:siamese}, \Cref{prop:exchanged} & Siamese and digit-exchanged gems & two magic squares, odd $n\ge5$\\
+\Cref{prop:fixed-steps}, \Cref{cor:many-vertices} & fixed steps; largest vertex count & linear squares; prime $n$\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -71,8 +74,9 @@ In all of these the magic squares are the \emph{points} of a polytope, whereas t
 The lifting construction itself is that of regular subdivisions and secondary fans \cite{gelfand1994discriminants,deloera2010triangulations}.
 The moment identities of \Cref{sec:balance} are due in substance to Loly and Rogers \cite{loly2004invariance,rogers2004inertia,rogers2005multipole}; we record them in the coordinates of the gem for later use.
 The Siamese square is de la Loub\`ere's construction \cite{loubere1693}, and the linear squares are the squares of the uniform step method \cite[Ch.~I]{andrews1960magic}, analysed by Lehmer \cite{lehmer1929} and by Apostol and Zuckerman \cite{apostol1951}; we give a self-contained proof of \Cref{prop:linear-magic} but do not claim priority for it.
+For linear squares with fixed steps we use integer hulls of linear families of polygons, a planar case of a theorem of Calegari and Walker \cite{calegari2013integer}, and the lower bound rests on Rubin's Fibonacci triangle \cite{rubin1970}.
 The partition of the $880$ order-four squares into associative, self-complementary and other squares is Dudeney's \cite{dudeney1917amusements}.
-New are the Siamese theorem and its companion for the digit-exchanged square, the exact order-four census and the comparison of \Cref{sec:magic-vs-random}, together with a short covariance argument that settles symmetry and congruence of the point sets for every order.
+New are the Siamese theorem and its companion for the digit-exchanged square, the results on linear squares with fixed steps and on their largest vertex count, the exact order-four census and the comparison of \Cref{sec:magic-vs-random}, together with a short covariance argument that settles symmetry and congruence of the point sets for every order.
 The moment identities of all orders implied by the row and column sums, the number of them that forces an arrangement to be semi-magic (a permutation threshold), and the line-sum energies of random arrangements are treated in a companion manuscript \cite{mathewson_companion}; no result of it is used here.
 
 Sections~\ref{sec:gem}--\ref{sec:discussion} treat, in turn, the gem, the balance of its vectors, symmetry and congruence, faces and the order-four census, the Siamese and linear squares, and open questions; the appendices describe the computations and collect lattice-point counts, vertex statistics and further order-four data.

@@ -263,13 +263,92 @@ All of this is checked in exact polynomial arithmetic by \texttt{anc/digit\_exch
 \begin{remark}[Vertex counts of linear squares]
 \label{rem:linear}
 The gems of other linear squares do not share the twelve-vertex count.
-Over all linear magic squares, counted up to $D_4$ (each family is closed under complementation; complements are not identified), the vertex counts (\texttt{anc/linear\_squares.py}, exact hulls) range over $[11,18]$ for $n=5$ ($184$ classes), $[12,25]$ for $n=7$ ($3159$ classes), $[12,31]$ for $n=9$ ($441$ classes) and $[12,36]$ for $n=11$ ($89{,}125$ classes).
+Over all linear magic squares, counted up to $D_4$ (each family is closed under complementation; complements are not identified), the vertex counts range over $[11,18]$ for $n=5$ ($184$ classes), $[12,25]$ for $n=7$ ($3159$ classes), $[12,31]$ for $n=9$ ($441$ classes) and $[12,36]$ for $n=11$ ($89{,}125$ classes) (\texttt{anc/linear\_squares.py}, exact hulls), and over $[12,41]$, $[12,38]$, $[12,48]$, $[12,51]$ and $[12,48]$ for $n=13,15,17,19,21$ ($283{,}176$, $1472$, $1{,}713{,}664$, $3{,}558{,}249$ and $25{,}272$ classes; \texttt{anc/linear\_census.py}).
+For $n\ge13$ the counts are floating-point (Quickhull) counts, and every class with at most $13$ vertices or with the largest count is certified with the exact hull; for $n\le11$ the Quickhull vertex sets agree with the exact ones for every class.
 For $n=5$ the minimum $11$ is attained by two classes, complements of each other, both pandiagonal and not associative, with $f$-vector $(11,23,14)$; one is $s=5\langle4i+3j\rangle+\langle4i+2j\rangle+1$ ($\mathbf u=(-1,-2)$, $\mathbf w=(-1,2)$, $\alpha=\beta=0$), the first square below.
 \[
 \begin{pmatrix}1&18&10&22&14\\25&12&4&16&8\\19&6&23&15&2\\13&5&17&9&21\\7&24&11&3&20\end{pmatrix}
 \qquad\qquad
 \begin{pmatrix}1&19&15&13&17\\23&5&14&20&3\\10&21&12&4&18\\24&9&8&22&2\\7&11&16&6&25\end{pmatrix}
 \]
-For $n=7,9,11$ the minimum $12$ is attained by exactly two classes, those of the Siamese and the digit-exchanged square (\Cref{thm:siamese}, \Cref{prop:exchanged}).
+For $7\le n\le21$ the minimum $12$ is attained by exactly two classes, those of the Siamese and the digit-exchanged square (\Cref{thm:siamese}, \Cref{prop:exchanged}); for $n\ge13$ this relies on the floating-point counts of the other classes.
 The Siamese gem is not vertex-minimal at order five: simulated annealing (Appendix~\ref{sec:vertexstats}) found $15$ $D_4$-classes of magic squares of order $5$ whose gems have $10$ vertices (\texttt{anc/sa\_n5\_V10.txt}). For example, the second square above has $f$-vector $(10,22,14)$, volume $845/3$ and $8$ interior points.
 \end{remark}
+
+\subsection{Fixed steps and the largest vertex count}
+\label{sec:fixed-steps}
+
+The Siamese and the digit-exchanged gems have the same type for every odd $n\ge5$.
+Every family of linear squares with fixed steps and offsets affine in $n$ has an eventually periodic $f$-vector, while the largest vertex count over all linear magic squares of order $n$ is unbounded.
+
+Fix $\mathbf u,\mathbf w\in\Z^2\setminus\{0\}$ and rationals $\alpha_0,\alpha_1,\beta_0,\beta_1$, put $\alpha(n)=\alpha_0+\alpha_1n$, $\beta(n)=\beta_0+\beta_1n$ and $\mathcal N=\{n\ge2:\alpha(n),\beta(n)\in\Z\}$, and for $n\in\mathcal N$ let $S_n$ be the array
+\[
+s(c)=n\langle\mathbf u\cdot c+\alpha(n)\rangle+\langle\mathbf w\cdot c+\beta(n)\rangle+1,\qquad c=(i,j)\in\{0,\dots,n-1\}^2,
+\]
+and $\mathcal G_n$ the convex hull of its lifted points $(x_j,y_i,s(c)-\frac{n^2+1}2)$, the gem of $S_n$ when $S_n$ is an arrangement.
+Let $\delta\ge1$ be the least integer with $\delta\alpha_1,\delta\beta_1\in\Z$, and $L$ the least common multiple of the non-zero numbers among $|u_1|$, $|u_2|$, $|w_1|$, $|w_2|$, $|u_1w_2-u_2w_1|$.
+The Siamese squares form the family $\mathbf u=(1,1)$, $\mathbf w=(1,2)$, $\alpha(n)=-m=\frac{1-n}2$, $\beta(n)=-2m=1-n$, with $\mathcal N$ the odd numbers, $\delta=2$ and $L=2$.
+
+\begin{proposition}[Fixed steps]
+\label{prop:fixed-steps}
+\begin{enumerate}
+\item[(a)] The number of vertices of $\mathcal G_n$ is bounded on $\mathcal N$.
+\item[(b)] There is an $n_0$ such that for every $n\in\mathcal N$ with $n\ge n_0$ and $\dim\mathcal G_n=3$ also $n+\delta L\in\mathcal N$, $\dim\mathcal G_{n+\delta L}=3$ and $f(\mathcal G_{n+\delta L})=f(\mathcal G_n)$.
+\item[(c)] If $S_n$ is a semi-magic square, then $\dim\mathcal G_n=3$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}[Proof of (c), and outline of (a) and (b)]
+If all the lifted points lay in a plane, it would not be vertical, as the grid points are not collinear; so $z=Ax+By+C$, equal row sums give $B=0$, equal column sums $A=0$, and then $z$ would be constant.
+For (a) and (b), the proof of \Cref{thm:siamese}, Step~3, generalises: since $\langle t\rangle=t-n\lfloor t/n\rfloor$, one affine bijection of $\R^3$, the same for all cells, maps $\mathcal G_n$ onto the convex hull of the points $(c,\zeta(c))$ with $\zeta(c)=-n\lfloor t_A(c)/n\rfloor-\lfloor t_B(c)/n\rfloor$, where $t_A(c)=\mathbf u\cdot c+\alpha(n)$ and $t_B(c)=\mathbf w\cdot c+\beta(n)$.
+The pairs of floors range over a finite set that does not depend on $n$, and each level set is the set of lattice points of a polygon $\{x\in\R^2:Mx\le ng+h\}$ with $M$, $g$, $h$ independent of $n$.
+For large $n$ in a fixed residue class modulo $\delta L$, the vertices of the hull of the lattice points of such a polygon come from a fixed finite list of points $np+q$ (\Cref{lem:linear-polygons}), and the face lattice of the hull of finitely many points that move affinely with $n$ is eventually constant (\Cref{lem:moving-points}).
+The details are in Appendix~\ref{sec:app-fixed-steps}.
+\end{proof}
+
+So the vertex count along such a family is bounded, as it is for the Siamese and the digit-exchanged squares, but the bound, $n_0$ and the eventual $f$-vectors are not explicit.
+The least period can be smaller than $\delta L$: for the Siamese family $\delta L=4$ and the $f$-vector is constant for $n\ge5$.
+In computations it can equal $\delta L$: for $\mathbf u=(1,3)$, $\mathbf w=(3,1)$, $\alpha=\beta=0$ we have $\delta=1$ and $L=24$, and the exact hulls satisfy $f(\mathcal G_n)=f(\mathcal G_{n+24})$ for $150\le n\le197$, with no smaller shift doing so on that range (\texttt{anc/linear\_fixed\_steps.py}).
+
+The bound depends on the family, and the largest vertex counts in \Cref{rem:linear} grow with $n$.
+That they are unbounded follows from Rubin's example of triangles whose integer hulls have arbitrarily many vertices \cite{rubin1970}.
+Zolotykh's survey \cite[Sect.~3]{zolotykh2006vertices} describes Rubin's triangles by Fibonacci knapsack inequalities with $k+3$ vertices; its printed inequality, with $F_{2k-1}$ in place of $F_{2k+1}$, has fewer vertices, and we have not seen Rubin's paper, so we state and prove the version we use (Appendix~\ref{sec:app-fixed-steps}).
+Here $F_t$ are the Fibonacci numbers, extended to all $t\in\Z$ by $F_0=0$, $F_1=1$, $F_{t+1}=F_t+F_{t-1}$.
+
+\begin{lemma}[Rubin's triangle]
+\label{lem:fib-triangle}
+Let $k\ge1$, $a=F_{2k}$, $b=F_{2k+1}$, $R=b^2-1$ and $T_k=\{(x,y)\in\R^2:x\ge0,\ y\ge0,\ ax+by\le R\}$.
+The convex hull of $T_k\cap\Z^2$ has exactly $k+3$ vertices, $(0,0)$ and $(F_{2t},\,b-F_{2t-1})$ for $0\le t\le k+1$.
+\end{lemma}
+
+\begin{proposition}[Many vertices]
+\label{prop:many-vertices}
+Let $k$, $a$, $b$, $R$ be as in \Cref{lem:fib-triangle}, and let $n$ be a prime with $n>\max(b^2,3b)$.
+Then $s(i,j)=n\langle ai+bj+n-1-R\rangle+\langle i+3j\rangle+1$ is a magic square of order $n$, and the points of its gem over the $k+3$ cells $(i,j)$ that are vertices of $\operatorname{conv}(T_k\cap\Z^2)$ are vertices of the gem.
+\end{proposition}
+
+\begin{proof}
+As $n>3b\ge6$ is prime, every integer $\sigma$ with $0<|\sigma|<n$ is a unit of $\Z_n$.
+The numbers $a$, $b$, $1$, $3$ and $3a-b=F_{2k}+F_{2k-2}$, and the diagonal steps $a+b=F_{2k+2}$, $a-b=-F_{2k-1}$, $4$ and $-2$, are of this kind, since $b^2<n$ and $3b<n$; so (a) of \Cref{prop:linear-magic} holds and (b) is vacuous, and the square is magic.
+Put $t_A=ai+bj+\alpha$ with $\alpha=n-1-R$, which lies in $\{1,\dots,n-1\}$ as $n\ge b^2+1$, and $t_B=i+3j$.
+As in Step~3 of the proof of \Cref{thm:siamese}, $s-\frac{n^2+1}2=\lambda+n\zeta$ with $\lambda=nt_A+t_B+1-\frac{n^2+1}2$ affine and $\zeta=-n\lfloor t_A/n\rfloor-\lfloor t_B/n\rfloor$, so the shear $(x,y,z)\mapsto(x,y,(z-\lambda)/n)$ maps the gem onto the convex hull of the points $(x_j,y_i,\zeta(i,j))$.
+On the grid $t_A,t_B\ge0$, so $\zeta\le0$, with equality if and only if $ai+bj\le R$ and $i+3j\le n-1$.
+Every lattice point $(i,j)$ of $T_k$ is a cell, as $i\le R<n-1$ and $j<b<n$, and satisfies $i+3j\le\max(R/a,3R/b)<\max(b^2,3b)<n$; so the cells with $\zeta=0$ are exactly the lattice points of $T_k$.
+If $Q\subset\R^3$ is finite and $Q_{\rm top}$ is the set of its points of largest third coordinate, every vertex $q$ of $\operatorname{conv}Q_{\rm top}$ is a vertex of $\operatorname{conv}Q$: if a linear function $\ell$ is maximal on $Q_{\rm top}$ only at $q$, then $\zeta+\varepsilon\ell$ is maximal on $Q$ only at $q$ for small $\varepsilon>0$.
+Applied to the sheared points, this proves the claim.
+\end{proof}
+
+\begin{corollary}
+\label{cor:many-vertices}
+For every prime $n\ge7$ some linear magic square of order $n$ has a gem with at least $\lceil\ln n/(4\ln\varphi)\rceil+2\ge0.519\ln n+2$ vertices, where $\varphi=(1+\sqrt5)/2$.
+In particular the largest vertex count of a linear magic square of prime order $n$ is unbounded.
+\end{corollary}
+
+\begin{proof}
+Put $k=\lceil\ln n/(4\ln\varphi)\rceil-1$. Then $k\ge1$, as $n\ge7>\varphi^4$, and $\varphi^{4k}<n$.
+Since $F_t\le\varphi^{t-1}$ for $t\ge1$, $b^2=F_{2k+1}^2\le\varphi^{4k}<n$; and $3b<n$, as $3b=6<n$ for $k=1$ and $3b<b^2$ for $k\ge2$.
+Now apply \Cref{prop:many-vertices}.
+\end{proof}
+
+The bound is far below the computed maxima of \Cref{rem:linear} (the square of the proof has $18$ vertices at $n=7$, where the bound is $4$), it covers only prime orders, and we have no upper bound better than the trivial $n^2$.
+Lemma~\ref{lem:fib-triangle}, Proposition~\ref{prop:many-vertices} and Corollary~\ref{cor:many-vertices} are checked by exact computation for $k\le15$, for $k\le3$ at $n=7,29,173$, and at every prime $7\le n<120$ (\texttt{anc/linear\_fixed\_steps.py}).
