@@ -509,6 +509,16 @@ Congruence without symmetry is rare: of the $528$ gems with trivial isometry gro
 The symmetric gems have congruences beyond their symmetry in $28$ cases, and in $9$ after scaling (\texttt{anc/congruent\_facets.py}).
 \end{remark}
 
+\begin{remark}[Repeating chains of facets]
+\label{rem:belts}
+The pairing of \Cref{rem:congruent-facets} respects adjacency: an isometry of the gem maps facets that share an edge to facets that share an edge, so a chain of adjacent facets is matched by a chain of congruent facets in the same order.
+This is easiest to see on belts.
+If a plane through $\mathbf 0$ contains no point $\mathbf p_c$, the facets that it crosses, taken in order along the boundary of the section of the gem by the plane, form a closed chain in which consecutive facets share an edge.
+If an isometry of the gem maps the plane to itself and acts on it as a half-turn about $\mathbf 0$, it preserves the cyclic order of the edges of the section and fixes none of them, so it maps the chain to itself shifted half way round: the second half of the chain repeats the first. If it acts on the plane as a reflection, it reverses the chain.
+So for an associative square the chain along the plane $z=0$ of the mean entry repeats after half a turn, and so does, for the other self-complementary squares, the chain along the vertical plane through $\mathbf 0$ perpendicular to the axis of the half-turn; along $z=0$ the half-turn reverses its chain, which then reads the same in both directions.
+For order four these chains have $8$ or $10$ facets for the associative gems, and $4$ to $14$ facets around the axis for the others (\texttt{anc/congruent\_facets.py}).
+\end{remark}
+
 \section{Faces of the gem and a census of order four}
 \label{sec:census}
 
