@@ -225,7 +225,6 @@ The Siamese square is de la Loub\`ere's construction \cite{loubere1693}, and the
 For linear squares with fixed steps we use integer hulls of linear families of polygons, a planar case of a theorem of Calegari and Walker \cite{calegari2013integer}, and the lower bound rests on Rubin's Fibonacci triangle \cite{rubin1970}.
 The partition of the $880$ order-four squares into associative, self-complementary and other squares is Dudeney's \cite{dudeney1917amusements}.
 New are the Siamese theorem and its companion for the digit-exchanged square, the results on linear squares with fixed steps and on their largest vertex count, the exact order-four census and the comparison of \Cref{sec:magic-vs-random}, together with a short covariance argument that settles symmetry and congruence of the point sets for every order.
-The moment identities of all orders implied by the row and column sums, the number of them that forces an arrangement to be semi-magic (a permutation threshold), and the line-sum energies of random arrangements are treated in a companion manuscript \cite{mathewson_companion}; no result of it is used here.
 
 Sections~\ref{sec:gem}--\ref{sec:discussion} treat, in turn, the gem, the balance of its vectors, symmetry and congruence, faces and the order-four census, the Siamese and linear squares, and open questions; the appendices describe the computations and collect lattice-point counts, vertex statistics and further order-four data.
 An interactive display of the $880$ order-four gems is available at \url{https://kylemath.github.io/MagicGemWebpage/}.
@@ -330,7 +329,7 @@ The origin is the only non-vertex point and is interior; the gem has $f$-vector 
 
 Figures~\ref{fig:vectors} and~\ref{fig:lines} draw the points $\mathbf p_{ij}$ as vectors from the origin.
 This section records which balance statements these vectors satisfy, and for which arrangements.
-The identities are due in substance to Loly and Rogers \cite{loly2004invariance,rogers2004inertia,rogers2005multipole}, who study the moment of inertia and the multipole moments of magic squares and cubes; the moment identities of all orders, and how many of them force an arrangement to be semi-magic, are the subject of the companion paper \cite{mathewson_companion}.
+The identities are due in substance to Loly and Rogers \cite{loly2004invariance,rogers2004inertia,rogers2005multipole}, who study the moment of inertia and the multipole moments of magic squares and cubes.
 
 \paragraph{Unweighted balance holds for every arrangement.}
 By \Cref{lem:lines}(1), $\sum_{i,j}\mathbf p_{ij}=\mathbf 0$ for every arrangement: the origin is the centroid of the $N$ points, and by \Cref{prop:fulldim} it is an interior point of $\mathcal G(S)$ unless $S$ is a $D_4$-image of the natural square.
@@ -1104,8 +1103,8 @@ Versions 1--4 contained the following errors and overstatements, which are corre
 (i)~The ``Complete Energy Characterization Theorem'' presented in version~4 as the main theoretical contribution is immediate from the definitions: the energy is a sum of squared line-sum deviations, so it vanishes exactly on magic squares. It is not presented as a result here.
 (ii)~Table~2 of version~4 gave about $3.4\times10^7$ essentially different magic squares of order five; the correct number is $275{,}305{,}224$ \cite{gardner1976}, and $3.4\times10^7$ is that number divided by $8$.
 (iii)~The same table gave $8$, $12$ and $16$ as the ``typical'' numbers of hull vertices for orders $3$, $4$ and $5$. For order four the number ranges from $8$ to $16$ (\Cref{tab:census} of this version), and the Siamese gem of order five has $12$ vertices (\Cref{thm:siamese}).
-(iv)~The energy-landscape statistics of version~4 (its Section~4.5, including the ``landscape entropy'' and the claim that it is scale-invariant) are not carried over; exact results on random arrangements are in the companion paper \cite{mathewson_companion}.
-(v)~The statistics in Table~3 of version~4 weighted the diagonal terms of the energy differently from its stated definition. That table also reported that $6\times10^7$ uniformly random arrangements of order four contained no non-magic zero of the four-term energy; since $14{,}639{,}440$ of the $16!$ arrangements are such zeros \cite{mathewson_companion}, about $42$ were to be expected, and a rerun with the same number of samples finds $45$ (\texttt{anc/v4\_sampling\_recheck.py}). That statement of version~4 is withdrawn.
+(iv)~The energy-landscape statistics of version~4 (its Section~4.5, including the ``landscape entropy'' and the claim that it is scale-invariant) are not carried over.
+(v)~The statistics in Table~3 of version~4 weighted the diagonal terms of the energy differently from its stated definition. That table also reported that $6\times10^7$ uniformly random arrangements of order four contained no zero of the four-term energy other than magic squares; the zeros are the arrangements whose first moments vanish and whose two diagonals sum to $34$. An exact count gives $14{,}639{,}440$ such zeros among the $16!$ arrangements, $7{,}040$ of them magic (\texttt{anc/energy\_zeros\_count.py}), so about $42$ non-magic zeros were to be expected, and a rerun with the same number of samples finds $45$ (\texttt{anc/v4\_sampling\_recheck.py}). That statement of version~4 is withdrawn.
 (vi)~The hardware stated in version~4 was incorrect; the computations were run on an Apple M4 Max.
 
 

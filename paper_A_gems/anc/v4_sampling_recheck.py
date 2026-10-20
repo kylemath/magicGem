@@ -5,7 +5,7 @@ zero of the four-term (low-mode) energy E_low other than magic squares.
 E_low = 0 exactly when the first moments sum_ij z_ij x_j and sum_ij z_ij y_i
 vanish and both diagonals sum to 34; this script tests those four conditions in
 integer arithmetic for the same number of samples and counts the zeros found.
-Since 14,639,440 of the 16! arrangements are zeros (companion paper), about 42
+Since 14,639,440 of the 16! arrangements are zeros (energy_zeros_count.py), about 42
 are expected.  Usage: python3 v4_sampling_recheck.py [samples] [seed]
 """
 import sys
