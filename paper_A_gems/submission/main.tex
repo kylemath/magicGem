@@ -138,7 +138,7 @@ Given an arrangement of $\{1,\dots,n^2\}$ in an $n\times n$ grid, we lift each c
 \section{Introduction}
 \label{sec:introduction}
 
-Magic squares are among the oldest objects of recreational mathematics: the $3\times3$ Lo Shu belongs to Chinese tradition, a $4\times4$ square is engraved in D\"urer's \emph{Melencolia~I} (1514), and constructions for every order $n\ge3$ have been known for centuries \cite{andrews1960magic,pickover2002zen}.
+Magic squares are among the oldest objects of recreational mathematics: the $3\times3$ Lo Shu belongs to Chinese tradition, a $4\times4$ square is engraved in Albrecht D\"urer's \emph{Melencolia~I} (1514) alongside a balance scale and a $12$-vertex convex polyhedron (\emph{D\"urer's solid}, a truncated rhombohedron), and constructions for every order $n\ge3$ have been known for centuries \cite{andrews1960magic,pickover2002zen}.
 The modern literature treats them from several directions: enumeration and the geometry of the polytopes whose lattice points are the squares \cite{stanley1973magic,ehrhart1973magic,ahmed2003polyhedral,beck2006insideout,beck2010enumeration}, spectral and matrix properties \cite{loly2009spectra,nordgren2012properties,nordgren2014spectra,cameron2013signatura}, and, in work of Loly and collaborators, physical invariants such as the moment of inertia and the multipole moments \cite{loly2004invariance,rogers2004inertia,rogers2005multipole}.
 Magic squares have also been read as height fields: Knecht's water-retention problem asks how much water a magic square of order $n$ can hold when its entries are the heights of the cells \cite{oeis_A201126}, and led to the study of water retention on random surfaces \cite{knecht2012retention}.
 
@@ -157,12 +157,12 @@ whose horizontal part $(x_{ij},y_{ij})$ is the position of the cell and whose he
 The \emph{gem} $\mathcal G(S)$ is the convex hull of these $n^2$ points (\Cref{sec:gem}).
 It is defined for every arrangement: the points are the lift of a fixed grid by a permutation of fixed heights, and the lower and upper faces of the gem are the regular subdivisions $\mathcal S(z)$ and $\mathcal S(-z)$ of the grid, glued along its boundary (\Cref{prop:subdivisions}).
 Magic squares are the motivating case, and we call the gem of a magic square a \emph{Magic Gem}: read as vectors from the origin, its points have vertical components that cancel along every row, column and both diagonals (\Cref{lem:lines}; Figures~\ref{fig:vectors} and~\ref{fig:lines}).
-\Cref{fig:vectors} shows D\"urer's square, its vectors and its gem, which has $12$ vertices and $4$ points in its interior.
+Uniting the three emblems of \emph{Melencolia~I}, the equal row and column sums place the lifted heights in mechanical balance about the origin, and the gem of D\"urer's square is itself a centrally symmetric $12$-vertex polyhedron with $f$-vector $(12,24,14)$ and $4$ interior points (\Cref{fig:vectors}).
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.88\textwidth]{fig_vectors.pdf}
-\caption{D\"urer's square. (a)~Entries $s_{ij}$ on a heat map of the heights $z_{ij}=s_{ij}-8.5$ (orange above $0$, blue below); every line sums to $34$. (b)~The $16$ vectors $\mathbf p_{ij}$ from the origin $O$, labelled by the entries, with drop lines to the floor grid. (c)~Their convex hull, the Magic Gem: $12$ tips are vertices (filled), $4$ lie in the interior (open). The colour bar is shared by (a) and (b).}
+\includegraphics[width=0.98\textwidth]{fig_vectors.pdf}
+\caption{From \emph{Melencolia~I} to the Magic Gem. (a)~Albrecht D\"urer's engraving \emph{Melencolia~I} (1514, public domain), highlighting the $4\times4$ magic square, the balance scale, and D\"urer's $12$-vertex truncated rhombohedron ($f=(12,18,8)$). (b)~D\"urer's square with entries $s_{ij}$ on a heat map of the heights $z_{ij}=s_{ij}-8.5$ (orange above $0$, blue below); every line sums to $34$. (c)~The $16$ vectors $\mathbf p_{ij}$ from the origin $O$, labelled by the entries, with drop lines to the floor grid. (d)~Their convex hull, the Magic Gem ($f=(12,24,14)$): $12$ tips are vertices (filled) and $4$ lie in the interior (open). The colour bar is shared by (b) and (c).}
 \label{fig:vectors}
 \end{figure}
 
