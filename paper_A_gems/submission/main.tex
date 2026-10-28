@@ -689,7 +689,21 @@ To understand how the line-sum conditions shape the geometry of the gem, we comp
 \label{tab:magic-vs-random}
 \scriptsize
 \setlength{\tabcolsep}{6pt}
-\input{anc/magic_vs_random.tex}
+\begin{tabular}{l rrrr}
+\toprule
+ & random & first moments $0$ & semi-magic & magic\\
+invariant & \multicolumn{3}{c}{(estimates, $10^5$ samples each)} & (exact)\\
+\midrule
+vertices $V$ & 12.055 & 12.076 & 12.124 & 12.227\\
+interior points $V^\circ$ & 2.439 & 2.508 & 2.625 & 2.718\\
+non-vertex boundary points $V^\partial$ & 1.506 & 1.415 & 1.251 & 1.055\\
+lower facets & 6.503 & 6.503 & 6.455 & 6.439\\
+volume & 75.75 & 81.72 & 82.68 & 84.05\\
+distance of the solid centroid from $\mathbf 0$ & 0.348 & 0.353 & 0.159 & 0.109\\
+fraction with $\operatorname{Iso}(\mathcal G)\ne\{\mathrm{id}\}$ & 0.000 & 0.000 & 0.101 & 0.400\\
+\bottomrule
+\end{tabular}
+
 \end{table}
 
 As \Cref{tab:magic-vs-random} shows, the combinatorial counts are almost completely insensitive to the line-sum constraints.
@@ -911,7 +925,33 @@ The inner products of $\tilde q_1$ with $\tilde q_2,\dots,\tilde q_6$ are $2m^3+
 \label{tab:slacks}
 \scriptsize
 \setlength{\tabcolsep}{4pt}
-\resizebox{\textwidth}{!}{\input{anc/siamese_slacks.tex}}
+\resizebox{\textwidth}{!}{\begin{tabular}{l l cccccccc}
+\toprule
+point & $(x,y,\zeta)$ & (1) & (2) & (3) & (4) & (5) & (6) & (7) & (8)\\
+\midrule
+$q_{1}$ & $(-m,m,2m+2)$ & $\mathbf{0}$ & $\mathbf{0}$ & $\mathbf{0}$ & $\mathbf{0}$ & $2(m-1)(m+1)$ & $2m(m-1)(m+2)$ & $2m(m-1)$ & $2(m-1)$\\
+$q_{2}$ & $(-1,m,2m+2)$ & $\mathbf{0}$ & $\mathbf{0}$ & $m-1$ & $2(m-1)(m+1)$ & $\mathbf{0}$ & $\mathbf{0}$ & $\mathbf{0}$ & $2(m-1)$\\
+$q_{3}$ & $(-m,1,2m+2)$ & $\mathbf{0}$ & $m-1$ & $\mathbf{0}$ & $(m-1)(2m+1)$ & $\mathbf{0}$ & $(m-1)(2m+1)$ & $(m-1)(2m-1)$ & $\mathbf{0}$\\
+\addlinespace[2pt]
+$q_{4}$ & $(-m,0,1)$ & $2m+1$ & $m$ & $\mathbf{0}$ & $\mathbf{0}$ & $4m^{2}+2m-1$ & $2m(2m^{2}+2m-1)$ & $2m(2m-1)$ & $2m-1$\\
+$q_{13}$ & $(-m,1-m,1)$ & $2m+1$ & $2m-1$ & $\mathbf{0}$ & $(m-1)(2m+1)$ & $2m^{2}+2m+1$ & $(m+1)(2m^{2}+2m-1)$ & $4m^{2}-3m+1$ & $1$\\
+$q_{14}$ & $(-1,m-1,1)$ & $2m+1$ & $1$ & $m-1$ & $m-1$ & $4m^{2}+2m-1$ & $(m+1)(4m^{2}-2m+1)$ & $(m+1)(2m-1)$ & $4m-3$\\
+\addlinespace[2pt]
+$q_{5}$ & $(-m,-m,0)$ & $2(m+1)$ & $2m$ & $\mathbf{0}$ & $2m^{2}$ & $2m(m+1)$ & $2m^{2}(m+2)$ & $2m(2m-1)$ & $\mathbf{0}$\\
+$q_{6}$ & $(0,-m,0)$ & $2(m+1)$ & $2m$ & $m$ & $2m(2m+1)$ & $\mathbf{0}$ & $\mathbf{0}$ & $2m(m-1)$ & $\mathbf{0}$\\
+$q_{7}$ & $(0,m,0)$ & $2(m+1)$ & $\mathbf{0}$ & $m$ & $\mathbf{0}$ & $4m(m+1)$ & $2m(2m^{2}+2m-1)$ & $2m^{2}$ & $4m$\\
+$q_{8}$ & $(m,m,0)$ & $2(m+1)$ & $\mathbf{0}$ & $2m$ & $2m(m+1)$ & $2m(m+1)$ & $2m(m-1)(m+1)$ & $\mathbf{0}$ & $4m$\\
+\addlinespace[2pt]
+$q_{9}$ & $(m,0,-1)$ & $2m+3$ & $m$ & $2m$ & $2m(2m+1)$ & $2m+1$ & $\mathbf{0}$ & $\mathbf{0}$ & $2m+1$\\
+$q_{15}$ & $(m,m-1,-1)$ & $2m+3$ & $1$ & $2m$ & $(m+1)(2m+1)$ & $2m^{2}+2m-1$ & $(m-1)(2m^{2}+2m-1)$ & $m-1$ & $4m-1$\\
+$q_{16}$ & $(1,1-m,-1)$ & $2m+3$ & $2m-1$ & $m+1$ & $4m^{2}+m+1$ & $2m+1$ & $(m-1)(2m+1)$ & $(m-1)(2m-1)$ & $3$\\
+\addlinespace[2pt]
+$q_{10}$ & $(m,-m,-2m-2)$ & $4(m+1)$ & $2m$ & $2m$ & $2m(2m+1)$ & $2(m+1)^{2}$ & $2m(m^{2}+m+1)$ & $2m^{2}$ & $2(m+1)$\\
+$q_{11}$ & $(m,-1,-2m-2)$ & $4(m+1)$ & $m+1$ & $2m$ & $(m+1)(2m+1)$ & $4m(m+1)$ & $(m+1)(4m^{2}-2m+1)$ & $(m+1)(2m-1)$ & $4m$\\
+$q_{12}$ & $(1,-m,-2m-2)$ & $4(m+1)$ & $2m$ & $m+1$ & $2(m^{2}+m+1)$ & $4m(m+1)$ & $2m(2m^{2}+2m-1)$ & $2m(2m-1)$ & $2(m+1)$\\
+\bottomrule
+\end{tabular}
+}
 \end{table}
 
 All entries of \Cref{tab:slacks} and the closure of the facet list are verified symbolically in exact polynomial arithmetic (Appendix~\ref{sec:appendix}), and as an independent cross-check the theorem agrees with certified exact hull computations for $n=3,5,\dots,41$.
@@ -1120,7 +1160,33 @@ Among the other ancillary files in \texttt{anc/}, \texttt{squares880.txt} and \t
 \label{tab:slacks-exchanged}
 \scriptsize
 \setlength{\tabcolsep}{4pt}
-\resizebox{0.9\textwidth}{!}{\input{anc/digit_exchanged_slacks.tex}}
+\resizebox{0.9\textwidth}{!}{\begin{tabular}{l l ccccccc}
+\toprule
+point & $(x,y,\zeta^\prime)$ & (1) & (2) & (3) & (4) & (5) & (6) & (7)\\
+\midrule
+$q_{1}$ & $(-m,m,2m+2)$ & $\mathbf{0}$ & $\mathbf{0}$ & $\mathbf{0}$ & $\mathbf{0}$ & $m-1$ & $2(m-1)$ & $2(2m^{2}-1)$\\
+$q_{2}$ & $(-1,m,2m+2)$ & $\mathbf{0}$ & $\mathbf{0}$ & $m-1$ & $2(m-1)(m+1)$ & $\mathbf{0}$ & $\mathbf{0}$ & $2(2m^{2}-1)$\\
+$q_{3}$ & $(-m,1,2m+2)$ & $\mathbf{0}$ & $m-1$ & $\mathbf{0}$ & $(m-1)(m+1)$ & $\mathbf{0}$ & $m-1$ & $(m+1)(2m-1)$\\
+\addlinespace[2pt]
+$q_{4}$ & $(-m,0,2m+1)$ & $1$ & $m$ & $\mathbf{0}$ & $m^{2}$ & $m-1$ & $m-1$ & $(m-1)(2m+1)$\\
+$q_{13}$ & $(-m,1-m,2m+1)$ & $1$ & $2m-1$ & $\mathbf{0}$ & $2m^{2}-1$ & $\mathbf{0}$ & $\mathbf{0}$ & $\mathbf{0}$\\
+$q_{14}$ & $(-1,m-1,2m+1)$ & $1$ & $1$ & $m-1$ & $2m^{2}-1$ & $m-1$ & $\mathbf{0}$ & $2(m-1)(2m+1)$\\
+\addlinespace[2pt]
+$q_{5}$ & $(-m,-m,0)$ & $2(m+1)$ & $2m$ & $\mathbf{0}$ & $\mathbf{0}$ & $(m+1)(2m-1)$ & $2m$ & $\mathbf{0}$\\
+$q_{6}$ & $(0,-m,0)$ & $2(m+1)$ & $2m$ & $m$ & $2m(m+1)$ & $2m^{2}-1$ & $\mathbf{0}$ & $\mathbf{0}$\\
+$q_{7}$ & $(0,m,0)$ & $2(m+1)$ & $\mathbf{0}$ & $m$ & $\mathbf{0}$ & $2m^{2}+2m-1$ & $2m$ & $2m(2m+1)$\\
+$q_{8}$ & $(m,m,0)$ & $2(m+1)$ & $\mathbf{0}$ & $2m$ & $2m(m+1)$ & $(m+1)(2m-1)$ & $\mathbf{0}$ & $2m(2m+1)$\\
+\addlinespace[2pt]
+$q_{9}$ & $(m,0,-2m-1)$ & $4m+3$ & $m$ & $2m$ & $m(m+2)$ & $4m^{2}+m-1$ & $m+1$ & $(m+1)(2m+1)$\\
+$q_{15}$ & $(m,m-1,-2m-1)$ & $4m+3$ & $1$ & $2m$ & $2m+1$ & $2(m+1)(2m-1)$ & $2m$ & $2m(2m+1)$\\
+$q_{16}$ & $(1,1-m,-2m-1)$ & $4m+3$ & $2m-1$ & $m+1$ & $2m+1$ & $4m^{2}+m-1$ & $2m$ & $2(2m+1)$\\
+\addlinespace[2pt]
+$q_{10}$ & $(m,-m,-2m-2)$ & $4(m+1)$ & $2m$ & $2m$ & $2m(m+1)$ & $4m^{2}+m-1$ & $2$ & $2(m+1)$\\
+$q_{11}$ & $(m,-1,-2m-2)$ & $4(m+1)$ & $m+1$ & $2m$ & $(m+1)^{2}$ & $2(m+1)(2m-1)$ & $m+1$ & $2m^{2}+m+1$\\
+$q_{12}$ & $(1,-m,-2m-2)$ & $4(m+1)$ & $2m$ & $m+1$ & $2(m+1)$ & $2(m+1)(2m-1)$ & $2m$ & $2(m+1)$\\
+\bottomrule
+\end{tabular}
+}
 \end{table}
 
 \section{Lattice-point counts and vertex statistics}
