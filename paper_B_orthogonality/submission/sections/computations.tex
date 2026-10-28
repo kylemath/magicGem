@@ -37,8 +37,7 @@ The converse is clear.
 
 \begin{remark}
 \label{rem:n3_enum}
-The enumeration of all $9!$ arrangements confirms \Cref{prop:n3_lowmode} and each step of its proof (\texttt{anc/n3\_lowmode\_proof.py}): exactly $760$ arrangements satisfy the degree-$1$ conditions, $4{,}224$ have both diagonal sums $15$, $72$ (the semi-magic squares) satisfy the degree-$2$ conditions, and $8$, the magic squares, satisfy the degree-$1$ and both diagonal conditions; the only integer solution of $4\kappa^2+3(a'^2+c'^2)+\xi'^2+\eta'^2=30$ with $\xi'+\eta'=\kappa$, $a'c'\ne0$, $|a'|\ne|c'|$ is $\kappa=\xi'=\eta'=0$, $a'^2+c'^2=10$.
-The four conditions are weaker than the magic conditions for real-valued $z$; the proof uses that the entries are distinct integers with $\sum_cz_c^2=60$.
+Although the four conditions $\Efour(S)=0$ are strictly weaker than the $2n$ magic conditions for real arrays $z$, the proof above uses that the entries are distinct integers satisfying $\sum_cz_c^2=60$. Among all $9!=362{,}880$ arrangements of order $3$, exactly $760$ satisfy the degree-$1$ conditions, $4{,}224$ have both diagonal sums equal to $15$, $72$ (the semi-magic squares) satisfy the degree-$2$ conditions, and their intersection with the diagonal condition consists solely of the $8$ magic squares.
 \end{remark}
 
 For $n=4$ the equivalence fails (\Cref{rem:four_term_insufficient}).
@@ -56,7 +55,7 @@ The class $\{\langle x,z\rangle=\langle y,z\rangle=0\}$ has $6{,}697{,}177{,}424
 \begin{proof}[Computation]
 A meet-in-the-middle enumeration over $(U_1,\dots,U_4)$, splitting the grid into the top two and bottom two rows (Appendix~\ref{sec:appendix}); the matching pairs were expanded to obtain the breakdown of \Cref{tab:L4}.
 The same program reproduces the brute-force counts for $n=3$ ($8$, $760$, $4224$, and $72$ semi-magic squares) and, with the $2n$ line sums in place of $U_1,U_2$, the $7{,}040$ magic and $549{,}504$ semi-magic squares of order $4$.
-Two further programs written independently of \texttt{anc/lowmode\_enum.c} (\texttt{anc/lowmode\_recount.py}, \texttt{anc/table4\_recount.py}) together reproduce $|L_4|$, the first-moment count $6{,}697{,}177{,}424$ and every entry of \Cref{tab:L4}.
+Two further programs written independently (Appendix~\ref{sec:appendix}) together reproduce $|L_4|$, the first-moment count $6{,}697{,}177{,}424$ and every entry of \Cref{tab:L4}.
 The diagonal-only count also follows from a direct count: there are $2150$ ordered pairs of disjoint $4$-subsets of $\{1,\dots,16\}$ with sum $34$, and $2150\cdot(4!)^2\cdot8!=49{,}932{,}288{,}000$.
 \end{proof}
 
@@ -111,5 +110,4 @@ The smallest increase $g_{\min}(S)=\min_{a\ne b}d^2\lambda(a,b)$ satisfies $2\le
 \end{remark}
 
 Call $S$ a local minimum with respect to transpositions if no transposition lowers the energy.
-For $n=3$ the local minima of $\Efull$ are the eight magic squares and eight non-magic arrangements with $N^2\Efull=2$, all strict; $\Efour$ has $344$, of which $336$ are non-magic, and only $72$ of them ($64$ non-magic) are strict.
-Steepest descent on $\Efull$ (at each step perform the transposition with the most negative change of $N^2\Efull$, ties broken by the first cell pair in row-major order; stop when no transposition lowers it) reaches a magic square in $19.5\%$ ($\pm0.1\%$), $1.2\%$ and $0.8\%$ of $2\times10^5$ runs from uniformly random starts for $n=4,5,6$ (\texttt{anc/algorithms.py}).
+For $n=3$ the local minima of $\Efull$ are the eight magic squares and eight non-magic arrangements with $N^2\Efull=2$, all strict; $\Efour$ has $344$ local minima, of which $336$ are non-magic, and only $72$ of them ($64$ non-magic) are strict.

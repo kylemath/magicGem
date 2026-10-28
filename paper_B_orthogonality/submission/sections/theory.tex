@@ -109,9 +109,8 @@ The question is therefore how large $k$ can be for vectors that are column-devia
 
 Part (a) is Schur's bound on real zeros applied to $P_\gamma$ (\Cref{lem:schur}) and does not use that $\gamma$ comes from an arrangement beyond the bound $\|\gamma\|_1\le n^4/4$ of \Cref{lem:col_feasible}; the constant $2\sqrt2$ is about $2.83$.
 It is below $n-1$ from $n=24$ on, gives $k^*(n)\le n-3$ from $n=27$ on and improves on (c) from $n=30$ on; at $n=40$ and $n=100$ it gives $32$ and $58$, against the exact value $26$ and the computed upper bound $45$ (\Cref{fig:kstar}).
-To our knowledge, parts (b)--(d) are new.
-In part (c) the lower bounds rest on witness arrangements, checkable in exact arithmetic (printed in Appendix~\ref{sec:app_witnesses} for $n\le13$, in \texttt{anc/kstar\_witnesses.json} for $14\le n\le17$), and the upper bounds are proved by hand.
-Part (d) is computer-assisted: its upper bounds come from an exact lattice enumeration backed by a certificate, its lower bounds from witness arrangements found by computer search and checked in exact arithmetic (\Cref{sec:kstar_exact}).
+In part (c) the lower bounds rest on witness arrangements checked in exact arithmetic (printed in Appendix~\ref{sec:app_witnesses} for $n\le13$ and documented in Appendix~\ref{sec:appendix} for $14\le n\le17$), while the upper bounds are proved by hand.
+Part (d) is computer-assisted: its upper bounds come from an exact lattice enumeration backed by an arithmetic certificate, and its lower bounds from witness arrangements found by computer search and checked in exact arithmetic (\Cref{sec:kstar_exact}).
 
 \subsection{Proof of the upper bound}
 \label{sec:kstar_upper}
@@ -164,11 +163,20 @@ The pigeonhole principle alone, as in the proof of (b) below, gives the constant
 Between $\sqrt{24n}$ and \Cref{lem:schur} lies the gap, by a factor of order $\log(D/K)$ in the height, between the known lower and upper bounds for the least height of an integer polynomial of degree less than $D$ with a zero of order $K$ at $1$ \cite{mignotte1982,bombieri1987low,amoroso1995}; for coefficients in $\{-1,0,1\}$ the analogous gap is between the orders $\sqrt{n/\log n}$ and $\sqrt n$, and closing it ``looks quite difficult'' \cite[Sect.~2]{BEK1999}.
 Arguments that use integrality only through the size of one coefficient cannot close it: rescaled, \cite[Thm.~2.3]{BEK1999} gives real polynomials of degree $n$ with constant coefficient $1$ and all coefficients at most $H\ge1$ in absolute value that have a zero of order at least $\min\{\frac16\sqrt{n(1+\log H)}-1,n\}$ at $1$; see \cite[Thms.~2.1 and 2.2]{erdelyi2016} for explicit constants in the $\ell^p$ normalisations.
 
-\subsection{Proof of the lower bound}
+\subsection{Proof of the lower bound: complementary-row swaps and a pigeonhole collision}
 \label{sec:kstar_lower}
 
-A lower bound $k^*(n)\ge K$ requires a witness, i.e.\ an arrangement that satisfies the degree-$(K-1)$ conditions without being semi-magic.
-We keep all row sums equal to $M(n)$ and control the column deviations by swaps.
+To prove a lower bound $k^*(n)\ge K$, we must construct a witness arrangement whose row sums all equal $M(n)$ (so $\rho=0$), whose column-deviation vector $\gamma$ is nonzero, and whose polynomial $P_\gamma(t)=\sum_j\gamma_jt^j$ is divisible by $(t-1)^K$. The difficulty is that $\gamma$ cannot be chosen freely in the lattice $\Lambda_{n,K-1}$: it must arise from an actual permutation of $\{1,\dots,n^2\}$ with balanced rows.
+
+Our strategy is to start from a semi-magic square $S$ and perturb it by horizontal transpositions—swapping two entries within the same row—which automatically preserve every row sum. Specifically, we group the columns into $Q\approx n/2$ adjacent pairs $(j_q, j_q+1)$ with $j_q=j_0+2q$. Any horizontal swap between columns $j_q$ and $j_q+1$ changes the column-deviation vector by a multiple of $e_{j_q}-e_{j_q+1}$, which contributes a dipole term $\zeta_q t^{j_q}(1-t)$ to $P_\gamma(t)$. Summing over all $q<Q$, the resulting polynomial factors as
+\[
+P_\gamma(t)=t^{j_0}(1-t)P_\zeta(t^2),\qquad\text{where}\quad P_\zeta(u)=\sum_{q<Q}\zeta_q u^q.
+\]
+Thus, if we can choose the net swap amplitudes $\zeta_q$ so that the first $K-1$ binomial moments $B_s(\zeta)=\sum_q\zeta_q\binom qs$ ($0\le s\le K-2$) all vanish, then $(u-1)^{K-1}\mid P_\zeta(u)$, which implies $(t^2-1)^{K-1}\mid P_\zeta(t^2)$ and hence $(t-1)^K\mid P_\gamma(t)$.
+
+How do we find a nonzero vector $\zeta$ of achievable swap amplitudes with $K-1$ vanishing moments? By the pigeonhole principle (in the spirit of Siegel's lemma): in each column pair $q$, we select $r_q$ rows and consider all subset sums $g_q \in F_q$ of their swap differences $d_{q,i}=s_{i,j_q+1}-s_{i,j_q}$. If the box $\prod_{q<Q} F_q$ has more elements than the number of possible moment tuples $(B_0(g),\dots,B_{K-2}(g))$, two distinct subset-sum vectors $g\ne g'$ must share the exact same moments, so their difference $\zeta = g - g'$ has $B_s(\zeta)=0$ for all $s\le K-2$.
+
+There is just one catch: $\zeta_q = g_q - g'_q$ is a \emph{difference} of two subset sums, meaning we must apply $+d_{q,i}$ for $i\in I_q\setminus I'_q$ and $-d_{q,i}$ for $i\in I'_q\setminus I_q$ simultaneously in disjoint rows. This is why we build our starting semi-magic squares out of \emph{complementary pairs of rows}: if row $i$ and row $i'$ sum to $N+1$ in every column, then the entry difference in row $i'$ is the exact negative of the entry difference in row $i$, giving us both $+d_{q,i}$ and $-d_{q,i}$ on disjoint cells.
 
 \begin{definition}
 Rows $i\ne i'$ of an arrangement are \emph{complementary on} a set $J$ of columns if $s_{ij}+s_{i'j}=N+1$ for all $j\in J$.
@@ -312,8 +320,9 @@ By Parseval, $\|\gamma\|_2^2=a^2\sum_j\bigl(\binom{n-2}j-\binom{n-2}{j-1}\bigr)^
 At $n=18$ this factor is $70{,}715{,}340>50{,}860{,}872=18^5(18^2-1)/12$.
 From $n$ to $n+1$ the left side grows by the factor $2(2n-3)/n\ge11/3$ and the right side by $(n+1)^4(n+2)/(n^4(n-1))<3/2$.
 So for $n\ge18$ the bound $\|\gamma\|_2^2\le n^5(n^2-1)/12$ of \Cref{lem:col_feasible} forces $a=0$, and $k^*(n)\le n-3$.
+(At the next step $\Lambda_{n,n-4}$ has rank $3$, with $P_\gamma=(t-1)^{n-3}(a+bt+ct^2)$, where eliminating the three parameters $a,b,c$ requires more than evaluating at $t=-1$ and Parseval's identity, so from $n=18$ onward we turn to exact lattice enumeration.)
 
-\emph{Lower bounds for $14\le n\le17$.}  For each of these $n$ we found an arrangement with all row sums $M(n)$ whose column deviations satisfy $(t-1)^{n-2}\mid P_\gamma$ and $\gamma\ne0$ (\texttt{anc/kstar\_witnesses.json}; verified in exact integer arithmetic, $\max_j|\gamma_j|$ in \Cref{tab:kstar}).
+\emph{Lower bounds for $14\le n\le17$.}  For each of these $n$ we found an arrangement with all row sums $M(n)$ whose column deviations satisfy $(t-1)^{n-2}\mid P_\gamma$ and $\gamma\ne0$ (verified in exact integer arithmetic, Appendix~\ref{sec:appendix}; $\max_j|\gamma_j|$ is listed in \Cref{tab:kstar}).
 \end{proof}
 
 \begin{proof}[Proof of \Cref{thm:perm_threshold}(d)]
@@ -322,7 +331,7 @@ By \Cref{lem:col_feasible} only vectors with $\|\gamma\|_2^2\le n^5(n^2-1)/12$ n
 At $k=k^*(n)$ the ball contains no nonzero vector for $16$ of the $23$ values of $n$, since the Gram--Schmidt norms of the reduced basis already exceed the radius.
 For $n=20,22,24,26,34,36,38$ it contains $2,2,6,6,6,2,2$ vectors.
 Each violates \eqref{eq:col_feasible}, in every case but one already with $p=1$; the exception is $n=26$, where two of the six vectors need $p=2$.
-The certificate \texttt{anc/kstar\_certificates.json} lists the reduced bases and, for each vector, a violated instance $(p,J)$.
+The ancillary certificate (Appendix~\ref{sec:appendix}) lists the reduced bases and, for each vector, a violated instance $(p,J)$.
 
 \emph{Lower bounds.}  For each $18\le n\le40$ we found a witness for $k^*(n)\ge K$, with $K$ the value of \Cref{tab:kstar}: an arrangement with all row sums $M(n)$ whose column deviations satisfy $(t-1)^{K}\mid P_\gamma$ and $\gamma\ne0$; each was verified in exact integer arithmetic.
 \end{proof}
@@ -340,7 +349,7 @@ $k^{*}(n)$ & 21&21&22&22&23&23&23&24&24&25&25&26&26&\\
 $\max_j|\gamma_j|$ & 8892&6405&11737&9330&14881&11799&9177&18147&14766&24150&16515&26520&22233&\\
 $n^2(n-1)/2$ & 10584&11774&13050&14415&15872&17424&19074&20825&22680&24642&26714&28899&31200&
 \end{tabular}
-\caption{Exact values of the permutation threshold for $14\le n\le40$ (\Cref{thm:perm_threshold}(c),(d)), the largest column deviation $\max_j|\gamma_j|$ of the witness arrangement, and the bound $n^2(n-1)/2$ of \Cref{lem:col_feasible}. The upper bounds for $18\le n\le40$ were computed by two independent exact lattice enumerations (\texttt{anc/kstar\_verify.py}, \texttt{anc/kstar\_enum\_independent.py}) and, for $n\le33$, also by integer programming (\texttt{anc/kstar\_crosscheck/}); a certificate is in \texttt{anc/kstar\_certificates.json}.}
+\caption{Exact values of the permutation threshold for $14\le n\le40$ (\Cref{thm:perm_threshold}(c),(d)), the largest column deviation $\max_j|\gamma_j|$ of the witness arrangement, and the bound $n^2(n-1)/2$ of \Cref{lem:col_feasible}. The upper bounds for $18\le n\le40$ were computed by two independent exact lattice enumerations and, for $n\le33$, also by integer programming (Appendix~\ref{sec:appendix}).}
 \label{tab:kstar}
 \end{table}
 
@@ -364,9 +373,9 @@ $k^*(n)=U(n)$ for every $n\ge3$.
 \end{conjecture}
 
 We tested \Cref{conj:lattice} for $41\le n\le46$, where both implementations give $U(n)=26,27,27,27,28,28$ (not certified).
-For each of these $n$ the same search, run on the vectors of $\Lambda_{n,U(n)-1}$ in the ball $\|\gamma\|_2^2\le n^5(n^2-1)/12$ that satisfy \eqref{eq:col_feasible}, found a witness (\texttt{anc/kstar\_beyond40.json}, verified in exact arithmetic).
+For each of these $n$ the same search, run on the vectors of $\Lambda_{n,U(n)-1}$ in the ball $\|\gamma\|_2^2\le n^5(n^2-1)/12$ that satisfy \eqref{eq:col_feasible}, found a witness (verified in exact arithmetic; Appendix~\ref{sec:appendix}).
 So $k^*(n)\ge U(n)$, i.e.\ $k^*(n)\ge26,27,27,27,28,28$, holds unconditionally for $41\le n\le46$; only the upper bounds $k^*(n)\le U(n)$ are uncertified, and the conjecture holds for these $n$ if they are correct.
 The hardest case was $n=42$, where the ball contains a single such vector up to sign, with slack $7$ in one instance of \eqref{eq:col_feasible} with $p=3$; it and one of the $50$ vectors for $n=46$ were realised only by a longer two-stage annealing.
 Beyond $n=40$ the values $U(n)$ are computer-assisted upper bounds for $k^*(n)$ (two independent implementations agree for every $n\le100$, but the values carry no certificate); for instance $k^*(50)\le30$, $k^*(80)\le39$ and $k^*(100)\le45$.
 In \Cref{fig:kstar}(b), $k^*(n)/\sqrt n$ (and $U(n)/\sqrt n$ beyond $n=40$) grows from $3.2$ at $n=14$ to $4.5$ at $n=100$, while the same values divided by $\sqrt{n\log n}$ stay between $2.06$ and $2.18$ for $20\le n\le100$.
-These data do not discriminate between the orders $\sqrt n$ and $\sqrt{n\log n}$: by \Cref{sec:kstar_upper}, $U(n)\ge(\sqrt{24}-o(1))\sqrt n$, so $U(n)/\sqrt n$ eventually exceeds any constant below $\sqrt{24}\approx4.90$, and a rise of this kind is expected also if $U(n)$ is of order $\sqrt n$.
+These data do not discriminate between the orders $\sqrt n$ and $\sqrt{n\log n}$: by \Cref{sec:kstar_upper}, the unconditional pigeonhole bound already gives $U(n)\ge(\sqrt{12}-o(1))\sqrt n\approx3.46\sqrt n$ (and Amoroso's bound gives $\sqrt{24}\approx4.90$), so a steady rise of $U(n)/\sqrt n$ across $n\le100$ is expected even if $U(n)$ is of order $\sqrt n$.

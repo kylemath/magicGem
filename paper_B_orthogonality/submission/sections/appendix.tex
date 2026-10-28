@@ -25,7 +25,7 @@ For each of the $\binom{16}{8}=12{,}870$ value sets $V$ and each of the $8!$ bij
 This touches about $1.04\times10^9$ partial vectors instead of $16!\approx2.1\times10^{13}$ arrangements (\texttt{anc/lowmode\_enum.c}).
 The NumPy programs \texttt{anc/lowmode\_recount.py} and \texttt{anc/table4\_recount.py} use the same split with a different packing of the keys and tag each half by its number of rows (and the sum of a chosen column) equal to $34$; together with a direct enumeration of the members of $L_4$ whose four rows all sum to $34$, they recount $|L_4|$, the first-moment class and every entry of \Cref{tab:L4}.
 
-\texttt{anc/verify\_numbers.py} recomputes the remaining numbers in exact arithmetic.
+\texttt{anc/verify\_numbers.py}, \texttt{anc/n3\_lowmode\_proof.py} and \texttt{anc/algorithms.py} recompute the remaining small-order counts and local-minimum statistics in exact arithmetic.
 
 \section{Squares with many complementary rows}
 \label{sec:app_twin}
@@ -69,16 +69,12 @@ For distinct cells, $\E[z_a^4]=p_4/N$, and with $(N)_k=N(N-1)\cdots(N-k+1)$,
 by M\"obius inversion of the power sums over set partitions.
 Write $m_\nu$ for $\E[z_az_bz_cz_d]$ when the equality pattern of $(a,b,c,d)$ is exactly the partition $\nu$ of the positions $\{1,2,3,4\}$, and $m_\lambda=m_\nu$ for any $\nu$ of block type $\lambda$ (e.g.\ $m_{211}$ for $12|3|4$); the displayed moments are $m_4$, $m_{31}$, $m_{22}$, $m_{211}$ and $m_{1111}$.
 
-\paragraph{Proof of \Cref{prop:var_identity}.}
-The mean: $\E[z^{\mathsf T}Az]=\frac{p_2}N\tr A-\frac{p_2}{N(N-1)}\sum_{a\ne b}A_{ab}$ and $\sum_{a\ne b}A_{ab}=-\tr A$.
-For the second moment let $S^{=}(\nu)$ be the sum of $A_{ab}A_{cd}$ over the tuples with pattern exactly $\nu$ and $S^{\ge}(\nu')=\sum_{\nu\ge\nu'}S^{=}(\nu)$ the sum over tuples satisfying at least the equalities of $\nu'$; $S^{\ge}(\nu')$ is an unrestricted sum.
-M\"obius inversion gives $\E[(z^{\mathsf T}Az)^2]=\sum_\nu m_\nu S^{=}(\nu)=\sum_{\nu'}\theta(\nu')S^{\ge}(\nu')$ with $\theta(\nu')=\sum_{\nu\le\nu'}\mu(\nu,\nu')m_\nu$.
-If $\nu'$ has a singleton block, the corresponding index occurs in a single factor of $A_{ab}A_{cd}$ and summing over it gives a row sum, so $S^{\ge}(\nu')=0$.
-The remaining partitions are $12|34$, $13|24$, $14|23$ and $1234$, with $S^{\ge}$ equal to $(\tr A)^2$, $\tr A^2$, $\tr A^2$, $\sum_aA_{aa}^2$, and
+\paragraph{Evaluation of the M\"obius coefficients in \Cref{prop:var_identity}.}
+From the M\"obius inversion on $\Pi_4$ in the proof of \Cref{prop:var_identity}, the coefficients of the four surviving singleton-free partitions $12|34$, $13|24$, $14|23$ and $1234$ are
 \[
 \begin{aligned}\theta(12|34)=\theta(13|24)=\theta(14|23)&=m_{22}-2m_{211}+m_{1111},\\ \theta(1234)&=m_4-4m_{31}-3m_{22}+12m_{211}-6m_{1111}.\end{aligned}
 \]
-For the centred values $1,\dots,N$, $p_2=N(N^2-1)/12$ and $p_4=N(N^2-1)(3N^2-7)/240$, and these coefficients simplify to $N(N^2-1)(5N+6)/720$ and $-N^2(N+1)^2/120$; subtracting $\bigl(\frac{N(N+1)}{12}\tr A\bigr)^2$ gives \eqref{eq:var_identity}.
+For the centred values $1,\dots,N$, $p_2=N(N^2-1)/12$ and $p_4=N(N^2-1)(3N^2-7)/240$, so these coefficients simplify to $N(N^2-1)(5N+6)/720$ and $-N^2(N+1)^2/120$; subtracting $\bigl(\frac{N(N+1)}{12}\tr A\bigr)^2$ gives \eqref{eq:var_identity}.
 
 \paragraph{The invariants.}
 With $\Gamma_{\ell\ell'}=\langle\tilde\varphi_\ell,\tilde\varphi_{\ell'}\rangle$ and $h_c=A_{cc}=\sum_\ell a_{\ell,c}^2$,

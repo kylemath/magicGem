@@ -41,13 +41,13 @@ The vanishing of the first moments is strictly weaker than the row and column co
 \paragraph{Second moments.}
 The second moments of the point set are as rigid as the first: when the first moments of the heights vanish they do not depend on the arrangement at all.
 
-\begin{lemma}[Covariance]
+\begin{lemma}[Second-moment matrix]
 \label{lem:cov}
-The covariance matrix $\Sigma=\frac1N\sum_{i,j}\mathbf p_{ij}\mathbf p_{ij}^{\top}$ of the points of an arrangement $S$ has $\Sigma_{xx}=\Sigma_{yy}=a_n$, $\Sigma_{zz}=b_n$, $\Sigma_{xy}=0$, $N\Sigma_{xz}=\sum_jx_jC_j$ and $N\Sigma_{yz}=\sum_iy_iR_i$. If the first moments $\sum z_{ij}x_{ij}$ and $\sum z_{ij}y_{ij}$ vanish, for instance if $S$ is semi-magic, then $\Sigma=\operatorname{diag}(a_n,a_n,b_n)$, and $a_n<b_n$ for $n\ge2$.
+The second-moment matrix (or empirical covariance matrix) $\Sigma=\frac1N\sum_{i,j}\mathbf p_{ij}\mathbf p_{ij}^{\top}$ of the lifted points of an arrangement $S$ has $\Sigma_{xx}=\Sigma_{yy}=a_n$, $\Sigma_{zz}=b_n$, $\Sigma_{xy}=0$, $N\Sigma_{xz}=\sum_jx_jC_j$ and $N\Sigma_{yz}=\sum_iy_iR_i$. If the first moments $\sum z_{ij}x_{ij}$ and $\sum z_{ij}y_{ij}$ vanish, for instance if $S$ is semi-magic, then $\Sigma=\operatorname{diag}(a_n,a_n,b_n)$, and $a_n<b_n$ for $n\ge2$.
 \end{lemma}
 
 \begin{proof}
-\Cref{lem:lines}(1)--(2) and \eqref{eq:moments} with $\varphi(t)=t$.
+The diagonal entries $\Sigma_{xx},\Sigma_{yy},\Sigma_{zz}$ and $\Sigma_{xy}=0$ follow immediately from \Cref{lem:lines}(1)--(2), while the off-diagonal moments $N\Sigma_{xz}$ and $N\Sigma_{yz}$ are given by \eqref{eq:moments} with $\varphi(t)=t$.
 \end{proof}
 
 Since $b_n=(n^2+1)a_n$, placing equal point masses at the $N$ points $\mathbf p_{ij}$ of an arrangement with vanishing first moments gives an axisymmetric inertia tensor $I=\operatorname{diag}(I_\perp,I_\perp,I_{zz})$ about $\mathbf 0$ with $I_\perp/I_{zz}=(a_n+b_n)/(2a_n)=(n^2+2)/2$ ($9$ for order four), so in torque-free motion the point-weighted gem precesses like a symmetric rotor even when $\mathcal G(S)$ has no geometric symmetry.

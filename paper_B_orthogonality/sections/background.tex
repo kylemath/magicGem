@@ -16,7 +16,7 @@ x_{ij}=x_j=j-\frac{n-1}{2},\qquad y_{ij}=y_i=\frac{n-1}{2}-i,\qquad z_{ij}=s_{ij
 We call $z=z(S)$ the \emph{centred entries} of $S$, and regard $x$, $y$ and $z$ as functions on the cells.
 \end{definition}
 
-The function $z$ is the vertical coordinate of the points $(x_c,y_c,z_c)$ studied in \cite{mathewson_gems}; we do not call it a height function, a term that in combinatorics refers to tilings \cite{thurston1990conway}.
+The function $z$ is the vertical coordinate of the lifted points $(x_c,y_c,z_c)$ studied in the companion paper \cite{mathewson_gems}.
 A \emph{line} is one of the $n$ rows $R_i$, the $n$ columns $C_j$, the main diagonal $D_{\mathrm m}=\{i=j\}$ or the anti-diagonal $D_{\mathrm a}=\{i+j=n-1\}$, and $\mathbf 1_L$ denotes the indicator of a line $L$.
 Each line has $n$ cells, and since $M(n)=n\cdot\frac{N+1}2$ the \emph{deviation} of a line is
 \begin{equation}
@@ -162,8 +162,6 @@ $P_\gamma(t)$ & $\sum_j\gamma_jt^j$ (\Cref{sec:theory_hierarchy})\\
 $\Lambda_{n,k}$ & $\{\gamma\in\Z^n:(t-1)^{k+1}\mid P_\gamma\}$ (\Cref{sec:kstar})\\
 $k^*(n)$ & permutation threshold (\Cref{def:kstar})\\
 $U(n)$ & least $k$ such that no nonzero vector of $\Lambda_{n,k}$ satisfies \eqref{eq:col_feasible} (\Cref{sec:kstar_exact})\\
-$r_q$, $d_{q,i}$, $F_q$ & number of pairs of complementary rows used for the $q$-th column pair; their swap differences; the set of subset sums of the $d_{q,i}$ (\Cref{prop:box})\\
-$B_s(g)$ & binomial moment $\sum_q\binom qsg_q$ of a vector $g$ (proof of \Cref{prop:box})\\
 \midrule
 $T_\varphi$, $\tau_\ell$ & $\langle\varphi,z\rangle$ for a random arrangement; standard deviation of $T_\ell=T_{\varphi_\ell}$ (\Cref{sec:random_energy})\\
 $\Gamma$, $C_n$ & Gram matrix of the centred test functions of an energy; correlation matrix of the four statistics of $\Efour$ (\Cref{prop:random_energy_moments}, \Cref{cor:random_energy_clt})\\

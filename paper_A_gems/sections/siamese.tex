@@ -71,7 +71,6 @@ For the second, the anti-diagonal has $\sigma=-1$, and the main diagonal $\sigma
 For $n=5,7,11$ the formula gives $184$, $3159$ and $89{,}125$ classes.
 For $n=9$ the units $r\equiv1\pmod3$ have $f(r)=1,3,3$ ($r=1,4,7$), those with $r\equiv2$ have $f=3,3,1$ ($r=2,5,8$), and $r-r'$ is a unit if and only if $r\not\equiv r'\pmod 3$; so there are $6^2\cdot2\cdot7^2=3528$ linear magic squares and $441$ classes.
 This explains the small number at $n=9$: when $3\mid n$ every linear magic square has, for each digit, a diagonal along which the digit is not a permutation of $\Z_n$, and the offsets are restricted accordingly.
-The script \texttt{anc/linear\_magic\_count.py} confirms the criterion and the count against the actual line sums of all $n^6$ parameter choices for $n=3,5,\dots,25$.
 
 \subsection{The Siamese theorem}
 
@@ -132,26 +131,28 @@ The entries $1$ and $N$ are among the side extremes, and for $m\ge2$ the eight s
 From now on let $m\ge2$. It remains to show that no point other than the twelve forced vertices is a vertex.
 
 \emph{Step 3: shear to five levels.}
-With $x=j-m$, $y=m-i$ and $\langle t\rangle=t-n\lfloor t/n\rfloor$ the closed form gives
+Why should the convex hull of $n^2$ points have only $12$ vertices for arbitrarily large $n$? The geometric key is that in the closed form $s(i,j)=n\langle i+j-m\rangle+\langle i+2j-2m\rangle+1$, the modular remainders differ from the linear functions $\ell_1=x-y+m$ and $\ell_2=2x-y+m$ (where $x=j-m$ and $y=m-i$) only by multiples of $n$ that record how many times each coordinate wraps around the torus. Since subtracting an affine function of $(x,y)$ and rescaling vertically is an affine shear that preserves the face lattice and vertex cells of the hull (\Cref{prop:subdivisions}(3)), we can subtract the global linear ramp $\lambda(x,y)=n\ell_1+\ell_2+1-\bar s$ from $z$. This collapses all $n^2$ lifted points onto just five flat horizontal terraces!
+
+Specifically, with $\langle t\rangle=t-n\lfloor t/n\rfloor$ the closed form gives
 \begin{gather*}
 z=\lambda(x,y)+n\,\zeta(x,y),\qquad \lambda(x,y)=n(x-y+m)+(2x-y+m)+1-\bar s,\\
 \zeta(x,y)=-n\Big\lfloor\tfrac{\ell_1}{n}\Big\rfloor-\Big\lfloor\tfrac{\ell_2}{n}\Big\rfloor,\qquad \ell_1=x-y+m,\quad \ell_2=2x-y+m=\ell_1+x .
 \end{gather*}
-The map $\Phi(x,y,z)=(x,y,(z-\lambda(x,y))/n)$ is a shear (an affine bijection that preserves vertical lines), so $\Phi(\mathcal G(S))=\operatorname{conv}\{(x,y,\zeta(x,y))\}$ has the same face lattice and vertex cells as $\mathcal G(S)$; equivalently, $\mathcal S(\pm z)=\mathcal S(\pm\zeta)$.
-After the shear the height $\zeta$ takes five values, and its level sets are the lattice points of five polygons $\Lambda_k$ (the \emph{level polygons}).
-Indeed, for $|x|,|y|\le m$ we have $-m\le\ell_1\le3m$ and $-2m\le\ell_2\le4m$, so both floors lie in $\{-1,0,1\}$.
+The shear $\Phi(x,y,z)=(x,y,(z-\lambda(x,y))/n)$ maps $\mathcal G(S)$ onto $\Phi(\mathcal G(S))=\operatorname{conv}\{(x,y,\zeta(x,y))\}$, which has the same face lattice and vertex cells as $\mathcal G(S)$ (equivalently, $\mathcal S(\pm z)=\mathcal S(\pm\zeta)$).
+For $|x|,|y|\le m$ we have $-m\le\ell_1\le3m$ and $-2m\le\ell_2\le4m$, so both wrap-around quotients $\lfloor\ell_1/n\rfloor$ and $\lfloor\ell_2/n\rfloor$ lie in $\{-1,0,1\}$.
 If $\ell_1<0$, then $x\le y-m-1\le-1$, so $\ell_2<0$ and $\zeta=n+1$.
 If $\ell_1\ge n$, then $x\ge y+m+1\ge1$, so $\ell_2\ge n$ and $\zeta=-(n+1)$.
 If $0\le\ell_1\le2m$, then $\lfloor\ell_2/n\rfloor=-1,0,1$ according as $y\ge2x+m+1$, $|y-2x|\le m$, or $y\le2x-m-1$.
 Conversely, if $|y-2x|\le m$, then $\ell_1<0$ is impossible, since it would force $\ell_2<0$, i.e.\ $y\ge2x+m+1$; likewise $\ell_1\ge n$ would force $y\le2x-m-1$.
-So, in the box $|x|,|y|\le m$ (\Cref{fig:siamese-layers}a):
+Thus, across the grid $|x|,|y|\le m$, the sheared height $\zeta$ takes only five values, partitioning the grid into five polygonal terraces (\emph{level polygons}; \Cref{fig:siamese-layers}a):
 $\zeta=n+1$ on $\Lambda_{+2}=\{y\ge x+m+1\}=\operatorname{conv}\{(-m,m),(-1,m),(-m,1)\}$;
 $\zeta=1$ on $\Lambda_{+1}=\{2x+m+1\le y\le x+m\}=\operatorname{conv}\{(-m,0),(-m,1-m),(-1,m-1)\}$;
 $\zeta=0$ on $\Lambda_{0}=\{|y-2x|\le m\}=\operatorname{conv}\{(-m,-m),(0,m),(m,m),(0,-m)\}$;
 and $\zeta=-1$, $-(n+1)$ on $\Lambda_{-1}=-\Lambda_{+1}$, $\Lambda_{-2}=-\Lambda_{+2}$.
 
 \emph{Step 4: the hull.}
-Let $q_1,\dots,q_{12}$ be the images under $\Phi$ of the twelve forced vertices and $q_{13},\dots,q_{16}$ the remaining four vertices of the level polygons; their coordinates are in \Cref{tab:slacks}.
+Because every sheared grid point on a level polygon $\Lambda_k$ is a convex combination of the corners of $\Lambda_k$ at the same height $\zeta$, only the $3+3+4+3+3=16$ corners of the five level polygons can be extreme points of $\Phi(\mathcal G(S))$.
+Let $q_1,\dots,q_{12}$ be the images under $\Phi$ of the twelve forced vertices and $q_{13},\dots,q_{16}$ the remaining four corners of the level polygons; their coordinates are listed in \Cref{tab:slacks}.
 Let $H$ be the polyhedron defined by the eight inequalities below and their images $(1')$--$(8')$ under $-\mathrm{id}$.
 Inequality $(k)$ is the plane through the first three points of its list below (its normal is the cross product of two edge vectors):
 \begin{align*}
@@ -201,8 +202,7 @@ The inner products of $\tilde q_1$ with $\tilde q_2,\dots,\tilde q_6$ are $2m^3+
 \resizebox{\textwidth}{!}{\input{anc/siamese_slacks.tex}}
 \end{table}
 
-All entries of \Cref{tab:slacks} and the closure of the facet list are verified by \texttt{anc/siamese\_slacks.py} in exact polynomial arithmetic.
-As a cross-check, not part of the proof, the theorem agrees with certified exact hull computations for $n=3,5,\dots,41$ (\texttt{anc/verify\_structure.py}).
+All entries of \Cref{tab:slacks} and the closure of the facet list are verified symbolically in exact polynomial arithmetic (Appendix~\ref{sec:appendix}), and as an independent cross-check the theorem agrees with certified exact hull computations for $n=3,5,\dots,41$.
 For $m=1$ several entries vanish and the four triangles degenerate.
 
 \begin{figure}[htbp]
@@ -257,13 +257,12 @@ The quadrilaterals are convex in the listed order: $(2)$ is the trapezoid of Ste
 These fourteen polygons have $24$ edges, each shared by exactly two of them, so by \Cref{lem:closing}, with $W$ the twelve points $\pm q_1,\pm q_2,\pm q_3,\pm q_5,\pm q_6,\pm q_{13}$ ($q_7=-q_6$, $q_8=-q_5$), they are the facets of $\Phi'(\mathcal G(S'))=H'$.
 Mapping back by $(i,j)=(m-y,x+m)$ gives the listed cells; the forced ones are the corners, $(0,m)$ and $(2m,m)$ (the entries $1$ and $N$), $(1,2m)$ (the smallest entry of the right column) and $(2m-1,0)$ (the largest of the left column).
 For the isometries argue as in Step~5: the squared norms of the six antipodal pairs of vertices in the original coordinates are $2m^2+1$, $4m^4-4m^3-5m^2+4m+4$, $4m^4-3m^2+2$, $4m^4+4m^3-m^2-4m+2$, $m^2(4m^2+4m+3)$, $m^2(4m^2+8m+5)$ (over $(m-1,0)$, $(0,0)$, $(0,m-1)$, $(2m-1,0)$, $(2m,0)$, $(2m,m)$), pairwise distinct for $m\ge2$, and the inner products of the vertex over $(0,0)$ with the other five are non-zero for $m\ge2$.
-All of this is checked in exact polynomial arithmetic by \texttt{anc/digit\_exchanged\_slacks.py}, which applies the same certificate to the Siamese square as a cross-check.
 \end{proof}
 
 \begin{remark}[Vertex counts of linear squares]
 \label{rem:linear}
 The gems of other linear squares do not share the twelve-vertex count.
-Over all linear magic squares, counted up to $D_4$ (each family is closed under complementation; complements are not identified), the vertex counts range over $[11,18]$ for $n=5$ ($184$ classes), $[12,25]$ for $n=7$ ($3159$ classes), $[12,31]$ for $n=9$ ($441$ classes) and $[12,36]$ for $n=11$ ($89{,}125$ classes) (\texttt{anc/linear\_squares.py}, exact hulls), and over $[12,41]$, $[12,38]$, $[12,48]$, $[12,51]$ and $[12,48]$ for $n=13,15,17,19,21$ ($283{,}176$, $1472$, $1{,}713{,}664$, $3{,}558{,}249$ and $25{,}272$ classes; \texttt{anc/linear\_census.py}).
+Over all linear magic squares, counted up to $D_4$ (each family is closed under complementation; complements are not identified), the vertex counts range over $[11,18]$ for $n=5$ ($184$ classes), $[12,25]$ for $n=7$ ($3159$ classes), $[12,31]$ for $n=9$ ($441$ classes) and $[12,36]$ for $n=11$ ($89{,}125$ classes) by exact hull computation, and over $[12,41]$, $[12,38]$, $[12,48]$, $[12,51]$ and $[12,48]$ for $n=13,15,17,19,21$ ($283{,}176$, $1472$, $1{,}713{,}664$, $3{,}558{,}249$ and $25{,}272$ classes).
 For $n\ge13$ the counts are floating-point (Quickhull) counts, and every class with at most $13$ vertices or with the largest count is certified with the exact hull; for $n\le11$ the Quickhull vertex sets agree with the exact ones for every class.
 For $n=5$ the minimum $11$ is attained by two classes, complements of each other, both pandiagonal and not associative, with $f$-vector $(11,23,14)$; one is $s=5\langle4i+3j\rangle+\langle4i+2j\rangle+1$ ($\mathbf u=(-1,-2)$, $\mathbf w=(-1,2)$, $\alpha=\beta=0$), the first square below.
 \[
@@ -272,7 +271,7 @@ For $n=5$ the minimum $11$ is attained by two classes, complements of each other
 \begin{pmatrix}1&19&15&13&17\\23&5&14&20&3\\10&21&12&4&18\\24&9&8&22&2\\7&11&16&6&25\end{pmatrix}
 \]
 For $7\le n\le21$ the minimum $12$ is attained by exactly two classes, those of the Siamese and the digit-exchanged square (\Cref{thm:siamese}, \Cref{prop:exchanged}); for $n\ge13$ this relies on the floating-point counts of the other classes.
-The Siamese gem is not vertex-minimal at order five: simulated annealing (Appendix~\ref{sec:vertexstats}) found $15$ $D_4$-classes of magic squares of order $5$ whose gems have $10$ vertices (\texttt{anc/sa\_n5\_V10.txt}). For example, the second square above has $f$-vector $(10,22,14)$, volume $845/3$ and $8$ interior points.
+The Siamese gem is not vertex-minimal among all magic squares at order five: simulated annealing (Appendix~\ref{sec:vertexstats}) found $15$ $D_4$-classes of magic squares of order $5$ whose gems have $10$ vertices. For example, the second square above has $f$-vector $(10,22,14)$, volume $845/3$ and $8$ interior points.
 \end{remark}
 
 \subsection{Fixed steps and the largest vertex count}
@@ -308,7 +307,7 @@ The details are in Appendix~\ref{sec:app-fixed-steps}.
 
 So the vertex count along such a family is bounded, as it is for the Siamese and the digit-exchanged squares, but the bound, $n_0$ and the eventual $f$-vectors are not explicit.
 The least period can be smaller than $\delta L$: for the Siamese family $\delta L=4$ and the $f$-vector is constant for $n\ge5$.
-In computations it can equal $\delta L$: for $\mathbf u=(1,3)$, $\mathbf w=(3,1)$, $\alpha=\beta=0$ we have $\delta=1$ and $L=24$, and the exact hulls satisfy $f(\mathcal G_n)=f(\mathcal G_{n+24})$ for $150\le n\le197$, with no smaller shift doing so on that range (\texttt{anc/linear\_fixed\_steps.py}).
+In computations it can equal $\delta L$: for $\mathbf u=(1,3)$, $\mathbf w=(3,1)$, $\alpha=\beta=0$ we have $\delta=1$ and $L=24$, and the exact hulls satisfy $f(\mathcal G_n)=f(\mathcal G_{n+24})$ for $150\le n\le197$, with no smaller shift doing so on that range.
 
 The bound depends on the family, and the largest vertex counts in \Cref{rem:linear} grow with $n$.
 That they are unbounded follows from Rubin's example of triangles whose integer hulls have arbitrarily many vertices \cite{rubin1970}.
@@ -351,4 +350,3 @@ Now apply \Cref{prop:many-vertices}.
 \end{proof}
 
 The bound is far below the computed maxima of \Cref{rem:linear} (the square of the proof has $18$ vertices at $n=7$, where the bound is $4$) and covers only prime orders, but its order of magnitude $\Theta(\ln n)$ is sharp: choosing balanced residues $u_1,u_2,w_1,w_2\in(-n/2,n/2]\cap\Z$ and $\alpha,\beta\in\{0,\dots,n-1\}$ restricts the floor pair $(\lfloor t_A/n\rfloor,\lfloor t_B/n\rfloor)$ in Step~1 of Appendix~\ref{sec:app-fixed-steps} to at most $25$ values on the grid, so the sheared points lie on at most $25$ level polygons $P_{ab}(n)\subseteq[0,n-1]^2$ defined by at most $8$ linear inequalities each, and the integer hull of any polygon with a bounded number of sides in $[0,n-1]^2$ has $O(\ln n)$ vertices \cite[Sect.~2]{zolotykh2006vertices}.
-Lemma~\ref{lem:fib-triangle}, Proposition~\ref{prop:many-vertices} and Corollary~\ref{cor:many-vertices} are checked by exact computation for $k\le15$, for $k\le3$ at $n=7,29,173$, and at every prime $7\le n<120$ (\texttt{anc/linear\_fixed\_steps.py}).

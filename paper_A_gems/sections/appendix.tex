@@ -22,10 +22,11 @@ Isometry groups of a finite set $X$ (a vertex set or a full point set) are compu
 Congruence of two finite sets is tested by comparing the sorted multisets of squared distances and then by an isomorphism test of the complete graphs with squared distances as edge labels; for the $880$ gems the multisets alone certify the classes (\Cref{prop:congruence}).
 \Cref{prop:pointset} is checked in the same way for all $880$ squares and for the Siamese squares of orders $3$ to $15$.
 
-\paragraph{Polynomial identities.}
-The slack polynomials of \Cref{tab:slacks} are computed with SymPy; a polynomial $p$ is certified positive for all integers $m\ge2$ by non-negativity of all coefficients of $p(2+t)$ and $p(2)>0$.
+\paragraph{Polynomial identities and ancillary scripts.}
+The slack polynomials of \Cref{tab:slacks} are computed with SymPy (\texttt{anc/siamese\_slacks.py}); a polynomial $p$ is certified positive for all integers $m\ge2$ by non-negativity of all coefficients of $p(2+t)$ and $p(2)>0$.
 The same script checks the closure of the facet list and the norms and inner products of Step~5.
 For the digit-exchanged square, \texttt{anc/digit\_exchanged\_slacks.py} applies the same certificate, written once for both squares (it reproduces \Cref{thm:siamese} as a cross-check), to the slacks of \Cref{tab:slacks-exchanged}; it also checks, for $n=5,\dots,61$, that the sheared points of $s'$ have the five level sets used in the proof of \Cref{prop:exchanged} and satisfy all fourteen inequalities.
+Among the other ancillary files in \texttt{anc/}, \texttt{squares880.txt} and \texttt{all7040\_dudeney.tsv} list the Fr\'enicle standard forms and Dudeney group labels of the order-four squares; \texttt{verify\_structure.py}, \texttt{congruent\_facets.py} and \texttt{vertex\_determination.py} verify the order-four census, facet congruences and vertex-set determination (Sections~\ref{sec:symmetry} and~\ref{sec:census}); \texttt{energy\_zeros\_count.py} and \texttt{magic\_vs\_random.py} produce \Cref{tab:magic-vs-random}; and \texttt{linear\_magic\_count.py}, \texttt{linear\_squares.py}, \texttt{linear\_census.py}, \texttt{linear\_fixed\_steps.py} and \texttt{sa\_n5\_V10.txt} verify the counts and bounds of \Cref{sec:siamese-gems}.
 
 \begin{table}[htbp]
 \centering

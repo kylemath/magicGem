@@ -23,13 +23,6 @@ W.~S. Andrews.
 \newblock {\em Magic Squares and Cubes}.
 \newblock Dover Publications, 2nd edition, 1960.
 
-\bibitem{barbour2005}
-A.~D. Barbour and Louis H.~Y. Chen.
-\newblock The permutation distribution of matrix correlation statistics.
-\newblock In {\em Stein's Method and Applications}, volume~5 of {\em Lecture
-  Notes Series, Institute for Mathematical Sciences, National University of
-  Singapore}, pages 223--245. Singapore University Press, Singapore, 2005.
-
 \bibitem{beck2010enumeration}
 Matthias Beck and Andrew van Herick.
 \newblock Enumeration of 4 $\times$ 4 magic squares.
@@ -240,11 +233,6 @@ Richard~P. Stanley.
   graphs.
 \newblock {\em Duke Mathematical Journal}, 40:607--632, 1973.
 
-\bibitem{thurston1990conway}
-William~P. Thurston.
-\newblock Conway's tiling groups.
-\newblock {\em American Mathematical Monthly}, 97(8):757--773, 1990.
-
 \bibitem{trump2012enumeration}
 Walter Trump.
 \newblock Notes on magic squares and cubes.
@@ -265,11 +253,5 @@ James~E. Ward, III.
 E.~M. Wright.
 \newblock Prouhet's 1851 solution of the {T}arry--{E}scott problem of 1910.
 \newblock {\em American Mathematical Monthly}, 66:199--201, 1959.
-
-\bibitem{zhao1997}
-Lincheng Zhao, Zhidong Bai, Chern-Ching Chao, and Wen-Qi Liang.
-\newblock Error bound in a central limit theorem of double-indexed permutation
-  statistics.
-\newblock {\em Annals of Statistics}, 25(5):2210--2227, 1997.
 
 \end{thebibliography}

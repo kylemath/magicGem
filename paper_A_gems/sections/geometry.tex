@@ -65,13 +65,13 @@ The vertical facets are the triangles $\{2,4,9\}$, $\{2,6,7\}$, $\{1,6,8\}$, $\{
 The centre point (height $0$) lies in the convex hull of each quadrilateral cell but belongs to no cell: the plane of $\{1,2,3,4\}$ is $z=-x-y-3$, which is $-3<0$ at the centre.
 \end{example}
 
-For the $880$ order-four gems, $856$ have four vertical facets, $20$ have three and $4$ have two; the height functions of the $7040$ order-four magic squares induce $417$ distinct regular subdivisions of the $4\times4$ grid up to $D_4$, and for $548$ of the $880$ classes $\mathcal S(z)$ is a triangulation (\texttt{anc/verify\_structure.py}).
+For the $880$ order-four gems, $856$ have four vertical facets, $20$ have three and $4$ have two; the height functions of the $7040$ order-four magic squares induce $417$ distinct regular subdivisions of the $4\times4$ grid up to $D_4$, and for $548$ of the $880$ classes $\mathcal S(z)$ is a triangulation.
 
 \subsection{The census}
 \label{sec:census-4}
 
 There are $8$ magic squares of order $3$, all images of the Lo Shu under $D_4$, and $7{,}040$ of order $4$, forming $880$ $D_4$-classes; the order-four squares were listed by Fr\'enicle de Bessy \cite{frenicle1693} and have been recounted by computer \cite{beck2010enumeration}.
-Dudeney sorted them into twelve groups according to the pattern of complementary pairs $(a,17-a)$ \cite{dudeney1917amusements}; since the numbering of the groups differs between reproductions of his table, we list the labels used here, for all $7040$ squares together with the number $\#$ of their class, in \texttt{anc/all7040\_dudeney.tsv}.
+Dudeney sorted them into twelve groups according to the pattern of complementary pairs $(a,17-a)$ \cite{dudeney1917amusements} (Appendix~\ref{sec:appendix} records the group labels for all $7040$ squares).
 The number $275{,}305{,}224$ of magic squares of order five up to $D_4$ is due to Schroeppel (1973) \cite{gardner1976}; for order six see \cite{pinn1998number,mino2024order6,trump_howmany}.
 
 For each of the $880$ squares we computed $\mathcal G(S)$ exactly (integer facet inequalities, rational volumes; Appendix~\ref{sec:appendix}).
@@ -138,20 +138,24 @@ Let $S$ and $T$ be magic squares of order four. Then $\mathcal G(S)$ and $\mathc
 
 \begin{remark}[The vertex set determines the square]
 \label{rem:vertexset}
-If $S$, $T$ are magic squares of order four and $\hat g\operatorname{vert}\mathcal G(S)=\operatorname{vert}\mathcal G(T)$ for some $g\in D_4$, then $T=gS$.
-This is linear algebra plus a finite check.
-By \eqref{eq:d4}, $gS$ and $T$ have the same vertex set, so they have the same entries on the vertex cells and the same set $U$ of other cells.
-The ten line sums are linear equations for the entries on $U$, with the $0/1$ matrix $A_U$ of incidences between lines and cells of $U$; if $\operatorname{rank}A_U=|U|$, these entries are determined, and $T=gS$.
-This holds for $871$ of the $880$ classes; the rank and everything below are invariant under $D_4$, which permutes the lines.
-For the other nine, $\#45$, $\#46$, $\#47$, $\#49$, $\#50$, $\#54$, $\#165$, $\#166$ and $\#672$, we listed every magic square that has the entries of $S$ on the vertex cells of $S$: for five of them $S$ is the only one, and $\#45$, $\#47$, $\#50$, $\#54$ have $1$, $1$, $7$ and $7$ others (for $\#45$ the square $\#109$), but the gems of all these other squares have different vertex sets (\texttt{anc/vertex\_determination.py}).
-Since $g^{-1}T$ has the vertex set of $\mathcal G(S)$, it is one of these squares, so $g^{-1}T=S$.
+Remarkably, the vertices of an order-four magic gem suffice to reconstruct the entire magic square: if $S$ and $T$ are magic squares of order four and $\hat g\operatorname{vert}\mathcal G(S)=\operatorname{vert}\mathcal G(T)$ for some $g\in D_4$, then $T=gS$.
+To see why, note that by \eqref{eq:d4}, $gS$ and $T$ share the same vertex set, so they agree on all vertex cells and leave the same subset $U$ of non-vertex cells undetermined.
+The ten magic line-sum conditions provide a system of linear equations for the entries on $U$, governed by the $0/1$ incidence matrix $A_U$ between the ten lines and the cells of $U$. Whenever $\operatorname{rank}A_U=|U|$, the missing entries are uniquely determined by linear algebra alone.
+Direct calculation shows that $\operatorname{rank}A_U=|U|$ for $871$ of the $880$ $D_4$-classes.
+For the remaining nine classes ($\#45$, $\#46$, $\#47$, $\#49$, $\#50$, $\#54$, $\#165$, $\#166$ and $\#672$), enumerating all order-four magic squares that agree with $S$ on its vertex cells reveals that five classes admit no other completion, while $\#45$, $\#47$, $\#50$ and $\#54$ admit $1$, $1$, $7$ and $7$ alternative magic completions respectively (for instance, $\#109$ agrees with $\#45$ on its twelve vertices). In every such case, however, the alternative completion turns at least one cell of $U$ into a new vertex of the hull, so no two distinct squares share the exact same vertex set.
 \end{remark}
 
-\paragraph{Forced vertices and named squares.}
+\paragraph{Forced vertices and the geometry of the extreme squares.}
 For order four nothing beyond the forced vertices of \Cref{lem:forced} is a vertex of every gem: the only cells that carry a vertex in all $880$ gems are the four corners, and the only entries that always label a vertex are $1$ and $16$.
 In eight gems the point of the entry $2$ is a non-vertex boundary point, for instance for square \#593 below.
 The gems of the Lo Shu, of D\"urer's square and of the Siamese square of order $5$ have $8$ of $9$, $12$ of $16$ and $12$ of $25$ points as vertices and volumes $18$, $92$ and $830/3$.
-The gem of D\"urer's square is centrally symmetric with twelve vertices; exchanging its first two rows and its last two rows gives square \#802, whose gem has all sixteen points as vertices.
+
+The three extreme order-four gems highlighted in \Cref{fig:gem-geometry-880}(d)--(f) illustrate how the placement of the entries governs the polyhedral geometry:
+\begin{itemize}\setlength\itemsep{1pt}
+\item \emph{Minimum vertices and facets ($\#54$, $f=(8,14,8)$):} In square $\#54$ below, the top row $(1,6,11,16)$ and the bottom row $(4,7,10,13)$ are both arithmetic progressions. By \Cref{prop:subdivisions}(2), the lifted points along each of these two sides of the grid are collinear, eliminating both the front and back vertical facets and making $\#54$ one of the four order-four gems with only two vertical facets and the unique gem achieving the minimal $f$-vector $(8,14,8)$.
+\item \emph{All sixteen points as vertices ($\#802$, $V=16$):} The gem of D\"urer's square has $12$ boundary vertices and its $4$ central cells in the interior. Exchanging its first two rows and its last two rows produces square $\#802$, which moves the extreme entries $\{1,2,15,16\}$ from the boundary into the interior $2\times2$ core so that all four interior points pierce through the boundary canopy and all $16$ points become vertices.
+\item \emph{Maximum volume ($\#379$, $\operatorname{vol}=292/3$):} In square $\#379$, the four smallest entries $\{1,2,3,4\}$ and four largest entries $\{13,14,15,16\}$ alternate along the boundary and diagonals so that the upper concave surface $U$ is propped near the ceiling across the grid while the lower convex surface $L$ is pulled near the floor, maximizing the enclosed volume.
+\end{itemize}
 The squares cited in Figures~\ref{fig:weighted}, \ref{fig:symmetry} and~\ref{fig:gem-geometry-880} and in the text are
 {\small\[
 \setlength{\arraycolsep}{2pt}
@@ -172,32 +176,31 @@ The squares cited in Figures~\ref{fig:weighted}, \ref{fig:symmetry} and~\ref{fig
 \subsection{Which invariants see the line conditions}
 \label{sec:magic-vs-random}
 
-To see whether the gem distinguishes magic squares from other arrangements, we compared four nested families of order four: all $16!\approx2.09\cdot10^{13}$ arrangements, the $6{,}697{,}177{,}424$ arrangements with vanishing first moments (about one in $3124$; \texttt{anc/energy\_zeros\_count.py}), the $549{,}504$ semi-magic squares and the $7040$ magic squares (\Cref{tab:magic-vs-random}; \texttt{anc/magic\_vs\_random.py}).
+To understand how the line-sum conditions shape the geometry of the gem, we compare four nested families of arrangements of order four (\Cref{tab:magic-vs-random}): all $16!\approx2.09\cdot10^{13}$ arrangements, the $6{,}697{,}177{,}424$ arrangements whose heights have vanishing first moments $\sum z\,x=\sum z\,y=0$ (about one in $3124$), the $549{,}504$ semi-magic squares, and the $7040$ magic squares.
 
 \begin{table}[htbp]
 \centering
-\caption{Mean invariants of the gems of order four. The first three columns are estimates from $10^5$ uniform samples each (standard errors at most $0.006$ for the counts and the fractions, $0.024$ for the volume and $0.001$ for the centroid): arrangements, arrangements with $\sum z\,x=\sum z\,y=0$ (rejection sampling), and semi-magic squares (uniform over all $549{,}504$). The magic column is exact (all $7040$ squares). $d$: difference of the means of magic and semi-magic squares divided by the pooled standard deviation, over all squares and over those that are not self-complementary (s.-c.); its standard error is at most $0.034$ ($0.044$ in the last column). The solid centroid is the centre of mass of the solid $\mathcal G(S)$.}
+\caption{Mean invariants of the gems of order four across four nested families. The first three columns are estimates from $10^5$ uniform samples each (standard errors at most $0.006$ for the counts and fractions, $0.024$ for the volume and $0.001$ for the centroid): arbitrary arrangements, arrangements with vanishing first moments $\sum z\,x=\sum z\,y=0$ (rejection sampling), and semi-magic squares (uniform over all $549{,}504$). The magic column is exact over all $7040$ magic squares. The solid centroid is the centre of mass of the solid polytope $\mathcal G(S)$.}
 \label{tab:magic-vs-random}
 \scriptsize
-\setlength{\tabcolsep}{4pt}
+\setlength{\tabcolsep}{6pt}
 \input{anc/magic_vs_random.tex}
 \end{table}
 
-The counts barely move.
-The mean vertex count is $12.06$ for random arrangements, $12.12$ for semi-magic squares and $12.23$ for magic squares ($d=0.14$ against random arrangements, $0.08$ against semi-magic squares).
-Self-complementary magic squares have more vertices on average ($12.43$, against $12.09$ for the others; the $48$ associative ones average $11.88$), and they make up $40\%$ of the magic squares but $10\%$ of the semi-magic squares.
-This accounts for almost all of the excess over semi-magic squares: over the squares that are not self-complementary, magic and semi-magic squares differ by $0.017\pm0.004$ ($d=0.01$).
-It does not account for the excess over random arrangements: the magic squares that are not self-complementary still exceed random arrangements by $0.040\pm0.004$, about a quarter of the excess.
-The mean numbers of lower and of upper facets differ by less than $0.08$ between any two of the four families, and the mean number of vertical facets ($3.97$ to $4.00$) by less than $0.03$.
+As \Cref{tab:magic-vs-random} shows, the combinatorial counts are almost completely insensitive to the line-sum constraints.
+The mean number of vertices rises only slightly from $12.06$ for random arrangements and $12.12$ for semi-magic squares to $12.23$ for magic squares, while the mean numbers of lower and upper facets differ by less than $0.08$ across all four families and the mean number of vertical facets stays between $3.97$ and $4.00$.
+Even the small difference in vertex count between magic and semi-magic squares is largely an artifact of symmetry: self-complementary magic squares have more vertices on average ($12.43$ versus $12.09$ for asymmetric magic squares, with the $48$ associative squares averaging $11.88$), and self-complementary squares constitute $40\%$ of the magic squares compared with $10\%$ of the semi-magic squares. Restricting to non-self-complementary squares reduces the gap between magic and semi-magic mean vertex counts to $0.017\pm0.004$.
 
-The continuous invariants respond to the hypotheses one at a time.
-Vanishing first moments turn the principal axes of the solid towards the coordinate axes (the tilt $(\Sigma_{xz}^2+\Sigma_{yz}^2)^{1/2}$ of the covariance matrix $\Sigma$ of the solid falls from $0.73$ to $0.24$, $d=-1.82$) and add $6.0$ to the mean volume ($d=0.90$), but do not move the solid centroid; the row and column conditions move it towards the origin (from $0.35$ to $0.16$, $d=-1.16$) and add $1.0$ to the volume; and the diagonal conditions add another $1.4$ to the volume ($d=0.21$) and move the centroid further in ($d=-0.62$), also when the self-complementary squares are left out.
-Geometrically, $\operatorname{vol}\mathcal G(S)=\iint(U-L)$ for the upper concave and lower convex boundary functions $U,L$ of \Cref{prop:subdivisions}(4): along every line $L_0$ with $\sum_{c\in L_0}z_c=0$, convexity forces $\sum_{c\in L_0}L(c)\le0\le\sum_{c\in L_0}U(c)$, preventing $z$ from being convex or concave along the line and pushing $U$ and $L$ apart.
-A non-trivial isometry occurs for $40\%$ of the magic gems, $10\%$ of the semi-magic gems and almost none of the others, in both families exactly for the self-complementary squares (\Cref{prop:iso4}; for the semi-magic sample by computation, consistent with \Cref{prop:pointset}).
+By contrast, the continuous geometric invariants respond noticeably as each successive balance condition is imposed:
+\begin{enumerate}\setlength\itemsep{1pt}
+\item \emph{Vanishing first moments} align the principal axes of the solid with the coordinate axes (reducing the off-diagonal tilt $(\Sigma_{xz}^2+\Sigma_{yz}^2)^{1/2}$ of the solid's second-moment matrix from $0.73$ to $0.24$) and increase the mean volume from $75.75$ to $81.72$, without yet pulling the solid centroid toward the origin.
+\item \emph{Equal row and column sums} (the semi-magic condition) draw the solid centroid more than halfway toward the origin (from distance $0.35$ to $0.16$) and raise the mean volume to $82.68$.
+\item \emph{Equal main diagonal sums} increase the mean volume further to $84.05$ and pull the mean centroid distance down to $0.11$, an effect that persists even when self-complementary squares are excluded.
+\end{enumerate}
+There is a clean geometric reason why zero-sum lines inflate the volume of the hull. By \Cref{prop:subdivisions}(4), $\operatorname{vol}\mathcal G(S)=\iint(U-L)$, where $U$ is the concave upper boundary function and $L$ is the convex lower boundary function of the gem. Along any line $L_0$ of the grid on which $\sum_{c\in L_0}z_c=0$, the inequalities $L(c)\le z_c\le U(c)$ force
+\[
+\sum_{c\in L_0}L(c)\;\le\;0\;\le\;\sum_{c\in L_0}U(c).
+\]
+Consequently, $z$ cannot be uniformly convex or uniformly concave along $L_0$: a bowl-shaped or dome-shaped height profile (which would make $U$ and $L$ hug each other closely and produce a thin, small-volume hull) is forbidden along every zero-sum line, forcing the upper canopy $U$ and lower bowl $L$ apart.
 
-At order five all four families are sampled, $2\cdot10^4$ each, and every hull is certified exactly; the semi-magic squares and the magic squares (distinct $D_4$-classes) come from the annealer of Appendix~\ref{sec:vertexstats}, with other seeds than the larger magic sample of \Cref{tab:vertices}, whose hulls are computed in floating point.
-The distribution of the annealer at order five is not known; at order four it hits all $880$ magic classes and reproduces the uniform distribution of the semi-magic squares (Appendix~\ref{sec:vertexstats}).
-The mean vertex counts of random arrangements, arrangements with vanishing first moments, semi-magic and magic squares are $15.40$, $15.42$, $15.36$ and $15.39$ (standard errors $0.012$; $|d|\le0.04$; \Cref{tab:vertices} gives $15.38$ for its magic sample), the mean numbers of lower and of upper facets differ by at most $0.16$, and all but $16$ of the $8\cdot10^4$ gems have four vertical facets (the others have three).
-The volumes are $250.1$, $260.9$, $265.4$ and $268.5$ ($d=0.22$ for magic against semi-magic squares), and the distance of the solid centroid from the origin is $0.47$, $0.47$, $0.24$ and $0.22$ ($d=-0.10$).
-
-So the magic conditions hardly affect the vertex count; they show in the volume, the position of the solid and the frequency of symmetric squares, and beyond the row and column conditions only by a fraction of a standard deviation.
+A similar pattern appears in heuristic explorations at order five. Comparing $2\cdot10^4$ certified exact hulls each of uniform random arrangements, random arrangements with vanishing first moments, and order-five semi-magic and magic squares generated by simulated annealing (Appendix~\ref{sec:vertexstats}; note that the sampling distribution of the annealer at $n=5$ is not known to be uniform), the mean vertex counts are nearly identical across all four families ($15.40$, $15.42$, $15.36$ and $15.39$, with standard errors $0.012$), whereas the mean volumes climb steadily ($250.1$, $260.9$, $265.4$ and $268.5$) and the mean distance of the solid centroid from the origin drops from $0.47$ to $0.24$ and $0.22$.

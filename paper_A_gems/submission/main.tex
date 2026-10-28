@@ -127,19 +127,11 @@
 \maketitle
 
 \begin{abstract}
-To an arrangement of $1,\dots,n^2$ in an $n\times n$ grid we attach the $n^2$ points $(x,y,z)$ in $\R^3$, where $(x,y)$ is the position of a cell measured from the centre of the grid and $z$ is its entry minus the mean entry.
-Their convex hull is the \emph{gem} of the arrangement; its lower and upper faces are the regular subdivisions of the grid induced by the heights and by their negatives.
-Magic squares are the motivating case.
-Our main result concerns the Siamese (de la Loub\`ere) square of every odd order $n\ge5$: its gem has exactly the twelve vertices that the boundary of the grid forces (the corners and, on each side, the cells of the smallest and largest entry), with $f$-vector $(12,26,16)$ and isometry group $\{\pm\mathrm{id}\}$.
-The proof shears the lift onto five levels and reduces to the signs of a table of polynomials in $m=(n-1)/2$.
-The same method gives the $f$-vector $(12,24,14)$ for the square with the two base-$n$ digits exchanged, and we determine and count the magic linear squares.
-Along every family of linear squares with fixed steps and offsets affine in $n$ the number of vertices is bounded and the $f$-vector is eventually periodic in $n$, while over all linear magic squares of prime order $n$ the largest number of vertices is of order $\Theta(\ln n)$.
+What does a magic square look like as a three-dimensional polyhedron? Given an arrangement of $\{1,\dots,n^2\}$ in an $n\times n$ grid, we lift each cell to $\R^3$ by centring its grid coordinates $(x,y)$ at the origin and taking its centred entry $z = s_{ij} - (n^2+1)/2$ as a vertical height. We call the convex hull of these $n^2$ points the \emph{gem} of the arrangement; its lower and upper boundaries are the regular polyhedral subdivisions of the grid induced by the height field $\pm z$.
 
-Most other results need less than magic.
-If the heights have vanishing first moments, as for every semi-magic square, the point set has a non-trivial isometry exactly when the arrangement equals its complement up to rotation and reflection.
-For the $880$ magic squares of order four a computational census gives $616$ congruence classes and $352$ combinatorial types of gems, none with an isometry that its point set lacks.
-The gem hardly sees the magic conditions: at order four the mean numbers of vertices and of lower and upper facets of magic gems differ from those of semi-magic squares and of random arrangements by at most $0.14$ standard deviations, and the excess of vertices over semi-magic squares comes almost entirely from self-complementary squares; at order five, on samples, the mean vertex counts differ by less than $0.07$ vertices.
-The volume and the solid centroid do shift.
+While random arrangements and generic linear magic squares produce gems whose vertex counts grow with $n$, our main theorem shows that the classical Siamese (de la Loub\`ere) magic square of every odd order $n\ge5$ behaves at the opposite extreme: its gem has the same combinatorial type for all $n\ge5$, with $f$-vector $(12,26,16)$, isometry group $\{\pm\mathrm{id}\}$, and only the twelve vertices forced by the four corners and the extreme entries along the four sides of the grid. The proof shears the lifted point set onto five parallel planes and reduces the convex hull calculation to the signs of a finite table of polynomials in $m=(n-1)/2$. The same shearing method yields the constant $f$-vector $(12,24,14)$ for the base-$n$ digit-exchanged square, and we determine and count all magic linear squares. Along every family of linear squares with fixed steps and offsets affine in $n$ the number of vertices is bounded and the $f$-vector is eventually periodic in $n$, whereas over all linear magic squares of prime order $n$ the maximum number of vertices grows as $\Theta(\ln n)$.
+
+At general order, we show that several foundational properties of a magic gem require weaker hypotheses than the full magic line sums. Whenever the height field has vanishing first moments—as holds for every semi-magic square—a short principal-axes argument proves that the lifted point set has a non-trivial Euclidean symmetry if and only if the arrangement equals its complement up to dihedral symmetry. An exact census of the $880$ magic squares of order four yields $616$ congruence classes and $352$ combinatorial types of gems, none having a hull isometry absent from its point set. Remarkably, the combinatorial invariants of a gem (such as vertex and facet counts) are nearly insensitive to the magic line-sum constraints, whereas continuous geometric invariants—most notably the volume and the solid centroid—shift systematically because zero-sum lines prevent the height field from curving uniformly upward or downward.
 \medskip
 
 \noindent\textbf{Keywords:} magic squares, convex polytopes, regular subdivisions, symmetry groups, Siamese method, linear magic squares, integer hulls
@@ -187,12 +179,12 @@ The same method shows that the square with the two base-$n$ digits exchanged has
 More generally, along every family of linear squares with fixed steps and offsets affine in $n$ the vertex count is bounded and the $f$-vector is eventually periodic in $n$ (\Cref{prop:fixed-steps}).
 The bound depends on the family: over all linear magic squares of prime order $n$ the largest vertex count grows like $\Theta(\ln n)$ and is at least $\lceil\ln n/(4\ln\varphi)\rceil+2$, with $\varphi$ the golden ratio (\Cref{cor:many-vertices}), and, by computation, for $7\le n\le21$ the Siamese and the digit-exchanged squares are the only linear magic squares, up to $D_4$, with as few as twelve vertices (\Cref{rem:linear}).
 
-The other results need weaker hypotheses than magic, and most of them hold for every arrangement; \Cref{tab:hypotheses} lists what each one needs.
-The points balance about the origin for every arrangement, and the heights balance as weights on the grid exactly when the rows and columns have equal sums (\Cref{sec:balance}).
-If only the first moments $\sum z\,x$ and $\sum z\,y$ of the heights vanish, the covariance matrix of the point set is $\operatorname{diag}(a_n,a_n,b_n)$ with $a_n\ne b_n$, and a short principal-axes argument shows that the point set has a non-trivial isometry exactly when the arrangement equals its complement up to $D_4$ (\Cref{prop:pointset}).
-For the $880$ magic squares of order four up to rotation and reflection we compute all gems exactly, by computer: the isometry group of each gem equals that of its point set, so $48$ gems are centrally symmetric, $304$ have one half-turn and $528$ have none (\Cref{prop:iso4}); the gems have $8$ to $16$ vertices, $39$ $f$-vectors, $352$ combinatorial types and $155$ distinct volumes, and form $616$ congruence classes (\Cref{prop:congruence}); and the vertex set determines the square, for $871$ of the $880$ classes already by the rank of the line equations (\Cref{rem:vertexset}).
+The other results require weaker hypotheses than the full magic conditions, and several hold for every arrangement; \Cref{tab:hypotheses} lists what each result needs.
+The lifted points balance about the origin for every arrangement, and the heights balance as weights on the grid if and only if the rows and columns have equal sums (\Cref{sec:balance}).
+When only the first moments $\sum z\,x$ and $\sum z\,y$ of the heights vanish, the second-moment matrix of the point set is $\operatorname{diag}(a_n,a_n,b_n)$ with $a_n\ne b_n$, and a four-line principal-axes argument shows that the point set has a non-trivial isometry if and only if the arrangement equals its complement up to $D_4$ (\Cref{prop:pointset}).
+For the $880$ magic squares of order four up to rotation and reflection we compute all gems in exact integer arithmetic: the isometry group of each gem equals that of its point set, so $48$ gems are centrally symmetric, $304$ have a single half-turn symmetry and $528$ have trivial symmetry (\Cref{prop:iso4}). Across the $880$ squares, the gems have between $8$ and $16$ vertices, realizing $39$ distinct $f$-vectors, $352$ combinatorial types, $155$ exact volumes and $616$ congruence classes (\Cref{prop:congruence}); moreover, the vertex set alone uniquely determines the magic square, for $871$ of the $880$ classes already from the rank of the line-sum equations on the non-vertex cells (\Cref{rem:vertexset}).
 
-Finally, \Cref{sec:magic-vs-random} compares magic gems with the gems of semi-magic squares, of arrangements with vanishing first moments and of random arrangements: the mean numbers of vertices and facets hardly differ, while the volume and the position of the solid centroid change with the line conditions.
+Finally, \Cref{sec:magic-vs-random} compares magic gems with the gems of semi-magic squares, of arrangements with vanishing first moments and of random arrangements: whereas combinatorial counts such as the mean numbers of vertices and facets are nearly unchanged across these families, continuous invariants—specifically the volume and the solid centroid—shift systematically as the line-sum constraints are imposed.
 
 \begin{table}[htbp]
 \centering
@@ -206,7 +198,7 @@ result & statement & hypothesis\\
 \midrule
 \Cref{lem:lines}, \Cref{lem:forced}, \Cref{lem:selfcomp} & centring; forced vertices; complements & any arrangement\\
 \Cref{prop:fulldim}, \Cref{prop:subdivisions} & $3$-polytope; faces $\mathcal S(z)$, $\mathcal S(-z)$ & any arrangement$^*$\\
-\Cref{lem:cov}, \Cref{prop:pointset} & covariance; isometries of point sets & vanishing first moments\\
+\Cref{lem:cov}, \Cref{prop:pointset} & second moments; point-set isometries & vanishing first moments\\
 \Cref{lem:parity} & parity of $V$, $V^\partial$, $V^\circ$; of $E$, $F$ & self-complementary$^*$; associative$^*$\\
 \Cref{prop:iso4}, \ref{prop:congruence}, \Cref{rem:vertexset} & order-four census & magic, $n=4$ (computation)\\
 \Cref{sec:magic-vs-random} & which invariants see the line conditions & $n=4,5$ (computation)\\
@@ -218,17 +210,13 @@ result & statement & hypothesis\\
 \end{table}
 
 \paragraph{Relation to previous work.}
-The polyhedral geometry of magic squares is classical: nonnegative integer matrices with all line sums equal to $t$ are the lattice points of the $t$-th dilate of the Birkhoff polytope, and their number is a polynomial in $t$ \cite{stanley1973magic,ehrhart1973magic,ziegler1995lectures}; the count of magic squares with distinct entries is an Ehrhart quasi-polynomial of an inside-out polytope \cite{beck2006insideout,beck2010enumeration}; the cones of magic squares and cubes have Hilbert-basis descriptions \cite{ahmed2003polyhedral}; contingency tables with fixed margins are the same lattice points seen as a sample space \cite{diaconis1995rectangular}.
-In all of these the magic squares are the \emph{points} of a polytope, whereas the gem attaches a polytope to a \emph{single} arrangement.
-The lifting construction itself is that of regular subdivisions and secondary fans \cite{gelfand1994discriminants,deloera2010triangulations}.
-The moment identities of \Cref{sec:balance} are due in substance to Loly and Rogers \cite{loly2004invariance,rogers2004inertia,rogers2005multipole}; we record them in the coordinates of the gem for later use.
-The Siamese square is de la Loub\`ere's construction \cite{loubere1693}, and the linear squares are the squares of the uniform step method \cite[Ch.~I]{andrews1960magic}, analysed by Lehmer \cite{lehmer1929} and by Apostol and Zuckerman \cite{apostol1951}; we give a self-contained proof of \Cref{prop:linear-magic} but do not claim priority for it.
-For linear squares with fixed steps we use integer hulls of linear families of polygons, a planar case of a theorem of Calegari and Walker \cite{calegari2013integer}, and the lower bound rests on Rubin's Fibonacci triangle \cite{rubin1970}.
-The partition of the $880$ order-four squares into associative, self-complementary and other squares is Dudeney's \cite{dudeney1917amusements}.
-New are the Siamese theorem and its companion for the digit-exchanged square, the results on linear squares with fixed steps and on their largest vertex count, the exact order-four census and the comparison of \Cref{sec:magic-vs-random}, together with a short covariance argument that settles symmetry and congruence of the point sets for every order.
+In polyhedral combinatorics, one traditionally studies the space of \emph{all} magic squares of order $n$ simultaneously: nonnegative integer matrices with line sums equal to $t$ are the lattice points of the $t$-th dilate of the Birkhoff polytope \cite{stanley1973magic,ehrhart1973magic,ziegler1995lectures}, magic squares with distinct entries are counted by Ehrhart quasi-polynomials of inside-out polytopes \cite{beck2006insideout,beck2010enumeration}, magic cones admit Hilbert-basis descriptions \cite{ahmed2003polyhedral}, and contingency tables with fixed margins form the corresponding statistical sample spaces \cite{diaconis1995rectangular}.
+In all of those constructions, magic squares are individual lattice points inside a high-dimensional polytope in $\R^{n^2}$. Here we take the complementary view, attaching a three-dimensional polytope $\mathcal G(S)\subset\R^3$ to a \emph{single} arrangement $S$ via the regular-subdivision lifting construction of discrete geometry \cite{gelfand1994discriminants,deloera2010triangulations}.
 
-Sections~\ref{sec:gem}--\ref{sec:discussion} treat, in turn, the gem, the balance of its vectors, symmetry and congruence, faces and the order-four census, the Siamese and linear squares, and open questions; the appendices describe the computations and collect lattice-point counts, vertex statistics and further order-four data.
-An interactive display of the $880$ order-four gems is available at \url{https://kylemath.github.io/MagicGemWebpage/}.
+This geometric viewpoint connects naturally with several classical threads. The linear and quadratic balance identities of \Cref{sec:balance} reformulate the mechanical moment invariants of Loly and Rogers \cite{loly2004invariance,rogers2004inertia,rogers2005multipole} in the coordinates of $\mathcal G(S)$, allowing us to settle the Euclidean symmetry and congruence classification of the lifted point sets for every order (\Cref{prop:pointset}). In \Cref{sec:census}, we combine regular subdivision theory with Dudeney's classification of the $880$ order-four magic squares \cite{dudeney1917amusements} to analyse their $352$ combinatorial gem types and explain geometrically why zero-sum lines inflate the volume of the hull. In \Cref{sec:siamese-gems}, we revisit de la Loub\`ere's Siamese square \cite{loubere1693} and the uniform-step (linear) magic squares studied by Lehmer \cite{lehmer1929} and by Apostol and Zuckerman \cite{apostol1951}; combining our five-level affine shear with theorems of Calegari and Walker \cite{calegari2013integer}, Rubin \cite{rubin1970} and Zolotykh \cite{zolotykh2006vertices} on integer hulls of rational polygons yields the $12$-vertex theorem for Siamese squares (\Cref{thm:siamese}), eventual periodicity for fixed-step families (\Cref{prop:fixed-steps}), and the sharp $\Theta(\ln n)$ growth of the maximum vertex count over prime-order linear magic squares (\Cref{cor:many-vertices}).
+
+Sections~\ref{sec:gem}--\ref{sec:discussion} treat, in turn, the gem construction, moment balance, symmetry and congruence, faces and the order-four census, Siamese and linear squares, and open questions. The appendices document the exact computational methods and ancillary verification scripts (\Cref{sec:appendix}) and collect lattice-point counts, vertex statistics, further order-four data and the proofs for \Cref{sec:fixed-steps}.
+An interactive 3D display of all $880$ order-four gems is available at \url{https://kylemath.github.io/MagicGemWebpage/}.
 
 \section{The gem of an arrangement}
 \label{sec:gem}
@@ -257,7 +245,7 @@ We write $\operatorname{vert}\mathcal G(S)$ for the vertex set, $V$, $V^\circ$, 
 For any set $X\subseteq\R^3$, $\operatorname{Iso}(X)$ is the group of isometries of $\R^3$ that map $X$ onto itself.
 The dihedral group $D_4=\langle r,h\rangle$ of the square acts on arrangements by $(gS)_{gc}=s_c$; here $r$ is the quarter-turn, $r^2$ the half-turn, $h$ and $v$ the left--right and top--bottom reflections and $d$ the reflection in the main diagonal $i=j$.
 For $g\in D_4$ let $\hat g(x,y,z)=(g(x,y),z)$, where $g$ acts on the plane as the corresponding orthogonal map.
-The order-four squares are numbered $\#0,\dots,\#879$ in the lexicographic order of their Fr\'enicle standard forms (the image under $D_4$ with the smallest corner entry at top left and $s_{01}<s_{10}$) \cite{frenicle1693}; the list is \texttt{anc/squares880.txt}.
+The order-four squares are numbered $\#0,\dots,\#879$ in the lexicographic order of their Fr\'enicle standard forms (the image under $D_4$ with the smallest corner entry at top left and $s_{01}<s_{10}$) \cite{frenicle1693}.
 
 \begin{lemma}[Means, variances, line sums]
 \label{lem:lines}
@@ -368,13 +356,13 @@ The vanishing of the first moments is strictly weaker than the row and column co
 \paragraph{Second moments.}
 The second moments of the point set are as rigid as the first: when the first moments of the heights vanish they do not depend on the arrangement at all.
 
-\begin{lemma}[Covariance]
+\begin{lemma}[Second-moment matrix]
 \label{lem:cov}
-The covariance matrix $\Sigma=\frac1N\sum_{i,j}\mathbf p_{ij}\mathbf p_{ij}^{\top}$ of the points of an arrangement $S$ has $\Sigma_{xx}=\Sigma_{yy}=a_n$, $\Sigma_{zz}=b_n$, $\Sigma_{xy}=0$, $N\Sigma_{xz}=\sum_jx_jC_j$ and $N\Sigma_{yz}=\sum_iy_iR_i$. If the first moments $\sum z_{ij}x_{ij}$ and $\sum z_{ij}y_{ij}$ vanish, for instance if $S$ is semi-magic, then $\Sigma=\operatorname{diag}(a_n,a_n,b_n)$, and $a_n<b_n$ for $n\ge2$.
+The second-moment matrix (or empirical covariance matrix) $\Sigma=\frac1N\sum_{i,j}\mathbf p_{ij}\mathbf p_{ij}^{\top}$ of the lifted points of an arrangement $S$ has $\Sigma_{xx}=\Sigma_{yy}=a_n$, $\Sigma_{zz}=b_n$, $\Sigma_{xy}=0$, $N\Sigma_{xz}=\sum_jx_jC_j$ and $N\Sigma_{yz}=\sum_iy_iR_i$. If the first moments $\sum z_{ij}x_{ij}$ and $\sum z_{ij}y_{ij}$ vanish, for instance if $S$ is semi-magic, then $\Sigma=\operatorname{diag}(a_n,a_n,b_n)$, and $a_n<b_n$ for $n\ge2$.
 \end{lemma}
 
 \begin{proof}
-\Cref{lem:lines}(1)--(2) and \eqref{eq:moments} with $\varphi(t)=t$.
+The diagonal entries $\Sigma_{xx},\Sigma_{yy},\Sigma_{zz}$ and $\Sigma_{xy}=0$ follow immediately from \Cref{lem:lines}(1)--(2), while the off-diagonal moments $N\Sigma_{xz}$ and $N\Sigma_{yz}$ are given by \eqref{eq:moments} with $\varphi(t)=t$.
 \end{proof}
 
 Since $b_n=(n^2+1)a_n$, placing equal point masses at the $N$ points $\mathbf p_{ij}$ of an arrangement with vanishing first moments gives an axisymmetric inertia tensor $I=\operatorname{diag}(I_\perp,I_\perp,I_{zz})$ about $\mathbf 0$ with $I_\perp/I_{zz}=(a_n+b_n)/(2a_n)=(n^2+2)/2$ ($9$ for order four), so in torque-free motion the point-weighted gem precesses like a symmetric rotor even when $\mathcal G(S)$ has no geometric symmetry.
@@ -421,14 +409,14 @@ Let $S$ and $T$ be arrangements of order $n\ge2$ with $\sum z_{ij}x_{ij}=\sum z_
 \end{proposition}
 
 \begin{proof}
-An isometry of $\R^3$ mapping one finite set onto another maps centroid to centroid, and both centroids are $\mathbf 0$ (\Cref{lem:lines}(1)); so $\psi$ is orthogonal, and $\psi\Sigma_S\psi^{\top}=\Sigma_T$ for the covariance matrices.
+An isometry of $\R^3$ mapping one finite set onto another maps centroid to centroid, and both centroids are $\mathbf 0$ (\Cref{lem:lines}(1)); so $\psi$ is orthogonal, and $\psi\Sigma_S\psi^{\top}=\Sigma_T$ for the second-moment matrices.
 By \Cref{lem:cov}, $\Sigma_S=\Sigma_T=\operatorname{diag}(a_n,a_n,b_n)$ with $a_n\neq b_n$, so $\psi$ commutes with $\Sigma_S$ and preserves its eigenspaces, the plane $z=0$ and the $z$-axis: $\psi=\operatorname{diag}(B,\varepsilon)$ with $B\in O(2)$ and $\varepsilon=\pm1$.
-The projection of both point sets to the plane is the grid, so $B$ is a symmetry of the grid, that is, an element $g\in D_4$; hence $\psi=\hat g$ or $\psi=\hat g\tau$.
+Since $\psi=\operatorname{diag}(B,\varepsilon)$ commutes with orthogonal projection onto the plane $z=0$, and the projection of both point sets is the $n\times n$ grid, $B$ is a symmetry of the grid, that is, an element $g\in D_4$; hence $\psi=\hat g$ or $\psi=\hat g\tau$.
 By \eqref{eq:d4}, $\hat g(P_S)=P_{gS}$ and $\hat g\tau(P_S)=P_{g\overline S}$, and the point set determines the arrangement; this proves (1), and (2) follows.
 For (3) take $T=S$: $\hat g(P_S)=P_S$ forces $gS=S$, hence $g=\mathrm{id}$, and $\hat g\tau(P_S)=P_S$ forces $g\overline S=S$, i.e.\ $\overline S=g^{-1}S=gS$ by \Cref{lem:selfcomp}.
 \end{proof}
 
-The diagonal conditions play no role.
+Notice that the diagonal line sums play no role in \Cref{prop:pointset}: vanishing horizontal first moments alone lock the principal axes of the point set to the grid.
 
 \subsection{The isometry groups of the order-four gems}
 \label{sec:iso4}
@@ -496,7 +484,7 @@ If $S$ is associative, $\iota_g=-\mathrm{id}$, and a face fixed by $-\mathrm{id}
 \end{proof}
 
 The hypothesis is needed: the natural square of order $3$ is associative, but its gem is a parallelogram and has no interior points.
-For $n=4$ the $48$ associative gems have $V^\circ\in\{0,2,4\}$ ($4$, $23$ and $21$ gems), and among the $528$ squares that are not self-complementary all four combinations of the parities of $V$ and $V^\circ$ occur (\texttt{anc/verify\_structure.py}).
+For $n=4$ the $48$ associative gems have $V^\circ\in\{0,2,4\}$ ($4$, $23$ and $21$ gems), and among the $528$ squares that are not self-complementary all four combinations of the parities of $V$ and $V^\circ$ occur.
 
 \begin{remark}[Facet orbits of the half-turns]
 \label{rem:facet-orbits}
@@ -508,8 +496,7 @@ The half-turn $\iota_h$ (the case $\iota_v$ is the same after the reflection $d$
 An isometry of a gem maps facets to congruent facets, so the facets of the $352$ self-complementary gems of order four come in congruent pairs, apart from the facets fixed by a half-turn (\Cref{rem:facet-orbits}), none of which is congruent to another facet.
 These isometries are diagonal matrices, so the pairs stay congruent when the heights are rescaled, as in printed models and paper nets.
 Similarly, since $-\mathrm{id}\,\mathcal G(S)=\mathcal G(r^2\overline S)$, every upper facet of $\mathcal G(S)$ is parallel and congruent to a lower facet of the half-turned complement $\mathcal G(r^2\overline S)$, allowing copies of a gem and its complement twin to stack face-to-face into periodic columns; for instance, in square $\#762$ the entries $\{13,14,15,16\}$ lie on a centred knight's-move square of area $5$ and are coplanar ($z=6-\frac15(3x-y)$), forming a quadrilateral upper facet matched by $\{1,2,3,4\}$ below.
-Congruence without symmetry is rare: of the $528$ gems with trivial isometry group, $182$ have congruent facets, $480$ of their $8858$ facets in $230$ classes of triangles and $10$ of quadrilaterals; with the heights scaled by $1/5$ these numbers drop to $130$ gems and $332$ facets.
-The symmetric gems have congruences beyond their symmetry in $28$ cases, and in $9$ after scaling (\texttt{anc/congruent\_facets.py}).
+Accidental congruences between facets not related by an isometry of $\mathcal G(S)$ also occur among the order-four gems ($182$ of the $528$ asymmetric gems and $28$ of the $352$ symmetric gems have at least one such pair), though unlike symmetry-forced congruences most of these accidental matches disappear when the vertical coordinate is rescaled relative to the horizontal grid.
 \end{remark}
 
 \begin{remark}[Repeating chains of facets]
@@ -519,7 +506,7 @@ This is easiest to see on belts.
 If a plane through $\mathbf 0$ contains no point $\mathbf p_c$, the facets that it crosses, taken in order along the boundary of the section of the gem by the plane, form a closed chain in which consecutive facets share an edge.
 If an isometry of the gem maps the plane to itself and acts on it as a half-turn about $\mathbf 0$, it preserves the cyclic order of the edges of the section and fixes none of them, so it maps the chain to itself shifted half way round: the second half of the chain repeats the first. If it acts on the plane as a reflection, it reverses the chain.
 So for an associative square the chain along the plane $z=0$ of the mean entry repeats after half a turn, and so does, for the other self-complementary squares, the chain along the vertical plane through $\mathbf 0$ perpendicular to the axis of the half-turn; along $z=0$ the half-turn reverses its chain, which then reads the same in both directions.
-For order four these chains have $8$ or $10$ facets for the associative gems, and $4$ to $14$ facets around the axis for the others (\texttt{anc/congruent\_facets.py}).
+For order four these chains have $8$ or $10$ facets for the associative gems, and $4$ to $14$ facets around the axis for the others.
 \end{remark}
 
 \section{Faces of the gem and a census of order four}
@@ -589,13 +576,13 @@ The vertical facets are the triangles $\{2,4,9\}$, $\{2,6,7\}$, $\{1,6,8\}$, $\{
 The centre point (height $0$) lies in the convex hull of each quadrilateral cell but belongs to no cell: the plane of $\{1,2,3,4\}$ is $z=-x-y-3$, which is $-3<0$ at the centre.
 \end{example}
 
-For the $880$ order-four gems, $856$ have four vertical facets, $20$ have three and $4$ have two; the height functions of the $7040$ order-four magic squares induce $417$ distinct regular subdivisions of the $4\times4$ grid up to $D_4$, and for $548$ of the $880$ classes $\mathcal S(z)$ is a triangulation (\texttt{anc/verify\_structure.py}).
+For the $880$ order-four gems, $856$ have four vertical facets, $20$ have three and $4$ have two; the height functions of the $7040$ order-four magic squares induce $417$ distinct regular subdivisions of the $4\times4$ grid up to $D_4$, and for $548$ of the $880$ classes $\mathcal S(z)$ is a triangulation.
 
 \subsection{The census}
 \label{sec:census-4}
 
 There are $8$ magic squares of order $3$, all images of the Lo Shu under $D_4$, and $7{,}040$ of order $4$, forming $880$ $D_4$-classes; the order-four squares were listed by Fr\'enicle de Bessy \cite{frenicle1693} and have been recounted by computer \cite{beck2010enumeration}.
-Dudeney sorted them into twelve groups according to the pattern of complementary pairs $(a,17-a)$ \cite{dudeney1917amusements}; since the numbering of the groups differs between reproductions of his table, we list the labels used here, for all $7040$ squares together with the number $\#$ of their class, in \texttt{anc/all7040\_dudeney.tsv}.
+Dudeney sorted them into twelve groups according to the pattern of complementary pairs $(a,17-a)$ \cite{dudeney1917amusements} (Appendix~\ref{sec:appendix} records the group labels for all $7040$ squares).
 The number $275{,}305{,}224$ of magic squares of order five up to $D_4$ is due to Schroeppel (1973) \cite{gardner1976}; for order six see \cite{pinn1998number,mino2024order6,trump_howmany}.
 
 For each of the $880$ squares we computed $\mathcal G(S)$ exactly (integer facet inequalities, rational volumes; Appendix~\ref{sec:appendix}).
@@ -662,20 +649,24 @@ Let $S$ and $T$ be magic squares of order four. Then $\mathcal G(S)$ and $\mathc
 
 \begin{remark}[The vertex set determines the square]
 \label{rem:vertexset}
-If $S$, $T$ are magic squares of order four and $\hat g\operatorname{vert}\mathcal G(S)=\operatorname{vert}\mathcal G(T)$ for some $g\in D_4$, then $T=gS$.
-This is linear algebra plus a finite check.
-By \eqref{eq:d4}, $gS$ and $T$ have the same vertex set, so they have the same entries on the vertex cells and the same set $U$ of other cells.
-The ten line sums are linear equations for the entries on $U$, with the $0/1$ matrix $A_U$ of incidences between lines and cells of $U$; if $\operatorname{rank}A_U=|U|$, these entries are determined, and $T=gS$.
-This holds for $871$ of the $880$ classes; the rank and everything below are invariant under $D_4$, which permutes the lines.
-For the other nine, $\#45$, $\#46$, $\#47$, $\#49$, $\#50$, $\#54$, $\#165$, $\#166$ and $\#672$, we listed every magic square that has the entries of $S$ on the vertex cells of $S$: for five of them $S$ is the only one, and $\#45$, $\#47$, $\#50$, $\#54$ have $1$, $1$, $7$ and $7$ others (for $\#45$ the square $\#109$), but the gems of all these other squares have different vertex sets (\texttt{anc/vertex\_determination.py}).
-Since $g^{-1}T$ has the vertex set of $\mathcal G(S)$, it is one of these squares, so $g^{-1}T=S$.
+Remarkably, the vertices of an order-four magic gem suffice to reconstruct the entire magic square: if $S$ and $T$ are magic squares of order four and $\hat g\operatorname{vert}\mathcal G(S)=\operatorname{vert}\mathcal G(T)$ for some $g\in D_4$, then $T=gS$.
+To see why, note that by \eqref{eq:d4}, $gS$ and $T$ share the same vertex set, so they agree on all vertex cells and leave the same subset $U$ of non-vertex cells undetermined.
+The ten magic line-sum conditions provide a system of linear equations for the entries on $U$, governed by the $0/1$ incidence matrix $A_U$ between the ten lines and the cells of $U$. Whenever $\operatorname{rank}A_U=|U|$, the missing entries are uniquely determined by linear algebra alone.
+Direct calculation shows that $\operatorname{rank}A_U=|U|$ for $871$ of the $880$ $D_4$-classes.
+For the remaining nine classes ($\#45$, $\#46$, $\#47$, $\#49$, $\#50$, $\#54$, $\#165$, $\#166$ and $\#672$), enumerating all order-four magic squares that agree with $S$ on its vertex cells reveals that five classes admit no other completion, while $\#45$, $\#47$, $\#50$ and $\#54$ admit $1$, $1$, $7$ and $7$ alternative magic completions respectively (for instance, $\#109$ agrees with $\#45$ on its twelve vertices). In every such case, however, the alternative completion turns at least one cell of $U$ into a new vertex of the hull, so no two distinct squares share the exact same vertex set.
 \end{remark}
 
-\paragraph{Forced vertices and named squares.}
+\paragraph{Forced vertices and the geometry of the extreme squares.}
 For order four nothing beyond the forced vertices of \Cref{lem:forced} is a vertex of every gem: the only cells that carry a vertex in all $880$ gems are the four corners, and the only entries that always label a vertex are $1$ and $16$.
 In eight gems the point of the entry $2$ is a non-vertex boundary point, for instance for square \#593 below.
 The gems of the Lo Shu, of D\"urer's square and of the Siamese square of order $5$ have $8$ of $9$, $12$ of $16$ and $12$ of $25$ points as vertices and volumes $18$, $92$ and $830/3$.
-The gem of D\"urer's square is centrally symmetric with twelve vertices; exchanging its first two rows and its last two rows gives square \#802, whose gem has all sixteen points as vertices.
+
+The three extreme order-four gems highlighted in \Cref{fig:gem-geometry-880}(d)--(f) illustrate how the placement of the entries governs the polyhedral geometry:
+\begin{itemize}\setlength\itemsep{1pt}
+\item \emph{Minimum vertices and facets ($\#54$, $f=(8,14,8)$):} In square $\#54$ below, the top row $(1,6,11,16)$ and the bottom row $(4,7,10,13)$ are both arithmetic progressions. By \Cref{prop:subdivisions}(2), the lifted points along each of these two sides of the grid are collinear, eliminating both the front and back vertical facets and making $\#54$ one of the four order-four gems with only two vertical facets and the unique gem achieving the minimal $f$-vector $(8,14,8)$.
+\item \emph{All sixteen points as vertices ($\#802$, $V=16$):} The gem of D\"urer's square has $12$ boundary vertices and its $4$ central cells in the interior. Exchanging its first two rows and its last two rows produces square $\#802$, which moves the extreme entries $\{1,2,15,16\}$ from the boundary into the interior $2\times2$ core so that all four interior points pierce through the boundary canopy and all $16$ points become vertices.
+\item \emph{Maximum volume ($\#379$, $\operatorname{vol}=292/3$):} In square $\#379$, the four smallest entries $\{1,2,3,4\}$ and four largest entries $\{13,14,15,16\}$ alternate along the boundary and diagonals so that the upper concave surface $U$ is propped near the ceiling across the grid while the lower convex surface $L$ is pulled near the floor, maximizing the enclosed volume.
+\end{itemize}
 The squares cited in Figures~\ref{fig:weighted}, \ref{fig:symmetry} and~\ref{fig:gem-geometry-880} and in the text are
 {\small\[
 \setlength{\arraycolsep}{2pt}
@@ -696,35 +687,34 @@ The squares cited in Figures~\ref{fig:weighted}, \ref{fig:symmetry} and~\ref{fig
 \subsection{Which invariants see the line conditions}
 \label{sec:magic-vs-random}
 
-To see whether the gem distinguishes magic squares from other arrangements, we compared four nested families of order four: all $16!\approx2.09\cdot10^{13}$ arrangements, the $6{,}697{,}177{,}424$ arrangements with vanishing first moments (about one in $3124$; \texttt{anc/energy\_zeros\_count.py}), the $549{,}504$ semi-magic squares and the $7040$ magic squares (\Cref{tab:magic-vs-random}; \texttt{anc/magic\_vs\_random.py}).
+To understand how the line-sum conditions shape the geometry of the gem, we compare four nested families of arrangements of order four (\Cref{tab:magic-vs-random}): all $16!\approx2.09\cdot10^{13}$ arrangements, the $6{,}697{,}177{,}424$ arrangements whose heights have vanishing first moments $\sum z\,x=\sum z\,y=0$ (about one in $3124$), the $549{,}504$ semi-magic squares, and the $7040$ magic squares.
 
 \begin{table}[htbp]
 \centering
-\caption{Mean invariants of the gems of order four. The first three columns are estimates from $10^5$ uniform samples each (standard errors at most $0.006$ for the counts and the fractions, $0.024$ for the volume and $0.001$ for the centroid): arrangements, arrangements with $\sum z\,x=\sum z\,y=0$ (rejection sampling), and semi-magic squares (uniform over all $549{,}504$). The magic column is exact (all $7040$ squares). $d$: difference of the means of magic and semi-magic squares divided by the pooled standard deviation, over all squares and over those that are not self-complementary (s.-c.); its standard error is at most $0.034$ ($0.044$ in the last column). The solid centroid is the centre of mass of the solid $\mathcal G(S)$.}
+\caption{Mean invariants of the gems of order four across four nested families. The first three columns are estimates from $10^5$ uniform samples each (standard errors at most $0.006$ for the counts and fractions, $0.024$ for the volume and $0.001$ for the centroid): arbitrary arrangements, arrangements with vanishing first moments $\sum z\,x=\sum z\,y=0$ (rejection sampling), and semi-magic squares (uniform over all $549{,}504$). The magic column is exact over all $7040$ magic squares. The solid centroid is the centre of mass of the solid polytope $\mathcal G(S)$.}
 \label{tab:magic-vs-random}
 \scriptsize
-\setlength{\tabcolsep}{4pt}
+\setlength{\tabcolsep}{6pt}
 \input{anc/magic_vs_random.tex}
 \end{table}
 
-The counts barely move.
-The mean vertex count is $12.06$ for random arrangements, $12.12$ for semi-magic squares and $12.23$ for magic squares ($d=0.14$ against random arrangements, $0.08$ against semi-magic squares).
-Self-complementary magic squares have more vertices on average ($12.43$, against $12.09$ for the others; the $48$ associative ones average $11.88$), and they make up $40\%$ of the magic squares but $10\%$ of the semi-magic squares.
-This accounts for almost all of the excess over semi-magic squares: over the squares that are not self-complementary, magic and semi-magic squares differ by $0.017\pm0.004$ ($d=0.01$).
-It does not account for the excess over random arrangements: the magic squares that are not self-complementary still exceed random arrangements by $0.040\pm0.004$, about a quarter of the excess.
-The mean numbers of lower and of upper facets differ by less than $0.08$ between any two of the four families, and the mean number of vertical facets ($3.97$ to $4.00$) by less than $0.03$.
+As \Cref{tab:magic-vs-random} shows, the combinatorial counts are almost completely insensitive to the line-sum constraints.
+The mean number of vertices rises only slightly from $12.06$ for random arrangements and $12.12$ for semi-magic squares to $12.23$ for magic squares, while the mean numbers of lower and upper facets differ by less than $0.08$ across all four families and the mean number of vertical facets stays between $3.97$ and $4.00$.
+Even the small difference in vertex count between magic and semi-magic squares is largely an artifact of symmetry: self-complementary magic squares have more vertices on average ($12.43$ versus $12.09$ for asymmetric magic squares, with the $48$ associative squares averaging $11.88$), and self-complementary squares constitute $40\%$ of the magic squares compared with $10\%$ of the semi-magic squares. Restricting to non-self-complementary squares reduces the gap between magic and semi-magic mean vertex counts to $0.017\pm0.004$.
 
-The continuous invariants respond to the hypotheses one at a time.
-Vanishing first moments turn the principal axes of the solid towards the coordinate axes (the tilt $(\Sigma_{xz}^2+\Sigma_{yz}^2)^{1/2}$ of the covariance matrix $\Sigma$ of the solid falls from $0.73$ to $0.24$, $d=-1.82$) and add $6.0$ to the mean volume ($d=0.90$), but do not move the solid centroid; the row and column conditions move it towards the origin (from $0.35$ to $0.16$, $d=-1.16$) and add $1.0$ to the volume; and the diagonal conditions add another $1.4$ to the volume ($d=0.21$) and move the centroid further in ($d=-0.62$), also when the self-complementary squares are left out.
-Geometrically, $\operatorname{vol}\mathcal G(S)=\iint(U-L)$ for the upper concave and lower convex boundary functions $U,L$ of \Cref{prop:subdivisions}(4): along every line $L_0$ with $\sum_{c\in L_0}z_c=0$, convexity forces $\sum_{c\in L_0}L(c)\le0\le\sum_{c\in L_0}U(c)$, preventing $z$ from being convex or concave along the line and pushing $U$ and $L$ apart.
-A non-trivial isometry occurs for $40\%$ of the magic gems, $10\%$ of the semi-magic gems and almost none of the others, in both families exactly for the self-complementary squares (\Cref{prop:iso4}; for the semi-magic sample by computation, consistent with \Cref{prop:pointset}).
+By contrast, the continuous geometric invariants respond noticeably as each successive balance condition is imposed:
+\begin{enumerate}\setlength\itemsep{1pt}
+\item \emph{Vanishing first moments} align the principal axes of the solid with the coordinate axes (reducing the off-diagonal tilt $(\Sigma_{xz}^2+\Sigma_{yz}^2)^{1/2}$ of the solid's second-moment matrix from $0.73$ to $0.24$) and increase the mean volume from $75.75$ to $81.72$, without yet pulling the solid centroid toward the origin.
+\item \emph{Equal row and column sums} (the semi-magic condition) draw the solid centroid more than halfway toward the origin (from distance $0.35$ to $0.16$) and raise the mean volume to $82.68$.
+\item \emph{Equal main diagonal sums} increase the mean volume further to $84.05$ and pull the mean centroid distance down to $0.11$, an effect that persists even when self-complementary squares are excluded.
+\end{enumerate}
+There is a clean geometric reason why zero-sum lines inflate the volume of the hull. By \Cref{prop:subdivisions}(4), $\operatorname{vol}\mathcal G(S)=\iint(U-L)$, where $U$ is the concave upper boundary function and $L$ is the convex lower boundary function of the gem. Along any line $L_0$ of the grid on which $\sum_{c\in L_0}z_c=0$, the inequalities $L(c)\le z_c\le U(c)$ force
+\[
+\sum_{c\in L_0}L(c)\;\le\;0\;\le\;\sum_{c\in L_0}U(c).
+\]
+Consequently, $z$ cannot be uniformly convex or uniformly concave along $L_0$: a bowl-shaped or dome-shaped height profile (which would make $U$ and $L$ hug each other closely and produce a thin, small-volume hull) is forbidden along every zero-sum line, forcing the upper canopy $U$ and lower bowl $L$ apart.
 
-At order five all four families are sampled, $2\cdot10^4$ each, and every hull is certified exactly; the semi-magic squares and the magic squares (distinct $D_4$-classes) come from the annealer of Appendix~\ref{sec:vertexstats}, with other seeds than the larger magic sample of \Cref{tab:vertices}, whose hulls are computed in floating point.
-The distribution of the annealer at order five is not known; at order four it hits all $880$ magic classes and reproduces the uniform distribution of the semi-magic squares (Appendix~\ref{sec:vertexstats}).
-The mean vertex counts of random arrangements, arrangements with vanishing first moments, semi-magic and magic squares are $15.40$, $15.42$, $15.36$ and $15.39$ (standard errors $0.012$; $|d|\le0.04$; \Cref{tab:vertices} gives $15.38$ for its magic sample), the mean numbers of lower and of upper facets differ by at most $0.16$, and all but $16$ of the $8\cdot10^4$ gems have four vertical facets (the others have three).
-The volumes are $250.1$, $260.9$, $265.4$ and $268.5$ ($d=0.22$ for magic against semi-magic squares), and the distance of the solid centroid from the origin is $0.47$, $0.47$, $0.24$ and $0.22$ ($d=-0.10$).
-
-So the magic conditions hardly affect the vertex count; they show in the volume, the position of the solid and the frequency of symmetric squares, and beyond the row and column conditions only by a fraction of a standard deviation.
+A similar pattern appears in heuristic explorations at order five. Comparing $2\cdot10^4$ certified exact hulls each of uniform random arrangements, random arrangements with vanishing first moments, and order-five semi-magic and magic squares generated by simulated annealing (Appendix~\ref{sec:vertexstats}; note that the sampling distribution of the annealer at $n=5$ is not known to be uniform), the mean vertex counts are nearly identical across all four families ($15.40$, $15.42$, $15.36$ and $15.39$, with standard errors $0.012$), whereas the mean volumes climb steadily ($250.1$, $260.9$, $265.4$ and $268.5$) and the mean distance of the solid centroid from the origin drops from $0.47$ to $0.24$ and $0.22$.
 
 \section{Larger orders: Siamese and linear squares}
 \label{sec:siamese-gems}
@@ -799,7 +789,6 @@ For the second, the anti-diagonal has $\sigma=-1$, and the main diagonal $\sigma
 For $n=5,7,11$ the formula gives $184$, $3159$ and $89{,}125$ classes.
 For $n=9$ the units $r\equiv1\pmod3$ have $f(r)=1,3,3$ ($r=1,4,7$), those with $r\equiv2$ have $f=3,3,1$ ($r=2,5,8$), and $r-r'$ is a unit if and only if $r\not\equiv r'\pmod 3$; so there are $6^2\cdot2\cdot7^2=3528$ linear magic squares and $441$ classes.
 This explains the small number at $n=9$: when $3\mid n$ every linear magic square has, for each digit, a diagonal along which the digit is not a permutation of $\Z_n$, and the offsets are restricted accordingly.
-The script \texttt{anc/linear\_magic\_count.py} confirms the criterion and the count against the actual line sums of all $n^6$ parameter choices for $n=3,5,\dots,25$.
 
 \subsection{The Siamese theorem}
 
@@ -860,26 +849,28 @@ The entries $1$ and $N$ are among the side extremes, and for $m\ge2$ the eight s
 From now on let $m\ge2$. It remains to show that no point other than the twelve forced vertices is a vertex.
 
 \emph{Step 3: shear to five levels.}
-With $x=j-m$, $y=m-i$ and $\langle t\rangle=t-n\lfloor t/n\rfloor$ the closed form gives
+Why should the convex hull of $n^2$ points have only $12$ vertices for arbitrarily large $n$? The geometric key is that in the closed form $s(i,j)=n\langle i+j-m\rangle+\langle i+2j-2m\rangle+1$, the modular remainders differ from the linear functions $\ell_1=x-y+m$ and $\ell_2=2x-y+m$ (where $x=j-m$ and $y=m-i$) only by multiples of $n$ that record how many times each coordinate wraps around the torus. Since subtracting an affine function of $(x,y)$ and rescaling vertically is an affine shear that preserves the face lattice and vertex cells of the hull (\Cref{prop:subdivisions}(3)), we can subtract the global linear ramp $\lambda(x,y)=n\ell_1+\ell_2+1-\bar s$ from $z$. This collapses all $n^2$ lifted points onto just five flat horizontal terraces!
+
+Specifically, with $\langle t\rangle=t-n\lfloor t/n\rfloor$ the closed form gives
 \begin{gather*}
 z=\lambda(x,y)+n\,\zeta(x,y),\qquad \lambda(x,y)=n(x-y+m)+(2x-y+m)+1-\bar s,\\
 \zeta(x,y)=-n\Big\lfloor\tfrac{\ell_1}{n}\Big\rfloor-\Big\lfloor\tfrac{\ell_2}{n}\Big\rfloor,\qquad \ell_1=x-y+m,\quad \ell_2=2x-y+m=\ell_1+x .
 \end{gather*}
-The map $\Phi(x,y,z)=(x,y,(z-\lambda(x,y))/n)$ is a shear (an affine bijection that preserves vertical lines), so $\Phi(\mathcal G(S))=\operatorname{conv}\{(x,y,\zeta(x,y))\}$ has the same face lattice and vertex cells as $\mathcal G(S)$; equivalently, $\mathcal S(\pm z)=\mathcal S(\pm\zeta)$.
-After the shear the height $\zeta$ takes five values, and its level sets are the lattice points of five polygons $\Lambda_k$ (the \emph{level polygons}).
-Indeed, for $|x|,|y|\le m$ we have $-m\le\ell_1\le3m$ and $-2m\le\ell_2\le4m$, so both floors lie in $\{-1,0,1\}$.
+The shear $\Phi(x,y,z)=(x,y,(z-\lambda(x,y))/n)$ maps $\mathcal G(S)$ onto $\Phi(\mathcal G(S))=\operatorname{conv}\{(x,y,\zeta(x,y))\}$, which has the same face lattice and vertex cells as $\mathcal G(S)$ (equivalently, $\mathcal S(\pm z)=\mathcal S(\pm\zeta)$).
+For $|x|,|y|\le m$ we have $-m\le\ell_1\le3m$ and $-2m\le\ell_2\le4m$, so both wrap-around quotients $\lfloor\ell_1/n\rfloor$ and $\lfloor\ell_2/n\rfloor$ lie in $\{-1,0,1\}$.
 If $\ell_1<0$, then $x\le y-m-1\le-1$, so $\ell_2<0$ and $\zeta=n+1$.
 If $\ell_1\ge n$, then $x\ge y+m+1\ge1$, so $\ell_2\ge n$ and $\zeta=-(n+1)$.
 If $0\le\ell_1\le2m$, then $\lfloor\ell_2/n\rfloor=-1,0,1$ according as $y\ge2x+m+1$, $|y-2x|\le m$, or $y\le2x-m-1$.
 Conversely, if $|y-2x|\le m$, then $\ell_1<0$ is impossible, since it would force $\ell_2<0$, i.e.\ $y\ge2x+m+1$; likewise $\ell_1\ge n$ would force $y\le2x-m-1$.
-So, in the box $|x|,|y|\le m$ (\Cref{fig:siamese-layers}a):
+Thus, across the grid $|x|,|y|\le m$, the sheared height $\zeta$ takes only five values, partitioning the grid into five polygonal terraces (\emph{level polygons}; \Cref{fig:siamese-layers}a):
 $\zeta=n+1$ on $\Lambda_{+2}=\{y\ge x+m+1\}=\operatorname{conv}\{(-m,m),(-1,m),(-m,1)\}$;
 $\zeta=1$ on $\Lambda_{+1}=\{2x+m+1\le y\le x+m\}=\operatorname{conv}\{(-m,0),(-m,1-m),(-1,m-1)\}$;
 $\zeta=0$ on $\Lambda_{0}=\{|y-2x|\le m\}=\operatorname{conv}\{(-m,-m),(0,m),(m,m),(0,-m)\}$;
 and $\zeta=-1$, $-(n+1)$ on $\Lambda_{-1}=-\Lambda_{+1}$, $\Lambda_{-2}=-\Lambda_{+2}$.
 
 \emph{Step 4: the hull.}
-Let $q_1,\dots,q_{12}$ be the images under $\Phi$ of the twelve forced vertices and $q_{13},\dots,q_{16}$ the remaining four vertices of the level polygons; their coordinates are in \Cref{tab:slacks}.
+Because every sheared grid point on a level polygon $\Lambda_k$ is a convex combination of the corners of $\Lambda_k$ at the same height $\zeta$, only the $3+3+4+3+3=16$ corners of the five level polygons can be extreme points of $\Phi(\mathcal G(S))$.
+Let $q_1,\dots,q_{12}$ be the images under $\Phi$ of the twelve forced vertices and $q_{13},\dots,q_{16}$ the remaining four corners of the level polygons; their coordinates are listed in \Cref{tab:slacks}.
 Let $H$ be the polyhedron defined by the eight inequalities below and their images $(1')$--$(8')$ under $-\mathrm{id}$.
 Inequality $(k)$ is the plane through the first three points of its list below (its normal is the cross product of two edge vectors):
 \begin{align*}
@@ -929,8 +920,7 @@ The inner products of $\tilde q_1$ with $\tilde q_2,\dots,\tilde q_6$ are $2m^3+
 \resizebox{\textwidth}{!}{\input{anc/siamese_slacks.tex}}
 \end{table}
 
-All entries of \Cref{tab:slacks} and the closure of the facet list are verified by \texttt{anc/siamese\_slacks.py} in exact polynomial arithmetic.
-As a cross-check, not part of the proof, the theorem agrees with certified exact hull computations for $n=3,5,\dots,41$ (\texttt{anc/verify\_structure.py}).
+All entries of \Cref{tab:slacks} and the closure of the facet list are verified symbolically in exact polynomial arithmetic (Appendix~\ref{sec:appendix}), and as an independent cross-check the theorem agrees with certified exact hull computations for $n=3,5,\dots,41$.
 For $m=1$ several entries vanish and the four triangles degenerate.
 
 \begin{figure}[htbp]
@@ -985,13 +975,12 @@ The quadrilaterals are convex in the listed order: $(2)$ is the trapezoid of Ste
 These fourteen polygons have $24$ edges, each shared by exactly two of them, so by \Cref{lem:closing}, with $W$ the twelve points $\pm q_1,\pm q_2,\pm q_3,\pm q_5,\pm q_6,\pm q_{13}$ ($q_7=-q_6$, $q_8=-q_5$), they are the facets of $\Phi'(\mathcal G(S'))=H'$.
 Mapping back by $(i,j)=(m-y,x+m)$ gives the listed cells; the forced ones are the corners, $(0,m)$ and $(2m,m)$ (the entries $1$ and $N$), $(1,2m)$ (the smallest entry of the right column) and $(2m-1,0)$ (the largest of the left column).
 For the isometries argue as in Step~5: the squared norms of the six antipodal pairs of vertices in the original coordinates are $2m^2+1$, $4m^4-4m^3-5m^2+4m+4$, $4m^4-3m^2+2$, $4m^4+4m^3-m^2-4m+2$, $m^2(4m^2+4m+3)$, $m^2(4m^2+8m+5)$ (over $(m-1,0)$, $(0,0)$, $(0,m-1)$, $(2m-1,0)$, $(2m,0)$, $(2m,m)$), pairwise distinct for $m\ge2$, and the inner products of the vertex over $(0,0)$ with the other five are non-zero for $m\ge2$.
-All of this is checked in exact polynomial arithmetic by \texttt{anc/digit\_exchanged\_slacks.py}, which applies the same certificate to the Siamese square as a cross-check.
 \end{proof}
 
 \begin{remark}[Vertex counts of linear squares]
 \label{rem:linear}
 The gems of other linear squares do not share the twelve-vertex count.
-Over all linear magic squares, counted up to $D_4$ (each family is closed under complementation; complements are not identified), the vertex counts range over $[11,18]$ for $n=5$ ($184$ classes), $[12,25]$ for $n=7$ ($3159$ classes), $[12,31]$ for $n=9$ ($441$ classes) and $[12,36]$ for $n=11$ ($89{,}125$ classes) (\texttt{anc/linear\_squares.py}, exact hulls), and over $[12,41]$, $[12,38]$, $[12,48]$, $[12,51]$ and $[12,48]$ for $n=13,15,17,19,21$ ($283{,}176$, $1472$, $1{,}713{,}664$, $3{,}558{,}249$ and $25{,}272$ classes; \texttt{anc/linear\_census.py}).
+Over all linear magic squares, counted up to $D_4$ (each family is closed under complementation; complements are not identified), the vertex counts range over $[11,18]$ for $n=5$ ($184$ classes), $[12,25]$ for $n=7$ ($3159$ classes), $[12,31]$ for $n=9$ ($441$ classes) and $[12,36]$ for $n=11$ ($89{,}125$ classes) by exact hull computation, and over $[12,41]$, $[12,38]$, $[12,48]$, $[12,51]$ and $[12,48]$ for $n=13,15,17,19,21$ ($283{,}176$, $1472$, $1{,}713{,}664$, $3{,}558{,}249$ and $25{,}272$ classes).
 For $n\ge13$ the counts are floating-point (Quickhull) counts, and every class with at most $13$ vertices or with the largest count is certified with the exact hull; for $n\le11$ the Quickhull vertex sets agree with the exact ones for every class.
 For $n=5$ the minimum $11$ is attained by two classes, complements of each other, both pandiagonal and not associative, with $f$-vector $(11,23,14)$; one is $s=5\langle4i+3j\rangle+\langle4i+2j\rangle+1$ ($\mathbf u=(-1,-2)$, $\mathbf w=(-1,2)$, $\alpha=\beta=0$), the first square below.
 \[
@@ -1000,7 +989,7 @@ For $n=5$ the minimum $11$ is attained by two classes, complements of each other
 \begin{pmatrix}1&19&15&13&17\\23&5&14&20&3\\10&21&12&4&18\\24&9&8&22&2\\7&11&16&6&25\end{pmatrix}
 \]
 For $7\le n\le21$ the minimum $12$ is attained by exactly two classes, those of the Siamese and the digit-exchanged square (\Cref{thm:siamese}, \Cref{prop:exchanged}); for $n\ge13$ this relies on the floating-point counts of the other classes.
-The Siamese gem is not vertex-minimal at order five: simulated annealing (Appendix~\ref{sec:vertexstats}) found $15$ $D_4$-classes of magic squares of order $5$ whose gems have $10$ vertices (\texttt{anc/sa\_n5\_V10.txt}). For example, the second square above has $f$-vector $(10,22,14)$, volume $845/3$ and $8$ interior points.
+The Siamese gem is not vertex-minimal among all magic squares at order five: simulated annealing (Appendix~\ref{sec:vertexstats}) found $15$ $D_4$-classes of magic squares of order $5$ whose gems have $10$ vertices. For example, the second square above has $f$-vector $(10,22,14)$, volume $845/3$ and $8$ interior points.
 \end{remark}
 
 \subsection{Fixed steps and the largest vertex count}
@@ -1036,7 +1025,7 @@ The details are in Appendix~\ref{sec:app-fixed-steps}.
 
 So the vertex count along such a family is bounded, as it is for the Siamese and the digit-exchanged squares, but the bound, $n_0$ and the eventual $f$-vectors are not explicit.
 The least period can be smaller than $\delta L$: for the Siamese family $\delta L=4$ and the $f$-vector is constant for $n\ge5$.
-In computations it can equal $\delta L$: for $\mathbf u=(1,3)$, $\mathbf w=(3,1)$, $\alpha=\beta=0$ we have $\delta=1$ and $L=24$, and the exact hulls satisfy $f(\mathcal G_n)=f(\mathcal G_{n+24})$ for $150\le n\le197$, with no smaller shift doing so on that range (\texttt{anc/linear\_fixed\_steps.py}).
+In computations it can equal $\delta L$: for $\mathbf u=(1,3)$, $\mathbf w=(3,1)$, $\alpha=\beta=0$ we have $\delta=1$ and $L=24$, and the exact hulls satisfy $f(\mathcal G_n)=f(\mathcal G_{n+24})$ for $150\le n\le197$, with no smaller shift doing so on that range.
 
 The bound depends on the family, and the largest vertex counts in \Cref{rem:linear} grow with $n$.
 That they are unbounded follows from Rubin's example of triangles whose integer hulls have arbitrarily many vertices \cite{rubin1970}.
@@ -1079,7 +1068,6 @@ Now apply \Cref{prop:many-vertices}.
 \end{proof}
 
 The bound is far below the computed maxima of \Cref{rem:linear} (the square of the proof has $18$ vertices at $n=7$, where the bound is $4$) and covers only prime orders, but its order of magnitude $\Theta(\ln n)$ is sharp: choosing balanced residues $u_1,u_2,w_1,w_2\in(-n/2,n/2]\cap\Z$ and $\alpha,\beta\in\{0,\dots,n-1\}$ restricts the floor pair $(\lfloor t_A/n\rfloor,\lfloor t_B/n\rfloor)$ in Step~1 of Appendix~\ref{sec:app-fixed-steps} to at most $25$ values on the grid, so the sheared points lie on at most $25$ level polygons $P_{ab}(n)\subseteq[0,n-1]^2$ defined by at most $8$ linear inequalities each, and the integer hull of any polygon with a bounded number of sides in $[0,n-1]^2$ has $O(\ln n)$ vertices \cite[Sect.~2]{zolotykh2006vertices}.
-Lemma~\ref{lem:fib-triangle}, Proposition~\ref{prop:many-vertices} and Corollary~\ref{cor:many-vertices} are checked by exact computation for $k\le15$, for $k\le3$ at $n=7,29,173$, and at every prime $7\le n<120$ (\texttt{anc/linear\_fixed\_steps.py}).
 
 \section{Open questions}
 \label{sec:discussion}
@@ -1142,10 +1130,11 @@ Isometry groups of a finite set $X$ (a vertex set or a full point set) are compu
 Congruence of two finite sets is tested by comparing the sorted multisets of squared distances and then by an isomorphism test of the complete graphs with squared distances as edge labels; for the $880$ gems the multisets alone certify the classes (\Cref{prop:congruence}).
 \Cref{prop:pointset} is checked in the same way for all $880$ squares and for the Siamese squares of orders $3$ to $15$.
 
-\paragraph{Polynomial identities.}
-The slack polynomials of \Cref{tab:slacks} are computed with SymPy; a polynomial $p$ is certified positive for all integers $m\ge2$ by non-negativity of all coefficients of $p(2+t)$ and $p(2)>0$.
+\paragraph{Polynomial identities and ancillary scripts.}
+The slack polynomials of \Cref{tab:slacks} are computed with SymPy (\texttt{anc/siamese\_slacks.py}); a polynomial $p$ is certified positive for all integers $m\ge2$ by non-negativity of all coefficients of $p(2+t)$ and $p(2)>0$.
 The same script checks the closure of the facet list and the norms and inner products of Step~5.
 For the digit-exchanged square, \texttt{anc/digit\_exchanged\_slacks.py} applies the same certificate, written once for both squares (it reproduces \Cref{thm:siamese} as a cross-check), to the slacks of \Cref{tab:slacks-exchanged}; it also checks, for $n=5,\dots,61$, that the sheared points of $s'$ have the five level sets used in the proof of \Cref{prop:exchanged} and satisfy all fourteen inequalities.
+Among the other ancillary files in \texttt{anc/}, \texttt{squares880.txt} and \texttt{all7040\_dudeney.tsv} list the Fr\'enicle standard forms and Dudeney group labels of the order-four squares; \texttt{verify\_structure.py}, \texttt{congruent\_facets.py} and \texttt{vertex\_determination.py} verify the order-four census, facet congruences and vertex-set determination (Sections~\ref{sec:symmetry} and~\ref{sec:census}); \texttt{energy\_zeros\_count.py} and \texttt{magic\_vs\_random.py} produce \Cref{tab:magic-vs-random}; and \texttt{linear\_magic\_count.py}, \texttt{linear\_squares.py}, \texttt{linear\_census.py}, \texttt{linear\_fixed\_steps.py} and \texttt{sa\_n5\_V10.txt} verify the counts and bounds of \Cref{sec:siamese-gems}.
 
 \begin{table}[htbp]
 \centering

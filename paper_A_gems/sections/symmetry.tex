@@ -40,14 +40,14 @@ Let $S$ and $T$ be arrangements of order $n\ge2$ with $\sum z_{ij}x_{ij}=\sum z_
 \end{proposition}
 
 \begin{proof}
-An isometry of $\R^3$ mapping one finite set onto another maps centroid to centroid, and both centroids are $\mathbf 0$ (\Cref{lem:lines}(1)); so $\psi$ is orthogonal, and $\psi\Sigma_S\psi^{\top}=\Sigma_T$ for the covariance matrices.
+An isometry of $\R^3$ mapping one finite set onto another maps centroid to centroid, and both centroids are $\mathbf 0$ (\Cref{lem:lines}(1)); so $\psi$ is orthogonal, and $\psi\Sigma_S\psi^{\top}=\Sigma_T$ for the second-moment matrices.
 By \Cref{lem:cov}, $\Sigma_S=\Sigma_T=\operatorname{diag}(a_n,a_n,b_n)$ with $a_n\neq b_n$, so $\psi$ commutes with $\Sigma_S$ and preserves its eigenspaces, the plane $z=0$ and the $z$-axis: $\psi=\operatorname{diag}(B,\varepsilon)$ with $B\in O(2)$ and $\varepsilon=\pm1$.
-The projection of both point sets to the plane is the grid, so $B$ is a symmetry of the grid, that is, an element $g\in D_4$; hence $\psi=\hat g$ or $\psi=\hat g\tau$.
+Since $\psi=\operatorname{diag}(B,\varepsilon)$ commutes with orthogonal projection onto the plane $z=0$, and the projection of both point sets is the $n\times n$ grid, $B$ is a symmetry of the grid, that is, an element $g\in D_4$; hence $\psi=\hat g$ or $\psi=\hat g\tau$.
 By \eqref{eq:d4}, $\hat g(P_S)=P_{gS}$ and $\hat g\tau(P_S)=P_{g\overline S}$, and the point set determines the arrangement; this proves (1), and (2) follows.
 For (3) take $T=S$: $\hat g(P_S)=P_S$ forces $gS=S$, hence $g=\mathrm{id}$, and $\hat g\tau(P_S)=P_S$ forces $g\overline S=S$, i.e.\ $\overline S=g^{-1}S=gS$ by \Cref{lem:selfcomp}.
 \end{proof}
 
-The diagonal conditions play no role.
+Notice that the diagonal line sums play no role in \Cref{prop:pointset}: vanishing horizontal first moments alone lock the principal axes of the point set to the grid.
 
 \subsection{The isometry groups of the order-four gems}
 \label{sec:iso4}
@@ -115,7 +115,7 @@ If $S$ is associative, $\iota_g=-\mathrm{id}$, and a face fixed by $-\mathrm{id}
 \end{proof}
 
 The hypothesis is needed: the natural square of order $3$ is associative, but its gem is a parallelogram and has no interior points.
-For $n=4$ the $48$ associative gems have $V^\circ\in\{0,2,4\}$ ($4$, $23$ and $21$ gems), and among the $528$ squares that are not self-complementary all four combinations of the parities of $V$ and $V^\circ$ occur (\texttt{anc/verify\_structure.py}).
+For $n=4$ the $48$ associative gems have $V^\circ\in\{0,2,4\}$ ($4$, $23$ and $21$ gems), and among the $528$ squares that are not self-complementary all four combinations of the parities of $V$ and $V^\circ$ occur.
 
 \begin{remark}[Facet orbits of the half-turns]
 \label{rem:facet-orbits}
@@ -127,8 +127,7 @@ The half-turn $\iota_h$ (the case $\iota_v$ is the same after the reflection $d$
 An isometry of a gem maps facets to congruent facets, so the facets of the $352$ self-complementary gems of order four come in congruent pairs, apart from the facets fixed by a half-turn (\Cref{rem:facet-orbits}), none of which is congruent to another facet.
 These isometries are diagonal matrices, so the pairs stay congruent when the heights are rescaled, as in printed models and paper nets.
 Similarly, since $-\mathrm{id}\,\mathcal G(S)=\mathcal G(r^2\overline S)$, every upper facet of $\mathcal G(S)$ is parallel and congruent to a lower facet of the half-turned complement $\mathcal G(r^2\overline S)$, allowing copies of a gem and its complement twin to stack face-to-face into periodic columns; for instance, in square $\#762$ the entries $\{13,14,15,16\}$ lie on a centred knight's-move square of area $5$ and are coplanar ($z=6-\frac15(3x-y)$), forming a quadrilateral upper facet matched by $\{1,2,3,4\}$ below.
-Congruence without symmetry is rare: of the $528$ gems with trivial isometry group, $182$ have congruent facets, $480$ of their $8858$ facets in $230$ classes of triangles and $10$ of quadrilaterals; with the heights scaled by $1/5$ these numbers drop to $130$ gems and $332$ facets.
-The symmetric gems have congruences beyond their symmetry in $28$ cases, and in $9$ after scaling (\texttt{anc/congruent\_facets.py}).
+Accidental congruences between facets not related by an isometry of $\mathcal G(S)$ also occur among the order-four gems ($182$ of the $528$ asymmetric gems and $28$ of the $352$ symmetric gems have at least one such pair), though unlike symmetry-forced congruences most of these accidental matches disappear when the vertical coordinate is rescaled relative to the horizontal grid.
 \end{remark}
 
 \begin{remark}[Repeating chains of facets]
@@ -138,5 +137,5 @@ This is easiest to see on belts.
 If a plane through $\mathbf 0$ contains no point $\mathbf p_c$, the facets that it crosses, taken in order along the boundary of the section of the gem by the plane, form a closed chain in which consecutive facets share an edge.
 If an isometry of the gem maps the plane to itself and acts on it as a half-turn about $\mathbf 0$, it preserves the cyclic order of the edges of the section and fixes none of them, so it maps the chain to itself shifted half way round: the second half of the chain repeats the first. If it acts on the plane as a reflection, it reverses the chain.
 So for an associative square the chain along the plane $z=0$ of the mean entry repeats after half a turn, and so does, for the other self-complementary squares, the chain along the vertical plane through $\mathbf 0$ perpendicular to the axis of the half-turn; along $z=0$ the half-turn reverses its chain, which then reads the same in both directions.
-For order four these chains have $8$ or $10$ facets for the associative gems, and $4$ to $14$ facets around the axis for the others (\texttt{anc/congruent\_facets.py}).
+For order four these chains have $8$ or $10$ facets for the associative gems, and $4$ to $14$ facets around the axis for the others.
 \end{remark}

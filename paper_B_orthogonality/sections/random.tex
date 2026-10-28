@@ -2,7 +2,7 @@
 \label{sec:random_energy}
 
 This section specialises classical results on permutation statistics.
-The energies are quadratic forms $z^{\mathsf T}Az$ in a random permutation $z$ of fixed values, i.e.\ quadratic assignment statistics, a form that goes back to Daniels's generalised correlation coefficient \cite{daniels1944}; Bloemena \cite{bloemena1964} proved asymptotic normality for the number of edges of a graph joining randomly sampled points, Mantel \cite{mantel1967} and Hubert \cite{hubert1987assignment} give the general mean and variance, and Zhao, Bai, Chao and Liang \cite{zhao1997} and Barbour and Chen \cite{barbour2005} treat the normal approximation by Stein's method.
+The energies are quadratic forms $z^{\mathsf T}Az$ in a random permutation $z$ of fixed values, i.e.\ quadratic assignment statistics, a form that goes back to Daniels's generalised correlation coefficient \cite{daniels1944}; Bloemena \cite{bloemena1964} proved asymptotic normality for the number of edges of a graph joining randomly sampled points, and Mantel \cite{mantel1967} and Hubert \cite{hubert1987assignment} give the general mean and variance.
 What is specific here is the evaluation of the invariants for the energies, with its dependence on the parity of $n$ (\Cref{thm:var_closed}).
 
 Let $S$ be a uniformly random arrangement: $z_c=b_{\pi(c)}$ with $\pi$ uniform and $b$ the centred values $b_v=v-\frac{N+1}2$, $1\le v\le N$.
@@ -59,7 +59,7 @@ By \eqref{eq:loly_identity}, $I(S)-\frac{n^2(n^4-1)}{12}=N\,T_{x^2+y^2}$, so \Cr
 Since $x^2$ depends only on the column and $y^2$ only on the row, $\widetilde{x^2}\perp\widetilde{y^2}$, so $\|\widetilde{x^2+y^2}\|^2=2\bigl(\langle x^4,\mathbf 1\rangle-\langle x^2,\mathbf 1\rangle^2\bigr)$ with $\langle x^2,\mathbf 1\rangle=\frac{n^2-1}{12}$ and $\langle x^4,\mathbf 1\rangle=\frac{(n^2-1)(3n^2-7)}{240}$, which gives $\frac{(n^2-1)(n^2-4)}{90}$.
 \end{proof}
 
-For $n=3$, $\Var(I)=30$ and $I$ takes $29$ values from $46$ to $74$; for $n=4$, $\Var(I)=2176/3$ and $\Pr(I=340)=13049/450450\approx0.029$ (\texttt{anc/verify\_numbers.py}).
+For $n=3$, $\Var(I)=30$ and $I$ takes $29$ values from $46$ to $74$; for $n=4$, $\Var(I)=2176/3$ and $\Pr(I=340)=13049/450450\approx0.029$.
 
 \subsection{Variances}
 \label{sec:random_var}
@@ -76,13 +76,17 @@ Let $A$ be a symmetric $N\times N$ matrix with zero row sums, $N\ge4$, and let $
 \end{equation}
 \end{proposition}
 
-\begin{proof}[Proof (sketch; details in Appendix~\ref{sec:app_variance})]
-Expand $\E[(z^{\mathsf T}Az)^2]=\sum_{a,b,c,d}A_{ab}A_{cd}\E[z_az_bz_cz_d]$ according to the equality pattern of $(a,b,c,d)$, a set partition of $\{1,2,3,4\}$, and apply M\"obius inversion on the partition lattice, so that each pattern contributes an unrestricted sum.
-An unrestricted sum in which some index occurs in only one factor $A_{\cdot\cdot}$ is a row sum of $A$, hence $0$.
-Only the four partitions without singletons survive, $12|34$, $13|24$, $14|23$ and $1234$, contributing $(\tr A)^2$, $\tr A^2$, $\tr A^2$ and $\sum_aA_{aa}^2$, with coefficients given by the joint moments of a random permutation of the centred values.
+\begin{proof}
+Because $\sum_vb_v=0$, the power sums $p_r=\sum_vb_v^r$ satisfy $\E[z_a^2]=p_2/N$ and $\E[z_az_b]=-p_2/(N)_2$ for $a\ne b$, where $(N)_k=N(N-1)\cdots(N-k+1)$. Since each row of $A$ sums to zero, $\sum_{a\ne b}A_{ab}=-\tr A$, giving $\E[z^{\mathsf T}Az]=\frac{p_2}{N-1}\tr A=\frac{N(N+1)}{12}\tr A$.
+
+To compute the second moment $\E[(z^{\mathsf T}Az)^2]=\sum_{a,b,c,d}A_{ab}A_{cd}\E[z_az_bz_cz_d]$, observe that the expectation $m_\nu=\E[z_az_bz_cz_d]$ depends only on the equality pattern of the $4$-tuple $(a,b,c,d)$, which is a set partition $\nu$ of $\{1,2,3,4\}$. Let $S^=(\nu)$ be the restricted sum of $A_{ab}A_{cd}$ over tuples with exact equality pattern $\nu$, and let $S^\ge(\nu')=\sum_{\nu\ge\nu'}S^=(\nu)$ be the \emph{unrestricted} sum over all tuples satisfying at least the equalities of $\nu'$. By M\"obius inversion on the partition lattice $\Pi_4$,
+\[
+\E[(z^{\mathsf T}Az)^2]=\sum_{\nu\in\Pi_4}m_\nu S^=(\nu)=\sum_{\nu'\in\Pi_4}\theta(\nu')S^\ge(\nu'),\qquad\text{where}\quad \theta(\nu')=\sum_{\nu\le\nu'}\mu(\nu,\nu')m_\nu.
+\]
+Here the zero-row-sum hypothesis produces a dramatic simplification: if a partition $\nu'$ contains any singleton block, the corresponding cell index appears in only one factor of $A_{ab}A_{cd}$ and is summed freely over all cells, yielding a row sum of $A$, which is zero! Thus $S^\ge(\nu')=0$ for all eleven partitions with singletons. Only the four singleton-free partitions survive: the three pair partitions $12|34$, $13|24$, $14|23$—which evaluate to $(\tr A)^2$, $\tr(A^2)$, and $\tr(A^2)$—and the single-block partition $1234$, which evaluates to $\sum_a A_{aa}^2$. Substituting the M\"obius coefficients $\theta(12|34)=m_{22}-2m_{211}+m_{1111}$ and $\theta(1234)=m_4-4m_{31}-3m_{22}+12m_{211}-6m_{1111}$ along with $p_2=N(N^2-1)/12$ and $p_4=N(N^2-1)(3N^2-7)/240$ (Appendix~\ref{sec:app_variance}) and subtracting $(\E[z^{\mathsf T}Az])^2$ yields \eqref{eq:var_identity}.
 \end{proof}
 
-For the energies the three invariants are explicit; this is where the parity of $n$ enters, through the centre cell shared by the two diagonals when $n$ is odd.
+For the energies $\Efour$ and $\Efull$, the three trace invariants are explicit rational functions of $n$ (Appendix~\ref{sec:app_variance}); even and odd orders $n$ give different rational expressions because the two main diagonals intersect at the centre cell if and only if $n$ is odd, yet their asymptotic expansions agree to the first three leading orders.
 
 \begin{theorem}[Variances of the energies]
 \label{thm:var_closed}
