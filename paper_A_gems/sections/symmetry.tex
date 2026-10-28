@@ -24,7 +24,7 @@ The map $\iota_g=\hat g\,\tau$ is an isometry of $\R^3$ that maps the point set 
 \begin{proof}
 If also $\overline S=g'S$ then $g^{-1}g'$ fixes $S$; as the entries are distinct it fixes every cell, and $D_4$ acts faithfully on the cells, so $g=g'$.
 Since complementation commutes with $g$, $g^2S=g\overline S=\overline{gS}=\overline{\overline S}=S$, so $g^2=\mathrm{id}$.
-If $g$ fixes a cell $c$ then $s_c=N+1-s_c=2\bar s$.
+If $g$ fixes a cell $c$ then $2s_c=N+1=2\bar s$, so $s_c=\bar s$.
 The involutions of $D_4$ are $r^2$, $h$, $v$ and the two diagonal reflections; the diagonal reflections fix $n\ge2$ cells, $h$ and $v$ fix the $n$ cells of the middle column or row when $n$ is odd and none when $n$ is even, and $r^2$ fixes only the centre cell when $n$ is odd.
 Finally, the points of $S$ are mapped by $\tau$ to those of $\overline S=gS$, and by $\hat g=\hat g^{-1}$ back to those of $g^2S=S$, by \eqref{eq:d4}.
 \end{proof}
@@ -126,6 +126,7 @@ The half-turn $\iota_h$ (the case $\iota_v$ is the same after the reflection $d$
 \label{rem:congruent-facets}
 An isometry of a gem maps facets to congruent facets, so the facets of the $352$ self-complementary gems of order four come in congruent pairs, apart from the facets fixed by a half-turn (\Cref{rem:facet-orbits}), none of which is congruent to another facet.
 These isometries are diagonal matrices, so the pairs stay congruent when the heights are rescaled, as in printed models and paper nets.
+Similarly, since $-\mathrm{id}\,\mathcal G(S)=\mathcal G(r^2\overline S)$, every upper facet of $\mathcal G(S)$ is parallel and congruent to a lower facet of the half-turned complement $\mathcal G(r^2\overline S)$, allowing copies of a gem and its complement twin to stack face-to-face into periodic columns; for instance, in square $\#762$ the entries $\{13,14,15,16\}$ lie on a centred knight's-move square of area $5$ and are coplanar ($z=6-\frac15(3x-y)$), forming a quadrilateral upper facet matched by $\{1,2,3,4\}$ below.
 Congruence without symmetry is rare: of the $528$ gems with trivial isometry group, $182$ have congruent facets, $480$ of their $8858$ facets in $230$ classes of triangles and $10$ of quadrilaterals; with the heights scaled by $1/5$ these numbers drop to $130$ gems and $332$ facets.
 The symmetric gems have congruences beyond their symmetry in $28$ cases, and in $9$ after scaling (\texttt{anc/congruent\_facets.py}).
 \end{remark}

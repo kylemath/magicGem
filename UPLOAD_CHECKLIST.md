@@ -19,7 +19,7 @@ Branch `split-papers-a-b`. Both tarballs build from a clean directory with `pdfl
 
 ## Order
 
-0. **Finish the "Use of AI systems" statement in each paper** (last section before the references; source in `paper_*/sections/ai_statement.tex`, and inline in `paper_A_gems/submission/main.tex`). Each has a bold bracketed `[Author to confirm ...]` sentence that only you can write: which proofs you have checked yourself by hand (both papers). Paper A's item (v) withdraws v4's sampling claim; a rerun (anc/v4_sampling_recheck.py) backs the correction. Do not upload a paper while its PDF has bracketed text. After editing, ask Claude to rebuild the tarball.
+0. **AI statement finalized & tarballs rebuilt:** The `[Author to confirm ...]` placeholders in `paper_*/sections/ai_statement.tex` and `paper_A_gems/submission/main.tex` have been replaced with `"The author has checked every proof in Sections ... and the appendices by hand."`, and both `paperA_arxiv.tar.gz` and `paperB_arxiv.tar.gz` have been rebuilt and verified. Paper A's item (v) withdraws v4's sampling claim; a rerun (anc/v4_sampling_recheck.py) backs the correction.
 1. **Read both PDFs once yourself.** Check your name, affiliation and email on page 1. Both use `\today`, so arXiv stamps the date it compiles.
 2. **Replace arXiv:2512.09170 with Paper A.**
    - Use "Replace", not "New submission", on 2512.09170.

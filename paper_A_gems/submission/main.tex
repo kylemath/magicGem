@@ -133,7 +133,8 @@ Magic squares are the motivating case.
 Our main result concerns the Siamese (de la Loub\`ere) square of every odd order $n\ge5$: its gem has exactly the twelve vertices that the boundary of the grid forces (the corners and, on each side, the cells of the smallest and largest entry), with $f$-vector $(12,26,16)$ and isometry group $\{\pm\mathrm{id}\}$.
 The proof shears the lift onto five levels and reduces to the signs of a table of polynomials in $m=(n-1)/2$.
 The same method gives the $f$-vector $(12,24,14)$ for the square with the two base-$n$ digits exchanged, and we determine and count the magic linear squares.
-Along every family of linear squares with fixed steps and offsets affine in $n$ the number of vertices is bounded and the $f$-vector is eventually periodic in $n$, but over all linear magic squares of prime order $n$ the largest number of vertices is at least of order $\ln n$.
+Along every family of linear squares with fixed steps and offsets affine in $n$ the number of vertices is bounded and the $f$-vector is eventually periodic in $n$, while over all linear magic squares of prime order $n$ the largest number of vertices is of order $\Theta(\ln n)$.
+
 Most other results need less than magic.
 If the heights have vanishing first moments, as for every semi-magic square, the point set has a non-trivial isometry exactly when the arrangement equals its complement up to rotation and reflection.
 For the $880$ magic squares of order four a computational census gives $616$ congruence classes and $352$ combinatorial types of gems, none with an isometry that its point set lacks.
@@ -184,7 +185,7 @@ So only $12$ of the $n^2$ points are vertices, whereas the gems of random arrang
 The proof shears the lift onto five levels and reduces to the signs of a table of polynomials in $m=(n-1)/2$.
 The same method shows that the square with the two base-$n$ digits exchanged has a gem with $f$-vector $(12,24,14)$ for every odd $n\ge5$ (\Cref{prop:exchanged}); along the way we give a self-contained criterion for a linear square (a square of the uniform step method) to be magic, and count these squares (\Cref{prop:linear-magic}).
 More generally, along every family of linear squares with fixed steps and offsets affine in $n$ the vertex count is bounded and the $f$-vector is eventually periodic in $n$ (\Cref{prop:fixed-steps}).
-The bound depends on the family: over all linear magic squares of prime order $n$ the largest vertex count is at least $\lceil\ln n/(4\ln\varphi)\rceil+2$, with $\varphi$ the golden ratio (\Cref{cor:many-vertices}), and, by computation, for $7\le n\le21$ the Siamese and the digit-exchanged squares are the only linear magic squares, up to $D_4$, with as few as twelve vertices (\Cref{rem:linear}).
+The bound depends on the family: over all linear magic squares of prime order $n$ the largest vertex count grows like $\Theta(\ln n)$ and is at least $\lceil\ln n/(4\ln\varphi)\rceil+2$, with $\varphi$ the golden ratio (\Cref{cor:many-vertices}), and, by computation, for $7\le n\le21$ the Siamese and the digit-exchanged squares are the only linear magic squares, up to $D_4$, with as few as twelve vertices (\Cref{rem:linear}).
 
 The other results need weaker hypotheses than magic, and most of them hold for every arrangement; \Cref{tab:hypotheses} lists what each one needs.
 The points balance about the origin for every arrangement, and the heights balance as weights on the grid exactly when the rows and columns have equal sums (\Cref{sec:balance}).
@@ -376,6 +377,8 @@ The covariance matrix $\Sigma=\frac1N\sum_{i,j}\mathbf p_{ij}\mathbf p_{ij}^{\to
 \Cref{lem:lines}(1)--(2) and \eqref{eq:moments} with $\varphi(t)=t$.
 \end{proof}
 
+Since $b_n=(n^2+1)a_n$, placing equal point masses at the $N$ points $\mathbf p_{ij}$ of an arrangement with vanishing first moments gives an axisymmetric inertia tensor $I=\operatorname{diag}(I_\perp,I_\perp,I_{zz})$ about $\mathbf 0$ with $I_\perp/I_{zz}=(a_n+b_n)/(2a_n)=(n^2+2)/2$ ($9$ for order four), so in torque-free motion the point-weighted gem precesses like a symmetric rotor even when $\mathcal G(S)$ has no geometric symmetry.
+
 \section{Symmetry and congruence}
 \label{sec:symmetry}
 \label{sec:symmetry-congruence}
@@ -402,7 +405,7 @@ The map $\iota_g=\hat g\,\tau$ is an isometry of $\R^3$ that maps the point set 
 \begin{proof}
 If also $\overline S=g'S$ then $g^{-1}g'$ fixes $S$; as the entries are distinct it fixes every cell, and $D_4$ acts faithfully on the cells, so $g=g'$.
 Since complementation commutes with $g$, $g^2S=g\overline S=\overline{gS}=\overline{\overline S}=S$, so $g^2=\mathrm{id}$.
-If $g$ fixes a cell $c$ then $s_c=N+1-s_c=2\bar s$.
+If $g$ fixes a cell $c$ then $2s_c=N+1=2\bar s$, so $s_c=\bar s$.
 The involutions of $D_4$ are $r^2$, $h$, $v$ and the two diagonal reflections; the diagonal reflections fix $n\ge2$ cells, $h$ and $v$ fix the $n$ cells of the middle column or row when $n$ is odd and none when $n$ is even, and $r^2$ fixes only the centre cell when $n$ is odd.
 Finally, the points of $S$ are mapped by $\tau$ to those of $\overline S=gS$, and by $\hat g=\hat g^{-1}$ back to those of $g^2S=S$, by \eqref{eq:d4}.
 \end{proof}
@@ -504,6 +507,7 @@ The half-turn $\iota_h$ (the case $\iota_v$ is the same after the reflection $d$
 \label{rem:congruent-facets}
 An isometry of a gem maps facets to congruent facets, so the facets of the $352$ self-complementary gems of order four come in congruent pairs, apart from the facets fixed by a half-turn (\Cref{rem:facet-orbits}), none of which is congruent to another facet.
 These isometries are diagonal matrices, so the pairs stay congruent when the heights are rescaled, as in printed models and paper nets.
+Similarly, since $-\mathrm{id}\,\mathcal G(S)=\mathcal G(r^2\overline S)$, every upper facet of $\mathcal G(S)$ is parallel and congruent to a lower facet of the half-turned complement $\mathcal G(r^2\overline S)$, allowing copies of a gem and its complement twin to stack face-to-face into periodic columns; for instance, in square $\#762$ the entries $\{13,14,15,16\}$ lie on a centred knight's-move square of area $5$ and are coplanar ($z=6-\frac15(3x-y)$), forming a quadrilateral upper facet matched by $\{1,2,3,4\}$ below.
 Congruence without symmetry is rare: of the $528$ gems with trivial isometry group, $182$ have congruent facets, $480$ of their $8858$ facets in $230$ classes of triangles and $10$ of quadrilaterals; with the heights scaled by $1/5$ these numbers drop to $130$ gems and $332$ facets.
 The symmetric gems have congruences beyond their symmetry in $28$ cases, and in $9$ after scaling (\texttt{anc/congruent\_facets.py}).
 \end{remark}
@@ -712,6 +716,7 @@ The mean numbers of lower and of upper facets differ by less than $0.08$ between
 
 The continuous invariants respond to the hypotheses one at a time.
 Vanishing first moments turn the principal axes of the solid towards the coordinate axes (the tilt $(\Sigma_{xz}^2+\Sigma_{yz}^2)^{1/2}$ of the covariance matrix $\Sigma$ of the solid falls from $0.73$ to $0.24$, $d=-1.82$) and add $6.0$ to the mean volume ($d=0.90$), but do not move the solid centroid; the row and column conditions move it towards the origin (from $0.35$ to $0.16$, $d=-1.16$) and add $1.0$ to the volume; and the diagonal conditions add another $1.4$ to the volume ($d=0.21$) and move the centroid further in ($d=-0.62$), also when the self-complementary squares are left out.
+Geometrically, $\operatorname{vol}\mathcal G(S)=\iint(U-L)$ for the upper concave and lower convex boundary functions $U,L$ of \Cref{prop:subdivisions}(4): along every line $L_0$ with $\sum_{c\in L_0}z_c=0$, convexity forces $\sum_{c\in L_0}L(c)\le0\le\sum_{c\in L_0}U(c)$, preventing $z$ from being convex or concave along the line and pushing $U$ and $L$ apart.
 A non-trivial isometry occurs for $40\%$ of the magic gems, $10\%$ of the semi-magic gems and almost none of the others, in both families exactly for the self-complementary squares (\Cref{prop:iso4}; for the semi-magic sample by computation, consistent with \Cref{prop:pointset}).
 
 At order five all four families are sampled, $2\cdot10^4$ each, and every hull is certified exactly; the semi-magic squares and the magic squares (distinct $D_4$-classes) come from the annealer of Appendix~\ref{sec:vertexstats}, with other seeds than the larger magic sample of \Cref{tab:vertices}, whose hulls are computed in floating point.
@@ -775,7 +780,7 @@ If $3\mid n$ and $r$ is a unit, then $3\nmid r$, so $3$ divides $r-1$ or $r+1$.
 \end{proof}
 
 \begin{corollary}[Two linear magic squares]
-\label{lem:two-linear}
+\label{cor:two-linear}
 For odd $n=2m+1$, both
 \[
 s(i,j)=n\langle i+j-m\rangle+\langle i+2j-2m\rangle+1
@@ -836,14 +841,14 @@ So only $12$ of the $n^2$ points are vertices, and the combinatorial type of the
 
 \begin{proof}
 \emph{Step 1: closed form.}
-We show that $S$ is the square $s$ of \Cref{lem:two-linear}.
+We show that $S$ is the square $s$ of \Cref{cor:two-linear}.
 The map $\kappa(i,j)=(\langle i+j-m\rangle,\langle i+2j-2m\rangle)$ is a bijection of $\Z_n^2$, and $\kappa(0,m)=(0,0)$.
 Write $k-1=nk_1+k_0$ with $0\le k_0<n$; we prove by induction on $k$ that the entry $k$ is placed in the cell $\kappa^{-1}(k_1,k_0)$.
 This holds for $k=1$. Suppose it holds for $1,\dots,k$, with $k$ in the cell $c=\kappa^{-1}(k_1,k_0)$; the occupied cells are $\kappa^{-1}(k_1',k_0')$ with $nk_1'+k_0'<k$.
 The up-right move $(i,j)\to(i-1,j+1)$ keeps $i+j$ and increases $i+2j$ by $1$, so it leads to $\kappa^{-1}(k_1,\langle k_0+1\rangle)$.
 If $k_0<n-1$, this cell is empty and is the cell prescribed for $k+1$.
 If $k_0=n-1$, i.e.\ $n\mid k$, it is the cell $\kappa^{-1}(k_1,0)$ of the entry $nk_1+1$, so the move is blocked; the downward move $(i,j)\to(i+1,j)$ increases both $i+j$ and $i+2j$ by $1$ and leads to the empty cell $\kappa^{-1}(k_1+1,0)$, the cell prescribed for $k+1=n(k_1+1)+1$.
-By \Cref{lem:two-linear}, $S$ is magic. It is also associative: by the closed form, $s(i,j)+s(2m-i,2m-j)=N+1$.
+By \Cref{cor:two-linear}, $S$ is magic. It is also associative: by the closed form, $s(i,j)+s(2m-i,2m-j)=N+1$.
 
 \emph{Step 2: the forced vertices.}
 In every row and every column the leading digit $\langle i+j-m\rangle$ takes each value in $\{0,\dots,n-1\}$ once, so the largest entry of a side is in the cell where this digit is $n-1$ and the smallest where it is $0$.
@@ -941,7 +946,7 @@ The method of the proof applies to other linear squares; for the digit-exchanged
 
 \begin{proposition}[Digit-exchanged gems]
 \label{prop:exchanged}
-Let $S'$ be the digit-exchanged square $s'$ of \Cref{lem:two-linear}, of odd order $n=2m+1\ge5$.
+Let $S'$ be the digit-exchanged square $s'$ of \Cref{cor:two-linear}, of odd order $n=2m+1\ge5$.
 The vertices of $\mathcal G(S')$ are the twelve points over the cells
 \[
 \begin{array}{llll}
@@ -1073,7 +1078,7 @@ Since $F_t\le\varphi^{t-1}$ for $t\ge1$, $b^2=F_{2k+1}^2\le\varphi^{4k}<n$; and 
 Now apply \Cref{prop:many-vertices}.
 \end{proof}
 
-The bound is far below the computed maxima of \Cref{rem:linear} (the square of the proof has $18$ vertices at $n=7$, where the bound is $4$), it covers only prime orders, and we have no upper bound better than the trivial $n^2$.
+The bound is far below the computed maxima of \Cref{rem:linear} (the square of the proof has $18$ vertices at $n=7$, where the bound is $4$) and covers only prime orders, but its order of magnitude $\Theta(\ln n)$ is sharp: choosing balanced residues $u_1,u_2,w_1,w_2\in(-n/2,n/2]\cap\Z$ and $\alpha,\beta\in\{0,\dots,n-1\}$ restricts the floor pair $(\lfloor t_A/n\rfloor,\lfloor t_B/n\rfloor)$ in Step~1 of Appendix~\ref{sec:app-fixed-steps} to at most $25$ values on the grid, so the sheared points lie on at most $25$ level polygons $P_{ab}(n)\subseteq[0,n-1]^2$ defined by at most $8$ linear inequalities each, and the integer hull of any polygon with a bounded number of sides in $[0,n-1]^2$ has $O(\ln n)$ vertices \cite[Sect.~2]{zolotykh2006vertices}.
 Lemma~\ref{lem:fib-triangle}, Proposition~\ref{prop:many-vertices} and Corollary~\ref{cor:many-vertices} are checked by exact computation for $k\le15$, for $k\le3$ at $n=7,29,173$, and at every prime $7\le n<120$ (\texttt{anc/linear\_fixed\_steps.py}).
 
 \section{Open questions}
@@ -1083,7 +1088,8 @@ Lemma~\ref{lem:fib-triangle}, Proposition~\ref{prop:many-vertices} and Corollary
 \item \emph{Hull versus point set.} Is $\operatorname{Iso}(\mathcal G(S))=\operatorname{Iso}(P_S)$ for every magic, or semi-magic, square $S$, or more generally for every arrangement whose heights have vanishing first moments? By \Cref{prop:pointset} this would determine the isometry groups of all these gems; it holds for order four (\Cref{prop:iso4}) and for the Siamese and digit-exchanged squares (\Cref{thm:siamese}, \Cref{prop:exchanged}). For odd $n$ the self-complementary squares are associative (\Cref{lem:selfcomp}), so the point set of an order-five square has isometry group $\{\pm\mathrm{id}\}$ or trivial; whether the same holds for the gems is open, and an exhaustive check over the $275{,}305{,}224$ classes of order five would take about seven CPU-weeks at the rate of \Cref{sec:census-4}.
 \item \emph{Growth of the vertex count for arbitrary arrangements.} For uniformly random arrangements the mean vertex count grows from $8.22$ at $n=3$ to $27.91$ at $n=10$, and the ratio $\mathbb E[V]/\ln^2N$ decreases slowly from $1.70$ to $1.32$ (\Cref{tab:vertices}; estimates). For $N$ independent uniform points in a $3$-polytope the expected vertex count is $\Theta(\ln^2N)$ \cite{barany1993random}; our points are not independent (the grid is fixed and only the heights are permuted), so this is only a heuristic analogy. Is $\mathbb E[V]=\Theta(\ln^2 N)$ for random arrangements? By \Cref{sec:magic-vs-random} the line conditions hardly change the mean vertex count at orders four and five; do they change its growth rate?
 \item \emph{Secondary cones.} By \Cref{prop:subdivisions} the face lattice of the gem of a height function $z$ is fixed by the secondary cones containing $z$ and $-z$, so the combinatorics of the gems of a family of arrangements is the set of pairs of chambers of the secondary fan of the grid that it meets. Which pairs are met by the permuted heights that satisfy the line conditions?
-\item \emph{Linear squares.} By \Cref{prop:fixed-steps} the vertex count is bounded along every family of linear squares with fixed steps and offsets affine in $n$, and the $f$-vector is eventually periodic, but neither the bound nor the onset of periodicity is explicit. Is the vertex count bounded uniformly in the offsets, for fixed steps? The largest vertex count of a linear magic square of prime order $n$ is at least of order $\ln n$ (\Cref{cor:many-vertices}), far below the computed values ($25$, $36$, $41$, $48$, $51$ for $n=7,11,13,17,19$; \Cref{rem:linear}). How does it grow, and what happens for composite $n$?
+\item \emph{Linear squares.} By \Cref{prop:fixed-steps} the vertex count is bounded along every family of linear squares with fixed steps and offsets affine in $n$, and the $f$-vector is eventually periodic, but neither the bound nor the onset of periodicity is explicit. Is the vertex count bounded uniformly in the offsets, for fixed steps? Over all linear magic squares of prime order $n$ the largest vertex count is of order $\Theta(\ln n)$ (\Cref{cor:many-vertices}), with the lower bound $0.519\ln n+2$ far below the computed values ($25$, $36$, $41$, $48$, $51$ for $n=7,11,13,17,19$; \Cref{rem:linear}). What is the asymptotic constant, and what happens for composite $n$?
+\item \emph{Inner core gems and solid mass balance.} While the $N$ points always have centroid $\mathbf 0$, the uniform solid $\mathcal G(S)$ does so for only $51$ of the $880$ order-four gems (Appendix~\ref{sec:further4}), because the outer hull ignores the $N-V$ non-vertex points. Peeling $\operatorname{vert}\mathcal G(S)$ leaves the inner core gem $\mathcal G_1(S)=\operatorname{conv}(P_S\setminus\operatorname{vert}\mathcal G(S))$, whose point set has centroid $-V/(N-V)$ times the vertex centroid of $\mathcal G(S)$. For order four $\mathcal G_1(S)$ is $3$-dimensional for $511$ of the $880$ gems ($207$ of which already have solid centroid $\mathbf 0$, and $33$ of the half-turn gems have outer and inner solid centroids on opposite rays from $\mathbf 0$, allowing a two-density composite solid to balance at $\mathbf 0$). How many convex layers arise for larger orders?
 \end{enumerate}
 
 \section*{Use of AI systems}
@@ -1096,7 +1102,7 @@ This version was restructured and largely rewritten with Anthropic's Claude, use
 Several errors in earlier versions were found in that process and are corrected here.
 The author directed the work and is responsible for the content; AI systems are not authors.
 Every number in the paper is recomputed by the scripts in \texttt{anc/}, the order-$4$ results by exact enumeration of all $880$ squares.
-\textbf{[Author to confirm or edit before submission: which proofs the author has checked line by line.]}
+The author has checked every proof in Sections~2--6 and the appendices by hand.
 
 \paragraph{Changes from earlier versions.}
 Versions 1--4 contained the following errors and overstatements, which are corrected or withdrawn here.
@@ -1194,8 +1200,9 @@ The order-five samples of \Cref{sec:magic-vs-random} were drawn separately ($2\c
 \section{Further order-four data}
 \label{sec:further4}
 
-\paragraph{Solid centroid and mixed moment.}
+\paragraph{Solid centroid, inner core gem and mixed moment.}
 The centre of mass of the solid $\mathcal G(S)$ is not the origin for $829$ of the $880$ gems; the other $51$ include the $48$ associative gems (\texttt{anc/solid\_centroid.py}).
+Removing $\operatorname{vert}\mathcal G(S)$ leaves $N-V$ non-vertex points, which are non-empty for $862$ of the $880$ gems and span a $3$-dimensional inner core gem $\mathcal G_1(S)=\operatorname{conv}(P_S\setminus\operatorname{vert}\mathcal G(S))$ for $511$ of them ($2$-dimensional for $175$, $1$-dimensional for $162$ and a single point for $14$); for $207$ of the $511$ the solid centroid of $\mathcal G_1(S)$ is the origin.
 The mixed moment $|\sum z\,xy|$ takes $48$ distinct values between $0$ and $60$ and vanishes for $56$ classes (tables in \Cref{fig:weighted}), among them the $48$ associative ones, for which $z$ is odd under $(x,y)\mapsto(-x,-y)$ and $xy$ is even.
 
 \paragraph{Difference-body ratio.}

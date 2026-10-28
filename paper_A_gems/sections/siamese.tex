@@ -52,7 +52,7 @@ If $3\mid n$ and $r$ is a unit, then $3\nmid r$, so $3$ divides $r-1$ or $r+1$.
 \end{proof}
 
 \begin{corollary}[Two linear magic squares]
-\label{lem:two-linear}
+\label{cor:two-linear}
 For odd $n=2m+1$, both
 \[
 s(i,j)=n\langle i+j-m\rangle+\langle i+2j-2m\rangle+1
@@ -113,14 +113,14 @@ So only $12$ of the $n^2$ points are vertices, and the combinatorial type of the
 
 \begin{proof}
 \emph{Step 1: closed form.}
-We show that $S$ is the square $s$ of \Cref{lem:two-linear}.
+We show that $S$ is the square $s$ of \Cref{cor:two-linear}.
 The map $\kappa(i,j)=(\langle i+j-m\rangle,\langle i+2j-2m\rangle)$ is a bijection of $\Z_n^2$, and $\kappa(0,m)=(0,0)$.
 Write $k-1=nk_1+k_0$ with $0\le k_0<n$; we prove by induction on $k$ that the entry $k$ is placed in the cell $\kappa^{-1}(k_1,k_0)$.
 This holds for $k=1$. Suppose it holds for $1,\dots,k$, with $k$ in the cell $c=\kappa^{-1}(k_1,k_0)$; the occupied cells are $\kappa^{-1}(k_1',k_0')$ with $nk_1'+k_0'<k$.
 The up-right move $(i,j)\to(i-1,j+1)$ keeps $i+j$ and increases $i+2j$ by $1$, so it leads to $\kappa^{-1}(k_1,\langle k_0+1\rangle)$.
 If $k_0<n-1$, this cell is empty and is the cell prescribed for $k+1$.
 If $k_0=n-1$, i.e.\ $n\mid k$, it is the cell $\kappa^{-1}(k_1,0)$ of the entry $nk_1+1$, so the move is blocked; the downward move $(i,j)\to(i+1,j)$ increases both $i+j$ and $i+2j$ by $1$ and leads to the empty cell $\kappa^{-1}(k_1+1,0)$, the cell prescribed for $k+1=n(k_1+1)+1$.
-By \Cref{lem:two-linear}, $S$ is magic. It is also associative: by the closed form, $s(i,j)+s(2m-i,2m-j)=N+1$.
+By \Cref{cor:two-linear}, $S$ is magic. It is also associative: by the closed form, $s(i,j)+s(2m-i,2m-j)=N+1$.
 
 \emph{Step 2: the forced vertices.}
 In every row and every column the leading digit $\langle i+j-m\rangle$ takes each value in $\{0,\dots,n-1\}$ once, so the largest entry of a side is in the cell where this digit is $n-1$ and the smallest where it is $0$.
@@ -218,7 +218,7 @@ The method of the proof applies to other linear squares; for the digit-exchanged
 
 \begin{proposition}[Digit-exchanged gems]
 \label{prop:exchanged}
-Let $S'$ be the digit-exchanged square $s'$ of \Cref{lem:two-linear}, of odd order $n=2m+1\ge5$.
+Let $S'$ be the digit-exchanged square $s'$ of \Cref{cor:two-linear}, of odd order $n=2m+1\ge5$.
 The vertices of $\mathcal G(S')$ are the twelve points over the cells
 \[
 \begin{array}{llll}
@@ -350,5 +350,5 @@ Since $F_t\le\varphi^{t-1}$ for $t\ge1$, $b^2=F_{2k+1}^2\le\varphi^{4k}<n$; and 
 Now apply \Cref{prop:many-vertices}.
 \end{proof}
 
-The bound is far below the computed maxima of \Cref{rem:linear} (the square of the proof has $18$ vertices at $n=7$, where the bound is $4$), it covers only prime orders, and we have no upper bound better than the trivial $n^2$.
+The bound is far below the computed maxima of \Cref{rem:linear} (the square of the proof has $18$ vertices at $n=7$, where the bound is $4$) and covers only prime orders, but its order of magnitude $\Theta(\ln n)$ is sharp: choosing balanced residues $u_1,u_2,w_1,w_2\in(-n/2,n/2]\cap\Z$ and $\alpha,\beta\in\{0,\dots,n-1\}$ restricts the floor pair $(\lfloor t_A/n\rfloor,\lfloor t_B/n\rfloor)$ in Step~1 of Appendix~\ref{sec:app-fixed-steps} to at most $25$ values on the grid, so the sheared points lie on at most $25$ level polygons $P_{ab}(n)\subseteq[0,n-1]^2$ defined by at most $8$ linear inequalities each, and the integer hull of any polygon with a bounded number of sides in $[0,n-1]^2$ has $O(\ln n)$ vertices \cite[Sect.~2]{zolotykh2006vertices}.
 Lemma~\ref{lem:fib-triangle}, Proposition~\ref{prop:many-vertices} and Corollary~\ref{cor:many-vertices} are checked by exact computation for $k\le15$, for $k\le3$ at $n=7,29,173$, and at every prime $7\le n<120$ (\texttt{anc/linear\_fixed\_steps.py}).
