@@ -26,12 +26,12 @@ For order four the forced vertices number between $4$ and $13$, and in general o
 
 \paragraph{Gems and regular subdivisions.}
 \label{sec:subdivisions}
-The gem is two regular subdivisions of the grid, by $z$ and by $-z$, glued along the boundary of the grid (with vertical facets over the sides where the entries are not in arithmetic progression); \Cref{fig:construction}e shows the two subdivisions for the Lo Shu.
-Let $A$ be the $n\times n$ grid of cell positions.
-For a height function $\omega\colon A\to\R$, the \emph{regular subdivision} $\mathcal S(\omega)$ of $A$ is obtained by projecting to the plane the lower faces of $\operatorname{conv}\{(c,\omega(c))\}$, i.e.\ the faces whose outer normals have negative last coordinate; its cells are the sets of grid points whose lifts lie on a common lower face \cite[Ch.~2]{deloera2010triangulations}, \cite[Ch.~7]{gelfand1994discriminants}.
-Cells are marked: a cell is a set of grid points, and its convex hull may contain grid points that are not in it.
-$\mathcal S(\omega)$ does not change if $\omega$ is multiplied by a positive scalar or an affine function of $(x,y)$ is added to it; the height functions inducing a given subdivision form a relatively open polyhedral cone, its \emph{secondary cone}.
-By definition, $\mathcal G(S)$ is the lift of $A$ by the height function $z$ of $S$, and its upper faces are the reflections in $z=0$ of the lower faces of the lift by $-z$.
+Geometrically, a three-dimensional gem $\mathcal G(S)$ is bounded over the square $\operatorname{conv}A=[-\frac{n-1}2,\frac{n-1}2]^2$ by a piecewise-linear concave upper roof $z=U(x,y)$ and a piecewise-linear convex lower floor $z=L(x,y)$, joined around the perimeter of the grid by vertical walls wherever the upper and lower boundary chains do not coincide.
+Viewing the gem from below ($z\to-\infty$) or from above ($z\to+\infty$) projects its lower and upper facets onto two \emph{regular subdivisions} of the $n\times n$ grid $A$ of cell positions (\Cref{fig:construction}e shows both subdivisions for the Lo Shu).
+More precisely, for any height function $\omega\colon A\to\R$, the regular subdivision $\mathcal S(\omega)$ of $A$ is obtained by projecting to the plane the lower faces of $\operatorname{conv}\{(c,\omega(c)):c\in A\}$, i.e.\ the faces whose outer normals have negative vertical coordinate; its cells are the subsets of grid points whose lifts lie on a common lower face \cite[Ch.~2]{deloera2010triangulations}, \cite[Ch.~7]{gelfand1994discriminants}.
+(Each cell of $\mathcal S(\omega)$ is recorded as a marked subset of $A$, since the convex hull of a cell may contain grid points whose lifted heights lie strictly above the supporting plane and therefore do not belong to the cell.)
+The subdivision $\mathcal S(\omega)$ is unchanged if $\omega$ is multiplied by a positive scalar or if an affine function of $(x,y)$ is added to it; the height functions that induce a given subdivision form a relatively open polyhedral cone, its \emph{secondary cone}.
+Because the upper faces of $\mathcal G(S)$ are the reflections in $z=0$ of the lower faces of the lift by $-z$, the lower and upper boundaries of $\mathcal G(S)$ project to $\mathcal S(z)$ and $\mathcal S(-z)$.
 
 \begin{proposition}[Gems as pairs of regular subdivisions]
 \label{prop:subdivisions}
@@ -45,17 +45,14 @@ Let $S$ be an arrangement of order $n\ge2$ that is not a $D_4$-image of the natu
 \end{proposition}
 
 \begin{proof}
-(1) is the definition of $\mathcal S(z)$ and, after reflecting in $z=0$, of $\mathcal S(-z)$.
-(2) A vertical facet lies in a plane $\ell(x,y)=\max_A\ell$ for a linear form $\ell$; the maximisers of $\ell$ on the grid are a corner or the $n$ cells of a side, and the face is $2$-dimensional only in the second case and only if the lifts of the side are not collinear, i.e.\ if the heights along the side are not an affine function of the position.
-(3) The vertical line through a vertex $\mathbf p_c$ meets $\mathcal G(S)$ in a segment with endpoint $\mathbf p_c$, so $\mathbf p_c$ lies on a lower or an upper face, of which it is a vertex; conversely the vertices of a face are vertices of the polytope.
-(4) Let $U$ and $L$ be the upper and lower boundary functions of $\mathcal G(S)$ over $\operatorname{conv}A$.
-$U-L$ is concave, non-negative, and positive at the projection of an interior point, hence positive on $\operatorname{int}\operatorname{conv}A$.
-So a lower face and an upper face meet only over $\partial\operatorname{conv}A$.
-Over a side $e$ of the grid, $\mathcal G(S)$ meets the vertical plane in $\operatorname{conv}\{\mathbf p_c: c\in e\}$.
-This polygon is bounded by the restrictions of the two boundary chains to $e$, and it is a vertical facet exactly when these chains differ, i.e.\ (by (2)) when the entries along $e$ are not an arithmetic progression.
-A lower or upper facet projects bijectively onto its cell, so its vertices are the lifts of the vertices of the convex hull of the cell.
-Hence the marked cells of $\mathcal S(z)$ and $\mathcal S(-z)$, together with the vertical facets, determine every vertex--facet incidence.
-The complement has height function $-z$.
+(1) follows directly from the definition of $\mathcal S(z)$ and, after reflecting in $z=0$, of $\mathcal S(-z)$.
+For (2), a vertical facet lies in a supporting plane $\ell(x,y)=\max_A\ell$ for some non-zero linear form $\ell$; the maximisers of $\ell$ on the grid $A$ are either a single corner or the $n$ cells of a side, and the resulting face is two-dimensional if and only if we are in the second case and the lifted points over that side are not collinear—that is, the heights along the side are not an affine function of the position.
+For (3), the vertical line through any vertex $\mathbf p_c$ meets $\mathcal G(S)$ in a segment having $\mathbf p_c$ as an endpoint, so $\mathbf p_c$ lies on a lower or an upper face, of which it is a vertex; conversely, the vertices of any face are vertices of the polytope.
+For (4), consider the upper concave roof $U$ and lower convex floor $L$ of $\mathcal G(S)$ over $\operatorname{conv}A$.
+The vertical thickness $U-L$ is concave, non-negative, and strictly positive at the projection of the interior point $\mathbf 0$ (\Cref{prop:fulldim}), so $U>L$ throughout $\operatorname{int}\operatorname{conv}A$; thus a lower face and an upper face can meet only over the boundary $\partial\operatorname{conv}A$.
+Over each side $e$ of the grid, $\mathcal G(S)$ meets the vertical boundary plane in the polygon $\operatorname{conv}\{\mathbf p_c: c\in e\}$, which is bounded above and below by the restrictions of $U$ and $L$ to $e$; this polygon is a two-dimensional vertical facet if and only if those two boundary chains do not coincide into a single segment, i.e.\ by (2) when the entries along $e$ are not an arithmetic progression.
+Finally, each lower or upper facet projects bijectively onto its cell in $A$, so its vertices are the lifts of the extreme points of that cell.
+Hence the marked cells of $\mathcal S(z)$ and $\mathcal S(-z)$, together with the vertical facets, determine all vertex--facet incidences, and replacing $S$ by its complement $N+1-S$ negates $z$ and swaps $\mathcal S(z)$ with $\mathcal S(-z)$.
 \end{proof}
 
 \begin{example}[Lo Shu, continuing \Cref{ex:loshu}]

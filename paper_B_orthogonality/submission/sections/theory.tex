@@ -50,7 +50,7 @@ The mixed moments are not determined by the line sums:
 
 \begin{remark}[Mixed moments]
 \label{rem:product_inertia}
-The magic square with rows $(1,6,11,16)$, $(8,15,2,9)$, $(12,3,14,5)$, $(13,10,7,4)$ has mixed moment $\sum_cz_cx_cy_c=60$ (Loly's product of inertia).
+The magic square with rows $(1,6,11,16)$, $(8,15,2,9)$, $(12,3,14,5)$, $(13,10,7,4)$ (square $\#45$ in the Fr\'enicle numbering of \cite{mathewson_gems}) has mixed moment $\sum_cz_cx_cy_c=60$ (Loly's product of inertia).
 Among the $880$ magic squares of order $4$ up to $D_4$, the mixed moment $\sum_cz_cx_cy_c$ is nonzero for $824$ and takes $48$ distinct absolute values between $0$ and $60$, and the mixed moments $\sum_cz_cx_c^2y_c$, $\sum_cz_cx_cy_c^2$ are nonzero for $623$ and $773$ of them.
 For $n=3$ the mixed moment $\sum_cz_cx_cy_c$ vanishes for all eight magic squares, because $s_c+s_{-c}=10$ for centrally opposite cells, so $z$ is odd under $(x,y)\mapsto(-x,-y)$ while $xy$ is even.
 \end{remark}
@@ -254,7 +254,7 @@ Since $\alpha^2/4<1/2$, \eqref{eq:box} holds for large $n$, and $k^*(n)\ge\lfloo
 \end{proof}
 
 The odd case thus gives the same constant $\sqrt2$ as the even case, but more slowly: \eqref{eq:box} with $|F_q|\ge\lceil r_q/2\rceil+1$ first gives $k^*(n)\ge2$ at $n=14$ for even $n$ and only at $n=21$ for odd $n$, and $k^*(n)\ge29$ at $n=999$ and $n=1001$ against $k^*(1000)\ge32$.
-For $n\equiv0\pmod 4$ a square with controlled differences $d_{q,i}$ makes the sets $F_q$ much larger.
+Notice why the general bound above stops at $\sqrt{2n}$: it uses only the generic estimate $|F_q|\ge\lceil r_q/2\rceil+1=\Theta(n)$, which gives $\log\prod_{q<Q}|F_q|=\frac12n\log n-O(n)$. When $n\equiv0\pmod 4$, we can construct a semi-magic square whose swap differences $d_{q,r}$ in column pair $q$ form a shifted arithmetic progression $\mp2(2qh+2r+1)$, expanding the subset-sum set $|F_q|$ from $\Theta(n)$ to $\Theta(qn^2)$ and tripling $\log\prod_{q<Q}|F_q|$ to $\frac32n\log n-O(n)$, which boosts the threshold from $\sqrt{2n}$ to $\sqrt{6n}$.
 
 \begin{proposition}[All subset sums]
 \label{prop:subset}

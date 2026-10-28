@@ -112,7 +112,7 @@ For both parities,
 \end{theorem}
 
 \begin{proof}
-\Cref{prop:var_identity} with $N=n^2$ and the invariants \eqref{eq:inv_low}--\eqref{eq:inv_full} of Appendix~\ref{sec:app_variance}; the expansions follow.
+Substituting $N=n^2$ and the explicit trace invariants \eqref{eq:inv_low}--\eqref{eq:inv_full} of Appendix~\ref{sec:app_variance} into \Cref{prop:var_identity} yields the rational variance formulas and their Laurent expansions.
 \end{proof}
 
 
@@ -155,8 +155,8 @@ It has the exact mean but variance $2\sum_jw_j^2$, and by \Cref{thm:var_closed} 
 1-\frac2n-\frac{7}{5n^2}+O(n^{-3})\quad(\Efull),\qquad 1-\frac{82}{25n^2}+O(n^{-3})\quad(\Efour).
 \]
 The $\chi^2$-mixture variance is $2\tr\bigl((\sigma_n^2\Gamma)^2\bigr)=N^2(N+1)^2\tr(A^2)/72$.
-In \eqref{eq:var_identity} the coefficient of $\tr(A^2)$ is this value times $1-(4N+6)/(5N(N+1))=1-4/(5n^2)+O(n^{-4})$, and the $(\tr A)^2$ and $\sum_aA_{aa}^2$ terms are negative.
-For $\Efull$ they give the leading deficit $-4/(5n)-6/(5n)=-2/n$; for $\Efour$ all three terms contribute only at order $n^{-2}$ ($-4/5$, $-4/5$, $-42/25$, total $-82/25$).
+In \eqref{eq:var_identity} the coefficient of $\tr(A^2)$ is this value times $1-(4N+6)/(5N(N+1))=1-4/(5n^2)+O(n^{-4})$, while the $(\tr A)^2$ and $\sum_aA_{aa}^2$ terms are negative—reflecting the negative fourth-cumulant correlations induced by sampling the permutation entries without replacement.
+For $\Efull$ these two negative terms produce the leading variance deficit $-4/(5n)-6/(5n)=-2/n$; for $\Efour$ all three terms contribute only at order $n^{-2}$ ($-4/5$, $-4/5$, $-42/25$, total $-82/25$).
 For $\Efull$ the number of statistics grows with $n$ and \Cref{cor:random_energy_clt} does not apply.
 The approximation is poor for small $n$: at $n=3$ the $\chi^2$-mixture standard deviation of $\Efull$ is about twice the exact one (\Cref{tab:random_energy}).
 \end{remark}
