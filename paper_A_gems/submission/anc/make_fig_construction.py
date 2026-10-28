@@ -10,7 +10,7 @@ from mpl_toolkits.mplot3d.art3d import Poly3DCollection, Line3DCollection
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-FIGDIR = os.path.join(HERE, '..', 'figures'); os.makedirs(FIGDIR, exist_ok=True)
+FIGDIR = os.path.join(HERE, '..', 'figures') if os.path.isdir(os.path.join(HERE, '..', 'figures')) else os.path.join(HERE, '..')
 
 from gem_geometry import exact_hull
 

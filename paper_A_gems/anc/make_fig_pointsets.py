@@ -39,10 +39,10 @@ for col, (S, let, name, formula, sub) in enumerate(CASES):
     floor(ax, ZF, fc='#EDEDED', ec='#B8B8B8')
     for p in P:                                              # stems
         ax.plot([p[0], p[0]], [p[1], p[1]], [ZF, p[2]], color='#9A9A9A', lw=0.7, zorder=2)
-    if let == 'a':
+    if let == 'd':
         for pi, (k, l) in enumerate(pairsA):
             ax.plot(*zip(P[k], P[l]), color=PAIRCOL[pi], lw=1.1, zorder=3)
-    if let == 'b':
+    if let == 'e':
         for pi, (k, l) in enumerate(pairsB):
             foot = np.array([P[k, 0], 0.0, 0.0])
             assert abs((P[k] - P[l]) @ np.array([1, 0, 0])) < 1e-12 and np.allclose((P[k] + P[l]) / 2, foot)   # midpoint on axis, segment perpendicular to it

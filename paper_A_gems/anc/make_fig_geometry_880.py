@@ -10,7 +10,7 @@ from mpl_toolkits.mplot3d.art3d import Poly3DCollection
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 SRC = HERE
-FIGDIR = os.path.join(HERE, '..', 'figures'); os.makedirs(FIGDIR, exist_ok=True)
+FIGDIR = os.path.join(HERE, '..', 'figures') if os.path.isdir(os.path.join(HERE, '..', 'figures')) else os.path.join(HERE, '..')
 
 sys.path.insert(0, SRC)
 from gem_geometry import exact_hull, classify_points

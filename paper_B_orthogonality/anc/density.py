@@ -13,14 +13,18 @@ def _phi(t, weights):
 
 
 def mixture_pdf(x, weights):
-    """f(x) = (1/pi) int_0^inf Re[phi(t) e^{-itx}] dt, evaluated pointwise."""
+    """f(x) = (1/pi) int_0^inf Re[phi(t) e^{-itx}] dt, evaluated pointwise along the 4th-quadrant ray t = (1 - 0.5i)u."""
     weights = [(float(w), int(m)) for w, m in weights]
     x = np.atleast_1d(np.asarray(x, dtype=float))
     out = np.empty_like(x)
+    c = 1.0 - 0.5j
     for i, xi in enumerate(x):
-        f = lambda t: (_phi(t, weights) * np.exp(-1j * t * xi)).real
-        val, _ = quad(f, 0, np.inf, limit=4000)
-        out[i] = val / np.pi
+        if xi <= 0:
+            out[i] = 0.0
+            continue
+        f = lambda u: (c * _phi(c * u, weights) * np.exp(-1j * c * u * xi)).real
+        val, _ = quad(f, 0.0, np.inf, epsabs=1e-10, epsrel=1e-8, limit=200)
+        out[i] = max(0.0, val / np.pi)
     return out
 
 

@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d.art3d import Poly3DCollection
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
 from gem_geometry import exact_hull, classify_points
-FIGDIR = os.path.join(HERE, '..', 'figures'); os.makedirs(FIGDIR, exist_ok=True)
+FIGDIR = os.path.join(HERE, '..', 'figures') if os.path.isdir(os.path.join(HERE, '..', 'figures')) else os.path.join(HERE, '..')
 OI = dict(black='#000000', orange='#E69F00', sky='#56B4E9', green='#009E73', yellow='#F0E442',
           blue='#0072B2', verm='#D55E00', purple='#CC79A7')
 plt.rcParams.update({'font.size': 8, 'axes.titlesize': 8, 'pdf.fonttype': 42, 'ps.fonttype': 42,
