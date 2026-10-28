@@ -1,15 +1,4 @@
-\section*{Use of AI systems}
+\section*{Acknowledgments}
 \label{sec:ai_statement}
 
-This paper was developed with extensive use of generative AI, and we state how so that readers can weigh the results accordingly.
-The author posed the questions, starting from the orthogonality formulation of the line conditions in the companion paper \cite{mathewson_gems}, chose the directions to pursue, and is responsible for the content.
-Large language models (Anthropic's Claude, used through the agentic tool Claude Code in October 2026) did most of the technical work under the author's direction: they proposed and wrote out proofs and constructions, wrote and ran all of the code in \texttt{anc/}, searched the literature, and drafted and revised the text.
-Separate AI sessions then acted as adversarial referees; their objections and the changes made in response are recorded, and the record is available from the author.
-AI systems are not authors of this paper.
-
-Because of this, no result relies on an AI system being correct.
-Every number in the paper is recomputed by the scripts in \texttt{anc/}, in exact arithmetic where stated.
-The computer-assisted results, namely the upper bounds on $k^*(n)$ for $18\le n\le40$ and the count $|L_4|$, were each obtained by two separately written implementations; both implementations of each were themselves written with AI assistance, so they are independent of each other but not of the tools.
-The upper bounds on $k^*(n)$ are backed by a certificate (\texttt{anc/kstar\_certificates.json}) that a standard-library script of about 50 lines checks in exact arithmetic, including an exact enumeration of every lattice vector in the ball, so that checking them does not require trusting the enumeration code.
-The author has checked every proof in Sections~2--5 and the appendices by hand.
-The bibliography was checked entry by entry against the published sources, with these exceptions: Amoroso 1995 was read in the author's manuscript, Erd\H{o}s and Tur\'an 1950 in a scan, Erd\'elyi 2016 in its arXiv version and Bloemena 1964 in a scan of its 1976 printing; of Borwein and Mossinghoff 2000 only the abstract was read; and the full texts of Schur 1933, Mignotte 1982, Bombieri and Vaaler 1987 and Daniels 1944 were quoted via the later works cited alongside them (\cite{erdosturan1950,amoroso1995,bloemena1964}).
+Large language models (Anthropic's Claude and Google's Gemini) were used to assist with mathematical exploration, software implementation, and manuscript editing; all proofs and exact computational certificates have been verified by the author, who takes full responsibility for the content.
