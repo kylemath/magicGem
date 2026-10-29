@@ -1,0 +1,157 @@
+\section{Torque-Free and Pivot-Top Rotation: Equal Masses Precess Smoothly, Entry Masses Flip}
+\label{sec:dynamics}
+
+We now turn from static radial equilibrium to three-dimensional rotational dynamics. Suppose a physical Magic Gem (or radial spoke/strut sculpture) of total mass $M$ and centre of mass $\mathbf c$ is either tossed in free space (zero gravity) or supported on a low-friction conical pivot or gimbal at the origin $O$ under uniform gravity $\mathbf g=(0,0,-g)^{\top}$ (generalizing the conical fulcrum of \texttt{weighted\_ring.stl} in \cite{mathewson2025magicgemweb}). About the pivot $O$, gravity exerts the torque
+\[
+\boldsymbol\tau_{\mathrm{grav}} = M\,\mathbf c \times \mathbf g,
+\]
+which \emph{vanishes identically in every orientation if and only if the centre of mass lies at the pivot ($\mathbf c=\mathbf 0$)}. Consequently, any balanced sculpture ($\mathbf c=\mathbf 0$) supported at $O$ rotates under Earth's gravity according to Euler's exact torque-free equations \cite{arnold1989mathematical,goldstein2002classical}: in the principal body frame, the angular velocity vector $\boldsymbol\omega=(\omega_1,\omega_2,\omega_3)^{\top}$ evolves via
+\begin{equation}
+\label{eq:euler}
+I_1\dot\omega_1 = (I_2-I_3)\omega_2\omega_3,\qquad
+I_2\dot\omega_2 = (I_3-I_1)\omega_3\omega_1,\qquad
+I_3\dot\omega_3 = (I_1-I_2)\omega_1\omega_2,
+\end{equation}
+where $I_1,I_2,I_3$ are the principal moments of inertia. For an asymmetric body with three distinct principal moments $I_1<I_2<I_3$, rotation about the intermediate axis $I_2$ is exponentially unstable: any small perturbation grows at rate $\sqrt{(I_2-I_1)(I_3-I_2)/(I_1I_3)}\,|\omega_2|$, causing the body to execute the $180^\circ$ flips of the Dzhanibekov (or tennis-racket) theorem \cite{ashbaugh1991twisting,poinsot1834theorie}.
+
+\subsection{Equal Point Masses Make Every Semi-Magic Square an Axisymmetric Rotor with Spherical-Top Scale \texorpdfstring{$\lambda_{\mathrm{iso}}=(n^2+1)^{-1/2}$}{lambda-iso}}
+
+Consider first the discrete point cloud $P_S(\lambda)=\{\mathbf p_{ij}(\lambda)=(x_j,y_i,\lambda z_{ij})\}$ carrying equal point masses $m=M/N$ at the $N=n^2$ lifted points (for instance, identical steel bearings mounted at the tips of the sixteen radial spokes $\mathbf p_{ij}(\lambda)$ on a lightweight hub at $O$). Because $\mathbf c=\frac1N\sum_{i,j}\mathbf p_{ij}(\lambda)=\mathbf 0$, the gravitational torque about $O$ vanishes identically for every semi-magic square.
+
+\begin{theorem}[Universal symmetric-top law, spherical-top scale, and periodic polhodes]
+\label{thm:rotor}
+Let $S$ be any arrangement of $\{1,\dots,n^2\}$ ($n\ge2$) whose height field has vanishing first moments $\sum_{i,j}x_jz_{ij}=\sum_{i,j}y_iz_{ij}=0$ (in particular, any semi-magic or magic square), and place equal point masses $m=M/N$ at the points $\mathbf p_{ij}(\lambda)=(x_j,y_i,\lambda z_{ij})$.
+\begin{enumerate}
+\item \emph{(Axisymmetric inertia tensor.)} For every $\lambda>0$, the inertia tensor about the origin $O$,
+\[
+I(\lambda) = \frac{M}{N}\sum_{i,j}\Bigl(\|\mathbf p_{ij}(\lambda)\|_2^2\,I_3 - \mathbf p_{ij}(\lambda)\mathbf p_{ij}(\lambda)^{\top}\Bigr),
+\]
+is diagonal and strictly axisymmetric about the $z$-axis:
+\begin{equation}
+\label{eq:inertia-point}
+I(\lambda) = M\diag\bigl(I_\perp(\lambda),\, I_\perp(\lambda),\, I_{zz}\bigr),\qquad
+I_\perp(\lambda) = a_n + \lambda^2 b_n,\qquad
+I_{zz} = 2a_n,
+\end{equation}
+with universal principal inertia ratio
+\begin{equation}
+\label{eq:inertia-ratio}
+\frac{I_\perp(\lambda)}{I_{zz}} = \frac{a_n + \lambda^2 b_n}{2a_n} = \frac{1 + \lambda^2(n^2+1)}{2}.
+\end{equation}
+\item \emph{(Three critical aspect ratios.)} Varying the vertical lift scale $\lambda$ drives the rotor through three regimes (\Cref{fig:precession}(a)):
+\begin{enumerate}
+\item At the \emph{canonical lift} $\lambda=1$,
+\begin{equation}
+\label{eq:ratio-lambda1}
+\frac{I_\perp(1)}{I_{zz}} = \frac{n^2+2}{2},
+\end{equation}
+which is an exact integer for every even order $n$ ($9$ for $n=4$, $19$ for $n=6$, $33$ for $n=8$) and a half-integer for every odd order $n$ ($11/2$ for $n=3$, $27/2$ for $n=5$).
+\item At the \emph{spherical-top critical scale}
+\begin{equation}
+\label{eq:lambda-iso}
+\lambda_{\mathrm{iso}}(n) = \frac{1}{\sqrt{n^2+1}}
+\qquad\Bigl(\tfrac{1}{\sqrt{10}}\approx0.3162\text{ for }n=3,\quad \tfrac{1}{\sqrt{17}}\approx0.2425\text{ for }n=4\Bigr),
+\end{equation}
+$I_\perp(\lambda_{\mathrm{iso}})=I_{zz}=2a_n$, so $I(\lambda_{\mathrm{iso}})=2Ma_nI_3$ is a scalar multiple of the identity: the point-weighted gem is a \emph{spherical top} for which every axis through $O$ in $\R^3$ is a principal axis of inertia.
+\item At the \emph{cubic bounding-box scale} $\lambda_{\mathrm{cube}}(n)=\frac{n-1}{n^2-1}=\frac{1}{n+1}$ (where the vertical span matches the horizontal footprint $[-\frac{n-1}{2},\frac{n-1}{2}]^2$, giving $\lambda_{\mathrm{cube}}=1/5=0.20$ at $n=4$),
+\begin{equation}
+\label{eq:ratio-cube}
+\frac{I_\perp(\lambda_{\mathrm{cube}})}{I_{zz}} = \frac{n^2+n+1}{(n+1)^2}
+\qquad\Bigl(\frac{21}{25}=0.84\text{ at }n=4\Bigr).
+\end{equation}
+\end{enumerate}
+\item \emph{(Suppression of Dzhanibekov tumbling and rational orbit closure.)} Because $I_{xx}(\lambda)=I_{yy}(\lambda)=I_\perp(\lambda)$, no distinct intermediate principal axis exists. In torque-free motion \eqref{eq:euler}, $\omega_3(t)=\omega_{3,0}$ is constant and the transverse angular velocity $(\omega_1(t),\omega_2(t))$ precesses in a uniform circle at the body-frame polhode frequency
+\begin{equation}
+\label{eq:polhode-freq}
+\Omega_{\mathrm{body}}(\lambda) = \frac{I_\perp(\lambda)-I_{zz}}{I_\perp(\lambda)}\,\omega_{3,0}
+= \frac{\lambda^2(n^2+1)-1}{\lambda^2(n^2+1)+1}\,\omega_{3,0}.
+\end{equation}
+At $\lambda=1$, $\Omega_{\mathrm{body}}(1)=\frac{n^2}{n^2+2}\omega_{3,0}$ is a rational multiple of the spin rate $\omega_{3,0}$, so the polhode and space-cone trajectories close periodically after $n^2+2$ spin revolutions (or $(n^2+2)/2$ revolutions when $n$ is even: $9$ revolutions at $n=4$). At $\lambda=\lambda_{\mathrm{iso}}(n)$, $\Omega_{\mathrm{body}}=0$ and the gem rotates steadily without wobble about any initial angular velocity vector $\boldsymbol\omega_0\in\R^3$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+By \cite[Lem.~3.1]{mathewson2026gems}, the empirical covariance matrix $\Sigma(\lambda)=\frac1N\sum_{i,j}\mathbf p_{ij}(\lambda)\mathbf p_{ij}(\lambda)^{\top}$ has diagonal entries $\Sigma_{xx}=\Sigma_{yy}=a_n=(n^2-1)/12$ and $\Sigma_{zz}=\lambda^2b_n=\lambda^2(n^4-1)/12=\lambda^2(n^2+1)a_n$, while $\Sigma_{xy}=0$ by grid symmetry and $\Sigma_{xz}=\Sigma_{yz}=0$ by vanishing of the first moments. Since $I(\lambda)=M\bigl(\tr(\Sigma(\lambda))I_3-\Sigma(\lambda)\bigr)$, we obtain \eqref{eq:inertia-point} and \eqref{eq:inertia-ratio}. Specializing \eqref{eq:inertia-ratio} to $\lambda=1$, $\lambda=(n^2+1)^{-1/2}$, and $\lambda=(n+1)^{-1}$ yields (2a)--(2c). Substituting $I_1=I_2=I_\perp(\lambda)$ and $I_3=I_{zz}$ into Euler's equations \eqref{eq:euler} gives $\dot\omega_3=0$ and $\dot\omega_1=\Omega_{\mathrm{body}}\omega_2$, $\dot\omega_2=-\Omega_{\mathrm{body}}\omega_1$ with $\Omega_{\mathrm{body}}$ as in \eqref{eq:polhode-freq}.
+\end{proof}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{figures/fig_precession_dynamics.pdf}
+\caption{Three-dimensional rotational dynamics of Magic Gems. (a)~Universal principal inertia ratio $I_\perp(\lambda)/I_{zz}=\frac12(1+\lambda^2(n^2+1))$ versus vertical scale $\lambda$ for orders $n=3,4,5$, with 3D inertia ellipsoids at the cubic 3D-print scale $\lambda_{\mathrm{cube}}=1/5$ ($21/25$), the isotropic spherical-top transition $\lambda_{\mathrm{iso}}=1/\sqrt{17}$ ($1$), and the canonical lift $\lambda=1$ ($9$) for $n=4$. (b)~Triaxial Poinsot energy ellipsoid $\frac12\sum I_k\omega_k^2=E$ of entry-weighted square \#46 ($I_1=110<I_2=230<I_3=340$), showing the figure-eight separatrix through the unstable intermediate saddle $\pm\boldsymbol\omega_2$ and the heteroclinic polhode orbit connecting $+\omega_2$ to $-\omega_2$. (c)~Time series of Euler's equations \eqref{eq:euler}: an axisymmetric magic rotor (D\"urer \#175 or any point-weighted gem) precesses harmonically with constant $|\boldsymbol\omega_\perp|$, whereas entry-weighted square \#46 ($|Q_{xy}|=60$) undergoes periodic $180^\circ$ Dzhanibekov flips $\omega_2(t)\in[+1,-1]$ about its intermediate diagonal axis. (d)~Census of the quadrupole moment $|Q_{xy}(S)|=|\sum z_{ij}x_jy_i|=\frac12(I_2-I_1)$ across the $880$ order-four magic squares.}
+\label{fig:precession}
+\end{figure}
+
+\subsection{Entry-Weighted Masses Split the Horizontal Inertia by \texorpdfstring{$2|Q_{xy}|$}{2|Qxy|} and Trigger Dzhanibekov Flips}
+
+When each cell of the board or 3D gem instead carries a positive mass $m_{ij}=s_{ij}$ proportional to its magic entry (as in the planar balancing wheel \texttt{weighted\_ring.stl} \cite{mathewson2025magicgemweb} or the checker stacks of \cite[Fig.~3]{mathewson2026gems}), Loly's theorem \cite{loly2004invariance} fixes the diagonal moments of inertia while the off-diagonal products of inertia expose both the planar quadrupole moment $Q_{xy}(S)=\sum_{i,j}z_{ij}x_jy_i$ and the cubic 3D vector resultant $\mathbf V_3(S;\lambda)$ of \Cref{thm:3d-power}(1). Physically, on square \#46 (\Cref{fig:hero-squares}(d)), the heavy entries $\{16,13,15,14\}$ concentrate in the NW/SE quadrants ($xy<0$) while the light entries $\{1,4,2,3\}$ sit in the NE/SW quadrants ($xy>0$). Holding the board by its opposite NW/SE corners and flicking it to spin about the intermediate diagonal axis $y=-x$ ($I_2=230$) places the angular velocity directly on the saddle of the Poinsot energy ellipsoid (\Cref{fig:precession}(b)), triggering a spontaneous $180^\circ$ mid-air Dzhanibekov flip (\Cref{fig:precession}(c)).
+
+\begin{theorem}[Entry-weighted inertia split, quadrupole Dzhanibekov instability, and 3D lifted tensor]
+\label{thm:quadrupole-split}
+Let $S$ be any semi-magic square of order $n$, and assign entry masses $m_{ij}=s_{ij}=\bar s+z_{ij}$ with total mass $M=\sum_{i,j}s_{ij}=N\bar s=n^2(n^2+1)/2$.
+\begin{enumerate}
+\item \emph{(Planar inertia tensor and diagonal principal axes.)} When the masses $m_{ij}=s_{ij}$ are placed at the planar grid positions $(x_j,y_i,0)\in\R^3$, the centre of mass lies at $O$ and the $3\times3$ inertia tensor about $O$ is
+\begin{equation}
+\label{eq:inertia-entry}
+I^{(s)}(S) = \begin{pmatrix}
+I_0 & -Q_{xy}(S) & 0\\
+-Q_{xy}(S) & I_0 & 0\\
+0 & 0 & 2I_0
+\end{pmatrix},\quad
+I_0 = M a_n = \frac{n^2(n^4-1)}{24},\quad
+Q_{xy}(S) = \sum_{i,j}z_{ij}x_jy_i.
+\end{equation}
+Its principal moments of inertia are
+\begin{equation}
+\label{eq:principal-entry}
+I_1(S) = I_0 - |Q_{xy}(S)|,\qquad
+I_2(S) = I_0 + |Q_{xy}(S)|,\qquad
+I_3 = 2I_0,
+\end{equation}
+with horizontal principal axes directed along the two main diagonals $y=\pm x$.
+\item \emph{(Order-four Dzhanibekov dichotomy.)} At order $n=4$, $I_0=170$ and $I_3=340$. Across the $880$ magic squares of order~$4$ (\Cref{fig:precession}(b--d)):
+\begin{enumerate}
+\item Exactly $56$ squares satisfy $Q_{xy}(S)=0$ ($48$ associative squares in Dudeney's Group~III, including D\"urer's square \#175, plus $4$ in Group~IX and $4$ in Group~X). For these $56$ squares, $I_1=I_2=170$, making the entry-weighted board an axisymmetric rotor with no intermediate-axis instability.
+\item For the remaining $824$ squares, $|Q_{xy}(S)|$ takes $47$ non-zero integer values in $\{1,\dots,60\}$ (attaining its maximum $|Q_{xy}|=60$, $I_1=110 < I_2=230 < I_3=340$, on four squares in Group~VI: \#46, \#71, \#253, and \#286). Every such square satisfies $I_1<I_2<I_3$, so spinning the board about the intermediate diagonal axis $y=-\operatorname{sgn}(Q_{xy})\,x$ triggers the unstable Dzhanibekov flip at dimensionless exponential growth rate
+\[
+\Gamma(S) = \sqrt{\frac{(I_2-I_1)(I_3-I_2)}{I_1 I_3}} = \sqrt{\frac{|Q_{xy}(S)|}{I_0}} = \sqrt{\frac{|Q_{xy}(S)|}{170}}.
+\]
+\end{enumerate}
+\item \emph{(3D lifted entry-weighted gem, parallel-axis shift, and unification with $\mathbf V_3(S;\lambda)$.)} When the entry masses $m_{ij}=s_{ij}$ are placed at the 3D lifted points $\mathbf p_{ij}(\lambda)=(x_j,y_i,\lambda z_{ij})$ ($\lambda>0$), the centre of mass shifts vertically along the $z$-axis to $\mathbf c^{(s)}(\lambda)=(0,0,z_{\mathrm{cm}}(\lambda))$ with $z_{\mathrm{cm}}(\lambda)=\lambda b_n/\bar s=\frac{\lambda(n^2-1)}{6}$ ($=\frac52\lambda$ at $n=4$). Because $\sum_{i,j}z_{ij}^3=0$, the diagonal moments of inertia about the fixed grid origin $O$ are
+\[
+I_{xx,O}^{(s)}(\lambda) = I_{yy,O}^{(s)}(\lambda) = M\bigl(a_n + \lambda^2 b_n\bigr),\qquad
+I_{zz,O}^{(s)}(\lambda) = 2M a_n = 2I_0
+\]
+($=170(1+17\lambda^2)$ and $340$ at $n=4$), which are identical to those of the equal-mass 3D gem in \Cref{thm:rotor}(1). By Steiner's parallel-axis theorem $I_{\mathrm{cm}}^{(s)}(\lambda)=I_O^{(s)}(\lambda)-M\bigl(\|\mathbf c^{(s)}\|_2^2 I_3-\mathbf c^{(s)}\mathbf c^{(s)\top}\bigr)$, translating to the true centre of mass $\mathbf c^{(s)}(\lambda)$ for free-space rotation \eqref{eq:euler} leaves $I_{zz,\mathrm{cm}}^{(s)}=2I_0$ and all three off-diagonal products of inertia unchanged while subtracting $Mz_{\mathrm{cm}}(\lambda)^2=M\lambda^2 b_n^2/\bar s^2$ ($=850\lambda^2$ at $n=4$) from the horizontal diagonal moments:
+\[
+I_{xx,\mathrm{cm}}^{(s)}(\lambda) = I_{yy,\mathrm{cm}}^{(s)}(\lambda)
+= M\!\left(a_n + \lambda^2 b_n\!\left(1 - \frac{b_n}{\bar s^2}\right)\right)
+= M a_n\!\left(1 + \frac{2(n^2+2)}{3}\lambda^2\right)
+\]
+($=170(1+12\lambda^2)=340\bigl(\frac12+6\lambda^2\bigr)$ at $n=4$). In both frames ($O$ and $\mathbf c^{(s)}(\lambda)$), the off-diagonal products of inertia are $I_{xy}^{(s)}=-Q_{xy}(S)$ and
+\[
+\bigl(I_{xz}^{(s)}(\lambda),\, I_{yz}^{(s)}(\lambda)\bigr)
+= -\lambda\sum_{i,j}z_{ij}^2(x_j,y_i)
+= -\lambda^{-1}\Bigl(\bigl(\mathbf V_3(S;\lambda)\bigr)_x,\, \bigl(\mathbf V_3(S;\lambda)\bigr)_y\Bigr).
+\]
+Consequently, for all $48$ associative order-four magic squares, both $Q_{xy}(S)=0$ and $\mathbf V_3(S;\lambda)=\mathbf 0$, so the 3D lifted entry-weighted gem has a strictly diagonal, axisymmetric inertia tensor about both $O$ and $\mathbf c^{(s)}(\lambda)$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(1)--(2) Since $S$ is semi-magic, every row excess $R_i=\sum_jz_{ij}$ and column excess $C_j=\sum_iz_{ij}$ vanishes. Hence $\sum_{i,j}s_{ij}x_j^2=\bar s\sum_{i,j}x_j^2+\sum_jx_j^2C_j=M a_n=I_0$, and similarly $\sum_{i,j}s_{ij}y_i^2=I_0$, giving $I_{xx}=I_{yy}=I_0$ and $I_{zz}=2I_0$. Since $\sum_{i,j}x_jy_i=0$, the off-diagonal product of inertia is $I_{xy}=-\sum_{i,j}s_{ij}x_jy_i=-\sum_{i,j}z_{ij}x_jy_i=-Q_{xy}(S)$. Diagonalizing the $2\times2$ block $\bigl(\begin{smallmatrix}I_0 & -Q_{xy}\\ -Q_{xy} & I_0\end{smallmatrix}\bigr)$ yields eigenvalues $I_0\mp|Q_{xy}|$ along $(1,\pm1)/\sqrt{2}$, proving \eqref{eq:inertia-entry}--\eqref{eq:principal-entry}. At $n=4$, $I_0=16\cdot\frac{17}{2}\cdot\frac{5}{4}=170$, and since $|Q_{xy}|\le 60 < 170$, we have $I_1 < I_2 < I_3=340$ whenever $Q_{xy}\ne0$. Because $I_3-I_2=2I_0-(I_0+|Q_{xy}|)=I_0-|Q_{xy}|=I_1$, the factor $I_3-I_2$ cancels $I_1$ in the linearized growth rate $\sqrt{(I_2-I_1)(I_3-I_2)/(I_1I_3)}=\sqrt{2|Q_{xy}|I_1/(2I_0I_1)}=\sqrt{|Q_{xy}|/I_0}$.
+
+(3) At the 3D lifted points $\mathbf p_{ij}(\lambda)$, $\sum_{i,j}s_{ij}(x_j,y_i)=\mathbf 0$ while $\sum_{i,j}(\bar s+z_{ij})\lambda z_{ij}=\lambda\sum_{i,j}z_{ij}^2=N\lambda b_n$, giving $\mathbf c^{(s)}(\lambda)=(0,0,z_{\mathrm{cm}}(\lambda))$ with $z_{\mathrm{cm}}(\lambda)=\lambda b_n/\bar s$. Moreover, $\sum_{i,j}(\bar s+z_{ij})\lambda^2z_{ij}^2=\lambda^2\bar s N b_n+\lambda^2\sum_{i,j}z_{ij}^3=M\lambda^2b_n$ because $\sum_{i,j}z_{ij}^3=0$, so $I_{xx,O}^{(s)}(\lambda)=I_{yy,O}^{(s)}(\lambda)=M(a_n+\lambda^2b_n)$ and $I_{zz,O}^{(s)}(\lambda)=2Ma_n$. Since $\mathbf c^{(s)}(\lambda)$ lies on the $z$-axis, Steiner's parallel-axis theorem subtracts $Mz_{\mathrm{cm}}(\lambda)^2\diag(1,1,0)$ from $I_O^{(s)}(\lambda)$ and leaves all off-diagonal products unchanged; using $b_n=(n^2+1)a_n$ and $1-b_n/\bar s^2=1-\frac{n^2-1}{3(n^2+1)}=\frac{2(n^2+2)}{3(n^2+1)}$ gives $b_n(1-b_n/\bar s^2)=\frac{2(n^2+2)}{3}a_n$ (at $n=4$, $b_4=85/4$, $\bar s=17/2$, $1-b_4/\bar s^2=12/17$, and $I_{xx,\mathrm{cm}}^{(s)}(\lambda)=170(1+12\lambda^2)$). Finally, $I_{xz}^{(s)}(\lambda)=-\sum_{i,j}(\bar s+z_{ij})\lambda x_jz_{ij}=-\lambda\sum_{i,j}z_{ij}^2x_j=-\lambda^{-1}(\mathbf V_3)_x$ and similarly for $I_{yz}^{(s)}(\lambda)$; by \Cref{thm:3d-power}(1), both vanish alongside $Q_{xy}(S)$ on all $48$ associative squares.
+\end{proof}
+
+\subsection{Uniform Polyhedral Solids Remain Within \texorpdfstring{$2.5\%$}{2.5\%} of an Axisymmetric Rotor}
+
+When a Magic Gem is fabricated as a uniform-density 3D polyhedron $\mathcal G(S)=\conv P_S$, its continuous covariance matrix $\Sigma_{\mathrm{solid}}=\frac{1}{\vol\mathcal G}\iiint_{\mathcal G}(\mathbf x-\mathbf c_0)(\mathbf x-\mathbf c_0)^{\top}\,dV$ and inertia tensor $I_{\mathrm{solid}}=M\bigl(\tr(\Sigma_{\mathrm{solid}})I_3-\Sigma_{\mathrm{solid}}\bigr)$ can be computed in exact rational arithmetic by decomposing $\mathcal G(S)$ into tetrahedra (\Cref{sec:appendix}). Across all $880$ order-four magic gems at $\lambda=1$:
+\begin{itemize}
+\item The ratio of the mean transverse principal moment $\frac12(I_2+I_3)$ to the axial moment $I_1$ (along the near-$z$ axis) has mean $9.412$ and range $[7.338,\,11.574]$, closely tracking the universal point-mass value $9$.
+\item Because the vanishing of the discrete first moments suppresses the off-diagonal tilt of the hull \cite[Sect.~5.3]{mathewson2026gems}, the relative splitting between the two transverse principal moments remains below $2.5\%$ across the entire order-four census:
+\[
+\frac{I_3 - I_2}{I_2} \in [0.00004,\, 0.0243], \qquad \text{mean } 0.0071.
+\]
+\end{itemize}
+
+However, while the inertia tensor of the uniform solid $\mathcal G(S)$ remains nearly axisymmetric about its own centre of mass $\mathbf c_0(S)$, supporting the solid on a fixed pivot at the grid origin $O$ under gravity requires $\mathbf c_0(S)=\mathbf 0$ so that the gravitational torque $\boldsymbol\tau_{\mathrm{grav}}=M\mathbf c_0(S)\times\mathbf g$ vanishes. As we show next in \Cref{sec:nested}, passing from the discrete point cloud $P_S$ to the uniform solid $\mathcal G_0(S)$ shifts $\mathbf c_0(S)$ away from $O$ on $829$ of the $880$ squares, directly motivating our multi-material core, wireframe, strut-network, and papercraft balancing constructions.

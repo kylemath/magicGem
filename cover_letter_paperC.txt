@@ -1,0 +1,31 @@
+October 29, 2026
+
+Professor Joy Ko
+Editor-in-Chief, Journal of Mathematics and the Arts
+Taylor & Francis
+
+Dear Professor Ko,
+
+Please find enclosed my manuscript titled "Mechanics and Balance of Magic Gems: Radial Vector Laws, Symmetric-Top Precession, Nested Core Inclusions, and Mirror-Twin Towers" (28 pages, 7 multi-panel figures, 5 tables), which I am submitting for consideration for publication as a Research Article in the Journal of Mathematics and the Arts.
+
+Over five centuries ago, Albrecht Durer contributed two enduring landmarks at the intersection of mathematics and the visual arts: the order-four magic square in his engraving Melencolia I (1514) and the first printed polyhedral net unfoldings in Underweysung der Messung (1525). When the entries of an n x n magic square S are lifted vertically above the centered grid to form three-dimensional points p_{ij}(lambda) = (x_j, y_i, lambda z_{ij}), their convex hull defines a polyhedral sculpture—the "Magic Gem" G_lambda(S). Motivated by fabricating physical 3D-printed models, ball-and-rod wireframes, fully interconnected strut sculptures, and folded cardstock cutouts across all 880 order-four magic squares (openly shared with an interactive 3D visual gallery and physics web essay at https://github.com/kylemath/magicGemWeb and https://github.com/kylemath/magicGem), this paper investigates how the combinatorial symmetries of a magic square govern the physical balance, rotational dynamics, skeletal and papercraft architecture, and sculptural stacking of its 3D polyhedron:
+
+1. Radial vector balance and the sqrt(5) Pell barrier (Section 2): By an exact length-weight duality, scaling 3D origin vectors by power-law lengths R_{ij}^beta is mechanically equivalent to weighting the natural vectors by R_{ij}^{beta - 1}. For cubic 3D lengths (beta = 3), the vertical resultant vanishes identically for every semi-magic square, while on the unit sphere S^2 (beta = 0) all 880 order-four magic squares admit positive minimum-variance balancing weights. In the plane, decomposing the 4 x 4 grid into three concentric rings proves that planar unit vectors never balance because r_2 / r_1 = sqrt(5) is irrational; the global minimum norm across all 880 squares (approx. 0.07049) is governed by the fundamental Pell convergent 9/4 on eight Dudeney Group VI squares.
+
+2. Symmetric-top precession, spherical tops, and Dzhanibekov flips (Section 3): Extending the planar magic-square inertia results of Loly and Rogers (2004, 2005) into three dimensions, we show that equal point masses make every semi-magic gem an axisymmetric rotor with universal spherical-top transition scale lambda_{iso} = (n^2 + 1)^{-1/2} (= 1/sqrt(17) at n = 4) and closed 9:1 polhode orbits at lambda = 1. Under entry-weighted masses m_{ij} = s_{ij}, the off-diagonal quadrupole moment Q_{xy}(S) splits the horizontal moments and triggers the intermediate-axis (Dzhanibekov) flip on 824 of the 880 squares while leaving all 48 associative squares (including Durer's square #175) strictly axisymmetric.
+
+3. Multi-material "diamond-in-a-diamond" cores, 3D-printed wireframes, complete K_{16} strut sculptures, and Durer papercraft nets (Section 4): While passing from discrete point masses to a uniform solid polyhedron shifts the center of mass off the origin for 829 of the 880 squares, we classify the 51 naturally balanced solids and show how two-density core inclusions G_1(S) subset G_0(S) restore exact balance in 35 Group VI gems (led by 8 printable denser-core gems with modest excess density Delta rho_1 / rho_0 <= 40/19 and 2 lighter-core gems). Extending this analysis to physical skeletal and thin-shell realizations, we prove that the complete 120-rod network K_{16} with equal-mass struts has centroid at the origin and continuous rod covariance equal to (29/45) Sigma(lambda) for every order-four square; that tuning the inner-to-outer rod diameter ratio d_1 / d_0 in a single material balances 158 Group VI nested wireframes G(G_0) U G(G_1); and that unfolding the boundary surface along a breadth-first dual spanning tree yields a strictly non-overlapping 2D papercraft cutout net with N_{tabs} = f_0 - 1 glue tabs across all 880 order-four Magic Gems (verifying Durer's / Shephard's unfolding conjecture across the entire order-four ensemble).
+
+4. Freestanding mirror-twin sculptural towers (Section 5): Finally, we prove that central inversion G_lambda(r^2 \bar{S}) = -G_lambda(S) locks any gem with centrally symmetric top and bottom facets onto its complementary mirror twin to form zero-rotation vertical towers, led by 17 gems whose contact facets project to centered area-5 knight's-move squares (such as square #763, which stands without sliding at the cubic print scale lambda = 0.20 whenever the static friction coefficient exceeds mu_s = 0.20).
+
+For complete transparency, two companion preprints by the author examine separate pure-combinatorial aspects of lifted magic squares: one (submitted to Experimental Mathematics, arXiv:2512.09170) catalogs the static polyhedral combinatorics (f-vectors, vertex survival, and all-odd-n Siamese volumes), and a second (submitted to Discrete Applied Mathematics) studies abstract Prouhet-Tarry-Escott polynomial matrix moments and random permutation energies. The present manuscript is self-contained and is the only paper in the series investigating vector balance laws, 3D rigid-body dynamics, nested multi-material and wireframe/papercraft fabrication, and mirror-twin sculptural stacking.
+
+This manuscript is original, is my sole work, has not been published previously, and is not under consideration for publication elsewhere. Thank you very much for your time and consideration.
+
+Sincerely,
+
+Kyle Elliott Mathewson, Ph.D.
+Associate Professor, Faculty of Science
+University of Alberta
+Edmonton, Alberta, Canada
+Email: kyle.mathewson@ualberta.ca

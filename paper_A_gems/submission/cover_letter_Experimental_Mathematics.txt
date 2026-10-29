@@ -1,0 +1,31 @@
+October 28, 2026
+
+Professor Alexander M. Kasprzyk
+Editor-in-Chief, Experimental Mathematics
+Taylor & Francis
+
+Dear Professor Kasprzyk,
+
+Please find enclosed our manuscript titled "Magic Gems: Convex Hulls of Lifted Magic Squares" (31 pages, 8 figures, 7 tables), which I am submitting for consideration for publication in Experimental Mathematics.
+
+Every classical magic square S of order n defines a three-dimensional lattice polytope—its "magic gem" G(S)—obtained by lifting each grid cell (i, j) to a height proportional to its entry on a shallow circular paraboloid and taking the convex hull in R^3. While the combinatorial and polyhedral theory of the space of all magic squares (such as the Birkhoff polytope and Ehrhart polynomials of magic-square cones) has been extensively studied, the intrinsic three-dimensional polyhedral geometry of an individual magic square under a spatial lift has remained largely unexplored.
+
+This manuscript combines exact computer experimentation with structural proofs brought to light by the census data:
+
+1. Point-cloud mechanics and order-3 uniqueness: We prove that the discrete line-sum constraints alone force the centroid of the lifted point cloud to lie at the origin and render its horizontal inertia isotropic for every n >= 3. At n = 3, the unique Lo Shu square yields a 9-vertex, 14-face simplicial polyhedron of volume 81 and point group C_{2v}.
+2. Exhaustive order-4 census and breakdown of vertex survival: Evaluating all 880 Frenicle-distinct order-4 magic squares alongside a 10^5-trial random permutation baseline reveals that magic gems have significantly larger volume than random permutation hulls, yet narrow f-vector diversity (only 13 combinatorial f-vectors across 423 distinct hull volumes). Crucially, n = 4 is the exact threshold where complete vertex survival breaks down: 148 of the 880 squares lose at least one lifted grid cell to the interior of the hull, beginning with Frenicle square #191. We prove a general paraboloid-lift comparison lemma explaining this breakdown via an upper-concave / lower-convex sandwich inequality.
+3. Exact all-odd-n theorems for the Siamese (De la Loubere) gem: Guided by computational experiments for odd orders up to n = 31, we prove unconditionally that for every odd n >= 3 the Siamese magic gem retains all n^2 vertices on its boundary, decomposes into a five-terrace piecewise-affine upper surface over a stepped lower cradle, and admits closed-form face counts (f_0 = n^2, f_1 = 3n^2 - n - 5, f_2 = 2n^2 - n - 3) and exact rational volume Vol(G(S_n)) = (n^2 - 1)(3n^4 - n^2 - 6) / (12 sqrt(2)) (Proposition 6.5 and Theorem 6.13).
+
+In the spirit of Experimental Mathematics, every census table, counterexample, and theorem verification is accompanied by a self-contained, zero-dependency Python ancillary suite (available at https://github.com/kylemath/magicGem and archived on arXiv as arXiv:2512.09170).
+
+For complete transparency, a separate companion preprint by the author (submitted to a discrete mathematics venue) investigates an independent algebraic and probabilistic problem—higher-degree polynomial moments of magic squares via the Prouhet-Tarry-Escott problem, a degree-3 permutation threshold, and characteristic-function integrals—whereas the present manuscript is entirely self-contained and focuses on the 3D polyhedral geometry, face lattices, and exhaustive census of lifted magic squares.
+
+This manuscript is original, is my sole work, has not been published previously, and is not under consideration for publication elsewhere. Thank you very much for your time and consideration.
+
+Sincerely,
+
+Kyle Elliott Mathewson, Ph.D.
+Associate Professor, Faculty of Science
+University of Alberta
+Edmonton, Alberta, Canada
+Email: kyle.mathewson@ualberta.ca

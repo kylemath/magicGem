@@ -1,0 +1,1971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Hidden Mechanics of Magic Gems — An Interactive Visual Essay (Paper C)</title>
+  <!-- KaTeX for clean inline & display math -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"
+    onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+  <style>
+    :root {
+      --bg: #faf9f5;
+      --surface: #ffffff;
+      --surface-alt: #f2f4f0;
+      --surface-warm: #fdfaf2;
+      --ink: #182022;
+      --ink-body: #283236;
+      --ink-muted: #5c696d;
+      --border: #dde2de;
+      --border-strong: #c2ccc6;
+
+      /* Semantic Distill Color Palette */
+      --emerald: #0f766e;
+      --emerald-light: #e6f6f4;
+      --cobalt: #1d4ed8;
+      --cobalt-light: #eff6ff;
+      --amber: #d97706;
+      --amber-light: #fef3c7;
+      --crimson: #e11d48;
+      --crimson-light: #ffe4e6;
+      --orange-hi: #d95f02;
+      --blue-lo: #0072b2;
+
+      --font-serif: 'Charter', 'Source Serif 4', 'Iowan Old Style', 'Georgia', serif;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', 'SFMono-Regular', Menlo, Consolas, monospace;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink-body);
+      font-family: var(--font-serif);
+      font-size: 18.5px;
+      line-height: 1.74;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Color-coded inline math / concept pills (Chris Olah / Distill style) */
+    .c-pill {
+      display: inline-block;
+      font-family: var(--font-sans);
+      font-size: 0.82em;
+      font-weight: 700;
+      padding: 0.06em 0.5em;
+      border-radius: 5px;
+      vertical-align: baseline;
+      line-height: 1.4;
+      white-space: nowrap;
+    }
+    .c-emerald { background: var(--emerald-light); color: #0b5852; border: 1px solid rgba(15,118,110,0.28); }
+    .c-cobalt  { background: var(--cobalt-light);  color: #1e40af; border: 1px solid rgba(29,78,216,0.25); }
+    .c-amber   { background: var(--amber-light);   color: #92400e; border: 1px solid rgba(217,119,6,0.32); }
+    .c-crimson { background: var(--crimson-light); color: #9f1239; border: 1px solid rgba(225,29,72,0.28); }
+    .c-hi      { background: #fff0e5; color: #b34800; border: 1px solid rgba(217,95,2,0.3); }
+    .c-lo      { background: #e6f3fa; color: #005587; border: 1px solid rgba(0,114,178,0.3); }
+
+    /* Distill Header */
+    header.distill-header {
+      background: radial-gradient(circle at 80% 20%, #1c4542 0%, #0f2528 60%, #091719 100%);
+      color: #f8faf9;
+      padding: 3.8rem 2rem 3rem;
+      border-bottom: 4px solid #2dd4bf;
+      position: relative;
+      overflow: hidden;
+    }
+    .header-container {
+      max-width: 1120px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+    .trilogy-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-sans);
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: rgba(45, 212, 191, 0.16);
+      border: 1px solid rgba(94, 234, 212, 0.4);
+      color: #99f6e4;
+      padding: 0.32rem 0.85rem;
+      border-radius: 999px;
+      margin-bottom: 1.1rem;
+    }
+    header.distill-header h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(2.1rem, 4vw, 3.05rem);
+      line-height: 1.15;
+      font-weight: 700;
+      margin: 0 0 1rem 0;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+    }
+    header.distill-header p.subtitle {
+      font-family: var(--font-sans);
+      font-size: 1.15rem;
+      line-height: 1.6;
+      color: #cbe3de;
+      max-width: 850px;
+      margin: 0 0 2rem 0;
+      font-weight: 400;
+    }
+
+    /* Four Question Cards in Header */
+    .hero-questions {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.9rem;
+      margin-bottom: 2rem;
+      font-family: var(--font-sans);
+    }
+    @media (max-width: 920px) {
+      .hero-questions { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 540px) {
+      .hero-questions { grid-template-columns: 1fr; }
+    }
+    .hq-card {
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+      padding: 0.85rem 1rem;
+      color: #f0f9f7;
+      text-decoration: none;
+      transition: all 0.18s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+    .hq-card:hover {
+      background: rgba(45, 212, 191, 0.16);
+      border-color: #5eead4;
+      transform: translateY(-2px);
+    }
+    .hq-num {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #5eead4;
+      font-weight: 700;
+    }
+    .hq-title {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.3;
+    }
+    .hq-desc {
+      font-size: 0.78rem;
+      color: #b7d4ce;
+      line-height: 1.4;
+    }
+
+    .byline-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2.4rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid rgba(255,255,255,0.15);
+      font-family: var(--font-sans);
+      font-size: 0.84rem;
+    }
+    .byline-col .label {
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      font-size: 0.68rem;
+      color: #82b5ab;
+      margin-bottom: 0.2rem;
+    }
+    .byline-col .val, .byline-col a {
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .byline-col a:hover { text-decoration: underline; color: #5eead4; }
+
+    /* Distill 3-Column Layout */
+    .distill-layout {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 225px minmax(0, 740px) 235px;
+      gap: 2.3rem;
+      padding: 2.5rem 1.5rem 5rem;
+    }
+    @media (max-width: 1140px) {
+      .distill-layout {
+        grid-template-columns: 1fr;
+        max-width: 820px;
+      }
+      nav.d-toc, aside.sidenote-col { display: none; }
+    }
+
+    /* Sticky Left Table of Contents */
+    nav.d-toc {
+      z-index: 1;
+      position: sticky;
+      top: 1.8rem;
+      align-self: start;
+      font-family: var(--font-sans);
+      font-size: 0.82rem;
+      line-height: 1.42;
+      border-right: 1px solid var(--border);
+      padding-right: 1rem;
+    }
+    nav.d-toc .toc-title {
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--ink-muted);
+      font-size: 0.7rem;
+      margin-bottom: 0.85rem;
+    }
+    nav.d-toc ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    nav.d-toc li { margin-bottom: 0.65rem; }
+    nav.d-toc a {
+      color: var(--ink-muted);
+      text-decoration: none;
+      transition: all 0.15s;
+      display: block;
+      padding: 0.2rem 0.4rem;
+      border-radius: 6px;
+    }
+    nav.d-toc a:hover, nav.d-toc a.active {
+      color: var(--emerald);
+      background: var(--emerald-light);
+      font-weight: 600;
+    }
+    nav.d-toc .sim-badge {
+      display: inline-block;
+      font-size: 0.63rem;
+      background: #0f766e;
+      color: #ffffff;
+      padding: 0.08rem 0.42rem;
+      border-radius: 4px;
+      font-weight: 700;
+      margin-left: 0.25rem;
+      vertical-align: middle;
+    }
+
+    /* Article Typography & Callouts */
+    main.d-article h2 {
+      font-family: var(--font-sans);
+      font-size: 1.75rem;
+      font-weight: 800;
+      margin: 3.4rem 0 0.8rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--border);
+      color: var(--ink);
+      letter-spacing: -0.015em;
+      line-height: 1.25;
+    }
+    main.d-article section:first-child h2 {
+      margin-top: 0.5rem;
+    }
+    main.d-article h3 {
+      font-family: var(--font-sans);
+      font-size: 1.22rem;
+      font-weight: 700;
+      margin: 2rem 0 0.55rem;
+      color: #163638;
+    }
+    main.d-article p {
+      margin: 0 0 1.15rem;
+    }
+
+    /* Key Takeaway / Intuition Banner */
+    .intuition-box {
+      background: linear-gradient(135deg, #f0fdf9 0%, #f8fafc 100%);
+      border: 1px solid #99f6e4;
+      border-left: 5px solid var(--emerald);
+      border-radius: 10px;
+      padding: 1.1rem 1.35rem;
+      margin: 1.4rem 0;
+      font-family: var(--font-sans);
+      font-size: 0.96rem;
+      line-height: 1.58;
+      color: #133332;
+      box-shadow: 0 3px 10px rgba(15, 118, 110, 0.05);
+    }
+    .intuition-box .ib-label {
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--emerald);
+      margin-bottom: 0.3rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    /* Interactive Story Presets ("Click to Try in Simulator") */
+    .story-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 0.75rem;
+      margin: 1.25rem 0;
+      font-family: var(--font-sans);
+    }
+    .story-card {
+      background: var(--surface);
+      border: 1px solid var(--border-strong);
+      border-radius: 9px;
+      padding: 0.75rem 0.95rem;
+      cursor: pointer;
+      transition: all 0.16s ease;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+    }
+    .story-card:hover {
+      border-color: var(--emerald);
+      background: var(--emerald-light);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(15, 118, 110, 0.1);
+    }
+    .story-card .sc-tag {
+      font-size: 0.68rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--emerald);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .story-card .sc-title {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+    .story-card .sc-sub {
+      font-size: 0.77rem;
+      color: var(--ink-muted);
+      line-height: 1.38;
+    }
+
+    /* Collapsible Formal Math & Theorem Drawer */
+    details.math-drawer {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      margin: 1.2rem 0 1.6rem;
+      overflow: hidden;
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+    }
+    details.math-drawer summary {
+      padding: 0.75rem 1.15rem;
+      background: var(--surface-alt);
+      cursor: pointer;
+      font-weight: 700;
+      color: #1c3b39;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      user-select: none;
+      list-style: none;
+    }
+    details.math-drawer summary::-webkit-details-marker { display: none; }
+    details.math-drawer summary::after {
+      content: "Show Formal Math & Proof ▾";
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--emerald);
+      background: #ffffff;
+      padding: 0.2rem 0.6rem;
+      border-radius: 99px;
+      border: 1px solid var(--border-strong);
+    }
+    details.math-drawer[open] summary::after {
+      content: "Hide Formal Math ▴";
+    }
+    details.math-drawer .drawer-body {
+      padding: 1rem 1.25rem;
+      border-top: 1px solid var(--border);
+      line-height: 1.65;
+      color: var(--ink-body);
+    }
+
+    /* Sidenotes */
+    .sidenote-card {
+      font-family: var(--font-sans);
+      font-size: 0.79rem;
+      line-height: 1.48;
+      color: var(--ink-muted);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--emerald);
+      padding: 0.75rem 0.9rem;
+      border-radius: 6px;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+    }
+    .sidenote-card strong {
+      color: var(--ink);
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+
+    /* Tufte/Distill-style margin notes that float into the right column */
+    .margin-note {
+      float: right;
+      clear: right;
+      width: 220px;
+      margin: 0.35rem -262px 1rem 1rem;
+      font-family: var(--font-sans);
+      font-size: 0.79rem;
+      line-height: 1.48;
+      color: var(--ink-muted);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--emerald);
+      padding: 0.75rem 0.9rem;
+      border-radius: 6px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+    }
+    .margin-note strong { color: var(--ink); display: block; margin-bottom: 0.2rem; }
+    @media (max-width: 1140px) {
+      .margin-note { float: none; width: auto; margin: 1rem 0; }
+    }
+
+    /* Full-Bleed Interactive Physics Simulator Cards */
+    .simulator-card {
+      clear: both;
+      position: relative;
+      z-index: 5;
+      width: 1180px;
+      max-width: calc(100vw - 3rem);
+      margin: 2rem 0 2.8rem -220px;
+      background: var(--surface);
+      border: 1px solid #c6d1cc;
+      border-radius: 14px;
+      box-shadow: 0 14px 36px rgba(15, 37, 40, 0.09);
+      overflow: hidden;
+      font-family: var(--font-sans);
+    }
+    @media (max-width: 1140px) {
+      .simulator-card {
+        width: 100%;
+        max-width: 100%;
+        margin: 1.8rem 0;
+      }
+    }
+
+    .sim-header {
+      background: linear-gradient(90deg, #0f2528 0%, #163836 100%);
+      color: #ffffff;
+      padding: 0.85rem 1.35rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+    .sim-header .sim-title {
+      font-weight: 700;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .sim-header .live-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #2dd4bf;
+      box-shadow: 0 0 9px #2dd4bf;
+      display: inline-block;
+      animation: pulseDot 2s infinite;
+    }
+    @keyframes pulseDot {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.25); opacity: 0.75; }
+    }
+    .sim-header .sim-hint {
+      font-size: 0.78rem;
+      color: #99f6e4;
+      background: rgba(255,255,255,0.08);
+      padding: 0.24rem 0.65rem;
+      border-radius: 99px;
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      flex-wrap: wrap;
+    }
+    .sim-paper-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #fef3c7;
+      background: rgba(217, 119, 6, 0.32);
+      border: 1px solid rgba(252, 211, 77, 0.45);
+      padding: 0.14rem 0.52rem;
+      border-radius: 99px;
+      text-decoration: none;
+      letter-spacing: 0.01em;
+      transition: all 0.15s ease;
+    }
+    .sim-paper-badge:hover {
+      background: rgba(217, 119, 6, 0.55);
+      color: #ffffff;
+      text-decoration: none;
+    }
+
+    /* Segmented Mode Tabs inside Simulator */
+    .sim-tabs {
+      display: flex;
+      background: #e9eeec;
+      padding: 0.35rem 1.35rem 0;
+      gap: 0.35rem;
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+    .sim-tab {
+      padding: 0.5rem 1rem;
+      border: 1px solid transparent;
+      border-bottom: none;
+      border-radius: 8px 8px 0 0;
+      background: transparent;
+      color: #495754;
+      font-family: var(--font-sans);
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .sim-tab:hover {
+      color: #0f2528;
+      background: rgba(255,255,255,0.5);
+    }
+    .sim-tab.active {
+      background: #f5f8f6;
+      color: var(--emerald);
+      border-color: var(--border);
+      box-shadow: 0 -2px 6px rgba(0,0,0,0.03);
+    }
+
+    .sim-controls {
+      background: #f5f8f6;
+      border-bottom: 1px solid var(--border);
+      padding: 0.85rem 1.35rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.1rem;
+      align-items: center;
+      font-size: 0.83rem;
+    }
+    .ctrl-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.24rem;
+    }
+    .ctrl-group label {
+      font-weight: 700;
+      font-size: 0.72rem;
+      color: #3b4b48;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .ctrl-group input[type="range"] {
+      accent-color: var(--emerald);
+      cursor: pointer;
+    }
+    select.sim-select {
+      padding: 0.38rem 0.65rem;
+      border-radius: 7px;
+      border: 1px solid #b5c4bd;
+      background: #fff;
+      font-family: var(--font-sans);
+      font-size: 0.83rem;
+      font-weight: 600;
+      color: #132a2c;
+      cursor: pointer;
+    }
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.42rem;
+      align-items: center;
+    }
+    button.sim-btn {
+      padding: 0.4rem 0.75rem;
+      border-radius: 7px;
+      border: 1px solid #0f766e;
+      background: #ffffff;
+      color: #0f766e;
+      font-family: var(--font-sans);
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.14s ease;
+    }
+    button.sim-btn:hover, button.sim-btn.active {
+      background: #0f766e;
+      color: #ffffff;
+      box-shadow: 0 2px 6px rgba(15, 118, 110, 0.22);
+    }
+    button.sim-btn.gold {
+      border-color: #d97706;
+      color: #92400e;
+      background: #fffbeb;
+    }
+    button.sim-btn.gold:hover, button.sim-btn.gold.active {
+      background: #d97706;
+      color: #ffffff;
+    }
+    button.sim-btn.crimson {
+      border-color: #e11d48;
+      color: #be123c;
+      background: #fff1f2;
+    }
+    button.sim-btn.crimson:hover, button.sim-btn.crimson.active {
+      background: #e11d48;
+      color: #ffffff;
+    }
+
+    .sim-canvas-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      background: #ffffff;
+    }
+    .sim-canvas-grid.intro-grid {
+      grid-template-columns: 380px 1fr;
+    }
+    @media (max-width: 880px) {
+      .sim-canvas-grid, .sim-canvas-grid.intro-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .canvas-pane {
+      position: relative;
+      padding: 0.8rem;
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .canvas-pane:last-child { border-right: none; }
+    .canvas-pane canvas {
+      width: 100%;
+      max-width: 550px;
+      height: auto;
+      border-radius: 8px;
+      background: #fafbfa;
+      border: 1px solid #e5eae7;
+    }
+
+    /* Interactive HTML 4x4 Magic Square Board inside Intro Sim */
+    .magic-board-wrap {
+      width: 100%;
+      max-width: 340px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .magic-board-title {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--ink);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .magic-grid-4x4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      background: #e6ece9;
+      padding: 8px;
+      border-radius: 10px;
+      border: 1px solid #cbd5d0;
+    }
+    .mg-cell {
+      aspect-ratio: 1;
+      border-radius: 7px;
+      background: #ffffff;
+      border: 2px solid transparent;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.12s ease;
+      position: relative;
+      user-select: none;
+    }
+    .mg-cell:hover, .mg-cell.active {
+      transform: scale(1.06);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+      z-index: 2;
+    }
+    .mg-cell .s-num {
+      font-size: 1.15rem;
+      font-weight: 800;
+      line-height: 1.1;
+    }
+    .mg-cell .z-num {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      opacity: 0.85;
+    }
+    .mg-cell .ring-dot {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+    }
+
+    .sim-readout {
+      background: #102124;
+      color: #e4f0ec;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      padding: 0.7rem 1.35rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .sim-readout span.hl { color: #5eead4; font-weight: 700; }
+    .sim-readout span.warn { color: #fda4af; font-weight: 700; }
+    .sim-readout span.gold { color: #fcd34d; font-weight: 700; }
+
+    /* Section 6: Visual Census & Exemplar Gallery */
+    .census-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0 2.2rem;
+      font-family: var(--font-sans);
+    }
+    .census-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem 1.15rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+    .census-card .cc-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 0.5rem;
+    }
+    .census-card .cc-title {
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--ink);
+    }
+    .census-card .cc-count {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 0.8rem;
+      color: var(--emerald);
+      white-space: nowrap;
+    }
+    .census-bar-track {
+      height: 8px;
+      background: #e6ece9;
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .census-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #0f766e, #14b8a6);
+      border-radius: 99px;
+    }
+    .census-card .cc-desc {
+      font-size: 0.79rem;
+      color: var(--ink-muted);
+      line-height: 1.42;
+    }
+    .census-card .cc-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-top: 0.2rem;
+    }
+    .jump-chip {
+      font-family: var(--font-sans);
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.2rem 0.55rem;
+      border-radius: 99px;
+      background: var(--emerald-light);
+      color: var(--emerald);
+      border: 1px solid rgba(15,118,110,0.3);
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.14s;
+    }
+    .jump-chip:hover {
+      background: var(--emerald);
+      color: #ffffff;
+    }
+
+    /* Data Table */
+    table.distill-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: var(--font-sans);
+      font-size: 0.83rem;
+      margin: 1.2rem 0;
+      background: var(--surface);
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    table.distill-table th {
+      background: #eef3f0;
+      color: #132a2c;
+      font-weight: 700;
+      text-align: left;
+      padding: 0.6rem 0.75rem;
+      border-bottom: 2px solid #cbd5d0;
+    }
+    table.distill-table td {
+      padding: 0.52rem 0.75rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+    table.distill-table tr:hover { background: #f4faf8; }
+
+    /* Open Problem Cards */
+    .open-problems-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 1.2rem 0;
+      font-family: var(--font-sans);
+    }
+    @media (max-width: 720px) {
+      .open-problems-grid { grid-template-columns: 1fr; }
+    }
+    .op-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--cobalt);
+      border-radius: 8px;
+      padding: 1rem 1.15rem;
+    }
+    .op-card h4 {
+      margin: 0 0 0.4rem 0;
+      font-size: 0.92rem;
+      color: var(--ink);
+    }
+    .op-card p {
+      margin: 0;
+      font-size: 0.82rem;
+      line-height: 1.5;
+      color: var(--ink-muted);
+    }
+
+    footer.distill-footer {
+      background: #0f2528;
+      color: #b5ccc4;
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      padding: 2.5rem 1.5rem;
+      margin-top: 3rem;
+    }
+    footer .footer-inner {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    footer a { color: #5eead4; text-decoration: none; }
+  </style>
+</head>
+<body>
+
+<header class="distill-header">
+  <div class="header-container">
+    <div class="trilogy-pill">Magic Gems Trilogy · Companion Paper C · Interactive Visual Essay</div>
+    <h1>The Hidden Mechanics of Magic Gems</h1>
+    <p class="subtitle">
+      What happens when you turn a $4\times 4$ magic square into 16 three-dimensional vectors and wrap a crystal hull around them?
+      Explore how Magic Gems pull on the origin, spin in zero gravity without tumbling, balance via nested "diamond-in-a-diamond" cores, and lock with their mirror twins into vertical towers.
+    </p>
+
+    <div class="hero-questions">
+      <a class="hq-card" href="#sec-rings">
+        <span class="hq-num">Question 1 · Vectors &amp; Rings</span>
+        <span class="hq-title">Why can't 16 unit arrows on a $4\times 4$ board ever cancel out?</span>
+        <span class="hq-desc">The middle ring sits $\sqrt{5}$ times farther out than the inner ring—creating an irrational barrier solved to $0.0705$ by Pell's equation $9/4 \approx \sqrt{5}$.</span>
+      </a>
+      <a class="hq-card" href="#sec-precession">
+        <span class="hq-num">Question 2 · Zero-G Spin</span>
+        <span class="hq-title">Why do tennis rackets flip $180^\circ$ in space, while Magic Gems spin smoothly?</span>
+        <span class="hq-desc">Equal masses make every Magic Gem an axisymmetric top—and a zero-wobble spherical top at $\lambda = 1/\sqrt{17}$—while entry masses trigger dramatic flips.</span>
+      </a>
+      <a class="hq-card" href="#sec-nested">
+        <span class="hq-num">Question 3 · Nested Cores</span>
+        <span class="hq-title">How do you balance a lopsided 3D-printed gem without changing its shape?</span>
+        <span class="hq-desc">Peeling the outer hull reveals an inner "diamond inside a diamond" that pulls in the opposite direction—restoring balance when printed at a denser (or hollow) ratio.</span>
+      </a>
+      <a class="hq-card" href="#sec-stacking">
+        <span class="hq-num">Question 4 · Mirror Towers</span>
+        <span class="hq-title">How do jagged crystals stack into a straight vertical column?</span>
+        <span class="hq-desc">Turning a magic square upside-down and taking $17-S$ creates its 3D central inversion, locking knight's-move facets with $100\%$ overlap.</span>
+      </a>
+    </div>
+
+    <div class="byline-bar">
+      <div class="byline-col">
+        <div class="label">Author</div>
+        <div class="val"><a href="mailto:kyle.mathewson@ualberta.ca">Kyle Elliott Mathewson</a></div>
+      </div>
+      <div class="byline-col">
+        <div class="label">Affiliation</div>
+        <div class="val">Faculty of Science, University of Alberta</div>
+      </div>
+      <div class="byline-col">
+        <div class="label">Companion Papers</div>
+        <div class="val">
+          <a href="paperC.pdf">Paper C (PDF)</a> ·
+          <a href="paperA.pdf">Paper A (Gems)</a> ·
+          <a href="paperB.pdf">Paper B (Moments)</a>
+        </div>
+      </div>
+      <div class="byline-col">
+        <div class="label">Exact Census</div>
+        <div class="val">All 880 Order-4 Magic Gems · 14,824 Facets</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="distill-layout">
+  <!-- Sticky Left Navigation -->
+  <nav class="d-toc">
+    <div class="toc-title">Interactive Guide</div>
+    <ul>
+      <li><a href="#sec-intro">1. Lifting a Magic Square into 3D <span class="sim-badge">PLAY</span></a></li>
+      <li><a href="#sec-rings">2. Tug-of-War from $O$ &amp; the $\sqrt{5}$ Barrier <span class="sim-badge">SIM 1</span></a></li>
+      <li><a href="#sec-precession">3. Zero-G Spin: Spherical Tops vs. Flips <span class="sim-badge">SIM 2</span></a></li>
+      <li><a href="#sec-nested">4. "Diamond-in-a-Diamond" Balance <span class="sim-badge">SIM 3</span></a></li>
+      <li><a href="#sec-fab">5. Build It: Rods, Struts &amp; Paper <span class="sim-badge">SIM 4</span></a></li>
+      <li><a href="#sec-stacking">6. Mirror-Twin Vertical Towers <span class="sim-badge">SIM 5</span></a></li>
+      <li><a href="#sec-open">7. Visual Census of All 880 Gems</a></li>
+    </ul>
+  </nav>
+
+  <!-- Main Article Column -->
+  <main class="d-article">
+
+    <!-- ================================================================= -->
+    <!-- SECTION 1 + INTRO PLAYGROUND                                      -->
+    <!-- ================================================================= -->
+    <section id="sec-intro">
+      <h2>1. How to Turn a Magic Square into a 3D Crystal</h2>
+      <aside class="margin-note"><strong>The Magic Gems Trilogy</strong>
+        <span style="display:block;margin-top:0.25rem;"><b>A</b> · <a href="paperA.pdf"><em>Magic Gems: Convex Hulls of Lifted Magic Squares</em></a></span>
+        <span style="display:block;margin-top:0.25rem;"><b>B</b> · <a href="paperB.pdf"><em>Moments of Magic Squares</em></a></span>
+        <span style="display:block;margin-top:0.25rem;"><b>C</b> · <a href="paperC.pdf"><em>Mechanics and Balance of Magic Gems</em></a> (this essay)</span></aside>
+      <p>
+        In a $4\times 4$ magic square, the numbers $1$ through $16$ are arranged so that every row, column, and main diagonal adds up to the magic sum $\mu_4 = 34$.
+        To see the hidden geometry inside these numbers, we place the $4\times 4$ grid flat on the $(x,y)$ plane centered at the origin $O = (0,0,0)$ and measure each number relative to the average value $\bar{s} = 8.5$:
+      </p>
+      <p style="text-align:center;">
+        <span class="c-pill c-hi">High numbers $9\dots 16$ lift UP ($z_{ij} > 0$)</span>
+        &nbsp;&nbsp;and&nbsp;&nbsp;
+        <span class="c-pill c-lo">Low numbers $1\dots 8$ drop DOWN ($z_{ij} < 0$)</span>
+      </p>
+      <p>
+        Each cell $(i,j)$ now defines a <strong>3D vector from the origin</strong> $\mathbf{p}_{ij}(\lambda) = (x_j, y_i, \lambda z_{ij})$, where $\lambda > 0$ controls how tall we stretch the vertical heights. Wrapping a tight elastic skin (the 3D convex hull) around all 16 vector tips creates a faceted polyhedron we call a <strong>Magic Gem</strong> $\mathcal{G}_\lambda(S)$.
+      </p>
+
+      <div class="intuition-box">
+        <div class="ib-label">Try It Yourself: Two-Phase Lift from Flat Board to 3D Crystal</div>
+        Click <strong>▶ Lift 2D → Cubic ($\lambda=0.20$)</strong> below to watch each of the 16 dots rise or drop straight from its flat $4\times 4$ grid cell to the <strong>cubic lift</strong> ($\lambda_{\mathrm{cube}} = 0.20$, where the vertical span $\pm 1.5$ equals the horizontal board span $\pm 1.5$) with the axes held completely fixed so you can clearly see where every dot starts and ends. Then click <strong>▶▶ Phase 2: Stretch $\lambda \to 1.0$</strong> to stretch the crystal taller and compare how the lift parameter $\lambda$ changes its aspect and inertia ratio.
+      </div>
+
+      <!-- INTRO INTERACTIVE PLAYGROUND -->
+      <div class="simulator-card" id="sim-intro">
+        <div class="sim-header">
+          <div class="sim-title"><span class="live-dot"></span> Interactive Playground 0 · From 4×4 Magic Square to 3D Vectors &amp; Convex Gem</div>
+          <div class="sim-hint"><a class="sim-paper-badge" href="paperC.pdf" target="_blank" rel="noopener">📄 Paper C · §1 &amp; Fig. 1</a> Hover any cell on the 4×4 board · Drag 3D crystal to rotate</div>
+        </div>
+        <div class="sim-controls">
+          <div class="ctrl-group">
+            <label for="intro-sq-select">Featured Magic Square</label>
+            <select id="intro-sq-select" class="sim-select">
+              <option value="175">#175 Dürer's Square (1514 — Symmetric Associative Gem)</option>
+              <option value="70">#70 Pell Champion (Reaches √5 Barrier Minimum 0.0705)</option>
+              <option value="46">#46 Dzhanibekov Champion (Max Quadrupole Split |Q_xy|=60)</option>
+              <option value="673">#673 Diamond-in-a-Diamond (8 Outer Vertices + 8 Inner Core)</option>
+              <option value="763">#763 Knight's-Move Tower Gem (Locks with Mirror Twin)</option>
+            </select>
+          </div>
+          <div class="ctrl-group">
+            <label for="intro-lam-slider">3D Lift Height $\lambda$: <span id="intro-lam-val">0.20</span></label>
+            <input type="range" id="intro-lam-slider" min="0.00" max="1.00" step="0.01" value="0.20" style="width:150px;" />
+          </div>
+          <div class="btn-row">
+            <button class="sim-btn" id="btn-intro-flat">Flat ($\lambda=0$)</button>
+            <button class="sim-btn active" id="btn-intro-cube">Cubic Lift ($\lambda=0.20$)</button>
+            <button class="sim-btn gold" id="btn-intro-animate">▶ Lift 2D → Cubic ($\lambda=0.20$)</button>
+            <button class="sim-btn crimson" id="btn-intro-phase2">▶▶ Phase 2: Stretch $\lambda \to 1.0$</button>
+            <button class="sim-btn active" id="btn-intro-vectors">16 Vectors</button>
+            <button class="sim-btn active" id="btn-intro-hull">Outer Hull</button>
+            <button class="sim-btn active" id="btn-intro-core">Inner Core</button>
+          </div>
+        </div>
+        <div class="sim-canvas-grid intro-grid">
+          <div class="canvas-pane" style="background:#f8faf9;">
+            <div class="magic-board-wrap">
+              <div class="magic-board-title">
+                <span id="intro-board-label">Square #175 (Dürer)</span>
+                <span style="font-size:0.73rem; color:var(--emerald);">Every line sums to 34</span>
+              </div>
+              <div class="magic-grid-4x4" id="intro-magic-grid"></div>
+              <div style="font-size:0.75rem; color:var(--ink-muted); line-height:1.4; margin-top:0.2rem;">
+                <span style="color:#d95f02; font-weight:700;">■ Orange ($z>0$):</span> points above board &nbsp;·&nbsp;
+                <span style="color:#0072b2; font-weight:700;">■ Blue ($z<0$):</span> points below board<br/>
+                <span style="color:#d97706; font-weight:700;">★ Gold border:</span> trapped inside the hull ($P_S^{(1)}$)
+              </div>
+            </div>
+          </div>
+          <div class="canvas-pane">
+            <canvas id="canvas-intro-3d" width="640" height="400"></canvas>
+          </div>
+        </div>
+        <div class="sim-readout" id="intro-readout">
+          <span>3D Vector Sum: <span class="hl">∑ p_ij(λ) = (0, 0, 0) (Always Balanced)</span></span>
+          <span>Hull $f$-vector: <span class="hl">12 vertices, 24 edges, 14 facets</span></span>
+          <span>Inner Core: <span class="gold">4 trapped interior points</span></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- SECTION 2 + SIMULATOR 1                                           -->
+    <!-- ================================================================= -->
+    <section id="sec-rings">
+      <h2>2. Tug-of-War from the Origin: Why Unit Arrows Can't Balance on a $4\times 4$ Grid</h2>
+      <aside class="margin-note"><strong>Why $9/4 \approx \sqrt{5}$?</strong>
+      The continued fraction of $\sqrt{5} = [2; 4, 4, \dots]$ has first convergent $2 + 1/4 = 9/4 = 2.25$, solving Pell's equation $p^2 - 5q^2 = +1$. On the $4\times 4$ grid, $\mathbf{d}_{\mathrm{out}} = 5\mathbf{d}_{\mathrm{in}}$ gives $\|\mathbf{v}\|/\|\mathbf{u}\| = 18/8 = 9/4$.</aside>
+      <p>
+        Because every row and column of a magic square adds up to the same constant, the 16 natural 3D arrows $\mathbf{p}_{ij}(\lambda)$ radiating from the origin $O$ always cancel out completely: $\sum_{i,j}\mathbf{p}_{ij}(\lambda) = \mathbf{0}$. Likewise, in the flat 2D grid plane, weighting each cell's position vector $\mathbf{r}_{ij} = (x_j, y_i)$ by its signed height $z_{ij}$ gives $\sum_{i,j} z_{ij}\mathbf{r}_{ij} = \mathbf{0}$. If you place those 16 arrows head-to-tail in order of their compass angle around $O$, they form a <strong>perfectly closed 16-sided polygon</strong>.
+      </p>
+      <p>
+        <strong>But what happens if we change the lengths of the arrows?</strong> Suppose every cell pulls on the origin along its unit direction with length $L_{ij} = R_{ij}^\beta$ (in 3D) or $\ell(r_{ij}) = r_{ij}^\alpha$ (in 2D)—most simply, what if all 16 arrows are rescaled to <strong>unit length</strong> ($\beta=0$ on the unit sphere $S^2$, or $\alpha=0$ on the unit circle $S^1$)?
+      </p>
+
+      <div class="intuition-box">
+        <div class="ib-label">Three Surprises When We Rescale the Arrows</div>
+        <ol style="margin:0.3rem 0 0 1.2rem; padding:0;">
+          <li style="margin-bottom:0.45rem;">
+            <strong>Length–Weight Duality:</strong> Changing arrow lengths to $R_{ij}^\beta$ is mechanically identical to keeping the original arrows $\mathbf{p}_{ij}$ and reweighting the masses at their tips by $w_{ij} = R_{ij}^{\beta-1}$. At <strong>cubic 3D lengths ($\beta=3$)</strong>, the vertical pull $V_z$ vanishes identically ($V_z = 0$) for <em>every</em> magic square. And on the 3D unit sphere ($\beta=0$), all $880$ squares can be balanced at $O$ using strictly positive tip weights <span class="c-pill c-amber">$w_{ij}^* > 0$</span>.
+          </li>
+          <li style="margin-bottom:0.45rem;">
+            <strong>The $\sqrt{5}$ Irrationality Barrier in 2D:</strong> A $4\times 4$ board consists of three concentric rings around $O$:
+            <span class="c-pill c-emerald">4 Inner cells ($r_1 = \frac{\sqrt{2}}{2}$)</span>,
+            <span class="c-pill c-cobalt">8 Middle cells ($r_2 = \frac{\sqrt{10}}{2}$)</span>, and
+            <span class="c-pill c-amber">4 Outer corners ($r_3 = \frac{3\sqrt{2}}{2}$)</span>.
+            Because the middle ring is $\frac{r_2}{r_1} = \sqrt{5}$ times farther out than the inner ring—and $\sqrt{5} \approx 2.23607$ is irrational—<strong>16 unit arrows ($\alpha=0$) can never cancel out on any $4\times 4$ magic square.</strong> The closest any magic square can get is the famous Pell fraction $\frac{9}{4} = 2.25 \approx \sqrt{5}$ ($9^2 - 5\cdot 4^2 = 1$), achieved by 8 squares led by <strong>#70</strong> with a tiny gap of $\|\mathbf{B}_{\mathrm{unit}}\|_2 \approx 0.07049$.
+          </li>
+          <li>
+            <strong>Exact Non-Linear Polygon Closure at $\alpha^* = -1$ and $\alpha^* = +3$:</strong> Whenever a square's inner and outer ring dipoles point in the same direction ($204$ squares), there is a <em>second</em> exponent $\alpha^* \ne 1$ where the 16-gon snaps completely shut again—including exact inverse lengths $\ell(r)=1/r$ ($\alpha^*=-1$) on 25 squares (#45) and cubic lengths $\ell(r)=r^3$ ($\alpha^*=+3$) on 25 squares (#286).
+          </li>
+        </ol>
+      </div>
+
+      <!-- Clickable Story Presets for Sim 1 -->
+      <div class="story-strip">
+        <button class="story-card" data-sim1-preset="pell">
+          <span class="sc-tag"><span>Story 1 · Pell Champion #70</span> <span>Try ➔</span></span>
+          <span class="sc-title">The $9/4 \approx \sqrt{5}$ Near-Miss ($\alpha=0$)</span>
+          <span class="sc-sub">Watch #70 shrink its unit-vector gap to the theoretical minimum $0.07049$.</span>
+        </button>
+        <button class="story-card" data-sim1-preset="inv45">
+          <span class="sc-tag"><span>Story 2 · Inverse Law #45</span> <span>Try ➔</span></span>
+          <span class="sc-title">Polygon Closes at $\alpha^* = -1$ ($\ell = 1/r$)</span>
+          <span class="sc-sub">Because $\mathbf{d}_{\mathrm{out}} = 9\mathbf{d}_{\mathrm{in}}$, inverse radial lengths close the 16-gon.</span>
+        </button>
+        <button class="story-card" data-sim1-preset="cub286">
+          <span class="sc-tag"><span>Story 3 · Cubic Law #286</span> <span>Try ➔</span></span>
+          <span class="sc-title">Polygon Closes at $\alpha^* = +3$ ($\ell = r^3$)</span>
+          <span class="sc-sub">Because $\mathbf{d}_{\mathrm{out}} = \mathbf{d}_{\mathrm{in}}$, cubic lengths restore exact 2D balance.</span>
+        </button>
+        <button class="story-card" data-sim1-preset="sphereW">
+          <span class="sc-tag"><span>Story 4 · 3D Sphere Weights</span> <span>Try ➔</span></span>
+          <span class="sc-title">Positive Weights $w_{ij}^* > 0$ on $S^2$</span>
+          <span class="sc-sub">Every one of the 880 squares balances on the unit sphere with positive weights.</span>
+        </button>
+      </div>
+
+      <details class="math-drawer">
+        <summary>Formal Statements: Length–Weight Duality, Three-Ring Formula &amp; Pell Minimum (Theorems 2.2–2.5)</summary>
+        <div class="drawer-body">
+          <p>
+            <strong>3D Length–Weight Duality &amp; Cubic Vertical Vanishing (Theorems 2.2 &amp; 2.5):</strong>
+            Along unit rays $\hat{\mathbf{p}}_{ij}(\lambda) = \mathbf{p}_{ij}(\lambda)/R_{ij}(\lambda) \in S^2$, scaling lengths to $L_{ij}$ with weights $w_{ij}$ gives $\mathbf{V}_{w,L}(S;\lambda) = \sum_{i,j} w_{ij}L_{ij}\hat{\mathbf{p}}_{ij}(\lambda) = \sum_{i,j}\bigl(\frac{w_{ij}L_{ij}}{R_{ij}(\lambda)}\bigr)\mathbf{p}_{ij}(\lambda)$. For cubic 3D lengths ($\beta=3$, $L_{ij}=R_{ij}^3$), row–column separability of $r_{ij}^2 = x_j^2+y_i^2$ and $\sum z_{ij}^3 = 0$ force the vertical component to vanish identically for every semi-magic square:
+            $$\mathbf{V}_3(S;\lambda) = \left(\lambda^2\sum_{i,j} z_{ij}^2 x_j,\;\; \lambda^2\sum_{i,j} z_{ij}^2 y_i,\;\; 0\right).$$
+            On the unit sphere $S^2$ ($\beta=0$), the minimum-variance balancing weight vector $\mathbf{w}^*(S) = \mathbf{1} - \hat{P}(\hat{P}^\top\hat{P})^{-1}\mathbf{V}_0(S)$ is strictly positive ($\mathbf{w}^*(S) > \mathbf{0}$) for all $880$ order-four magic squares.
+          </p>
+          <p style="margin-bottom:0;">
+            <strong>Three-Ring Formula &amp; Even-Lattice Pell Minimum (Theorem 2.3 &amp; Corollary 2.4):</strong>
+            Grouping $A_4 = R_{\mathrm{in}} \sqcup R_{\mathrm{mid}} \sqcup R_{\mathrm{out}}$ with ring dipoles $\mathbf{d}_k = \sum_{c\in R_k} z_c\mathbf{r}_c$ satisfies $\mathbf{d}_{\mathrm{in}} \in \mathbb{Z}^2\setminus\{\mathbf{0}\}$, $\mathbf{d}_{\mathrm{out}} \in (3\mathbb{Z})^2\setminus\{\mathbf{0}\}$, and $\mathbf{d}_{\mathrm{mid}} = -(\mathbf{d}_{\mathrm{in}}+\mathbf{d}_{\mathrm{out}})$, giving
+            $$\mathbf{B}_{z,\ell}(S) = \left(\frac{\ell_1}{r_1} - \frac{\ell_2}{r_2}\right)\mathbf{d}_{\mathrm{in}}(S) + \left(\frac{\ell_3}{r_3} - \frac{\ell_2}{r_2}\right)\mathbf{d}_{\mathrm{out}}(S).$$
+            At unit length ($\ell_k=1$, $\alpha=0$), substituting $1/r_1=\sqrt{2}$, $1/r_2=\sqrt{2}/\sqrt{5}$, and $1/r_3=\sqrt{2}/3$ motivates $\mathbf{u}(S) = \mathbf{d}_{\mathrm{in}}(S) + \frac{1}{3}\mathbf{d}_{\mathrm{out}}(S) \in \mathbb{Z}^2$ and $\mathbf{v}(S) = \mathbf{d}_{\mathrm{in}}(S) + \mathbf{d}_{\mathrm{out}}(S) \in \mathbb{Z}^2$, so $\mathbf{B}_{\mathrm{unit}}(S) = \sqrt{2}\bigl(\mathbf{u}(S) - \frac{1}{\sqrt{5}}\mathbf{v}(S)\bigr)$. Across $\mathcal{M}_4$, $\frac{1}{3}\|\mathbf{d}_{\mathrm{out}}\|_\infty \le 12$ excludes all Pell–Lucas pairs $(F_k, L_k)$ with $k \ge 8$, while saturating $\frac{1}{3}|d_{\mathrm{out}}| = 8$ on a coordinate axis forces $|d_{\mathrm{in}}| \le 4$ and $p = |d_{\mathrm{in}} + \frac{1}{3}d_{\mathrm{out}}| \le 12 < 13$, excluding $(F_7, L_7) = (13, 29)$; independently, because the four-cell diagonal halves $T_{\mathrm{diag}}$ and $R_{\mathrm{diag}}$ always have even sum on $\mathcal{M}_4$, both $\mathbf{u}(S) = 2\tilde{\mathbf{u}}(S)\in(2\mathbb{Z})^2$ and $\mathbf{v}(S) = 2\tilde{\mathbf{v}}(S)\in(2\mathbb{Z})^2$ lie in the even sublattice with $\|\mathbf{u}(S)\|_\infty \le 16$ and $\|\mathbf{u}(S)\|_2 \le 8\sqrt{5} \approx 17.89$. Writing $U=\|\tilde{\mathbf{u}}\|_2$ and $V=\|\tilde{\mathbf{v}}\|_2$ ($1\le U^2\le 80$) reduces minimization to the Pell inequality $|5U^2-V^2|\ge 1$: its unique solution in range is $(U,V)=(4,9)$, giving $\|\mathbf{v}\|/\|\mathbf{u}\| = 18/8 = 9/4$ on $8$ squares (#70, #76, #121, #188, #452, #459, #490, #574) and achieving
+            $$\min_{S\in\mathcal{M}_4}\|\mathbf{B}_{\mathrm{unit}}(S)\|_2 = \frac{18\sqrt{10}}{5} - 8\sqrt{2} = \frac{2\sqrt{10}}{5\varphi^6} \approx 0.07049108.$$
+          </p>
+        </div>
+      </details>
+
+      <!-- SIMULATOR 1 -->
+      <div class="simulator-card" id="sim-rings">
+        <div class="sim-header">
+          <div class="sim-title"><span class="live-dot"></span> Interactive Simulator 1 · Head-to-Tail Polygon Closure, 3D Sphere Vectors &amp; Pell $\sqrt{5}$ Explorer</div>
+          <div class="sim-hint"><a class="sim-paper-badge" href="paperC.pdf" target="_blank" rel="noopener">📄 Paper C · §2, Thm. 2.3 &amp; Figs. 2–3</a> Click any preset to smoothly animate $\alpha,\beta$ · Click any dot in the 880-square scatter plot</div>
+        </div>
+        <!-- Segmented View Tabs -->
+        <div class="sim-tabs" id="ring-tabs">
+          <button class="sim-tab active" data-view="polygon">① 2D Radial Star &amp; 16-Gon Polygon Closure</button>
+          <button class="sim-tab" data-view="rings">② 4×4 Concentric Rings &amp; Dipole Tug-of-War</button>
+          <button class="sim-tab" data-view="3d">③ 3D Origin Vectors &amp; Unit Sphere $S^2$</button>
+        </div>
+        <!-- Hidden select kept synced for backwards compatibility -->
+        <select id="ring-view-mode" style="display:none;">
+          <option value="polygon">polygon</option>
+          <option value="rings">rings</option>
+          <option value="3d">3d</option>
+        </select>
+
+        <div class="sim-controls">
+          <div class="ctrl-group">
+            <label for="ring-sq-select">Magic Square (1–880)</label>
+            <select id="ring-sq-select" class="sim-select">
+              <option value="70">#70 (Group VI — Pell Min 0.0705, 3D zero β*=2.24)</option>
+              <option value="175">#175 (Dürer — Associative, Exact 0 for all α, β)</option>
+              <option value="45">#45 (Group VI — κ=+9: Closes 16-Gon at α*=-1)</option>
+              <option value="286">#286 (Group VI — κ=+1: Closes 16-Gon at α*=+3)</option>
+              <option value="376">#376 (Group VI — Min 3D Sphere Drift 0.0072)</option>
+              <option value="46">#46 (Group VI — κ=-9: Anti-Parallel Ring Dipoles)</option>
+              <option value="673">#673 (Group VI — κ=-7/3, 3D zero at β*=-1.70)</option>
+              <option value="253">#253 (Group VI — κ=-1: Middle-Ring Dipole d_mid = 0)</option>
+              <option value="763">#763 (Knight's-Move Champion)</option>
+              <option value="635">#635 (Group III — Max 2D Unit Imbalance 11.98)</option>
+              <option value="86">#86 (Group VI — Natural Solid Balance, β*=1.72)</option>
+            </select>
+          </div>
+          <div class="ctrl-group">
+            <label for="ring-alpha-slider">Length Exponent $\alpha$ (2D) / $\beta$ (3D): <span id="ring-alpha-val">1.00</span></label>
+            <input type="range" id="ring-alpha-slider" min="-1.20" max="3.10" step="0.01" value="1.00" style="width:160px;" />
+          </div>
+          <div class="btn-row">
+            <button class="sim-btn active" id="btn-alpha-1">Natural ($\alpha=1$)</button>
+            <button class="sim-btn" id="btn-alpha-0">Unit Arrows ($\alpha=0$)</button>
+            <button class="sim-btn" id="btn-alpha-m1">Inverse ($\alpha^*=-1$ on #45)</button>
+            <button class="sim-btn" id="btn-alpha-p3">Cubic ($\alpha^*=+3$ on #286)</button>
+            <button class="sim-btn gold" id="btn-3d-weights">3D Sphere Weights ($w^*>0$)</button>
+            <button class="sim-btn gold" id="btn-collinear-tune">Tune Rings ($\mathbf{B}=\mathbf{0}$)</button>
+            <button class="sim-btn crimson" id="btn-ring-sweep">▶ Sweep $\alpha$</button>
+            <button class="sim-btn active" id="btn-ring-lens">⊞ 4×4 Lens</button>
+          </div>
+        </div>
+        <div class="sim-canvas-grid">
+          <div class="canvas-pane">
+            <canvas id="canvas-ring-board" width="530" height="440"></canvas>
+          </div>
+          <div class="canvas-pane">
+            <canvas id="canvas-ring-pell" width="530" height="440"></canvas>
+          </div>
+        </div>
+        <div class="sim-readout" id="ring-readout">
+          <span>$\mathbf{d}_{\mathrm{in}} = (3, 0)$, $\mathbf{d}_{\mathrm{out}} = (15, 0)$</span>
+          <span>$\|\mathbf{v}\|/\|\mathbf{u}\| = 18/8 = 9/4 = 2.25 \approx \sqrt{5}$</span>
+          <span>Resultant $\|\mathbf{B}_{z,\ell}(S)\|_2 = $ <span class="hl">0.000000 (CLOSED)</span></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- SECTION 3 + SIMULATOR 2                                           -->
+    <!-- ================================================================= -->
+    <section id="sec-precession">
+      <h2>3. Spinning in Zero Gravity: Smooth Spherical Tops vs. The $180^\circ$ Dzhanibekov Flip</h2>
+      <aside class="margin-note"><strong>The Spherical-Top Scale</strong>
+      At $\lambda_{\mathrm{iso}} = 1/\sqrt{17} \approx 0.2425$, every $4\times 4$ magic square—even one with zero geometric symmetry—has $I_{xx} = I_{yy} = I_{zz}$, spinning smoothly around any axis in 3D.</aside>
+      <p>
+        If you spin a tennis racket, a book, or an irregular crystal in zero gravity around its <em>intermediate</em> axis of inertia ($I_1 < I_2 < I_3$), something famous and eerie happens: after a few turns, the object suddenly <strong>flips $180^\circ$ upside down</strong>, spins a few more turns, and flips back again. This is the <strong>Dzhanibekov (or tennis-racket) instability</strong>.
+      </p>
+      <p>
+        You might expect an irregular Magic Gem—whose 3D shape often has <em>zero</em> geometric symmetry—to tumble chaotically in space. Instead, the magic line-sum conditions produce a remarkable split between <strong>equal point masses</strong> and <strong>entry-weighted masses</strong>:
+      </p>
+
+      <div class="intuition-box">
+        <div class="ib-label">Why Equal Masses Precess Smoothly While Entry Masses Flip</div>
+        <ul style="margin:0.3rem 0 0 1.2rem; padding:0;">
+          <li style="margin-bottom:0.45rem;">
+            <span class="c-pill c-emerald">Equal Masses at the 16 Vertices ($m_{ij} = 1$)</span>:
+            Because the rows and columns balance, the horizontal moments of inertia are <strong>always equal</strong> ($I_1 = I_2 = I_\perp(\lambda)$) for <em>every</em> magic square. With no intermediate axis to go unstable, the gem never flips. Even better, at the magic vertical scale
+            <strong>$\lambda_{\mathrm{iso}} = \frac{1}{\sqrt{17}} \approx 0.2425$</strong>, the vertical and horizontal moments become identical ($I_1 = I_2 = I_3$): <strong>every Magic Gem becomes a perfect spherical top that spins with zero wobble around any axis in 3D.</strong>
+          </li>
+          <li>
+            <span class="c-pill c-crimson">Entry-Weighted Masses ($m_{ij} = s_{ij}$)</span>:
+            If each cell instead weighs its number $s_{ij} \in \{1\dots 16\}$, the diagonal quadrupole moment $Q_{xy}(S) = \sum_{i,j} z_{ij}x_jy_i$ splits the two horizontal moments into $I_1 = 170 - |Q_{xy}|$ and $I_2 = 170 + |Q_{xy}|$. For $56$ squares (like Dürer #175), $Q_{xy}=0$ and spin stays smooth; for the other $824$ squares (led by <strong>#46</strong> with $|Q_{xy}|=60$), spinning near the intermediate diagonal axis triggers dramatic $180^\circ$ Dzhanibekov flips.
+          </li>
+          <li style="margin-top:0.45rem;">
+            <span class="c-pill c-amber">How Magic Gems Compare to Classical Shapes (Sphere, Perfect Cube, Cone &amp; Pyramid)</span>:
+            <ul style="margin:0.25rem 0 0 1.1rem; padding:0; font-size:0.95em;">
+              <li><strong>Sphere &amp; Perfect Cube ($I_1 = I_2 = I_3$):</strong> Counterintuitively, a uniform <strong>Perfect Cube</strong> is an exact <em>spherical top</em> ($I_{xx}=I_{yy}=I_{zz}=\frac{1}{6}Ma^2$), spinning with zero wobble around any axis just like a <strong>Sphere</strong>—and just like any equal-mass Magic Gem at $\lambda_{\mathrm{iso}} = 1/\sqrt{17} \approx 0.2425$.</li>
+              <li><strong>Right Circular Cone &amp; Square Pyramid ($I_1 = I_2 \ne I_3$):</strong> Because of their rotational or $C_4$ symmetry, a Cone and a Square Pyramid are <em>symmetric tops</em>: their spin axis sweeps a smooth circular precession cone and never flips—matching an equal-mass Magic Gem at $\lambda \ne 1/\sqrt{17}$, even though the Magic Gem itself has no rotational symmetry.</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Story Presets for Sim 2 -->
+      <div class="story-strip">
+        <button class="story-card" data-sim2-preset="dual-compare">
+          <span class="sc-tag"><span>Story 1 · Side-by-Side Race</span> <span>Try ➔</span></span>
+          <span class="sc-title">Equal Masses vs. Dzhanibekov Flip (#46)</span>
+          <span class="sc-sub">Watch Equal Masses spin rock-steady on the left while Entry Masses flip $180^\circ$ on the right.</span>
+        </button>
+        <button class="story-card" data-sim2-preset="shapes-gallery">
+          <span class="sc-tag"><span>Story 2 · 6-Rotor Arena</span> <span>Try ➔</span></span>
+          <span class="sc-title">Gem vs. Cube, Cone, Pyramid &amp; Sphere</span>
+          <span class="sc-sub">Spin all 6 shapes at once: watch Sphere, Cube &amp; Equal Gem spin dead-steady, Cone &amp; Pyramid precess, and Entry Gem flip.</span>
+        </button>
+        <button class="story-card" data-sim2-preset="cube-twin">
+          <span class="sc-tag"><span>Story 3 · Spherical-Top Twins</span> <span>Try ➔</span></span>
+          <span class="sc-title">Asymmetric Gem #46 vs. Perfect Cube</span>
+          <span class="sc-sub">At $\lambda_{\mathrm{iso}} = 1/\sqrt{17}$, an asymmetric Magic Gem has the exact same isotropic inertia ($I_1=I_2=I_3$) as a Perfect Cube &amp; Sphere.</span>
+        </button>
+        <button class="story-card" data-sim2-preset="durer-calm">
+          <span class="sc-tag"><span>Story 4 · Dürer's Square #175</span> <span>Try ➔</span></span>
+          <span class="sc-title">Immune to Flips Even with Entry Masses</span>
+          <span class="sc-sub">Because $Q_{xy}=0$ on all 48 associative squares, even entry masses never flip.</span>
+        </button>
+      </div>
+
+      <details class="math-drawer">
+        <summary>Formal Statements: Universal Symmetric-Top Law &amp; Quadrupole Split (Theorems 3.1 &amp; 3.2)</summary>
+        <div class="drawer-body">
+          <p>
+            <strong>Theorem 3.1 (Point-Mass Axisymmetric Rotor):</strong> For any arrangement with $\sum xz = \sum yz = 0$ carrying equal masses $M/n^2$ at $\mathbf{p}_{ij}(\lambda)$, the inertia tensor about $O$ is $I(\lambda) = M\operatorname{diag}(I_\perp(\lambda), I_\perp(\lambda), I_{zz})$ with universal ratio
+            $$\frac{I_\perp(\lambda)}{I_{zz}} = \frac{1 + \lambda^2(n^2+1)}{2}.$$
+            At $n=4$, this ratio equals $21/25 = 0.84$ at the cubic 3D-print scale $\lambda_{\mathrm{cube}}=0.20$, equals $1$ at the spherical-top scale $\lambda_{\mathrm{iso}} = 1/\sqrt{17} \approx 0.2425$, and equals the integer $9$ at the canonical lift $\lambda=1$ (closing every free-precession orbit after $9$ spin revolutions).
+          </p>
+          <p style="margin-bottom:0;">
+            <strong>Theorem 3.2 (Entry-Weighted Quadrupole Split &amp; Central Inertia):</strong> Assigning masses $m_{ij} = s_{ij}$ on the planar grid gives principal moments $I_1(S) = 170 - |Q_{xy}(S)|$, $I_2(S) = 170 + |Q_{xy}(S)|$, and $I_3 = 340$, where $Q_{xy}(S) = \sum_{i,j} z_{ij}x_jy_i \in [-60, 60]$. For the $824$ squares with $Q_{xy}\ne 0$, intermediate-axis perturbations grow exponentially at dimensionless rate $\Gamma(S) = \sqrt{|Q_{xy}(S)|/170}$. In the 3D lift $\mathbf{p}_{ij}(\lambda)$, entry masses shift the center of mass vertically to $\mathbf{c}^{(s)}(\lambda) = (0, 0, \frac{b_n}{\bar{s}}\lambda) = (0, 0, \frac{n^2-1}{6}\lambda) = (0, 0, \frac{5}{2}\lambda)$; by Steiner's parallel-axis theorem, the central inertia tensor $I_{\mathrm{cm}}^{(s)}(\lambda) = I_O^{(s)}(\lambda) - M\|\mathbf{c}^{(s)}(\lambda)\|_2^2(\mathbf{I}_3 - \hat{\mathbf{e}}_z\hat{\mathbf{e}}_z^\top)$ retains the identical horizontal quadrupole split $I_{xy,\mathrm{cm}}^{(s)} = -Q_{xy}(S)$, vertical coupling $(I_{xz,\mathrm{cm}}^{(s)}, I_{yz,\mathrm{cm}}^{(s)}) = -\lambda^{-1}((\mathbf{V}_3)_x, (\mathbf{V}_3)_y)$, and central diagonal moments $I_{xx,\mathrm{cm}}^{(s)} = I_{yy,\mathrm{cm}}^{(s)} = Ma_n(1 + \frac{2(n^2+2)}{3}\lambda^2) = 170(1 + 12\lambda^2) = 340(\frac{1}{2} + 6\lambda^2)$ with $I_{zz,\mathrm{cm}}^{(s)} = 340$.
+          </p>
+        </div>
+      </details>
+
+      <!-- SIMULATOR 2 -->
+      <div class="simulator-card" id="sim-precession">
+        <div class="sim-header">
+          <div class="sim-title"><span class="live-dot"></span> Interactive Simulator 2 · Zero-Gravity 3D Spin: Magic Gems vs. Cube, Cone, Pyramid &amp; Sphere</div>
+          <div class="sim-hint"><a class="sim-paper-badge" href="paperC.pdf" target="_blank" rel="noopener">📄 Paper C · §3, Thms. 3.1–3.2 &amp; Fig. 4</a> Compare Magic Gems against classical shapes · Drag 3D viewports to orbit</div>
+        </div>
+        <!-- Quick Shape Comparison Tabs -->
+        <div class="sim-tabs" id="rot-tabs">
+          <button class="sim-tab active" data-rot-mode="compare">Equal vs. Entry Gem</button>
+          <button class="sim-tab" data-rot-mode="gallery">All 6 Shapes Arena</button>
+          <button class="sim-tab" data-rot-mode="vs-sphere">vs. Sphere</button>
+          <button class="sim-tab" data-rot-mode="vs-cube">vs. Perfect Cube</button>
+          <button class="sim-tab" data-rot-mode="vs-cone">vs. Cone</button>
+          <button class="sim-tab" data-rot-mode="vs-pyramid">vs. Pyramid</button>
+        </div>
+        <div class="sim-controls">
+          <div class="ctrl-group">
+            <label for="rot-sq-select">Magic Gem</label>
+            <select id="rot-sq-select" class="sim-select">
+              <option value="46">#46 (Group VI — |Q_xy| = 60, Fastest Dzhanibekov Flip)</option>
+              <option value="45">#45 (Group VI — |Q_xy| = 57, Strong Dzhanibekov Flip)</option>
+              <option value="70">#70 (Group VI — Pell Champion, |Q_xy| = 36)</option>
+              <option value="673">#673 (Group VI — |Q_xy| = 20)</option>
+              <option value="763">#763 (Knight's-Move Gem, |Q_xy| = 8)</option>
+              <option value="175">#175 (Dürer — Associative, |Q_xy| = 0, Never Flips)</option>
+            </select>
+          </div>
+          <div class="ctrl-group">
+            <label for="rot-model-select">3D Viewport Mode</label>
+            <select id="rot-model-select" class="sim-select">
+              <option value="compare">Side-by-Side: Equal Gem (Left) vs. Entry Gem Flip (Right)</option>
+              <option value="gallery">6-Shape Arena: Equal &amp; Entry Gems + Sphere, Cube, Cone &amp; Pyramid</option>
+              <option value="vs-sphere">Side-by-Side: Equal Gem (Left) vs. Classical Sphere (Right)</option>
+              <option value="vs-cube">Side-by-Side: Equal Gem (Left) vs. Perfect Cube (Right)</option>
+              <option value="vs-cone">Side-by-Side: Equal Gem (Left) vs. Right Circular Cone (Right)</option>
+              <option value="vs-pyramid">Side-by-Side: Equal Gem (Left) vs. Square Pyramid (Right)</option>
+              <option value="point">Single Rotor: Equal Point Masses p_ij(λ) (Smooth Top)</option>
+              <option value="entry">Single Rotor: Entry Masses m_ij = s_ij (Dzhanibekov Split)</option>
+              <option value="solid">Single Rotor: Uniform 3D Solid Gem G_λ(S)</option>
+              <option value="sphere">Single Rotor: Classical Sphere (I₁ = I₂ = I₃)</option>
+              <option value="cube">Single Rotor: Perfect Cube (I₁ = I₂ = I₃ Spherical Top)</option>
+              <option value="cone">Single Rotor: Right Circular Cone (Symmetric Top)</option>
+              <option value="pyramid">Single Rotor: Square Pyramid (Symmetric Top)</option>
+            </select>
+          </div>
+          <div class="ctrl-group">
+            <label for="rot-lam-slider">Lift Scale $\lambda$: <span id="rot-lam-val">0.2425</span></label>
+            <input type="range" id="rot-lam-slider" min="0.08" max="1.00" step="0.0025" value="0.2425" style="width:140px;" />
+          </div>
+          <div class="btn-row">
+            <button class="sim-btn" id="btn-lam-cube">Cube $\lambda=0.20$</button>
+            <button class="sim-btn active" id="btn-lam-iso">Spherical Top $\lambda=1/\sqrt{17}$</button>
+            <button class="sim-btn" id="btn-lam-one">Canonical $\lambda=1.0$</button>
+            <button class="sim-btn gold" id="btn-dzh-kick">Spin Intermediate Axis</button>
+            <button class="sim-btn" id="btn-cone-kick">30° Precession Cone</button>
+            <button class="sim-btn active" id="btn-rot-ellipsoid">Inertia Ellipsoid</button>
+            <button class="sim-btn active" id="btn-rot-lens">⊞ 4×4 Lens</button>
+            <button class="sim-btn crimson" id="btn-rot-pause">⏸ Pause</button>
+          </div>
+        </div>
+        <div class="sim-canvas-grid">
+          <div class="canvas-pane">
+            <canvas id="canvas-rot-3d" width="530" height="430"></canvas>
+          </div>
+          <div class="canvas-pane">
+            <canvas id="canvas-rot-chart" width="530" height="430"></canvas>
+          </div>
+        </div>
+        <div class="sim-readout" id="rot-readout">
+          <span>Moments: <span class="hl">I₁ = 2.50, I₂ = 2.50, I₃ = 2.50</span></span>
+          <span>Ratio $I_\perp / I_{zz} = $ <span class="hl">1.000 (Spherical Top)</span></span>
+          <span>Dzhanibekov Flip Count: <span class="gold" id="rot-flip-count">0 flips</span></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- SECTION 4 + SIMULATOR 3                                           -->
+    <!-- ================================================================= -->
+    <section id="sec-nested">
+      <h2>4. "Diamond-in-a-Diamond": How Nested Cores Balance a 3D-Printed Gem</h2>
+      <aside class="margin-note"><strong>Denser vs. Hollow Cores</strong>
+      Most Group VI gems have $\mathbf{c}_0$ and $\mathbf{c}_1$ pulling in opposite directions (balanced by a denser core $\Delta\rho_1 > 0$). Gems #123 and #54 have $\mathbf{c}_0$ and $\mathbf{c}_1$ on the <em>same</em> side of $O$, so they balance by making the inner core lighter or hollow.</aside>
+      <p>
+        Suppose you 3D-print a Magic Gem $\mathcal{G}_0(S)$ out of uniform plastic and place it on a knife-edge fulcrum at the origin $O = (0,0,0)$. Even though the 16 discrete points have their average at $O$, <strong>$829$ of the $880$ solid Magic Gems tip over.</strong>
+      </p>
+      <p>
+        Why? Because the outer surface of the crystal only touches the outer corner vertices ($V$ points) and completely forgets the $16-V$ inner points trapped inside. If we wrap a second convex hull around those forgotten inner points, we get the <strong>Inner Core Gem</strong> $\mathcal{G}_1(S) \subset \mathcal{G}_0(S)$—a literal <strong>"diamond inside a diamond."</strong>
+      </p>
+
+      <div class="intuition-box">
+        <div class="ib-label">The Opposite Tug-of-War Between Outer Shell and Inner Core</div>
+        Because all 16 points sum to zero, the outer vertices and the inner core points <strong>always pull in strictly opposite directions</strong> across the origin:
+        $$V\,\overline{\mathbf{p}}_{\mathrm{outer}} + (16 - V)\,\overline{\mathbf{p}}_{\mathrm{inner}} = \mathbf{0}.$$
+        Across the $880$ order-four gems:
+        <ul style="margin:0.35rem 0 0 1.2rem; padding:0;">
+          <li><strong>51 Gems Balance Naturally as Uniform Solids ($\mathbf{c}_0 = \mathbf{0}$):</strong> All $48$ centrally symmetric associative gems plus <strong>three remarkable non-associative gems in Group VI (#86, #739, #756)</strong>.</li>
+          <li><strong>33 Gems Balance via a Denser Inner Core ($\Delta\rho_1 > 0$):</strong> In Group VI, a $180^\circ$ rotation symmetry locks the outer solid centroid <span class="c-pill c-emerald">$\mathbf{c}_0$</span> and the inner core centroid <span class="c-pill c-amber">$\mathbf{c}_1$</span> onto the same axis pointing in opposite directions. Printing the inner core slightly denser—starting at <strong>$\Delta\rho_1/\rho_0 = 5/4 = 1.25$ on Gem #673</strong>—brings the composite center of mass to $0.00^\circ$ level balance.</li>
+          <li><strong>2 Gems Balance via a Lighter or Hollow Core Cavity ($\Delta\rho_1 < 0$):</strong> On 17 gems, volumetric simplex weighting pulls $\mathbf{c}_0$ to the <em>same</em> side of $O$ as $\mathbf{c}_1$. Two of these—<strong>#123 ($\Delta\rho_1/\rho_0 = -3/17$)</strong> and <strong>#54 ($\Delta\rho_1/\rho_0 = -57/58$, a nearly hollow cavity)</strong>—balance by printing the inner core <em>lighter</em> than the shell.</li>
+        </ul>
+      </div>
+
+      <!-- Story Presets for Sim 3 -->
+      <div class="story-strip">
+        <button class="story-card" data-sim3-preset="gem673">
+          <span class="sc-tag"><span>Story 1 · Champion #673</span> <span>Try ➔</span></span>
+          <span class="sc-title">Denser Core Ratio $\Delta\rho_1/\rho_0 = 5/4$</span>
+          <span class="sc-sub">8 outer vertices + 8 inner core points: snap to $\Delta\rho_1/\rho_0 = 1.25$ to level the seesaw.</span>
+        </button>
+        <button class="story-card" data-sim3-preset="hollow54">
+          <span class="sc-tag"><span>Story 2 · Hollow Cavity #54</span> <span>Try ➔</span></span>
+          <span class="sc-title">Balance by Hollowing Out the Core</span>
+          <span class="sc-sub">Both $\mathbf{c}_0$ and $\mathbf{c}_1$ pull the same way—so a $98.3\%$ hollow core ($\Delta\rho_1/\rho_0 = -57/58$) balances it.</span>
+        </button>
+        <button class="story-card" data-sim3-preset="nat86">
+          <span class="sc-tag"><span>Story 3 · Natural Exception #86</span> <span>Try ➔</span></span>
+          <span class="sc-title">Non-Associative Yet Naturally Balanced</span>
+          <span class="sc-sub">One of only 3 non-associative gems whose uniform solid balances at $\Delta\rho_1 = 0$.</span>
+        </button>
+      </div>
+
+      <details class="math-drawer">
+        <summary>Formal Statements: Onion Peeling &amp; Two-Density Balancing Formula (Propositions 4.1–4.2 &amp; Theorem 4.3)</summary>
+        <div class="drawer-body">
+          <p>
+            <strong>Composite Center of Mass (Theorem 4.3):</strong> Fabricating $\mathcal{G}_0(S)$ with baseline density $\rho_0 > 0$ and inner core $\mathcal{G}_1(S) = \operatorname{conv}(P_S\setminus\operatorname{vert}\mathcal{G}_0(S))$ with excess density $\Delta\rho_1 = \rho_1 - \rho_0$ yields composite centroid
+            $$\mathbf{c}_{\mathrm{comp}} = \frac{\rho_0\operatorname{vol}(\mathcal{G}_0)\,\mathbf{c}_0 + \Delta\rho_1\operatorname{vol}(\mathcal{G}_1)\,\mathbf{c}_1}{\rho_0\operatorname{vol}(\mathcal{G}_0) + \Delta\rho_1\operatorname{vol}(\mathcal{G}_1)}.$$
+            Whenever $\mathbf{c}_0 \times \mathbf{c}_1 = \mathbf{0}$ and $\mathbf{c}_1 \ne \mathbf{0}$, exact balance $\mathbf{c}_{\mathrm{comp}} = \mathbf{0}$ is achieved at the unique rational ratio
+            $$\frac{\Delta\rho_1}{\rho_0} = -\frac{\operatorname{vol}(\mathcal{G}_0)\,(\mathbf{c}_0\cdot\mathbf{c}_1)}{\operatorname{vol}(\mathcal{G}_1)\,\|\mathbf{c}_1\|_2^2}.$$
+            Across all $880$ gems, $528$ ($60.0\%$) also balance via non-negative point weights placed at the inner points $P_S^{(1)}$ ($-\mathbf{c}_0 \in \operatorname{cone}(P_S^{(1)})$).
+          </p>
+        </div>
+      </details>
+
+      <!-- SIMULATOR 3 -->
+      <div class="simulator-card" id="sim-nested">
+        <div class="sim-header">
+          <div class="sim-title"><span class="live-dot"></span> Interactive Simulator 3 · "Diamond-in-a-Diamond" Cutaway &amp; Live Seesaw Balance Lab</div>
+          <div class="sim-hint"><a class="sim-paper-badge" href="paperC.pdf" target="_blank" rel="noopener">📄 Paper C · §4, Thm. 4.3 &amp; Fig. 5</a> Peel open the outer crystal · Drag $\Delta\rho_1/\rho_0$ or click Snap to watch the seesaw level out</div>
+        </div>
+        <div class="sim-controls">
+          <div class="ctrl-group">
+            <label for="nest-sq-select">Composite Magic Gem</label>
+            <select id="nest-sq-select" class="sim-select">
+              <option value="673">#673 (Denser Core Champion: Exact Balance at Δρ₁/ρ₀ = +5/4 = 1.25)</option>
+              <option value="502">#502 (Denser Core: Exact Balance at Δρ₁/ρ₀ = +4/3 ≈ 1.333)</option>
+              <option value="45">#45 (Denser Core: Exact Balance at Δρ₁/ρ₀ = +85/61 ≈ 1.393)</option>
+              <option value="307">#307 (Denser Core: Exact Balance at Δρ₁/ρ₀ = +23/15 ≈ 1.533)</option>
+              <option value="49">#49 (Denser Core: Exact Balance at Δρ₁/ρ₀ = +2.000)</option>
+              <option value="123">#123 (Lighter Core Cavity: Exact Balance at Δρ₁/ρ₀ = -3/17 ≈ -0.176)</option>
+              <option value="54">#54 (Nearly Hollow Core Cavity: Exact Balance at Δρ₁/ρ₀ = -57/58 ≈ -0.983)</option>
+              <option value="86">#86 (Non-Associative Natural Balance: c₀ = 0 at Δρ₁ = 0)</option>
+              <option value="739">#739 (Non-Associative Natural Balance: c₀ = 0 at Δρ₁ = 0)</option>
+              <option value="756">#756 (Non-Associative Natural Balance: c₀ = 0 at Δρ₁ = 0)</option>
+            </select>
+          </div>
+          <div class="ctrl-group">
+            <label for="nest-rho-slider">Core Excess Density $\Delta\rho_1/\rho_0$: <span id="nest-rho-val">0.00</span></label>
+            <input type="range" id="nest-rho-slider" min="-1.00" max="2.50" step="0.01" value="0.00" style="width:165px;" />
+          </div>
+          <div class="ctrl-group">
+            <label for="nest-peel-slider">Peel Outer Shell: <span id="nest-peel-val">0.25</span></label>
+            <input type="range" id="nest-peel-slider" min="0.00" max="0.90" step="0.01" value="0.25" style="width:130px;" />
+          </div>
+          <div class="btn-row">
+            <button class="sim-btn gold" id="btn-snap-balance">Snap to Exact Balance ($\mathbf{c}_{\mathrm{comp}}=\mathbf{0}$)</button>
+            <button class="sim-btn" id="btn-reset-rho">Uniform ($\Delta\rho_1 = 0$)</button>
+            <button class="sim-btn" id="btn-nest-peel-anim">Animate Shell Peel</button>
+            <button class="sim-btn active" id="btn-nest-lens">⊞ 4×4 Lens</button>
+          </div>
+        </div>
+        <div class="sim-canvas-grid">
+          <div class="canvas-pane">
+            <canvas id="canvas-nest-3d" width="530" height="430"></canvas>
+          </div>
+          <div class="canvas-pane">
+            <canvas id="canvas-nest-balance" width="530" height="430"></canvas>
+          </div>
+        </div>
+        <div class="sim-readout" id="nest-readout">
+          <span>Outer $\operatorname{vol}(\mathcal{G}_0) = 257/3$, Inner $\operatorname{vol}(\mathcal{G}_1) = 56/3$</span>
+          <span>Composite $\mathbf{c}_{\mathrm{comp}} = $ <span class="warn">(0.000, -0.0778, 0.000)</span></span>
+          <span>Seesaw Status: <span class="warn">-14.2° (Tipped Left)</span></span>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ================================================================= -->
+    <!-- SECTION 5 + SIMULATOR 4: BUILD IT (WIREFRAMES, K16, PAPERCRAFT)    -->
+    <!-- ================================================================= -->
+    <section id="sec-fab">
+      <h2>5. Beyond Solids: Building Gems from Rods, Struts &amp; Paper</h2>
+      <aside class="margin-note"><strong>Make your own</strong>
+        The open-source <a href="https://github.com/kylemath/magicGemWeb" target="_blank" rel="noopener"><code>magicGemWeb</code></a> suite generates every model on this page as 3D-printable OpenSCAD/STL files and printable paper nets. Browse the <a href="https://kylemath.github.io/magicGemWeb/3dModels/index.html" target="_blank" rel="noopener">3D &amp; papercraft gallery ↗</a>.</aside>
+      <p>
+        A solid 3D print is only one way to build a Magic Gem. You can also build one from balls and rods, from a tangle of struts joining every pair of points, or from a sheet of folded paper. Each of these <em>physical</em> gems spreads its mass differently, so each one balances differently.
+      </p>
+
+      <div class="intuition-box">
+        <div class="ib-label">Three Ways to Build a Gem, and How Each One Balances</div>
+        <ul style="margin:0.3rem 0 0 1.2rem; padding:0;">
+          <li style="margin-bottom:0.45rem;">
+            <span class="c-pill c-emerald">Ball-and-rod wireframe</span> Balls sit at the 16 points, with rods along the edges of the outer hull and the inner core. Rods weigh in proportion to their length, so the frame usually tips over. Making the inner rods thicker or thinner (rod-diameter ratio $d_1/d_0$ in the slender-rod limit $d/L_{uv}\to 0^+$) rebalances <strong>158 Group VI gems at $\lambda = 1$</strong> ($164$ at the cubic scale $\lambda = 0.20$), for example #673 at $d_1/d_0 \approx 0.793$ ($\lambda=1$) or $d_1/d_0 \approx 0.493$ ($\lambda=0.20$). That is more than four times as many gems as two-density solids can balance.
+          </li>
+          <li style="margin-bottom:0.45rem;">
+            <span class="c-pill c-cobalt">Complete $K_{16}$ strut network</span> Join <em>all</em> $\binom{16}{2} = 120$ pairs of points. If every rod has the same mass, the network balances at $O$ for <strong>every</strong> magic square and spins like the 16 point masses, with the same $1/\sqrt{17}$ spherical-top scale. With constant-thickness rods (mass proportional to length) it only balances for the $48$ associative squares, but it drifts $2.7$ to $3.6$ times less than the outer wireframe.
+          </li>
+          <li>
+            <span class="c-pill c-amber">Papercraft net</span> Unfold the gem's surface into a flat, printable net. However you unfold it, you need <strong>one glue tab fewer than the number of corners</strong> ($N_{\mathrm{tabs}} = f_0 - 1$): 11 tabs for Dürer's #175 and 7 for #673. All $880$ gems unfold without any overlapping faces.
+          </li>
+        </ul>
+      </div>
+
+      <div class="story-strip">
+        <button class="story-card" data-fab-preset="wire673">
+          <span class="sc-tag"><span>Story 1 · Wireframe #673</span> <span>Try ➔</span></span>
+          <span class="sc-title">Balance by Changing Rod Thickness</span>
+          <span class="sc-sub">Watch the inner rods slim down to $d_1/d_0 \approx 0.793$ ($\lambda=1$) or $0.493$ ($\lambda=0.20$) until the seesaw levels.</span>
+        </button>
+        <button class="story-card" data-fab-preset="k16net">
+          <span class="sc-tag"><span>Story 2 · All 120 Struts</span> <span>Try ➔</span></span>
+          <span class="sc-title">Equal-Mass Rods Always Balance</span>
+          <span class="sc-sub">Slide from length-weighted rods ($\mu = 1$) to equal-mass rods ($\mu = 0$): the drift vanishes.</span>
+        </button>
+        <button class="story-card" data-fab-preset="paper175">
+          <span class="sc-tag"><span>Story 3 · Dürer's Net #175</span> <span>Try ➔</span></span>
+          <span class="sc-title">Cut, Fold &amp; Glue with 11 Tabs</span>
+          <span class="sc-sub">14 faces, 13 dashed folds and $f_0 - 1 = 11$ glue tabs, as Euler's formula predicts.</span>
+        </button>
+      </div>
+
+      <details class="math-drawer">
+        <summary>Formal Statements: Complete K<sub>N</sub> Networks, Nested Wireframes &amp; Papercraft Nets (Theorem 4.4, Proposition 4.5 &amp; Remark 4.6)</summary>
+        <div class="drawer-body">
+          <p style="margin-top:0;">
+            <strong>Theorem 4.4 (Complete $K_N$ Networks &amp; Nested Wireframes):</strong>
+            Let $K_N(P_S(\lambda))$ be the complete graph on the $N=n^2$ lifted points with edge midpoints $\mathbf{m}_{uv} = \frac{1}{2}(\mathbf{p}_u+\mathbf{p}_v)$ and lengths $L_{uv}(\lambda) = \|\mathbf{p}_u-\mathbf{p}_v\|_2$.
+          </p>
+          <ol style="margin:0.35rem 0 0 1.2rem; padding:0;">
+            <li style="margin-bottom:0.4rem;">
+              <strong>Equal-Mass $K_N$ Universal Rotor:</strong> Because every vertex has degree $N-1$, assigning equal mass $m_e = M_{\mathrm{rods}}/\binom{N}{2}$ to each rod gives $\mathbf{c}_{=\text{mass}}(K_N) = \frac{1}{N}\sum_u\mathbf{p}_u = \mathbf{0}$ and continuous rod-network covariance $\Sigma_{\mathrm{rods}}^{(=\text{mass})}(K_N) = \frac{2N-3}{3(N-1)}\Sigma(\lambda)$ ($=\frac{29}{45}\Sigma(\lambda)$ at $n=4$). For any node-to-strut mass fraction $\theta\in[0,1]$, $K_N$ shares the universal axisymmetric ratio $I_\perp(\lambda)/I_{zz} = \frac{1}{2}(1+\lambda^2(n^2+1))$ and spherical-top scale $\lambda_{\mathrm{iso}} = (n^2+1)^{-1/2}$.
+            </li>
+            <li style="margin-bottom:0.4rem;">
+              <strong>Length-Weighted $K_{16}$ &amp; Nested Wireframe Gauge Ratio (1D Slender-Rod Limit $d/L_{uv}\to 0^+$):</strong> Under uniform rod cross-section ($m_e = \rho_{\mathrm{lin}}L_e$), $\mathbf{c}_{\mathrm{len}}(K_{16}) = \mathbf{0} \iff S$ is associative ($48/880$), while across all $880$ gems $K_{16}$ reduces mean centroid drift by $2.7\times$–$3.6\times$ relative to $G(\mathcal{G}_0)$. Assigning linear densities $\rho_{\mathrm{lin},0}$ and $\rho_{\mathrm{lin},1}$ to the disjoint edge sets $E(\mathcal{G}_0)$ and $E(\mathcal{G}_1)$ with length moments $\mathbf{m}_{\mathrm{wire},k}(\lambda) = \sum_{uv\in E(\mathcal{G}_k)} L_{uv}(\lambda)\mathbf{m}_{uv}(\lambda)$ balances the composite wireframe whenever $\mathbf{m}_{\mathrm{wire},0}\times\mathbf{m}_{\mathrm{wire},1}=\mathbf{0}$ and $\mathbf{m}_{\mathrm{wire},0}\cdot\mathbf{m}_{\mathrm{wire},1} < 0$ at rod-diameter ratio
+              $$\frac{d_1}{d_0} = \sqrt{\frac{\rho_{\mathrm{lin},1}}{\rho_{\mathrm{lin},0}}} = \sqrt{-\frac{\mathbf{m}_{\mathrm{wire},0}(\lambda)\cdot\mathbf{m}_{\mathrm{wire},1}(\lambda)}{\|\mathbf{m}_{\mathrm{wire},1}(\lambda)\|_2^2}},$$
+              balancing $158$ Group VI wireframes at $\lambda=1$ ($81$ with 3D cores, $37$ with 2D cores, $40$ with 1D cores; e.g. #673 at $d_1/d_0 \approx 0.793$) and $164$ at $\lambda=0.20$ (#673 at $d_1/d_0 \approx 0.493$).
+            </li>
+            <li style="margin-bottom:0.4rem;">
+              <strong>Remark 4.6 (Finite-Diameter Node/Strut Overlap Corrections):</strong> Physical 3D prints with finite rod diameter $d>0$ and node spheres/cubes of radius $r_{\mathrm{node}}>0$ experience pairwise cylinder-overlap and cap-truncation volume corrections of order $O((d/L_{\min})^2)$ and $O((r_{\mathrm{node}}/L_{\min})^3)$. Because $D_4$ and $C_2$ symmetries preserve all pairwise intersection volumes, the $48$ associative gems stay balanced for any finite $d, r_{\mathrm{node}}>0$, and the Group VI $C_2$ axis continues to constrain both wireframe moments to the same 1D axis.
+            </li>
+            <li>
+              <strong>Proposition 4.5 (Papercraft Cutout Nets &amp; $N_{\mathrm{tabs}} = f_0 - 1$):</strong> Cutting $\partial\mathcal{G}_\lambda(S)$ along the edges complement to a dual spanning tree $T^*\subset G^*$ of its $f_2$ facets leaves $e(T^*) = f_2-1$ interior fold hinges; by LP duality the primal cut edges form a spanning tree $T\subset G^{(1)}$ on the $f_0$ vertices, requiring $N_{\mathrm{tabs}}(S) = f_1 - (f_2 - 1) = f_0 - 1 \in \{7,\dots,15\}$ glue tabs (invariant under facial triangulation). All $880$ gems admit a strictly non-overlapping BFS spanning-tree unfolding at both $\lambda=1$ and $\lambda=0.20$, and $80$ Group VI nested thin shells $\partial\mathcal{G}_0\cup\partial\mathcal{G}_1$ ($\lambda=1$; $87$ at $\lambda=0.20$) balance in the zero-thickness limit $t\to 0^+$ via cardstock areal-density ratio $\sigma_1/\sigma_0 > 0$.
+            </li>
+          </ol>
+        </div>
+      </details>
+
+      <!-- SIMULATOR 4 -->
+      <div class="simulator-card" id="sim-fab">
+        <div class="sim-header">
+          <div class="sim-title"><span class="live-dot"></span> Interactive Simulator 4 · Build It: Wireframes, $K_{16}$ Strut Networks &amp; Papercraft Nets</div>
+          <div class="sim-hint"><a class="sim-paper-badge" href="paperC.pdf" target="_blank" rel="noopener">📄 Paper C · §4.4, Thm. 4.4, Prop. 4.5 &amp; Fig. 6</a> <a href="https://kylemath.github.io/magicGemWeb/3dModels/index.html" target="_blank" rel="noopener" style="color:#fcd34d;">Printable gallery ↗</a> · Hover 2D net ↔ 3D gem</div>
+        </div>
+        <div class="sim-tabs" id="fab-mode-tabs">
+          <button class="sim-tab active" data-fab="wireframe">① Ball-and-Rod Wireframe</button>
+          <button class="sim-tab" data-fab="k16">② Complete $K_{16}$ Strut Network (120 rods)</button>
+        </div>
+        <div class="sim-controls">
+          <div class="ctrl-group">
+            <label for="fab-sq-select">Magic Gem</label>
+            <select id="fab-sq-select" class="sim-select">
+              <option value="673">#673 (Wireframe balances at d₁/d₀ = 0.793 · 7 glue tabs)</option>
+              <option value="175">#175 Dürer (Associative: balanced in every build · 11 glue tabs)</option>
+              <option value="45">#45 (Wireframe balances at d₁/d₀ = 0.795 · 9 glue tabs)</option>
+              <option value="502">#502 (Wireframe needs thick inner rods, d₁/d₀ = 4.685)</option>
+              <option value="307">#307 (10 corners · 9 glue tabs)</option>
+              <option value="49">#49 (12 corners · 11 glue tabs)</option>
+              <option value="739">#739 (Wireframe balances at d₁/d₀ = 1.869)</option>
+              <option value="86">#86 (Naturally balanced solid · 11 glue tabs)</option>
+              <option value="756">#756 (Naturally balanced solid · 11 glue tabs)</option>
+            </select>
+          </div>
+          <div class="ctrl-group">
+            <label for="fab-lam-select">Lift Scale $\lambda$</label>
+            <select id="fab-lam-select" class="sim-select">
+              <option value="1.00" selected>λ = 1.00 (Canonical: d₁/d₀ = 0.793 on #673)</option>
+              <option value="0.20">λ = 0.20 (Cubic Print: d₁/d₀ = 0.493 on #673)</option>
+            </select>
+          </div>
+          <div class="ctrl-group">
+            <label for="fab-param-slider"><span id="fab-param-label">Inner/Outer Rod Gauge (d₁/d₀)²:</span> <span id="fab-param-val">0.00</span></label>
+            <input type="range" id="fab-param-slider" min="0" max="2.5" step="0.01" value="0" style="width:160px;" />
+          </div>
+          <div class="ctrl-group">
+            <label for="fab-peel-slider">Spread Outer Frame: <span id="fab-peel-val">0.15</span></label>
+            <input type="range" id="fab-peel-slider" min="0.00" max="0.90" step="0.01" value="0.15" style="width:120px;" />
+          </div>
+          <div class="btn-row">
+            <button class="sim-btn gold" id="btn-fab-snap">Snap to Balance</button>
+            <button class="sim-btn" id="btn-fab-reset">Reset</button>
+            <button class="sim-btn" id="btn-fab-spread-anim">↔ Animate Spread</button>
+            <button class="sim-btn active" data-fab-right="seesaw">Seesaw</button>
+            <button class="sim-btn" data-fab-right="paper">Papercraft Net</button>
+            <button class="sim-btn gold" id="btn-fab-svg">⬇ Download Printable SVG Net</button>
+            <button class="sim-btn active" id="btn-fab-lens">⊞ 4×4 Lens</button>
+          </div>
+        </div>
+        <div class="sim-canvas-grid">
+          <div class="canvas-pane">
+            <canvas id="canvas-fab-3d" width="530" height="430"></canvas>
+          </div>
+          <div class="canvas-pane">
+            <canvas id="canvas-fab-right" width="530" height="430"></canvas>
+          </div>
+        </div>
+        <div class="sim-readout" id="fab-readout">
+          <span>Rod length: outer <span class="hl">—</span>, inner <span class="hl">—</span></span>
+          <span>Centre of mass = <span class="warn">—</span></span>
+          <span>Seesaw: <span class="warn">—</span></span>
+        </div>
+      </div>
+    </section>
+    <!-- ================================================================= -->
+    <!-- SECTION 6 + SIMULATOR 5                                           -->
+    <!-- ================================================================= -->
+    <section id="sec-stacking">
+      <h2>6. Mirror-Twin Architecture: Stacking Jagged Gems into Vertical Towers</h2>
+      <aside class="margin-note"><strong>3D Print Scale $\lambda = 0.20$</strong>
+      Setting $\lambda = 1/(n+1) = 0.20$ makes numbers $1\dots 16$ span $3.0$ units vertically—matching the $3.0\times 3.0$ horizontal grid footprint of a physical $3\text{ cm}$ 3D print.</aside>
+      <p>
+        Can we stack copies of a Magic Gem on top of each other to build a free-standing vertical tower under gravity?
+        If you try to stack identical copies of a <em>single</em> gem $\mathcal{G}_\lambda(S)$ without rotating them, the top facet $F_+$ and bottom facet $F_-$ must have parallel slopes—a rare property shared by only $124$ of the $880$ gems. On most gems, stacking identical copies makes the column veer crookedly off to the side and topple.
+      </p>
+      <p>
+        Paper C solves this with a simple symmetry trick: take the complement magic square $\overline{S} = 17 - S$ and rotate the board $180^\circ$ ($r^2$). The resulting square $S^* = r^2\overline{S}$ is the <strong>Mirror Twin</strong>, and its 3D gem is the exact <strong>central inversion</strong> of the original gem:
+        $$\mathcal{G}_\lambda(r^2\overline{S}) = -\mathcal{G}_\lambda(S).$$
+      </p>
+
+      <div class="intuition-box">
+        <div class="ib-label">Why Alternating Mirror Twins Locks with 100% Facet Overlap</div>
+        <ul style="margin:0.3rem 0 0 1.2rem; padding:0;">
+          <li style="margin-bottom:0.45rem;">
+            <strong>Automatic Slope &amp; Shape Matching:</strong> Central inversion turns every upper facet $F_+$ (pointing up with normal $+\mathbf{n}_+$) into a congruent lower facet $-F_+$ on the mirror twin (pointing down with normal $-\mathbf{n}_+$). Whenever $F_+$ and $F_-$ are centrally symmetric polygons centered on the vertical $z$-axis ($48$ gems), alternating <span class="c-pill c-emerald">Primary Gem $\mathcal{G}_\lambda(S)$</span> and <span class="c-pill c-amber">Mirror Twin $-\mathcal{G}_\lambda(S)$</span> builds a <strong>strictly vertical tower with $100\%$ polygon lock and zero center-of-mass drift</strong> (with the bottom facet $F_-$ seated on a complementary wedge plinth of slope $-\mathbf{n}_-$ when $F_-$ is oblique to the horizontal table).
+          </li>
+          <li>
+            <strong>The Knight's-Move Square Champion (#763):</strong> Seventeen gems achieve the largest possible horizontal contact footprint—an area of $A_{xy} = 5$ ($55.6\%$ of the entire $3\times 3$ grid) formed by a tilted $2\times 1$ <strong>knight's-move square</strong> connecting $\{13,14,15,16\}$ on top and $\{1,2,3,4\}$ on the bottom. At the cubic 3D-print scale $\lambda = 0.20$, $74.5\%$ of all $14{,}824$ facets across the $880$ gems are gravitationally stable; a single block of #763 resting on its contact facet stands firm up to a table tilt of <strong>$\theta_{\mathrm{tip}}^{(1)} = 39.35^\circ$</strong>, while unbonded dry-stack joints of slope $\alpha = \arctan(\lambda)$ remain slip-free whenever static friction satisfies $\mu_s \ge \lambda = 0.20$ ($\theta_{\mathrm{joint}} = 11.31^\circ$).
+          </li>
+        </ul>
+      </div>
+
+      <!-- Story Presets for Sim 4 -->
+      <div class="story-strip">
+        <button class="story-card" data-sim4-preset="twin-lock">
+          <span class="sc-tag"><span>Story 1 · Mirror-Twin Lock (#763)</span> <span>Try ➔</span></span>
+          <span class="sc-title">Drop &amp; Lock 4 Alternating Gems</span>
+          <span class="sc-sub">Watch primary gems and mirror twins drop into place with $100\%$ knight's-move contact.</span>
+        </button>
+        <button class="story-card" data-sim4-preset="same-fail">
+          <span class="sc-tag"><span>Story 2 · Why Same-Gem Fails</span> <span>Try ➔</span></span>
+          <span class="sc-title">Mismatched Slopes Without the Twin</span>
+          <span class="sc-sub">On #763, $\mathbf{n}_- \ne -\mathbf{n}_+$: trying to stack identical copies causes an immediate collapse.</span>
+        </button>
+        <button class="story-card" data-sim4-preset="tilt-test">
+          <span class="sc-tag"><span>Story 3 · Tilting-Table Test</span> <span>Try ➔</span></span>
+          <span class="sc-title">Push #763 Past Its $39.35^\circ$ Single-Block Limit</span>
+          <span class="sc-sub">Watch the gravity plumb line cross the golden stability circle along the steepest overturning edge normal.</span>
+        </button>
+      </div>
+
+      <details class="math-drawer">
+        <summary>Formal Statements: Facet Stability Margin &amp; Mirror-Twin Tower Theorem (Theorem 5.3 &amp; Proposition 5.4)</summary>
+        <div class="drawer-body">
+          <p>
+            <strong>Resting Stability (Definition 5.1 &amp; Proposition 5.2):</strong> A facet $F \subset \partial\mathcal{G}_\lambda(S)$ is statically stable under gravity iff the orthogonal projection $\pi_F(\mathbf{c}(\lambda))$ lies in the strict interior of $F$ ($d_{\mathrm{stab}} > 0$), giving single-block critical tipping angle $\theta_{\mathrm{tip}}^{(1)} = \arctan(d_{\mathrm{stab}}/h_F(\lambda))$ toward the nearest edge of $F$. Rescaling from $\lambda=1$ to $\lambda_{\mathrm{cube}}=0.20$ increases stable facets across $\mathcal{M}_4$ from $6{,}378/14{,}824$ ($43.0\%$) to $11{,}044/14{,}824$ ($74.5\%$).
+          </p>
+          <p style="margin-bottom:0;">
+            <strong>Mirror-Twin Alternating Towers &amp; Base Plinths (Theorem 5.3 &amp; Proposition 5.4):</strong> Given centrally symmetric facets $F_+, F_- \subset \mathcal{G}_\lambda(S)$ with centroids $\mathbf{c}(F_\pm) = (0,0,z_\pm)$, the unrotated blocks $B_{2m} = \mathcal{G}_\lambda(S) + m\mathbf{T}$ and $B_{2m+1} = -\mathcal{G}_\lambda(S) + 2\mathbf{c}(F_+) + m\mathbf{T}$ with vertical period $\mathbf{T} = (0,0,2(z_+-z_-))$ meet with $100\%$ polygon congruence at every interior joint and keep the tower's center of mass on the vertical $z$-axis (seated on a complementary base wedge plinth of upper normal $-\mathbf{n}_-(\lambda)$ when $\mathbf{n}_-\nparallel\hat{\mathbf{e}}_z$). Across an unbonded $M$-block column, each oblique joint of tilt $\alpha_\pm(\lambda) = \arccos(|\mathbf{n}_\pm(\lambda)\cdot\hat{\mathbf{e}}_z|)$ prevents sliding whenever $\mu_s \ge \tan\alpha_\pm(\lambda)$ ($\mu_s \ge \lambda = 0.20$ on the $17$ knight's-move towers), while monolithically bonded or pinned columns tip as a rigid body when the composite centroid projection exits the base footprint $F_-$.
+          </p>
+        </div>
+      </details>
+
+      <!-- SIMULATOR 4 -->
+      <div class="simulator-card" id="sim-stacking">
+        <div class="sim-header">
+          <div class="sim-title"><span class="live-dot"></span> Interactive Simulator 5 · Mirror-Twin Tower Assembler &amp; Tilting-Table Topple Lab</div>
+          <div class="sim-hint"><a class="sim-paper-badge" href="paperC.pdf" target="_blank" rel="noopener">📄 Paper C · §5, Thm. 5.3, Prop. 5.4 &amp; Fig. 7</a> Drop blocks to assemble tower · Tilt table past $\theta_{\mathrm{tip}}^{(1)}$ to topple</div>
+        </div>
+        <div class="sim-controls">
+          <div class="ctrl-group">
+            <label for="stack-sq-select">Tower Gem</label>
+            <select id="stack-sq-select" class="sim-select">
+              <option value="763">#763 (Knight's-Move A_xy=5, Stacks ONLY w/ Mirror Twin)</option>
+              <option value="603">#603 (Knight's-Move A_xy=5, Max Tip Angle 45.39° w/ Twin)</option>
+              <option value="774">#774 (Knight's-Move A_xy=5, Parallel Top &amp; Bottom)</option>
+              <option value="756">#756 (Centred Parallelogram A_xy=4, Exact c₀ = 0)</option>
+            </select>
+          </div>
+          <div class="ctrl-group">
+            <label for="stack-mode-select">Stacking Rule</label>
+            <select id="stack-mode-select" class="sim-select">
+              <option value="twin">Alternate with Mirror Twin -G(S) (100% Lock)</option>
+              <option value="same">Same Gem G(S) Only (Slope Mismatch on #763)</option>
+            </select>
+          </div>
+          <div class="ctrl-group">
+            <label for="stack-lam-slider">Aspect $\lambda$: <span id="stack-lam-val">0.20</span></label>
+            <input type="range" id="stack-lam-slider" min="0.10" max="0.60" step="0.01" value="0.20" style="width:115px;" />
+          </div>
+          <div class="ctrl-group">
+            <label for="stack-tilt-slider">Table Tilt $\theta_{\mathrm{table}}$: <span id="stack-tilt-val">0.0°</span></label>
+            <input type="range" id="stack-tilt-slider" min="0.0" max="48.0" step="0.5" value="0.0" style="width:130px;" />
+          </div>
+          <div class="btn-row">
+            <button class="sim-btn gold" id="btn-stack-assemble">⬇ Drop &amp; Assemble</button>
+            <button class="sim-btn" id="btn-tilt-zero">Level ($0^\circ$)</button>
+            <button class="sim-btn" id="btn-tilt-crit">Edge of Stability</button>
+            <button class="sim-btn crimson" id="btn-tilt-topple">Topple Tower</button>
+            <button class="sim-btn active" id="btn-stack-lens">⊞ 4×4 Lens</button>
+          </div>
+        </div>
+        <div class="sim-canvas-grid">
+          <div class="canvas-pane">
+            <canvas id="canvas-stack-3d" width="530" height="440"></canvas>
+          </div>
+          <div class="canvas-pane">
+            <canvas id="canvas-stack-footprint" width="530" height="440"></canvas>
+          </div>
+        </div>
+        <div class="sim-readout" id="stack-readout">
+          <span>Contact Joint: <span class="hl">{13, 14, 15, 16} (Knight's-Move Square, A_xy = 5.00)</span></span>
+          <span>Margin $d_{\mathrm{stab}} = $ <span class="hl">0.9694</span> · 1-Block Tip $\theta_{\mathrm{tip}}^{(1)} = $ <span class="hl">39.35°</span> · Joint Friction $\mu_s \ge 0.20$</span>
+          <span>Tower Status: <span class="hl">STATICALLY STABLE (100% Vertex Lock)</span></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- SECTION 7: VISUAL CENSUS & OPEN PROBLEMS                          -->
+    <!-- ================================================================= -->
+    <section id="sec-open">
+      <h2>7. Synthesis: The Complete Mechanical Census of All 880 Magic Gems</h2>
+      <p>
+        Every theorem and census count in Paper C is verified in exact rational arithmetic across all $880$ order-four magic squares by the companion verification suite. Click any <strong>Load in Lab ↗</strong> badge below to jump directly to that simulator with the corresponding canonical square pre-loaded.
+      </p>
+
+      <!-- Visual Proportion Cards -->
+      <div class="census-grid">
+        <div class="census-card">
+          <div class="cc-head">
+            <span class="cc-title">Linear &amp; Cubic Vertical Balance ($\beta=1, 3$)</span>
+            <span class="cc-count">880 / 880 (100%)</span>
+          </div>
+          <div class="census-bar-track"><div class="census-bar-fill" style="width:100%;"></div></div>
+          <div class="cc-desc">All 880 squares satisfy $\sum\mathbf{p}_{ij}=\mathbf{0}$ at $\beta=1$ and have strictly zero vertical resultant $(\mathbf{V}_3)_z = 0$ at cubic lengths $\beta=3$.</div>
+          <div class="cc-links">
+            <a class="jump-chip" href="#sim-rings" data-jump-sim="1" data-sq="70" data-alpha="1">Test β=1 (#70) ↗</a>
+            <a class="jump-chip" href="#sim-rings" data-jump-sim="1" data-sq="70" data-alpha="3" data-view="3d">Test β=3 Vertical Zero ↗</a>
+          </div>
+        </div>
+
+        <div class="census-card">
+          <div class="cc-head">
+            <span class="cc-title">Positive Sphere Weights ($\mathbf{w}^* > \mathbf{0}$ on $S^2$)</span>
+            <span class="cc-count">880 / 880 (100%)</span>
+          </div>
+          <div class="census-bar-track"><div class="census-bar-fill" style="width:100%;"></div></div>
+          <div class="cc-desc">Every magic square balances on the unit sphere $S^2$ with strictly positive minimum-variance weights $w_{ij}^* > 0$.</div>
+          <div class="cc-links">
+            <a class="jump-chip" href="#sim-rings" data-jump-sim="1" data-sq="70" data-weights="1">Inspect w* on #70 ↗</a>
+            <a class="jump-chip" href="#sim-rings" data-jump-sim="1" data-sq="376" data-weights="1">Min Drift #376 ↗</a>
+          </div>
+        </div>
+
+        <div class="census-card">
+          <div class="cc-head">
+            <span class="cc-title">Collinear Ring Dipoles &amp; 2nd Planar Roots</span>
+            <span class="cc-count">408 / 880 (46.4%)</span>
+          </div>
+          <div class="census-bar-track"><div class="census-bar-fill" style="width:46.4%;"></div></div>
+          <div class="cc-desc">$204$ squares with $\kappa > 0$ have a 2nd zero $\alpha^* \ne 1$, including $25$ at $\alpha^*=-1$ ($\ell=1/r$) and $25$ at $\alpha^*=+3$ ($\ell=r^3$).</div>
+          <div class="cc-links">
+            <a class="jump-chip" href="#sim-rings" data-jump-sim="1" data-sq="45" data-alpha="-1">#45 (α* = -1) ↗</a>
+            <a class="jump-chip" href="#sim-rings" data-jump-sim="1" data-sq="286" data-alpha="3">#286 (α* = +3) ↗</a>
+          </div>
+        </div>
+
+        <div class="census-card">
+          <div class="cc-head">
+            <span class="cc-title">Axisymmetric Entry Rotors ($Q_{xy} = 0$)</span>
+            <span class="cc-count">56 / 880 (6.4%)</span>
+          </div>
+          <div class="census-bar-track"><div class="census-bar-fill" style="width:6.4%;"></div></div>
+          <div class="cc-desc">$56$ squares have $I_1=I_2=170$ under entry masses $m_{ij}=s_{ij}$; the other $824$ undergo $180^\circ$ Dzhanibekov flips.</div>
+          <div class="cc-links">
+            <a class="jump-chip" href="#sim-precession" data-jump-sim="2" data-sq="46" data-model="compare">#46 Max Flip (|Q_xy|=60) ↗</a>
+            <a class="jump-chip" href="#sim-precession" data-jump-sim="2" data-sq="175" data-model="entry">#175 Dürer (Q_xy=0) ↗</a>
+          </div>
+        </div>
+
+        <div class="census-card">
+          <div class="cc-head">
+            <span class="cc-title">Inner-Core &amp; Two-Density Solid Balance</span>
+            <span class="cc-count">528 / 880 (60.0%)</span>
+          </div>
+          <div class="census-bar-track"><div class="census-bar-fill" style="width:60.0%;"></div></div>
+          <div class="cc-desc">$51$ balance naturally ($\mathbf{c}_0=\mathbf{0}$), $33$ via a denser inner core $\mathcal{G}_1$, $2$ via a lighter/hollow core, and $528$ via inner cone weights.</div>
+          <div class="cc-links">
+            <a class="jump-chip" href="#sim-nested" data-jump-sim="3" data-sq="673" data-snap="1">#673 (Δρ=5/4) ↗</a>
+            <a class="jump-chip" href="#sim-nested" data-jump-sim="3" data-sq="54" data-snap="1">#54 Hollow Core ↗</a>
+            <a class="jump-chip" href="#sim-nested" data-jump-sim="3" data-sq="86" data-snap="1">#86 Natural ↗</a>
+          </div>
+        </div>
+
+        <div class="census-card">
+          <div class="cc-head">
+            <span class="cc-title">Rods, Struts &amp; Paper Nets</span>
+            <span class="cc-count">206 / 880 wireframes (23.4%)</span>
+          </div>
+          <div class="census-bar-track"><div class="census-bar-fill" style="width:23.4%;"></div></div>
+          <div class="cc-desc">Equal-mass $K_{16}$ networks balance for all $880$; nested wireframes balance for $206$ ($48$ associative + $158$ Group VI at $\lambda=1$; $48+164=212$ at $\lambda=0.20$); all $880$ unfold into overlap-free paper nets with $f_0 - 1$ glue tabs.</div>
+          <div class="cc-links">
+            <a class="jump-chip" href="#sim-fab" data-jump-sim="fab" data-sq="673" data-fab="wireframe" data-snap="1">#673 Wireframe ↗</a>
+            <a class="jump-chip" href="#sim-fab" data-jump-sim="fab" data-sq="673" data-fab="k16" data-snap="1">K₁₆ Equal Mass ↗</a>
+            <a class="jump-chip" href="#sim-fab" data-jump-sim="fab" data-sq="175" data-fab="k16" data-right="paper">#175 Paper Net ↗</a>
+          </div>
+        </div>
+
+        <div class="census-card">
+          <div class="cc-head">
+            <span class="cc-title">Stable Facets ($\lambda=0.20$) &amp; Mirror Towers</span>
+            <span class="cc-count">11,044 / 14,824 (74.5%)</span>
+          </div>
+          <div class="census-bar-track"><div class="census-bar-fill" style="width:74.5%;"></div></div>
+          <div class="cc-desc">Cubic scaling raises facet stability from $43.0\%$ to $74.5\%$; $48$ gems form centered mirror-twin towers ($17$ with $A_{xy}=5$).</div>
+          <div class="cc-links">
+            <a class="jump-chip" href="#sim-stacking" data-jump-sim="4" data-sq="763" data-mode="twin">#763 Knight's Tower ↗</a>
+            <a class="jump-chip" href="#sim-stacking" data-jump-sim="4" data-sq="603" data-mode="twin">#603 (45.4° Tip) ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <details class="math-drawer" open>
+        <summary>Complete Reference Table (Table 4 of Paper C)</summary>
+        <div class="drawer-body" style="padding:0;">
+          <table class="distill-table" style="margin:0; border:none;">
+            <thead>
+              <tr>
+                <th>Mechanical Property / Regime</th>
+                <th>Order-4 Census</th>
+                <th>Universal Law or Extremal Bound</th>
+                <th>Canonical Exemplars</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Linear 3D &amp; 2D Vectors</strong> ($\beta=1, \alpha=1$)</td>
+                <td>$880 / 880$ ($100\%$)</td>
+                <td>$\sum\mathbf{p}_{ij}(\lambda)=\mathbf{0}$ and $\mathbf{B}_{z,r}=\mathbf{0}$ identically</td>
+                <td>All semi-magic squares</td>
+              </tr>
+              <tr>
+                <td><strong>Cubic 3D Vector Law</strong> ($\beta=3$, $L_{ij}=R_{ij}^3$)</td>
+                <td>$880 / 880$ ($100\%$)</td>
+                <td>$(\mathbf{V}_3(S;\lambda))_z = 0$ identically; $\mathbf{V}_3=\mathbf{0} \iff$ associative ($48$)</td>
+                <td>All semi-magic ($z=0$)</td>
+              </tr>
+              <tr>
+                <td><strong>3D Unit Sphere</strong> $\sum \hat{\mathbf{p}}_{ij}(\lambda) = \mathbf{0}$</td>
+                <td>$48 / 880$ ($5.5\%$)</td>
+                <td>Exact $\mathbf{0}$ $\forall\lambda>0 \iff$ associative; $107$ have $\beta^*\ne 1$</td>
+                <td>#175 ($\mathbf{0}$), #70 ($\beta^*\approx 2.24$), #376</td>
+              </tr>
+              <tr>
+                <td><strong>3D Sphere Positive Weights</strong> $\mathbf{w}^*(S) > \mathbf{0}$</td>
+                <td>$880 / 880$ ($100\%$)</td>
+                <td>$\sum w_{ij}^*\hat{\mathbf{p}}_{ij}=\mathbf{0}$ with $\|\mathbf{w}^*-\mathbf{1}\|_2 \in [0.005, 1.60]$</td>
+                <td>All $880$ magic squares</td>
+              </tr>
+              <tr>
+                <td><strong>Planar Unit-Vector Norm</strong> $\|\mathbf{B}_{\mathrm{unit}}(S)\|_2$</td>
+                <td>$0 / 880$ vanish</td>
+                <td>$\min = \frac{18\sqrt{10}}{5} - 8\sqrt{2} \approx 0.070491$ ($v/u = 9/4$)</td>
+                <td>#70, #76, #121, #188, #452, #459, #490, #574</td>
+              </tr>
+              <tr>
+                <td><strong>Collinear Dipoles &amp; Roots</strong> $\alpha^*(\kappa)\ne 1$</td>
+                <td>$408 / 880$ ($46.4\%$)</td>
+                <td>$204$ with $\kappa>0$ ($25$ at $\alpha^*=-1$, $25$ at $\alpha^*=+3$)</td>
+                <td>#45 ($\alpha^*=-1$), #286 ($\alpha^*=+3$)</td>
+              </tr>
+              <tr>
+                <td><strong>Point-Mass Rotor Ratio</strong> $I_\perp(\lambda)/I_{zz}$</td>
+                <td>$880 / 880$ ($100\%$)</td>
+                <td>$\frac{1+17\lambda^2}{2}$ ($1$ at $\lambda=\frac{1}{\sqrt{17}}$, $9$ at $\lambda=1$)</td>
+                <td>Every semi-magic square</td>
+              </tr>
+              <tr>
+                <td><strong>Entry-Weighted ($m=s$) Rotor</strong></td>
+                <td>$56 / 880$ ($6.4\%$)</td>
+                <td>$Q_{xy}=0 \implies I_1=I_2=170$; $824$ flip ($|Q_{xy}|\le 60$)</td>
+                <td>#175 ($Q_{xy}=0$), #46 ($|Q_{xy}|=60$)</td>
+              </tr>
+              <tr>
+                <td><strong>Naturally Balanced Solid</strong> $\mathbf{c}_0 = \mathbf{0}$</td>
+                <td>$51 / 880$ ($5.8\%$)</td>
+                <td>$48$ associative + $3$ non-associative Group VI</td>
+                <td>#86, #739, #756</td>
+              </tr>
+              <tr>
+                <td><strong>Two-Density "Diamond-in-a-Diamond"</strong></td>
+                <td>$35 / 511$ 3D cores</td>
+                <td>$33$ denser ($\Delta\rho_1/\rho_0 \ge 5/4$) + $2$ lighter/cavity</td>
+                <td>#673 ($5/4$), #123 ($-3/17$), #54 ($-57/58$)</td>
+              </tr>
+              <tr>
+                <td><strong>Complete $K_{16}$ Network</strong> ($120$ rods)</td>
+                <td>$880 / 880$ (equal mass)</td>
+                <td>$\mathbf{c}=\mathbf{0}$, $\Sigma_{\mathrm{rods}}=\frac{29}{45}\Sigma(\lambda)$; length-weighted mean drift $0.025$ ($\lambda=0.2$)</td>
+                <td>Dürer #175 ($K_{16}$ strut model)</td>
+              </tr>
+              <tr>
+                <td><strong>Nested Wireframes</strong> $G(\mathcal{G}_0)\cup G(\mathcal{G}_1)$</td>
+                <td>$206 / 880$ ($\lambda=1$)</td>
+                <td>$48$ associative + $158$ Group VI ($164$ at $\lambda=0.20$) via $d_1/d_0$</td>
+                <td>#673 ($d_1/d_0=0.793$ at $\lambda=1$; $0.493$ at $\lambda=0.20$)</td>
+              </tr>
+              <tr>
+                <td><strong>Papercraft Nets &amp; Shells</strong> $\partial\mathcal{G}_0$</td>
+                <td>$880 / 880$ nets</td>
+                <td>$N_{\mathrm{tabs}}=f_0-1\in[7,15]$; $48+80$ Group VI shells balance</td>
+                <td>#175 ($11$ tabs, $13$ folds)</td>
+              </tr>
+              <tr>
+                <td><strong>Resting Facet Stability</strong> ($\lambda=0.20$)</td>
+                <td>$11{,}044 / 14{,}824$</td>
+                <td>$74.5\%$ stable at $\lambda=0.20$ ($43.0\%$ at $\lambda=1.0$)</td>
+                <td>Max $\theta_{\mathrm{tip}}^{(1)} = 47.3^\circ$ at $\lambda=0.20$</td>
+              </tr>
+              <tr>
+                <td><strong>Mirror-Twin Vertical Towers</strong></td>
+                <td>$48 / 880$ ($5.5\%$)</td>
+                <td>Max projected footprint $A_{xy}=5$ ($17$ knight's-move)</td>
+                <td>#763 (0-idx #762), #603, #774</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+
+      <h3>Open Questions for Future Exploration</h3>
+      <div class="open-problems-grid">
+        <div class="op-card">
+          <h4>1. Higher-Order Diophantine Ring Minima ($n \ge 5$)</h4>
+          <p>At $n=5$, the grid rings have radii $\{1, \sqrt{2}, 2, \sqrt{5}, 2\sqrt{2}\}$, mixing $\sqrt{2}$ and $\sqrt{5}$. Does $\mathbf{B}_{\mathrm{unit}}(S)$ ever vanish for $n\ge 5$, or how fast does $\min_{S\in\mathcal{M}_n}\|\mathbf{B}_{\mathrm{unit}}(S)\|_2$ decay via simultaneous Diophantine approximation?</p>
+        </div>
+        <div class="op-card">
+          <h4>2. Onion Peeling Depth of Siamese Gems</h4>
+          <p>By Paper A, the outer hull of an odd-order Siamese square strips off only $12$ vertices, leaving $n^2-12$ inner points on five sheared polygons. How does the onion peeling depth $d_{\mathrm{onion}}(S_n)$ grow with $n$?</p>
+        </div>
+        <div class="op-card">
+          <h4>3. Exact Solid-Isotropic Magic Gems</h4>
+          <p>Point-weighted gems become exact spherical tops at $\lambda_{\mathrm{iso}}=(n^2+1)^{-1/2}$, whereas uniform solids $\mathcal{G}_\lambda(S)$ retain a tiny $0.004\%\text{–}2.4\%$ transverse split. Can a two-density composite $(\mathcal{G}_0,\mathcal{G}_1)$ achieve an exact scalar-identity solid inertia tensor?</p>
+        </div>
+        <div class="op-card">
+          <h4>4. Space-Filling &amp; Interlocking 3D Packings</h4>
+          <p>Beyond vertical mirror-twin columns, can a Magic Gem $\mathcal{G}_\lambda(S)$ and its $D_4\times\langle\tau\rangle$ symmetry images tile a horizontal slab or interlock in 3D space with full facet-to-facet contact?</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Right column is reserved for floating margin notes -->
+  <aside class="sidenote-col"></aside>
+</div>
+
+<footer class="distill-footer">
+  <div class="footer-inner">
+    <strong>The Hidden Mechanics of Magic Gems (Companion Paper C)</strong> · Kyle Elliott Mathewson, Faculty of Science, University of Alberta (<a href="mailto:kyle.mathewson@ualberta.ca">kyle.mathewson@ualberta.ca</a>).<br/>
+    <strong>Acknowledgments:</strong> This work grew out of the author's physical and computational explorations of 3D-printed Magic Gems, ball-and-rod wireframes, and folded papercraft models (<code>magicGemWeb</code>), and forms the third part of the Magic Gems series. Large language models (OpenAI's ChatGPT, Anthropic's Claude, and Google's Gemini) were used by the author as interactive assistants for symbolic checks, verification scripting, interactive simulator prototyping, and manuscript copy-editing; all mathematical formulations, proofs, and exact computational certificates were verified by the author, who takes full responsibility for the work.
+  </div>
+</footer>
+
+<script src="gems_data.js"></script>
+<script src="simulators.js"></script>
+</body>
+</html>

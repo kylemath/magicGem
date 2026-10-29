@@ -1,0 +1,154 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\PassOptionsToPackage{hyphens}{url}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage[hypertexnames=false,colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue,pdfauthor={Kyle Elliott Mathewson},pdftitle={Mechanics and Balance of Magic Gems: Radial Vector Laws, Symmetric-Top Precession, Nested Core Inclusions, and Mirror-Twin Towers}]{hyperref}
+\usepackage{geometry}
+\usepackage{float}
+
+% \Cref / \cref: reference with the type name inferred from the label prefix (fig:, thm:, sec:, ...).
+\makeatletter
+\def\Cref@getprefix#1:#2\relax{#1}
+\def\Cref@prefix@sec{sec}
+\def\Cref@prefix@subsec{subsec}
+\def\Cref@prefix@fig{fig}
+\def\Cref@prefix@tab{tab}
+\def\Cref@prefix@eq{eq}
+\def\Cref@prefix@thm{thm}
+\def\Cref@prefix@prop{prop}
+\def\Cref@prefix@lem{lem}
+\def\Cref@prefix@cor{cor}
+\def\Cref@prefix@conj{conj}
+\def\Cref@prefix@def{def}
+\def\Cref@prefix@rem{rem}
+\def\Cref@prefix@ex{ex}
+
+\def\Cref@type@cap#1{%
+  \edef\Cref@tmp{#1}%
+  \ifx\Cref@tmp\Cref@prefix@sec Section%
+  \else\ifx\Cref@tmp\Cref@prefix@subsec Section%
+  \else\ifx\Cref@tmp\Cref@prefix@fig Figure%
+  \else\ifx\Cref@tmp\Cref@prefix@tab Table%
+  \else\ifx\Cref@tmp\Cref@prefix@eq Equation%
+  \else\ifx\Cref@tmp\Cref@prefix@thm Theorem%
+  \else\ifx\Cref@tmp\Cref@prefix@prop Proposition%
+  \else\ifx\Cref@tmp\Cref@prefix@lem Lemma%
+  \else\ifx\Cref@tmp\Cref@prefix@cor Corollary%
+  \else\ifx\Cref@tmp\Cref@prefix@conj Conjecture%
+  \else\ifx\Cref@tmp\Cref@prefix@def Definition%
+  \else\ifx\Cref@tmp\Cref@prefix@rem Remark%
+  \else\ifx\Cref@tmp\Cref@prefix@ex Example%
+  \else Ref.%
+  \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
+}
+
+\def\Cref@type@low#1{%
+  \edef\Cref@tmp{#1}%
+  \ifx\Cref@tmp\Cref@prefix@sec section%
+  \else\ifx\Cref@tmp\Cref@prefix@subsec section%
+  \else\ifx\Cref@tmp\Cref@prefix@fig figure%
+  \else\ifx\Cref@tmp\Cref@prefix@tab table%
+  \else\ifx\Cref@tmp\Cref@prefix@eq equation%
+  \else\ifx\Cref@tmp\Cref@prefix@thm theorem%
+  \else\ifx\Cref@tmp\Cref@prefix@prop proposition%
+  \else\ifx\Cref@tmp\Cref@prefix@lem lemma%
+  \else\ifx\Cref@tmp\Cref@prefix@cor corollary%
+  \else\ifx\Cref@tmp\Cref@prefix@conj conjecture%
+  \else\ifx\Cref@tmp\Cref@prefix@def definition%
+  \else\ifx\Cref@tmp\Cref@prefix@rem remark%
+  \else\ifx\Cref@tmp\Cref@prefix@ex example%
+  \else ref.%
+  \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
+}
+
+\DeclareRobustCommand{\Cref}[1]{%
+  \begingroup
+  \edef\Cref@label{#1}%
+  \edef\Cref@prefix{\expandafter\Cref@getprefix\Cref@label:\relax}%
+  \hyperref[#1]{\Cref@type@cap{\Cref@prefix}~\ref*{#1}}%
+  \endgroup
+}
+\DeclareRobustCommand{\cref}[1]{%
+  \begingroup
+  \edef\Cref@label{#1}%
+  \edef\Cref@prefix{\expandafter\Cref@getprefix\Cref@label:\relax}%
+  \hyperref[#1]{\Cref@type@low{\Cref@prefix}~\ref*{#1}}%
+  \endgroup
+}
+\makeatother
+
+\geometry{margin=0.9in}
+\setlength{\emergencystretch}{2em}
+\setlength{\textfloatsep}{10pt plus 2pt minus 2pt}
+\setlength{\intextsep}{8pt plus 2pt minus 2pt}
+\setlength{\abovecaptionskip}{4pt}
+\makeatletter
+\long\def\@makecaption#1#2{\vskip\abovecaptionskip\small\sbox\@tempboxa{#1: #2}\ifdim\wd\@tempboxa>\hsize #1: #2\par\else\global\@minipagefalse\hb@xt@\hsize{\hfil\box\@tempboxa\hfil}\fi\vskip\belowcaptionskip}
+\makeatother
+\renewcommand{\topfraction}{0.9}
+\renewcommand{\bottomfraction}{0.6}
+\renewcommand{\textfraction}{0.07}
+\renewcommand{\floatpagefraction}{0.85}
+\setcounter{topnumber}{3}
+\setcounter{totalnumber}{5}
+
+% Theorem environments
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+% Custom commands
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\conv}{\operatorname{conv}}
+\newcommand{\vertset}{\operatorname{vert}}
+\newcommand{\vol}{\operatorname{vol}}
+\newcommand{\cone}{\operatorname{cone}}
+\newcommand{\diag}{\operatorname{diag}}
+
+\title{\textbf{Mechanics and Balance of Magic Gems:\\ Radial Vector Laws, Symmetric-Top Precession,\\ Nested Core Inclusions, and Mirror-Twin Towers}}
+
+\author{Kyle Elliott Mathewson\\
+\textit{Faculty of Science, University of Alberta}\\
+\texttt{kyle.mathewson@ualberta.ca}}
+
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\input{sections/abstract}
+\input{sections/introduction}
+\input{sections/vectors}
+\input{sections/dynamics}
+\input{sections/nested}
+\input{sections/stacking}
+\input{sections/discussion}
+\input{sections/ai_statement}
+
+\bibliographystyle{plain}
+{\small\setlength{\itemsep}{0pt}\bibliography{references}}
+
+\appendix
+\input{sections/appendix}
+
+\end{document}

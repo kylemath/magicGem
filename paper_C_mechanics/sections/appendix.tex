@@ -1,0 +1,49 @@
+\section{Exact computational methods and certificates}
+\label{sec:appendix}
+
+All computations in this paper use Python~3.9 with NumPy~2.0, SciPy~1.13, and Python's exact rational module \texttt{fractions.Fraction}. The complete verification script \texttt{anc/verify\_paper\_c.py} and figure generator \texttt{anc/make\_figures\_c.py} run in under $10$\,s on a single core and write the certified census archive \texttt{anc/results\_paper\_c.json}.
+
+\paragraph{Exact simplex moments for continuous polyhedra.}
+As in \cite[App.~A]{mathewson2026gems}, doubling the centred coordinates \eqref{eq:coords} produces integer vectors $P=2\mathbf p\in\Z^3$, and every facet plane $aX+bY+cZ+d=0$ of $\mathcal G_0(S)$ and of the inner core gem $\mathcal G_1(S)=\conv P_S^{(1)}$ is certified in exact integer arithmetic. To compute the exact rational volume $\vol(\mathcal G)$, solid centroid $\mathbf c_{\mathrm{solid}}(\mathcal G)$, and second-moment covariance matrix $\Sigma_{\mathrm{solid}}(\mathcal G)$ of any 3-dimensional gem $\mathcal G$, we decompose $\mathcal G$ into tetrahedra $\Delta_k=\conv\{\mathbf v_0,\mathbf v_{k,1},\mathbf v_{k,2},\mathbf v_{k,3}\}$ sharing the rational vertex $\mathbf v_0=\frac12 P_0\in(\frac12\Z)^3$. Each tetrahedron has exact rational volume
+\[
+V_k = \frac{1}{6}\,\bigl|\det(\mathbf v_{k,1}-\mathbf v_0,\, \mathbf v_{k,2}-\mathbf v_0,\, \mathbf v_{k,3}-\mathbf v_0)\bigr| \in \Q_{\ge0},
+\]
+exact first moment
+\[
+\iiint_{\Delta_k} \mathbf x\,dV = \frac{V_k}{4}\,\bigl(\mathbf v_0 + \mathbf v_{k,1} + \mathbf v_{k,2} + \mathbf v_{k,3}\bigr) \in \Q^3,
+\]
+and exact canonical second moment
+\[
+\iiint_{\Delta_k} x_i x_j\,dV = \frac{V_k}{20}\left(2\sum_{a=0}^3 v_{a,i}v_{a,j} + \sum_{0\le a\ne b\le3} v_{a,i}v_{b,j}\right) \in \Q,
+\]
+where $(\mathbf v_{k,0},\mathbf v_{k,1},\mathbf v_{k,2},\mathbf v_{k,3})=(\mathbf v_0,\mathbf v_{k,1},\mathbf v_{k,2},\mathbf v_{k,3})$. Summing over all simplices $\Delta_k$ yields $\vol(\mathcal G)=\sum_k V_k\in\Q$, $\mathbf c_{\mathrm{solid}}(\mathcal G)=\frac{1}{\vol(\mathcal G)}\sum_k\iiint_{\Delta_k}\mathbf x\,dV\in\Q^3$, and $\Sigma_{\mathrm{solid},ij}=\frac{1}{\vol(\mathcal G)}\sum_k\iiint_{\Delta_k}x_ix_j\,dV - c_{\mathrm{solid},i}c_{\mathrm{solid},j}\in\Q$ without floating-point rounding. Because the simplicial decomposition partitions the convex body $\mathcal G$, these rational integrals are independent of the choice of boundary triangulation.
+
+\paragraph{Complete list of the 33 two-density balanced gems.}
+For completeness, \Cref{tab:all33} lists all $33$ order-four magic squares for which $\dim\mathcal G_1(S)=3$ and the solid centroids $\mathbf c_0(S)$ and $\mathbf c_1(S)$ are strictly anti-parallel, together with their exact rational balancing density increment $\Delta\rho_1/\rho_0=-\vol(\mathcal G_0)c_0/(\vol(\mathcal G_1)c_1)>0$ (\Cref{thm:diamond-balance}(1)). Every one of the $33$ squares belongs to Dudeney's Group~VI.
+
+\begin{table}[htbp]
+\centering
+\caption{Complete census of the $33$ order-four Magic Gems admitting exact two-density ``diamond-in-a-diamond'' solid balance $\mathbf c_{\mathrm{comp}}=\mathbf 0$ (\Cref{thm:diamond-balance}(1)), sorted by increasing excess density ratio $\Delta\rho_1/\rho_0$.}
+\label{tab:all33}
+\scriptsize
+\setlength{\tabcolsep}{4.5pt}
+\begin{tabular}{r c c c | r c c c | r c c c}
+\toprule
+Gem & $\vol(\mathcal G_0)$ & $\vol(\mathcal G_1)$ & $\Delta\rho_1/\rho_0$ &
+Gem & $\vol(\mathcal G_0)$ & $\vol(\mathcal G_1)$ & $\Delta\rho_1/\rho_0$ &
+Gem & $\vol(\mathcal G_0)$ & $\vol(\mathcal G_1)$ & $\Delta\rho_1/\rho_0$\\
+\midrule
+\#673 & $257/3$ & $56/3$ & $5/4$   & \#665 & $281/3$ & $6$    & $61/13$  & \#697 & $248/3$ & $28/3$ & $166/11$\\
+\#502 & $271/3$ & $6$    & $4/3$   & \#252 & $233/3$ & $7$    & $88/9$   & \#671 & $84$    & $2/3$  & $31/2$\\
+\#45  & $214/3$ & $6$    & $85/61$ & \#166 & $93$    & $8/3$  & $21/2$   & \#383 & $284/3$ & $7$    & $47/3$\\
+\#50  & $254/3$ & $22/3$ & $28/19$ & \#158 & $88$    & $9$    & $57/5$   & \#398 & $260/3$ & $7$    & $95/6$\\
+\#307 & $277/3$ & $22/3$ & $23/15$ & \#168 & $280/3$ & $7$    & $110/9$  & \#18  & $71$    & $9$    & $33/2$\\
+\#49  & $81$    & $2$    & $2$     & \#672 & $260/3$ & $4/3$  & $99/8$   & \#627 & $83$    & $4/3$  & $67/4$\\
+\#38  & $263/3$ & $22/3$ & $31/15$ & \#167 & $90$    & $8/3$  & $27/2$   & \#452 & $236/3$ & $6$    & $118/7$\\
+\#47  & $247/3$ & $22/3$ & $40/19$ & \#199 & $256/3$ & $22/3$ & $206/15$ & \#604 & $221/3$ & $26/3$ & $229/10$\\
+\#261 & $259/3$ & $7$    & $47/12$ & \#615 & $244/3$ & $5$    & $14$     & \#226 & $235/3$ & $7$    & $143/6$\\
+\#670 & $244/3$ & $10$   & $103/25$& \#6   & $239/3$ & $7$    & $127/9$  & \#626 & $69$    & $2/3$  & $49/2$\\
+\#488 & $277/3$ & $22/3$ & $71/16$ & \#573 & $251/3$ & $8$    & $44/3$   & \#436 & $235/3$ & $6$    & $191/6$\\
+\bottomrule
+\end{tabular}
+\end{table}

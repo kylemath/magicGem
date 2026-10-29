@@ -1,0 +1,45 @@
+\section{Synthesis of Mechanical Censuses and Open Problems}
+\label{sec:discussion}
+
+Taken together with the polyhedral classification of \cite{mathewson2026gems} and the moment hierarchy of \cite{mathewson2026moments}, the results of Sections~\ref{sec:vectors}--\ref{sec:stacking} show that Magic Gems obey exact mechanical laws across both discrete origin-vector and continuous polyhedral models. \Cref{tab:synthesis} synthesizes the complete order-four censuses across all four physical regimes, contrasting the universal algebraic invariants shared by all $880$ magic squares with the sharp symmetry and Diophantine thresholds that single out specific Dudeney groups and canonical exemplars.
+
+\begin{table}[htbp]
+\centering
+\caption{Summary of order-four mechanical censuses across the $880$ magic squares (certified in exact rational arithmetic; see \Cref{sec:appendix}).}
+\label{tab:synthesis}
+\scriptsize
+\setlength{\tabcolsep}{3.0pt}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}l c l l@{}}
+\toprule
+Mechanical Property / Regime & $n=4$ Count & Exact Extremal / Universal Law & Canonical Exemplars\\
+\midrule
+3D \& 2D linear vectors ($\beta=1,\alpha=1$) & $880/880$ ($100\%$) & $\sum\mathbf p_{ij}(\lambda)=\mathbf 0$, $\mathbf B_{z,r}=\mathbf 0$ identically & All semi-magic\\
+3D cubic vector law ($\beta=3$, $L_{ij}=R_{ij}^3$) & $880/880$ ($100\%$) & $(\mathbf V_3)_z=0$; $\mathbf V_3=\mathbf 0 \iff$ assoc.\ ($48$) & All semi-magic ($z=0$)\\
+3D unit sphere $\sum\hat{\mathbf p}_{ij}(\lambda)=\mathbf 0$ & $48/880$ ($5.5\%$) & $\mathbf 0\;\forall\lambda>0 \iff$ assoc.; $107$ have $\beta^*\ne1$ & \#175 ($\mathbf 0$), \#70 ($\beta^*\approx2.24$)\\
+3D unit-sphere weights $\mathbf w^*>\mathbf 0$ & $880/880$ ($100\%$) & $\sum w_{ij}^*\hat{\mathbf p}_{ij}=\mathbf 0$, $\|\mathbf w^*-\mathbf 1\|_2\in[0.005,1.60]$ & All $880$ squares\\
+Planar unit-vector norm $\|\mathbf B_{\mathrm{unit}}(S)\|_2$ & $0/880$ vanish & $\min=\frac{18\sqrt{10}}{5}-8\sqrt{2}\approx0.07049$ ($v/u=9/4$) & \#70, \#76, \#121, \#188, \#452, \#459, \#490, \#574\\
+Collinear dipoles \& roots $\alpha^*\ne1$ & $408/880$ ($46.4\%$) & $204$ with $\kappa>0$ ($25$ at $\alpha^*=-1$, $25$ at $+3$) & \#45 ($-1$), \#286 ($+3$)\\
+Point-mass rotor $I_\perp(\lambda)/I_{zz}$ & $880/880$ ($100\%$) & $\frac{1+17\lambda^2}{2}$ ($1$ at $\lambda=\frac{1}{\sqrt{17}}$, $9$ at $\lambda=1$) & All semi-magic\\
+Entry-weighted ($m=s$) rotor & $56/880$ ($6.4\%$) & $Q_{xy}=0\implies I_1=I_2=170$ ($48$ in 3D) & $48$ III $+ 4$ IX $+ 4$ X\\
+Naturally balanced solid $\mathbf c_0=\mathbf 0$ & $51/880$ ($5.8\%$) & $48$ associative $+ 3$ non-assoc.\ Group VI & \#86, \#739, \#756\\
+2-density core $(\mathcal G_0,\mathcal G_1)$ & $35/511$ 3D cores & $33$ denser ($8$ with $\Delta\rho_1/\rho_0\le\frac{40}{19}$) $+ 2$ cavity & \#673 ($\frac54$), \#123, \#54\\
+Non-negative inner-core balance & $528/880$ ($60.0\%$) & $51$ natural $+ 477$ with $-\mathbf c_0\in\cone(P_S^{(1)})$ & $528$ magic gems\\
+Complete $K_{16}$ network ($120$ rods) & $880/880$ ($=\text{mass}$) & $\mathbf c=\mathbf 0$, $\Sigma_{\mathrm{rods}}=\frac{29}{45}\Sigma(\lambda)$; len.\ $\overline{\|\mathbf c\|}=0.025$ ($\lambda=0.2$) & All $880$ (\#175)\\
+Nested wireframes $G(\mathcal G_0)\cup G(\mathcal G_1)$ & $206/880$ ($\lambda=1$) & $48$ assoc.\ $+ 158$ Group VI ($164$ at $\lambda=0.20$) via $d_1/d_0$ & \#673 ($d_1/d_0=0.793$)\\
+Papercraft nets \& shells $\partial\mathcal G_0$ & $880/880$ nets & $N_{\mathrm{tabs}}=f_0-1\in[7,15]$; $48+80$ VI shells balance & \#175 ($11$ tabs, $13$ folds)\\
+Resting facet stability & $11{,}044/14{,}824$ & $74.5\%$ stable at $\lambda=0.20$ ($43.0\%$ at $\lambda=1$) & $\max\theta_{\mathrm{tip}}=47.3^\circ$\\
+Mirror-twin vertical towers & $48/880$ ($5.5\%$) & Max footprint $A_{xy}=5$ ($17$ knight's-move) & \#763, \#603\\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+We close with four open problems suggested by these mechanical findings:
+
+\begin{enumerate}
+\item \textbf{Higher-order Diophantine ring minima.} At order $n=5$, the $24$ non-central cells of $A_5$ lie on five concentric rings of radii $r\in\{1,\sqrt{2},2,\sqrt{5},2\sqrt{2}\}$, involving the independent square-free radicals $\sqrt{2}$ and $\sqrt{5}$. Does $\mathbf B_{\mathrm{unit}}(S)=\sum z_{ij}\mathbf u_{ij}$ vanish for any magic square of order $n\ge5$, or what is the asymptotic decay rate of $\min_{S\in\mathcal M_n}\|\mathbf B_{\mathrm{unit}}(S)\|_2$ as $n\to\infty$ via simultaneous Diophantine approximation?
+\item \textbf{Onion depth of Siamese and linear magic gems.} By \cite[Thm.~6.4]{mathewson2026gems}, the outer hull $\mathcal G_0(S)$ of the Siamese magic square of odd order $n\ge5$ strips off only $12$ vertices, leaving $n^2-12$ points in $P_S^{(1)}$ lying on five sheared planar polygons. How does the onion peeling depth $d_{\mathrm{onion}}(S_n)$ of the Siamese square grow with $n$, and what are the asymptotic $f$-vectors of its inner convex layers $\mathcal G_1(S_n)\supset\mathcal G_2(S_n)\supset\dots$?
+\item \textbf{Exact solid-isotropic Magic Gems.} While point-weighted Magic Gems become exact spherical tops ($I_{xx}=I_{yy}=I_{zz}$) at $\lambda_{\mathrm{iso}}=(n^2+1)^{-1/2}$, the uniform polyhedral solid $\mathcal G_\lambda(S)$ has a small transverse splitting $(I_3-I_2)/I_2\in[0.00004,0.0243]$ at $n=4$. Does there exist a magic square of some order $n\ge5$ (or a two-density composite $(\mathcal G_0,\mathcal G_1)$ at $n=4$) whose continuous solid inertia tensor is an exact scalar multiple of the identity $I_3$?
+\item \textbf{Space-filling and interlocking polyhedral packings.} Beyond vertical mirror-twin columns (\Cref{thm:mirror-tower}), can a Magic Gem $\mathcal G_\lambda(S)$ and its $D_4\times\langle\tau\rangle$ images tile a horizontal slab or interlock in three-dimensional space with full facet-to-facet contact?
+\end{enumerate}

@@ -1,0 +1,106 @@
+\begin{thebibliography}{10}
+
+\bibitem{andrews1960magic}
+W.~S. Andrews.
+\newblock {\em Magic Squares and Cubes}.
+\newblock Dover Publications, 2nd edition, 1960.
+
+\bibitem{arnold1989mathematical}
+Vladimir~I. Arnold.
+\newblock {\em Mathematical Methods of Classical Mechanics}, volume~60 of {\em
+  Graduate Texts in Mathematics}.
+\newblock Springer, New York, 2nd edition, 1989.
+
+\bibitem{ashbaugh1991twisting}
+Mark~S. Ashbaugh, Carmen~C. Chicone, and Richard~H. Cushman.
+\newblock The twisting tennis racket.
+\newblock {\em Journal of Dynamics and Differential Equations}, 3(1):67--85,
+  1991.
+
+\bibitem{chazelle1985convex}
+Bernard Chazelle.
+\newblock On the convex layers of a planar set.
+\newblock {\em IEEE Transactions on Information Theory}, 31(4):509--517, 1985.
+
+\bibitem{demaine2007geometric}
+Erik~D. Demaine and Joseph O'Rourke.
+\newblock {\em Geometric Folding Algorithms: Linkages, Origami, Polyhedra}.
+\newblock Cambridge University Press, Cambridge, 2007.
+
+\bibitem{dudeney1917amusements}
+Henry~E. Dudeney.
+\newblock {\em Amusements in Mathematics}.
+\newblock Thomas Nelson and Sons, London, 1917.
+
+\bibitem{durer1525underweysung}
+Albrecht D{\"u}rer.
+\newblock {\em Underweysung der Messung, mit dem Zirckel und Richtscheyt, in
+  Linien, Ebnen unnd gantzen Corporen}.
+\newblock Hieronymus Andreae, Nuremberg, 1525.
+
+\bibitem{frenicle1693}
+Bernard Fr{\'e}nicle~de Bessy.
+\newblock Des quarrez ou tables magiques.
+\newblock In {\em Divers ouvrages de math{\'e}matique et de physique, par
+  Messieurs de l'Acad{\'e}mie Royale des Sciences}. Imprimerie Royale, Paris,
+  1693.
+
+\bibitem{ghomi2014durer}
+Mohammad Ghomi.
+\newblock D{\"u}rer's conjecture on unfoldings of convex polyhedra.
+\newblock {\em Proceedings of the American Mathematical Society},
+  142(11):3975--3985, 2014.
+
+\bibitem{goldstein2002classical}
+Herbert Goldstein, Charles~P. Poole, and John~L. Safko.
+\newblock {\em Classical Mechanics}.
+\newblock Addison-Wesley, San Francisco, 3rd edition, 2002.
+
+\bibitem{loly2004invariance}
+Peter~D. Loly.
+\newblock The invariance of the moment of inertia of magic squares.
+\newblock {\em The Mathematical Gazette}, 88(511):151--153, 2004.
+\newblock Note 88.30.
+
+\bibitem{mathewson2025magicgemweb}
+Kyle~Elliott Mathewson.
+\newblock \texttt{magicGemWeb}: Interactive {3D}-printable ball-and-rod
+  wireframes, complete {$K_{16}$} strut networks, and unfolded papercraft
+  cutout nets for magic gems.
+\newblock \url{https://github.com/kylemath/magicGemWeb} and
+  \url{https://kylemath.github.io/magicGemWeb/3dModels/index.html}, 2025.
+
+\bibitem{mathewson2026gems}
+Kyle~Elliott Mathewson.
+\newblock Magic gems: Convex hulls of lifted magic squares.
+\newblock {\em arXiv preprint arXiv:2512.09170}, 2026.
+\newblock Companion paper~I.
+
+\bibitem{mathewson2026moments}
+Kyle~Elliott Mathewson.
+\newblock Moments of magic squares: Line-sum conditions, a permutation
+  threshold, and random energies, 2026.
+\newblock Companion paper~II, arXiv preprint.
+
+\bibitem{poinsot1834theorie}
+Louis Poinsot.
+\newblock {\em Th{\'e}orie nouvelle de la rotation des corps}.
+\newblock Bachelier, Paris, 1834.
+
+\bibitem{rogers2004inertia}
+Adam Rogers and Peter~D. Loly.
+\newblock The inertia tensor of a magic cube.
+\newblock {\em American Journal of Physics}, 72(6):786--789, 2004.
+
+\bibitem{rogers2005multipole}
+Adam Rogers and Peter~D. Loly.
+\newblock The electric multipole expansion for a magic cube.
+\newblock {\em European Journal of Physics}, 26(5):809--813, 2005.
+
+\bibitem{shephard1975convex}
+G.~C. Shephard.
+\newblock Convex polytopes with convex nets.
+\newblock {\em Mathematical Proceedings of the Cambridge Philosophical
+  Society}, 78(3):389--403, 1975.
+
+\end{thebibliography}

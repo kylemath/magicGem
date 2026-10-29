@@ -1,0 +1,29 @@
+October 28, 2026
+
+Professor Endre Boros
+Editor-in-Chief, Discrete Applied Mathematics
+Elsevier
+
+Dear Professor Boros,
+
+Please find enclosed my manuscript titled "Moments of Magic Squares: Line-Sum Conditions, a Permutation Threshold, and Random Energies" (27 pages, 3 figures, 4 tables), which I am submitting for consideration for publication as a Full Length Article in Discrete Applied Mathematics.
+
+A classical magic square S of order n satisfies linear row, column, and main-diagonal sum constraints. A natural algebraic question is to determine how tightly these first-order line-sum constraints govern higher-degree polynomial moments of the form <P, K^(r)>_F = sum_{i,j} S_{i,j}^r K_{i,j} across spatial kernels K on the n x n grid.
+
+This manuscript establishes a complete hierarchy of exact and probabilistic results for these higher-degree moments:
+
+1. Equivalence with the Prouhet-Tarry-Escott (PTE) problem and the r = 2 circular identity: We show that the vanishing of centered higher-degree moments against arbitrary rank-1 row/column kernels is equivalent to the classical Prouhet-Tarry-Escott problem on the rows and columns of S. At degree r = 2, although individual row and column second moments vary across magic squares, we prove that for every magic square of every order n >= 3 the squared projections along any two orthogonal directions on the centered circle sum to the universal constant (1/12) n^2 (n^2 - 1)^2 (Theorem 3.2), reducing the 2 x 2 second-moment matrix to a two-dimensional dipole space parametrized by all 880 order-4 squares.
+2. A sharp degree-3 permutation threshold on S_n: Restricting from general n x n magic squares to n x n permutation matrices P in S_n against the radial kernel R_{i,j} = (i - c)^2 + (j - c)^2, we prove via Vandermonde linear independence that the Frobenius inner product <P, R^r>_F is constant across all n! permutation matrices for every integer degree 0 <= r <= 3 (Proposition 4.1), with closed-form universal constants for all n, and fails to be invariant precisely at degree r = 4 as soon as n >= 3 (Theorem 4.3).
+3. Continuous energy density for random assignments: Replacing grid-locked permutations with independent standard normal weights produces a continuous quadratic energy W_n whose probability density is expressed as a single convergent Fourier-Gil-Pelaez integral of the exact characteristic function, capturing the empirical order-n = 4 permutation spectrum within 3.6% and converging to N(0, 1) at rate O(n^{-1}).
+
+For complete transparency, this manuscript is algebraically and probabilistically self-contained; a separate geometric preprint by the author (arXiv:2512.09170, submitted to an experimental geometry venue) investigates the three-dimensional convex hulls and face lattices of lifted magic squares, where only the elementary r = 1 centroid identity appears. There is no overlap in theorems, proofs, or figures between the two manuscripts. All verification scripts are publicly available at https://github.com/kylemath/magicGem.
+
+This manuscript is original, is my sole work, has not been published previously, and is not under consideration for publication elsewhere. Thank you very much for considering this submission for Discrete Applied Mathematics.
+
+Sincerely,
+
+Kyle Elliott Mathewson, Ph.D.
+Associate Professor, Faculty of Science
+University of Alberta
+Edmonton, Alberta, Canada
+Email: kyle.mathewson@ualberta.ca
