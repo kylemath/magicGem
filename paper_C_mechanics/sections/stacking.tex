@@ -1,7 +1,7 @@
-\section{Test 4: Freestanding Gravity and Mirror-Twin Towers}
+\section{Freestanding Gravity and Mirror-Twin Towers}
 \label{sec:stacking}
 
-Our fourth and final test removes the central pivot and places Magic Gems directly onto a flat horizontal table under gravity—first as individual resting blocks, and then stacked face-to-face into multi-block vertical columns. Because the hull vertices sit at unequal heights, the boundary facets of $\mathcal G_\lambda(S)$ are slanted polygons whose outward normals rarely oppose each other across the gem. Test~4 asks: \emph{(i)~when does a slanted facet $F\subset\partial\mathcal G_\lambda(S)$ support the gem's centre of mass without tipping, and (ii)~when identical copies of a gem curve off-axis along mismatched top and bottom facets, how does pairing the gem with an inverted partner restore a straight vertical column?}
+Our fourth and final test removes the central pivot and places Magic Gems directly onto a flat horizontal table under gravity—first as individual resting blocks, and then stacked face-to-face into multi-block vertical columns. Because the hull vertices sit at unequal heights, the boundary facets of $\mathcal G_\lambda(S)$ are slanted polygons whose outward normals rarely oppose each other across the gem. We therefore test when a slanted facet $F\subset\partial\mathcal G_\lambda(S)$ supports the gem's centre of mass without tipping, and how pairing a gem with an inverted partner restores a straight vertical column when identical copies curve off-axis.
 
 \subsection{Single-Block Table Equilibrium: Cubic Aspect Scaling Stabilizes \texorpdfstring{$74.5\%$}{74.5\%} of Facets}
 
@@ -18,11 +18,7 @@ For a facet $F\subset\partial\mathcal G_\lambda(S)$, the \emph{stability margin}
 
 \begin{proposition}[Order-four resting stability census]
 \label{prop:stability-census}
-Across all $880$ magic squares of order~$4$, the gems $\mathcal G_\lambda(S)$ possess a total of $14{,}824$ facets (mean $16.85$ facets per gem).
-\begin{enumerate}
-\item At the tall canonical lift $\lambda=1$ (where the vertical height span $15$ is five times the $3\times3$ floor span), the high centre of mass $\mathbf c_0(S)$ projects outside $57.0\%$ of all facet polygons: $6{,}378$ of the $14{,}824$ facets ($43.0\%$) are statically stable, with every gem possessing between $4$ and $12$ stable resting facets (mean $7.25$; using the balanced point centroid $O$ gives $6{,}340$ stable facets, $42.8\%$).
-\item Compressing the vertical lift to the cubic 3D-print scale $\lambda_{\mathrm{cube}}=1/5=0.20$ brings the centre of mass closer to the slanted upper and lower facets: $11{,}044$ of the $14{,}824$ facets ($74.5\%$) become statically stable, with a mean critical tipping angle of $17.8^\circ$ and a maximum of $47.3^\circ$ (\Cref{fig:mirror-stacking}(d)).
-\end{enumerate}
+Across all $880$ magic squares of order~$4$, the gems $\mathcal G_\lambda(S)$ possess a total of $14{,}824$ facets (mean $16.85$ facets per gem). At the tall canonical lift $\lambda=1$ (where the vertical height span $15$ is five times the $3\times3$ floor span), the high centre of mass $\mathbf c_0(S)$ projects outside $57.0\%$ of all facet polygons: $6{,}378$ of the $14{,}824$ facets ($43.0\%$) are statically stable, with every gem possessing between $4$ and $12$ stable resting facets (mean $7.25$; using the balanced point centroid $O$ gives $6{,}340$ stable facets, $42.8\%$). Compressing the vertical lift to the cubic 3D-print scale $\lambda_{\mathrm{cube}}=1/5=0.20$ brings the centre of mass closer to the slanted upper and lower facets so that $11{,}044$ of the $14{,}824$ facets ($74.5\%$) become statically stable, with a mean critical tipping angle of $17.8^\circ$ and a maximum of $47.3^\circ$ (\Cref{fig:mirror-stacking}(d)).
 \end{proposition}
 
 \begin{proof}
@@ -49,46 +45,35 @@ which inverts the polyhedron through the origin in $\R^3$ and pairs every slante
 
 \begin{theorem}[Mirror-Twin Inversion and Zero-Rotation Alternating Towers]
 \label{thm:mirror-tower}
-Let $S$ be any arrangement of order $n$, let $S^*=r^2\overline S$ be its half-turned complement, and let $\lambda>0$.
-\begin{enumerate}
-\item \emph{(Central inversion identity.)} In $\R^3$, the lifted point clouds and convex hulls satisfy
+Let $S$ be any arrangement of order $n$, let $S^*=r^2\overline S$ be its half-turned complement, and let $\lambda>0$. In $\R^3$, the lifted point clouds and convex hulls satisfy the central inversion identity
 \begin{equation}
 \label{eq:central-inv}
 P_{S^*}(\lambda) = -P_S(\lambda),\qquad
-\mathcal G_\lambda(S^*) = -\mathcal G_\lambda(S).
+\mathcal G_\lambda(S^*) = -\mathcal G_\lambda(S),
 \end{equation}
-Consequently, the map $F\mapsto F^*:=-F$ is an area-preserving, normal-reversing bijection between the upper facets $F_+\subset\mathcal G_\lambda(S)$ (outward normal $+\mathbf n_+$) and the lower facets $F_+^*\subset\mathcal G_\lambda(S^*)$ (outward normal $-\mathbf n_+$), and between the lower facets $F_-\subset\mathcal G_\lambda(S)$ (outward normal $+\mathbf n_-$) and the upper facets $F_-^*=-F_-\subset\mathcal G_\lambda(S^*)$ (outward normal $-\mathbf n_-$).
-\item \emph{(Zero-rotation alternating tower.)} Choose \emph{any} upper facet $F_+\subset\mathcal G_\lambda(S)$ and \emph{any} lower facet $F_-\subset\mathcal G_\lambda(S)$ (not necessarily parallel) that are centrally symmetric polygons in $\R^3$ with centroids $\mathbf c(F_+)$ and $\mathbf c(F_-)$. Define the alternating sequence of unrotated blocks $B_0,B_1,B_2,\dots$ by
+so the map $F\mapsto F^*:=-F$ is an area-preserving, normal-reversing bijection between the upper facets $F_+\subset\mathcal G_\lambda(S)$ (outward normal $+\mathbf n_+$) and the lower facets $F_+^*\subset\mathcal G_\lambda(S^*)$ (outward normal $-\mathbf n_+$), and between the lower facets $F_-\subset\mathcal G_\lambda(S)$ (outward normal $+\mathbf n_-$) and the upper facets $F_-^*=-F_-\subset\mathcal G_\lambda(S^*)$ (outward normal $-\mathbf n_-$).
+
+Consequently, given any upper facet $F_+\subset\mathcal G_\lambda(S)$ and any lower facet $F_-\subset\mathcal G_\lambda(S)$ (not necessarily parallel) that are centrally symmetric polygons in $\R^3$ with centroids $\mathbf c(F_+)$ and $\mathbf c(F_-)$, the alternating sequence of unrotated blocks $B_0,B_1,B_2,\dots$ defined by
 \begin{equation}
 \label{eq:tower-blocks}
 B_{2m} = \mathcal G_\lambda(S) + m\mathbf T,\qquad
 B_{2m+1} = -\mathcal G_\lambda(S) + 2\mathbf c(F_+) + m\mathbf T,\qquad
-\mathbf T = 2\bigl(\mathbf c(F_+) - \mathbf c(F_-)\bigr).
+\mathbf T = 2\bigl(\mathbf c(F_+) - \mathbf c(F_-)\bigr),
 \end{equation}
-Then:
-\begin{enumerate}
-\item At every odd joint $B_{2m}\cap B_{2m+1}$, the upper facet $F_+ + m\mathbf T$ of $B_{2m}$ coincides \emph{identically} (100\% polygon and vertex overlap, with opposite outward normals $\pm\mathbf n_+$) with the lower facet $-F_+ + 2\mathbf c(F_+) + m\mathbf T$ of $B_{2m+1}$.
-\item At every even joint $B_{2m-1}\cap B_{2m}$, the upper facet $-F_- + 2\mathbf c(F_+) + (m-1)\mathbf T$ of $B_{2m-1}$ coincides \emph{identically} (with opposite outward normals $\mp\mathbf n_-$) with the lower facet $F_- + m\mathbf T$ of $B_{2m}$.
-\item Every two-block repeating unit $B_{2m}\cup B_{2m+1}$ is centrally symmetric about $\mathbf c(F_+)+m\mathbf T$. When $\mathbf c(F_+)=(0,0,z_+)$ and $\mathbf c(F_-)=(0,0,z_-)$ both lie on the vertical $z$-axis ($z_+>0>z_-$), the period vector $\mathbf T=(0,0,2(z_+-z_-))$ is purely vertical, and the centre of mass of any $2M$-block tower lies on the $z$-axis regardless of whether $\mathbf c_0(S)=\mathbf 0$ (\Cref{fig:mirror-stacking}(a,c)).
-\end{enumerate}
-\end{enumerate}
+meets with $100\%$ polygon and vertex overlap at every odd joint $B_{2m}\cap B_{2m+1}$ (where the upper facet $F_+ + m\mathbf T$ of $B_{2m}$ coincides identically with the lower facet $-F_+ + 2\mathbf c(F_+) + m\mathbf T$ of $B_{2m+1}$ with opposite outward normals $\pm\mathbf n_+$) and at every even joint $B_{2m-1}\cap B_{2m}$ (where the upper facet $-F_- + 2\mathbf c(F_+) + (m-1)\mathbf T$ of $B_{2m-1}$ coincides identically with the lower facet $F_- + m\mathbf T$ of $B_{2m}$ with opposite outward normals $\mp\mathbf n_-$). Every two-block repeating unit $B_{2m}\cup B_{2m+1}$ is centrally symmetric about $\mathbf c(F_+)+m\mathbf T$, and whenever $\mathbf c(F_+)=(0,0,z_+)$ and $\mathbf c(F_-)=(0,0,z_-)$ both lie on the vertical $z$-axis ($z_+>0>z_-$), the period vector $\mathbf T=(0,0,2(z_+-z_-))$ is purely vertical and places the centre of mass of any $2M$-block tower on the $z$-axis regardless of whether $\mathbf c_0(S)=\mathbf 0$ (\Cref{fig:mirror-stacking}(a,c)).
 \end{theorem}
 
 \begin{proof}
-(1) In centred coordinates \eqref{eq:coords}, $r^2$ sends $(x,y)\mapsto(-x,-y)$ and complementation sends $z\mapsto-z$, so $r^2\overline S$ lifts to $-\mathbf p_{ij}(\lambda)$, proving \eqref{eq:central-inv}.
-
-(2) Central symmetry of $F_\pm$ about $\mathbf c(F_\pm)$ gives $-F_\pm + 2\mathbf c(F_\pm)=F_\pm$. Translating by $m\mathbf T$ yields~(2a) and~(2b), while central inversion about $\mathbf c(F_+)+m\mathbf T$ exchanges $B_{2m}$ and $B_{2m+1}$, proving~(2c).
+In centred coordinates \eqref{eq:coords}, $r^2$ sends $(x,y)\mapsto(-x,-y)$ and complementation sends $z\mapsto-z$, so $r^2\overline S$ lifts to $-\mathbf p_{ij}(\lambda)$, proving \eqref{eq:central-inv}. Central symmetry of $F_\pm$ about $\mathbf c(F_\pm)$ gives $-F_\pm + 2\mathbf c(F_\pm)=F_\pm$; translating by $m\mathbf T$ establishes identical facet coincidence at all odd and even joints, while central inversion about $\mathbf c(F_+)+m\mathbf T$ exchanges $B_{2m}$ and $B_{2m+1}$ and locks the two-block centroid onto the $z$-axis.
 \end{proof}
 
 \subsection{Chiral Knight's-Move Towers: Exemplar Square \#763}
 
 \begin{proposition}[Vertically centered tower census and the knight's-move square \#763]
 \label{prop:knights-move}
-Across the $880$ magic squares of order~$4$:
-\begin{enumerate}
-\item Exactly $48$ squares possess both an upper facet $F_+$ and a lower facet $F_-$ that are centrally symmetric polygons whose centroids lie on the vertical axis $(0,0,z_\pm)$.
-\item The maximum projected horizontal contact area among these $48$ squares is $A_{xy}=5$ (spanning $5/9\approx55.6\%$ of the $3\times3$ grid footprint), achieved by $17$ squares (\Cref{tab:knights-move}; e.g.\ squares \#603, \#763, and \#774), in which $\pi_{xy}(F_+)$ is the centred $2\times1$ knight's-move square with vertices $(\pm\frac32,\mp\frac12)$ and $(\pm\frac12,\pm\tfrac32)$ (\Cref{fig:mirror-stacking}(b)). Only two of the $17$ (\#774 and \#792) have parallel top and bottom facets ($\mathbf n_-=-\mathbf n_+$); the remaining $15$ require mirror-twin alternation.
-\item In particular, square \#763 (Dudeney Group~VI, $\overline S=hS$, so $S^*=r^2\overline S=vS$ is its vertical reflection) is obtained from naturally balanced solid \#756 ($\mathbf c_0=\mathbf 0$, \Cref{tab:three-exceptions}) by swapping the single complementary pair $(4,13)\leftrightarrow(16,1)$ in rows~$2$--$3$ (\Cref{fig:hero-squares}(f)):
+Across the $880$ magic squares of order~$4$, exactly $48$ squares possess both an upper facet $F_+$ and a lower facet $F_-$ that are centrally symmetric polygons whose centroids lie on the vertical axis $(0,0,z_\pm)$. The maximum projected horizontal contact area among these $48$ squares is $A_{xy}=5$ (spanning $5/9\approx55.6\%$ of the $3\times3$ grid footprint), achieved by $17$ squares (\Cref{tab:knights-move}; e.g.\ squares \#603, \#763, and \#774) in which $\pi_{xy}(F_+)$ is the centred $2\times1$ knight's-move square with vertices $(\pm\frac32,\mp\frac12)$ and $(\pm\frac12,\pm\tfrac32)$ (\Cref{fig:mirror-stacking}(b)). Only two of the $17$ (\#774 and \#792) have parallel top and bottom facets ($\mathbf n_-=-\mathbf n_+$); the remaining $15$ require mirror-twin alternation.
+
+In particular, square \#763 (Dudeney Group~VI, $\overline S=hS$, so $S^*=r^2\overline S=vS$ is its vertical reflection) is obtained from naturally balanced solid \#756 ($\mathbf c_0=\mathbf 0$, \Cref{tab:three-exceptions}) by swapping the single complementary pair $(4,13)\leftrightarrow(16,1)$ in rows~$2$--$3$ (\Cref{fig:hero-squares}(f)):
 \[
 S_{\#763} = \begin{pmatrix}
 5 & 2 & \mathbf{15} & 12\\
@@ -104,16 +89,15 @@ S^*_{\#763} = vS_{\#763} = \begin{pmatrix}
 \end{pmatrix}.
 \]
 This swap lifts $\{13,14,15,16\}$ onto the Pythagorean upper knight's-move plane $4x-3y+5z=30$ (centroid $(0,0,6\lambda)$) and $\{1,2,3,4\}$ onto the lower plane $-4x-3y-5z=30$ (centroid $(0,0,-6\lambda)$), while shifting the solid centroid slightly to $\mathbf c_0=(0,-5/126,0)$ (which cancels pairwise in $B_{2m}\cup B_{2m+1}$). Both facets have 3D area $5\sqrt{1+\lambda^2}$, stability margin $d_{\mathrm{stab}}=0.969$, and single-block tipping angle $\theta_{\mathrm{tip}}^{(1)}=39.35^\circ$ at $\lambda=0.20$. Because $\mathbf n_\pm(\lambda)\propto(\pm4\lambda,-3\lambda,\pm5)$ makes angle $\theta_{\mathrm{joint}}(\lambda)=\arctan(\lambda)$ with $\hat{\mathbf e}_z$ ($\approx11.31^\circ$ at $\lambda=0.20$), any material with static friction $\mu_s>\lambda=0.20$ holds the unbonded column at level ($\theta_{\mathrm{table}}=0$), while tilting an $M$-block column of centre-of-mass height $H_M$ is governed by $\min\bigl(\arctan(\mu_s)-\theta_{\mathrm{joint}}(\lambda),\,\arctan(d_{\mathrm{stab}}/H_M)\bigr)$ (\Cref{fig:mirror-stacking}(c)).
-\end{enumerate}
 \end{proposition}
 
 \begin{proof}
-Testing each facet $F\subset\partial\mathcal G_1(S)$ across the $880$ gems for central symmetry ($F=2\mathbf c(F)-F$ with $c_x(F)=c_y(F)=0$) identifies the $48$ gems in~(1) and the $17$ gems of projected shoelace area $A_{xy}=5$ in~(2). Substituting the lifted coordinates of $\{13,14,15,16\}$ and $\{1,2,3,4\}$ on \#763 into $4x-3y+5(z/\lambda)=30$ and $-4x-3y-5(z/\lambda)=30$ verifies the facet planes, normals $\mathbf n_\pm(\lambda)\propto(\pm4\lambda,-3\lambda,\pm5)$, surface area $5\sqrt{1+\lambda^2}$, and joint tilt $\tan\theta_{\mathrm{joint}}(\lambda)=\lambda$.
+Testing each facet $F\subset\partial\mathcal G_1(S)$ across the $880$ gems for central symmetry ($F=2\mathbf c(F)-F$ with $c_x(F)=c_y(F)=0$) identifies the $48$ gems and the $17$ gems of projected shoelace area $A_{xy}=5$. Substituting the lifted coordinates of $\{13,14,15,16\}$ and $\{1,2,3,4\}$ on \#763 into $4x-3y+5(z/\lambda)=30$ and $-4x-3y-5(z/\lambda)=30$ verifies the facet planes, normals $\mathbf n_\pm(\lambda)\propto(\pm4\lambda,-3\lambda,\pm5)$, surface area $5\sqrt{1+\lambda^2}$, and joint tilt $\tan\theta_{\mathrm{joint}}(\lambda)=\lambda$.
 \end{proof}
 
 \begin{remark}[Three-dimensional chirality and why a single mold cannot build the \#763 tower]
 \label{rem:chirality}
-Because square \#763 satisfies $\overline S=hS$ ($z(-x,y)=-z(x,y)$), its 3D gem $\mathcal G_\lambda(S_{\#763})$ is invariant under the $180^\circ$ proper rotation around the $y$-axis, $R_{y,\pi}(x,y,z)=(-x,y,-z)\in SO(3)$, which exchanges $F_+\colon 4x-3y+5z=30$ and $F_-\colon -4x-3y-5z=30$ and returns the \emph{exact same block} in its original orientation. Flipping a second copy of $\mathcal G_\lambda(S_{\#763})$ upside-down around the $x$-axis via $R_{x,\pi}(x,y,z)=(x,-y,-z)$ maps $F_+$ to a lower facet with outward normal $(+4\lambda,+3\lambda,-5)\ne-\mathbf n_+=(-4\lambda,+3\lambda,-5)$, failing to mate flush with $F_+$. More fundamentally, $\operatorname{Aut}_{O(3)}\bigl(\mathcal G_\lambda(S_{\#763})\bigr)=\{I_3,R_{y,\pi}\}\cong C_2\subset SO(3)$ contains no improper reflections: $\mathcal G_\lambda(S_{\#763})$ and $\mathcal G_\lambda(S^*_{\#763})=-\mathcal G_\lambda(S_{\#763})$ are \emph{chiral 3D enantiomorphs} in disjoint proper rigid-motion orbits, so building the tower of \Cref{fig:mirror-stacking}(a) requires two opposite-handed molds.
+Because square \#763 satisfies $\overline S=hS$ ($z(-x,y)=-z(x,y)$), its 3D gem $\mathcal G_\lambda(S_{\#763})$ is invariant under the $180^\circ$ proper rotation around the $y$-axis, $R_{y,\pi}(x,y,z)=(-x,y,-z)\in SO(3)$, which exchanges $F_+\colon 4x-3y+5z=30$ and $F_-\colon -4x-3y-5z=30$ and returns the exact same block in its original orientation. Flipping a second copy of $\mathcal G_\lambda(S_{\#763})$ upside-down around the $x$-axis via $R_{x,\pi}(x,y,z)=(x,-y,-z)$ maps $F_+$ to a lower facet with outward normal $(+4\lambda,+3\lambda,-5)\ne-\mathbf n_+=(-4\lambda,+3\lambda,-5)$, failing to mate flush with $F_+$. More fundamentally, $\operatorname{Aut}_{O(3)}\bigl(\mathcal G_\lambda(S_{\#763})\bigr)=\{I_3,R_{y,\pi}\}\cong C_2\subset SO(3)$ contains no improper reflections: $\mathcal G_\lambda(S_{\#763})$ and $\mathcal G_\lambda(S^*_{\#763})=-\mathcal G_\lambda(S_{\#763})$ are \emph{chiral 3D enantiomorphs} in disjoint proper rigid-motion orbits, so building the tower of \Cref{fig:mirror-stacking}(a) requires two opposite-handed molds.
 \end{remark}
 
 \begin{table}[htbp]

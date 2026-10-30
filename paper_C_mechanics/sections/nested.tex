@@ -1,17 +1,13 @@
-\section{Test 3: Convex Hulls and ``Diamond-in-a-Diamond'' Counterweighting}
+\section{Convex Hulls and ``Diamond-in-a-Diamond'' Counterweighting}
 \label{sec:nested}
 
 Why does passing from the discrete point cloud $P_S$ ($\sum_{i,j}\mathbf p_{ij}=\mathbf 0$) to its uniform-density solid convex hull $\mathcal G_0(S):=\mathcal G(S)=\conv P_S$ shift the solid centre of mass
 \[
 \mathbf c_0(S) := \mathbf c_{\mathrm{solid}}(\mathcal G_0(S)) = \frac{1}{\vol\mathcal G_0(S)}\iiint_{\mathcal G_0(S)}\mathbf x\,dV
 \]
-away from the origin $O$ on $829$ of the $880$ order-four magic squares? Taking the 3D convex hull introduces two geometric inequalities:
-\begin{enumerate}
-\item \emph{Omission of interior points:} The boundary $\partial\mathcal G_0(S)$ depends solely on the $V_0=|\vertset\mathcal G_0(S)|$ extreme vertices and ignores the $V_1=N-V_0$ interior and non-vertex points $P_S^{(1)}=P_S\setminus\vertset\mathcal G_0(S)$.
-\item \emph{Volumetric simplex weighting:} Even when $V_0=N=16$ ($18$ of the $880$ squares), decomposing $\mathcal G_0(S)$ into tetrahedra from $O$ weights each simplex $\Delta_k$ by its volume $\vol(\Delta_k)$ rather than weighting the $16$ vertices equally.
-\end{enumerate}
+away from the origin $O$ on $829$ of the $880$ order-four magic squares? Taking the three-dimensional convex hull introduces two geometric inequalities: first, the boundary $\partial\mathcal G_0(S)$ depends solely on the $V_0=|\vertset\mathcal G_0(S)|$ extreme vertices and omits the $V_1=N-V_0$ interior and non-vertex points $P_S^{(1)}=P_S\setminus\vertset\mathcal G_0(S)$; second, even when $V_0=N=16$ ($18$ of the $880$ squares), decomposing $\mathcal G_0(S)$ into tetrahedra from $O$ weights each simplex $\Delta_k$ by its volume $\vol(\Delta_k)$ rather than weighting the sixteen vertices equally.
 
-Test~3 asks: \emph{since the outer hull vertices and the discarded inner points together sum to zero, their centroids must pull in strictly opposite directions across $O$. Can we restore exact balance at $O$ by physically re-engaging the inner core $\mathcal G_1(S)=\conv P_S^{(1)}$ across cast solids, 3D-printed wireframes, complete strut networks, and folded papercraft shells?}
+Since the outer hull vertices and the discarded inner points together sum to zero, their centroids must pull in strictly opposite directions across $O$. We now test whether physically re-engaging the inner core $\mathcal G_1(S)=\conv P_S^{(1)}$ restores exact balance at $O$ across cast solids, 3D-printed wireframes, complete strut networks, and folded papercraft shells.
 
 \subsection{The 51 Naturally Balanced Solids and Outer--Inner Vertex Opposition}
 
@@ -19,11 +15,7 @@ We first classify the $51$ order-four magic squares whose uniform solid hull $\m
 
 \begin{proposition}[Classification of the 51 naturally balanced order-four gems]
 \label{prop:51-balanced}
-Across the $880$ magic squares of order~$4$, the uniform solid $\mathcal G_0(S)$ has centre of mass $\mathbf c_0(S)=\mathbf 0$ for $51$ squares:
-\begin{enumerate}
-\item The $48$ associative squares (Dudeney's Group~III), for which $z(-x,-y)=-z(x,y)$ implies $\mathcal G_0(S)=-\mathcal G_0(S)$, forcing $\mathbf c_0(S)=-\mathbf c_0(S)=\mathbf 0$ by central inversion.
-\item Three non-associative squares in Dudeney's Group~VI: squares \#86, \#739, and \#756 (\Cref{tab:three-exceptions}).
-\end{enumerate}
+Across the $880$ magic squares of order~$4$, the uniform solid $\mathcal G_0(S)$ has centre of mass $\mathbf c_0(S)=\mathbf 0$ for exactly $51$ squares, consisting of the $48$ associative squares (Dudeney's Group~III, where $z(-x,-y)=-z(x,y)$ implies $\mathcal G_0(S)=-\mathcal G_0(S)$ and forces $\mathbf c_0(S)=-\mathbf c_0(S)=\mathbf 0$ by central inversion) together with three non-associative squares in Dudeney's Group~VI: squares \#86, \#739, and \#756 (\Cref{tab:three-exceptions}).
 \end{proposition}
 
 \begin{proof}
@@ -58,20 +50,16 @@ calling $\mathcal G_0(S)$ the \emph{outer gem} and $\mathcal G_1(S)=\conv P_S^{(
 
 \begin{proposition}[Vertex-centroid opposition and order-four onion hierarchy]
 \label{prop:opposition}
-Let $S$ be any arrangement of order $n$ with $V_0=|\vertset\mathcal G_0(S)|<N$ and $V_1=N-V_0$.
-\begin{enumerate}
-\item \emph{(Exact vertex-centroid opposition.)} The centroid $\overline{\mathbf p}_{\mathrm{outer}}=\frac{1}{V_0}\sum_{\mathbf p\in\vertset\mathcal G_0}\mathbf p$ of the outer hull vertices and the centroid $\overline{\mathbf p}_{\mathrm{inner}}=\frac{1}{V_1}\sum_{\mathbf p\in P_S^{(1)}}\mathbf p$ of the inner core points satisfy
+Let $S$ be any arrangement of order $n$ with $V_0=|\vertset\mathcal G_0(S)|<N$ and $V_1=N-V_0$. The centroid $\overline{\mathbf p}_{\mathrm{outer}}=\frac{1}{V_0}\sum_{\mathbf p\in\vertset\mathcal G_0}\mathbf p$ of the outer hull vertices and the centroid $\overline{\mathbf p}_{\mathrm{inner}}=\frac{1}{V_1}\sum_{\mathbf p\in P_S^{(1)}}\mathbf p$ of the inner core points satisfy
 \begin{equation}
 \label{eq:opposition}
 V_0\,\overline{\mathbf p}_{\mathrm{outer}} + V_1\,\overline{\mathbf p}_{\mathrm{inner}} = \mathbf 0,
 \end{equation}
-pointing in strictly opposite directions across $O$ whenever $\overline{\mathbf p}_{\mathrm{outer}}\ne\mathbf 0$.
-\item \emph{(Order-four layer census.)} Across the $880$ magic squares of order~$4$ (\Cref{fig:nested-diamonds}(c)): $18$ squares have $V_0=16$ ($P_S^{(1)}=\emptyset$); $842$ squares have onion depth~$2$ ($14$ singletons, $162$ segments, $175$ planar polygons, and $491$ 3D polyhedra $\mathcal G_1(S)$); and $20$ squares have onion depth~$3$ ($\mathcal G_0\supset\mathcal G_1\supset\mathcal G_2$, comprising $16$ with dimension sequence $(3,3,0)$ and $4$ with $(3,3,1)$). In total, $511$ order-four magic squares possess a three-dimensional inner core gem $\mathcal G_1(S)$.
-\end{enumerate}
+pointing in strictly opposite directions across $O$ whenever $\overline{\mathbf p}_{\mathrm{outer}}\ne\mathbf 0$. Across the $880$ magic squares of order~$4$ (\Cref{fig:nested-diamonds}(c)), $18$ squares have $V_0=16$ ($P_S^{(1)}=\emptyset$), $842$ squares have onion depth~$2$ ($14$ singletons, $162$ segments, $175$ planar polygons, and $491$ 3D polyhedra $\mathcal G_1(S)$), and $20$ squares have onion depth~$3$ ($\mathcal G_0\supset\mathcal G_1\supset\mathcal G_2$, comprising $16$ with dimension sequence $(3,3,0)$ and $4$ with $(3,3,1)$), so in total $511$ order-four magic squares possess a three-dimensional inner core gem $\mathcal G_1(S)$.
 \end{proposition}
 
 \begin{proof}
-Equation~\eqref{eq:opposition} follows immediately from $\sum_{\mathbf p\in P_S}\mathbf p=\mathbf 0$ and $P_S=\vertset\mathcal G_0(S)\sqcup P_S^{(1)}$, and exact convex-hull peeling across all $880$ squares yields~(2).
+Equation~\eqref{eq:opposition} follows immediately from $\sum_{\mathbf p\in P_S}\mathbf p=\mathbf 0$ and $P_S=\vertset\mathcal G_0(S)\sqcup P_S^{(1)}$, and exact convex-hull peeling across all $880$ squares yields the stated layer census.
 \end{proof}
 
 \begin{figure}[htbp]
@@ -87,9 +75,7 @@ Guided by the opposition identity \eqref{eq:opposition}, our first restoration m
 
 \begin{theorem}[Composite ``diamond-in-a-diamond'' solid balancing]
 \label{thm:diamond-balance}
-Let $S$ be an order-four magic square.
-\begin{enumerate}
-\item \emph{(Two-density solid inclusion $(\mathcal G_0,\mathcal G_1)$.)} Suppose $\dim\mathcal G_1(S)=3$ ($511$ squares), and fabricate $\mathcal G_0(S)$ with baseline density $\rho_0>0$ and inner core inclusion $\mathcal G_1(S)\subset\mathcal G_0(S)$ of excess density $\Delta\rho_1=\rho_1-\rho_0$. The composite centre of mass
+Let $S$ be an order-four magic square with $\dim\mathcal G_1(S)=3$ ($511$ squares), and fabricate $\mathcal G_0(S)$ with baseline density $\rho_0>0$ and inner core inclusion $\mathcal G_1(S)\subset\mathcal G_0(S)$ of excess density $\Delta\rho_1=\rho_1-\rho_0$. The composite centre of mass
 \[
 \mathbf c_{\mathrm{comp}} = \frac{\rho_0\vol(\mathcal G_0)\,\mathbf c_0 + \Delta\rho_1\vol(\mathcal G_1)\,\mathbf c_1}{\rho_0\vol(\mathcal G_0) + \Delta\rho_1\vol(\mathcal G_1)}
 \]
@@ -98,25 +84,18 @@ vanishes for some $\Delta\rho_1\ne0$ if and only if $\mathbf c_0$ and $\mathbf c
 \label{eq:density-ratio}
 \frac{\Delta\rho_1}{\rho_0} = -\frac{\vol(\mathcal G_0)\,(\mathbf c_0\cdot\mathbf c_1)}{\vol(\mathcal G_1)\,\|\mathbf c_1\|_2^2}.
 \end{equation}
-The $511$ order-four gems with $\dim\mathcal G_1(S)=3$ partition into four classes:
-\begin{itemize}
-\item $207$ gems have $\mathbf c_1=\mathbf 0$ ($13$ associative gems plus $194$ non-associative gems whose four inner points form a zero-sum tetrahedron);
-\item $254$ gems (outside Group~VI) have non-collinear solid centroids $\mathbf c_0\times\mathbf c_1\ne\mathbf 0$;
-\item $33$ Group~VI gems have strictly anti-parallel solid centroids ($\mathbf c_0\cdot\mathbf c_1<0$), balanced by a \emph{denser} inner core with rational excess density $\Delta\rho_1/\rho_0\in[5/4,\,191/6]$ (\Cref{tab:two-density} and \Cref{tab:all33}), led by Gem \#673 at $\Delta\rho_1/\rho_0=5/4$ (\Cref{fig:hero-squares}(e), \Cref{fig:nested-diamonds}(a));
-\item $17$ Group~VI gems have parallel solid centroids pointing in the \emph{same} direction ($\mathbf c_0\cdot\mathbf c_1>0$), because volumetric simplex weighting pulls $\mathbf c_0$ onto the same side of $O$ as $\mathbf c_1$ despite the opposite vertex centroids of \eqref{eq:opposition}. Balancing these gems requires $\Delta\rho_1<0$, which is physically realizable with non-negative core density $\rho_1\in[0,\rho_0)$ for two gems: square \#123 ($\Delta\rho_1/\rho_0=-3/17$, $\rho_1/\rho_0=14/17$, a lighter core) and square \#54 ($\Delta\rho_1/\rho_0=-57/58$, $\rho_1/\rho_0=1/58$, a nearly hollow core cavity, \Cref{fig:nested-diamonds}(b)). Square \#54 differs from denser-core square \#45 ($\Delta\rho_1/\rho_0=+85/61$) by a single border swap $(8,9)\leftrightarrow(15,2)$ (\Cref{fig:hero-squares}(c)), which inflates the $+y$ hull flares enough to pull $\mathbf c_0$ across $O$ from $(0,-85/856,0)$ to $(0,+19/324,0)$.
-\end{itemize}
-\item \emph{(Non-negative inner-core point weighting.)} Placing non-negative point masses $m_q\ge0$ at the inner points $q\in P_S^{(1)}$ balances the uniform solid $\mathcal G_0(S)$ at $O$ if and only if $-\mathbf c_0(S)\in\cone(P_S^{(1)})$, which holds for $477$ of the $829$ unbalanced gems ($528/880=60.0\%$ including the $51$ naturally balanced solids).
-\item \emph{(Universal bead-inlaid solid.)} For \emph{every} semi-magic square $S$ of any order $n$, partitioning $\mathcal G_0(S)$ into $N$ cells of equal mass $M/N$ with centroids at $\mathbf p_{ij}$ (or embedding $N$ identical dense beads at $\mathbf p_{ij}$ in a lightweight shell) yields $\mathbf c_{\mathrm{comp}}=\mathbf 0$ and restores the axisymmetric inertia tensor of \Cref{thm:rotor}.
-\end{enumerate}
+Across the $511$ order-four gems with $\dim\mathcal G_1(S)=3$, $207$ gems have $\mathbf c_1=\mathbf 0$ ($13$ associative gems plus $194$ non-associative gems whose four inner points form a zero-sum tetrahedron) and $254$ gems outside Group~VI have non-collinear solid centroids $\mathbf c_0\times\mathbf c_1\ne\mathbf 0$. Among the remaining $50$ gems (all in Dudeney's Group~VI), $33$ have strictly anti-parallel solid centroids ($\mathbf c_0\cdot\mathbf c_1<0$), balanced by a denser inner core with rational excess density $\Delta\rho_1/\rho_0\in[5/4,\,191/6]$ (\Cref{tab:two-density} and \Cref{tab:all33}), led by Gem \#673 at $\Delta\rho_1/\rho_0=5/4$ (\Cref{fig:hero-squares}(e), \Cref{fig:nested-diamonds}(a)); the other $17$ have parallel solid centroids pointing in the same direction ($\mathbf c_0\cdot\mathbf c_1>0$), because volumetric simplex weighting pulls $\mathbf c_0$ onto the same side of $O$ as $\mathbf c_1$ despite the opposite vertex centroids of \eqref{eq:opposition}, and two of these $17$ gems balance with non-negative core density $\rho_1\in[0,\rho_0)$: square \#123 ($\Delta\rho_1/\rho_0=-3/17$, $\rho_1/\rho_0=14/17$, a lighter core) and square \#54 ($\Delta\rho_1/\rho_0=-57/58$, $\rho_1/\rho_0=1/58$, a nearly hollow core cavity, \Cref{fig:nested-diamonds}(b)), which differs from denser-core square \#45 ($\Delta\rho_1/\rho_0=+85/61$) by the single border swap $(8,9)\leftrightarrow(15,2)$ (\Cref{fig:hero-squares}(c)).
+
+More generally, placing non-negative point masses $m_q\ge0$ at the inner points $q\in P_S^{(1)}$ balances the uniform solid $\mathcal G_0(S)$ at $O$ if and only if $-\mathbf c_0(S)\in\cone(P_S^{(1)})$, which holds for $477$ of the $829$ unbalanced gems ($528/880=60.0\%$ including the $51$ naturally balanced solids), while partitioning $\mathcal G_0(S)$ into $N$ cells of equal mass $M/N$ with centroids at $\mathbf p_{ij}$ (or embedding $N$ identical dense beads at $\mathbf p_{ij}$ in a lightweight shell) yields $\mathbf c_{\mathrm{comp}}=\mathbf 0$ and restores the axisymmetric inertia tensor of \Cref{thm:rotor} for every semi-magic square of any order $n$.
 \end{theorem}
 
 \begin{proof}
-Part~(1) follows from setting $\rho_0\vol(\mathcal G_0)\mathbf c_0+\Delta\rho_1\vol(\mathcal G_1)\mathbf c_1=\mathbf 0$ and evaluating the exact rational simplicial moments (\Cref{sec:appendix}) across all $511$ gems with $\dim\mathcal G_1(S)=3$. Part~(2) is certified by linear programming for $-\mathbf c_0\in\cone(P_S^{(1)})$, and Part~(3) follows from $\sum_{i,j}\mathbf p_{ij}=\mathbf 0$ and \Cref{thm:rotor}.
+Setting $\rho_0\vol(\mathcal G_0)\mathbf c_0+\Delta\rho_1\vol(\mathcal G_1)\mathbf c_1=\mathbf 0$ and evaluating the exact rational simplicial moments (\Cref{sec:appendix}) across all $511$ gems with $\dim\mathcal G_1(S)=3$ yields \eqref{eq:density-ratio} and the four-class partition. Existence of non-negative inner point masses $m_q\ge0$ is equivalent to $-\mathbf c_0\in\cone(P_S^{(1)})$ and certified by linear programming over the $829$ unbalanced gems, while the bead-inlaid identity follows directly from $\sum_{i,j}\mathbf p_{ij}=\mathbf 0$ and \Cref{thm:rotor}.
 \end{proof}
 
 \begin{table}[htbp]
 \centering
-\caption{The eight order-four Magic Gems with the smallest balancing excess density ratios $\Delta\rho_1/\rho_0\in[5/4,40/19]\approx[1.25,2.11]$ in a two-density ``diamond-in-a-diamond'' solid inclusion $(\mathcal G_0(S),\mathcal G_1(S))$ (\Cref{thm:diamond-balance}(1)), all achievable with standard dual-material 3D printing. All $33$ denser-core gems belong to Dudeney's Group~VI; the full list of $33$ is given in \Cref{tab:all33}.}
+\caption{The eight order-four Magic Gems with the smallest balancing excess density ratios $\Delta\rho_1/\rho_0\in[5/4,40/19]\approx[1.25,2.11]$ in a two-density ``diamond-in-a-diamond'' solid inclusion $(\mathcal G_0(S),\mathcal G_1(S))$ (\Cref{thm:diamond-balance}), all achievable with standard dual-material 3D printing. All $33$ denser-core gems belong to Dudeney's Group~VI; the full list of $33$ is given in \Cref{tab:all33}.}
 \label{tab:two-density}
 \small
 \setlength{\tabcolsep}{4.5pt}
@@ -139,15 +118,13 @@ Part~(1) follows from setting $\rho_0\vol(\mathcal G_0)\mathbf c_0+\Delta\rho_1\
 \subsection{Overcoming the Density Barrier: Complete \texorpdfstring{$K_N$}{K\_N} Networks, Nested Wireframes, and Papercraft Shells}
 \label{subsec:wireframes-nets}
 
-While the eight gems in \Cref{tab:two-density} have modest excess density ratios $\Delta\rho_1/\rho_0\in[5/4,40/19]$ that print directly on a dual-extruder 3D printer (e.g.\ standard PLA around a tungsten- or bronze-filled PLA core), the remaining $25$ denser-core gems in \Cref{tab:all33} have tiny core volumes $\vol(\mathcal G_1)$ requiring $\Delta\rho_1/\rho_0\in[47/12,191/6]$, and $194$ gems have a $4$-vertex tetrahedral core whose solid centroid $\mathbf c_{\mathrm{solid}}(\mathcal G_1)=\frac14\sum\mathbf p_q=\mathbf 0$ provides no lever arm at all.
+While the eight gems in \Cref{tab:two-density} have modest excess density ratios $\Delta\rho_1/\rho_0\in[5/4,40/19]$ that print directly on a dual-extruder 3D printer (such as standard PLA around a tungsten- or bronze-filled PLA core), the remaining $25$ denser-core gems in \Cref{tab:all33} have small core volumes $\vol(\mathcal G_1)$ requiring $\Delta\rho_1/\rho_0\in[47/12,191/6]$, and $194$ gems have a four-vertex tetrahedral core whose solid centroid $\mathbf c_{\mathrm{solid}}(\mathcal G_1)=\frac14\sum\mathbf p_q=\mathbf 0$ provides no lever arm at all.
 
-Replacing solid volume with the skeletal and thin-shell architectures of \texttt{magicGemWeb} \cite{mathewson2025magicgemweb} (\Cref{fig:wireframes-nets}) overcomes both barriers: (i)~connecting all $\binom{N}{2}$ pairs of points as a complete strut network $K_N\bigl(P_S(\lambda)\bigr)$ (\texttt{magicGem\_v2.stl}, \Cref{fig:wireframes-nets}(b)) restores equal participation of all $N$ vertices; (ii)~building a nested ball-and-rod wireframe $G(\mathcal G_0)\cup G(\mathcal G_1)$ (\texttt{magicGem\_v1.stl}, \Cref{fig:wireframes-nets}(a)) replaces volumetric scaling with quadratic rod-diameter scaling ($\rho_{\mathrm{lin}}\propto d^2$) and gives $4$-vertex tetrahedral cores a non-zero edge-length centroid $\mathbf c_{\mathrm{wire}}(\mathcal G_1)\ne\mathbf 0$; and (iii)~unfolding $\partial\mathcal G_\lambda(S)$ along a dual spanning tree produces a flat printable papercraft net (\Cref{fig:wireframes-nets}(c)).
+Replacing solid volume with the skeletal and thin-shell architectures of \texttt{magicGemWeb} \cite{mathewson2025magicgemweb} (\Cref{fig:wireframes-nets}) overcomes both barriers. Connecting all $\binom{N}{2}$ pairs of points as a complete strut network $K_N\bigl(P_S(\lambda)\bigr)$ (\texttt{magicGem\_v2.stl}, \Cref{fig:wireframes-nets}(b)) restores equal participation of all $N$ vertices; building a nested ball-and-rod wireframe $G(\mathcal G_0)\cup G(\mathcal G_1)$ (\texttt{magicGem\_v1.stl}, \Cref{fig:wireframes-nets}(a)) replaces volumetric scaling with quadratic rod-diameter scaling ($\rho_{\mathrm{lin}}\propto d^2$) and gives four-vertex tetrahedral cores a non-zero edge-length centroid $\mathbf c_{\mathrm{wire}}(\mathcal G_1)\ne\mathbf 0$; and unfolding $\partial\mathcal G_\lambda(S)$ along a dual spanning tree produces a flat printable papercraft net (\Cref{fig:wireframes-nets}(c)).
 
 \begin{theorem}[Complete $K_N$ strut networks and two-gauge nested wireframes]
 \label{thm:complete-network}
-Let $S$ be an arrangement of $\{1,\dots,N\}$, $N=n^2$ ($n\ge2$), with $\sum_{u=1}^N\mathbf p_u(\lambda)=\mathbf 0$ and empirical covariance matrix $\Sigma(\lambda)=\frac1N\sum_{u=1}^N\mathbf p_u(\lambda)\mathbf p_u(\lambda)^{\top}$. In the slender-rod limit $d/L_{uv}\to 0^+$:
-\begin{enumerate}
-\item \emph{(Equal-mass-per-edge complete network $K_N$.)} If each of the $\binom{N}{2}$ rods connecting $\mathbf p_u(\lambda)$ and $\mathbf p_v(\lambda)$ ($1\le u<v\le N$) carries equal mass $m_{\mathrm{edge}}=M_{\mathrm{rods}}/\binom{N}{2}$ (with optional equal node masses $m_{\mathrm{node}}=M_{\mathrm{nodes}}/N$), then $(N-1)$-regularity of $K_N$ places the centre of mass at $O$ for \emph{every} arrangement $S$:
+Let $S$ be an arrangement of $\{1,\dots,N\}$, $N=n^2$ ($n\ge2$), with $\sum_{u=1}^N\mathbf p_u(\lambda)=\mathbf 0$ and empirical covariance matrix $\Sigma(\lambda)=\frac1N\sum_{u=1}^N\mathbf p_u(\lambda)\mathbf p_u(\lambda)^{\top}$ in the slender-rod limit $d/L_{uv}\to 0^+$. If each of the $\binom{N}{2}$ rods connecting $\mathbf p_u(\lambda)$ and $\mathbf p_v(\lambda)$ ($1\le u<v\le N$) carries equal mass $m_{\mathrm{edge}}=M_{\mathrm{rods}}/\binom{N}{2}$ (with optional equal node masses $m_{\mathrm{node}}=M_{\mathrm{nodes}}/N$), then $(N-1)$-regularity of $K_N$ places the centre of mass at $O$ for every arrangement $S$:
 \begin{equation}
 \label{eq:kN-com}
 \mathbf c\bigl(K_N(\lambda)\bigr) = \frac{1}{\binom{N}{2}}\sum_{1\le u<v\le N}\frac{\mathbf p_u(\lambda)+\mathbf p_v(\lambda)}{2} = \frac{1}{N}\sum_{u=1}^N\mathbf p_u(\lambda) = \mathbf 0,
@@ -157,36 +134,31 @@ and the continuous second-moment covariance matrix of the $\binom{N}{2}$ rods is
 \label{eq:kN-cov}
 \Sigma_{\mathrm{rods}}^{(=\text{mass})}\bigl(K_N(\lambda)\bigr)
 = \frac{2N-3}{3(N-1)}\,\Sigma(\lambda)
-\qquad\Bigl(=\frac{5}{8}\,\Sigma(\lambda)\text{ at }n=3,\quad \frac{29}{45}\,\Sigma(\lambda)\text{ at }n=4\Bigr).
+\qquad\Bigl(=\frac{5}{8}\,\Sigma(\lambda)\text{ at }n=3,\quad \frac{29}{45}\,\Sigma(\lambda)\text{ at }n=4\Bigr),
 \end{equation}
-Consequently, for every semi-magic square $S$, the equal-mass complete network $K_N\bigl(P_S(\lambda)\bigr)$ shares the exact same axisymmetric inertia ratio $I_\perp(\lambda)/I_{zz}=\frac12\bigl(1+\lambda^2(n^2+1)\bigr)$ and spherical-top scale $\lambda_{\mathrm{iso}}=(n^2+1)^{-1/2}$ as the discrete point cloud in \Cref{thm:rotor}.
-\item \emph{(Uniform-diameter strut networks $\rho_{\mathrm{lin}}=\mathrm{const}$.)} When a subgraph $G=(V_G,E_G)$ is printed with uniform rod diameter $d$, each rod has mass proportional to its length $L_{uv}(\lambda)=\|\mathbf p_u(\lambda)-\mathbf p_v(\lambda)\|_2$. Across all $880$ order-four magic squares (\Cref{fig:wireframes-nets}(d)), both $K_{16}$ and the outer wireframe $G(\mathcal G_0)$ have $\mathbf c_{\mathrm{len}}=\mathbf 0$ if and only if $S$ is one of the $48$ associative squares, but passing from $G(\mathcal G_0)$ to the $120$-rod complete network $K_{16}$ reduces mean centroid drift $\|\mathbf c_{\mathrm{len}}\|_2$ by $2.7\times$ at $\lambda=1$ (from $0.194$ to $0.072$) and by $3.6\times$ at $\lambda=0.20$ (from $0.088$ to $0.025$).
-\item \emph{(Single-material balance of nested wireframes $G(\mathcal G_0)\cup G(\mathcal G_1)$ via rod diameter tuning.)} For the $848$ order-four gems with $\dim\mathcal G_1(S)\ge1$, printing the outer edges $E(\mathcal G_0)$ with rod diameter $d_0$ and the disjoint inner core edges $E(\mathcal G_1)$ with rod diameter $d_1$ restores $\mathbf c_{\mathrm{wire}}(\mathcal G_0\cup\mathcal G_1)=\mathbf 0$ whenever $\mathbf c_{\mathrm{wire}}(\mathcal G_0)$ and $\mathbf c_{\mathrm{wire}}(\mathcal G_1)$ are strictly anti-parallel, at the unique rod diameter ratio
+so that for every semi-magic square $S$, the equal-mass complete network $K_N\bigl(P_S(\lambda)\bigr)$ shares the exact axisymmetric inertia ratio $I_\perp(\lambda)/I_{zz}=\frac12\bigl(1+\lambda^2(n^2+1)\bigr)$ and spherical-top scale $\lambda_{\mathrm{iso}}=(n^2+1)^{-1/2}$ of \Cref{thm:rotor}.
+
+When a subgraph $G=(V_G,E_G)$ is instead printed with uniform rod diameter $d$ so that each rod has mass proportional to its length $L_{uv}(\lambda)=\|\mathbf p_u(\lambda)-\mathbf p_v(\lambda)\|_2$, both $K_{16}$ and the outer wireframe $G(\mathcal G_0)$ have $\mathbf c_{\mathrm{len}}=\mathbf 0$ if and only if $S$ is one of the $48$ associative squares, while passing from $G(\mathcal G_0)$ to the $120$-rod complete network $K_{16}$ reduces mean centroid drift $\|\mathbf c_{\mathrm{len}}\|_2$ across $\mathcal M_4$ by $2.7\times$ at $\lambda=1$ (from $0.194$ to $0.072$) and by $3.6\times$ at $\lambda=0.20$ (from $0.088$ to $0.025$; \Cref{fig:wireframes-nets}(d)). Furthermore, for the $848$ order-four gems with $\dim\mathcal G_1(S)\ge1$, printing the outer edges $E(\mathcal G_0)$ with rod diameter $d_0$ and the disjoint inner core edges $E(\mathcal G_1)$ with rod diameter $d_1$ restores $\mathbf c_{\mathrm{wire}}(\mathcal G_0\cup\mathcal G_1)=\mathbf 0$ whenever $\mathbf c_{\mathrm{wire}}(\mathcal G_0)$ and $\mathbf c_{\mathrm{wire}}(\mathcal G_1)$ are strictly anti-parallel, at the unique rod diameter ratio
 \begin{equation}
 \label{eq:rod-diam-ratio}
 \frac{d_1}{d_0} = \sqrt{\frac{\rho_{\mathrm{lin},1}}{\rho_{\mathrm{lin},0}}}
-= \sqrt{-\frac{L\bigl(G(\mathcal G_0)\bigr)\,\bigl(\mathbf c_{\mathrm{wire}}(\mathcal G_0)\cdot\mathbf c_{\mathrm{wire}}(\mathcal G_1)\bigr)}{L\bigl(G(\mathcal G_1)\bigr)\,\|\mathbf c_{\mathrm{wire}}(\mathcal G_1)\|_2^2}}.
+= \sqrt{-\frac{L\bigl(G(\mathcal G_0)\bigr)\,\bigl(\mathbf c_{\mathrm{wire}}(\mathcal G_0)\cdot\mathbf c_{\mathrm{wire}}(\mathcal G_1)\bigr)}{L\bigl(G(\mathcal G_1)\bigr)\,\|\mathbf c_{\mathrm{wire}}(\mathcal G_1)\|_2^2}},
 \end{equation}
-This balances $158$ Group~VI gems at $\lambda=1$ (e.g.\ Gem \#673 at $d_1/d_0=0.793$ and Gem \#45 at $d_1/d_0=0.795$) and $164$ Group~VI gems at $\lambda=0.20$.
-\end{enumerate}
+balancing $158$ Group~VI gems at $\lambda=1$ (such as Gem \#673 at $d_1/d_0=0.793$ and Gem \#45 at $d_1/d_0=0.795$) and $164$ Group~VI gems at $\lambda=0.20$.
 \end{theorem}
 
 \begin{proof}
-(1) Integrating $\mathbf x(t)=(1-t)\mathbf p_u+t\mathbf p_v$ over $t\in[0,1]$ gives midpoint $\frac12(\mathbf p_u+\mathbf p_v)$ and second moment $\frac13(\mathbf p_u\mathbf p_u^{\top}+\mathbf p_v\mathbf p_v^{\top})+\frac16(\mathbf p_u\mathbf p_v^{\top}+\mathbf p_v\mathbf p_u^{\top})$. Since each vertex belongs to $N-1$ edges of $K_N$ and $\sum_{u<v}(\mathbf p_u\mathbf p_v^{\top}+\mathbf p_v\mathbf p_u^{\top})=-N\Sigma(\lambda)$, averaging over $\binom{N}{2}$ edges yields \eqref{eq:kN-com}--\eqref{eq:kN-cov}. Parts~(2)--(3) follow by exact evaluation across all $880$ squares (\Cref{sec:appendix}).
+Integrating $\mathbf x(t)=(1-t)\mathbf p_u+t\mathbf p_v$ over $t\in[0,1]$ gives midpoint $\frac12(\mathbf p_u+\mathbf p_v)$ and second moment $\frac13(\mathbf p_u\mathbf p_u^{\top}+\mathbf p_v\mathbf p_v^{\top})+\frac16(\mathbf p_u\mathbf p_v^{\top}+\mathbf p_v\mathbf p_u^{\top})$. Since each vertex belongs to $N-1$ edges of $K_N$ and $\sum_{u<v}(\mathbf p_u\mathbf p_v^{\top}+\mathbf p_v\mathbf p_u^{\top})=-N\Sigma(\lambda)$, averaging over $\binom{N}{2}$ edges yields \eqref{eq:kN-com}--\eqref{eq:kN-cov}. Exact evaluation of the edge lengths and \eqref{eq:rod-diam-ratio} across all $880$ squares establishes the length-weighted and nested wireframe censuses (\Cref{sec:appendix}).
 \end{proof}
 
 \begin{proposition}[Papercraft cutout nets, glue-tab invariant, and nested thin-shell balance]
 \label{prop:papercraft-net}
-Let $\mathcal G_\lambda(S)$ be any three-dimensional Magic Gem with $f$-vector $(f_0,f_1,f_2)$.
-\begin{enumerate}
-\item \emph{(Topological glue-tab invariant $N_{\mathrm{tabs}}=f_0-1$ and non-overlapping nets.)} Unfolding $\partial\mathcal G_\lambda(S)$ into a connected planar net along any spanning tree $T^*$ of the dual facet graph $G^*(\mathcal G)$ \cite{durer1525underweysung,shephard1975convex,demaine2007geometric,ghomi2014durer} partitions the $f_1$ edges into $f_2-1$ interior fold creases and $N_{\mathrm{tabs}}=f_1-(f_2-1)$ cut edges joined by trapezoidal glue tabs (paired by labels \texttt{a}--\texttt{k} in \Cref{fig:wireframes-nets}(c)). Because $\partial\mathcal G_\lambda(S)\cong S^2$, the cut edges $E\setminus E(T^*)$ form a spanning tree $T$ of the primal $1$-skeleton $G(\mathcal G_\lambda)$ on the $f_0$ hull vertices, so the number of glue tabs depends \emph{solely on the hull vertex count $f_0$}:
+Let $\mathcal G_\lambda(S)$ be any three-dimensional Magic Gem with $f$-vector $(f_0,f_1,f_2)$. Unfolding $\partial\mathcal G_\lambda(S)$ into a connected planar net along any spanning tree $T^*$ of the dual facet graph $G^*(\mathcal G)$ \cite{durer1525underweysung,shephard1975convex,demaine2007geometric,ghomi2014durer} partitions the $f_1$ edges into $f_2-1$ interior fold creases and $N_{\mathrm{tabs}}=f_1-(f_2-1)$ cut edges joined by trapezoidal glue tabs (paired by labels \texttt{a}--\texttt{k} in \Cref{fig:wireframes-nets}(c)). Because $\partial\mathcal G_\lambda(S)\cong S^2$, the cut edges $E\setminus E(T^*)$ form a spanning tree $T$ of the primal $1$-skeleton $G(\mathcal G_\lambda)$ on the $f_0$ hull vertices, so the number of glue tabs depends solely on the hull vertex count $f_0$:
 \begin{equation}
 \label{eq:glue-tabs}
 N_{\mathrm{tabs}} = f_1 - (f_2 - 1) = |E(T)| = f_0 - 1,
 \end{equation}
-taking every integer value in $\{7,\dots,15\}$ across $\mathcal M_4$ ($11$ tabs for D\"urer's \#175). Under the deterministic breadth-first dual spanning tree $T^*$ rooted at the largest-area facet $F_0$ ($\bigstar F_0$ in \Cref{fig:wireframes-nets}(c)), \emph{all $880$ order-four Magic Gems ($100\%$) unfold into strictly non-overlapping 2D planar nets} at both $\lambda=1$ and $\lambda=0.20$.
-\item \emph{(Hollow thin-shell balance.)} A uniform boundary shell $\partial\mathcal G_\lambda(S)$ of areal density $\sigma_0>0$ has $\mathbf c_{\mathrm{shell}}(\mathcal G_0)=\mathbf 0$ on the $48$ associative squares, and enclosing a nested inner shell $\partial\mathcal G_1(S)$ ($\dim\mathcal G_1=3$) of areal density $\sigma_1$ restores $\mathbf c_{\mathrm{shell}}(\partial\mathcal G_0\cup\partial\mathcal G_1)=\mathbf 0$ for $80$ Group~VI gems at $\lambda=1$ ($87$ at $\lambda=0.20$).
-\end{enumerate}
+taking every integer value in $\{7,\dots,15\}$ across $\mathcal M_4$ ($11$ tabs for D\"urer's \#175). Under the deterministic breadth-first dual spanning tree $T^*$ rooted at the largest-area facet $F_0$ ($\bigstar F_0$ in \Cref{fig:wireframes-nets}(c)), all $880$ order-four Magic Gems ($100\%$) unfold into strictly non-overlapping 2D planar nets at both $\lambda=1$ and $\lambda=0.20$. Moreover, a uniform boundary shell $\partial\mathcal G_\lambda(S)$ of areal density $\sigma_0>0$ has $\mathbf c_{\mathrm{shell}}(\mathcal G_0)=\mathbf 0$ on the $48$ associative squares, and enclosing a nested inner shell $\partial\mathcal G_1(S)$ ($\dim\mathcal G_1=3$) of areal density $\sigma_1$ restores $\mathbf c_{\mathrm{shell}}(\partial\mathcal G_0\cup\partial\mathcal G_1)=\mathbf 0$ for $80$ Group~VI gems at $\lambda=1$ ($87$ at $\lambda=0.20$).
 \end{proposition}
 
 \begin{proof}
@@ -201,8 +173,8 @@ In a physical 3D print of finite rod diameter $d>0$, each cylindrical strut of l
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{figures/fig_wireframes_and_nets.pdf}
-\caption{Wireframes, complete $K_{16}$ strut networks, and unfolded papercraft cutout nets of Magic Gems \cite{mathewson2025magicgemweb}. (a)~Nested ball-and-rod wireframe $G(\mathcal G_0)\cup G(\mathcal G_1)$ of Gem \#673 ($17$ outer blue rods + $17$ inner orange rods), where tuning the inner-to-outer rod diameter ratio to $d_1/d_0=0.793$ at $\lambda=1$ ($0.493$ at $\lambda=0.20$) restores $\mathbf c_{\mathrm{wire}}=\mathbf 0$. (b)~Fully interconnected complete network $K_{16}$ of D\"urer's Gem \#175 (\texttt{magicGem\_v2.stl}) with all $\binom{16}{2}=120$ rods ($24$ outer hull edges in green + $96$ internal cross-struts in slate) and $16$ node cubes; for equal-mass rods, $\mathbf c(K_{16})=\mathbf 0$ and $\Sigma_{\mathrm{rods}}=\frac{29}{45}\Sigma(\lambda)$ for all $880$ squares (\Cref{thm:complete-network}(1)). (c)~Exact 2D unfolded papercraft cutout net of D\"urer's Gem \#175 ($\lambda=0.20$, $f=(12,24,14)$) rooted at $\bigstar F_0$, with $f_2-1=13$ dashed fold lines (mean dihedral fold angle $\overline{\theta}_{\mathrm{fold}}=141.2^\circ\in[117^\circ,165^\circ]$), $2f_0-2=22$ solid cut perimeter segments, $N_{\mathrm{tabs}}=f_0-1=11$ grey trapezoidal glue tabs paired with their mating cut edges by lowercase labels \texttt{a}--\texttt{k} (\Cref{prop:papercraft-net}(1)), and magic entries $s_{ij}$ at the unfolded vertices. (d)~Comparison of mean centroid drift $\|\mathbf c(S)\|_2$ across all $880$ order-four magic squares for the five physical realizations at $\lambda=1.0$ and $\lambda=0.20$.}
+\caption{Wireframes, complete $K_{16}$ strut networks, and unfolded papercraft cutout nets of Magic Gems \cite{mathewson2025magicgemweb}. (a)~Nested ball-and-rod wireframe $G(\mathcal G_0)\cup G(\mathcal G_1)$ of Gem \#673 ($17$ outer blue rods + $17$ inner orange rods), where tuning the inner-to-outer rod diameter ratio to $d_1/d_0=0.793$ at $\lambda=1$ ($0.493$ at $\lambda=0.20$) restores $\mathbf c_{\mathrm{wire}}=\mathbf 0$. (b)~Fully interconnected complete network $K_{16}$ of D\"urer's Gem \#175 (\texttt{magicGem\_v2.stl}) with all $\binom{16}{2}=120$ rods ($24$ outer hull edges in green + $96$ internal cross-struts in slate) and $16$ node cubes; for equal-mass rods, $\mathbf c(K_{16})=\mathbf 0$ and $\Sigma_{\mathrm{rods}}=\frac{29}{45}\Sigma(\lambda)$ for all $880$ squares (\Cref{thm:complete-network}). (c)~Exact 2D unfolded papercraft cutout net of D\"urer's Gem \#175 ($\lambda=0.20$, $f=(12,24,14)$) rooted at $\bigstar F_0$, with $f_2-1=13$ dashed fold lines (mean dihedral fold angle $\overline{\theta}_{\mathrm{fold}}=141.2^\circ\in[117^\circ,165^\circ]$), $2f_0-2=22$ solid cut perimeter segments, $N_{\mathrm{tabs}}=f_0-1=11$ grey trapezoidal glue tabs paired with their mating cut edges by lowercase labels \texttt{a}--\texttt{k} (\Cref{prop:papercraft-net}), and magic entries $s_{ij}$ at the unfolded vertices. (d)~Comparison of mean centroid drift $\|\mathbf c(S)\|_2$ across all $880$ order-four magic squares for the five physical realizations at $\lambda=1.0$ and $\lambda=0.20$.}
 \label{fig:wireframes-nets}
 \end{figure}
 
-Having restored internal balance to individual polyhedra, we now remove the central pivot $O$ in Test~4 and place Magic Gems directly on a flat horizontal table and into multi-block vertical stacks under gravity.
+Having restored internal balance to individual polyhedra, we now remove the central pivot $O$ in \Cref{sec:stacking} and place Magic Gems directly on a flat horizontal table and into multi-block vertical stacks under gravity.
