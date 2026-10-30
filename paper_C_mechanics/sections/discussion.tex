@@ -1,41 +1,57 @@
-\section{Synthesis of Mechanical Censuses and Open Problems}
+\section{Synthesis: Three Tiers of Balance in Inequality and Open Problems}
 \label{sec:discussion}
 
-Taken together with the polyhedral classification of \cite{mathewson2026gems} and the moment hierarchy of \cite{mathewson2026moments}, the results of Sections~\ref{sec:vectors}--\ref{sec:stacking} show that Magic Gems obey exact mechanical laws across both discrete origin-vector and continuous polyhedral models. \Cref{tab:synthesis} synthesizes the complete order-four censuses across all four physical regimes, contrasting the universal algebraic invariants shared by all $880$ magic squares with the sharp symmetry and Diophantine thresholds that single out specific Dudeney groups and canonical exemplars.
+Stepping back from the individual theorems, Tests~1--4 tell a unified story about how combinatorial \emph{balance in inequality} behaves when lifted from a flat grid of numbers into three-dimensional physical space (\Cref{tab:synthesis}). Across all four physical regimes—radial spokes, spinning rotors, convex polyhedra, and stacked columns—the $880$ order-four magic squares stratify into three distinct mechanical tiers determined by how their symmetries interact with nonlinearity:
+
+\begin{enumerate}
+\item \textbf{Tier~1: Universal Line-Sum Cancellation ($880/880 = 100\%$).} Whenever a physical observable is linear or symmetric-quadratic in the coordinates $(x_j,y_i,z_{ij})$, the row and column constraints neutralize entry inequality across \emph{all} $880$ squares. This universal tier encompasses linear 3D and 2D spoke balance ($\beta=1,\alpha=1$), cubic vertical spoke vanishing ($(\mathbf V_3)_z=0$), existence of positive unit-sphere counterweights ($\mathbf w^*>\mathbf 0$), axisymmetric precession and the $\lambda_{\mathrm{iso}}=1/\sqrt{17}$ spherical-top transition for equal point masses and equal-mass $K_{16}$ strut networks, outer--inner vertex opposition ($V_0\overline{\mathbf p}_{\mathrm{outer}}=-V_1\overline{\mathbf p}_{\mathrm{inner}}$), non-overlapping papercraft nets with $N_{\mathrm{tabs}}=f_0-1$ glue tabs, and mirror-twin facet inversion ($\mathcal G_\lambda(r^2\overline S)=-\mathcal G_\lambda(S)$).
+
+\item \textbf{Tier~2: Axial Dipole Counterbalancing in Dudeney's Group~VI ($304$ squares, $\overline S=hS$ or $vS$).} When a nonlinear geometric operation breaks universal balance, it typically creates a three-component residual imbalance vector $\mathbf c=(c_x,c_y,c_z)\in\R^3$ that a single scalar parameter cannot zero out. In Dudeney's Group~VI, however, the $180^\circ$ proper half-turn symmetry ($C_2\subset SO(3)$) forces two coordinates of every residual vector to vanish identically, locking opposing components onto a \emph{single coordinate axis}. This axial alignment explains why one-parameter restoration occurs throughout Group~VI: the $8$ planar Pell-minimum squares (\#70, $v/u=9/4\approx\sqrt{5}$), the integer power-law spoke roots ($\alpha^*=-1$ on \#45 and $\alpha^*=+3$ on \#286), all $107$ 3D power-law spoke roots $\beta^*\ne1$, the $3$ non-associative balanced solids (\#86, \#739, \#756), all $35$ two-density ``diamond-in-a-diamond'' solids ($33$ denser cores led by \#673 plus the $2$ lighter/hollow-cavity cores \#123 and \#54), all $158$ balanced nested wireframes ($d_1/d_0$), all $80$ balanced nested shells ($\sigma_1/\sigma_0$), and the chiral knight's-move mirror-twin towers (\#763).
+
+\item \textbf{Tier~3: Pointwise Antipodal Cancellation in Dudeney's Group~III ($48$ associative squares, $r^2S=\overline S$).} Finally, when a nonlinear observable requires \emph{unweighted} equilibrium without an opposing parameter—such as equal-weight unit-sphere spokes ($\mathbf V_0=\mathbf 0$), full 3D cubic spoke vanishing ($\mathbf V_3=\mathbf 0$), 3D entry-weighted rotational axisymmetry ($Q_{xy}=0$ and $\mathbf V_3=\mathbf 0$), or uniform-diameter wireframes and hollow shells—balance holds if and only if central inversion $\mathbf p_{-c}(\lambda)=-\mathbf p_c(\lambda)$ cancels opposite cells pairwise, singling out the $48$ associative squares led by D\"urer's \#175.
+\end{enumerate}
 
 \begin{table}[htbp]
 \centering
-\caption{Summary of order-four mechanical censuses across the $880$ magic squares (certified in exact rational arithmetic; see \Cref{sec:appendix}).}
+\caption{Synthesis of the four progressive mechanical tests across the $880$ order-four magic squares, organized by Baseline Equilibrium, Nonlinear Symmetry Breaking, and Dual Restoration (certified in exact rational arithmetic; see \Cref{sec:appendix}).}
 \label{tab:synthesis}
 \scriptsize
 \setlength{\tabcolsep}{3.0pt}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{@{}l c l l@{}}
 \toprule
-Mechanical Property / Regime & $n=4$ Count & Exact Extremal / Universal Law & Canonical Exemplars\\
+Test / Mechanical Regime & $n=4$ Count & Universal Law, Breakdown, or Restoration Threshold & Flagship Exemplars\\
 \midrule
-3D \& 2D linear vectors ($\beta=1,\alpha=1$) & $880/880$ ($100\%$) & $\sum\mathbf p_{ij}(\lambda)=\mathbf 0$, $\mathbf B_{z,r}=\mathbf 0$ identically & All semi-magic\\
-3D cubic vector law ($\beta=3$, $L_{ij}=R_{ij}^3$) & $880/880$ ($100\%$) & $(\mathbf V_3)_z=0$; $\mathbf V_3=\mathbf 0 \iff$ assoc.\ ($48$) & All semi-magic ($z=0$)\\
-3D unit sphere $\sum\hat{\mathbf p}_{ij}(\lambda)=\mathbf 0$ & $48/880$ ($5.5\%$) & $\mathbf 0\;\forall\lambda>0 \iff$ assoc.; $107$ have $\beta^*\ne1$ & \#175 ($\mathbf 0$), \#70 ($\beta^*\approx2.24$)\\
-3D unit-sphere weights $\mathbf w^*>\mathbf 0$ & $880/880$ ($100\%$) & $\sum w_{ij}^*\hat{\mathbf p}_{ij}=\mathbf 0$, $\|\mathbf w^*-\mathbf 1\|_2\in[0.005,1.60]$ & All $880$ squares\\
-Planar unit-vector norm $\|\mathbf B_{\mathrm{unit}}(S)\|_2$ & $0/880$ vanish & $\min=\frac{18\sqrt{10}}{5}-8\sqrt{2}\approx0.07049$ ($v/u=9/4$) & \#70, \#76, \#121, \#188, \#452, \#459, \#490, \#574\\
-Collinear dipoles \& roots $\alpha^*\ne1$ & $408/880$ ($46.4\%$) & $204$ with $\kappa>0$ ($25$ at $\alpha^*=-1$, $25$ at $+3$) & \#45 ($-1$), \#286 ($+3$)\\
-Point-mass rotor $I_\perp(\lambda)/I_{zz}$ & $880/880$ ($100\%$) & $\frac{1+17\lambda^2}{2}$ ($1$ at $\lambda=\frac{1}{\sqrt{17}}$, $9$ at $\lambda=1$) & All semi-magic\\
-Entry-weighted ($m=s$) rotor & $56/880$ ($6.4\%$) & $Q_{xy}=0\implies I_1=I_2=170$ ($48$ in 3D) & $48$ III $+ 4$ IX $+ 4$ X\\
-Naturally balanced solid $\mathbf c_0=\mathbf 0$ & $51/880$ ($5.8\%$) & $48$ associative $+ 3$ non-assoc.\ Group VI & \#86, \#739, \#756\\
-2-density core $(\mathcal G_0,\mathcal G_1)$ & $35/511$ 3D cores & $33$ denser ($8$ with $\Delta\rho_1/\rho_0\le\frac{40}{19}$) $+ 2$ cavity & \#673 ($\frac54$), \#123, \#54\\
-Non-negative inner-core balance & $528/880$ ($60.0\%$) & $51$ natural $+ 477$ with $-\mathbf c_0\in\cone(P_S^{(1)})$ & $528$ magic gems\\
-Complete $K_{16}$ network ($120$ rods) & $880/880$ ($=\text{mass}$) & $\mathbf c=\mathbf 0$, $\Sigma_{\mathrm{rods}}=\frac{29}{45}\Sigma(\lambda)$; len.\ $\overline{\|\mathbf c\|}=0.025$ ($\lambda=0.2$) & All $880$ (\#175)\\
-Nested wireframes $G(\mathcal G_0)\cup G(\mathcal G_1)$ & $206/880$ ($\lambda=1$) & $48$ assoc.\ $+ 158$ Group VI ($164$ at $\lambda=0.20$) via $d_1/d_0$ & \#673 ($d_1/d_0=0.793$)\\
-Papercraft nets \& shells $\partial\mathcal G_0$ & $880/880$ nets & $N_{\mathrm{tabs}}=f_0-1\in[7,15]$; $48+80$ VI shells balance & \#175 ($11$ tabs, $13$ folds)\\
-Resting facet stability & $11{,}044/14{,}824$ & $74.5\%$ stable at $\lambda=0.20$ ($43.0\%$ at $\lambda=1$) & $\max\theta_{\mathrm{tip}}=47.3^\circ$\\
-Mirror-twin vertical towers & $48/880$ ($5.5\%$) & Max footprint $A_{xy}=5$ ($17$ knight's-move) & \#763, \#603\\
+\multicolumn{4}{@{}l}{\textbf{Test~1: 1D Radial Spokes from the Origin (\Cref{sec:vectors})}}\\
+Linear 3D \& 2D spokes ($\beta=1,\alpha=1$) & $880/880$ ($100\%$) & Baseline: $\sum\mathbf p_{ij}(\lambda)=\mathbf 0$, $\mathbf B_{z,r}=\mathbf 0$ identically & All semi-magic\\
+Planar unit spokes ($\alpha=0$, $r_2/r_1=\sqrt{5}$) & $0/880$ vanish & Breakdown: $\min\|\mathbf B_{\mathrm{unit}}\|_2=\frac{18\sqrt{10}}{5}-8\sqrt{2}\approx0.0705$ ($v/u=9/4$) & $8$ in VI (\#70, \#76, \dots)\\
+Planar power-law restoration ($\ell=r^{\alpha^*}$) & $204/880$ ($23.2\%$) & Parallel ring dipoles $\mathbf d_{\mathrm{out}}=\kappa\mathbf d_{\mathrm{in}}$ ($25$ at $\alpha^*=-1$, $25$ at $+3$) & \#45 ($-1$), \#286 ($+3$)\\
+3D unit sphere $\sum\hat{\mathbf p}_{ij}(\lambda)=\mathbf 0$ ($\beta=0$) & $48/880$ ($5.5\%$) & Pointwise antipodal cancellation ($\iff$ Group~III); $107$ VI have $\beta^*\ne1$ & \#175 ($\mathbf 0$), \#70 ($\beta^*\approx2.24$)\\
+3D unit-sphere tip weights $\mathbf w^*>\mathbf 0$ & $880/880$ ($100\%$) & Restoration: $\sum w_{ij}^*\hat{\mathbf p}_{ij}=\mathbf 0$, $\|\mathbf w^*-\mathbf 1\|_2\in[0.005,1.60]$ & All $880$ squares\\
+3D cubic spoke law ($\beta=3$, $L_{ij}=R_{ij}^3$) & $880/880$ ($100\%$) & Universal vertical vanishing $(\mathbf V_3)_z=0$; $\mathbf V_3=\mathbf 0\iff$ Group~III ($48$) & All semi-magic ($z=0$)\\
+\midrule
+\multicolumn{4}{@{}l}{\textbf{Test~2: 3D Rotational Dynamics (\Cref{sec:dynamics})}}\\
+Equal-mass point rotor $I_\perp(\lambda)/I_{zz}$ & $880/880$ ($100\%$) & Baseline: $\frac{1+17\lambda^2}{2}$ (spherical top $1$ at $\lambda=\frac{1}{\sqrt{17}}$, prolate $9$ at $\lambda=1$) & All semi-magic\\
+Entry-weighted ($m_{ij}=s_{ij}$) Dzhanibekov split & $824/880$ flip & Breakdown: $I_{1,2}=170\mp|Q_{xy}|$ ($56$ have $Q_{xy}=0$; $48$ Group~III in 3D) & \#46 ($|Q_{xy}|=60$), \#175 ($0$)\\
+\midrule
+\multicolumn{4}{@{}l}{\textbf{Test~3: 3D Convex Hulls, Skeletons, and Shells (\Cref{sec:nested})}}\\
+Uniform solid hull $\mathcal G_0(S)$ ($\mathbf c_0=\mathbf 0$) & $51/880$ ($5.8\%$) & Breakdown on $829$ gems; $48$ Group~III $+ 3$ Group~VI balance naturally & \#175, \#86, \#739, \#756\\
+Outer--inner vertex opposition & $862/880$ ($V_0<16$) & Restoration law: $V_0\overline{\mathbf p}_{\mathrm{outer}}+V_1\overline{\mathbf p}_{\mathrm{inner}}=\mathbf 0$ ($511$ have 3D core $\mathcal G_1$) & All $V_0<16$ gems\\
+Two-density solid $(\mathcal G_0,\mathcal G_1)$ & $35/511$ 3D cores & Group~VI: $33$ denser ($8$ with $\Delta\rho_1/\rho_0\le\frac{40}{19}$) $+ 2$ lighter/hollow cavity & \#673 ($\frac54$), \#45$\leftrightarrow$\#54\\
+Non-negative inner-core point weights & $528/880$ ($60.0\%$) & $51$ natural $+ 477$ with $-\mathbf c_0\in\cone(P_S^{(1)})$; bead inlay balances $880/880$ & $528$ magic gems\\
+Complete $K_{16}$ strut network ($120$ rods) & $880/880$ ($=\text{mass}$) & $\mathbf c=\mathbf 0$, $\Sigma_{\mathrm{rods}}=\frac{29}{45}\Sigma(\lambda)$; uniform-diam.\ drift cut $3.6\times$ at $\lambda=0.20$ & All $880$ (\#175)\\
+Two-gauge nested wireframe $G(\mathcal G_0)\cup G(\mathcal G_1)$ & $206/880$ ($\lambda=1$) & $48$ Group~III $+ 158$ Group~VI ($164$ at $\lambda=0.20$) via rod ratio $d_1/d_0$ & \#673 ($d_1/d_0=0.793$)\\
+Papercraft nets \& nested shells $\partial\mathcal G_0$ & $880/880$ nets & $100\%$ non-overlapping, $N_{\mathrm{tabs}}=f_0-1\in[7,15]$; $48+80$ VI shells balance & \#175 ($11$ tabs, $13$ folds)\\
+\midrule
+\multicolumn{4}{@{}l}{\textbf{Test~4: Freestanding Gravity and Mirror-Twin Towers (\Cref{sec:stacking})}}\\
+Single-block facet resting stability & $11{,}044/14{,}824$ & Cubic aspect $\lambda=0.20$ raises stability from $43.0\%$ ($\lambda=1$) to $74.5\%$ & $\max\theta_{\mathrm{tip}}=47.3^\circ$\\
+Mirror-twin vertical towers $\mathcal G_\lambda(r^2\overline S)$ & $48/880$ ($5.5\%$) & Central inversion $-\mathcal G_\lambda(S)$ locks slanted facets ($17$ area-$5$ knight's-move) & \#763$\leftrightarrow$\#756, \#603\\
 \bottomrule
 \end{tabular}%
 }
 \end{table}
 
-We close with four open problems suggested by these mechanical findings:
+We close with four open problems raised by these mechanical tests:
 
 \begin{enumerate}
 \item \textbf{Higher-order Diophantine ring minima.} At order $n=5$, the $24$ non-central cells of $A_5$ lie on five concentric rings of radii $r\in\{1,\sqrt{2},2,\sqrt{5},2\sqrt{2}\}$, involving the independent square-free radicals $\sqrt{2}$ and $\sqrt{5}$. Does $\mathbf B_{\mathrm{unit}}(S)=\sum z_{ij}\mathbf u_{ij}$ vanish for any magic square of order $n\ge5$, or what is the asymptotic decay rate of $\min_{S\in\mathcal M_n}\|\mathbf B_{\mathrm{unit}}(S)\|_2$ as $n\to\infty$ via simultaneous Diophantine approximation?

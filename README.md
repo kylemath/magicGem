@@ -24,7 +24,7 @@ is a polyhedral sculpture—the **Magic Gem** of $S$. This repository contains t
 | :--- | :--- | :--- | :--- |
 | **Paper A** | *Magic Gems: Convex Hulls of Lifted Magic Squares* (`paper_A_gems/`, `arXiv:2512.09170`) | [`paperA.pdf`](paperA.pdf) | `python3 paper_A_gems/anc/verify_paper_a.py` |
 | **Paper B** | *Bivariate Polynomial Moments and Prouhet–Tarry–Escott Identities of Semi-Magic Squares* (`paper_B_orthogonality/`) | [`paperB.pdf`](paperB.pdf) | `python3 paper_B_orthogonality/anc/verify_paper_b.py` |
-| **Paper C** | *Mechanics and Balance of Magic Gems: Radial Vector Laws, Symmetric-Top Precession, Nested Core Inclusions, and Mirror-Twin Towers* (`paper_C_mechanics/`) | [`paperC.pdf`](paperC.pdf) | `python3 paper_C_mechanics/anc/verify_paper_c.py` |
+| **Paper C** | *Balance in Inequality: Testing the Physical Equilibrium, Precession, and Structural Stability of Magic Gems* (`paper_C_mechanics/`) | [`paperC.pdf`](paperC.pdf) | `python3 paper_C_mechanics/anc/verify_paper_c.py` |
 
 ---
 

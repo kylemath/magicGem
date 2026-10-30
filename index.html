@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Hidden Mechanics of Magic Gems — An Interactive Visual Essay (Paper C)</title>
+  <title>Balance in Inequality: Testing the Physical Mechanics of Magic Gems — Interactive Visual Essay (Paper C)</title>
   <!-- KaTeX for clean inline & display math -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
@@ -907,32 +907,32 @@
 <header class="distill-header">
   <div class="header-container">
     <div class="trilogy-pill">Magic Gems Trilogy · Companion Paper C · Interactive Visual Essay</div>
-    <h1>The Hidden Mechanics of Magic Gems</h1>
+    <h1>Balance in Inequality: Testing the Mechanics of Magic Gems</h1>
     <p class="subtitle">
-      What happens when you turn a $4\times 4$ magic square into 16 three-dimensional vectors and wrap a crystal hull around them?
-      Explore how Magic Gems pull on the origin, spin in zero gravity without tumbling, balance via nested "diamond-in-a-diamond" cores, and lock with their mirror twins into vertical towers.
+      A $4\times 4$ magic square is built from 16 strictly unequal numbers $\{1,\dots,16\}$ whose row, column, and diagonal sums are equal.
+      We test one central hypothesis across all $880$ magic squares: <em>when does combinatorial line-sum balance survive when a magic square is lifted into a 3D sculpture—and when nonlinear geometry breaks that balance, how does an opposing inequality restore it?</em>
     </p>
 
     <div class="hero-questions">
       <a class="hq-card" href="#sec-rings">
-        <span class="hq-num">Question 1 · Vectors &amp; Rings</span>
-        <span class="hq-title">Why can't 16 unit arrows on a $4\times 4$ board ever cancel out?</span>
-        <span class="hq-desc">The middle ring sits $\sqrt{5}$ times farther out than the inner ring—creating an irrational barrier solved to $0.0705$ by Pell's equation $9/4 \approx \sqrt{5}$.</span>
+        <span class="hq-num">Test 1 · 1D Radial Spokes</span>
+        <span class="hq-title">Why does equalizing spoke lengths break balance, and how does duality restore it?</span>
+        <span class="hq-desc">Natural vectors balance at $O$, but unit planar spokes fail on every square because $r_2/r_1=\sqrt{5}$ (Pell bound $9/4\approx\sqrt{5}$)—restored by positive sphere weights $\mathbf{w}^*>0$ or power laws $r^{\alpha^*}$.</span>
       </a>
       <a class="hq-card" href="#sec-precession">
-        <span class="hq-num">Question 2 · Zero-G Spin</span>
-        <span class="hq-title">Why do tennis rackets flip $180^\circ$ in space, while Magic Gems spin smoothly?</span>
-        <span class="hq-desc">Equal masses make every Magic Gem an axisymmetric top—and a zero-wobble spherical top at $\lambda = 1/\sqrt{17}$—while entry masses trigger dramatic flips.</span>
+        <span class="hq-num">Test 2 · 3D Rotational Spin</span>
+        <span class="hq-title">Why do equal masses precess smoothly while unequal entry masses flip $180^\circ$?</span>
+        <span class="hq-desc">Equal masses make every Magic Gem an axisymmetric top—and a spherical top at $\lambda = 1/\sqrt{17}$—whereas entry masses expose $Q_{xy}$ and trigger Dzhanibekov flips on $824$ squares.</span>
       </a>
       <a class="hq-card" href="#sec-nested">
-        <span class="hq-num">Question 3 · Nested Cores</span>
-        <span class="hq-title">How do you balance a lopsided 3D-printed gem without changing its shape?</span>
-        <span class="hq-desc">Peeling the outer hull reveals an inner "diamond inside a diamond" that pulls in the opposite direction—restoring balance when printed at a denser (or hollow) ratio.</span>
+        <span class="hq-num">Test 3 · 3D Convex Hulls &amp; Cores</span>
+        <span class="hq-title">Why do $829$ solid hulls tilt, and how does the inner core counterweight them?</span>
+        <span class="hq-desc">Outer vertices and inner core points pull in opposite directions ($V_0\overline{\mathbf{p}}_{\mathrm{outer}}=-V_1\overline{\mathbf{p}}_{\mathrm{inner}}$), restoring balance via two-density cores, two-gauge wireframes, and $K_{16}$ strut networks.</span>
       </a>
       <a class="hq-card" href="#sec-stacking">
-        <span class="hq-num">Question 4 · Mirror Towers</span>
-        <span class="hq-title">How do jagged crystals stack into a straight vertical column?</span>
-        <span class="hq-desc">Turning a magic square upside-down and taking $17-S$ creates its 3D central inversion, locking knight's-move facets with $100\%$ overlap.</span>
+        <span class="hq-num">Test 4 · Gravity &amp; Mirror Towers</span>
+        <span class="hq-title">Why do identical blocks wedge apart, and how do mirror twins lock straight?</span>
+        <span class="hq-desc">Inverting a gem into its mirror twin $\mathcal{G}_\lambda(r^2\overline{S})=-\mathcal{G}_\lambda(S)$ cancels opposing facet slopes, locking chiral knight's-move blocks (#763) into a vertical tower.</span>
       </a>
     </div>
 
@@ -964,15 +964,15 @@
 <div class="distill-layout">
   <!-- Sticky Left Navigation -->
   <nav class="d-toc">
-    <div class="toc-title">Interactive Guide</div>
+    <div class="toc-title">Hypothesis &amp; Tests</div>
     <ul>
-      <li><a href="#sec-intro">1. Lifting a Magic Square into 3D <span class="sim-badge">PLAY</span></a></li>
-      <li><a href="#sec-rings">2. Tug-of-War from $O$ &amp; the $\sqrt{5}$ Barrier <span class="sim-badge">SIM 1</span></a></li>
-      <li><a href="#sec-precession">3. Zero-G Spin: Spherical Tops vs. Flips <span class="sim-badge">SIM 2</span></a></li>
-      <li><a href="#sec-nested">4. "Diamond-in-a-Diamond" Balance <span class="sim-badge">SIM 3</span></a></li>
-      <li><a href="#sec-fab">5. Build It: Rods, Struts &amp; Paper <span class="sim-badge">SIM 4</span></a></li>
-      <li><a href="#sec-stacking">6. Mirror-Twin Vertical Towers <span class="sim-badge">SIM 5</span></a></li>
-      <li><a href="#sec-open">7. Visual Census of All 880 Gems</a></li>
+      <li><a href="#sec-intro">1. Hypothesis: Balance in Inequality <span class="sim-badge">PLAY</span></a></li>
+      <li><a href="#sec-rings">2. Test 1: Radial Spokes &amp; $\sqrt{5}$ <span class="sim-badge">SIM 1</span></a></li>
+      <li><a href="#sec-precession">3. Test 2: Spin vs. Dzhanibekov Flips <span class="sim-badge">SIM 2</span></a></li>
+      <li><a href="#sec-nested">4. Test 3A: Solid Core Counterweights <span class="sim-badge">SIM 3</span></a></li>
+      <li><a href="#sec-fab">5. Test 3B: Wireframes, $K_{16}$ &amp; Nets <span class="sim-badge">SIM 4</span></a></li>
+      <li><a href="#sec-stacking">6. Test 4: Gravity &amp; Mirror Towers <span class="sim-badge">SIM 5</span></a></li>
+      <li><a href="#sec-open">7. Synthesis: Three Tiers of Balance</a></li>
     </ul>
   </nav>
 
@@ -983,11 +983,11 @@
     <!-- SECTION 1 + INTRO PLAYGROUND                                      -->
     <!-- ================================================================= -->
     <section id="sec-intro">
-      <h2>1. How to Turn a Magic Square into a 3D Crystal</h2>
+      <h2>1. Central Hypothesis: Balance in Inequality</h2>
       <aside class="margin-note"><strong>The Magic Gems Trilogy</strong>
         <span style="display:block;margin-top:0.25rem;"><b>A</b> · <a href="paperA.pdf"><em>Magic Gems: Convex Hulls of Lifted Magic Squares</em></a></span>
         <span style="display:block;margin-top:0.25rem;"><b>B</b> · <a href="paperB.pdf"><em>Moments of Magic Squares</em></a></span>
-        <span style="display:block;margin-top:0.25rem;"><b>C</b> · <a href="paperC.pdf"><em>Mechanics and Balance of Magic Gems</em></a> (this essay)</span></aside>
+        <span style="display:block;margin-top:0.25rem;"><b>C</b> · <a href="paperC.pdf"><em>Balance in Inequality: Mechanics of Magic Gems</em></a> (this essay)</span></aside>
       <p>
         In a $4\times 4$ magic square, the numbers $1$ through $16$ are arranged so that every row, column, and main diagonal adds up to the magic sum $\mu_4 = 34$.
         To see the hidden geometry inside these numbers, we place the $4\times 4$ grid flat on the $(x,y)$ plane centered at the origin $O = (0,0,0)$ and measure each number relative to the average value $\bar{s} = 8.5$:
@@ -1068,7 +1068,7 @@
     <!-- SECTION 2 + SIMULATOR 1                                           -->
     <!-- ================================================================= -->
     <section id="sec-rings">
-      <h2>2. Tug-of-War from the Origin: Why Unit Arrows Can't Balance on a $4\times 4$ Grid</h2>
+      <h2>2. Test 1 (Radial Spokes): Why Equalizing Spoke Lengths Breaks Balance &amp; How Duality Restores It</h2>
       <aside class="margin-note"><strong>Why $9/4 \approx \sqrt{5}$?</strong>
       The continued fraction of $\sqrt{5} = [2; 4, 4, \dots]$ has first convergent $2 + 1/4 = 9/4 = 2.25$, solving Pell's equation $p^2 - 5q^2 = +1$. On the $4\times 4$ grid, $\mathbf{d}_{\mathrm{out}} = 5\mathbf{d}_{\mathrm{in}}$ gives $\|\mathbf{v}\|/\|\mathbf{u}\| = 18/8 = 9/4$.</aside>
       <p>
@@ -1211,7 +1211,7 @@
     <!-- SECTION 3 + SIMULATOR 2                                           -->
     <!-- ================================================================= -->
     <section id="sec-precession">
-      <h2>3. Spinning in Zero Gravity: Smooth Spherical Tops vs. The $180^\circ$ Dzhanibekov Flip</h2>
+      <h2>3. Test 2 (3D Rotation): Equal Masses Precess Smoothly, Unequal Entry Masses Flip $180^\circ$</h2>
       <aside class="margin-note"><strong>The Spherical-Top Scale</strong>
       At $\lambda_{\mathrm{iso}} = 1/\sqrt{17} \approx 0.2425$, every $4\times 4$ magic square—even one with zero geometric symmetry—has $I_{xx} = I_{yy} = I_{zz}$, spinning smoothly around any axis in 3D.</aside>
       <p>
@@ -1361,7 +1361,7 @@
     <!-- SECTION 4 + SIMULATOR 3                                           -->
     <!-- ================================================================= -->
     <section id="sec-nested">
-      <h2>4. "Diamond-in-a-Diamond": How Nested Cores Balance a 3D-Printed Gem</h2>
+      <h2>4. Test 3A (Convex Solids): Restoring Balance via "Diamond-in-a-Diamond" Core Counterweights</h2>
       <aside class="margin-note"><strong>Denser vs. Hollow Cores</strong>
       Most Group VI gems have $\mathbf{c}_0$ and $\mathbf{c}_1$ pulling in opposite directions (balanced by a denser core $\Delta\rho_1 > 0$). Gems #123 and #54 have $\mathbf{c}_0$ and $\mathbf{c}_1$ on the <em>same</em> side of $O$, so they balance by making the inner core lighter or hollow.</aside>
       <p>
@@ -1473,7 +1473,7 @@
     <!-- SECTION 5 + SIMULATOR 4: BUILD IT (WIREFRAMES, K16, PAPERCRAFT)    -->
     <!-- ================================================================= -->
     <section id="sec-fab">
-      <h2>5. Beyond Solids: Building Gems from Rods, Struts &amp; Paper</h2>
+      <h2>5. Test 3B (Skeletons &amp; Shells): Wireframes, Complete $K_{16}$ Networks &amp; Papercraft Nets</h2>
       <aside class="margin-note"><strong>Make your own</strong>
         The open-source <a href="https://github.com/kylemath/magicGemWeb" target="_blank" rel="noopener"><code>magicGemWeb</code></a> suite generates every model on this page as 3D-printable OpenSCAD/STL files and printable paper nets. Browse the <a href="https://kylemath.github.io/magicGemWeb/3dModels/index.html" target="_blank" rel="noopener">3D &amp; papercraft gallery ↗</a>.</aside>
       <p>
@@ -1608,7 +1608,7 @@
     <!-- SECTION 6 + SIMULATOR 5                                           -->
     <!-- ================================================================= -->
     <section id="sec-stacking">
-      <h2>6. Mirror-Twin Architecture: Stacking Jagged Gems into Vertical Towers</h2>
+      <h2>6. Test 4 (Freestanding Gravity): Why Identical Blocks Wedge Apart &amp; Mirror Twins Lock Straight</h2>
       <aside class="margin-note"><strong>3D Print Scale $\lambda = 0.20$</strong>
       Setting $\lambda = 1/(n+1) = 0.20$ makes numbers $1\dots 16$ span $3.0$ units vertically—matching the $3.0\times 3.0$ horizontal grid footprint of a physical $3\text{ cm}$ 3D print.</aside>
       <p>
@@ -1722,7 +1722,7 @@
     <!-- SECTION 7: VISUAL CENSUS & OPEN PROBLEMS                          -->
     <!-- ================================================================= -->
     <section id="sec-open">
-      <h2>7. Synthesis: The Complete Mechanical Census of All 880 Magic Gems</h2>
+      <h2>7. Synthesis: Three Tiers of Balance in Inequality Across All 880 Magic Gems</h2>
       <p>
         Every theorem and census count in Paper C is verified in exact rational arithmetic across all $880$ order-four magic squares by the companion verification suite. Click any <strong>Load in Lab ↗</strong> badge below to jump directly to that simulator with the corresponding canonical square pre-loaded.
       </p>

@@ -168,9 +168,9 @@ Email: kyle.mathewson@ualberta.ca
 ### 3.1 Portal Metadata Checklist
 - **Journal:** *Journal of Mathematics and the Arts* (Taylor & Francis, Journal Code: `TMAA`, Portal: `https://rp.tandfonline.com/submission/create?journalCode=TMAA`)
 - **Article Type:** Research Article / Original Article
-- **Title:** `Mechanics and Balance of Magic Gems: Radial Vector Laws, Symmetric-Top Precession, Nested Core Inclusions, and Mirror-Twin Towers`
-- **Running Head (Short Title):** `Mechanics and Balance of Magic Gems`
-- **Manuscript PDF to Upload:** `/Users/fulkanjou/magicGem/paperC.pdf` (28 pages, 7 figures, 5 tables)
+- **Title:** `Balance in Inequality: Testing the Physical Equilibrium, Precession, and Structural Stability of Magic Gems`
+- **Running Head (Short Title):** `Balance in Inequality: Mechanics of Magic Gems`
+- **Manuscript PDF to Upload:** `/Users/fulkanjou/magicGem/paperC.pdf` (26 pages, 7 figures, 5 tables)
 - **Ancillary / Supplemental Archive:** `/Users/fulkanjou/magicGem/paperC_arxiv.tar.gz`
 - **Interactive Companion & 3D Fabrication Gallery:** `https://github.com/kylemath/magicGem` and `https://kylemath.github.io/magicGemWeb/3dModels/index.html`
 - **MSC 2020 Classifications:** `52B10` (Primary); `00A66`, `05B15`, `52B15`, `70E15`, `11J70` (Secondary)
