@@ -568,6 +568,105 @@ def make_fig6_bubble_trinity(data: dict) -> None:
     save_fig(fig, "fig6_bubble_trinity_regimes")
 
 
+def make_fig7_dimensional_relief(data: dict) -> None:
+    multi = data["section5_bubble_trinity"]["multi_order_upgraded"]
+    orders = [3, 4, 5, 6, 7, 8]
+    null_dims = [n * n - 2 * n - 1 for n in orders]
+    restarts = [multi[f"n{n}"]["mean_restarts"] for n in orders]
+    descents = [multi[f"n{n}"]["mean_descents"] for n in orders]
+    times_ms = [multi[f"n{n}"]["mean_ms"] for n in orders]
+
+    fig = plt.figure(figsize=(11.4, 4.3))
+    gs = fig.add_gridspec(1, 2, width_ratios=[1.08, 1.0], wspace=0.34)
+
+    # Panel (a): Mean restarts and mean 2-cycle descents vs order n = 3..8
+    ax0 = fig.add_subplot(gs[0, 0])
+    ax0_r = ax0.twinx()
+
+    l1 = ax0.plot(orders, restarts, color="#e7298a", marker="o", markersize=6.5,
+                  linewidth=2.2, label="Mean restarts to $\\mathcal{H}_{\\mathrm{line}}=0$ (left axis)")
+    l2 = ax0_r.plot(orders, descents, color="#2b5c8f", linestyle="--", marker="s", markersize=5.8,
+                    linewidth=1.9, label="Mean $2$-cycle descents to $\\mathcal{H}_{\\mathrm{line}}=0$ (right axis)")
+
+    for n_val, r_val in zip(orders, restarts):
+        if n_val == 3:
+            ax0.text(n_val, r_val + 0.45, f"{r_val:.2f}", ha="center", va="bottom",
+                     fontsize=7.8, fontweight="bold", color="#a8135d")
+        elif n_val == 4:
+            ax0.text(n_val + 0.14, r_val - 0.35, f"{r_val:.2f}", ha="left", va="top",
+                     fontsize=7.8, fontweight="bold", color="#a8135d")
+        elif n_val == 5:
+            ax0.text(n_val - 0.12, r_val + 0.35, f"{r_val:.2f}", ha="right", va="bottom",
+                     fontsize=7.8, fontweight="bold", color="#a8135d")
+        else:
+            ax0.text(n_val, r_val - 0.45, f"{r_val:.2f}", ha="center", va="top",
+                     fontsize=7.8, fontweight="bold", color="#a8135d")
+
+    ax0.annotate(
+        "Peak frustration at $n=5$\n($8.03$ restarts, $466.6$ descents)",
+        xy=(5, 8.03), xytext=(6.05, 8.45),
+        arrowprops=dict(arrowstyle="->", color="#e7298a", lw=1.3),
+        fontsize=7.3, fontweight="bold", color="#a8135d",
+        bbox=dict(boxstyle="round,pad=0.24", facecolor="#fdf0f6", edgecolor="#e7298a"),
+    )
+    ax0.annotate(
+        "Dimensional Relief ($n\\geq 6$):\nRestarts drop to $4.58$ ($n=7$)\nand $5.00$ ($n=8$) at $100\\%$ success",
+        xy=(7, 4.58), xytext=(5.35, 1.15),
+        arrowprops=dict(arrowstyle="->", color="#1b9e77", lw=1.3),
+        fontsize=7.6, fontweight="bold", color="#0f6648",
+        bbox=dict(boxstyle="round,pad=0.26", facecolor="#eefaf4", edgecolor="#1b9e77"),
+    )
+
+    ax0.set_xticks(orders)
+    ax0.set_xticklabels([f"$n={n}$\n($S_{{{n*n}}}$)" for n in orders])
+    ax0.set_ylim(-0.6, 11.2)
+    ax0_r.set_ylim(-35, 620)
+    ax0.set_xlabel("Magic square order $n$ (100.0% ground-state recovery across all $n=3\\dots 8$)")
+    ax0.set_ylabel("Mean restarts required to reach $\\mathcal{H}_{\\mathrm{line}}=0$", color="#a8135d")
+    ax0_r.set_ylabel("Mean $O(1)$ $2$-cycle descent loops", color="#2b5c8f")
+    ax0.set_title("(a) The Dimensional Relief Phenomenon ($n=3\\dots 8$)", fontweight="bold", pad=8)
+    ax0.grid(True, linestyle=":", alpha=0.45)
+
+    lines = l1 + l2
+    labels = [l.get_label() for l in lines]
+    ax0.legend(lines, labels, loc="upper left", frameon=True, framealpha=0.92, fontsize=7.3)
+
+    # Panel (b): Quadratic Nullspace Growth vs Linear Constraint Rank & Synthesis Time
+    ax1 = fig.add_subplot(gs[0, 1])
+    ax1_r = ax1.twinx()
+
+    x = np.arange(len(orders))
+    w = 0.34
+    rank_vals = [2 * n for n in orders]
+    b_null = ax1.bar(x - w / 2, null_dims, width=w, color="#1b9e77", edgecolor="white",
+                     label=r"Nullspace $\dim\ker(\widetilde{L}_n) = n^2-2n-1$")
+    b_rank = ax1.bar(x + w / 2, rank_vals, width=w, color="#8da0cb", edgecolor="white",
+                     label=r"Constraint rank $\mathrm{rank}(\widetilde{L}_n) = 2n$")
+    l_time = ax1_r.plot(x, times_ms, color="#d95f02", marker="D", markersize=5.5,
+                        linewidth=2.0, label="Mean synthesis time (ms, right axis)")
+
+    for rect in b_null:
+        h = rect.get_height()
+        ax1.text(rect.get_x() + rect.get_width() / 2, h + 0.8, f"{int(h)}",
+                 ha="center", va="bottom", fontsize=7.3, fontweight="bold", color="#0f6648")
+
+    ax1.set_xticks(x)
+    ax1.set_xticklabels([f"$n={n}$" for n in orders])
+    ax1.set_ylim(0, 58)
+    ax1_r.set_ylim(0, 580)
+    ax1.set_xlabel("Magic square order $n$")
+    ax1.set_ylabel("Subspace dimension in $\\mathbf{1}^\\perp \\subset \\mathbb{R}^{n^2-1}$")
+    ax1_r.set_ylabel("Mean synthesis time per square (ms)", color="#b34800")
+    ax1.set_title("(b) Quadratic Nullspace Expansion vs. Runtime", fontweight="bold", pad=8)
+    ax1.grid(True, axis="y", linestyle=":", alpha=0.45)
+
+    handles1, labels1 = ax1.get_legend_handles_labels()
+    handles2, labels2 = ax1_r.get_legend_handles_labels()
+    ax1.legend(handles1 + handles2, labels1 + labels2, loc="upper left", frameon=True, framealpha=0.92, fontsize=7.2)
+
+    save_fig(fig, "fig7_multi_order_dimensional_relief")
+
+
 def main() -> None:
     print("=== Generating Publication Figures for Paper D ===")
     data = json.loads(RESULTS_JSON.read_text(encoding="utf-8"))
@@ -577,7 +676,8 @@ def main() -> None:
     make_fig4_s9_landscape()
     make_fig5_s16_descent(data)
     make_fig6_bubble_trinity(data)
-    print("All 6 Paper D figures generated successfully!")
+    make_fig7_dimensional_relief(data)
+    print("All 7 Paper D figures generated successfully!")
 
 
 if __name__ == "__main__":

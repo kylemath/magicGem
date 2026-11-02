@@ -1095,19 +1095,240 @@ def verify_section5_bubble_trinity() -> dict:
             f"Upgraded 2+3+(2,2) Polish={100*hits_upgraded_22/trials:5.1f}%"
         )
 
-    # Multi-order benchmark (n = 3, 4, 5) at standard interactive budget
+    # Multi-order benchmark (n = 3..8) for the Re-Anchored Hierarchical Multi-Cycle Settler
+    def solve_reanchored_hierarchical(n_ord, max_restarts=80, kicks_per_restart=18, seed=0):
+        rng_h = random.Random(seed)
+        N_ord = n_ord * n_ord
+        base_vals = [2 * s - (N_ord + 1) for s in range(1, N_ord + 1)]
+        cell_lines = [[] for _ in range(N_ord)]
+        for r in range(n_ord):
+            for c in range(n_ord):
+                idx = r * n_ord + c
+                cell_lines[idx].append(r)
+                cell_lines[idx].append(n_ord + c)
+                if r == c:
+                    cell_lines[idx].append(2 * n_ord)
+                if r + c == n_ord - 1:
+                    cell_lines[idx].append(2 * n_ord + 1)
+        pairs_h = []
+        pair_only_a = []
+        pair_only_b = []
+        pair_c_ab = []
+        for a in range(N_ord):
+            la = set(cell_lines[a])
+            for b in range(a + 1, N_ord):
+                lb = set(cell_lines[b])
+                oa = tuple(la - lb)
+                ob = tuple(lb - la)
+                pairs_h.append((a, b))
+                pair_only_a.append(oa)
+                pair_only_b.append(ob)
+                pair_c_ab.append(len(oa) + len(ob))
+        num_pairs = len(pairs_h)
+        row_pair_indices = [[] for _ in range(n_ord)]
+        col_pair_indices = [[] for _ in range(n_ord)]
+        for idx, (a, b) in enumerate(pairs_h):
+            ra, ca = divmod(a, n_ord)
+            rb, cb = divmod(b, n_ord)
+            if ra == rb:
+                row_pair_indices[ra].append(idx)
+            if ca == cb:
+                col_pair_indices[ca].append(idx)
+        total_descents = 0
+        for restart in range(max_restarts):
+            z = base_vals[:]
+            rng_h.shuffle(z)
+            R = [0] * (2 * n_ord + 2)
+            for i, val in enumerate(z):
+                for l in cell_lines[i]:
+                    R[l] += val
+            E = sum(r * r for r in R)
+            def swap_dE(p_idx):
+                a, b = pairs_h[p_idx]
+                d = z[a] - z[b]
+                s = 0
+                for l in pair_only_a[p_idx]:
+                    s -= R[l]
+                for l in pair_only_b[p_idx]:
+                    s += R[l]
+                return 2 * d * s + d * d * pair_c_ab[p_idx]
+            def do_swap(p_idx):
+                nonlocal E
+                a, b = pairs_h[p_idx]
+                d = z[a] - z[b]
+                s = 0
+                for l in pair_only_a[p_idx]:
+                    s -= R[l]
+                    R[l] -= d
+                for l in pair_only_b[p_idx]:
+                    s += R[l]
+                    R[l] += d
+                E += 2 * d * s + d * d * pair_c_ab[p_idx]
+                z[a], z[b] = z[b], z[a]
+            def swap_cells(a, b):
+                if a == b:
+                    return
+                if a > b:
+                    a, b = b, a
+                do_swap(a * (2 * N_ord - a - 1) // 2 + (b - a - 1))
+            best_state_z = z[:]
+            best_state_R = R[:]
+            best_state_E = E
+            for _ in range(kicks_per_restart):
+                while E > 0:
+                    total_descents += 1
+                    best_dE = 0
+                    best_p = -1
+                    for p_idx in range(num_pairs):
+                        a, b = pairs_h[p_idx]
+                        d = z[a] - z[b]
+                        s = 0
+                        for l in pair_only_a[p_idx]:
+                            s -= R[l]
+                        for l in pair_only_b[p_idx]:
+                            s += R[l]
+                        dE = 2 * d * s + d * d * pair_c_ab[p_idx]
+                        if dE < best_dE:
+                            best_dE = dE
+                            best_p = p_idx
+                    if best_p >= 0:
+                        do_swap(best_p)
+                    else:
+                        break
+                if E == 0:
+                    return 0, total_descents, restart
+                if E < best_state_E:
+                    best_state_E = E
+                    best_state_z = z[:]
+                    best_state_R = R[:]
+                elif E > best_state_E + 24:
+                    z = best_state_z[:]
+                    R = best_state_R[:]
+                    E = best_state_E
+                E0 = E
+                best_rc_dE = 0
+                best_rc = None
+                for i1 in range(n_ord):
+                    for i2 in range(i1 + 1, n_ord):
+                        for c in range(n_ord):
+                            swap_cells(i1 * n_ord + c, i2 * n_ord + c)
+                        if E - E0 < best_rc_dE:
+                            best_rc_dE = E - E0
+                            best_rc = (0, i1, i2)
+                        for c in range(n_ord):
+                            swap_cells(i1 * n_ord + c, i2 * n_ord + c)
+                        for r in range(n_ord):
+                            swap_cells(r * n_ord + i1, r * n_ord + i2)
+                        if E - E0 < best_rc_dE:
+                            best_rc_dE = E - E0
+                            best_rc = (1, i1, i2)
+                        for r in range(n_ord):
+                            swap_cells(r * n_ord + i1, r * n_ord + i2)
+                if best_rc is not None:
+                    kind, i1, i2 = best_rc
+                    if kind == 0:
+                        for c in range(n_ord):
+                            swap_cells(i1 * n_ord + c, i2 * n_ord + c)
+                    else:
+                        for r in range(n_ord):
+                            swap_cells(r * n_ord + i1, r * n_ord + i2)
+                    continue
+                best_22 = None
+                best_22_dE = 0
+                for r1 in range(n_ord):
+                    for p1 in row_pair_indices[r1]:
+                        dE1 = swap_dE(p1)
+                        if dE1 > 80:
+                            continue
+                        do_swap(p1)
+                        for r2 in range(r1 + 1, n_ord):
+                            for p2 in row_pair_indices[r2]:
+                                tot = dE1 + swap_dE(p2)
+                                if tot < best_22_dE:
+                                    best_22_dE = tot
+                                    best_22 = (p1, p2)
+                        do_swap(p1)
+                if best_22 is None:
+                    for c1 in range(n_ord):
+                        for p1 in col_pair_indices[c1]:
+                            dE1 = swap_dE(p1)
+                            if dE1 > 80:
+                                continue
+                            do_swap(p1)
+                            for c2 in range(c1 + 1, n_ord):
+                                for p2 in col_pair_indices[c2]:
+                                    tot = dE1 + swap_dE(p2)
+                                    if tot < best_22_dE:
+                                        best_22_dE = tot
+                                        best_22 = (p1, p2)
+                            do_swap(p1)
+                if best_22 is not None:
+                    do_swap(best_22[0])
+                    do_swap(best_22[1])
+                    continue
+                cand = []
+                for p_idx in range(num_pairs):
+                    dE1 = swap_dE(p_idx)
+                    if dE1 <= 48:
+                        cand.append((dE1, p_idx))
+                cand.sort()
+                cand = cand[:40]
+                for idx1 in range(len(cand)):
+                    dE1, p1 = cand[idx1]
+                    a1, b1 = pairs_h[p1]
+                    do_swap(p1)
+                    for idx2 in range(idx1 + 1, len(cand)):
+                        _, p2 = cand[idx2]
+                        a2, b2 = pairs_h[p2]
+                        if a1 == a2 or a1 == b2 or b1 == a2 or b1 == b2:
+                            continue
+                        tot = dE1 + swap_dE(p2)
+                        if tot < best_22_dE:
+                            best_22_dE = tot
+                            best_22 = (p1, p2)
+                    do_swap(p1)
+                if best_22 is not None:
+                    do_swap(best_22[0])
+                    do_swap(best_22[1])
+                    continue
+                if len(cand) >= 2:
+                    _, p1 = cand[rng_h.randrange(min(12, len(cand)))]
+                    _, p2 = cand[rng_h.randrange(min(12, len(cand)))]
+                    do_swap(p1)
+                    if p2 != p1:
+                        do_swap(p2)
+                else:
+                    do_swap(rng_h.randrange(num_pairs))
+                    do_swap(rng_h.randrange(num_pairs))
+        return E, total_descents, max_restarts
+
+    import time
     multi_order = {}
-    for n_ord, bud, tr in [(3, 500, 200), (4, 1500, 200), (5, 2500, 100)]:
-        r_mo = random.Random(7777 + n_ord)
-        succ_up = sum(1 for _ in range(tr) if run_upgraded_settler(n_ord, bud, r_mo) == 0)
+    for n_ord, tr in [(3, 200), (4, 200), (5, 100), (6, 100), (7, 100), (8, 100)]:
+        t0 = time.time()
+        succ_up = 0
+        tot_desc = 0
+        tot_rest = 0
+        for s in range(tr):
+            e_fin, td, r_used = solve_reanchored_hierarchical(n_ord, max_restarts=80, kicks_per_restart=18, seed=20000 + s)
+            if e_fin == 0:
+                succ_up += 1
+            tot_desc += td
+            tot_rest += r_used
+        dt = time.time() - t0
         multi_order[f"n{n_ord}"] = {
             "n": n_ord,
-            "budget": bud,
             "trials": tr,
             "success_count": succ_up,
             "success_pct": round(100.0 * succ_up / tr, 1),
+            "mean_descents": round(tot_desc / tr, 1),
+            "mean_restarts": round(tot_rest / tr, 2),
+            "mean_ms": round(1000.0 * dt / tr, 2),
         }
-        print(f"  Multi-Order Upgraded Settler n={n_ord} (budget={bud}): {succ_up}/{tr} ({100*succ_up/tr:.1f}%)")
+        print(
+            f"  Multi-Order Hierarchical Settler n={n_ord} ({tr} trials): {succ_up}/{tr} ({100*succ_up/tr:.1f}%), "
+            f"mean_descents={tot_desc/tr:.1f}, mean_restarts={tot_rest/tr:.2f}, {1000*dt/tr:.1f} ms/trial"
+        )
 
     return {
         "regime_metrics": regime_metrics,

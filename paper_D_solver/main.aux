@@ -97,16 +97,20 @@
 \newlabel{fig:bubble_trinity}{{6}{14}{\textbf {Continuous Bubble-Trinity Langevin relaxation regimes and $(2,2)$-polished ground-state synthesis benchmarks.} \textbf {(a)} Trajectories of the kernel-induced line Hamiltonian $\Hind (t)$ across $250$ integration steps ($\Delta t = 0.025$) for the four canonical dynamical regimes of \Cref {tab:bubble_regimes}, starting from a $4$-swap perturbation of D\"urer's $4\times 4$ square ($\Hind (0) = 1{,}681.89$). \textbf {(b)} Order-$4$ magic ground-state recovery rate ($\Hline = 0$, $\%$, $200$ trials per budget) comparing the unbiased $2+3$-cycle baseline SA, stress-guided $2+3$-cycle SA, and the upgraded Stress-Guided $(2+3+(2,2))$-Cycle Settler with greedy polish across step budgets $B \in \{200, 500, 1{,}000, 1{,}500, 2{,}500\}$}{figure.79}{}}
 \newlabel{eq:langevin_sde}{{20}{14}{Continuous Kernel-Induced Line Field and Langevin Equations of Motion}{equation.77}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.2}The Four Dynamical Regimes and Why Pure Spatial Snapping Fails}{14}{subsection.80}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Parameters and trajectory invariants across the four canonical Bubble-Trinity Langevin regimes at order $n=4$ ($250$ steps, $\Delta t=0.025$), verified by \texttt  {verify\_paper\_d.py}.}}{15}{table.86}\protected@file@percent }
+\newlabel{tab:bubble_regimes}{{6}{15}{Parameters and trajectory invariants across the four canonical Bubble-Trinity Langevin regimes at order $n=4$ ($250$ steps, $\Delta t=0.025$), verified by \texttt {verify\_paper\_d.py}}{table.86}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Stress-Guided $(2+3+(2,2))$-Cycle Settling and the $100\%$ Multi-Order Hierarchical Solver}{15}{subsection.87}\protected@file@percent }
 \citation{mathewson2026gems}
 \citation{mathewson2026moments}
 \citation{mathewson2026mechanics}
-\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Parameters and trajectory invariants across the four canonical Bubble-Trinity Langevin regimes at order $n=4$ ($250$ steps, $\Delta t=0.025$), verified by \texttt  {verify\_paper\_d.py}.}}{15}{table.86}\protected@file@percent }
-\newlabel{tab:bubble_regimes}{{6}{15}{Parameters and trajectory invariants across the four canonical Bubble-Trinity Langevin regimes at order $n=4$ ($250$ steps, $\Delta t=0.025$), verified by \texttt {verify\_paper\_d.py}}{table.86}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Stress-Guided $(2+3+(2,2))$-Cycle Settling with Greedy Polish}{15}{subsection.87}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {6}Discussion}{15}{section.91}\protected@file@percent }
-\newlabel{sec:discussion}{{6}{15}{Discussion}{section.91}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Multi-order synthesis benchmark of the Re-Anchored Hierarchical Multi-Cycle Settler across orders $n = 3, 4, 5, 6, 7, 8$, certified by \texttt  {verify\_paper\_d.py}. Note the \emph  {Dimensional Relief Phenomenon} at $n \ge 6$: as the nullspace dimension $\dim \ker (\setbox \z@ \hbox {\mathsurround \z@ $\textstyle L$}\mathaccent "0365{L}_n) = n^2-2n-1$ grows quadratically (\Cref  {thm:spectral_rationalization}), the number of restarts required to hit $\mathcal  {H}_{\mathrm  {line}}=0$ peaks at $n=5$ ($8.03$) and decreases for $n=6,7,8$.}}{16}{table.93}\protected@file@percent }
+\newlabel{tab:multi_order_settler}{{7}{16}{Multi-order synthesis benchmark of the Re-Anchored Hierarchical Multi-Cycle Settler across orders $n = 3, 4, 5, 6, 7, 8$, certified by \texttt {verify\_paper\_d.py}. Note the \emph {Dimensional Relief Phenomenon} at $n \ge 6$: as the nullspace dimension $\dim \ker (\Ltilde _n) = n^2-2n-1$ grows quadratically (\Cref {thm:spectral_rationalization}), the number of restarts required to hit $\Hline =0$ peaks at $n=5$ ($8.03$) and decreases for $n=6,7,8$}{table.93}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces \textbf  {Multi-order $100\%$ ground-state synthesis ($n=3\dots  8$) and the Dimensional Relief Phenomenon.} \textbf  {(a)} Mean restarts (magenta, left axis) and mean $O(1)$ incremental $2$-cycle descent loops (blue dashed, right axis) required by the Re-Anchored Hierarchical Multi-Cycle Settler to reach $\mathcal  {H}_{\mathrm  {line}}= 0$ with $100.0\%$ success across orders $n=3\dots  8$ (\Cref  {tab:multi_order_settler}). Topological frustration peaks at $n=5$ ($8.03$ restarts, $466.6$ descents) and drops at $n=6,7,8$ ($4.58$ restarts at $n=7$, $5.00$ at $n=8$). \textbf  {(b)} Quadratic expansion of the magic nullspace dimension $\dim \ker (\setbox \z@ \hbox {\mathsurround \z@ $\textstyle L$}\mathaccent "0365{L}_n) = n^2-2n-1$ (green bars, \Cref  {thm:spectral_rationalization}) versus linear growth of the constraint rank $(\setbox \z@ \hbox {\mathsurround \z@ $\textstyle L$}\mathaccent "0365{L}_n)=2n$ (blue bars) and mean synthesis runtime per square (orange curve, right axis, reaching $\mathcal  {H}_{\mathrm  {line}}=0$ in $479.8\text  { ms}$ at $n=8$, $64! \approx 1.27\times 10^{89}$ states).}}{16}{figure.95}\protected@file@percent }
+\newlabel{fig:dimensional_relief}{{7}{16}{\textbf {Multi-order $100\%$ ground-state synthesis ($n=3\dots 8$) and the Dimensional Relief Phenomenon.} \textbf {(a)} Mean restarts (magenta, left axis) and mean $O(1)$ incremental $2$-cycle descent loops (blue dashed, right axis) required by the Re-Anchored Hierarchical Multi-Cycle Settler to reach $\Hline = 0$ with $100.0\%$ success across orders $n=3\dots 8$ (\Cref {tab:multi_order_settler}). Topological frustration peaks at $n=5$ ($8.03$ restarts, $466.6$ descents) and drops at $n=6,7,8$ ($4.58$ restarts at $n=7$, $5.00$ at $n=8$). \textbf {(b)} Quadratic expansion of the magic nullspace dimension $\dim \ker (\Ltilde _n) = n^2-2n-1$ (green bars, \Cref {thm:spectral_rationalization}) versus linear growth of the constraint rank $\rank (\Ltilde _n)=2n$ (blue bars) and mean synthesis runtime per square (orange curve, right axis, reaching $\Hline =0$ in $479.8\text { ms}$ at $n=8$, $64! \approx 1.27\times 10^{89}$ states)}{figure.95}{}}
 \citation{rogers2004inertia}
 \citation{rogers2005multipole}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Discussion}{17}{section.96}\protected@file@percent }
+\newlabel{sec:discussion}{{6}{17}{Discussion}{section.96}{}}
 \citation{mathewson2026physicalsolver}
 \citation{mathewson2026gems}
 \citation{mathewson2026moments}
@@ -131,8 +135,8 @@
 \bibcite{rogers2004inertia}{15}
 \bibcite{rogers2005multipole}{16}
 \bibcite{wales2003energy}{17}
+\newlabel{sec:ai_statement}{{6}{18}{Acknowledgments and Declaration of Generative AI Use}{section*.99}{}}
 \bibcite{whitesides2004writing}{18}
-\newlabel{sec:ai_statement}{{6}{17}{Acknowledgments and Declaration of Generative AI Use}{section*.94}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {A}Exact Verification Suite and Reproducibility Manifest}{18}{appendix.96}\protected@file@percent }
-\newlabel{sec:appendix}{{A}{18}{Exact Verification Suite and Reproducibility Manifest}{appendix.96}{}}
-\gdef \@abspage@last{18}
+\@writefile{toc}{\contentsline {section}{\numberline {A}Exact Verification Suite and Reproducibility Manifest}{19}{appendix.101}\protected@file@percent }
+\newlabel{sec:appendix}{{A}{19}{Exact Verification Suite and Reproducibility Manifest}{appendix.101}{}}
+\gdef \@abspage@last{19}

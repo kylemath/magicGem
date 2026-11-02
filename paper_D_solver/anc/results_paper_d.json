@@ -10524,24 +10524,57 @@
     "multi_order_upgraded": {
       "n3": {
         "n": 3,
-        "budget": 500,
         "trials": 200,
         "success_count": 200,
-        "success_pct": 100.0
+        "success_pct": 100.0,
+        "mean_descents": 5.1,
+        "mean_restarts": 0.0,
+        "mean_ms": 0.1
       },
       "n4": {
         "n": 4,
-        "budget": 1500,
         "trials": 200,
         "success_count": 200,
-        "success_pct": 100.0
+        "success_pct": 100.0,
+        "mean_descents": 52.9,
+        "mean_restarts": 0.7,
+        "mean_ms": 6.04
       },
       "n5": {
         "n": 5,
-        "budget": 2500,
         "trials": 100,
-        "success_count": 27,
-        "success_pct": 27.0
+        "success_count": 100,
+        "success_pct": 100.0,
+        "mean_descents": 466.6,
+        "mean_restarts": 8.03,
+        "mean_ms": 133.88
+      },
+      "n6": {
+        "n": 6,
+        "trials": 100,
+        "success_count": 100,
+        "success_pct": 100.0,
+        "mean_descents": 439.6,
+        "mean_restarts": 7.16,
+        "mean_ms": 231.03
+      },
+      "n7": {
+        "n": 7,
+        "trials": 100,
+        "success_count": 100,
+        "success_pct": 100.0,
+        "mean_descents": 299.3,
+        "mean_restarts": 4.58,
+        "mean_ms": 263.3
+      },
+      "n8": {
+        "n": 8,
+        "trials": 100,
+        "success_count": 100,
+        "success_pct": 100.0,
+        "mean_descents": 335.3,
+        "mean_restarts": 5.0,
+        "mean_ms": 479.82
       }
     }
   }
