@@ -30,7 +30,7 @@ For every associative square $S$, $P_S=-P_S$ implies $\mathcal G_0(S)=-\mathcal 
 \setlength{\tabcolsep}{4.5pt}
 \begin{tabular}{r c c c c c l}
 \toprule
-Square & Dudeney & $f(\mathcal G_0)$ & $\vol(\mathcal G_0)$ & $\operatorname{Iso}(\mathcal G_0)$ & $\dim/\vol(\mathcal G_1)$ & First row of standard form $S$\\
+Gem & Dudeney & $f(\mathcal G_0)$ & $\vol(\mathcal G_0)$ & $\operatorname{Iso}(\mathcal G_0)$ & $\dim/\vol(\mathcal G_1)$ & First row of standard form $S$\\
 \midrule
 \#86  & Group VI & $(12,28,18)$ & $209/3$ & $C_2$ ($\overline S=vS$) & $2\mathrm{D}$ ($0$) & $(1,7,14,12)$\\
 \#739 & Group VI & $(12,26,16)$ & $287/3$ & $C_2$ ($\overline S=hS$) & $3\mathrm{D}$ ($5/3$) & $(4,14,3,13)$\\
@@ -65,7 +65,7 @@ Equation~\eqref{eq:opposition} follows immediately from $\sum_{\mathbf p\in P_S}
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{figures/fig_nested_diamonds.pdf}
-\caption{Nested ``diamond-in-a-diamond'' convex layers $\mathcal G_0(S)\supset\mathcal G_1(S)$ and centre-of-mass restoration. (a)~Denser-core Gem \#673 ($(V_0,V_1)=(8,8)$, \Cref{fig:hero-squares}(e)) and (b)~hollow-cavity Gem \#54 ($(V_0,V_1)=(10,6)$, $1$-swap sibling of \#45 in \Cref{fig:hero-squares}(c)), showing the translucent outer hull $\mathcal G_0(S)$ enclosing the inner core gem $\mathcal G_1(S)$ alongside 2D fulcrum lever diagrams at bottom. On \#673, $\mathbf c_0=(0,0,-20/257)$ (green circle) and $\mathbf c_1=(0,0,+2/7)$ (gold diamond) lie on opposite sides of $O$, balancing via a heavier inner core ($\Delta\rho_1/\rho_0=+5/4$, $\rho_1/\rho_0=2.25$). On \#54, although the discrete outer vertices still pull to $-y$ ($\overline{\mathbf p}_{\mathrm{outer}}=(0,-3/10,0)$), volumetric simplex weighting pulls $\mathbf c_0=(0,+19/324,0)$ onto the $+y$ side alongside $\mathbf c_1=(0,+29/68,0)$, so subtracting a $98.3\%$ hollow core cavity ($\Delta\rho_1/\rho_0=-57/58$, $\rho_1/\rho_0=1/58$) restores balance at $O$. (c)~Breakdown of nested layer properties and balance mechanisms across all $880$ order-four magic squares.}
+\caption{Nested ``diamond-in-a-diamond'' convex layers $\mathcal G_0(S)\supset\mathcal G_1(S)$ and centre-of-mass restoration. (a)~Denser-core Gem \#673 ($(V_0,V_1)=(8,8)$) and (b)~hollow-cavity Gem \#54 ($(V_0,V_1)=(10,6)$, $1$-swap sibling of \#45), showing the translucent outer hull $\mathcal G_0(S)$ around the inner core $\mathcal G_1(S)$ with 2D fulcrum lever diagrams below. On \#673, $\mathbf c_0$ (green circle) and $\mathbf c_1$ (gold diamond) lie on opposite sides of $O$, balancing via a heavier inner core ($\Delta\rho_1/\rho_0=+5/4$). On \#54, volumetric simplex weighting pulls $\mathbf c_0=(0,19/324,0)$ onto the $+y$ side alongside $\mathbf c_1=(0,29/68,0)$, so a $98.3\%$ hollow core cavity ($\Delta\rho_1/\rho_0=-57/58$) restores balance at $O$. (c)~Census of nested layer dimensions and solid balance mechanisms across all $880$ order-four magic squares.}
 \label{fig:nested-diamonds}
 \end{figure}
 
@@ -98,19 +98,19 @@ Setting $\rho_0\vol(\mathcal G_0)\mathbf c_0+\Delta\rho_1\vol(\mathcal G_1)\math
 \caption{The eight order-four Magic Gems with the smallest balancing excess density ratios $\Delta\rho_1/\rho_0\in[5/4,40/19]\approx[1.25,2.11]$ in a two-density ``diamond-in-a-diamond'' solid inclusion $(\mathcal G_0(S),\mathcal G_1(S))$ (\Cref{thm:diamond-balance}), all achievable with standard dual-material 3D printing. All $33$ denser-core gems belong to Dudeney's Group~VI; the full list of $33$ is given in \Cref{tab:all33}.}
 \label{tab:two-density}
 \small
-\setlength{\tabcolsep}{4.5pt}
-\begin{tabular}{r r c c c c c c c}
+\setlength{\tabcolsep}{5.0pt}
+\begin{tabular}{r c c c c c c c}
 \toprule
-1-idx & 0-idx & $(V_0,V_1)$ & $\vol(\mathcal G_0)$ & $\vol(\mathcal G_1)$ & Axial $c_0$ & Axial $c_1$ & Exact $\Delta\rho_1/\rho_0$ & Decimal $\rho_1/\rho_0$\\
+Gem & $(V_0,V_1)$ & $\vol(\mathcal G_0)$ & $\vol(\mathcal G_1)$ & Axial $c_0$ & Axial $c_1$ & Exact $\Delta\rho_1/\rho_0$ & Decimal $\rho_1/\rho_0$\\
 \midrule
-\#673 & 672 & $(8,8)$  & $257/3$ & $56/3$ & $-20/257$  & $+2/7$    & $5/4$   & $2.250$\\
-\#502 & 501 & $(10,6)$ & $271/3$ & $6$    & $+2/271$   & $-1/12$   & $4/3$   & $2.333$\\
-\#45  & 44  & $(10,6)$ & $214/3$ & $6$    & $-85/856$  & $+61/72$  & $85/61$ & $2.393$\\
-\#50  & 49  & $(10,6)$ & $254/3$ & $22/3$ & $-7/127$   & $+19/44$  & $28/19$ & $2.474$\\
-\#307 & 306 & $(10,6)$ & $277/3$ & $22/3$ & $+23/1108$ & $-15/88$  & $23/15$ & $2.533$\\
-\#49  & 48  & $(12,4)$ & $81$    & $2$    & $-2/81$    & $+1/2$    & $2$     & $3.000$\\
-\#38  & 37  & $(10,6)$ & $263/3$ & $22/3$ & $+31/1052$ & $-15/88$  & $31/15$ & $3.067$\\
-\#47  & 46  & $(10,6)$ & $247/3$ & $22/3$ & $-20/247$  & $+19/44$  & $40/19$ & $3.105$\\
+\#673 & $(8,8)$  & $257/3$ & $56/3$ & $-20/257$  & $+2/7$    & $5/4$   & $2.250$\\
+\#502 & $(10,6)$ & $271/3$ & $6$    & $+2/271$   & $-1/12$   & $4/3$   & $2.333$\\
+\#45  & $(10,6)$ & $214/3$ & $6$    & $-85/856$  & $+61/72$  & $85/61$ & $2.393$\\
+\#50  & $(10,6)$ & $254/3$ & $22/3$ & $-7/127$   & $+19/44$  & $28/19$ & $2.474$\\
+\#307 & $(10,6)$ & $277/3$ & $22/3$ & $+23/1108$ & $-15/88$  & $23/15$ & $2.533$\\
+\#49  & $(12,4)$ & $81$    & $2$    & $-2/81$    & $+1/2$    & $2$     & $3.000$\\
+\#38  & $(10,6)$ & $263/3$ & $22/3$ & $+31/1052$ & $-15/88$  & $31/15$ & $3.067$\\
+\#47  & $(10,6)$ & $247/3$ & $22/3$ & $-20/247$  & $+19/44$  & $40/19$ & $3.105$\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -173,7 +173,7 @@ In a physical 3D print of finite rod diameter $d>0$, each cylindrical strut of l
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{figures/fig_wireframes_and_nets.pdf}
-\caption{Wireframes, complete $K_{16}$ strut networks, and unfolded papercraft cutout nets of Magic Gems \cite{mathewson2025magicgemweb}. (a)~Nested ball-and-rod wireframe $G(\mathcal G_0)\cup G(\mathcal G_1)$ of Gem \#673 ($17$ outer blue rods + $17$ inner orange rods), where tuning the inner-to-outer rod diameter ratio to $d_1/d_0=0.793$ at $\lambda=1$ ($0.493$ at $\lambda=0.20$) restores $\mathbf c_{\mathrm{wire}}=\mathbf 0$. (b)~Fully interconnected complete network $K_{16}$ of D\"urer's Gem \#175 (\texttt{magicGem\_v2.stl}) with all $\binom{16}{2}=120$ rods ($24$ outer hull edges in green + $96$ internal cross-struts in slate) and $16$ node cubes; for equal-mass rods, $\mathbf c(K_{16})=\mathbf 0$ and $\Sigma_{\mathrm{rods}}=\frac{29}{45}\Sigma(\lambda)$ for all $880$ squares (\Cref{thm:complete-network}). (c)~Exact 2D unfolded papercraft cutout net of D\"urer's Gem \#175 ($\lambda=0.20$, $f=(12,24,14)$) rooted at $\bigstar F_0$, with $f_2-1=13$ dashed fold lines (mean dihedral fold angle $\overline{\theta}_{\mathrm{fold}}=141.2^\circ\in[117^\circ,165^\circ]$), $2f_0-2=22$ solid cut perimeter segments, $N_{\mathrm{tabs}}=f_0-1=11$ grey trapezoidal glue tabs paired with their mating cut edges by lowercase labels \texttt{a}--\texttt{k} (\Cref{prop:papercraft-net}), and magic entries $s_{ij}$ at the unfolded vertices. (d)~Comparison of mean centroid drift $\|\mathbf c(S)\|_2$ across all $880$ order-four magic squares for the five physical realizations at $\lambda=1.0$ and $\lambda=0.20$.}
+\caption{Wireframes, complete $K_{16}$ strut networks, and unfolded papercraft cutout nets of Magic Gems \cite{mathewson2025magicgemweb}. (a)~Nested ball-and-rod wireframe $G(\mathcal G_0)\cup G(\mathcal G_1)$ of Gem \#673 ($17$ outer blue rods and $17$ inner orange rods), balanced at rod-diameter ratio $d_1/d_0=0.793$ ($\lambda=1$). (b)~Complete network $K_{16}$ of D\"urer's Gem \#175 with all $\binom{16}{2}=120$ rods ($24$ hull edges in green, $96$ internal cross-struts in slate), which satisfies $\mathbf c(K_{16})=\mathbf 0$ and $\Sigma_{\mathrm{rods}}=\frac{29}{45}\Sigma(\lambda)$ for equal-mass rods across all $880$ squares. (c)~Exact 2D unfolded papercraft net of D\"urer's Gem \#175 ($\lambda=0.20$, $f=(12,24,14)$) rooted at $\bigstar F_0$, with $f_2-1=13$ dashed fold creases and $N_{\mathrm{tabs}}=f_0-1=11$ glue tabs paired by labels \texttt{a}--\texttt{k}. (d)~Mean centroid drift $\|\mathbf c(S)\|_2$ across all $880$ squares for the five physical realizations at $\lambda=1.0$ and $\lambda=0.20$.}
 \label{fig:wireframes-nets}
 \end{figure}
 

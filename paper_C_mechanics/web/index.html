@@ -906,7 +906,7 @@
 
 <header class="distill-header">
   <div class="header-container">
-    <div class="trilogy-pill">Magic Gems Trilogy · Companion Paper C · Interactive Visual Essay</div>
+    <div class="trilogy-pill">Magic Gems Trilogy · Companion Paper C · Interactive Visual Essay · <a href="../paperC.pdf" style="color:#ffffff;text-decoration:underline;">Read Paper C (PDF) ↗</a></div>
     <h1>Balance in Inequality: Testing the Mechanics of Magic Gems</h1>
     <p class="subtitle">
       A $4\times 4$ magic square is built from 16 strictly unequal numbers $\{1,\dots,16\}$ whose row, column, and diagonal sums are equal.
@@ -986,7 +986,7 @@
       <h2>1. Central Hypothesis: Balance in Inequality</h2>
       <aside class="margin-note"><strong>The Magic Gems Trilogy</strong>
         <span style="display:block;margin-top:0.25rem;"><b>A</b> · <a href="../../paperA.pdf"><em>Magic Gems: Convex Hulls of Lifted Magic Squares</em></a></span>
-        <span style="display:block;margin-top:0.25rem;"><b>B</b> · <a href="../../paperB.pdf"><em>Moments of Magic Squares</em></a></span>
+        <span style="display:block;margin-top:0.25rem;"><b>B</b> · <a href="../../paperB.pdf"><em>Bivariate Polynomial Moments and Prouhet–Tarry–Escott Identities of Semi-Magic Squares</em></a></span>
         <span style="display:block;margin-top:0.25rem;"><b>C</b> · <a href="../paperC.pdf"><em>Balance in Inequality: Mechanics of Magic Gems</em></a> (this essay)</span></aside>
       <p>
         In a $4\times 4$ magic square, the numbers $1$ through $16$ are arranged so that every row, column, and main diagonal adds up to the magic sum $\mu_4 = 34$.
@@ -1122,10 +1122,10 @@
       </div>
 
       <details class="math-drawer">
-        <summary>Formal Statements: Length–Weight Duality, Three-Ring Formula &amp; Pell Minimum (Theorems 2.2–2.5)</summary>
+        <summary>Formal Statements: Length–Weight Duality, Three-Ring Formula &amp; Pell Minimum (Proposition 2.2, Theorem 2.3, Corollary 2.4 &amp; Theorem 2.5)</summary>
         <div class="drawer-body">
           <p>
-            <strong>3D Length–Weight Duality &amp; Cubic Vertical Vanishing (Theorems 2.2 &amp; 2.5):</strong>
+            <strong>3D Length–Weight Duality &amp; Cubic Vertical Vanishing (Proposition 2.2 &amp; Theorem 2.5):</strong>
             Along unit rays $\hat{\mathbf{p}}_{ij}(\lambda) = \mathbf{p}_{ij}(\lambda)/R_{ij}(\lambda) \in S^2$, scaling lengths to $L_{ij}$ with weights $w_{ij}$ gives $\mathbf{V}_{w,L}(S;\lambda) = \sum_{i,j} w_{ij}L_{ij}\hat{\mathbf{p}}_{ij}(\lambda) = \sum_{i,j}\bigl(\frac{w_{ij}L_{ij}}{R_{ij}(\lambda)}\bigr)\mathbf{p}_{ij}(\lambda)$. For cubic 3D lengths ($\beta=3$, $L_{ij}=R_{ij}^3$), row–column separability of $r_{ij}^2 = x_j^2+y_i^2$ and $\sum z_{ij}^3 = 0$ force the vertical component to vanish identically for every semi-magic square:
             $$\mathbf{V}_3(S;\lambda) = \left(\lambda^2\sum_{i,j} z_{ij}^2 x_j,\;\; \lambda^2\sum_{i,j} z_{ij}^2 y_i,\;\; 0\right).$$
             On the unit sphere $S^2$ ($\beta=0$), the minimum-variance balancing weight vector $\mathbf{w}^*(S) = \mathbf{1} - \hat{P}(\hat{P}^\top\hat{P})^{-1}\mathbf{V}_0(S)$ is strictly positive ($\mathbf{w}^*(S) > \mathbf{0}$) for all $880$ order-four magic squares.
@@ -1134,7 +1134,7 @@
             <strong>Three-Ring Formula &amp; Even-Lattice Pell Minimum (Theorem 2.3 &amp; Corollary 2.4):</strong>
             Grouping $A_4 = R_{\mathrm{in}} \sqcup R_{\mathrm{mid}} \sqcup R_{\mathrm{out}}$ with ring dipoles $\mathbf{d}_k = \sum_{c\in R_k} z_c\mathbf{r}_c$ satisfies $\mathbf{d}_{\mathrm{in}} \in \mathbb{Z}^2\setminus\{\mathbf{0}\}$, $\mathbf{d}_{\mathrm{out}} \in (3\mathbb{Z})^2\setminus\{\mathbf{0}\}$, and $\mathbf{d}_{\mathrm{mid}} = -(\mathbf{d}_{\mathrm{in}}+\mathbf{d}_{\mathrm{out}})$, giving
             $$\mathbf{B}_{z,\ell}(S) = \left(\frac{\ell_1}{r_1} - \frac{\ell_2}{r_2}\right)\mathbf{d}_{\mathrm{in}}(S) + \left(\frac{\ell_3}{r_3} - \frac{\ell_2}{r_2}\right)\mathbf{d}_{\mathrm{out}}(S).$$
-            At unit length ($\ell_k=1$, $\alpha=0$), substituting $1/r_1=\sqrt{2}$, $1/r_2=\sqrt{2}/\sqrt{5}$, and $1/r_3=\sqrt{2}/3$ motivates $\mathbf{u}(S) = \mathbf{d}_{\mathrm{in}}(S) + \frac{1}{3}\mathbf{d}_{\mathrm{out}}(S) \in \mathbb{Z}^2$ and $\mathbf{v}(S) = \mathbf{d}_{\mathrm{in}}(S) + \mathbf{d}_{\mathrm{out}}(S) \in \mathbb{Z}^2$, so $\mathbf{B}_{\mathrm{unit}}(S) = \sqrt{2}\bigl(\mathbf{u}(S) - \frac{1}{\sqrt{5}}\mathbf{v}(S)\bigr)$. Across $\mathcal{M}_4$, $\frac{1}{3}\|\mathbf{d}_{\mathrm{out}}\|_\infty \le 12$ excludes all Pell–Lucas pairs $(F_k, L_k)$ with $k \ge 8$, while saturating $\frac{1}{3}|d_{\mathrm{out}}| = 8$ on a coordinate axis forces $|d_{\mathrm{in}}| \le 4$ and $p = |d_{\mathrm{in}} + \frac{1}{3}d_{\mathrm{out}}| \le 12 < 13$, excluding $(F_7, L_7) = (13, 29)$; independently, because the four-cell diagonal halves $T_{\mathrm{diag}}$ and $R_{\mathrm{diag}}$ always have even sum on $\mathcal{M}_4$, both $\mathbf{u}(S) = 2\tilde{\mathbf{u}}(S)\in(2\mathbb{Z})^2$ and $\mathbf{v}(S) = 2\tilde{\mathbf{v}}(S)\in(2\mathbb{Z})^2$ lie in the even sublattice with $\|\mathbf{u}(S)\|_\infty \le 16$ and $\|\mathbf{u}(S)\|_2 \le 8\sqrt{5} \approx 17.89$. Writing $U=\|\tilde{\mathbf{u}}\|_2$ and $V=\|\tilde{\mathbf{v}}\|_2$ ($1\le U^2\le 80$) reduces minimization to the Pell inequality $|5U^2-V^2|\ge 1$: its unique solution in range is $(U,V)=(4,9)$, giving $\|\mathbf{v}\|/\|\mathbf{u}\| = 18/8 = 9/4$ on $8$ squares (#70, #76, #121, #188, #452, #459, #490, #574) and achieving
+            At unit length ($\ell_k=1$, $\alpha=0$), substituting $1/r_1=\sqrt{2}$, $1/r_2=\sqrt{2}/\sqrt{5}$, and $1/r_3=\sqrt{2}/3$ motivates $\mathbf{u}(S) = \mathbf{d}_{\mathrm{in}}(S) + \frac{1}{3}\mathbf{d}_{\mathrm{out}}(S) \in \mathbb{Z}^2$ and $\mathbf{v}(S) = \mathbf{d}_{\mathrm{in}}(S) + \mathbf{d}_{\mathrm{out}}(S) \in \mathbb{Z}^2$, so $\mathbf{B}_{\mathrm{unit}}(S) = \sqrt{2}\bigl(\mathbf{u}(S) - \frac{1}{\sqrt{5}}\mathbf{v}(S)\bigr)$. Because the four-cell diagonal halves $T_{\mathrm{diag}}$ and $R_{\mathrm{diag}}$ always have even sum across $\mathcal{M}_4$, both $\mathbf{u}(S) = 2\tilde{\mathbf{u}}(S)\in(2\mathbb{Z})^2$ and $\mathbf{v}(S) = 2\tilde{\mathbf{v}}(S)\in(2\mathbb{Z})^2$ lie in the even sublattice with $\tilde{\mathbf{u}}, \tilde{\mathbf{v}} \in \mathbb{Z}^2\setminus\{\mathbf{0}\}$, $\|\tilde{\mathbf{u}}(S)\|_\infty \le 8$, and $\|\tilde{\mathbf{u}}(S)\|_2 \le 4\sqrt{5} < 9$. Thus $\|\mathbf{B}_{\mathrm{unit}}(S)\|_2 = 2\sqrt{2}\|\tilde{\mathbf{u}}(S) - \tilde{\mathbf{v}}(S)/\sqrt{5}\|_2$ is minimized along a coordinate axis with $1 \le \tilde{u} \le 8 < 17$; by Lagrange's theorem on continued fractions for $\sqrt{5} = [2; \overline{4}]$ (convergents $2/1, 9/4, 38/17, \dots$), the unique best rational approximation in range is the fundamental Pell convergent $\tilde{v}/\tilde{u} = 9/4$ ($9^2 - 5\cdot 4^2 = 1$), giving $\|\mathbf{v}\|/\|\mathbf{u}\| = 18/8 = 9/4$ on $8$ squares (#70, #76, #121, #188, #452, #459, #490, #574) and achieving
             $$\min_{S\in\mathcal{M}_4}\|\mathbf{B}_{\mathrm{unit}}(S)\|_2 = \frac{18\sqrt{10}}{5} - 8\sqrt{2} = \frac{2\sqrt{10}}{5\varphi^6} \approx 0.07049108.$$
           </p>
         </div>
@@ -1144,7 +1144,7 @@
       <div class="simulator-card" id="sim-rings">
         <div class="sim-header">
           <div class="sim-title"><span class="live-dot"></span> Interactive Simulator 1 · Head-to-Tail Polygon Closure, 3D Sphere Vectors &amp; Pell $\sqrt{5}$ Explorer</div>
-          <div class="sim-hint"><a class="sim-paper-badge" href="../paperC.pdf" target="_blank" rel="noopener">📄 Paper C · §2, Thm. 2.3 &amp; Figs. 2–3</a> Click any preset to smoothly animate $\alpha,\beta$ · Click any dot in the 880-square scatter plot</div>
+          <div class="sim-hint"><a class="sim-paper-badge" href="../paperC.pdf" target="_blank" rel="noopener">📄 Paper C · §2, Prop. 2.2, Thms. 2.3–2.5 &amp; Figs. 2–3</a> Click any preset to smoothly animate $\alpha,\beta$ · Click any dot in the 880-square scatter plot</div>
         </div>
         <!-- Segmented View Tabs -->
         <div class="sim-tabs" id="ring-tabs">
@@ -1543,7 +1543,7 @@
       <div class="simulator-card" id="sim-fab">
         <div class="sim-header">
           <div class="sim-title"><span class="live-dot"></span> Interactive Simulator 4 · Build It: Wireframes, $K_{16}$ Strut Networks &amp; Papercraft Nets</div>
-          <div class="sim-hint"><a class="sim-paper-badge" href="../paperC.pdf" target="_blank" rel="noopener">📄 Paper C · §4.4, Thm. 4.4, Prop. 4.5 &amp; Fig. 6</a> <a href="https://kylemath.github.io/magicGemWeb/3dModels/index.html" target="_blank" rel="noopener" style="color:#fcd34d;">Printable gallery ↗</a> · Hover 2D net ↔ 3D gem</div>
+          <div class="sim-hint"><a class="sim-paper-badge" href="../paperC.pdf" target="_blank" rel="noopener">📄 Paper C · §4.3, Thm. 4.4, Prop. 4.5 &amp; Fig. 6</a> <a href="https://kylemath.github.io/magicGemWeb/3dModels/index.html" target="_blank" rel="noopener" style="color:#fcd34d;">Printable gallery ↗</a> · Hover 2D net ↔ 3D gem</div>
         </div>
         <div class="sim-tabs" id="fab-mode-tabs">
           <button class="sim-tab active" data-fab="wireframe">① Ball-and-Rod Wireframe</button>
@@ -1652,7 +1652,7 @@
       </div>
 
       <details class="math-drawer">
-        <summary>Formal Statements: Facet Stability Margin &amp; Mirror-Twin Tower Theorem (Theorem 5.3 &amp; Proposition 5.4)</summary>
+        <summary>Formal Statements: Facet Stability Margin &amp; Mirror-Twin Tower Theorem (Proposition 5.2, Theorem 5.3 &amp; Proposition 5.4)</summary>
         <div class="drawer-body">
           <p>
             <strong>Resting Stability (Definition 5.1 &amp; Proposition 5.2):</strong> A facet $F \subset \partial\mathcal{G}_\lambda(S)$ is statically stable under gravity iff the orthogonal projection $\pi_F(\mathbf{c}(\lambda))$ lies in the strict interior of $F$ ($d_{\mathrm{stab}} > 0$), giving single-block critical tipping angle $\theta_{\mathrm{tip}}^{(1)} = \arctan(d_{\mathrm{stab}}/h_F(\lambda))$ toward the nearest edge of $F$. Rescaling from $\lambda=1$ to $\lambda_{\mathrm{cube}}=0.20$ increases stable facets across $\mathcal{M}_4$ from $6{,}378/14{,}824$ ($43.0\%$) to $11{,}044/14{,}824$ ($74.5\%$).
@@ -1667,7 +1667,7 @@
       <div class="simulator-card" id="sim-stacking">
         <div class="sim-header">
           <div class="sim-title"><span class="live-dot"></span> Interactive Simulator 5 · Mirror-Twin Tower Assembler &amp; Tilting-Table Topple Lab</div>
-          <div class="sim-hint"><a class="sim-paper-badge" href="../paperC.pdf" target="_blank" rel="noopener">📄 Paper C · §5, Thm. 5.3, Prop. 5.4 &amp; Fig. 7</a> Drop blocks to assemble tower · Tilt table past $\theta_{\mathrm{tip}}^{(1)}$ to topple</div>
+          <div class="sim-hint"><a class="sim-paper-badge" href="../paperC.pdf" target="_blank" rel="noopener">📄 Paper C · §5, Props. 5.2–5.4, Thm. 5.3 &amp; Fig. 7</a> Drop blocks to assemble tower · Tilt table past $\theta_{\mathrm{tip}}^{(1)}$ to topple</div>
         </div>
         <div class="sim-controls">
           <div class="ctrl-group">
@@ -1924,7 +1924,7 @@
                 <td><strong>Mirror-Twin Vertical Towers</strong></td>
                 <td>$48 / 880$ ($5.5\%$)</td>
                 <td>Max projected footprint $A_{xy}=5$ ($17$ knight's-move)</td>
-                <td>#763 (0-idx #762), #603, #774</td>
+                <td>#763, #603, #774</td>
               </tr>
             </tbody>
           </table>

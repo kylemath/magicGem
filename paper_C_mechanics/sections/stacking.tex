@@ -39,7 +39,7 @@ which inverts the polyhedron through the origin in $\R^3$ and pairs every slante
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{figures/fig_mirror_stacking.pdf}
-\caption{Mirror-twin facet locking and periodic vertical towers. (a)~Four-block alternating tower of square \#763 at the cubic 3D-print scale $\lambda=0.20$, alternating $\mathcal G_\lambda(S)$ (green) with its mirror twin $\mathcal G_\lambda(r^2\overline S)=-\mathcal G_\lambda(S)$ (blue); the golden contact joints are the centred knight's-move squares $\{13,14,15,16\}$ and $\{1,2,3,4\}$, which meet with $100\%$ vertex congruence and keep the column's centre of mass on the vertical $z$-axis (red dashed). (b)~Top-down $(x,y)$ footprint of square \#763 showing the dual knight's-move squares of area $A_{xy}=5$ and 2D footprint inradius $r=\sqrt{5}/2\approx1.12$ (while the 3D tilted-plane stability margin from $\mathbf c_0$ is $d_{\mathrm{stab}}=0.969$ at $\lambda=0.20$). (c)~Two-dimensional side-elevation joint and tipping schematic comparing the $2\theta_{\mathrm{joint}}=22.6^\circ$ wedge mismatch of unrotated same-gem stacking against flush mirror-twin locking ($\mathbf n_+^*=-\mathbf n_+$) on a $\theta_{\mathrm{joint}}=11.3^\circ$ base plinth. (d)~Census of critical tipping angles $\theta_{\mathrm{tip}}$ over all $14{,}824$ facets at $\lambda=0.20$ and $\lambda=1.0$.}
+\caption{Mirror-twin facet locking and periodic vertical towers. (a)~Four-block alternating tower of square \#763 at $\lambda=0.20$, alternating $\mathcal G_\lambda(S)$ (green) with its mirror twin $\mathcal G_\lambda(r^2\overline S)=-\mathcal G_\lambda(S)$ (blue) along the golden knight's-move contact facets $\{13,14,15,16\}$ and $\{1,2,3,4\}$ to keep the column's centre of mass on the $z$-axis (red dashed). (b)~Top-down $(x,y)$ footprint of square \#763 showing the dual knight's-move squares of area $A_{xy}=5$ and 2D inradius $r=\sqrt{5}/2\approx1.12$ ($d_{\mathrm{stab}}=0.969$ in the tilted plane at $\lambda=0.20$). (c)~Side-elevation schematic comparing the $2\theta_{\mathrm{joint}}=22.6^\circ$ wedge mismatch of same-gem stacking against flush mirror-twin locking ($\mathbf n_+^*=-\mathbf n_+$) on an $11.3^\circ$ base plinth. (d)~Census of critical tipping angles $\theta_{\mathrm{tip}}$ over all $14{,}824$ facets at $\lambda=0.20$ and $\lambda=1.0$.}
 \label{fig:mirror-stacking}
 \end{figure}
 
@@ -105,18 +105,18 @@ Because square \#763 satisfies $\overline S=hS$ ($z(-x,y)=-z(x,y)$), its 3D gem 
 \caption{Representative order-four Magic Gems from the $17$ classes (\#603, \#763, \#768, \#774, \#779, \#785, \#788, \#791, \#792, \#818, \#824, \#828, \#836, \#837, \#839, \#842, \#844) achieving the maximum projected contact area $A_{xy}=5$ via centred knight's-move square facets $F_+$ and $F_-$ (\Cref{prop:knights-move}). Plane equations $(a,b,c,d)$ are given in doubled coordinates $aX+bY+cZ+d=0$. ``Same-gem $\parallel$'' indicates whether $\mathbf n_-=-\mathbf n_+$; stability margins $d_{\mathrm{stab}}$ and single-block critical tipping angles $\theta_{\mathrm{tip}}^{(1)}$ (\Cref{def:stability}) are reported for the upper facet at $\lambda=0.20$.}
 \label{tab:knights-move}
 \small
-\setlength{\tabcolsep}{4.5pt}
-\begin{tabular}{r r c c c c c c}
+\setlength{\tabcolsep}{5.0pt}
+\begin{tabular}{r c c c c c c}
 \toprule
-1-idx & 0-idx & Group & Upper $F_+$ plane & Lower $F_-$ plane & Same-gem $\parallel$ & $d_{\mathrm{stab}}$ ($\lambda=0.2$) & $\theta_{\mathrm{tip}}^{(1)}$ ($\lambda=0.2$)\\
+Gem & Group & Upper $F_+$ plane & Lower $F_-$ plane & Same-gem $\parallel$ & $d_{\mathrm{stab}}$ ($\lambda=0.2$) & $\theta_{\mathrm{tip}}^{(1)}$ ($\lambda=0.2$)\\
 \midrule
-\#603 & 602 & VI & $(2,-9,5,-50)$ & $(-2,-9,-5,-50)$ & No  & $1.020$ & $45.39^\circ$\\
-\#763 & 762 & VI & $(4,-3,5,-60)$ & $(-4,-3,-5,-60)$ & No  & $0.969$ & $39.35^\circ$\\
-\#768 & 767 & II & $(0,-1,1,-12)$ & $(-4,-3,-5,-60)$ & No  & $0.973$ & $39.24^\circ$\\
-\#774 & 773 & VI & $(1,0,1,-12)$  & $(-1,0,-1,-12)$  & Yes & $0.931$ & $38.35^\circ$\\
-\#791 & 790 & VI & $(-3,-4,5,-60)$& $(-3,4,-5,-60)$  & No  & $0.969$ & $39.35^\circ$\\
-\#792 & 791 & VI & $(0,-1,1,-12)$ & $(0,1,-1,-12)$   & Yes & $0.931$ & $38.35^\circ$\\
-\#837 & 836 & VI & $(4,-3,5,-60)$ & $(4,3,-5,-60)$   & No  & $0.962$ & $38.94^\circ$\\
+\#603 & VI & $(2,-9,5,-50)$ & $(-2,-9,-5,-50)$ & No  & $1.020$ & $45.39^\circ$\\
+\#763 & VI & $(4,-3,5,-60)$ & $(-4,-3,-5,-60)$ & No  & $0.969$ & $39.35^\circ$\\
+\#768 & II & $(0,-1,1,-12)$ & $(-4,-3,-5,-60)$ & No  & $0.973$ & $39.24^\circ$\\
+\#774 & VI & $(1,0,1,-12)$  & $(-1,0,-1,-12)$  & Yes & $0.931$ & $38.35^\circ$\\
+\#791 & VI & $(-3,-4,5,-60)$& $(-3,4,-5,-60)$  & No  & $0.969$ & $39.35^\circ$\\
+\#792 & VI & $(0,-1,1,-12)$ & $(0,1,-1,-12)$   & Yes & $0.931$ & $38.35^\circ$\\
+\#837 & VI & $(4,-3,5,-60)$ & $(4,3,-5,-60)$   & No  & $0.962$ & $38.94^\circ$\\
 \bottomrule
 \end{tabular}
 \end{table}
