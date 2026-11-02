@@ -10521,60 +10521,100 @@
         "upgraded_lp22_settle_pct": 100.0
       }
     },
+    "ablation_study": {
+      "n4": {
+        "trials": 200,
+        "0_continuous_2d_greedy_snap_pct": 0.0,
+        "1_kawasaki_2cycle_quench_pct": 20.0,
+        "2_vacancy_3cycle_sa_pct": 32.5,
+        "3_spin_ice_lp22_quench_pct": 29.0,
+        "4_t1_eshelby_6kicks_pct": 44.0,
+        "5_plane_glide_18kicks_pct": 58.0,
+        "6_wales_doye_reanchored_full_pct": 100.0
+      },
+      "n5": {
+        "trials": 100,
+        "0_continuous_2d_greedy_snap_pct": 0.0,
+        "1_kawasaki_2cycle_quench_pct": 1.0,
+        "2_vacancy_3cycle_sa_pct": 0.0,
+        "3_spin_ice_lp22_quench_pct": 1.0,
+        "4_t1_eshelby_6kicks_pct": 2.0,
+        "5_plane_glide_18kicks_pct": 6.0,
+        "6_wales_doye_reanchored_full_pct": 100.0
+      }
+    },
     "multi_order_upgraded": {
       "n3": {
         "n": 3,
         "trials": 200,
+        "nullspace_dim": 2,
+        "constraint_rank": 6,
+        "maxwell_calladine_ratio": 0.333,
         "success_count": 200,
         "success_pct": 100.0,
         "mean_descents": 5.1,
         "mean_restarts": 0.0,
-        "mean_ms": 0.1
+        "mean_ms": 0.12
       },
       "n4": {
         "n": 4,
         "trials": 200,
+        "nullspace_dim": 7,
+        "constraint_rank": 8,
+        "maxwell_calladine_ratio": 0.875,
         "success_count": 200,
         "success_pct": 100.0,
         "mean_descents": 52.9,
         "mean_restarts": 0.7,
-        "mean_ms": 6.04
+        "mean_ms": 5.67
       },
       "n5": {
         "n": 5,
         "trials": 100,
+        "nullspace_dim": 14,
+        "constraint_rank": 10,
+        "maxwell_calladine_ratio": 1.4,
         "success_count": 100,
         "success_pct": 100.0,
         "mean_descents": 466.6,
         "mean_restarts": 8.03,
-        "mean_ms": 133.88
+        "mean_ms": 122.88
       },
       "n6": {
         "n": 6,
         "trials": 100,
+        "nullspace_dim": 23,
+        "constraint_rank": 12,
+        "maxwell_calladine_ratio": 1.917,
         "success_count": 100,
         "success_pct": 100.0,
         "mean_descents": 439.6,
         "mean_restarts": 7.16,
-        "mean_ms": 231.03
+        "mean_ms": 216.8
       },
       "n7": {
         "n": 7,
         "trials": 100,
+        "nullspace_dim": 34,
+        "constraint_rank": 14,
+        "maxwell_calladine_ratio": 2.429,
         "success_count": 100,
         "success_pct": 100.0,
         "mean_descents": 299.3,
         "mean_restarts": 4.58,
-        "mean_ms": 263.3
+        "mean_ms": 242.61
       },
       "n8": {
         "n": 8,
         "trials": 100,
+        "nullspace_dim": 47,
+        "constraint_rank": 16,
+        "maxwell_calladine_ratio": 2.938,
         "success_count": 100,
         "success_pct": 100.0,
         "mean_descents": 335.3,
         "mean_restarts": 5.0,
-        "mean_ms": 479.82
+        "mean_ms": 426.26
       }
     }
   }

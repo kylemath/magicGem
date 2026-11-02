@@ -152,10 +152,10 @@ def make_fig1_spectral(data: dict) -> None:
 
     ax1.text(
         1.5, -0.72,
-        r"$\langle X,Z\rangle = 0,\; \langle Y,Z\rangle = 0,\; R_{D_+} = 0,\; R_{D_-} = 0$ ($E_{\mathrm{low}}=0$)"
+        r"Macroscopic Torque/Dipole Balance: $\langle X,Z\rangle = \langle Y,Z\rangle = R_{D_\pm} = 0$ ($E_{\mathrm{low}}=0$)"
         + "\n"
-        + r"Yet $\mathcal{H}_{\mathrm{line}}(S_{\mathrm{low}}) = \sum R_L^2 = 1,584 > 0$ (5D high-mode residual)",
-        ha="center", va="center", fontsize=8.1,
+        + r"Fails via Optical-Phonon Blindness: $\mathcal{H}_{\mathrm{line}}(S_{\mathrm{low}}) = 1,584 > 0$ ($2n-3=5\mathrm{D}$ residual)",
+        ha="center", va="center", fontsize=7.7,
         bbox=dict(boxstyle="round,pad=0.3", facecolor="#f8f9fa", edgecolor="#adb5bd"),
     )
     ax1.set_xticks(range(4))
@@ -377,12 +377,12 @@ def make_fig4_s9_landscape() -> None:
     )
     ax1.text(
         1.0, -0.82,
-        r"Strict local minimum under all 36 $2$-cycles ($\min \Delta\mathcal{H}_{\mathrm{line}} = +4$)"
+        r"Kawasaki $2$-exchange ($\min \Delta\mathcal{H} = +4$) & Zener $3$-ring ($\min \Delta\mathcal{H} = +8$) FAIL"
         + "\n"
-        + r"and all 168 $3$-cycles ($\min \Delta\mathcal{H}_{\mathrm{line}} = +8$). Unique $(2,2)$ escape ($1/378$):"
+        + r"(break row conservation $\to$ monopole defects). Unique Spin-Ice $(2,2)$ loop"
         + "\n"
-        + r"row-preserving $(6\leftrightarrow 7)(3\leftrightarrow 4) \to \mathcal{H}_{\mathrm{line}}=0$ ($100\%$ $S_9$ basin)!",
-        ha="center", va="center", fontsize=7.6,
+        + r"$(6\leftrightarrow 7)(3\leftrightarrow 4)$ preserves row flux & cancels column dipole $\to \mathcal{H}_{\mathrm{line}}=0$!",
+        ha="center", va="center", fontsize=7.5,
         bbox=dict(boxstyle="round,pad=0.28", facecolor="#fdf0f6", edgecolor="#e7298a"),
     )
 
@@ -502,17 +502,17 @@ def make_fig5_s16_descent(data: dict) -> None:
 def make_fig6_bubble_trinity(data: dict) -> None:
     sec5 = data["section5_bubble_trinity"]
     regimes = sec5["regime_metrics"]
-    bench = sec5["solver_benchmarks"]
+    ablation = sec5["ablation_study"]
 
-    fig = plt.figure(figsize=(11.8, 4.4))
-    gs = fig.add_gridspec(1, 2, width_ratios=[1.1, 1.0], wspace=0.34)
+    fig = plt.figure(figsize=(12.4, 4.6))
+    gs = fig.add_gridspec(1, 2, width_ratios=[1.02, 1.18], wspace=0.52)
 
     # Panel (a): Continuous Bubble-Trinity induced energy decay across Regimes I-IV
     ax0 = fig.add_subplot(gs[0, 0])
     styles = {
-        "I_Frozen_Lattice": ("Regime I: Frozen Lattice ($k_w=7.0, k_f=0$)", "#7570b3", "--", "s"),
-        "II_Slow_Drift": ("Regime II: Slow Drift ($k_w=2.6, k_f=1.0$)", "#2b5c8f", "-.", "^"),
-        "III_Field_Storm": ("Regime III: Field Storm ($k_w=0.8, k_f=3.2$)", "#d95f02", "-", "o"),
+        "I_Frozen_Lattice": ("Regime I: Frozen Crystal ($k_w=7.0, k_f=0$)", "#7570b3", "--", "s"),
+        "II_Slow_Drift": ("Regime II: Elastic Phonon Drift ($k_w=2.6, k_f=1.0$)", "#2b5c8f", "-.", "^"),
+        "III_Field_Storm": ("Regime III: Convective Melt ($k_w=0.8, k_f=3.2$)", "#d95f02", "-", "o"),
         "IV_Centrifugal_Balance": ("Regime IV: Centrifugal Balance ($k_s=0.85$)", "#1b9e77", "-", "D"),
     }
     steps = [10 * i for i in range(25)]
@@ -521,49 +521,64 @@ def make_fig6_bubble_trinity(data: dict) -> None:
         ax0.plot(steps, y, color=col, linestyle=ls, marker=mk, markersize=4.2,
                  markevery=3, linewidth=1.7, label=label)
 
+    ax0.annotate(
+        "Kernel energy drops $37.5\\%$,\nyet greedy snapping fails ($0\\%$)\nvia hard-core eviction cascades",
+        xy=(90, 1258), xytext=(102, 1385),
+        arrowprops=dict(arrowstyle="->", color="#b2182b", lw=1.2),
+        fontsize=7.1, fontweight="bold", color="#8c1120",
+        bbox=dict(boxstyle="round,pad=0.22", facecolor="#fff5f5", edgecolor="#b2182b"),
+    )
+
     ax0.set_xlabel(r"Continuous Langevin integration step $t$ ($\Delta t = 0.025$)")
     ax0.set_ylabel(r"Kernel-induced line Hamiltonian $\mathcal{H}_{\mathrm{ind}}(t)$")
-    ax0.set_title(r"(a) Continuous Bubble-Trinity Relaxation (Regimes I--IV)", fontweight="bold", pad=8)
+    ax0.set_title(r"(a) Continuous Bubble-Trinity Regimes & Snapping Failure", fontweight="bold", pad=8)
     ax0.grid(True, linestyle=":", alpha=0.45)
-    ax0.legend(loc="lower left", frameon=True, framealpha=0.92, fontsize=7.8)
+    ax0.legend(loc="lower left", frameon=True, framealpha=0.92, fontsize=7.4)
 
-    # Panel (b): Ground-state synthesis rate vs step budget across all 3 solver tiers
+    # Panel (b): Contrasting Failed vs. Successful Physical Relaxation Mechanisms (Ablation Hierarchy)
     ax1 = fig.add_subplot(gs[0, 1])
-    budgets = sorted(int(k) for k in bench.keys())
-    sa2 = [bench[str(b)]["sa_2cycle_only_pct"] for b in budgets]
-    hyb = [bench[str(b)]["hybrid_settle_pct"] for b in budgets]
-    upg = [bench[str(b)]["upgraded_lp22_settle_pct"] for b in budgets]
+    tiers = [
+        ("0_continuous_2d_greedy_snap_pct", "0. Colloidal Drift + Snap\n(Hard-core eviction cascade)"),
+        ("1_kawasaki_2cycle_quench_pct", "1. Kawasaki 2-Spin Quench\n(Trapped by $c_{ab}d^2$ barrier)"),
+        ("2_vacancy_3cycle_sa_pct", "2. Zener 3-Ring Vacancy SA\n(Monopole defect + thermal drift)"),
+        ("3_spin_ice_lp22_quench_pct", "3. Spin-Ice $(2,2)$ Loop Quench\n($100\\%$ $S_9$; 1-pass quench)"),
+        ("4_t1_eshelby_6kicks_pct", "4. $T1$ Foam / Eshelby STZ\n(Top-$40$ quadrupoles, 1 restart)"),
+        ("5_plane_glide_18kicks_pct", "5. + Crystallographic Slip Glide\n(Row/col plane glide, 1 restart)"),
+        ("6_wales_doye_reanchored_full_pct", "6. Wales-Doye / Chaperonin\nRe-Anchored Basin-Hopping"),
+    ]
+    y_pos = np.arange(len(tiers))
+    n4_rates = [ablation["n4"][k] for k, _ in tiers]
+    n5_rates = [ablation["n5"][k] for k, _ in tiers]
 
-    x = np.arange(len(budgets))
-    w = 0.26
-    b1 = ax1.bar(x - w, sa2, width=w, color="#8da0cb", edgecolor="white",
-                 label="Unbiased $2+3$-Cycle Baseline SA")
-    b2 = ax1.bar(x, hyb, width=w, color="#d95f02", alpha=0.88, edgecolor="white",
-                 label="Stress-Guided $2+3$-Cycle SA")
-    b3 = ax1.bar(x + w, upg, width=w, color="#1b9e77", edgecolor="white",
-                 label="Stress-Guided $(2+3+(2,2))$ + Polish")
+    h = 0.36
+    b4 = ax1.barh(y_pos - h / 2, n4_rates, height=h, color="#2b5c8f", edgecolor="white",
+                  label="Order $n=4$ ($S_{16}$, $200$ trials)")
+    b5 = ax1.barh(y_pos + h / 2, n5_rates, height=h, color="#1b9e77", edgecolor="white",
+                  label="Order $n=5$ ($S_{25}$, $100$ trials)")
 
-    for rect in b1:
-        h = rect.get_height()
-        ax1.text(rect.get_x() + rect.get_width() / 2, h + 1.0, f"{h:.0f}%",
-                 ha="center", va="bottom", fontsize=6.8, color="#3b4d71")
-    for rect in b2:
-        h = rect.get_height()
-        ax1.text(rect.get_x() + rect.get_width() / 2, h + 1.0, f"{h:.0f}%",
-                 ha="center", va="bottom", fontsize=6.8, color="#b34800")
-    for rect in b3:
-        h = rect.get_height()
-        ax1.text(rect.get_x() + rect.get_width() / 2, h + 1.0, f"{h:.0f}%",
-                 ha="center", va="bottom", fontsize=7.0, color="#0f6648", fontweight="bold")
+    for idx, (r4, r5) in enumerate(zip(n4_rates, n5_rates)):
+        c4 = "#8c1120" if r4 == 0 else ("#0f3c66" if r4 < 100 else "#0f6648")
+        fw = "bold" if r4 in (0.0, 100.0) else "normal"
+        ax1.text(r4 + 1.4, idx - h / 2, f"{r4:.1f}%", va="center", ha="left",
+                 fontsize=7.2, color=c4, fontweight=fw)
+        ax1.text(r5 + 1.4, idx + h / 2, f"{r5:.1f}%", va="center", ha="left",
+                 fontsize=7.2, color="#0f6648" if r5 == 100 else "#b34800",
+                 fontweight="bold" if r5 == 100 else "normal")
 
-    ax1.set_xticks(x)
-    ax1.set_xticklabels([f"{b:,}" for b in budgets])
-    ax1.set_ylim(0, 126)
-    ax1.set_xlabel("Discrete settling step budget $B$")
-    ax1.set_ylabel(r"Order-4 ground-state recovery rate ($\mathcal{H}_{\mathrm{line}}=0$, %)")
-    ax1.set_title(r"(b) Order-4 Synthesis: Baseline vs. $(2,2)$-Polished Settling", fontweight="bold", pad=8)
-    ax1.grid(True, axis="y", linestyle=":", alpha=0.45)
-    ax1.legend(loc="upper left", frameon=True, framealpha=0.92, fontsize=7.2)
+    ax1.axhline(2.5, color="#d95f02", linestyle="--", linewidth=1.1, alpha=0.8)
+    ax1.text(78, 2.05, "Failed 1/2/3-body\nprocesses", fontsize=7.0,
+             color="#b34800", fontstyle="italic", ha="center")
+    ax1.text(78, 3.45, "Cooperative 4-body loop,\nplane glide & re-anchoring", fontsize=7.0,
+             color="#0f6648", fontweight="bold", ha="center")
+
+    ax1.set_yticks(y_pos)
+    ax1.set_yticklabels([lbl for _, lbl in tiers], fontsize=7.3)
+    ax1.invert_yaxis()
+    ax1.set_xlim(0, 119)
+    ax1.set_xlabel(r"Ground-state synthesis rate ($\mathcal{H}_{\mathrm{line}}=0$, %)")
+    ax1.set_title(r"(b) Physical Mechanism Ablation: Failed vs. Successful Analogs", fontweight="bold", pad=8)
+    ax1.grid(True, axis="x", linestyle=":", alpha=0.45)
+    ax1.legend(loc="upper right", frameon=True, framealpha=0.92, fontsize=7.2)
 
     save_fig(fig, "fig6_bubble_trinity_regimes")
 
@@ -572,11 +587,12 @@ def make_fig7_dimensional_relief(data: dict) -> None:
     multi = data["section5_bubble_trinity"]["multi_order_upgraded"]
     orders = [3, 4, 5, 6, 7, 8]
     null_dims = [n * n - 2 * n - 1 for n in orders]
+    eta_mc = [(n * n - 2 * n - 1) / (2.0 * n) for n in orders]
     restarts = [multi[f"n{n}"]["mean_restarts"] for n in orders]
     descents = [multi[f"n{n}"]["mean_descents"] for n in orders]
     times_ms = [multi[f"n{n}"]["mean_ms"] for n in orders]
 
-    fig = plt.figure(figsize=(11.4, 4.3))
+    fig = plt.figure(figsize=(11.6, 4.4))
     gs = fig.add_gridspec(1, 2, width_ratios=[1.08, 1.0], wspace=0.34)
 
     # Panel (a): Mean restarts and mean 2-cycle descents vs order n = 3..8
@@ -603,35 +619,35 @@ def make_fig7_dimensional_relief(data: dict) -> None:
                      fontsize=7.8, fontweight="bold", color="#a8135d")
 
     ax0.annotate(
-        "Peak frustration at $n=5$\n($8.03$ restarts, $466.6$ descents)",
-        xy=(5, 8.03), xytext=(6.05, 8.45),
+        "Isostatic crossover peak ($n=5$)\n$\\eta_{\\mathrm{MC}}=1.40$: $8.03$ restarts",
+        xy=(5, 8.03), xytext=(5.55, 8.65),
         arrowprops=dict(arrowstyle="->", color="#e7298a", lw=1.3),
-        fontsize=7.3, fontweight="bold", color="#a8135d",
-        bbox=dict(boxstyle="round,pad=0.24", facecolor="#fdf0f6", edgecolor="#e7298a"),
+        fontsize=7.0, fontweight="bold", color="#a8135d",
+        bbox=dict(boxstyle="round,pad=0.22", facecolor="#fdf0f6", edgecolor="#e7298a"),
     )
     ax0.annotate(
-        "Dimensional Relief ($n\\geq 6$):\nRestarts drop to $4.58$ ($n=7$)\nand $5.00$ ($n=8$) at $100\\%$ success",
-        xy=(7, 4.58), xytext=(5.35, 1.15),
+        "Maxwell-Calladine Floppy Relief ($n\\geq 6$):\n$\\eta_{\\mathrm{MC}} \\geq 1.92$ drops restarts to $4.58$ ($n=7$)\nand $5.00$ ($n=8$) at $100\\%$ convergence",
+        xy=(7, 4.58), xytext=(4.42, 1.05),
         arrowprops=dict(arrowstyle="->", color="#1b9e77", lw=1.3),
-        fontsize=7.6, fontweight="bold", color="#0f6648",
-        bbox=dict(boxstyle="round,pad=0.26", facecolor="#eefaf4", edgecolor="#1b9e77"),
+        fontsize=7.0, fontweight="bold", color="#0f6648",
+        bbox=dict(boxstyle="round,pad=0.22", facecolor="#eefaf4", edgecolor="#1b9e77"),
     )
 
     ax0.set_xticks(orders)
-    ax0.set_xticklabels([f"$n={n}$\n($S_{{{n*n}}}$)" for n in orders])
+    ax0.set_xticklabels([f"$n={n}$\n($\\eta={eta:.2f}$)" for n, eta in zip(orders, eta_mc)])
     ax0.set_ylim(-0.6, 11.2)
     ax0_r.set_ylim(-35, 620)
-    ax0.set_xlabel("Magic square order $n$ (100.0% ground-state recovery across all $n=3\\dots 8$)")
+    ax0.set_xlabel("Order $n$ and Maxwell-Calladine floppy ratio $\\eta_{\\mathrm{MC}} = (n^2-2n-1)/(2n)$")
     ax0.set_ylabel("Mean restarts required to reach $\\mathcal{H}_{\\mathrm{line}}=0$", color="#a8135d")
     ax0_r.set_ylabel("Mean $O(1)$ $2$-cycle descent loops", color="#2b5c8f")
-    ax0.set_title("(a) The Dimensional Relief Phenomenon ($n=3\\dots 8$)", fontweight="bold", pad=8)
+    ax0.set_title("(a) Isostatic Peak ($n=5$) & Floppy-Mode Relief ($n\\geq 6$)", fontweight="bold", pad=8)
     ax0.grid(True, linestyle=":", alpha=0.45)
 
     lines = l1 + l2
     labels = [l.get_label() for l in lines]
-    ax0.legend(lines, labels, loc="upper left", frameon=True, framealpha=0.92, fontsize=7.3)
+    ax0.legend(lines, labels, loc="upper left", frameon=True, framealpha=0.92, fontsize=7.2)
 
-    # Panel (b): Quadratic Nullspace Growth vs Linear Constraint Rank & Synthesis Time
+    # Panel (b): Quadratic Nullspace (Floppy Modes) vs Constraint Rank & Runtime
     ax1 = fig.add_subplot(gs[0, 1])
     ax1_r = ax1.twinx()
 
@@ -639,30 +655,30 @@ def make_fig7_dimensional_relief(data: dict) -> None:
     w = 0.34
     rank_vals = [2 * n for n in orders]
     b_null = ax1.bar(x - w / 2, null_dims, width=w, color="#1b9e77", edgecolor="white",
-                     label=r"Nullspace $\dim\ker(\widetilde{L}_n) = n^2-2n-1$")
+                     label=r"Floppy modes $\dim\ker(\widetilde{L}_n) = n^2-2n-1$")
     b_rank = ax1.bar(x + w / 2, rank_vals, width=w, color="#8da0cb", edgecolor="white",
-                     label=r"Constraint rank $\mathrm{rank}(\widetilde{L}_n) = 2n$")
+                     label=r"States of self-stress $\mathrm{rank}(\widetilde{L}_n) = 2n$")
     l_time = ax1_r.plot(x, times_ms, color="#d95f02", marker="D", markersize=5.5,
                         linewidth=2.0, label="Mean synthesis time (ms, right axis)")
 
-    for rect in b_null:
+    for rect, eta in zip(b_null, eta_mc):
         h = rect.get_height()
-        ax1.text(rect.get_x() + rect.get_width() / 2, h + 0.8, f"{int(h)}",
-                 ha="center", va="bottom", fontsize=7.3, fontweight="bold", color="#0f6648")
+        ax1.text(rect.get_x() + rect.get_width() / 2, h + 0.8, f"{int(h)}\n({eta:.1f}x)",
+                 ha="center", va="bottom", fontsize=6.6, fontweight="bold", color="#0f6648")
 
     ax1.set_xticks(x)
     ax1.set_xticklabels([f"$n={n}$" for n in orders])
-    ax1.set_ylim(0, 58)
-    ax1_r.set_ylim(0, 580)
-    ax1.set_xlabel("Magic square order $n$")
+    ax1.set_ylim(0, 62)
+    ax1_r.set_ylim(0, 560)
+    ax1.set_xlabel("Magic square order $n$ ($100.0\\%$ synthesis across all $n=3\\dots 8$)")
     ax1.set_ylabel("Subspace dimension in $\\mathbf{1}^\\perp \\subset \\mathbb{R}^{n^2-1}$")
     ax1_r.set_ylabel("Mean synthesis time per square (ms)", color="#b34800")
-    ax1.set_title("(b) Quadratic Nullspace Expansion vs. Runtime", fontweight="bold", pad=8)
+    ax1.set_title("(b) Maxwell-Calladine Floppy Modes vs. Self-Stress Rank", fontweight="bold", pad=8)
     ax1.grid(True, axis="y", linestyle=":", alpha=0.45)
 
     handles1, labels1 = ax1.get_legend_handles_labels()
     handles2, labels2 = ax1_r.get_legend_handles_labels()
-    ax1.legend(handles1 + handles2, labels1 + labels2, loc="upper left", frameon=True, framealpha=0.92, fontsize=7.2)
+    ax1.legend(handles1 + handles2, labels1 + labels2, loc="upper left", frameon=True, framealpha=0.92, fontsize=7.1)
 
     save_fig(fig, "fig7_multi_order_dimensional_relief")
 
