@@ -170,9 +170,9 @@ Email: kyle.mathewson@ualberta.ca
 - **Article Type:** Research Article / Original Article
 - **Title:** `Balance in Inequality: Testing the Physical Equilibrium, Precession, and Structural Stability of Magic Gems`
 - **Running Head (Short Title):** `Balance in Inequality: Mechanics of Magic Gems`
-- **Manuscript PDF to Upload:** `/Users/fulkanjou/magicGem/paperC.pdf` (26 pages, 7 figures, 5 tables)
+- **Manuscript PDF to Upload:** `/Users/fulkanjou/magicGem/paperC.pdf` (23 pages, 7 figures, 5 tables)
 - **Ancillary / Supplemental Archive:** `/Users/fulkanjou/magicGem/paperC_arxiv.tar.gz`
-- **Interactive Companion & 3D Fabrication Gallery:** `https://github.com/kylemath/magicGem` and `https://kylemath.github.io/magicGemWeb/3dModels/index.html`
+- **Interactive Companion & 3D Fabrication Gallery:** `https://kylemath.github.io/magicGem/` and `https://kylemath.github.io/magicGem/3dModels/index.html`
 - **MSC 2020 Classifications:** `52B10` (Primary); `00A66`, `05B15`, `52B15`, `70E15`, `11J70` (Secondary)
 - **Keywords:** `magic squares`, `polyhedral sculpture`, `3D printing and papercraft unfolding`, `Durer Melencolia I`, `rigid-body mechanics`, `convex layers`, `wireframe strut networks`
 - **Open Access Selection:** Choose **Standard Subscription Track ($0 cost)** + Green Open Access on arXiv (`paperC_arxiv.tar.gz`) and `magicGemWeb` *(Note: UAlberta CRKN provides a 25% APC discount if optional Open Select Gold OA is chosen, whereas the subscription + arXiv Green OA route is 100% free at $0).*
