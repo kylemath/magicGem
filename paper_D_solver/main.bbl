@@ -1,0 +1,108 @@
+\begin{thebibliography}{10}
+
+\bibitem{andrews1960magic}
+W.~S. Andrews.
+\newblock {\em Magic Squares and Cubes}.
+\newblock Dover Publications, 2nd edition, 1960.
+
+\bibitem{berlekamp2004winning}
+Elwyn~R. Berlekamp, John~H. Conway, and Richard~K. Guy.
+\newblock {\em Winning Ways for Your Mathematical Plays, Volume 4}.
+\newblock A K Peters, Wellesley, MA, 2nd edition, 2004.
+
+\bibitem{cameron2013signatura}
+Ian Cameron, Adam Rogers, and Peter~D. Loly.
+\newblock Signatura of magic and {L}atin integer squares: isentropic clans and
+  indexing.
+\newblock {\em Discussiones Mathematicae Probability and Statistics},
+  33(1-2):121--149, 2013.
+
+\bibitem{loubere1693}
+Simon de~La~Loub{\`e}re.
+\newblock {\em A New Historical Relation of the Kingdom of Siam}.
+\newblock T. Horne, London, 1693.
+\newblock English translation of \emph{Du Royaume de Siam}, Paris, 1691.
+
+\bibitem{diaconis1988group}
+Persi Diaconis.
+\newblock Group representations in probability and statistics.
+\newblock {\em Institute of Mathematical Statistics Lecture Notes---Monograph
+  Series}, 11:1--198, 1988.
+
+\bibitem{dudeney1917amusements}
+Henry~E. Dudeney.
+\newblock {\em Amusements in Mathematics}.
+\newblock Thomas Nelson and Sons, London, 1917.
+
+\bibitem{frenicle1693}
+Bernard Fr{\'e}nicle~de Bessy.
+\newblock Des quarrez ou tables magiques.
+\newblock In {\em Divers ouvrages de math{\'e}matique et de physique, par
+  Messieurs de l'Acad{\'e}mie Royale des Sciences}. Imprimerie Royale, Paris,
+  1693.
+
+\bibitem{kirkpatrick1983optimization}
+Scott Kirkpatrick, C.~Daniel Gelatt, and Mario~P. Vecchi.
+\newblock Optimization by simulated annealing.
+\newblock {\em Science}, 220(4598):671--680, 1983.
+
+\bibitem{mathewson2026mechanics}
+Kyle~Elliott Mathewson.
+\newblock Balance in inequality: Testing the physical equilibrium, precession,
+  and structural stability of magic gems, 2026.
+\newblock Companion paper~III, arXiv preprint (submit/8319388) and submitted to
+  \emph{Journal of Mathematics and the Arts}.
+
+\bibitem{mathewson2026moments}
+Kyle~Elliott Mathewson.
+\newblock Bivariate polynomial moments and {P}rouhet--{T}arry--{E}scott
+  identities of semi-magic squares, 2026.
+\newblock Companion paper~II, arXiv preprint.
+
+\bibitem{mathewson2026gems}
+Kyle~Elliott Mathewson.
+\newblock Magic gems: Convex hulls of lifted magic squares.
+\newblock {\em arXiv preprint arXiv:2512.09170}, 2026.
+\newblock Companion paper~I.
+
+\bibitem{mathewson2026physicalsolver}
+Kyle~Elliott Mathewson.
+\newblock \texttt{physicalSolver}: Interactive spectral decomposition,
+  multiscale window entropy, and bubble-trinity langevin laboratory for magic
+  squares.
+\newblock \url{https://kylemath.github.io/magicGem/web/physicalSolver/} and
+  \url{https://github.com/kylemath/magicGem}, 2026.
+
+\bibitem{mezard1987spin}
+Marc M{\'e}zard, Giorgio Parisi, and Miguel~Angel Virasoro.
+\newblock {\em Spin Glass Theory and Beyond}.
+\newblock World Scientific, Singapore, 1987.
+
+\bibitem{ollerenshaw1998most}
+Kathleen Ollerenshaw and David~S. Br{\'e}e.
+\newblock {\em Most-Perfect Pandiagonal Magic Squares: Their Construction and
+  Enumeration}.
+\newblock Institute of Mathematics and its Applications, Southend-on-Sea, 1998.
+
+\bibitem{rogers2004inertia}
+Adam Rogers and Peter~D. Loly.
+\newblock The inertia tensor of a magic cube.
+\newblock {\em American Journal of Physics}, 72(6):786--789, 2004.
+
+\bibitem{rogers2005multipole}
+Adam Rogers and Peter~D. Loly.
+\newblock The electric multipole expansion for a magic cube.
+\newblock {\em European Journal of Physics}, 26(5):809--813, 2005.
+
+\bibitem{wales2003energy}
+David~J. Wales.
+\newblock {\em Energy Landscapes: With Applications to Clusters, Biomolecules
+  and Glasses}.
+\newblock Cambridge University Press, Cambridge, 2003.
+
+\bibitem{whitesides2004writing}
+George~M. Whitesides.
+\newblock Whitesides' group: Writing a paper.
+\newblock {\em Advanced Materials}, 16(15):1375--1377, 2004.
+
+\end{thebibliography}

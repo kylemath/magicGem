@@ -529,7 +529,75 @@ def verify_section4_swap_landscape() -> dict:
     reach_magic_3 = int(np.sum(E_std[attractor] == 0))
     print(f"  n=3 Steepest-descent basin of the 8 Lo Shu ground states: {reach_magic_3}/362,880 ({100*reach_magic_3/len(all_perms):.2f}%)")
 
-    # 2. Order n = 4 Monte Carlo / steepest-descent & 3-cycle escape benchmark (2,000 random starts)
+    # Test line-preserving (2,2) double swaps on the 232 spurious local minima of S_9
+    # and on the canonical antipodal trap S_trap^(3) = [[2,6,7],[9,5,1],[3,4,8]]:
+    lp22_3 = []
+    for r1 in range(3):
+        for r2 in range(r1 + 1, 3):
+            for c1 in range(3):
+                for c2 in range(c1 + 1, 3):
+                    for c3 in range(3):
+                        for c4 in range(c3 + 1, 3):
+                            lp22_3.append((r1 * 3 + c1, r1 * 3 + c2, r2 * 3 + c3, r2 * 3 + c4))
+    for c1 in range(3):
+        for c2 in range(c1 + 1, 3):
+            for r1 in range(3):
+                for r2 in range(r1 + 1, 3):
+                    for r3 in range(3):
+                        for r4 in range(r3 + 1, 3):
+                            lp22_3.append((r1 * 3 + c1, r2 * 3 + c1, r3 * 3 + c2, r4 * 3 + c2))
+
+    # All 378 disjoint (2,2) double swaps on S_trap^(3) = [[2,6,7],[9,5,1],[3,4,8]]
+    s_trap_3 = [2 - 5, 6 - 5, 7 - 5, 9 - 5, 5 - 5, 1 - 5, 3 - 5, 4 - 5, 8 - 5]
+    all_22_disjoint = []
+    for i in range(len(pairs)):
+        a, b = pairs[i]
+        for j in range(i + 1, len(pairs)):
+            c, d = pairs[j]
+            if len({a, b, c, d}) == 4:
+                all_22_disjoint.append((a, b, c, d))
+    assert len(all_22_disjoint) == 378
+    s_trap_escaping_22 = []
+    for a, b, c, d in all_22_disjoint:
+        q = s_trap_3[:]
+        q[a], q[b] = q[b], q[a]
+        q[c], q[d] = q[d], q[c]
+        e_q = int(4 * np.sum((A @ np.array(q)) ** 2))
+        if e_q < 8:
+            s_trap_escaping_22.append({"cells": [a, b, c, d], "values": [s_trap_3[a]+5, s_trap_3[b]+5, s_trap_3[c]+5, s_trap_3[d]+5], "new_H_line": e_q})
+    assert len(s_trap_escaping_22) == 1, f"Expected unique escaping (2,2) swap, found {len(s_trap_escaping_22)}"
+    print(f"  n=3 Canonical trap S_trap^(3) escaping disjoint (2,2) swaps: {len(s_trap_escaping_22)}/378 -> {s_trap_escaping_22[0]}")
+
+    # Check how many of the 232 spurious local minima of S_9 escape via the 18 line-preserving (2,2) moves:
+    escaped_spurious_3_by_lp22 = 0
+    lp22_next = steepest_next.copy()
+    for idx in spurious_indices:
+        p = list(all_perms[idx])
+        e0 = int(E_std[idx])
+        best_q_idx = idx
+        best_e = e0
+        for a, b, c, d in lp22_3:
+            q = p[:]
+            q[a], q[b] = q[b], q[a]
+            q[c], q[d] = q[d], q[c]
+            e_q = int(np.sum((A @ np.array(q)) ** 2))
+            if e_q < best_e:
+                best_e = e_q
+                best_q_idx = perm_to_idx[tuple(q)]
+        if best_e < e0:
+            escaped_spurious_3_by_lp22 += 1
+            lp22_next[idx] = best_q_idx
+
+    attractor_lp22 = np.arange(len(all_perms), dtype=np.int32)
+    for _ in range(40):
+        attractor_lp22 = lp22_next[attractor_lp22]
+    reach_magic_3_lp22 = int(np.sum(E_std[attractor_lp22] == 0))
+    print(
+        f"  n=3 Spurious minima escaped by line-preserving (2,2) moves: {escaped_spurious_3_by_lp22}/{n_spurious_local_min_3}; "
+        f"combined steepest-descent + (2,2) basin: {reach_magic_3_lp22}/362,880 ({100*reach_magic_3_lp22/len(all_perms):.2f}%)"
+    )
+
+    # 2. Order n = 4 Monte Carlo / steepest-descent, 3-cycle & (2,2)-cycle escape benchmark (2,000 random starts)
     n4 = 4
     N4 = 16
     A4 = build_incidence_matrix(n4).astype(int)
@@ -537,6 +605,21 @@ def verify_section4_swap_landscape() -> dict:
     diag_L4 = np.diag(L4)
     pairs4 = [(a, b) for a in range(N4) for b in range(a + 1, N4)]
     triples4 = [(a, b, c) for a in range(N4) for b in range(a + 1, N4) for c in range(b + 1, N4)]
+    lp22_4 = []
+    for r1 in range(4):
+        for r2 in range(r1 + 1, 4):
+            for c1 in range(4):
+                for c2 in range(c1 + 1, 4):
+                    for c3 in range(4):
+                        for c4 in range(c3 + 1, 4):
+                            lp22_4.append((r1 * 4 + c1, r1 * 4 + c2, r2 * 4 + c3, r2 * 4 + c4))
+    for c1 in range(4):
+        for c2 in range(c1 + 1, 4):
+            for r1 in range(4):
+                for r2 in range(r1 + 1, 4):
+                    for r3 in range(4):
+                        for r4 in range(r3 + 1, 4):
+                            lp22_4.append((r1 * 4 + c1, r2 * 4 + c1, r3 * 4 + c2, r4 * 4 + c2))
 
     rng = random.Random(20261102)
     base_vals4 = [centered_height(s, 4) for s in range(1, 17)]
@@ -545,7 +628,9 @@ def verify_section4_swap_landscape() -> dict:
     greedy2_terminal_H = []
     greedy2_steps = []
     escaped_by_3cycle = 0
-    greedy23_success = 0
+    escaped_by_lp22 = 0
+    escaped_by_3_or_lp22 = 0
+    greedy2_plus_lp22_success = 0
 
     for _ in range(n_trials_4):
         z = base_vals4[:]
@@ -578,10 +663,9 @@ def verify_section4_swap_landscape() -> dict:
         greedy2_steps.append(steps)
         if e_term == 0:
             greedy2_success += 1
-            greedy23_success += 1
+            greedy2_plus_lp22_success += 1
         else:
             # Check if a 3-cycle can strictly decrease energy from this 2-cycle local minimum
-            r = A4 @ z_arr
             found_3 = False
             for a, b, c in triples4:
                 for p_new in ((z_arr[b], z_arr[c], z_arr[a]), (z_arr[c], z_arr[a], z_arr[b])):
@@ -595,12 +679,73 @@ def verify_section4_swap_landscape() -> dict:
             if found_3:
                 escaped_by_3cycle += 1
 
+            # Check if a line-preserving (2,2) double swap strictly decreases energy
+            found_22 = False
+            best_22_move = None
+            best_22_e = e_term
+            for a, b, c, d in lp22_4:
+                q = z_arr.copy()
+                q[a], q[b] = q[b], q[a]
+                q[c], q[d] = q[d], q[c]
+                eq = int(np.sum((A4 @ q) ** 2))
+                if eq < best_22_e:
+                    best_22_e = eq
+                    best_22_move = (a, b, c, d)
+                    found_22 = True
+            if found_22:
+                escaped_by_lp22 += 1
+            if found_3 or found_22:
+                escaped_by_3_or_lp22 += 1
+
+            # Continue steepest descent with line-preserving (2,2) fallback to see if it reaches E=0
+            z_cont = z_arr.copy()
+            while True:
+                e_c = int(np.sum((A4 @ z_cont) ** 2))
+                if e_c == 0:
+                    greedy2_plus_lp22_success += 1
+                    break
+                # Try 2-cycle
+                r_c = A4 @ z_cont
+                g_c = A4.T @ r_c
+                best_d = 0
+                best_p = None
+                for a, b in pairs4:
+                    c_ab = int(diag_L4[a] + diag_L4[b] - 2 * L4[a, b])
+                    d = int(z_cont[a] - z_cont[b])
+                    delta = -2 * d * int(g_c[a] - g_c[b]) + d * d * c_ab
+                    if delta < best_d:
+                        best_d = delta
+                        best_p = (a, b)
+                if best_p is not None:
+                    a, b = best_p
+                    z_cont[a], z_cont[b] = z_cont[b], z_cont[a]
+                    continue
+                # Try lp22
+                best_m = None
+                best_me = e_c
+                for a, b, c, d in lp22_4:
+                    q = z_cont.copy()
+                    q[a], q[b] = q[b], q[a]
+                    q[c], q[d] = q[d], q[c]
+                    eq = int(np.sum((A4 @ q) ** 2))
+                    if eq < best_me:
+                        best_me = eq
+                        best_m = (a, b, c, d)
+                if best_m is not None:
+                    a, b, c, d = best_m
+                    z_cont[a], z_cont[b] = z_cont[b], z_cont[a]
+                    z_cont[c], z_cont[d] = z_cont[d], z_cont[c]
+                else:
+                    break
+
     trapped_4 = n_trials_4 - greedy2_success
     print(
         f"  n=4 Greedy 2-cycle ({n_trials_4} random starts): ground-state E=0 reached in "
         f"{greedy2_success}/{n_trials_4} ({100*greedy2_success/n_trials_4:.2f}%), "
         f"mean terminal H_line={np.mean(greedy2_terminal_H):.1f}, "
-        f"trapped states with improving 3-cycle={escaped_by_3cycle}/{trapped_4} ({100*escaped_by_3cycle/max(1,trapped_4):.2f}%)"
+        f"escaped by 3-cycle={escaped_by_3cycle}/{trapped_4} ({100*escaped_by_3cycle/max(1,trapped_4):.2f}%), "
+        f"escaped by line-(2,2)={escaped_by_lp22}/{trapped_4} ({100*escaped_by_lp22/max(1,trapped_4):.2f}%), "
+        f"Greedy 2+(2,2) ground-state E=0={greedy2_plus_lp22_success}/{n_trials_4} ({100*greedy2_plus_lp22_success/n_trials_4:.2f}%)"
     )
 
     return {
@@ -612,8 +757,12 @@ def verify_section4_swap_landscape() -> dict:
             "spurious_local_minima_2cycle": n_spurious_local_min_3,
             "spurious_H_line_counts": {str(k): v for k, v in sorted(spurious_energies_centered.items())},
             "spurious_still_trapped_under_3cycles": still_trapped_after_3cycle,
+            "spurious_escaped_by_lp22": escaped_spurious_3_by_lp22,
+            "canonical_trap_unique_22_escape": s_trap_escaping_22[0],
             "steepest_descent_magic_basin_size": reach_magic_3,
             "steepest_descent_magic_basin_pct": round(100.0 * reach_magic_3 / len(all_perms), 4),
+            "steepest_descent_plus_lp22_basin_size": reach_magic_3_lp22,
+            "steepest_descent_plus_lp22_basin_pct": round(100.0 * reach_magic_3_lp22 / len(all_perms), 4),
         },
         "n4_benchmark": {
             "trials": n_trials_4,
@@ -624,6 +773,12 @@ def verify_section4_swap_landscape() -> dict:
             "greedy_2cycle_mean_steps": round(float(np.mean(greedy2_steps)), 2),
             "trapped_escaped_by_single_3cycle_count": escaped_by_3cycle,
             "trapped_escaped_by_single_3cycle_pct": round(100.0 * escaped_by_3cycle / max(1, trapped_4), 2),
+            "trapped_escaped_by_single_lp22_count": escaped_by_lp22,
+            "trapped_escaped_by_single_lp22_pct": round(100.0 * escaped_by_lp22 / max(1, trapped_4), 2),
+            "trapped_escaped_by_3_or_lp22_count": escaped_by_3_or_lp22,
+            "trapped_escaped_by_3_or_lp22_pct": round(100.0 * escaped_by_3_or_lp22 / max(1, trapped_4), 2),
+            "greedy_2_plus_lp22_magic_count": greedy2_plus_lp22_success,
+            "greedy_2_plus_lp22_magic_pct": round(100.0 * greedy2_plus_lp22_success / n_trials_4, 2),
             "terminal_H_histogram": {str(k): int(v) for k, v in sorted(Counter(greedy2_terminal_H).items())[:25]},
         },
     }
@@ -714,37 +869,191 @@ def verify_section5_bubble_trinity() -> dict:
             f"mean RMS disp={np.mean(traj_disp):.3f}"
         )
 
-    # Compare discrete Simulated Annealing (2-cycle + 3-cycle) success rate at n=4 across budgets
-    sa_budgets = [200, 500, 1000, 2500, 5000]
+    # Compare discrete Simulated Annealing tiers at n=4 across budgets
+    sa_budgets = [200, 500, 1000, 1500, 2500]
     sa_results = {}
     L4 = A4.T @ A4
     diag_L4 = np.diag(L4)
+    pairs4 = [(a, b) for a in range(16) for b in range(a + 1, 16)]
+    lp22_4 = []
+    for r1 in range(4):
+        for r2 in range(r1 + 1, 4):
+            for c1 in range(4):
+                for c2 in range(c1 + 1, 4):
+                    for c3 in range(4):
+                        for c4 in range(c3 + 1, 4):
+                            lp22_4.append((r1 * 4 + c1, r1 * 4 + c2, r2 * 4 + c3, r2 * 4 + c4))
+    for c1 in range(4):
+        for c2 in range(c1 + 1, 4):
+            for r1 in range(4):
+                for r2 in range(r1 + 1, 4):
+                    for r3 in range(4):
+                        for r4 in range(r3 + 1, 4):
+                            lp22_4.append((r1 * 4 + c1, r2 * 4 + c1, r3 * 4 + c2, r4 * 4 + c2))
+
+    def run_upgraded_settler(n_ord, budget_steps, rng_obj):
+        N_ord = n_ord * n_ord
+        A_ord = build_incidence_matrix(n_ord).astype(int)
+        pairs_ord = [(a, b) for a in range(N_ord) for b in range(a + 1, N_ord)]
+        lp22_ord = []
+        for r1 in range(n_ord):
+            for r2 in range(r1 + 1, n_ord):
+                for c1 in range(n_ord):
+                    for c2 in range(c1 + 1, n_ord):
+                        for c3 in range(n_ord):
+                            for c4 in range(c3 + 1, n_ord):
+                                lp22_ord.append((r1 * n_ord + c1, r1 * n_ord + c2, r2 * n_ord + c3, r2 * n_ord + c4))
+        for c1 in range(n_ord):
+            for c2 in range(c1 + 1, n_ord):
+                for r1 in range(n_ord):
+                    for r2 in range(r1 + 1, n_ord):
+                        for r3 in range(n_ord):
+                            for r4 in range(r3 + 1, n_ord):
+                                lp22_ord.append((r1 * n_ord + c1, r2 * n_ord + c1, r3 * n_ord + c2, r4 * n_ord + c2))
+        z = [centered_height(s, n_ord) for s in range(1, N_ord + 1)]
+        rng_obj.shuffle(z)
+        grid = z[:]
+        def get_e(g):
+            r = A_ord @ np.array(g, dtype=int)
+            return int(np.sum(r * r))
+        currE = get_e(grid)
+        bestE = currE
+        startT = 40.0 if n_ord == 3 else (80.0 if n_ord == 4 else 140.0)
+        endT = 0.15
+        stagnant = 0
+        for step in range(budget_steps):
+            if bestE == 0:
+                break
+            T = startT * ((endT / startT) ** (step / max(1, budget_steps - 1)))
+            u = rng_obj.random()
+            if u < 0.72:
+                k_tourn = 3 if rng_obj.random() < 0.65 else 1
+                best_pair = None
+                best_dE = 10**9
+                for _ in range(k_tourn):
+                    a, b = pairs_ord[rng_obj.randrange(len(pairs_ord))]
+                    grid[a], grid[b] = grid[b], grid[a]
+                    dE = get_e(grid) - currE
+                    grid[a], grid[b] = grid[b], grid[a]
+                    if dE < best_dE:
+                        best_dE = dE
+                        best_pair = (a, b)
+                a, b = best_pair
+                if best_dE <= 0 or rng_obj.random() < math.exp(-best_dE / T):
+                    grid[a], grid[b] = grid[b], grid[a]
+                    currE += best_dE
+            elif u < 0.86:
+                a, b, c = rng_obj.sample(range(N_ord), 3)
+                va, vb, vc = grid[a], grid[b], grid[c]
+                grid[a], grid[b], grid[c] = vc, va, vb
+                dE = get_e(grid) - currE
+                if dE <= 0 or rng_obj.random() < math.exp(-dE / T):
+                    currE += dE
+                else:
+                    grid[a], grid[b], grid[c] = va, vb, vc
+            else:
+                a, b, c, d = lp22_ord[rng_obj.randrange(len(lp22_ord))]
+                grid[a], grid[b] = grid[b], grid[a]
+                grid[c], grid[d] = grid[d], grid[c]
+                dE = get_e(grid) - currE
+                if dE <= 0 or rng_obj.random() < math.exp(-dE / T):
+                    currE += dE
+                else:
+                    grid[a], grid[b] = grid[b], grid[a]
+                    grid[c], grid[d] = grid[d], grid[c]
+            if currE < bestE:
+                bestE = currE
+                stagnant = 0
+                if bestE == 0:
+                    break
+            else:
+                stagnant += 1
+            if (currE <= 24 or stagnant >= 80) and currE > 0:
+                stagnant = 0
+                improved = True
+                while improved and currE > 0:
+                    improved = False
+                    best_swap = None
+                    best_e = currE
+                    for a, b in pairs_ord:
+                        grid[a], grid[b] = grid[b], grid[a]
+                        e_try = get_e(grid)
+                        grid[a], grid[b] = grid[b], grid[a]
+                        if e_try < best_e:
+                            best_e = e_try
+                            best_swap = (a, b)
+                    if best_swap is not None:
+                        a, b = best_swap
+                        grid[a], grid[b] = grid[b], grid[a]
+                        currE = best_e
+                        improved = True
+                        if currE < bestE:
+                            bestE = currE
+                    else:
+                        best_22 = None
+                        best_e22 = currE
+                        scan_moves = lp22_ord if len(lp22_ord) <= 600 else rng_obj.sample(lp22_ord, 600)
+                        for a, b, c, d in scan_moves:
+                            grid[a], grid[b] = grid[b], grid[a]
+                            grid[c], grid[d] = grid[d], grid[c]
+                            e_try = get_e(grid)
+                            grid[a], grid[b] = grid[b], grid[a]
+                            grid[c], grid[d] = grid[d], grid[c]
+                            if e_try < best_e22:
+                                best_e22 = e_try
+                                best_22 = (a, b, c, d)
+                        if best_22 is not None:
+                            a, b, c, d = best_22
+                            grid[a], grid[b] = grid[b], grid[a]
+                            grid[c], grid[d] = grid[d], grid[c]
+                            currE = best_e22
+                            improved = True
+                            if currE < bestE:
+                                bestE = currE
+                if currE > 0:
+                    a, b, c = rng_obj.sample(range(N_ord), 3)
+                    grid[a], grid[b], grid[c] = grid[b], grid[c], grid[a]
+                    currE = get_e(grid)
+        return bestE
+
     for budget in sa_budgets:
         r_sa = random.Random(999 + budget)
         hits_2only = 0
         hits_2and3 = 0
-        trials = 300
+        hits_upgraded_22 = 0
+        trials = 200
         for _ in range(trials):
-            # 2-cycle only SA
+            # 1. Unbiased 2+3-cycle baseline SA (original JS baseline)
             z = [centered_height(s, 4) for s in range(1, 17)]
             r_sa.shuffle(z)
             z_arr = np.array(z, dtype=int)
             e = int(np.sum((A4 @ z_arr) ** 2))
+            best_e_base = e
+            startT = 60.0
+            endT = 0.01
+            cooling = (endT / startT) ** (1.0 / budget)
+            T = startT
             for step in range(budget):
-                if e == 0:
+                if best_e_base == 0:
                     break
-                T = max(1.0, 120.0 * ((1.0 - step / budget) ** 2))
-                a, b = r_sa.sample(range(16), 2)
                 q = z_arr.copy()
-                q[a], q[b] = q[b], q[a]
+                if r_sa.random() < 0.4:
+                    a, b, c = r_sa.sample(range(16), 3)
+                    q[a], q[b], q[c] = q[c], q[a], q[b]
+                else:
+                    a, b = r_sa.sample(range(16), 2)
+                    q[a], q[b] = q[b], q[a]
                 e_new = int(np.sum((A4 @ q) ** 2))
-                if e_new <= e or r_sa.random() < math.exp(-(e_new - e) / T):
+                if e_new <= e or r_sa.random() < math.exp(-(e_new - e) / max(1e-6, T)):
                     z_arr = q
                     e = e_new
-            if e == 0:
+                    if e < best_e_base:
+                        best_e_base = e
+                T *= cooling
+            if best_e_base == 0:
                 hits_2only += 1
 
-            # Hybrid 2-cycle + 3-cycle + targeted line-residual SA (Bubble Trinity 'Settle' operator)
+            # 2. Stress-guided 2+3-cycle SA (without (2,2) polish)
             z = [centered_height(s, 4) for s in range(1, 17)]
             r_sa.shuffle(z)
             z_arr = np.array(z, dtype=int)
@@ -758,7 +1067,6 @@ def verify_section5_bubble_trinity() -> dict:
                     a, b, c = r_sa.sample(range(16), 3)
                     q[a], q[b], q[c] = q[b], q[c], q[a]
                 else:
-                    # Bias swap selection toward highest-stress cells (continuous field pre-guidance)
                     stress = np.abs(A4.T @ (A4 @ z_arr))
                     a = int(np.argmax(stress)) if r_sa.random() < 0.5 else r_sa.randrange(16)
                     b = r_sa.randrange(16)
@@ -770,17 +1078,41 @@ def verify_section5_bubble_trinity() -> dict:
             if e == 0:
                 hits_2and3 += 1
 
+            # 3. Upgraded Stress-Guided (2 + 3 + (2,2))-Cycle + Polish Settler
+            if run_upgraded_settler(4, budget, r_sa) == 0:
+                hits_upgraded_22 += 1
+
         sa_results[str(budget)] = {
             "budget_steps": budget,
             "trials": trials,
             "sa_2cycle_only_pct": round(100.0 * hits_2only / trials, 1),
             "hybrid_settle_pct": round(100.0 * hits_2and3 / trials, 1),
+            "upgraded_lp22_settle_pct": round(100.0 * hits_upgraded_22 / trials, 1),
         }
-        print(f"  Budget {budget:4d} steps: 2-cycle SA={100*hits_2only/trials:5.1f}% vs Field-Guided 2+3-cycle Settle={100*hits_2and3/trials:5.1f}%")
+        print(
+            f"  Budget {budget:4d} steps: Unbiased 2+3 SA={100*hits_2only/trials:5.1f}% | "
+            f"Stress 2+3 SA={100*hits_2and3/trials:5.1f}% | "
+            f"Upgraded 2+3+(2,2) Polish={100*hits_upgraded_22/trials:5.1f}%"
+        )
+
+    # Multi-order benchmark (n = 3, 4, 5) at standard interactive budget
+    multi_order = {}
+    for n_ord, bud, tr in [(3, 500, 200), (4, 1500, 200), (5, 2500, 100)]:
+        r_mo = random.Random(7777 + n_ord)
+        succ_up = sum(1 for _ in range(tr) if run_upgraded_settler(n_ord, bud, r_mo) == 0)
+        multi_order[f"n{n_ord}"] = {
+            "n": n_ord,
+            "budget": bud,
+            "trials": tr,
+            "success_count": succ_up,
+            "success_pct": round(100.0 * succ_up / tr, 1),
+        }
+        print(f"  Multi-Order Upgraded Settler n={n_ord} (budget={bud}): {succ_up}/{tr} ({100*succ_up/tr:.1f}%)")
 
     return {
         "regime_metrics": regime_metrics,
         "solver_benchmarks": sa_results,
+        "multi_order_upgraded": multi_order,
     }
 
 

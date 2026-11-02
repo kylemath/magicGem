@@ -10172,8 +10172,26 @@
         "8": 8
       },
       "spurious_still_trapped_under_3cycles": 8,
+      "spurious_escaped_by_lp22": 8,
+      "canonical_trap_unique_22_escape": {
+        "cells": [
+          1,
+          2,
+          6,
+          7
+        ],
+        "values": [
+          6,
+          7,
+          3,
+          4
+        ],
+        "new_H_line": 0
+      },
       "steepest_descent_magic_basin_size": 270442,
-      "steepest_descent_magic_basin_pct": 74.5266
+      "steepest_descent_magic_basin_pct": 74.5266,
+      "steepest_descent_plus_lp22_basin_size": 362880,
+      "steepest_descent_plus_lp22_basin_pct": 100.0
     },
     "n4_benchmark": {
       "trials": 2000,
@@ -10184,6 +10202,12 @@
       "greedy_2cycle_mean_steps": 8.18,
       "trapped_escaped_by_single_3cycle_count": 56,
       "trapped_escaped_by_single_3cycle_pct": 3.43,
+      "trapped_escaped_by_single_lp22_count": 271,
+      "trapped_escaped_by_single_lp22_pct": 16.57,
+      "trapped_escaped_by_3_or_lp22_count": 310,
+      "trapped_escaped_by_3_or_lp22_pct": 18.96,
+      "greedy_2_plus_lp22_magic_count": 509,
+      "greedy_2_plus_lp22_magic_pct": 25.45,
       "terminal_H_histogram": {
         "0": 365,
         "8": 470,
@@ -10463,33 +10487,61 @@
     "solver_benchmarks": {
       "200": {
         "budget_steps": 200,
-        "trials": 300,
-        "sa_2cycle_only_pct": 0.3,
-        "hybrid_settle_pct": 4.7
+        "trials": 200,
+        "sa_2cycle_only_pct": 1.0,
+        "hybrid_settle_pct": 6.5,
+        "upgraded_lp22_settle_pct": 24.5
       },
       "500": {
         "budget_steps": 500,
-        "trials": 300,
-        "sa_2cycle_only_pct": 5.3,
-        "hybrid_settle_pct": 18.3
+        "trials": 200,
+        "sa_2cycle_only_pct": 10.0,
+        "hybrid_settle_pct": 21.5,
+        "upgraded_lp22_settle_pct": 66.5
       },
       "1000": {
         "budget_steps": 1000,
-        "trials": 300,
-        "sa_2cycle_only_pct": 18.3,
-        "hybrid_settle_pct": 31.0
+        "trials": 200,
+        "sa_2cycle_only_pct": 23.0,
+        "hybrid_settle_pct": 34.0,
+        "upgraded_lp22_settle_pct": 92.0
+      },
+      "1500": {
+        "budget_steps": 1500,
+        "trials": 200,
+        "sa_2cycle_only_pct": 24.5,
+        "hybrid_settle_pct": 33.5,
+        "upgraded_lp22_settle_pct": 98.5
       },
       "2500": {
         "budget_steps": 2500,
-        "trials": 300,
-        "sa_2cycle_only_pct": 33.7,
-        "hybrid_settle_pct": 50.0
+        "trials": 200,
+        "sa_2cycle_only_pct": 38.5,
+        "hybrid_settle_pct": 51.5,
+        "upgraded_lp22_settle_pct": 100.0
+      }
+    },
+    "multi_order_upgraded": {
+      "n3": {
+        "n": 3,
+        "budget": 500,
+        "trials": 200,
+        "success_count": 200,
+        "success_pct": 100.0
       },
-      "5000": {
-        "budget_steps": 5000,
-        "trials": 300,
-        "sa_2cycle_only_pct": 48.7,
-        "hybrid_settle_pct": 69.0
+      "n4": {
+        "n": 4,
+        "budget": 1500,
+        "trials": 200,
+        "success_count": 200,
+        "success_pct": 100.0
+      },
+      "n5": {
+        "n": 5,
+        "budget": 2500,
+        "trials": 100,
+        "success_count": 27,
+        "success_pct": 27.0
       }
     }
   }

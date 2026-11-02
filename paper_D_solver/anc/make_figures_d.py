@@ -333,17 +333,18 @@ def make_fig4_s9_landscape() -> None:
     ax0.axvline(480.0, color="#d95f02", linestyle="--", linewidth=1.6,
                 label=r"Exact ensemble mean $\mathbb{E}[\mathcal{H}_{\mathrm{line}}] = 2\|\mathbf{z}\|^2 = 480$")
     ax0.axvline(0.0, color="#1b9e77", linestyle="-", linewidth=1.8,
-                label=r"8 Lo Shu ground states ($\mathcal{H}_{\mathrm{line}}=0$, $74.53\%$ basin)")
+                label=r"8 Lo Shu ground states ($\mathcal{H}_{\mathrm{line}}=0$, $74.53\%$ 2-cycle $\to 100\%$ w/ $(2,2)$)")
     ax0.axvline(8.0, color="#e7298a", linestyle=":", linewidth=1.8,
                 label=r"8 Antipodal trap states $S_{\mathrm{trap}}^{(3)}$ ($\mathcal{H}_{\mathrm{line}}=8$, $25.47\%$ basin)")
 
     ax0.set_xlabel(r"Centred line-indicator Hamiltonian $\mathcal{H}_{\mathrm{line}}(S) = \mathbf{z}^\top L_3 \mathbf{z}$")
     ax0.set_ylabel(r"Number of permutations in $S_9$ ($9! = 362,880$)")
+    ax0.set_ylim(0, 42000)
     ax0.set_title(r"(a) Exhaustive $S_9$ Energy Landscape & Basin Partition", fontweight="bold", pad=8)
     ax0.grid(True, linestyle=":", alpha=0.45)
-    ax0.legend(loc="upper right", frameon=True, framealpha=0.92)
+    ax0.legend(loc="upper right", frameon=True, framealpha=0.92, fontsize=7.6)
 
-    # Panel (b): Side-by-side comparison of S_trap^(3) vs Lo Shu and the (2,2)-double swap escape
+    # Panel (b): Side-by-side comparison of S_trap^(3) vs Lo Shu and the unique (2,2)-double swap escape
     ax1 = fig.add_subplot(gs[0, 1])
     s_trap = np.array([[2, 6, 7], [9, 5, 1], [3, 4, 8]], dtype=int)
     z_trap = 2 * s_trap - 10
@@ -365,24 +366,24 @@ def make_fig4_s9_landscape() -> None:
     ax1.text(1, 2.65, "$\Sigma=15$\n($R=0$)", ha="center", va="top", fontsize=8.2, color="#1b9e77", fontweight="bold")
     ax1.text(2, 2.65, "$\Sigma=16$\n($R=+2$)", ha="center", va="top", fontsize=8.2, color="#d95f02", fontweight="bold")
 
-    # Draw double-swap arrows (2 <-> 4) and (3 <-> 1) or (6 <-> 4) and (7 <-> 9)
+    # Draw the UNIQUE escaping row-preserving (2,2) double swap: (6 <-> 7) in Row 1 and (3 <-> 4) in Row 3
     ax1.annotate(
-        "", xy=(1, 2), xytext=(0, 0),
-        arrowprops=dict(arrowstyle="<->", color="#e7298a", lw=2.0, connectionstyle="arc3,rad=0.22"),
+        "", xy=(1.88, -0.34), xytext=(1.12, -0.34),
+        arrowprops=dict(arrowstyle="<->", color="#e7298a", lw=2.3, connectionstyle="arc3,rad=-0.22"),
     )
     ax1.annotate(
-        "", xy=(2, 1), xytext=(0, 2),
-        arrowprops=dict(arrowstyle="<->", color="#2b5c8f", lw=2.0, connectionstyle="arc3,rad=-0.22"),
+        "", xy=(0.88, 2.34), xytext=(0.12, 2.34),
+        arrowprops=dict(arrowstyle="<->", color="#2b5c8f", lw=2.3, connectionstyle="arc3,rad=0.22"),
     )
     ax1.text(
-        1.0, -0.73,
+        1.0, -0.82,
         r"Strict local minimum under all 36 $2$-cycles ($\min \Delta\mathcal{H}_{\mathrm{line}} = +4$)"
         + "\n"
-        + r"and all 168 $3$-cycles ($\min \Delta\mathcal{H}_{\mathrm{line}} = +8$). Escapes to Lo Shu via"
+        + r"and all 168 $3$-cycles ($\min \Delta\mathcal{H}_{\mathrm{line}} = +8$). Unique $(2,2)$ escape ($1/378$):"
         + "\n"
-        + r"simultaneous $(2,2)$-cycle $(2\leftrightarrow 4)(3\leftrightarrow 1)$!",
-        ha="center", va="center", fontsize=7.9,
-        bbox=dict(boxstyle="round,pad=0.3", facecolor="#fdf0f6", edgecolor="#e7298a"),
+        + r"row-preserving $(6\leftrightarrow 7)(3\leftrightarrow 4) \to \mathcal{H}_{\mathrm{line}}=0$ ($100\%$ $S_9$ basin)!",
+        ha="center", va="center", fontsize=7.6,
+        bbox=dict(boxstyle="round,pad=0.28", facecolor="#fdf0f6", edgecolor="#e7298a"),
     )
 
     ax1.set_xticks(range(3))
@@ -390,10 +391,10 @@ def make_fig4_s9_landscape() -> None:
     ax1.set_xticklabels(["Col 1", "Col 2", "Col 3"])
     ax1.set_yticklabels(["Row 1", "Row 2", "Row 3"])
     ax1.set_xlim(-0.55, 3.65)
-    ax1.set_ylim(3.25, -1.05)
+    ax1.set_ylim(3.25, -1.18)
     for sp in ("top", "right", "bottom", "left"):
         ax1.spines[sp].set_visible(False)
-    ax1.set_title(r"(b) Antipodal Trap $S_{\mathrm{trap}}^{(3)}$ ($\mathcal{H}_{\mathrm{line}}=8$) & $(2,2)$-Swap Escape", fontweight="bold", pad=12)
+    ax1.set_title(r"(b) Antipodal Trap $S_{\mathrm{trap}}^{(3)}$ ($\mathcal{H}_{\mathrm{line}}=8$) & Unique $(2,2)$ Escape", fontweight="bold", pad=12)
 
     save_fig(fig, "fig4_s9_landscape_traps")
 
@@ -526,36 +527,43 @@ def make_fig6_bubble_trinity(data: dict) -> None:
     ax0.grid(True, linestyle=":", alpha=0.45)
     ax0.legend(loc="lower left", frameon=True, framealpha=0.92, fontsize=7.8)
 
-    # Panel (b): Ground-state synthesis rate vs step budget (Standard 2-cycle SA vs Field-Guided 2+3-cycle Settle)
+    # Panel (b): Ground-state synthesis rate vs step budget across all 3 solver tiers
     ax1 = fig.add_subplot(gs[0, 1])
     budgets = sorted(int(k) for k in bench.keys())
     sa2 = [bench[str(b)]["sa_2cycle_only_pct"] for b in budgets]
     hyb = [bench[str(b)]["hybrid_settle_pct"] for b in budgets]
+    upg = [bench[str(b)]["upgraded_lp22_settle_pct"] for b in budgets]
 
     x = np.arange(len(budgets))
-    w = 0.36
-    b1 = ax1.bar(x - w / 2, sa2, width=w, color="#8da0cb", edgecolor="white",
-                 label="Unbiased $2$-cycle Simulated Annealing")
-    b2 = ax1.bar(x + w / 2, hyb, width=w, color="#1b9e77", edgecolor="white",
-                 label="Field-Guided $2+3$-Cycle Hybrid Settling")
+    w = 0.26
+    b1 = ax1.bar(x - w, sa2, width=w, color="#8da0cb", edgecolor="white",
+                 label="Unbiased $2+3$-Cycle Baseline SA")
+    b2 = ax1.bar(x, hyb, width=w, color="#d95f02", alpha=0.88, edgecolor="white",
+                 label="Stress-Guided $2+3$-Cycle SA")
+    b3 = ax1.bar(x + w, upg, width=w, color="#1b9e77", edgecolor="white",
+                 label="Stress-Guided $(2+3+(2,2))$ + Polish")
 
     for rect in b1:
         h = rect.get_height()
-        ax1.text(rect.get_x() + rect.get_width() / 2, h + 1.2, f"{h:.1f}%",
-                 ha="center", va="bottom", fontsize=7.5, color="#3b4d71")
+        ax1.text(rect.get_x() + rect.get_width() / 2, h + 1.0, f"{h:.0f}%",
+                 ha="center", va="bottom", fontsize=6.8, color="#3b4d71")
     for rect in b2:
         h = rect.get_height()
-        ax1.text(rect.get_x() + rect.get_width() / 2, h + 1.2, f"{h:.1f}%",
-                 ha="center", va="bottom", fontsize=7.5, color="#0f6648", fontweight="bold")
+        ax1.text(rect.get_x() + rect.get_width() / 2, h + 1.0, f"{h:.0f}%",
+                 ha="center", va="bottom", fontsize=6.8, color="#b34800")
+    for rect in b3:
+        h = rect.get_height()
+        ax1.text(rect.get_x() + rect.get_width() / 2, h + 1.0, f"{h:.0f}%",
+                 ha="center", va="bottom", fontsize=7.0, color="#0f6648", fontweight="bold")
 
     ax1.set_xticks(x)
     ax1.set_xticklabels([f"{b:,}" for b in budgets])
-    ax1.set_ylim(0, 80)
+    ax1.set_ylim(0, 126)
     ax1.set_xlabel("Discrete settling step budget $B$")
     ax1.set_ylabel(r"Order-4 ground-state recovery rate ($\mathcal{H}_{\mathrm{line}}=0$, %)")
-    ax1.set_title(r"(b) Ground-State Synthesis: $2$-Cycle SA vs. Hybrid Settling", fontweight="bold", pad=8)
+    ax1.set_title(r"(b) Order-4 Synthesis: Baseline vs. $(2,2)$-Polished Settling", fontweight="bold", pad=8)
     ax1.grid(True, axis="y", linestyle=":", alpha=0.45)
-    ax1.legend(loc="upper left", frameon=True, framealpha=0.92)
+    ax1.legend(loc="upper left", frameon=True, framealpha=0.92, fontsize=7.2)
 
     save_fig(fig, "fig6_bubble_trinity_regimes")
 
