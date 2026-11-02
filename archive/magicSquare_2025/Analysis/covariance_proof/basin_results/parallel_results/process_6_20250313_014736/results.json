@@ -1,0 +1,16 @@
+{
+  "process_id": 6,
+  "found_magic": false,
+  "start_perturbation": 8,
+  "max_iterations": 28,
+  "local_steps": 256,
+  "temperature": 1.0194719888571062,
+  "best_energy": 0.46875,
+  "distance": 0.46875,
+  "sum_error": 0.0,
+  "int_dev": 0.0,
+  "elapsed_time": 18.078724145889282,
+  "timestamp": "20250313_014736",
+  "results_dir": "covariance_proof/parallel_results/process_6_20250313_014736",
+  "square_file": "covariance_proof/parallel_results/process_6_20250313_014736/best_square.npy"
+}

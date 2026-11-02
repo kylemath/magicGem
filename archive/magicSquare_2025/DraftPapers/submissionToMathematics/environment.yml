@@ -1,0 +1,26 @@
+name: magic-square-gems
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python>=3.10
+  - numpy>=1.21
+  - scipy>=1.7
+  - scikit-learn>=1.0
+  - matplotlib>=3.4
+  - seaborn>=0.11
+  - pandas>=1.3
+  - networkx>=2.6
+  - pot>=0.8  # Optimal transport / Earth Mover's Distance
+  - umap-learn>=0.5
+  - statsmodels>=0.13
+  - ripser>=0.6
+  - persim>=0.3
+  - gudhi>=3.7
+  - tqdm>=4.62
+  - joblib>=1.2
+  - jupyterlab>=4.0  # For interactive notebooks
+  - jinja2>=3.0  # Required for pandas LaTeX output
+  - pip  # fallback packages via pip
+  - pip:
+      - mdpi-resources  # Placeholder until mdpi.cls is fetched 

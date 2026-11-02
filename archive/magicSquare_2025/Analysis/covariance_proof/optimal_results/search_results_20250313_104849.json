@@ -1,0 +1,532 @@
+[
+  {
+    "config": {
+      "transition_start": 150,
+      "transition_end": 275,
+      "total_steps": 325,
+      "learning_rate": 0.15,
+      "swaps": 2,
+      "search_id": 0,
+      "strategy": "direct"
+    },
+    "initial_metrics": {
+      "distance": 3.0168795965367927,
+      "sum_error": 4.0,
+      "int_dev": 0.0
+    },
+    "final_metrics": {
+      "distance": 0.008191538632947512,
+      "sum_error": 0.061148911895212876,
+      "int_dev": 2.999999999999998,
+      "is_magic": false
+    },
+    "computation_time": 0.06298398971557617,
+    "plot_files": [
+      "covariance_proof/gradual_descent_20250313_104849.png",
+      "covariance_proof/covariance_final_20250313_104849.png"
+    ],
+    "final_square": [
+      [
+        15.12702591305098,
+        7.746719810791785,
+        2.743267706598188,
+        12.117871899864248
+      ],
+      [
+        10.255331737239981,
+        9.127025912637496,
+        13.117871900789838,
+        5.243116213009696
+      ],
+      [
+        7.256883786990304,
+        7.132128099210162,
+        8.122974087362504,
+        15.244668262760019
+      ],
+      [
+        5.132128100135752,
+        13.756732293401813,
+        13.753280189208215,
+        5.122974086949019
+      ]
+    ]
+  },
+  {
+    "config": {
+      "transition_start": 175,
+      "transition_end": 275,
+      "total_steps": 350,
+      "learning_rate": 0.075,
+      "swaps": 3,
+      "search_id": 1,
+      "strategy": "direct"
+    },
+    "initial_metrics": {
+      "distance": 1.9304306514350627,
+      "sum_error": 4.2,
+      "int_dev": 0.0
+    },
+    "final_metrics": {
+      "distance": 0.001938103512778434,
+      "sum_error": 0.10264784541251615,
+      "int_dev": 2.008396022096835,
+      "is_magic": false
+    },
+    "computation_time": 0.06821465492248535,
+    "plot_files": [
+      "covariance_proof/gradual_descent_20250313_104849.png",
+      "covariance_proof/covariance_final_20250313_104849.png"
+    ],
+    "final_square": [
+      [
+        16.251835356051004,
+        7.001213399498939,
+        2.9999416811470567,
+        11.249300476342578
+      ],
+      [
+        9.001735502283468,
+        8.25183535569788,
+        12.249300476436723,
+        7.998809209586933
+      ],
+      [
+        7.001190790413067,
+        8.250699523563277,
+        8.24816464430212,
+        13.998264497716532
+      ],
+      [
+        5.250699523657421,
+        14.000058318852943,
+        13.998786600501061,
+        4.248164643948998
+      ]
+    ]
+  },
+  {
+    "config": {
+      "transition_start": 50,
+      "transition_end": 125,
+      "total_steps": 250,
+      "learning_rate": 0.075,
+      "swaps": 5,
+      "search_id": 2,
+      "strategy": "direct"
+    },
+    "initial_metrics": {
+      "distance": 1.769975282313287,
+      "sum_error": 5.1,
+      "int_dev": 0.0
+    },
+    "final_metrics": {
+      "distance": 0.004507517973524319,
+      "sum_error": 0.03093276438545871,
+      "int_dev": 2.272041679945091,
+      "is_magic": false
+    },
+    "computation_time": 0.046688079833984375,
+    "plot_files": [
+      "covariance_proof/gradual_descent_20250313_104849.png",
+      "covariance_proof/covariance_final_20250313_104849.png"
+    ],
+    "final_square": [
+      [
+        15.936190500282668,
+        8.128021255857211,
+        3.128811071389303,
+        13.191227991229495
+      ],
+      [
+        5.8719735610803765,
+        11.186190500680876,
+        11.191227990776664,
+        12.12856485756818
+      ],
+      [
+        10.62143514243182,
+        7.933772009223335,
+        9.938809499319124,
+        11.878026438919626
+      ],
+      [
+        7.933772008770506,
+        13.121188928610698,
+        16.121978744142787,
+        3.1888094997173324
+      ]
+    ]
+  },
+  {
+    "config": {
+      "transition_start": 75,
+      "transition_end": 200,
+      "total_steps": 250,
+      "learning_rate": 0.175,
+      "swaps": 5,
+      "search_id": 3,
+      "strategy": "direct"
+    },
+    "initial_metrics": {
+      "distance": 1.7410485346480151,
+      "sum_error": 5.7,
+      "int_dev": 0.0
+    },
+    "final_metrics": {
+      "distance": 0.01162049575792163,
+      "sum_error": 0.06613889868923195,
+      "int_dev": 2.5962047211272705,
+      "is_magic": false
+    },
+    "computation_time": 0.04585886001586914,
+    "plot_files": [
+      "covariance_proof/gradual_descent_20250313_104849.png",
+      "covariance_proof/covariance_final_20250313_104849.png"
+    ],
+    "final_square": [
+      [
+        11.871727257405745,
+        2.9930922812192158,
+        2.7391279722545328,
+        6.613995424530159
+      ],
+      [
+        2.00084739505977,
+        7.871727257856838,
+        6.613995426530642,
+        7.742533929961586
+      ],
+      [
+        4.257466070038414,
+        5.136004573469358,
+        4.878272742143162,
+        9.99915260494023
+      ],
+      [
+        6.136004575469841,
+        8.260872027745467,
+        10.006907718780784,
+        -0.12172725740574497
+      ]
+    ]
+  },
+  {
+    "config": {
+      "transition_start": 160,
+      "transition_end": 275,
+      "total_steps": 325,
+      "learning_rate": 0.15,
+      "swaps": 2,
+      "search_id": 4,
+      "strategy": "variation"
+    },
+    "initial_metrics": {
+      "distance": 0.976281209488332,
+      "sum_error": 2.0,
+      "int_dev": 0.0
+    },
+    "final_metrics": {
+      "distance": 0.00913900718655196,
+      "sum_error": 0.11261776395123917,
+      "int_dev": 2.0496988945946515,
+      "is_magic": false
+    },
+    "computation_time": 0.03897595405578613,
+    "plot_files": [
+      "covariance_proof/gradual_descent_20250313_104850.png",
+      "covariance_proof/covariance_final_20250313_104850.png"
+    ],
+    "final_square": [
+      [
+        15.241899959474589,
+        2.9924154779954892,
+        2.996008751584123,
+        14.251367037206736
+      ],
+      [
+        8.992240192113249,
+        10.241899960538575,
+        9.251367036942964,
+        7.005513868990186
+      ],
+      [
+        6.994486131009814,
+        7.2486329630570365,
+        8.258100039461425,
+        13.007759807886751
+      ],
+      [
+        4.248632962793264,
+        15.003991248415877,
+        15.00758452200451,
+        1.2581000405254117
+      ]
+    ]
+  },
+  {
+    "config": {
+      "transition_start": 175,
+      "transition_end": 265,
+      "total_steps": 350,
+      "learning_rate": 0.075,
+      "swaps": 3,
+      "search_id": 5,
+      "strategy": "variation"
+    },
+    "initial_metrics": {
+      "distance": 0.5659615711335886,
+      "sum_error": 1.6,
+      "int_dev": 0.0
+    },
+    "final_metrics": {
+      "distance": 0.0010292131210140067,
+      "sum_error": 0.026456593938098648,
+      "int_dev": 2.250108643960256,
+      "is_magic": false
+    },
+    "computation_time": 0.041419029235839844,
+    "plot_files": [
+      "covariance_proof/gradual_descent_20250313_104850.png",
+      "covariance_proof/covariance_final_20250313_104850.png"
+    ],
+    "final_square": [
+      [
+        16.937628539438617,
+        2.1255579580159227,
+        4.125935019598527,
+        12.188459459377798
+      ],
+      [
+        4.624688599312095,
+        9.937628539418396,
+        11.938459459228561,
+        8.875787546640362
+      ],
+      [
+        9.874212453359638,
+        7.186540540771437,
+        6.187371460581602,
+        12.125311400687904
+      ],
+      [
+        3.9365405406222025,
+        16.124064980401474,
+        13.124442041984077,
+        2.1873714605613843
+      ]
+    ]
+  },
+  {
+    "config": {
+      "transition_start": 50,
+      "transition_end": 125,
+      "total_steps": 250,
+      "learning_rate": 0.0612033187314758,
+      "swaps": 5,
+      "search_id": 6,
+      "strategy": "variation"
+    },
+    "initial_metrics": {
+      "distance": 3.0065033677014235,
+      "sum_error": 5.9,
+      "int_dev": 0.0
+    },
+    "final_metrics": {
+      "distance": 1.2412670766236366e-16,
+      "sum_error": 0.0,
+      "int_dev": 0.0,
+      "is_magic": true
+    },
+    "computation_time": 0.015156984329223633,
+    "plot_files": [
+      "covariance_proof/gradual_descent_20250313_104850.png",
+      "covariance_proof/covariance_final_20250313_104850.png"
+    ],
+    "final_square": [
+      [
+        13.0,
+        4.0,
+        11.0,
+        7.0
+      ],
+      [
+        1.0,
+        12.0,
+        9.0,
+        13.0
+      ],
+      [
+        11.0,
+        9.0,
+        5.0,
+        10.0
+      ],
+      [
+        10.0,
+        10.0,
+        10.0,
+        5.0
+      ]
+    ]
+  },
+  {
+    "config": {
+      "transition_start": 75,
+      "transition_end": 200,
+      "total_steps": 250,
+      "learning_rate": 0.175,
+      "swaps": 4,
+      "search_id": 7,
+      "strategy": "variation"
+    },
+    "initial_metrics": {
+      "distance": 2.42706097986845,
+      "sum_error": 5.1,
+      "int_dev": 0.0
+    },
+    "final_metrics": {
+      "distance": 0.005320430467719251,
+      "sum_error": 0.006554671422219371,
+      "int_dev": 2.0245965453259673,
+      "is_magic": false
+    },
+    "computation_time": 0.030089378356933594,
+    "plot_files": [
+      "covariance_proof/gradual_descent_20250313_104850.png",
+      "covariance_proof/covariance_final_20250313_104850.png"
+    ],
+    "final_square": [
+      [
+        14.247435478456714,
+        9.999692558331725,
+        0.002772791761249868,
+        9.754316060769622
+      ],
+      [
+        4.995763726679673,
+        9.247435478859016,
+        8.754316060111544,
+        11.004981765913131
+      ],
+      [
+        7.995018234086869,
+        8.745683939888456,
+        7.252564521140985,
+        10.004236273320327
+      ],
+      [
+        6.7456839392303785,
+        5.99722720823875,
+        18.000307441668276,
+        3.252564521543286
+      ]
+    ]
+  },
+  {
+    "config": {
+      "transition_start": 125,
+      "transition_end": 225,
+      "total_steps": 300,
+      "learning_rate": 0.1,
+      "swaps": 1,
+      "search_id": 8,
+      "strategy": "exploration"
+    },
+    "initial_metrics": {
+      "distance": 0.7905694150420947,
+      "sum_error": 2.0,
+      "int_dev": 0.0
+    },
+    "final_metrics": {
+      "distance": 0.005409947228457439,
+      "sum_error": 0.107418735317205,
+      "int_dev": 2.030473802013245,
+      "is_magic": false
+    },
+    "computation_time": 0.03623771667480469,
+    "plot_files": [
+      "covariance_proof/gradual_descent_20250313_104851.png",
+      "covariance_proof/covariance_final_20250313_104851.png"
+    ],
+    "final_square": [
+      [
+        15.249733701558037,
+        3.002933583460408,
+        4.00451513030746,
+        13.254731407625137
+      ],
+      [
+        4.996780706098984,
+        11.249733701616147,
+        11.254731407022678,
+        8.004568893337737
+      ],
+      [
+        9.995431106662263,
+        5.245268592977322,
+        7.250266298383853,
+        13.003219293901017
+      ],
+      [
+        5.245268592374864,
+        15.99548486969254,
+        12.997066416539592,
+        1.250266298441963
+      ]
+    ]
+  },
+  {
+    "config": {
+      "transition_start": 150,
+      "transition_end": 300,
+      "total_steps": 350,
+      "learning_rate": 0.075,
+      "swaps": 1,
+      "search_id": 9,
+      "strategy": "exploration"
+    },
+    "initial_metrics": {
+      "distance": 3.181980515339464,
+      "sum_error": 2.4,
+      "int_dev": 0.0
+    },
+    "final_metrics": {
+      "distance": 0.0047672261689079036,
+      "sum_error": 0.005613693041362921,
+      "int_dev": 2.049502985211098,
+      "is_magic": false
+    },
+    "computation_time": 0.04206991195678711,
+    "plot_files": [
+      "covariance_proof/gradual_descent_20250313_104851.png",
+      "covariance_proof/covariance_final_20250313_104851.png"
+    ],
+    "final_square": [
+      [
+        13.002989204717888,
+        0.003691286803881467,
+        11.003912847787543,
+        10.00369247173081
+      ],
+      [
+        4.251047564252873,
+        10.252989204227498,
+        11.253692471193885,
+        8.252736441891171
+      ],
+      [
+        9.747263558108829,
+        5.746307528806115,
+        6.747010795772501,
+        11.748952435747126
+      ],
+      [
+        6.996307528269189,
+        17.99608715221246,
+        4.996308713196119,
+        3.997010795282112
+      ]
+    ]
+  }
+]

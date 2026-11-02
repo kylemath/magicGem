@@ -1,0 +1,44 @@
+Magic Square Morse Theory Analysis Results
+=========================================
+
+Original Magic Square:
+[[16.  3.  2. 13.]
+ [ 5. 10. 11.  8.]
+ [ 9.  6.  7. 12.]
+ [ 4. 15. 14.  1.]]
+
+Perturbation Analysis:
+Number of Swaps | Distance to Manifold | Gradient Norm | Is Magic
+             0 |        0.0000000000 |   0.00000000 | True
+             1 |        2.2360679775 |   0.39528471 | False
+             2 |        1.6298006013 |   0.39528471 | False
+             3 |        1.7365554987 |   0.39528471 | False
+             4 |        1.2311072252 |   0.39528471 | False
+             5 |        1.5103807467 |   0.39528471 | False
+
+Convergence Analysis:
+
+Experiment 1:
+Initial Distance: 0.17968968, Sum Error: 0.92844809, Is Magic: False
+Final Distance: 0.00219403, Sum Error: 0.82541742, Is Magic: False
+
+Experiment 2:
+Initial Distance: 0.79549513, Sum Error: 0.60000000, Is Magic: False
+Final Distance: 0.00056532, Sum Error: 0.59999993, Is Magic: False
+
+Experiment 3:
+Initial Distance: 0.26516504, Sum Error: 0.90000000, Is Magic: False
+Final Distance: 0.00036033, Sum Error: 1.04979615, Is Magic: False
+
+Experiment 4:
+Initial Distance: 0.25000000, Sum Error: 0.80000000, Is Magic: False
+Final Distance: 0.00153937, Sum Error: 0.87999999, Is Magic: False
+
+Experiment 5:
+Initial Distance: 0.53033009, Sum Error: 0.90000000, Is Magic: False
+Final Distance: 0.00000366, Sum Error: 0.90000000, Is Magic: False
+
+Summary: 0 out of 5 gradient flows converged exactly to magic squares.
+Additionally, 0 flows converged to near-magic squares (distance < 0.001, sum error < 0.1).
+Average final distance: 0.00093254
+Average final sum error: 0.85104270

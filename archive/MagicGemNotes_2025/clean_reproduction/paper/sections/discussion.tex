@@ -1,0 +1,43 @@
+\section{Discussion}\label{sec:discussion}
+
+Our investigation establishes that magic squares are not merely arithmetic curiosities but objects with deep geometric coherence. The six-covariance characterization provides a rigorous theoretical foundation that captures both the balance and uniformity properties of magic squares, grounding the ancient intuition of ``perfect equilibrium'' in precise mathematics.
+
+\subsection{Validation of the Six-Covariance Characterization}
+
+To validate our characterization, we conducted extensive computational testing. Among 1,000,000 random permutations of $\{1, \ldots, 16\}$, we found that satisfying only the first-order covariances ($c_1 = c_2 = 0$) is insufficient---2,548 such permutations exist that are not magic squares. The first-order conditions alone capture balance but not uniformity. When testing all six covariances simultaneously, zero non-magic permutations satisfied all constraints (tolerance $10^{-10}$), providing strong empirical support for the sufficiency direction of Theorem~\ref{thm:main}. The six conditions together form a complete geometric signature of magicness.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{figures/covariance_distribution.png}
+    \caption{\textbf{The Six-Covariance Signature is Unique to Magic Squares.} (A) Distribution of covariance sums for random permutations (blue), two-swap perturbations (red), one-swap perturbations (orange), and magic squares (green line at zero). (B) Zoomed view near zero showing the gap between magic squares and all other arrangements.}
+    \label{fig:alternatives}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{figures/constraint_vs_geometry.png}
+    \caption{\textbf{Constraint Violation vs.\ Covariance.} Magic squares (green) occupy the origin. One-swap perturbations (orange) cluster near but not at the origin.}
+    \label{fig:constraint_geometry}
+\end{figure}
+
+\subsection{The 21 Geometric Configurations}
+
+The classification of the 880 squares into 21 geometric hull configurations offers a new taxonomic lens. This classification is orthogonal to the classical Frenicle classes; squares that are algebraically equivalent under symmetry operations can have distinct geometric shapes if the symmetry does not preserve the specific mapping of values to spatial positions.
+
+The fact that only 21 out of 91 theoretically possible $(V, F, I)$ configurations appear suggests that the magic constraints impose severe geometric restrictions. This reduction mirrors the dramatic reduction from $16! \approx 2 \times 10^{13}$ possible permutations to only 880 magic squares.
+
+\subsection{Network Structure Under EMD}
+
+The high connectivity of the magic square network in the Earth Mover's Distance metric has practical implications. It suggests that the space of magic squares is traversable: one can navigate from any magic square to any other through a sequence of small geometric deformations. This connectedness supports the feasibility of local search algorithms.
+
+We note that ``manifold'' is used informally throughout to describe the apparent low-dimensional structure; strictly speaking, the 880 squares form a discrete set.
+
+\subsection{Broader Connections}
+
+Beyond the specific results for $n=4$, this work connects magic squares to several mathematical themes. The covariance conditions define a linear subspace of $\mathbb{R}^{16}$, and the permutation constraint acts as a discrete sieve selecting exactly those integer points corresponding to magic squares. The Earth Mover's Distance analysis links the problem to optimal transport theory, suggesting that magic squares can be understood as configurations minimizing certain transport costs. The success of gradient-based optimization demonstrates more broadly the utility of continuous relaxations for discrete combinatorial problems.
+
+\subsection{Limitations and Future Directions}
+
+Several limitations of this work should be acknowledged. All results are validated for $n=4$ only; extension to larger orders requires verification that the constraint algebra generalizes, which we leave to future investigation. The persistent homology analysis operates on point clouds of only 16 points, limiting the rigor of any topological claims---at this scale, we capture local geometric configuration rather than deep topological structure. The optimization algorithm's success is entirely empirical; we do not prove convergence or complexity bounds.
+
+Future work should explore extension to $n \geq 5$, where the computational cost of complete enumeration prohibits exhaustive analysis but the theoretical framework remains applicable. The geometric approach may also prove fruitful for related combinatorial designs such as Latin squares and Sudoku puzzles. Ultimately, this work illustrates the value of revisiting classical discrete problems with the tools of modern continuous mathematics.

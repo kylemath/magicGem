@@ -1,0 +1,31 @@
+method,trial,time_ms,memory_mb,success
+Geometric Gradient Descent,0,10.239124298095703,0,False
+Geometric Gradient Descent,1,10.524988174438477,0,False
+Geometric Gradient Descent,2,14.093160629272461,0,False
+Geometric Gradient Descent,3,8.629083633422852,0,False
+Geometric Gradient Descent,4,16.27326011657715,0,False
+Geometric Gradient Descent,5,7.824182510375977,0,False
+Geometric Gradient Descent,6,7.61103630065918,0,False
+Geometric Gradient Descent,7,8.35108757019043,0,False
+Geometric Gradient Descent,8,9.218215942382812,0,False
+Geometric Gradient Descent,9,8.625984191894531,0,False
+Classical Backtracking,0,939.5718574523926,0,True
+Classical Backtracking,1,905.5347442626953,0,True
+Classical Backtracking,2,904.0460586547852,0,True
+Classical Backtracking,3,903.4991264343262,0,True
+Classical Backtracking,4,904.1359424591064,0,True
+Classical Backtracking,5,889.7600173950195,0,True
+Classical Backtracking,6,892.0211791992188,0,True
+Classical Backtracking,7,891.7801380157471,0,True
+Classical Backtracking,8,894.7010040283203,0,True
+Classical Backtracking,9,891.6270732879639,0,True
+Simulated Annealing,0,127.55322456359863,0,True
+Simulated Annealing,1,20.36905288696289,0,True
+Simulated Annealing,2,16.26133918762207,0,True
+Simulated Annealing,3,125.4580020904541,0,True
+Simulated Annealing,4,126.97196006774902,0,False
+Simulated Annealing,5,127.87985801696777,0,False
+Simulated Annealing,6,128.02982330322266,0,False
+Simulated Annealing,7,15.838146209716797,0,False
+Simulated Annealing,8,125.18095970153809,0,False
+Simulated Annealing,9,17.679929733276367,0,False

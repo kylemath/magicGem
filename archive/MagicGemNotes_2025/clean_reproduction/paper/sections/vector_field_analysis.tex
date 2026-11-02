@@ -1,0 +1,27 @@
+\section{Vector Field and Topological Analysis}\label{sec:vector-field-analysis}
+
+Our geometric embedding $\phi(M)$ allows us to treat the magic square not just as a static point cloud, but as a discrete surface on which we can define gradient flow. Specifically, we analyze the flow induced by the value differences between adjacent cells. For each point $p_{ij} = (i, j, M_{ij})$, we define a discrete gradient vector directed toward neighbors with lower values. This vector field reveals the internal transport structure of the square, typically exhibiting a balanced flow that distributes mass evenly without accumulation points, akin to an incompressible fluid.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/vector_field_flow.png}
+    \caption{Visualization of the discrete gradient flow on the magic square surface. Arrows indicate the direction of "steepest descent" from high values to low values. The balanced nature of the square results in a flow field that distributes mass evenly without accumulation points, akin to an incompressible fluid.}
+    \label{fig:vector-flow}
+\end{figure}
+
+This continuous perspective extends naturally to the analysis of constraints. As shown in Section~\ref{sec:covariance-proof}, the complete characterization of magic squares requires six covariances. The key insight is that diagonal constraints cannot be captured by projecting onto rotated axes---such covariances are linear combinations of the row and column covariances by the bilinearity of the covariance operator. Instead, the diagonal sum constraints are captured by indicator-function covariances $\operatorname{Cov}(\mathbf{1}_{i=j}, z)$ and $\operatorname{Cov}(\mathbf{1}_{i+j=3}, z)$, which measure whether diagonal elements are representative samples of the whole grid. This distinction between axis projection and membership indication is fundamental to the geometric characterization.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{figures/diagonal_covariance_visualization.png}
+    \caption{\textbf{Zero-Covariance Theorem Visualization.} (A) Main diagonal covariance plot showing vanishing correlation. (B) Anti-diagonal covariance plot. (C) Bar chart of centered values along diagonals, illustrating how positive and negative deviations perfectly cancel out. (D) Key insight summary.}
+    \label{fig:diagonal-cov}
+\end{figure}
+
+Furthermore, the geometric embedding enables the application of persistent homology to study the topological structure of magic squares. By constructing a filtered simplicial complex using the Vietoris-Rips construction on the point cloud, we track the birth and death of topological features as the filtration parameter increases.
+
+\begin{remark}[Methodological Caveat]
+We apply persistent homology at a modest scale: each magic square embedding consists of only 16 points in $\mathbb{R}^3$. At this sample size, the analysis captures local geometric configuration rather than providing rigorous topological classification. The results should be interpreted as qualitative descriptive geometry, not as definitive topological invariants. Standard sample complexity results for TDA do not directly apply at this scale.
+\end{remark}
+
+With this caveat in mind, our exploratory analysis reveals some geometric regularities across the 880 squares. The average number of persistent 1-dimensional features (loops) appears higher and more stable than in random permutations, and approximately 15\% of squares exhibit persistent voids (2-dimensional features). These observations provide a supplementary lens for understanding magic square geometry, though they should not be overinterpreted given the small point cloud size. Persistent homology computations were performed using the GUDHI library \citep{maria2014gudhi}.

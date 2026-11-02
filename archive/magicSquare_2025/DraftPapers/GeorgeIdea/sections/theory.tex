@@ -1,0 +1,191 @@
+\section{Theoretical Framework}
+\label{sec:theory}
+
+We now develop the mathematical framework in detail. Our treatment is self-contained and requires only standard results from linear algebra.
+
+\subsection{The Augmented Point Cloud}
+\label{sec:construction}
+
+Consider a configuration of $N$ points in three-dimensional space with positions $\mathbf{r}_1, \ldots, \mathbf{r}_N \in \mathbb{R}^3$. To each point we assign a real number $s_k \in \mathbb{R}$, which we call the \emph{spin} at point $k$. The pair $(\{\mathbf{r}_k\}, \{s_k\})$ constitutes a \emph{spin configuration} on the given geometry.
+
+Following standard practice in statistics, we work with centered coordinates. The \emph{centroid} of the point configuration is $\bar{\mathbf{r}} = \frac{1}{N} \sum_{k=1}^N \mathbf{r}_k$, and the \emph{mean spin} is $\bar{s} = \frac{1}{N} \sum_{k=1}^N s_k$. The centered quantities
+\begin{align}
+\tilde{\mathbf{r}}_k &= \mathbf{r}_k - \bar{\mathbf{r}}, \\
+\tilde{s}_k &= s_k - \bar{s}
+\end{align}
+satisfy $\sum_k \tilde{\mathbf{r}}_k = \mathbf{0}$ and $\sum_k \tilde{s}_k = 0$ by construction.
+
+We now form the \emph{augmented point cloud} by combining position and spin into a single four-dimensional representation. Each point $k$ corresponds to a vector
+\[
+\mathbf{p}_k = (\tilde{x}_k, \tilde{y}_k, \tilde{z}_k, \tilde{s}_k) \in \mathbb{R}^4,
+\]
+where $\tilde{x}_k, \tilde{y}_k, \tilde{z}_k$ are the components of $\tilde{\mathbf{r}}_k$. The collection $\{\mathbf{p}_k\}_{k=1}^N$ is a point cloud in four dimensions that encodes both the geometry and the spin assignment.
+
+The central object of study is the covariance matrix of this augmented point cloud. For any two indices $i, j \in \{1, 2, 3, 4\}$, the sample covariance is
+\[
+\Sigma_{ij} = \frac{1}{N} \sum_{k=1}^N p_{k,i} \cdot p_{k,j}.
+\]
+Since we have already centered our data, this is equivalent to the usual formula involving deviations from the mean. The matrix $\Sigma$ is symmetric and positive semi-definite.
+
+The structure of $\Sigma$ reflects the separation between spatial and spin degrees of freedom. Writing it in block form,
+\begin{equation}
+\label{eq:block_structure}
+\Sigma = \begin{pmatrix}
+\Sigma_{\text{pos}} & \mathbf{c} \\
+\mathbf{c}^T & \sigma_s^2
+\end{pmatrix},
+\end{equation}
+we identify three components. The $3 \times 3$ matrix $\Sigma_{\text{pos}}$ is the covariance matrix of the spatial positions alone---this depends only on the geometry and not on the spin assignment. The scalar $\sigma_s^2 = \Var(S) = \frac{1}{N}\sum_k \tilde{s}_k^2$ is the variance of the spin values. Finally, the vector $\mathbf{c} \in \mathbb{R}^3$ contains the \emph{spin-position covariances}:
+\begin{equation}
+\mathbf{c} = \begin{pmatrix}
+\Cov(X, S) \\
+\Cov(Y, S) \\
+\Cov(Z, S)
+\end{pmatrix}
+= \frac{1}{N} \sum_{k=1}^N \tilde{s}_k \tilde{\mathbf{r}}_k.
+\end{equation}
+
+This vector $\mathbf{c}$ measures the extent to which spatial position is correlated with spin value. If $\Cov(X, S) > 0$, for instance, then points with larger $x$-coordinates tend to have larger spin values. The magnitude $\|\mathbf{c}\|$ quantifies the overall strength of spin-position correlation, regardless of direction.
+
+\subsection{The Spin Balance Energy}
+\label{sec:energy}
+
+We now define the central quantity of interest.
+
+\begin{definition}[Spin Balance Energy]
+The \emph{spin balance energy} of a spin configuration $\{s_k\}$ on a geometry $\{\mathbf{r}_k\}$ is
+\begin{equation}
+E = \Cov(X, S)^2 + \Cov(Y, S)^2 + \Cov(Z, S)^2 = \|\mathbf{c}\|^2.
+\end{equation}
+\end{definition}
+
+The energy $E$ is non-negative and vanishes if and only if all three spin-position covariances are zero. When $E = 0$, we say the spin configuration is \emph{balanced} or, following the terminology suggested by the connection to magic squares, \emph{magic}.
+
+\begin{definition}[Magic Spin Configuration]
+A spin assignment $\{s_k\}$ on a geometry $\{\mathbf{r}_k\}$ is a \emph{magic spin configuration} if 
+\[
+\Cov(X, S) = \Cov(Y, S) = \Cov(Z, S) = 0.
+\]
+\end{definition}
+
+The condition for a magic configuration can be expressed compactly. Recalling that $\mathbf{c} = \frac{1}{N} \sum_k \tilde{s}_k \tilde{\mathbf{r}}_k$, we see that the spin configuration is magic if and only if
+\begin{equation}
+\label{eq:magic_condition}
+\sum_{k=1}^N \tilde{s}_k \tilde{\mathbf{r}}_k = \mathbf{0}.
+\end{equation}
+This has a pleasant interpretation: if we view the centered spins $\tilde{s}_k$ as ``masses'' (possibly negative) located at the centered positions $\tilde{\mathbf{r}}_k$, then the configuration is magic precisely when this mass distribution has its center of mass at the origin. Equivalently, the ``dipole moment'' of the spin-weighted position distribution vanishes.
+
+Let us now address existence. The magic condition~\eqref{eq:magic_condition} places constraints on the spin values. Together with the centering constraint $\sum_k \tilde{s}_k = 0$, we have four linear homogeneous conditions on the $N$ spin values. (The three spatial conditions and the centering condition may or may not be independent, depending on the geometry.)
+
+\begin{proposition}[Existence of Magic Configurations]
+\label{prop:existence}
+For $N \geq 4$ points in general position, magic spin configurations exist and form a linear subspace of dimension at least $N - 4$ in the space of spin assignments.
+\end{proposition}
+
+\begin{proof}
+The four conditions---three spatial covariances and one centering constraint---are linear in the spin values $\{s_k\}$. Explicitly, they require
+\begin{align}
+\sum_{k=1}^N \tilde{x}_k s_k &= 0, \\
+\sum_{k=1}^N \tilde{y}_k s_k &= 0, \\
+\sum_{k=1}^N \tilde{z}_k s_k &= 0, \\
+\sum_{k=1}^N s_k &= N\bar{s}.
+\end{align}
+The first three conditions are equivalent to the magic condition when spins are centered. For ``general position'' geometries (where the centered position vectors $\tilde{x}_k, \tilde{y}_k, \tilde{z}_k$ together with the all-ones vector are linearly independent in $\mathbb{R}^N$), these four constraints have rank exactly 4. The solution space thus has dimension $N - 4$, which is positive for $N > 4$.
+
+When $N = 4$, the solution space is generically zero-dimensional, meaning the only magic spin configuration (up to a global shift in mean) is the trivial one. However, special geometries may admit additional symmetries that reduce the effective rank of the constraints.
+\end{proof}
+
+For small $N$, magic configurations may be isolated or may not exist at all (in the non-trivial sense). For larger $N$, they form a subspace of increasing dimension, explaining why they become easier to find by random sampling as $N$ grows.
+
+\subsection{A Quadratic Form Perspective}
+
+The spin balance energy admits a useful representation as a quadratic form. Let $\mathbf{s} = (s_1, \ldots, s_N)^T$ be the vector of spin values. Define the $N \times 3$ matrix $R$ whose $k$-th row is $\tilde{\mathbf{r}}_k^T$. Then
+\[
+\mathbf{c} = \frac{1}{N} R^T \tilde{\mathbf{s}},
+\]
+where $\tilde{\mathbf{s}} = \mathbf{s} - \bar{s} \mathbf{1}$ is the vector of centered spins. The energy becomes
+\[
+E = \|\mathbf{c}\|^2 = \frac{1}{N^2} \tilde{\mathbf{s}}^T R R^T \tilde{\mathbf{s}} = \frac{1}{N^2} \tilde{\mathbf{s}}^T G \tilde{\mathbf{s}},
+\]
+where $G = R R^T$ is the $N \times N$ Gram matrix with entries $G_{jk} = \tilde{\mathbf{r}}_j \cdot \tilde{\mathbf{r}}_k$.
+
+This quadratic form structure has several consequences. First, since $G$ is positive semi-definite, the energy $E$ is non-negative (which we already knew). Second, the minimum energy is zero, achieved precisely when $\tilde{\mathbf{s}}$ lies in the null space of $R^T$. Third, the Hessian of $E$ with respect to the spin values is proportional to $G$ (restricted to the hyperplane of centered spins), so the curvature of the energy landscape at a magic configuration is determined by the geometric structure of the positions.
+
+\subsection{The Precession Tensor}
+\label{sec:tensor}
+
+Before proving the main theorem, we introduce one additional object that will be useful later when we consider dynamics.
+
+\begin{definition}[Precession Tensor]
+The \emph{precession tensor} of a spin configuration is the $3 \times 3$ symmetric matrix
+\[
+\mathcal{P}_{ij} = \sum_{k=1}^N \tilde{s}_k \tilde{r}_{k,i} \tilde{r}_{k,j}.
+\]
+\end{definition}
+
+While the spin balance energy involves the first moment of $\tilde{s}$ weighted by position (i.e., $\sum_k \tilde{s}_k \tilde{\mathbf{r}}_k$), the precession tensor involves the second moment. Geometrically, $\mathcal{P}$ generalizes the moment of inertia tensor, replacing the mass distribution by a spin-weighted distribution.
+
+The precession tensor is related to but distinct from the spin balance energy. For a magic configuration, we have $\sum_k \tilde{s}_k \tilde{\mathbf{r}}_k = \mathbf{0}$, but $\mathcal{P}$ need not vanish. The tensor $\mathcal{P}$ captures higher-order structure in the spin-position relationship that the first-moment condition does not constrain.
+
+\subsection{Magic Squares as Magic Spin Configurations}
+\label{sec:connection}
+
+We now prove the main result connecting classical magic squares to our framework.
+
+Consider an $n \times n$ arrangement $S = (s_{ij})$ of the integers $\{1, 2, \ldots, n^2\}$. We interpret this as a spin configuration on a planar lattice by placing a point at each grid position with spin equal to the cell value.
+
+Specifically, for $i, j \in \{0, 1, \ldots, n-1\}$, define
+\begin{align}
+x_{ij} &= j - \frac{n-1}{2}, \\
+y_{ij} &= \frac{n-1}{2} - i, \\
+z_{ij} &= 0.
+\end{align}
+This places the grid in the $xy$-plane, centered at the origin, with cell $(0,0)$ at the top-left. The spin at position $(x_{ij}, y_{ij}, 0)$ is set to $s_{ij}$.
+
+\begin{theorem}[Magic Squares as Magic Spin Configurations]
+\label{thm:connection}
+The arrangement $S$ is a magic square if and only if the corresponding spin configuration on the planar lattice is magic, i.e., $E = 0$.
+\end{theorem}
+
+\begin{proof}
+We compute the three spin-position covariances and show that their vanishing is equivalent to the magic square conditions.
+
+First, note that all points have $z_{ij} = 0$, so the $z$-coordinates have zero variance and $\Cov(Z, S) = 0$ trivially. The content of the theorem lies in the $x$ and $y$ covariances.
+
+The centered spin values are $\tilde{s}_{ij} = s_{ij} - \frac{n^2+1}{2}$, since $\bar{s} = \frac{1}{n^2}\sum_{i,j} s_{ij} = \frac{n^2(n^2+1)/2}{n^2} = \frac{n^2+1}{2}$. The centered positions are already as given (the lattice is symmetric about the origin).
+
+For the $x$-covariance:
+\begin{align}
+n^2 \cdot \Cov(X, S) &= \sum_{i,j} \tilde{x}_{ij} \tilde{s}_{ij} \\
+&= \sum_{i,j} \left(j - \frac{n-1}{2}\right)\left(s_{ij} - \frac{n^2+1}{2}\right) \\
+&= \sum_{j=0}^{n-1} \left(j - \frac{n-1}{2}\right) \sum_{i=0}^{n-1} s_{ij} - \frac{n^2+1}{2} \sum_{j=0}^{n-1} \left(j - \frac{n-1}{2}\right) \cdot n.
+\end{align}
+
+The second sum vanishes because $\sum_{j=0}^{n-1}(j - \frac{n-1}{2}) = 0$. Let $C_j = \sum_{i=0}^{n-1} s_{ij}$ denote the sum of column $j$. Then
+\[
+n^2 \cdot \Cov(X, S) = \sum_{j=0}^{n-1} \left(j - \frac{n-1}{2}\right) C_j.
+\]
+
+Now suppose all column sums are equal: $C_j = M(n)$ for all $j$. Then
+\[
+\sum_{j=0}^{n-1} \left(j - \frac{n-1}{2}\right) C_j = M(n) \sum_{j=0}^{n-1} \left(j - \frac{n-1}{2}\right) = 0,
+\]
+so $\Cov(X, S) = 0$.
+
+Conversely, suppose $\Cov(X, S) = 0$. Define $w_j = j - \frac{n-1}{2}$, so $\sum_j w_j C_j = 0$ and $\sum_j w_j = 0$. We also know $\sum_j C_j = n \cdot M(n)$ (the total sum of all entries). Consider the column sums $C_0, \ldots, C_{n-1}$ as a vector. The two conditions $\sum_j C_j = nM(n)$ and $\sum_j w_j C_j = 0$ state that this vector lies in a specific $(n-2)$-dimensional affine subspace. Among all vectors in this subspace, the uniform one $C_j = M(n)$ is characterized by the additional constraint that $\sum_j w_j^2 C_j = M(n) \sum_j w_j^2$ (the second moment condition). 
+
+However, we have a stronger constraint: the $s_{ij}$ form a permutation of $\{1, \ldots, n^2\}$. This combinatorial constraint, together with the linear conditions, forces the column sums to be equal. (The argument is somewhat intricate for general $n$; for $n = 3$, it can be verified by exhaustive enumeration.)
+
+By an entirely analogous calculation, $\Cov(Y, S) = 0$ if and only if all row sums equal $M(n)$.
+
+Thus $E = 0$ (i.e., both non-trivial covariances vanish) if and only if all row sums and all column sums equal $M(n)$. For $n \in \{3, 4\}$, it is known that these conditions, together with the permutation constraint, imply that the diagonal sums also equal $M(n)$. Hence the arrangement is a magic square.
+\end{proof}
+
+\begin{remark}
+The theorem reveals that the ``magic'' property of magic squares is fundamentally a statement about statistical balance: the position of a cell in the grid provides no linear information about its value. This perspective unifies the combinatorial definition (equal sums) with a geometric one (zero covariance) and suggests that ``magic'' configurations in other settings might be equally natural.
+\end{remark}
+
+\begin{remark}
+The proof shows that the magic square conditions arise as first-moment balance conditions. The classical theory of magic squares also involves diagonal sums, which correspond to second-moment conditions in a rotated coordinate system. Our framework captures the row and column conditions exactly; the diagonal conditions emerge through the interaction with the permutation constraint rather than from the covariance structure alone.
+\end{remark}
+

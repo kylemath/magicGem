@@ -1,0 +1,62 @@
+# Magic Squares Analysis Pipeline Configuration
+
+# Square Generation Settings
+squares:
+  n_squares: 100
+  order: 4
+  random_seed: 42
+
+# Analysis Settings
+analysis:
+  geometric:
+    enabled: true
+    compute_hull: true
+    compute_eigenvalues: true
+    compute_angular_uniformity: true
+  
+  manifold:
+    enabled: true
+    perplexity: 30
+    n_neighbors: 15
+    min_dist: 0.1
+  
+  emd:
+    enabled: true
+    multiscale: true
+    scales: [1, 2]
+    n_pairs: 20
+
+# Visualization Settings
+visualization:
+  tsne:
+    perplexity: 30
+    random_state: 42
+    learning_rate: 200
+  
+  plots:
+    dpi: 300
+    figsize: [10, 8]
+    style: "seaborn"
+    save_format: "png"
+
+# Report Settings
+report:
+  title: "Magic Squares: Geometric and Manifold Analysis"
+  author: "Magic Squares Research Team"
+  template_dir: "magic_squares/templates"
+  include_sections:
+    - introduction
+    - geometric_analysis
+    - manifold_analysis
+    - emd_analysis
+    - conclusions
+
+# Output Settings
+output:
+  base_dir: "magic_squares/runs"
+  subdirs:
+    - plots
+    - results
+    - logs
+  save_intermediates: true
+  compress_results: false 

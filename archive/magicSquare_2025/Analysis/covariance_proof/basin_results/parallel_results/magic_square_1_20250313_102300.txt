@@ -1,0 +1,30 @@
+Magic Square 1:
+[[16.  7.  4.  7.]
+ [ 1. 10. 13. 10.]
+ [ 7.  4.  7. 16.]
+ [10. 13. 10.  1.]]
+
+Configuration:
+  transition_start: 50
+  transition_end: 125
+  total_steps: 250
+  learning_rate: 0.2
+  swaps: 1
+  search_id: 1
+
+Properties:
+  is_magic: True
+  row_magic: True
+  col_magic: True
+  main_diag_magic: True
+  anti_diag_magic: True
+  target_sum: 34.0
+  row_sums: [34.0, 34.0, 34.0, 34.0]
+  col_sums: [34.0, 34.0, 34.0, 34.0]
+  main_diag_sum: 34.0
+  anti_diag_sum: 34.0
+  is_distinct: False
+  is_normal_form: False
+  min_value: 1.0
+  max_value: 16.0
+  size: 4

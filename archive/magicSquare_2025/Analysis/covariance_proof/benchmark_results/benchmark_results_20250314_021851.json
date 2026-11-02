@@ -1,0 +1,522 @@
+[
+  {
+    "trial_id": 1,
+    "parameters": {
+      "transition_start": 60,
+      "transition_end": 120,
+      "total_steps": 300,
+      "learning_rate": 0.1,
+      "swaps": 0,
+      "enforce_monotonic": true
+    },
+    "initial_metrics": {
+      "distance": 0.05391408890537871,
+      "sum_error": 0.14129224264785592,
+      "int_dev": 1.2646757163401565,
+      "monotonic_error": 42.5
+    },
+    "final_metrics": {
+      "distance": 2.7755575615628914e-16,
+      "sum_error": 0.0,
+      "int_dev": 0.0,
+      "monotonic_error": 42.5,
+      "is_magic": true,
+      "is_monotonic": true
+    },
+    "computation_time": 0.048047780990600586,
+    "final_square": [
+      [
+        16.0,
+        3.0,
+        2.0,
+        13.0
+      ],
+      [
+        5.0,
+        10.0,
+        11.0,
+        8.0
+      ],
+      [
+        9.0,
+        6.0,
+        7.0,
+        12.0
+      ],
+      [
+        4.0,
+        15.0,
+        14.0,
+        1.0
+      ]
+    ]
+  },
+  {
+    "trial_id": 2,
+    "parameters": {
+      "transition_start": 90,
+      "transition_end": 210,
+      "total_steps": 300,
+      "learning_rate": 0.1,
+      "swaps": 0,
+      "enforce_monotonic": true
+    },
+    "initial_metrics": {
+      "distance": 0.03576441146095004,
+      "sum_error": 0.07961180457519249,
+      "int_dev": 0.9149158906248342,
+      "monotonic_error": 42.5
+    },
+    "final_metrics": {
+      "distance": 0.0012046679273142516,
+      "sum_error": 0.0015110702244768958,
+      "int_dev": 0.012247919375137473,
+      "monotonic_error": 42.5,
+      "is_magic": true,
+      "is_monotonic": true
+    },
+    "computation_time": 0.045950889587402344,
+    "final_square": [
+      [
+        16.0,
+        3.0,
+        2.0,
+        13.0
+      ],
+      [
+        5.0,
+        10.0,
+        11.0,
+        8.0
+      ],
+      [
+        9.0,
+        6.0,
+        7.0,
+        12.0
+      ],
+      [
+        4.0,
+        15.0,
+        14.0,
+        1.0
+      ]
+    ]
+  },
+  {
+    "trial_id": 3,
+    "parameters": {
+      "transition_start": 150,
+      "transition_end": 240,
+      "total_steps": 300,
+      "learning_rate": 0.1,
+      "swaps": 0,
+      "enforce_monotonic": true
+    },
+    "initial_metrics": {
+      "distance": 0.013691019141124932,
+      "sum_error": 0.08886179568098385,
+      "int_dev": 1.0212617549155802,
+      "monotonic_error": 42.5
+    },
+    "final_metrics": {
+      "distance": 0.000290508629388992,
+      "sum_error": 0.0004173842869086286,
+      "int_dev": 0.0026439370167536946,
+      "monotonic_error": 42.5,
+      "is_magic": true,
+      "is_monotonic": true
+    },
+    "computation_time": 0.04850578308105469,
+    "final_square": [
+      [
+        16.0,
+        3.0,
+        2.0,
+        13.0
+      ],
+      [
+        5.0,
+        10.0,
+        11.0,
+        8.0
+      ],
+      [
+        9.0,
+        6.0,
+        7.0,
+        12.0
+      ],
+      [
+        4.0,
+        15.0,
+        14.0,
+        1.0
+      ]
+    ]
+  },
+  {
+    "trial_id": 4,
+    "parameters": {
+      "transition_start": 60,
+      "transition_end": 120,
+      "total_steps": 300,
+      "learning_rate": 0.12,
+      "swaps": 0,
+      "enforce_monotonic": true
+    },
+    "initial_metrics": {
+      "distance": 0.05934489202130498,
+      "sum_error": 0.11366180399871909,
+      "int_dev": 1.1542345288312317,
+      "monotonic_error": 42.5
+    },
+    "final_metrics": {
+      "distance": 2.7755575615628914e-16,
+      "sum_error": 0.0,
+      "int_dev": 0.0,
+      "monotonic_error": 42.5,
+      "is_magic": true,
+      "is_monotonic": true
+    },
+    "computation_time": 0.05107998847961426,
+    "final_square": [
+      [
+        16.0,
+        3.0,
+        2.0,
+        13.0
+      ],
+      [
+        5.0,
+        10.0,
+        11.0,
+        8.0
+      ],
+      [
+        9.0,
+        6.0,
+        7.0,
+        12.0
+      ],
+      [
+        4.0,
+        15.0,
+        14.0,
+        1.0
+      ]
+    ]
+  },
+  {
+    "trial_id": 5,
+    "parameters": {
+      "transition_start": 90,
+      "transition_end": 210,
+      "total_steps": 300,
+      "learning_rate": 0.12,
+      "swaps": 0,
+      "enforce_monotonic": true
+    },
+    "initial_metrics": {
+      "distance": 0.050705223182003094,
+      "sum_error": 0.0789389398901534,
+      "int_dev": 0.8011629322361862,
+      "monotonic_error": 42.5
+    },
+    "final_metrics": {
+      "distance": 0.0016326947054899534,
+      "sum_error": 0.0022336325931370028,
+      "int_dev": 0.015628553815085544,
+      "monotonic_error": 42.5,
+      "is_magic": true,
+      "is_monotonic": true
+    },
+    "computation_time": 0.04015302658081055,
+    "final_square": [
+      [
+        16.0,
+        3.0,
+        2.0,
+        13.0
+      ],
+      [
+        5.0,
+        10.0,
+        11.0,
+        8.0
+      ],
+      [
+        9.0,
+        6.0,
+        7.0,
+        12.0
+      ],
+      [
+        4.0,
+        15.0,
+        14.0,
+        1.0
+      ]
+    ]
+  },
+  {
+    "trial_id": 6,
+    "parameters": {
+      "transition_start": 150,
+      "transition_end": 240,
+      "total_steps": 300,
+      "learning_rate": 0.12,
+      "swaps": 0,
+      "enforce_monotonic": true
+    },
+    "initial_metrics": {
+      "distance": 0.025162971492512575,
+      "sum_error": 0.0897344830125654,
+      "int_dev": 0.8263823866425383,
+      "monotonic_error": 42.5
+    },
+    "final_metrics": {
+      "distance": 0.0013082771432602021,
+      "sum_error": 0.0015135491182697081,
+      "int_dev": 0.012947928494136285,
+      "monotonic_error": 42.5,
+      "is_magic": true,
+      "is_monotonic": true
+    },
+    "computation_time": 0.039305925369262695,
+    "final_square": [
+      [
+        16.0,
+        3.0,
+        2.0,
+        13.0
+      ],
+      [
+        5.0,
+        10.0,
+        11.0,
+        8.0
+      ],
+      [
+        9.0,
+        6.0,
+        7.0,
+        12.0
+      ],
+      [
+        4.0,
+        15.0,
+        14.0,
+        1.0
+      ]
+    ]
+  },
+  {
+    "trial_id": 7,
+    "parameters": {
+      "transition_start": 60,
+      "transition_end": 120,
+      "total_steps": 300,
+      "learning_rate": 0.15,
+      "swaps": 0,
+      "enforce_monotonic": true
+    },
+    "initial_metrics": {
+      "distance": 0.027357150930218094,
+      "sum_error": 0.1332791754167424,
+      "int_dev": 1.1460197224010393,
+      "monotonic_error": 42.5
+    },
+    "final_metrics": {
+      "distance": 2.7755575615628914e-16,
+      "sum_error": 0.0,
+      "int_dev": 0.0,
+      "monotonic_error": 42.5,
+      "is_magic": true,
+      "is_monotonic": true
+    },
+    "computation_time": 0.04070305824279785,
+    "final_square": [
+      [
+        16.0,
+        3.0,
+        2.0,
+        13.0
+      ],
+      [
+        5.0,
+        10.0,
+        11.0,
+        8.0
+      ],
+      [
+        9.0,
+        6.0,
+        7.0,
+        12.0
+      ],
+      [
+        4.0,
+        15.0,
+        14.0,
+        1.0
+      ]
+    ]
+  },
+  {
+    "trial_id": 8,
+    "parameters": {
+      "transition_start": 90,
+      "transition_end": 210,
+      "total_steps": 300,
+      "learning_rate": 0.15,
+      "swaps": 0,
+      "enforce_monotonic": true
+    },
+    "initial_metrics": {
+      "distance": 0.08803118948700182,
+      "sum_error": 0.2112476209451394,
+      "int_dev": 1.251258879418941,
+      "monotonic_error": 42.5
+    },
+    "final_metrics": {
+      "distance": 0.0017997596565166524,
+      "sum_error": 0.0025211215115803045,
+      "int_dev": 0.01659570811158617,
+      "monotonic_error": 42.5,
+      "is_magic": true,
+      "is_monotonic": true
+    },
+    "computation_time": 0.04038095474243164,
+    "final_square": [
+      [
+        16.0,
+        3.0,
+        2.0,
+        13.0
+      ],
+      [
+        5.0,
+        10.0,
+        11.0,
+        8.0
+      ],
+      [
+        9.0,
+        6.0,
+        7.0,
+        12.0
+      ],
+      [
+        4.0,
+        15.0,
+        14.0,
+        1.0
+      ]
+    ]
+  },
+  {
+    "trial_id": 9,
+    "parameters": {
+      "transition_start": 150,
+      "transition_end": 240,
+      "total_steps": 300,
+      "learning_rate": 0.15,
+      "swaps": 0,
+      "enforce_monotonic": true
+    },
+    "initial_metrics": {
+      "distance": 0.05878616082565057,
+      "sum_error": 0.16274819826298598,
+      "int_dev": 1.3889471912650873,
+      "monotonic_error": 42.5
+    },
+    "final_metrics": {
+      "distance": 0.0007866623662560185,
+      "sum_error": 0.0009871860269242915,
+      "int_dev": 0.0076334057937939015,
+      "monotonic_error": 42.5,
+      "is_magic": true,
+      "is_monotonic": true
+    },
+    "computation_time": 0.03997468948364258,
+    "final_square": [
+      [
+        16.0,
+        3.0,
+        2.0,
+        13.0
+      ],
+      [
+        5.0,
+        10.0,
+        11.0,
+        8.0
+      ],
+      [
+        9.0,
+        6.0,
+        7.0,
+        12.0
+      ],
+      [
+        4.0,
+        15.0,
+        14.0,
+        1.0
+      ]
+    ]
+  },
+  {
+    "trial_id": 10,
+    "parameters": {
+      "transition_start": 93,
+      "transition_end": 249,
+      "total_steps": 300,
+      "learning_rate": 0.12,
+      "swaps": 0,
+      "enforce_monotonic": true
+    },
+    "initial_metrics": {
+      "distance": 0.05721948946980258,
+      "sum_error": 0.09908777005507759,
+      "int_dev": 1.1259294224108112,
+      "monotonic_error": 42.5
+    },
+    "final_metrics": {
+      "distance": 0.0007584275274734087,
+      "sum_error": 0.0009100846511195471,
+      "int_dev": 0.0073892071796511916,
+      "monotonic_error": 42.5,
+      "is_magic": true,
+      "is_monotonic": true
+    },
+    "computation_time": 0.0407259464263916,
+    "final_square": [
+      [
+        16.0,
+        3.0,
+        2.0,
+        13.0
+      ],
+      [
+        5.0,
+        10.0,
+        11.0,
+        8.0
+      ],
+      [
+        9.0,
+        6.0,
+        7.0,
+        12.0
+      ],
+      [
+        4.0,
+        15.0,
+        14.0,
+        1.0
+      ]
+    ]
+  }
+]

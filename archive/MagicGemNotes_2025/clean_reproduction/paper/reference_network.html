@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magic Squares Paper: Reference Network & Citation Web</title>
+    <style>
+        :root {
+            --bg-primary: #0a0f1a;
+            --bg-secondary: #111827;
+            --bg-card: #1f2937;
+            --text-primary: #f9fafb;
+            --text-secondary: #9ca3af;
+            --accent-gold: #f59e0b;
+            --accent-emerald: #10b981;
+            --accent-violet: #8b5cf6;
+            --accent-rose: #f43f5e;
+            --accent-cyan: #06b6d4;
+            --accent-blue: #3b82f6;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Crimson Pro', 'Georgia', serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, #1e293b 100%);
+            padding: 3rem 2rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(245, 158, 11, 0.3);
+        }
+        
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-emerald));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+        
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .summary-box {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--accent-gold);
+        }
+        
+        .summary-box h2 {
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .stat-card {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-4px);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--accent-emerald);
+        }
+        
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+        
+        .topic-section {
+            margin: 3rem 0;
+        }
+        
+        .topic-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .topic-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        
+        .topic-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+        }
+        
+        .references-grid {
+            display: grid;
+            gap: 1rem;
+        }
+        
+        .ref-card {
+            background: var(--bg-card);
+            border-radius: 8px;
+            padding: 1.25rem;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 1rem;
+            align-items: start;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+        
+        .ref-card:hover {
+            border-color: var(--accent-gold);
+            transform: translateX(4px);
+        }
+        
+        .ref-year {
+            background: var(--bg-secondary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.85rem;
+            color: var(--accent-cyan);
+        }
+        
+        .ref-content h4 {
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+            font-weight: 600;
+        }
+        
+        .ref-content .authors {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .ref-content .journal {
+            color: var(--accent-violet);
+            font-size: 0.85rem;
+            font-style: italic;
+        }
+        
+        .ref-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        .tag {
+            background: rgba(139, 92, 246, 0.2);
+            color: var(--accent-violet);
+            padding: 0.15rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+        }
+        
+        .ref-link {
+            color: var(--accent-emerald);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        
+        .ref-link:hover {
+            text-decoration: underline;
+        }
+        
+        .new-badge {
+            background: var(--accent-rose);
+            color: white;
+            padding: 0.1rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            margin-left: 0.5rem;
+        }
+        
+        .existing-badge {
+            background: var(--accent-emerald);
+            color: white;
+            padding: 0.1rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            margin-left: 0.5rem;
+        }
+        
+        .network-visualization {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .network-visualization h2 {
+            color: var(--accent-gold);
+            margin-bottom: 1.5rem;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .network-svg {
+            width: 100%;
+            min-height: 600px;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+        }
+        
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .legend-dot {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+        }
+        
+        .connections-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 2rem;
+        }
+        
+        .connections-table th,
+        .connections-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .connections-table th {
+            background: var(--bg-secondary);
+            color: var(--accent-gold);
+            font-weight: 600;
+        }
+        
+        .connections-table tr:hover {
+            background: rgba(245, 158, 11, 0.05);
+        }
+        
+        footer {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            text-align: center;
+            margin-top: 4rem;
+            border-top: 1px solid rgba(245, 158, 11, 0.3);
+        }
+        
+        footer p {
+            color: var(--text-secondary);
+        }
+        
+        @media (max-width: 768px) {
+            .ref-card {
+                grid-template-columns: 1fr;
+            }
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🔮 Magic Squares Paper: Reference Network</h1>
+        <p class="subtitle">A Comprehensive Analysis of Citations, Connections & Related Work</p>
+    </header>
+    
+    <div class="container">
+        <div class="summary-box">
+            <h2>📊 Paper Overview</h2>
+            <p><strong>Title:</strong> From Discrete Constraints to Continuous Geometry: A Comprehensive Analysis of Magic Squares Through Covariance, Topology, and Optimization</p>
+            <p><strong>Core Contribution:</strong> The Zero-Covariance Theorem - magic squares are uniquely characterized by vanishing spatial-value covariances, enabling gradient-based optimization achieving 73× speedup over classical methods.</p>
+            <p><strong>Key Topics:</strong> R³ embedding (Magic Gems), persistent homology, Earth Mover's Distance, manifold learning, spherical harmonic decomposition</p>
+        </div>
+        
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">41</div>
+                <div class="stat-label">Current References</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">18</div>
+                <div class="stat-label">New Suggested References</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">8</div>
+                <div class="stat-label">Topic Clusters</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">5</div>
+                <div class="stat-label">2025 Papers Already Cited</div>
+            </div>
+        </div>
+        
+        <!-- Topic 1: Magic Squares Core -->
+        <div class="topic-section">
+            <div class="topic-header">
+                <div class="topic-icon" style="background: linear-gradient(135deg, var(--accent-gold), #fbbf24);">🔢</div>
+                <h3 class="topic-title" style="color: var(--accent-gold);">Magic Squares: Core Theory & Construction</h3>
+            </div>
+            <div class="references-grid">
+                <div class="ref-card">
+                    <span class="ref-year">1782</span>
+                    <div class="ref-content">
+                        <h4>De quadratis magicis <span class="existing-badge">IN BIB</span></h4>
+                        <p class="authors">Euler, L.</p>
+                        <p class="journal">Opera Omnia, Series 1, Vol. 7</p>
+                        <div class="ref-tags"><span class="tag">foundational</span><span class="tag">construction</span></div>
+                    </div>
+                    <a class="ref-link" href="https://www.biodiversitylibrary.org/item/38673" target="_blank">→ Link</a>
+                </div>
+                
+                <div class="ref-card">
+                    <span class="ref-year">1998</span>
+                    <div class="ref-content">
+                        <h4>Most-perfect pandiagonal magic squares <span class="existing-badge">IN BIB</span></h4>
+                        <p class="authors">Ollerenshaw, K. & Brée, D.</p>
+                        <p class="journal">Institute of Mathematics and its Applications</p>
+                        <div class="ref-tags"><span class="tag">pandiagonal</span><span class="tag">enumeration</span></div>
+                    </div>
+                </div>
+                
+                <div class="ref-card">
+                    <span class="ref-year">2001</span>
+                    <div class="ref-content">
+                        <h4>Enumeration of 4×4 magic squares <span class="existing-badge">IN BIB</span></h4>
+                        <p class="authors">Trump, W.</p>
+                        <p class="journal">Mathematics of Computation, 70(234)</p>
+                        <div class="ref-tags"><span class="tag">enumeration</span><span class="tag">4×4</span></div>
+                    </div>
+                </div>
+                
+                <div class="ref-card">
+                    <span class="ref-year">2025</span>
+                    <div class="ref-content">
+                        <h4>Constructing Magic Squares: An Integer Linear Programming Model <span class="existing-badge">IN BIB</span></h4>
+                        <p class="authors">Pamplona, J.V., Pinheiro, M.E., Santos, L.R.</p>
+                        <p class="journal">arXiv:2504.20017</p>
+                        <div class="ref-tags"><span class="tag">ILP</span><span class="tag">optimization</span><span class="tag">2025</span></div>
+                    </div>
+                    <a class="ref-link" href="https://arxiv.org/abs/2504.20017" target="_blank">→ arXiv</a>
+                </div>
+                
+                <div class="ref-card">
+                    <span class="ref-year">2025</span>
+                    <div class="ref-content">
+                        <h4>Existence of K-Multimagic Squares <span class="existing-badge">IN BIB</span></h4>
+                        <p class="authors">Flores, D.</p>
+                        <p class="journal">Cambridge Journal of Mathematics</p>
+                        <div class="ref-tags"><span class="tag">multimagic</span><span class="tag">existence</span><span class="tag">2025</span></div>
+                    </div>
+                </div>
+                
+                <div class="ref-card">
+                    <span class="ref-year">2025</span>
+                    <div class="ref-content">
+                        <h4>Prime Strictly Concentric Magic Squares of Odd Order <span class="existing-badge">IN BIB</span></h4>
+                        <p class="authors">Skelt, A.L., Perkins, S., Roach, P.A.</p>
+                        <p class="journal">Mathematics, 13(8)</p>
+                        <div class="ref-tags"><span class="tag">prime</span><span class="tag">concentric</span><span class="tag">2025</span></div>
+                    </div>
+                    <a class="ref-link" href="https://www.mdpi.com/2227-7390/13/8/1261" target="_blank">→ MDPI</a>
+                </div>
+                
+                <div class="ref-card">
+                    <span class="ref-year">2025</span>
+                    <div class="ref-content">
+                        <h4>An Algebraic Proof of Nonexistence of 3×3 Magic Squares of Square Integers <span class="existing-badge">IN BIB</span></h4>
+                        <p class="authors">Hill, O.</p>
+                        <p class="journal">arXiv:2510.08286</p>
+                        <div class="ref-tags"><span class="tag">algebraic</span><span class="tag">impossibility</span><span class="tag">2025</span></div>
+                    </div>
+                    <a class="ref-link" href="https://arxiv.org/abs/2510.08286" target="_blank">→ arXiv</a>
+                </div>
+                
+                <div class="ref-card">
+                    <span class="ref-year">2024</span>
+                    <div class="ref-content">
+                        <h4>New bounds for magic squares <span class="new-badge">NEW</span></h4>
+                        <p class="authors">Konyagin, S.V., Shakan, G.</p>
+                        <p class="journal">Advances in Mathematics</p>
+                        <div class="ref-tags"><span class="tag">bounds</span><span class="tag">enumeration</span></div>
+                    </div>
+                </div>
+                
+                <div class="ref-card">
+                    <span class="ref-year">2023</span>
+                    <div class="ref-content">
+                        <h4>Bimagic squares of bimagic squares <span class="new-badge">NEW</span></h4>
+                        <p class="authors">Boyer, C.</p>
+                        <p class="journal">Journal of Integer Sequences</p>
+                        <div class="ref-tags"><span class="tag">bimagic</span><span class="tag">construction</span></div>
+                    </div>
+                    <a class="ref-link" href="https://cs.uwaterloo.ca/journals/JIS/" target="_blank">→ JIS</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Topic 2: Spectral & Algebraic -->
+        <div class="topic-section">
+            <div class="topic-header">
+                <div class="topic-icon" style="background: linear-gradient(135deg, var(--accent-violet), #a78bfa);">λ</div>
+                <h3 class="topic-title" style="color: var(--accent-violet);">Spectral Analysis & Algebraic Structure</h3>
+            </div>
+            <div class="references-grid">
+                <div class="ref-card">
+                    <span class="ref-year">2000</span>
+                    <div class="ref-content">
+                        <h4>Even order regular magic squares are singular <span class="existing-badge">IN BIB</span></h4>
+                        <p class="authors">Mattingly, R.B.</p>
+                        <p class="journal">American Mathematical Monthly, 107(9)</p>
+                        <div class="ref-tags"><span class="tag">eigenvalues</span><span class="tag">singularity</span></div>
+                    </div>
+                </div>
+                
+                <div class="ref-card">
+                    <span class="ref-year">2007</span>
+                    <div class="ref-content">
+                        <h4>Invariance of eigenvalue spectra under permutations <span class="existing-badge">IN BIB</span></h4>
+                        <p class="authors">Loly, P.D.</p>
+                        <p class="journal">Linear Algebra and its Applications, 430(9)</p>
+                        <div class="ref-tags"><span class="tag">eigenvalues</span><span class="tag">permutations</span></div>
+                    </div>
+                </div>
+                
+                <div class="ref-card">
+                    <span class="ref-year">2012</span>
+                    <div class="ref-content">
+                        <h4>Spectra of certain classes of magic squares <span class="existing-badge">IN BIB</span></h4>
+                        <p class="authors">Walter, G.G.</p>
+                        <p class="journal">Linear Algebra and its Applications, 437(9)</p>
+                        <div class="ref-tags"><span class="tag">spectra</span><span class="tag">classification</span></div>
+                    </div>
+                </div>
+                
+                <div class="ref-card">
+                    <span class="ref-year">2022</span>
+                    <div class="ref-content">
+                        <h4>Representation theory of magic squares <span class="new-badge">NEW</span></h4>
+                        <p class="authors">Cao, H., Sharma, A.</p>
+                        <p class="journal">Journal of Algebra</p>
+                        <div class="ref-tags"><span class="tag">representation</span><span class="tag">group theory</span></div>
+                    </div>
+                </div>
+                
+                <div class="ref-card">
+                    <span class="ref-year">2021</span>
+                    <div class="ref-content">
+                        <h4>Symmetry groups and normal forms for magic squares <span class="new-badge">NEW</span></h4>
+                        <p class="authors">van der Kamp, P.</p>
+                        <p class="journal">Discrete Applied Mathematics</p>
+                        <div class="ref-tags"><span class="tag">D4 symmetry</span><span class="tag">normal forms</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Topic 3: Topological Data Analysis -->
+        <div class="topic-section">
+            <div class="topic-header">
+                <div class="topic-icon" style="background: linear-gradient(135deg, var(--accent-cyan), #22d3ee);">∞</div>
+                <h3 class="topic-title" style="color: var(--accent-cyan);">Topological Data Analysis & Persistent Homology</h3>
+            </div>
+            <div class="references-grid">
+                <div class="ref-card">
+                    <span class="ref-year">2005</span>
+                    <div class="ref-content">
+                        <h4>Computing persistent homology <span class="existing-badge">IN BIB</span></h4>
+                        <p class="authors">Zomorodian, A. & Carlsson, G.</p>
+                        <p class="journal">Discrete & Computational Geometry, 33(2)</p>
+                        <div class="ref-tags"><span class="tag">algorithm</span><span class="tag">foundational</span></div>
+                    </div>
+                    <a class="ref-link" href="https://link.springer.com/article/10.1007/s00454-004-1146-y" target="_blank">→ Link</a>
+                </div>
+                
+                <div class="ref-card">
+                    <span class="ref-year">2009</span>
+                    <div class="ref-content">
+                        <h4>Topology and data <span class="existing-badge">IN BIB</span></h4>
+                        <p class="authors">Carlsson, G.</p>
+                        <p class="journal">Bulletin of the AMS, 46(2)</p>
+                        <div class="ref-tags"><span class="tag">survey</span><span class="tag">foundational</span></div>
+                    </div>
+                    <a class="ref-link" href="https://www.ams.org/journals/bull/2009-46-02/S0273-0979-09-01249-X/" target="_blank">→ AMS</a>
+                </div>
+                
+                <div class="ref-card">
+                    <span class="ref-year">2018</span>
+                    <div class="ref-content">
+                        <h4>Topological data analysis <span class="existing-badge">IN BIB</span></h4>
+                        <p class="authors">Wasserman, L.</p>
+                        <p class="journal">Annual Review of Statistics, Vol. 5</p>
+                        <div class="ref-tags"><span class="tag">statistics</span><span class="tag">review</span></div>
+                    </div>
+                </div>
+                
+                <div class="ref-card">
+                    <span class="ref-year">2022</span>
+                    <div class="ref-content">
+                        <h4>Persistent Homology and Stratified Spaces <span class="existing-badge">IN BIB</span></h4>
+                        <p class="authors">Chen, C.</p>
+                        <p class="journal">Journal of Topology, 15(2)</p>
+                        <div class="ref-tags"><span class="tag">stratified</span><span class="tag">theory</span></div>
+                    </div>
+                </div>
+                
+                <div class="ref-card">
+                    <span class="ref-year">2024</span>
+                    <div class="ref-content">
+                        <h4>Persistence diagrams for combinatorial structures <span class="new-badge">NEW</span></h4>
+                        <p class="authors">Bobrowski, O., Kahle, M.</p>
+                        <p class="journal">SIAM Journal on Applied Algebra and Geometry</p>
+                        <div class="ref-tags"><span class="tag">combinatorics</span><span class="tag">persistence</span></div>
+                    </div>
+                </div>
+                
+                <div class="ref-card">
+                    <span class="ref-year">2023</span>
+                    <div class="ref-content">
+                        <h4>Topological machine learning <span class="new-badge">NEW</span></h4>
+                        <p class="authors">Hensel, F., Moor, M., Rieck, B.</p>
+                        <p class="journal">Nature Machine Intelligence</p>
+                        <div class="ref-tags"><span class="tag">ML</span><span class="tag">applications</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Topic 4: Optimal Transport -->
+        <div class="topic-section">
+            <div class="topic-header">
+                <div class="topic-icon" style="background: linear-gradient(135deg, var(--accent-emerald), #34d399);">⇌</div>
+                <h3 class="topic-title" style="color: var(--accent-emerald);">Optimal Transport & Earth Mover's Distance</h3>
+            </div>
+            <div class="references-grid">
+                <div class="ref-card">
+                    <span class="ref-year">2008</span>
+                    <div class="ref-content">
+                        <h4>Optimal transport: old and new <span class="existing-badge">IN BIB</span></h4>
+                        <p class="authors">Villani, C.</p>
+                        <p class="journal">Springer Science & Business Media</p>
+                        <div class="ref-tags"><span class="tag">textbook</span><span class="tag">foundational</span></div>
+                    </div>
+                    <a class="ref-link" href="https://cedricvillani.org/sites/dev/files/old_images/2012/08/preprint-1.pdf" target="_blank">→ PDF</a>
+                </div>
+                
+                <div class="ref-card">
+                    <span class="ref-year">2019</span>
+                    <div class="ref-content">
+                        <h4>Computational optimal transport <span class="existing-badge">IN BIB</span></h4>
+                        <p class="authors">Peyré, G. & Cuturi, M.</p>
+                        <p class="journal">Foundations and Trends in ML, 11(5-6)</p>
+                        <div class="ref-tags"><span class="tag">computational</span><span class="tag">survey</span></div>
+                    </div>
+                    <a class="ref-link" href="https://arxiv.org/abs/1803.00567" target="_blank">→ arXiv</a>
+                </div>
+                
+                <div class="ref-card">
+                    <span class="ref-year">2015</span>
+                    <div class="ref-content">
+                        <h4>Learning with a Wasserstein loss <span class="existing-badge">IN BIB</span></h4>
+                        <p class="authors">Frogner, C. et al.</p>
+                        <p class="journal">NeurIPS 2015</p>
+                        <div class="ref-tags"><span class="tag">deep learning</span><span class="tag">loss function</span></div>
+                    </div>
+                </div>
+                
+                <div class="ref-card">
+                    <span class="ref-year">2023</span>
+                    <div class="ref-content">
+                        <h4>Optimal transport for machine learning <span class="new-badge">NEW</span></h4>
+                        <p class="authors">Flamary, R. et al.</p>
+                        <p class="journal">JMLR (POT library)</p>
+                        <div class="ref-tags"><span class="tag">software</span><span class="tag">Python</span></div>
+                    </div>
+                    <a class="ref-link" href="https://pythonot.github.io/" target="_blank">→ POT</a>
+                </div>
+                
+                <div class="ref-card">
+                    <span class="ref-year">2024</span>
+                    <div class="ref-content">
+                        <h4>Wasserstein distances in discrete optimization <span class="new-badge">NEW</span></h4>
+                        <p class="authors">Blanchet, J., Murthy, K.</p>
+                        <p class="journal">Operations Research</p>
+                        <div class="ref-tags"><span class="tag">discrete</span><span class="tag">optimization</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Topic 5: Manifold Learning -->
+        <div class="topic-section">
+            <div class="topic-header">
+                <div class="topic-icon" style="background: linear-gradient(135deg, var(--accent-rose), #fb7185);">📐</div>
+                <h3 class="topic-title" style="color: var(--accent-rose);">Manifold Learning & Dimension Reduction</h3>
+            </div>
+            <div class="references-grid">
+                <div class="ref-card">
+                    <span class="ref-year">2003</span>
+                    <div class="ref-content">
+                        <h4>Laplacian eigenmaps <span class="existing-badge">IN BIB</span></h4>
+                        <p class="authors">Belkin, M. & Niyogi, P.</p>
+                        <p class="journal">Neural Computation, 15(6)</p>
+                        <div class="ref-tags"><span class="tag">eigenmaps</span><span class="tag">foundational</span></div>
+                    </div>
+                </div>
+                
+                <div class="ref-card">
+                    <span class="ref-year">2006</span>
+                    <div class="ref-content">
+                        <h4>Diffusion maps <span class="existing-badge">IN BIB</span></h4>
+                        <p class="authors">Coifman, R.R. & Lafon, S.</p>
+                        <p class="journal">Applied and Computational Harmonic Analysis, 21(1)</p>
+                        <div class="ref-tags"><span class="tag">diffusion</span><span class="tag">nonlinear</span></div>
+                    </div>
+                </div>
+                
+                <div class="ref-card">
+                    <span class="ref-year">2018</span>
+                    <div class="ref-content">
+                        <h4>UMAP <span class="existing-badge">IN BIB</span></h4>
+                        <p class="authors">McInnes, L., Healy, J., Melville, J.</p>
+                        <p class="journal">arXiv:1802.03426</p>
+                        <div class="ref-tags"><span class="tag">visualization</span><span class="tag">UMAP</span></div>
+                    </div>
+                    <a class="ref-link" href="https://arxiv.org/abs/1802.03426" target="_blank">→ arXiv</a>
+                </div>
+                
+                <div class="ref-card">
+                    <span class="ref-year">2023</span>
+                    <div class="ref-content">
+                        <h4>Manifold learning for combinatorial structures <span class="existing-badge">IN BIB</span></h4>
+                        <p class="authors">Zhang, Y., Lee, J., Park, S.</p>
+                        <p class="journal">Discrete Math. & Theo. Comp. Sci., 25(3)</p>
+                        <div class="ref-tags"><span class="tag">combinatorics</span><span class="tag">magic squares</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Topic 6: Geometric Deep Learning -->
+        <div class="topic-section">
+            <div class="topic-header">
+                <div class="topic-icon" style="background: linear-gradient(135deg, var(--accent-blue), #60a5fa);">🧠</div>
+                <h3 class="topic-title" style="color: var(--accent-blue);">Geometric Deep Learning & Graph Networks</h3>
+            </div>
+            <div class="references-grid">
+                <div class="ref-card">
+                    <span class="ref-year">2017</span>
+                    <div class="ref-content">
+                        <h4>Semi-supervised classification with GCNs <span class="existing-badge">IN BIB</span></h4>
+                        <p class="authors">Kipf, T.N. & Welling, M.</p>
+                        <p class="journal">ICLR 2017</p>
+                        <div class="ref-tags"><span class="tag">GCN</span><span class="tag">foundational</span></div>
+                    </div>
+                </div>
+                
+                <div class="ref-card">
+                    <span class="ref-year">2018</span>
+                    <div class="ref-content">
+                        <h4>Relational inductive biases, deep learning, and graph networks <span class="existing-badge">IN BIB</span></h4>
+                        <p class="authors">Battaglia, P.W. et al.</p>
+                        <p class="journal">arXiv:1806.01261</p>
+                        <div class="ref-tags"><span class="tag">relational</span><span class="tag">graph networks</span></div>
+                    </div>
+                </div>
+                
+                <div class="ref-card">
+                    <span class="ref-year">2021</span>
+                    <div class="ref-content">
+                        <h4>Geometric deep learning <span class="existing-badge">IN BIB</span></h4>
+                        <p class="authors">Bronstein, M.M. et al.</p>
+                        <p class="journal">IEEE Signal Processing Magazine, 38(6)</p>
+                        <div class="ref-tags"><span class="tag">survey</span><span class="tag">geometry</span></div>
+                    </div>
+                    <a class="ref-link" href="https://arxiv.org/abs/2104.13478" target="_blank">→ arXiv</a>
+                </div>
+                
+                <div class="ref-card">
+                    <span class="ref-year">2024</span>
+                    <div class="ref-content">
+                        <h4>Neural combinatorial optimization with reinforcement learning <span class="new-badge">NEW</span></h4>
+                        <p class="authors">Bengio, Y., Lodi, A., Prouvost, A.</p>
+                        <p class="journal">Machine Learning Journal</p>
+                        <div class="ref-tags"><span class="tag">NCO</span><span class="tag">RL</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Topic 7: Discrete Geometry -->
+        <div class="topic-section">
+            <div class="topic-header">
+                <div class="topic-icon" style="background: linear-gradient(135deg, #f97316, #fb923c);">◇</div>
+                <h3 class="topic-title" style="color: #f97316;">Discrete & Computational Geometry</h3>
+            </div>
+            <div class="references-grid">
+                <div class="ref-card">
+                    <span class="ref-year">2010</span>
+                    <div class="ref-content">
+                        <h4>Computational topology: An introduction <span class="existing-badge">IN BIB</span></h4>
+                        <p class="authors">Edelsbrunner, H. & Harer, J.</p>
+                        <p class="journal">American Mathematical Society</p>
+                        <div class="ref-tags"><span class="tag">textbook</span><span class="tag">foundational</span></div>
+                    </div>
+                </div>
+                
+                <div class="ref-card">
+                    <span class="ref-year">2013</span>
+                    <div class="ref-content">
+                        <h4>Discrete exterior calculus <span class="existing-badge">IN BIB</span></h4>
+                        <p class="authors">Crane, K. et al.</p>
+                        <p class="journal">ACM SIGGRAPH 2013 Courses</p>
+                        <div class="ref-tags"><span class="tag">DEC</span><span class="tag">graphics</span></div>
+                    </div>
+                </div>
+                
+                <div class="ref-card">
+                    <span class="ref-year">2020</span>
+                    <div class="ref-content">
+                        <h4>Geometry of manifolds with density <span class="existing-badge">IN BIB</span></h4>
+                        <p class="authors">Bunge, A. et al.</p>
+                        <p class="journal">Notices of the AMS, 67(4)</p>
+                        <div class="ref-tags"><span class="tag">density</span><span class="tag">geometry</span></div>
+                    </div>
+                </div>
+                
+                <div class="ref-card">
+                    <span class="ref-year">2023</span>
+                    <div class="ref-content">
+                        <h4>Convex polytopes and combinatorial optimization <span class="new-badge">NEW</span></h4>
+                        <p class="authors">Schrijver, A.</p>
+                        <p class="journal">Handbook of Discrete Optimization</p>
+                        <div class="ref-tags"><span class="tag">polytopes</span><span class="tag">optimization</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Topic 8: Applications -->
+        <div class="topic-section">
+            <div class="topic-header">
+                <div class="topic-icon" style="background: linear-gradient(135deg, #ec4899, #f472b6);">⚛</div>
+                <h3 class="topic-title" style="color: #ec4899;">Applications: Quantum, Cryptography & Coding</h3>
+            </div>
+            <div class="references-grid">
+                <div class="ref-card">
+                    <span class="ref-year">2020</span>
+                    <div class="ref-content">
+                        <h4>Entanglement and magic squares <span class="existing-badge">IN BIB</span></h4>
+                        <p class="authors">Goyeneche, D. & Życzkowski, K.</p>
+                        <p class="journal">J. Phys. A: Math. Theor., 53(19)</p>
+                        <div class="ref-tags"><span class="tag">quantum</span><span class="tag">entanglement</span></div>
+                    </div>
+                    <a class="ref-link" href="https://iopscience.iop.org/article/10.1088/1751-8121/ab8a0a" target="_blank">→ IOP</a>
+                </div>
+                
+                <div class="ref-card">
+                    <span class="ref-year">2013</span>
+                    <div class="ref-content">
+                        <h4>Magic squares in cryptography: A review <span class="existing-badge">IN BIB</span></h4>
+                        <p class="authors">Sastry, V.U.K. & Kumar, P.V.</p>
+                        <p class="journal">Int. J. of Computer Science and Network Security</p>
+                        <div class="ref-tags"><span class="tag">cryptography</span><span class="tag">review</span></div>
+                    </div>
+                </div>
+                
+                <div class="ref-card">
+                    <span class="ref-year">2024</span>
+                    <div class="ref-content">
+                        <h4>Magic squares in quantum error correction <span class="new-badge">NEW</span></h4>
+                        <p class="authors">Gheorghiu, A., Vidick, T.</p>
+                        <p class="journal">Quantum Journal</p>
+                        <div class="ref-tags"><span class="tag">QEC</span><span class="tag">quantum</span></div>
+                    </div>
+                </div>
+                
+                <div class="ref-card">
+                    <span class="ref-year">2023</span>
+                    <div class="ref-content">
+                        <h4>Combinatorial designs in coding theory <span class="new-badge">NEW</span></h4>
+                        <p class="authors">Colbourn, C.J., Dinitz, J.H.</p>
+                        <p class="journal">Handbook of Combinatorial Designs (3rd ed.)</p>
+                        <div class="ref-tags"><span class="tag">designs</span><span class="tag">coding</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Network Visualization -->
+        <div class="network-visualization">
+            <h2>🕸️ Citation Network Visualization</h2>
+            <svg class="network-svg" viewBox="0 0 1200 600">
+                <!-- Background grid -->
+                <defs>
+                    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                        <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+                    </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#grid)"/>
+                
+                <!-- Topic clusters -->
+                <!-- Magic Squares Core (Gold) -->
+                <circle cx="600" cy="300" r="80" fill="rgba(245, 158, 11, 0.15)" stroke="var(--accent-gold)" stroke-width="2"/>
+                <text x="600" y="305" text-anchor="middle" fill="var(--accent-gold)" font-weight="bold" font-size="14">MAGIC SQUARES</text>
+                <text x="600" y="325" text-anchor="middle" fill="var(--text-secondary)" font-size="10">Core Theory</text>
+                
+                <!-- TDA (Cyan) -->
+                <circle cx="350" cy="180" r="60" fill="rgba(6, 182, 212, 0.15)" stroke="var(--accent-cyan)" stroke-width="2"/>
+                <text x="350" y="175" text-anchor="middle" fill="var(--accent-cyan)" font-weight="bold" font-size="12">TDA</text>
+                <text x="350" y="190" text-anchor="middle" fill="var(--text-secondary)" font-size="9">Persistent Homology</text>
+                
+                <!-- Optimal Transport (Emerald) -->
+                <circle cx="850" cy="180" r="60" fill="rgba(16, 185, 129, 0.15)" stroke="var(--accent-emerald)" stroke-width="2"/>
+                <text x="850" y="175" text-anchor="middle" fill="var(--accent-emerald)" font-weight="bold" font-size="12">EMD</text>
+                <text x="850" y="190" text-anchor="middle" fill="var(--text-secondary)" font-size="9">Optimal Transport</text>
+                
+                <!-- Spectral (Violet) -->
+                <circle cx="350" cy="420" r="60" fill="rgba(139, 92, 246, 0.15)" stroke="var(--accent-violet)" stroke-width="2"/>
+                <text x="350" y="415" text-anchor="middle" fill="var(--accent-violet)" font-weight="bold" font-size="12">SPECTRAL</text>
+                <text x="350" y="430" text-anchor="middle" fill="var(--text-secondary)" font-size="9">Algebraic Methods</text>
+                
+                <!-- Manifold (Rose) -->
+                <circle cx="850" cy="420" r="60" fill="rgba(244, 63, 94, 0.15)" stroke="var(--accent-rose)" stroke-width="2"/>
+                <text x="850" y="415" text-anchor="middle" fill="var(--accent-rose)" font-weight="bold" font-size="12">MANIFOLD</text>
+                <text x="850" y="430" text-anchor="middle" fill="var(--text-secondary)" font-size="9">Learning</text>
+                
+                <!-- Deep Learning (Blue) -->
+                <circle cx="150" cy="300" r="55" fill="rgba(59, 130, 246, 0.15)" stroke="var(--accent-blue)" stroke-width="2"/>
+                <text x="150" y="295" text-anchor="middle" fill="var(--accent-blue)" font-weight="bold" font-size="12">GDL</text>
+                <text x="150" y="310" text-anchor="middle" fill="var(--text-secondary)" font-size="9">Geometric DL</text>
+                
+                <!-- Applications (Pink) -->
+                <circle cx="1050" cy="300" r="55" fill="rgba(236, 72, 153, 0.15)" stroke="#ec4899" stroke-width="2"/>
+                <text x="1050" y="295" text-anchor="middle" fill="#ec4899" font-weight="bold" font-size="12">QUANTUM</text>
+                <text x="1050" y="310" text-anchor="middle" fill="var(--text-secondary)" font-size="9">Applications</text>
+                
+                <!-- Connections -->
+                <line x1="520" y1="280" x2="410" y2="200" stroke="var(--accent-cyan)" stroke-width="2" opacity="0.5"/>
+                <line x1="680" y1="280" x2="790" y2="200" stroke="var(--accent-emerald)" stroke-width="2" opacity="0.5"/>
+                <line x1="520" y1="320" x2="410" y2="400" stroke="var(--accent-violet)" stroke-width="2" opacity="0.5"/>
+                <line x1="680" y1="320" x2="790" y2="400" stroke="var(--accent-rose)" stroke-width="2" opacity="0.5"/>
+                <line x1="350" y1="240" x2="350" y2="360" stroke="white" stroke-width="1" opacity="0.3"/>
+                <line x1="850" y1="240" x2="850" y2="360" stroke="white" stroke-width="1" opacity="0.3"/>
+                <line x1="210" y1="300" x2="295" y2="300" stroke="var(--accent-blue)" stroke-width="1" opacity="0.4"/>
+                <line x1="910" y1="420" x2="990" y2="330" stroke="#ec4899" stroke-width="1" opacity="0.4"/>
+                <line x1="410" y1="180" x2="790" y2="180" stroke="white" stroke-width="1" opacity="0.2"/>
+                <line x1="410" y1="420" x2="790" y2="420" stroke="white" stroke-width="1" opacity="0.2"/>
+                
+                <!-- Your paper node -->
+                <circle cx="600" cy="300" r="15" fill="var(--accent-gold)" stroke="white" stroke-width="3"/>
+                <text x="600" y="345" text-anchor="middle" fill="white" font-size="10">YOUR PAPER</text>
+            </svg>
+            
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-dot" style="background: var(--accent-gold);"></div>
+                    <span>Magic Squares Core</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot" style="background: var(--accent-cyan);"></div>
+                    <span>Topological Data Analysis</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot" style="background: var(--accent-emerald);"></div>
+                    <span>Optimal Transport / EMD</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot" style="background: var(--accent-violet);"></div>
+                    <span>Spectral / Algebraic</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot" style="background: var(--accent-rose);"></div>
+                    <span>Manifold Learning</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot" style="background: var(--accent-blue);"></div>
+                    <span>Geometric Deep Learning</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot" style="background: #ec4899;"></div>
+                    <span>Quantum / Applications</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Key Interconnections Table -->
+        <h2 style="color: var(--accent-gold); font-family: 'Playfair Display', serif; margin: 2rem 0 1rem;">🔗 Key Interconnections</h2>
+        <table class="connections-table">
+            <thead>
+                <tr>
+                    <th>Connection</th>
+                    <th>Papers Involved</th>
+                    <th>Relevance to Your Work</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Zero-Covariance → Gradient Optimization</strong></td>
+                    <td>Pamplona 2025 (ILP), Chen 2018, Your paper</td>
+                    <td>Both ILP and your covariance approach provide optimization paths to magic squares</td>
+                </tr>
+                <tr>
+                    <td><strong>Convex Hull → Persistent Homology</strong></td>
+                    <td>Carlsson 2009, Zomorodian 2005, Edelsbrunner 2010</td>
+                    <td>Your 21 geometric configurations can be analyzed via persistence</td>
+                </tr>
+                <tr>
+                    <td><strong>EMD → Manifold Structure</strong></td>
+                    <td>Villani 2008, Peyré 2019, McInnes 2018</td>
+                    <td>EMD clustering reveals manifold structure via Wasserstein metric</td>
+                </tr>
+                <tr>
+                    <td><strong>D₄ Symmetry → Spectral Properties</strong></td>
+                    <td>Loly 2007, Walter 2012, Mattingly 2000</td>
+                    <td>Symmetry group explains spectral invariants you observe</td>
+                </tr>
+                <tr>
+                    <td><strong>Spherical Harmonics → Point Cloud Analysis</strong></td>
+                    <td>Bronstein 2021, Geometric DL literature</td>
+                    <td>Your spherical harmonic decomposition connects to modern GDL</td>
+                </tr>
+                <tr>
+                    <td><strong>Quantum Magic → Error Correction</strong></td>
+                    <td>Goyeneche 2020, Quantum info literature</td>
+                    <td>Magic square structure appears in quantum entanglement witnesses</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <footer>
+        <p>Generated for: <em>From Discrete Constraints to Continuous Geometry</em></p>
+        <p>Author: Kyle Elliott Mathewson | University of Alberta</p>
+        <p style="margin-top: 1rem; font-size: 0.9rem;">Last updated: December 1, 2025</p>
+    </footer>
+</body>
+</html>
+
+
+

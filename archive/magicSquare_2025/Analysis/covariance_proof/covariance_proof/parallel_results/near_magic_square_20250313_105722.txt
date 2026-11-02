@@ -1,0 +1,19 @@
+Best Near-Magic Square:
+[[15.20663735  5.20725234  1.80400481 12.2047049 ]
+ [ 3.67731782 11.66521808 10.66787914  8.18718211]
+ [ 9.20894405  4.6714557   6.80739035 13.79570748]
+ [ 6.20603431 12.79904861 15.33562648  0.33510183]]
+
+Magic Sum: 34.44487634148801
+Distance: 0.06223065
+Sum Error: 0.21601322
+Integer Deviation: 4.00346139
+Monotonic Error: 40.00000000
+Is Monotonic 1-16: False
+
+Configuration:
+  transition_start: 125
+  transition_end: 250
+  total_steps: 350
+  learning_rate: 0.1
+  swaps: 4

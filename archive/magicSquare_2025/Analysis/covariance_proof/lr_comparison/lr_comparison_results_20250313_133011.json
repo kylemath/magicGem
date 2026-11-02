@@ -1,0 +1,70 @@
+[
+  {
+    "scheduler": "one_cycle",
+    "summary": {
+      "num_trials": 2,
+      "avg_initial_distance": 1.3744963603526055,
+      "avg_final_distance": 0.0014541156840649377,
+      "min_final_distance": 0.0004219546715579423,
+      "avg_initial_sum_error": 2.9499999999999997,
+      "avg_final_sum_error": 3.0198614740048186,
+      "avg_int_dev": 5.574403304526427,
+      "avg_compute_time": 0.020430445671081543,
+      "avg_improvement_pct": 99.77068491443899,
+      "magic_squares_found": 0,
+      "success_rate": 0.0
+    },
+    "magic_squares_count": 0
+  },
+  {
+    "scheduler": "cosine_annealing",
+    "summary": {
+      "num_trials": 2,
+      "avg_initial_distance": 1.8860349849432267,
+      "avg_final_distance": 0.05989724322490681,
+      "min_final_distance": 0.05029093906308653,
+      "avg_initial_sum_error": 4.6,
+      "avg_final_sum_error": 4.050204151512359,
+      "avg_int_dev": 5.893055484816163,
+      "avg_compute_time": 0.012959003448486328,
+      "avg_improvement_pct": 94.56478374778654,
+      "magic_squares_found": 0,
+      "success_rate": 0.0
+    },
+    "magic_squares_count": 0
+  },
+  {
+    "scheduler": "triangular",
+    "summary": {
+      "num_trials": 2,
+      "avg_initial_distance": 1.2674700267995043,
+      "avg_final_distance": 0.00844789627904233,
+      "min_final_distance": 0.005515843123431441,
+      "avg_initial_sum_error": 2.5,
+      "avg_final_sum_error": 2.36387046366662,
+      "avg_int_dev": 5.122440547297812,
+      "avg_compute_time": 0.012743711471557617,
+      "avg_improvement_pct": 99.03636540271143,
+      "magic_squares_found": 0,
+      "success_rate": 0.0
+    },
+    "magic_squares_count": 0
+  },
+  {
+    "scheduler": "constant",
+    "summary": {
+      "num_trials": 2,
+      "avg_initial_distance": 1.5381123044272291,
+      "avg_final_distance": 0.030975115563939136,
+      "min_final_distance": 0.00977997791520272,
+      "avg_initial_sum_error": 3.2,
+      "avg_final_sum_error": 2.987838393403487,
+      "avg_int_dev": 5.110636273319325,
+      "avg_compute_time": 0.012826681137084961,
+      "avg_improvement_pct": 97.2980592854731,
+      "magic_squares_found": 0,
+      "success_rate": 0.0
+    },
+    "magic_squares_count": 0
+  }
+]

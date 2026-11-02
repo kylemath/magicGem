@@ -1,0 +1,53 @@
+{
+  "system_info": {
+    "platform": "macOS-15.5-arm64-arm-64bit",
+    "processor": "arm",
+    "python_version": "3.9.6",
+    "cpu_count": 16,
+    "total_memory_gb": 128.0,
+    "timestamp": "2025-11-30T15:55:58.899365"
+  },
+  "benchmark_parameters": {
+    "n": 4,
+    "num_trials": 20,
+    "magic_sum": 34
+  },
+  "results": {
+    "Geometric Gradient Descent": {
+      "method": "Geometric Gradient Descent",
+      "success_rate": 0.0,
+      "avg_time": 0.009918320178985595,
+      "std_time": 0.0024479657900352398,
+      "min_time": 0.005720853805541992,
+      "max_time": 0.013974905014038086,
+      "avg_memory_mb": 0.0125,
+      "total_attempts": 20,
+      "successes": 0,
+      "failures": 20
+    },
+    "Classical Backtracking": {
+      "method": "Classical Backtracking",
+      "success_rate": 1.0,
+      "avg_time": 0.9035222411155701,
+      "std_time": 0.01531757832510716,
+      "min_time": 0.8815078735351562,
+      "max_time": 0.946993350982666,
+      "avg_memory_mb": 0.00078125,
+      "total_attempts": 20,
+      "successes": 20,
+      "failures": 0
+    },
+    "Simulated Annealing": {
+      "method": "Simulated Annealing",
+      "success_rate": 0.1,
+      "avg_time": 0.11633375883102418,
+      "std_time": 0.03058423304212425,
+      "min_time": 0.021026134490966797,
+      "max_time": 0.1274700164794922,
+      "avg_memory_mb": 0.00390625,
+      "total_attempts": 20,
+      "successes": 2,
+      "failures": 18
+    }
+  }
+}

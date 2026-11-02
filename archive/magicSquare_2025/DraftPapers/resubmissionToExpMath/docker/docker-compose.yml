@@ -1,0 +1,77 @@
+version: '3.8'
+
+services:
+  # Main analysis service
+  analysis:
+    build: 
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: magic-squares-analysis
+    volumes:
+      - ../results:/app/results
+      - ../figures:/app/figures
+      - ../data/generated:/app/data/generated
+    environment:
+      - PYTHONPATH=/app
+      - PYTHONHASHSEED=42
+      - RANDOM_SEED=42
+      - ANALYSIS_MODE=full
+    command: ["python", "analysis/run_analysis.py", "--full", "--generate"]
+    
+  # Web application service
+  webapp:
+    build: 
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: magic-squares-webapp
+    ports:
+      - "5000:5000"
+    volumes:
+      - ../results:/app/results
+      - ../figures:/app/figures
+      - ../data:/app/data
+    environment:
+      - FLASK_ENV=production
+      - FLASK_APP=web/app.py
+      - PYTHONPATH=/app
+    command: ["python", "web/app.py"]
+    depends_on:
+      - analysis
+
+  # Jupyter notebook service for interactive exploration
+  jupyter:
+    build: 
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: magic-squares-jupyter
+    ports:
+      - "8888:8888"
+    volumes:
+      - ../:/app
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+    command: >
+      bash -c "pip install jupyterlab &&
+               jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root 
+               --NotebookApp.token='' --NotebookApp.password=''"
+
+  # Benchmarking service
+  benchmark:
+    build: 
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: magic-squares-benchmark
+    volumes:
+      - ../results:/app/results
+      - ../benchmarks/results:/app/benchmarks/results
+    environment:
+      - PYTHONPATH=/app
+      - BENCHMARK_MODE=full
+    command: ["python", "benchmarks/algorithm_comparison.py", "--full-benchmark"]
+    depends_on:
+      - analysis
+
+volumes:
+  results:
+  figures:
+  generated_data: 

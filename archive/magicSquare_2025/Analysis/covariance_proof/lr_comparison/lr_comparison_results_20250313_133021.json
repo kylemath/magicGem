@@ -1,0 +1,70 @@
+[
+  {
+    "scheduler": "one_cycle",
+    "summary": {
+      "num_trials": 3,
+      "avg_initial_distance": 0.9511211251844504,
+      "avg_final_distance": 0.003994165375760317,
+      "min_final_distance": 0.0001405621257799152,
+      "avg_initial_sum_error": 1.8999999999999997,
+      "avg_final_sum_error": 0.11551826806673471,
+      "avg_int_dev": 3.5509857072391546,
+      "avg_compute_time": 0.043670972188313804,
+      "avg_improvement_pct": 98.9336211122092,
+      "magic_squares_found": 0,
+      "success_rate": 0.0
+    },
+    "magic_squares_count": 0
+  },
+  {
+    "scheduler": "cosine_annealing",
+    "summary": {
+      "num_trials": 3,
+      "avg_initial_distance": 1.2596703901832176,
+      "avg_final_distance": 0.008347624636537553,
+      "min_final_distance": 0.0009600469959037121,
+      "avg_initial_sum_error": 1.9000000000000001,
+      "avg_final_sum_error": 0.041070971768809035,
+      "avg_int_dev": 3.059114724507401,
+      "avg_compute_time": 0.04276378949483236,
+      "avg_improvement_pct": 99.05598135370919,
+      "magic_squares_found": 0,
+      "success_rate": 0.0
+    },
+    "magic_squares_count": 0
+  },
+  {
+    "scheduler": "triangular",
+    "summary": {
+      "num_trials": 3,
+      "avg_initial_distance": 1.0516101912358964,
+      "avg_final_distance": 0.008586657883940517,
+      "min_final_distance": 0.0004462138149006623,
+      "avg_initial_sum_error": 2.6,
+      "avg_final_sum_error": 0.07349714028010605,
+      "avg_int_dev": 3.413768517692963,
+      "avg_compute_time": 0.03992756207784017,
+      "avg_improvement_pct": 98.74248824689336,
+      "magic_squares_found": 0,
+      "success_rate": 0.0
+    },
+    "magic_squares_count": 0
+  },
+  {
+    "scheduler": "constant",
+    "summary": {
+      "num_trials": 3,
+      "avg_initial_distance": 1.418392667024932,
+      "avg_final_distance": 0.03225429046639062,
+      "min_final_distance": 0.02004658999729802,
+      "avg_initial_sum_error": 3.4666666666666663,
+      "avg_final_sum_error": 0.19314604094255614,
+      "avg_int_dev": 3.4918834226909983,
+      "avg_compute_time": 0.04021366437276205,
+      "avg_improvement_pct": 95.85532722338992,
+      "magic_squares_found": 0,
+      "success_rate": 0.0
+    },
+    "magic_squares_count": 0
+  }
+]

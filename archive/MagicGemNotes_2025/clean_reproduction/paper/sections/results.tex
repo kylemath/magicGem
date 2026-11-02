@@ -1,0 +1,108 @@
+\section{Results}\label{sec:results}
+
+Our analysis of the 880 unique $4 \times 4$ magic squares reveals a consistent and rich geometric structure. By viewing these combinatorial objects as shapes in $\mathbb{R}^3$, we uncover patterns that are invisible to traditional algebraic analysis.
+
+\subsection{Geometric Properties and Point Distribution}
+
+The most striking finding is the geometric consistency across the entire population of magic squares. Despite the diversity of numerical arrangements, the convex hull volumes cluster tightly around a mean of $84.1 \pm 7.1$ cubic units. This suggests that magic squares occupy a specific, well-defined volume in configuration space. The distribution of hull vertices ranges from 8 to 16, with an average of $12.2 \pm 1.4$, indicating that typically three-quarters of the points define the boundary of the ``Magic Gem,'' while the rest reside in the interior.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{figures/r3_embedding_stats.png}
+    \caption{\textbf{R$^3$ Embedding and Geometric Statistics.} (Top Left) The 3D embedding of a magic square with its convex hull. (Top Right) Distribution of the number of hull vertices across all 880 magic squares. (Bottom Left) Distribution of hull volumes. (Bottom Right) Distribution of volume-to-area ratios. The statistics reveal consistent geometric patterns despite the combinatorial diversity.}
+    \label{fig:configurations}
+\end{figure}
+
+\begin{table}[h]
+\centering
+\caption{Summary statistics of geometric properties across all 880 magic squares.}
+\label{tab:geom-stats}
+\begin{tabular}{lrrrr}
+\toprule
+Metric & Mean & Std & Min & Max \\
+\midrule
+Vertices & 12.227 & 1.438 & 8.000 & 16.000 \\
+Volume & 84.053 & 7.141 & 58.000 & 97.333 \\
+Area & 135.130 & 6.170 & 116.533 & 148.619 \\
+Angular Uniformity & 0.569 & 0.000 & 0.569 & 0.569 \\
+Compactness & 3.110 & 0.237 & 2.732 & 4.293 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+A particularly robust invariant is the angular uniformity, which measures the evenness of point distribution around the centroid. We observe identical values ($0.569$) across all 880 squares. This exact constancy is a consequence of the embedding geometry: with centered coordinates and the permutation constraint fixing the set of possible values, the angular distribution is determined by the grid structure itself rather than the specific arrangement.
+
+\subsection{Classification by Hull Configuration}
+
+We identified 21 distinct geometric configurations based on the tuple of vertices, face points, and interior points $(v, f, i)$. This represents a significant reduction from the 91 theoretically possible combinations for 16 points, suggesting that the magic constraints strictly limit the feasible shapes. The most common configuration, shared by 18.1\% of all squares (including Dürer's), is the \textbf{12v\_0f\_4i} type, characterized by 12 vertices and 4 interior points with no points on the faces.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lccp{5cm}}
+\toprule
+Configuration & Count & Percentage & Geometric Interpretation \\
+\midrule
+12v\_0f\_4i & 159 & 18.1\% & Balanced extremal structure with 4 interior points \\
+16v\_0f\_0i & 94 & 10.7\% & All points on hull boundary (maximal convexity) \\
+8v\_4f\_4i & 76 & 8.6\% & Symmetric distribution across all categories \\
+10v\_2f\_4i & 68 & 7.7\% & Dominant vertex structure with interior balance \\
+8v\_8f\_0i & 62 & 7.0\% & Equal vertex/face split, no interior \\
+14v\_0f\_2i & 58 & 6.6\% & Near-maximal hull with 2 interior points \\
+10v\_6f\_0i & 54 & 6.1\% & Balanced hull structure, no interior \\
+8v\_0f\_8i & 47 & 5.3\% & Minimal vertex set with maximal interior \\
+12v\_4f\_0i & 43 & 4.9\% & High vertex count with face points \\
+10v\_0f\_6i & 39 & 4.4\% & Moderate vertices with significant interior \\
+\bottomrule
+\end{tabular}
+\caption{Distribution of geometric hull configurations among 880 magic squares (top 10 shown). The remaining 11 configurations each represent less than 4\% of the total.}
+\label{tab:geom-classification}
+\end{table}
+
+This classification reveals a preference for vertex dominance, with nearly half of all squares having zero face points. Interior points, when they exist, tend to appear in clusters of 2, 4, 6, or 8. The maximally convex configuration (16 vertices, 0 interior) accounts for 10.7\% of the population (94 squares), representing cases where all 16 points lie on the hull boundary.
+
+\subsection{Geometric Signatures of Classical Categories}
+
+This geometric taxonomy complements the classical algebraic classification of magic squares into pandiagonal, associative, and simple types. Our analysis shows that the algebraic properties impress distinct signatures onto the geometry. For instance, pandiagonal and associative squares—which are algebraically disjoint sets—occupy distinct regions of the geometric configuration space. Pandiagonal squares predominantly cluster in configurations with odd numbers of interior points (such as 3), while associative squares are found almost exclusively in configurations with even numbers of interior points (2 or 4). Furthermore, the pandiagonal constraints appear to prevent the formation of the maximally convex 16-vertex hull, a configuration that is accessible to associative and simple squares. This separation implies that the algebraic symmetries of the squares enforce specific geometric constraints on their $\mathbb{R}^3$ embeddings.
+
+\subsection{Connectivity and Clustering}
+
+Analyzing the network of magic squares formed by linking nearest neighbors in the Earth Mover's Distance metric reveals a single, highly connected component. The perfect local clustering coefficient suggests that the space is locally regular: if square A is close to squares B and C, then B and C are likely close to each other. The average path length of 1.0 indicates that the graph is dense, with direct connections between most pairs of squares in terms of similarity.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/manifold_analysis.png}
+    \caption{Connectivity structure of magic squares. The visualization shows the network of EMD-based similarities among the 880 magic squares, revealing a highly connected structure with short path lengths and high clustering coefficients.}
+    \label{fig:connectivity}
+\end{figure}
+
+\begin{table}[h]
+\centering
+\caption{Nearest-neighbor Earth Mover's Distance statistics.}
+\label{tab:emd-nn}
+\begin{tabular}{lrr}
+\toprule
+Neighbor Rank & Mean Distance & Std Dev \\
+\midrule
+1st & 0.021 & 0.011 \\
+2nd & 0.032 & 0.011 \\
+3rd & 0.040 & 0.012 \\
+4th & 0.047 & 0.011 \\
+5th & 0.052 & 0.012 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The distribution of EMD distances shows a multi-modal structure, with a primary peak at small distances ($0.021 \pm 0.011$) representing tight local clusters. These clusters correspond to families of squares related by symmetry transformations. This structure suggests that despite the discrete nature of the permutation space, magic squares form a coherent geometric object rather than a scattered collection of isolated points. (We use ``manifold'' informally; strictly speaking, the 880 squares form a discrete set, and manifold-like structure refers to the apparent low-dimensional organization when embedded and connected via nearest-neighbor graphs.) While our primary visualization uses UMAP \citep{mcinnes2018}, we verified consistency with both diffusion maps \citep{coifman2006} and t-SNE \citep{vandermaaten2008} embeddings.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/distance_distributions.png}
+    \caption{Distribution of Earth Mover's Distance between magic squares. The histogram shows the distribution of pairwise EMD values, revealing natural clustering with characteristic distance scales.}
+    \label{fig:emd-dist}
+\end{figure}
+
+\subsection{Enumeration and Constraints}
+
+The fact that exactly 880 unique magic squares exist for $n=4$ has long been an empirical fact established by exhaustive search. Our geometric analysis offers a perspective on why this number is so small compared to the $16!$ possible permutations. The six covariance conditions (Theorem~\ref{thm:main}) define a linear subspace of $\mathbb{R}^{16}$; the permutation constraint selects only those integer points corresponding to rearrangements of $\{1,\ldots,16\}$. This intersection of continuous constraints with discrete structure effectively prunes the search space. While a precise analytical derivation of the count 880 from these geometric principles remains an open problem, the six-covariance characterization provides a foundation for such an approach.
+
+In summary, the geometric perspective unifies the diverse population of magic squares, revealing them to be variations on a small number of fundamental shapes characterized by strict covariance and symmetry constraints.

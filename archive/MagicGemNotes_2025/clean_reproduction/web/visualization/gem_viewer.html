@@ -1,0 +1,772 @@
+<!-- Gem Viewer Component -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Magic Square Geometric Explorer</title>
+    <style>
+        body { margin: 0; overflow: hidden; background-color: #f0f0f0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        #container {
+            display: flex;
+            width: 100vw;
+            height: 100vh;
+        }
+        #leftPanel {
+            width: 300px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            background: white;
+            border-right: 1px solid #ddd;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.05);
+            z-index: 10;
+        }
+        #controls {
+            padding: 15px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #ddd;
+        }
+        .control-group {
+            margin-bottom: 15px;
+        }
+        .control-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #2c3e50;
+        }
+        .toggle-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+        .toggle-row input {
+            margin-right: 8px;
+        }
+        .toggle-row label {
+            margin-bottom: 0;
+            font-weight: normal;
+            cursor: pointer;
+        }
+        input[type="range"] {
+            width: 100%;
+        }
+        input[type="number"] {
+            width: 80px;
+            padding: 4px;
+            margin-left: 8px;
+        }
+        #squareGrid {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 10px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+            gap: 8px;
+            align-content: start;
+        }
+        #gemView {
+            flex: 1;
+            height: 100%;
+            position: relative;
+        }
+        #viewControls {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .square-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+            cursor: pointer;
+            padding: 2px;
+            border: 2px solid transparent;
+            background: #eee;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+        .square-container:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .square-container.selected {
+            border-color: #3498db;
+            background-color: #3498db;
+        }
+        .square-cell {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 7px;
+            background-color: #fff;
+            color: #333;
+        }
+        button {
+            padding: 6px 12px;
+            cursor: pointer;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            color: #333;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+        button:hover {
+            background-color: #f0f0f0;
+            border-color: #bbb;
+        }
+        button.active {
+            background-color: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+        .square-info {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            min-width: 220px;
+            pointer-events: none;
+        }
+        .info-title {
+            margin: 0 0 10px 0;
+            font-size: 1rem;
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 5px;
+        }
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+        .stat-label {
+            color: #7f8c8d;
+        }
+        .stat-value {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="leftPanel">
+            <div id="controls">
+                <div class="control-group">
+                    <label>Visibility</label>
+                    <div class="toggle-row">
+                        <input type="checkbox" id="showPoints" checked>
+                        <label for="showPoints">Points</label>
+                    </div>
+                    <div class="toggle-row">
+                        <input type="checkbox" id="showHull" checked>
+                        <label for="showHull">Convex Hull</label>
+                    </div>
+                    <div class="toggle-row">
+                        <input type="checkbox" id="showVectors">
+                        <label for="showVectors">Vectors</label>
+                    </div>
+                    <div class="toggle-row">
+                        <input type="checkbox" id="showAxes" checked>
+                        <label for="showAxes">Axes</label>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <label>Hull Opacity</label>
+                    <input type="range" id="hullOpacity" min="0.1" max="1.0" step="0.1" value="0.8">
+                </div>
+
+                <div class="control-group">
+                    <label>Point Size</label>
+                    <input type="range" id="pointSize" min="0.05" max="0.3" step="0.01" value="0.15">
+                </div>
+
+                <div class="control-group">
+                    <label>Camera</label>
+                    <div class="toggle-row">
+                        <input type="checkbox" id="orthographic">
+                        <label for="orthographic">Orthographic View</label>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <button id="colorFaces" style="width: 100%">Color by Symmetry</button>
+                    <div class="toggle-row" style="margin-top: 8px;">
+                        <label for="epsilon" style="margin-bottom: 0;">Similarity ε:</label>
+                        <input type="number" id="epsilon" value="0.001" step="0.001" min="0.0001" max="0.1">
+                    </div>
+                </div>
+            </div>
+            <div id="squareGrid"></div>
+        </div>
+        <div id="gemView">
+            <div id="viewControls">
+                <button class="view-btn" data-view="iso">Isometric</button>
+                <button class="view-btn" data-view="top">Top</button>
+                <button class="view-btn" data-view="front">Front</button>
+                <button class="view-btn" data-view="right">Right</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+
+    <script type="module">
+        import * as THREE from 'three';
+        import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+        import { ConvexGeometry } from 'three/addons/geometries/ConvexGeometry.js';
+
+        // Initialize Scene
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0xf5f7fa);
+        
+        // Cameras
+        const aspect = (window.innerWidth - 300) / window.innerHeight;
+        const perspectiveCamera = new THREE.PerspectiveCamera(60, aspect, 0.1, 1000);
+        const d = 4;
+        const orthographicCamera = new THREE.OrthographicCamera(-d * aspect, d * aspect, d, -d, 0.1, 1000);
+        
+        let camera = perspectiveCamera;
+        
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth - 300, window.innerHeight);
+        renderer.shadowMap.enabled = true;
+        document.getElementById('gemView').appendChild(renderer.domElement);
+
+        // Lighting
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+        scene.add(ambientLight);
+        
+        const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+        dirLight.position.set(5, 10, 7);
+        dirLight.castShadow = true;
+        scene.add(dirLight);
+
+        const fillLight = new THREE.DirectionalLight(0xffffff, 0.4);
+        fillLight.position.set(-5, 0, -5);
+        scene.add(fillLight);
+
+        // Controls
+        let controls = new OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.05;
+        camera.position.set(4, 3, 5);
+        controls.update();
+
+        // Axes
+        const axesHelper = new THREE.AxesHelper(2);
+        scene.add(axesHelper);
+
+        // State
+        let currentMesh, currentPoints, currentVectors, currentWireframe;
+        let currentSquareData;
+        let currentGroups = [];
+        let faceConnections = null;
+        let squareColorCache = new Map();
+        let squareConnectionsCache = new Map();
+
+        // Color palette for face groups
+        const colorPalette = [
+            '#2f4f4f', '#7f0000', '#008000', '#000080', '#ff0000', 
+            '#00ced1', '#ffa500', '#7fff00', '#00fa9a', '#0000ff',
+            '#ff00ff', '#1e90ff', '#eee8aa', '#ffff54', '#dda0dd', '#ff1493'
+        ];
+
+        function generateDistinctColors(n) {
+            return colorPalette.slice(0, n).map(c => new THREE.Color(c));
+        }
+
+        // Custom shader for glowing lines
+        const laserVertexShader = `
+            varying vec2 vUv;
+            void main() {
+                vUv = uv;
+                gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+            }
+        `;
+
+        const laserFragmentShader = `
+            uniform vec3 color;
+            varying vec2 vUv;
+            void main() {
+                float center = 0.5;
+                float dist = abs(vUv.x - center);
+                float sigma = 0.15;
+                float intensity = exp(-dist * dist / (2.0 * sigma * sigma));
+                float peakBoost = smoothstep(0.48, 0.52, 1.0 - dist) * 0.5;
+                intensity += peakBoost;
+                gl_FragColor = vec4(color, intensity);
+            }
+        `;
+
+        // Create arc between two face centers
+        function createArcBetweenPoints(start, end, color) {
+            const center = new THREE.Vector3(0, 0, 0);
+            const midPoint = new THREE.Vector3().addVectors(start, end).multiplyScalar(0.5);
+            const directionFromCenter = midPoint.clone().sub(center).normalize();
+            
+            const radius = Math.max(start.length(), end.length(), midPoint.length()) * 2.5;
+            const controlPoint = directionFromCenter.multiplyScalar(radius);
+            
+            const curve = new THREE.QuadraticBezierCurve3(start, controlPoint, end);
+            const points = curve.getPoints(100);
+            
+            const tubeGeometry = new THREE.TubeGeometry(
+                new THREE.CatmullRomCurve3(points), 100, 0.02, 8, false
+            );
+
+            const material = new THREE.ShaderMaterial({
+                vertexShader: laserVertexShader,
+                fragmentShader: laserFragmentShader,
+                uniforms: {
+                    color: { value: new THREE.Color(color) }
+                },
+                transparent: true,
+                depthTest: true,
+                depthWrite: false,
+                blending: THREE.AdditiveBlending
+            });
+
+            return new THREE.Mesh(tubeGeometry, material);
+        }
+
+        // Get vertices of a face
+        function getFaceVertices(faceIndex, geometry) {
+            const vertices = [];
+            for (let i = 0; i < 3; i++) {
+                const vertexIndex = faceIndex * 3 + i;
+                vertices.push(new THREE.Vector3(
+                    geometry.attributes.position.array[vertexIndex * 3],
+                    geometry.attributes.position.array[vertexIndex * 3 + 1],
+                    geometry.attributes.position.array[vertexIndex * 3 + 2]
+                ));
+            }
+            return vertices;
+        }
+
+        // Get face characteristics for similarity comparison
+        function getFaceCharacteristics(vertices) {
+            const edges = [];
+            for (let i = 0; i < 3; i++) {
+                edges.push(vertices[i].distanceTo(vertices[(i + 1) % 3]));
+            }
+            edges.sort();
+            
+            const angles = [];
+            for (let i = 0; i < 3; i++) {
+                const edge1 = new THREE.Vector3().subVectors(vertices[(i + 1) % 3], vertices[i]);
+                const edge2 = new THREE.Vector3().subVectors(vertices[(i + 2) % 3], vertices[i]);
+                angles.push(edge1.angleTo(edge2));
+            }
+            angles.sort();
+            
+            return { edges, angles };
+        }
+
+        // Check if two faces are similar
+        function areFacesSimilar(face1, face2, epsilon) {
+            for (let i = 0; i < 3; i++) {
+                if (Math.abs(face1.edges[i] - face2.edges[i]) > epsilon) return false;
+                if (Math.abs(face1.angles[i] - face2.angles[i]) > epsilon) return false;
+            }
+            return true;
+        }
+
+        // Get face center
+        function getFaceCenter(vertices) {
+            const center = new THREE.Vector3();
+            vertices.forEach(v => center.add(v));
+            return center.divideScalar(3);
+        }
+
+        // Color similar faces
+        function colorSimilarFaces(square, geometry) {
+            const squareKey = JSON.stringify(square);
+
+            if (faceConnections) {
+                scene.remove(faceConnections);
+            }
+            faceConnections = new THREE.Group();
+            
+            if (squareColorCache.has(squareKey)) {
+                const cached = squareColorCache.get(squareKey);
+                geometry.setAttribute('color', new THREE.BufferAttribute(new Float32Array(cached), 3));
+                
+                if (squareConnectionsCache.has(squareKey)) {
+                    squareConnectionsCache.get(squareKey).forEach(c => faceConnections.add(c.clone()));
+                    scene.add(faceConnections);
+                }
+                currentMesh.material.vertexColors = true;
+                currentMesh.material.needsUpdate = true;
+                return;
+            }
+
+            const epsilon = parseFloat(document.getElementById('epsilon').value);
+            const faceCharacteristics = [];
+            const faceCenters = [];
+            
+            for (let i = 0; i < geometry.attributes.position.count / 3; i++) {
+                const vertices = getFaceVertices(i, geometry);
+                faceCharacteristics.push(getFaceCharacteristics(vertices));
+                faceCenters.push(getFaceCenter(vertices));
+            }
+
+            currentGroups = [];
+            const used = new Set();
+
+            for (let i = 0; i < faceCharacteristics.length; i++) {
+                if (used.has(i)) continue;
+                const group = [i];
+                used.add(i);
+                for (let j = i + 1; j < faceCharacteristics.length; j++) {
+                    if (!used.has(j) && areFacesSimilar(faceCharacteristics[i], faceCharacteristics[j], epsilon)) {
+                        group.push(j);
+                        used.add(j);
+                    }
+                }
+                currentGroups.push(group);
+            }
+
+            const distinctColors = generateDistinctColors(currentGroups.length);
+            const hullColors = new Float32Array(geometry.attributes.position.count * 3);
+            const connections = [];
+            
+            currentGroups.forEach((group, groupIndex) => {
+                const color = distinctColors[groupIndex];
+                
+                group.forEach(faceIndex => {
+                    for (let i = 0; i < 3; i++) {
+                        const vertexIndex = faceIndex * 3 + i;
+                        hullColors[vertexIndex * 3] = color.r;
+                        hullColors[vertexIndex * 3 + 1] = color.g;
+                        hullColors[vertexIndex * 3 + 2] = color.b;
+                    }
+                });
+
+                if (group.length > 1) {
+                    for (let i = 0; i < group.length - 1; i++) {
+                        const arc = createArcBetweenPoints(faceCenters[group[i]], faceCenters[group[i + 1]], color);
+                        faceConnections.add(arc);
+                        connections.push(arc);
+                    }
+                }
+            });
+
+            scene.add(faceConnections);
+            squareColorCache.set(squareKey, Array.from(hullColors));
+            squareConnectionsCache.set(squareKey, connections);
+
+            geometry.setAttribute('color', new THREE.BufferAttribute(hullColors, 3));
+            currentMesh.material.vertexColors = true;
+            currentMesh.material.needsUpdate = true;
+        }
+
+        // Calculate volume
+        function calculateVolume(geometry) {
+            let volume = 0;
+            for (let i = 0; i < geometry.attributes.position.count; i += 3) {
+                const v1 = new THREE.Vector3(
+                    geometry.attributes.position.array[i * 3],
+                    geometry.attributes.position.array[i * 3 + 1],
+                    geometry.attributes.position.array[i * 3 + 2]
+                );
+                const v2 = new THREE.Vector3(
+                    geometry.attributes.position.array[(i + 1) * 3],
+                    geometry.attributes.position.array[(i + 1) * 3 + 1],
+                    geometry.attributes.position.array[(i + 1) * 3 + 2]
+                );
+                const v3 = new THREE.Vector3(
+                    geometry.attributes.position.array[(i + 2) * 3],
+                    geometry.attributes.position.array[(i + 2) * 3 + 1],
+                    geometry.attributes.position.array[(i + 2) * 3 + 2]
+                );
+                volume += v1.dot(v2.cross(v3)) / 6.0;
+            }
+            return Math.abs(volume);
+        }
+
+        // Core visualization
+        function createVisualization(square) {
+            currentSquareData = square;
+            
+            // Clear previous
+            if(currentMesh) scene.remove(currentMesh);
+            if(currentPoints) scene.remove(currentPoints);
+            if(currentVectors) scene.remove(currentVectors);
+            if(faceConnections) scene.remove(faceConnections);
+
+            const points3D = [];
+            const positions = [];
+            const colors = [];
+
+            for(let i=0; i<4; i++) {
+                for(let j=0; j<4; j++) {
+                    const val = square[i][j];
+                    const x = (j - 1.5) / 3;
+                    const y = (1.5 - i) / 3;
+                    const z = (val - 8.5) / 15;
+
+                    const vec = new THREE.Vector3(x, y, z);
+                    points3D.push(vec);
+                    positions.push(x, y, z);
+
+                    const color = new THREE.Color().setHSL((val-1)/16 * 0.7, 0.8, 0.5);
+                    colors.push(color.r, color.g, color.b);
+                }
+            }
+
+            // 1. Convex Hull
+            const geometry = new ConvexGeometry(points3D);
+            const material = new THREE.MeshPhongMaterial({
+                color: 0x3498db,
+                transparent: true,
+                opacity: parseFloat(document.getElementById('hullOpacity').value),
+                side: THREE.DoubleSide,
+                flatShading: true,
+                vertexColors: true,
+                shininess: 100
+            });
+            currentMesh = new THREE.Mesh(geometry, material);
+            
+            // Add wireframe
+            const wiregeo = new THREE.WireframeGeometry(geometry);
+            const wiremat = new THREE.LineBasicMaterial({ color: 0x2c3e50, transparent: true, opacity: 0.5 });
+            currentWireframe = new THREE.LineSegments(wiregeo, wiremat);
+            currentMesh.add(currentWireframe);
+            
+            // Color faces by symmetry
+            colorSimilarFaces(square, geometry);
+            
+            if(document.getElementById('showHull').checked) scene.add(currentMesh);
+
+            // 2. Points
+            const pointGeo = new THREE.BufferGeometry();
+            pointGeo.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+            pointGeo.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+            
+            const pointMat = new THREE.PointsMaterial({
+                size: parseFloat(document.getElementById('pointSize').value),
+                vertexColors: true
+            });
+            currentPoints = new THREE.Points(pointGeo, pointMat);
+            if(document.getElementById('showPoints').checked) scene.add(currentPoints);
+
+            // 3. Vectors from origin
+            const vectorsGroup = new THREE.Group();
+            points3D.forEach((point, index) => {
+                const direction = point.clone().normalize();
+                const length = point.length();
+                const arrowHelper = new THREE.ArrowHelper(
+                    direction,
+                    new THREE.Vector3(0, 0, 0),
+                    length,
+                    new THREE.Color().setHSL((index) / 16, 1, 0.5),
+                    0.05,
+                    0.03
+                );
+                vectorsGroup.add(arrowHelper);
+            });
+            currentVectors = vectorsGroup;
+            if(document.getElementById('showVectors').checked) scene.add(currentVectors);
+
+            // Update Stats
+            updateStats(geometry, points3D);
+        }
+
+        function updateStats(geometry, points) {
+            const oldStats = document.querySelector('.square-info');
+            if(oldStats) oldStats.remove();
+
+            const numFaces = geometry.attributes.position.count / 3;
+            const volume = calculateVolume(geometry).toFixed(6);
+            const numPairedFaces = currentGroups.reduce((acc, g) => acc + (g.length > 1 ? g.length : 0), 0);
+            
+            const div = document.createElement('div');
+            div.className = 'square-info';
+            div.innerHTML = `
+                <h3 class="info-title">Geometric Properties</h3>
+                <div class="stat-row">
+                    <span class="stat-label">Total Points</span>
+                    <span class="stat-value">${points.length}</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Hull Faces</span>
+                    <span class="stat-value">${numFaces}</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Similar Faces</span>
+                    <span class="stat-value">${numPairedFaces}</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Face Groups</span>
+                    <span class="stat-value">${currentGroups.length}</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Volume</span>
+                    <span class="stat-value">${volume}</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Symmetry Group</span>
+                    <span class="stat-value">D<sub>4</sub></span>
+                </div>
+            `;
+            document.getElementById('gemView').appendChild(div);
+        }
+
+        // Load Data
+        fetch('../assets/data/unique_squares.json')
+            .then(r => r.json())
+            .then(squares => {
+                const grid = document.getElementById('squareGrid');
+                
+                squares.forEach((sq, idx) => {
+                    const el = document.createElement('div');
+                    el.className = 'square-container';
+                    el.dataset.index = idx;
+                    el.onclick = () => {
+                        document.querySelectorAll('.square-container').forEach(e => e.classList.remove('selected'));
+                        el.classList.add('selected');
+                        createVisualization(sq);
+                    };
+
+                    sq.forEach(row => {
+                        row.forEach(val => {
+                            const cell = document.createElement('div');
+                            cell.className = 'square-cell';
+                            cell.innerText = val;
+                            el.appendChild(cell);
+                        });
+                    });
+                    grid.appendChild(el);
+                });
+
+                if(squares.length > 0) {
+                    grid.children[0].click();
+                }
+
+                // Keyboard navigation
+                document.addEventListener('keydown', (e) => {
+                    const selected = document.querySelector('.square-container.selected');
+                    if (!selected) return;
+                    const idx = parseInt(selected.dataset.index);
+                    let newIdx;
+                    if (e.key === 'ArrowLeft') newIdx = (idx - 1 + squares.length) % squares.length;
+                    else if (e.key === 'ArrowRight') newIdx = (idx + 1) % squares.length;
+                    else return;
+                    const newEl = grid.querySelector(`[data-index="${newIdx}"]`);
+                    if (newEl) {
+                        newEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                        newEl.click();
+                    }
+                });
+            });
+
+        // Event Listeners
+        document.getElementById('hullOpacity').addEventListener('input', e => {
+            if(currentMesh) currentMesh.material.opacity = parseFloat(e.target.value);
+        });
+
+        document.getElementById('pointSize').addEventListener('input', e => {
+            if(currentPoints) currentPoints.material.size = parseFloat(e.target.value);
+        });
+
+        document.getElementById('showHull').addEventListener('change', e => {
+            if(currentMesh) e.target.checked ? scene.add(currentMesh) : scene.remove(currentMesh);
+        });
+
+        document.getElementById('showPoints').addEventListener('change', e => {
+            if(currentPoints) e.target.checked ? scene.add(currentPoints) : scene.remove(currentPoints);
+        });
+
+        document.getElementById('showVectors').addEventListener('change', e => {
+            if(currentVectors) e.target.checked ? scene.add(currentVectors) : scene.remove(currentVectors);
+        });
+
+        document.getElementById('showAxes').addEventListener('change', e => {
+            axesHelper.visible = e.target.checked;
+        });
+
+        document.getElementById('orthographic').addEventListener('change', e => {
+            const pos = camera.position.clone();
+            camera = e.target.checked ? orthographicCamera : perspectiveCamera;
+            camera.position.copy(pos);
+            controls.object = camera;
+            camera.lookAt(0,0,0);
+            controls.update();
+        });
+
+        document.getElementById('colorFaces').addEventListener('click', () => {
+            if (currentMesh && currentSquareData) {
+                const squareKey = JSON.stringify(currentSquareData);
+                squareColorCache.delete(squareKey);
+                squareConnectionsCache.delete(squareKey);
+                colorSimilarFaces(currentSquareData, currentMesh.geometry);
+            }
+        });
+
+        // View buttons
+        document.querySelectorAll('.view-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const pos = {
+                    'iso': [4, 3, 5],
+                    'top': [0, 10, 0],
+                    'front': [0, 0, 10],
+                    'right': [10, 0, 0]
+                }[btn.dataset.view];
+                
+                if(pos) {
+                    camera.position.set(...pos);
+                    camera.lookAt(0,0,0);
+                    controls.update();
+                }
+            });
+        });
+
+        // Resize
+        window.addEventListener('resize', () => {
+            const w = window.innerWidth - 300;
+            const h = window.innerHeight;
+            renderer.setSize(w, h);
+            
+            perspectiveCamera.aspect = w/h;
+            perspectiveCamera.updateProjectionMatrix();
+            
+            const ar = w/h;
+            orthographicCamera.left = -d * ar;
+            orthographicCamera.right = d * ar;
+            orthographicCamera.updateProjectionMatrix();
+        });
+
+        // Loop
+        function animate() {
+            requestAnimationFrame(animate);
+            controls.update();
+            renderer.render(scene, camera);
+        }
+        animate();
+
+    </script>
+</body>
+</html>

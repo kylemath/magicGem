@@ -1,0 +1,147 @@
+\documentclass[11pt]{article}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage[margin=1in]{geometry}
+
+% Theorem environments
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{remark}[theorem]{Remark}
+
+% Custom commands
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Cov}{\operatorname{Cov}}
+\newcommand{\Var}{\operatorname{Var}}
+
+% Title
+\title{\textbf{Magic Squares and Spin-Position Covariance}\\[0.5em]
+\large A Geometric Framework for Balanced Configurations}
+
+\author{George R.\\
+Department of Mathematics\\
+\texttt{george.r@institution.edu}}
+
+\date{December 2025}
+
+\begin{document}
+
+\maketitle
+
+% Abstract
+\input{sections/abstract}
+
+% Main sections
+\input{sections/introduction}
+\input{sections/theory}
+\input{sections/results}
+\input{sections/discussion}
+\input{sections/conclusion}
+
+% Bibliography
+\begin{thebibliography}{99}
+
+\bibitem{magic_gems_2025}
+Anonymous Authors.
+\newblock Magic Gems: A Polyhedral Framework for Magic Squares.
+\newblock \emph{Manuscript submitted to Experimental Mathematics}, 2025.
+
+\bibitem{andrews_1960}
+W.~S. Andrews.
+\newblock \emph{Magic Squares and Cubes}.
+\newblock Dover Publications, 1960.
+
+\bibitem{berlekamp_2004}
+E.~R. Berlekamp, J.~H. Conway, and R.~K. Guy.
+\newblock \emph{Winning Ways for Your Mathematical Plays}, Volume 4.
+\newblock A K Peters, 2nd edition, 2004.
+
+\bibitem{dummit_foote}
+D.~S. Dummit and R.~M. Foote.
+\newblock \emph{Abstract Algebra}.
+\newblock Wiley, 3rd edition, 2004.
+
+\bibitem{horn_johnson}
+R.~A. Horn and C.~R. Johnson.
+\newblock \emph{Matrix Analysis}.
+\newblock Cambridge University Press, 2nd edition, 2012.
+
+\bibitem{pickover_2002}
+C.~A. Pickover.
+\newblock \emph{The Zen of Magic Squares, Circles, and Stars}.
+\newblock Princeton University Press, 2002.
+
+\end{thebibliography}
+
+\appendix
+
+\section{The Precession Tensor}
+\label{app:tensor}
+
+For completeness, we record some properties of the precession tensor $\mathcal{P}$ introduced in Section~\ref{sec:tensor}.
+
+Given centered positions $\{\tilde{\mathbf{r}}_k\}$ and centered spins $\{\tilde{s}_k\}$, the precession tensor is defined by
+\[
+\mathcal{P}_{ij} = \sum_{k=1}^N \tilde{s}_k \cdot \tilde{r}_{k,i} \cdot \tilde{r}_{k,j}.
+\]
+This tensor is manifestly symmetric: $\mathcal{P}_{ij} = \mathcal{P}_{ji}$. Its trace is
+\[
+\operatorname{Tr}(\mathcal{P}) = \sum_{i=1}^3 \mathcal{P}_{ii} = \sum_{k=1}^N \tilde{s}_k \|\tilde{\mathbf{r}}_k\|^2,
+\]
+which is the spin-weighted sum of squared distances from the centroid.
+
+The precession tensor generalizes the moment of inertia tensor. If all spins were equal and positive, $\mathcal{P}$ would be proportional to the ordinary moment of inertia. With varying signs, $\mathcal{P}$ can have negative eigenvalues, reflecting regions where positive and negative spins contribute differently to the angular distribution.
+
+For a magic spin configuration, the first moment $\sum_k \tilde{s}_k \tilde{\mathbf{r}}_k$ vanishes, but $\mathcal{P}$ (a second moment quantity) is generally non-zero. The tensor $\mathcal{P}$ captures structure in the spin distribution that the magic condition does not constrain.
+
+\section{Implementation Notes}
+\label{app:code}
+
+We implemented the framework in Python using NumPy for linear algebra and Matplotlib for visualization. The core calculation is straightforward:
+
+\begin{verbatim}
+import numpy as np
+
+def spin_balance_energy(positions, spins):
+    """
+    Compute the spin balance energy for a configuration.
+    
+    Parameters:
+    -----------
+    positions : ndarray of shape (N, 3)
+        Point positions in 3D space
+    spins : ndarray of shape (N,)
+        Spin values at each point
+        
+    Returns:
+    --------
+    energy : float
+        The spin balance energy E = ||c||^2
+    """
+    # Center the data
+    centered_pos = positions - positions.mean(axis=0)
+    centered_spins = spins - spins.mean()
+    
+    # Compute covariances
+    N = len(spins)
+    c = centered_pos.T @ centered_spins / N
+    
+    return np.sum(c**2)
+\end{verbatim}
+
+Finding magic configurations amounts to solving the linear system $R^T \tilde{\mathbf{s}} = \mathbf{0}$ subject to $\sum_k \tilde{s}_k = 0$, which can be done using standard null-space routines.
+
+All source code, including figure generation scripts, is available in the supplementary materials.
+
+\end{document}
+

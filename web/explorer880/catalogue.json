@@ -1,0 +1,11 @@
+{
+  "id": "MagicGemWebpage",
+  "title": "MagicGemWebpage",
+  "oneLiner": "A web catalogue of all 880 4x4 magic gems",
+  "demoUrl": "https://kylemath.github.io/MagicGemWebpage",
+  "screenshot": "https://raw.githubusercontent.com/kylemath/MagicGemWebpage/main/screenshot.png",
+  "kind": "project",
+  "categories": ["magic squares"],
+  "tags": ["magic squares"],
+  "status": "published"
+}

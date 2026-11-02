@@ -1,0 +1,37 @@
+\section{Methods}\label{sec:methods}
+
+This section details our methodological framework for analyzing magic squares, systematically bridging discrete combinatorics with continuous mathematics. Our approach relies on three key components: a geometric embedding into $\mathbb{R}^3$, a metric based on optimal transport, and statistical tools for analyzing the resulting geometric spaces.
+
+\subsection{Geometric Embedding Framework}
+
+The foundation of our analysis is the natural embedding of magic squares into three-dimensional Euclidean space. For an $n \times n$ magic square $M$, we construct a point cloud in $\mathbb{R}^3$ by mapping each entry $M_{ij}$ to the point $(i, j, M_{ij})$. This embedding, $\phi(M) = \{(i, j, M_{ij}) \in \mathbb{R}^3 \mid 0 \leq i, j \leq n-1\}$, preserves the crucial spatial relationships between cells while treating the numerical value as a physical height or mass. We chose this $\mathbb{R}^3$ representation over spectral or high-dimensional vector embeddings because it maintains interpretability; the geometric features of the point cloud, such as convexity and symmetry, correspond directly to structural properties of the square. Furthermore, by viewing the square as a discrete probability distribution over grid positions, we connect the problem to geometric measure theory.
+
+For each embedded square, we compute the convex hull and classify the 16 points based on their position relative to this boundary. Points are categorized as vertices (forming the corners of the hull), face points (lying on the surface but not vertices), or interior points (strictly inside the hull). This classification yields a geometric signature $(V, F, I)$ for each square, allowing us to taxonomize the 880 unique configurations based on their shape. We also compute continuous geometric measures including hull volume, surface area, and angular uniformity to capture the spatial distribution of the values. Our convex hull classification connects to broader questions in discrete geometry regarding vertex configurations and polytope structure \citep{ziegler1995lectures}.
+
+\subsection{Earth Mover's Distance Analysis}
+
+To quantify the similarity between different magic squares, we employ the Earth Mover's Distance (EMD), also known as the 1-Wasserstein distance. This metric is particularly well-suited for our analysis because it respects the underlying geometry of the embedding space. Unlike the Frobenius norm (which treats entries independently) or the Hamming distance (which ignores value magnitude), the EMD measures the minimal ``work'' required to transform one configuration into another, where work is defined as mass times distance moved.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/emd_analysis.png}
+    \caption{Earth Mover's Distance analysis methodology. \textbf{(A)} EMD computation process showing optimal transport between two magic square embeddings. \textbf{(B)} Distance matrix revealing clustering structure. \textbf{(C)} Multi-scale EMD analysis across different embedding resolutions. \textbf{(D)} Statistical significance of EMD differences between matrix types.}
+    \label{fig:emd-analysis}
+\end{figure}
+
+Formally, for two magic squares with embeddings $P_1$ and $P_2$, the EMD is defined as the minimum cost to transport the mass distribution of $P_1$ to $P_2$ using the Euclidean distance in $\mathbb{R}^3$ as the ground metric. We normalize the coordinates to the unit cube $[0,1]^3$ to ensure comparable contributions from spatial and value dimensions. The computation is implemented using the Hungarian algorithm to solve the optimal assignment problem between the two sets of 16 points. We computed all pairwise EMD values using the Python Optimal Transport (POT) library \citep{flamary2021pot}, which provides efficient implementations of Wasserstein distance computations. By computing the pairwise EMD for all $\binom{880}{2}$ pairs of magic squares, we construct a complete distance matrix that reveals the intrinsic clustering and manifold structure of the space.
+
+\subsection{Multi-Scale Dimension and Statistical Validation}
+
+We estimate the intrinsic dimension of the magic square manifold using correlation dimension and $k$-nearest neighbor methods. By analyzing the scaling of point counts within spheres of increasing radius, we determine the effective degrees of freedom available to the system locally.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/dimension_analysis.png}
+    \caption{Multi-scale dimension analysis of magic squares. \textbf{(A)} Local dimension estimates across different scales showing convergence to $d \approx 2.07$. \textbf{(B)} Confidence intervals and statistical validation. \textbf{(C)} Comparison with null models. \textbf{(D)} Stratification analysis revealing potential non-uniform dimension distribution.}
+    \label{fig:dimension-analysis}
+\end{figure}
+
+To ensure the robustness of our findings, we employ a rigorous statistical framework. We validate our geometric observations against two null models: a Random Permutation Model (unconstrained arrangements of $1 \ldots 16$) and a Structured Null Model (matrices satisfying only row/column sums). We use bootstrap resampling to compute confidence intervals for all reported statistics and apply the Benjamini-Hochberg procedure to correct for multiple hypothesis testing when comparing properties across different classes of squares. This dual null model approach allows us to distinguish features that are unique to magic squares from those that arise merely from general structural constraints.
+
+All computational analyses were implemented in Python using standard scientific computing libraries (NumPy, SciPy) and specialized tools for persistent homology (GUDHI) \citep{maria2014gudhi}. The complete analysis pipeline is deterministic and reproducible.

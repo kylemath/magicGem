@@ -1,0 +1,72 @@
+[
+  {
+    "transition_start": 175,
+    "transition_end": 275,
+    "total_steps": 350,
+    "learning_rate": 0.075,
+    "swaps": 3,
+    "metrics": {
+      "distance": 0.0022851867444423747,
+      "sum_error": 0.10312340034369143,
+      "int_dev": 2.011042790110558,
+      "is_magic": false,
+      "combined_score": 0.6081692846157734
+    }
+  },
+  {
+    "transition_start": 50,
+    "transition_end": 125,
+    "total_steps": 250,
+    "learning_rate": 0.075,
+    "swaps": 5,
+    "metrics": {
+      "distance": 0.0051740175366413845,
+      "sum_error": 0.10549474034539089,
+      "int_dev": 2.0246300027566937,
+      "is_magic": false,
+      "combined_score": 0.6168262585712057
+    }
+  },
+  {
+    "transition_start": 150,
+    "transition_end": 200,
+    "total_steps": 350,
+    "learning_rate": 0.1,
+    "swaps": 4,
+    "metrics": {
+      "distance": 0.005294425185482998,
+      "sum_error": 0.10563280097550062,
+      "int_dev": 2.025088558497216,
+      "is_magic": false,
+      "combined_score": 0.6171993657852876
+    }
+  },
+  {
+    "transition_start": 150,
+    "transition_end": 200,
+    "total_steps": 250,
+    "learning_rate": 0.1,
+    "swaps": 2,
+    "metrics": {
+      "distance": 0.00347534155488633,
+      "sum_error": 0.05477335608744767,
+      "int_dev": 2.5313583576337377,
+      "is_magic": false,
+      "combined_score": 0.6910882870507684
+    }
+  },
+  {
+    "transition_start": 150,
+    "transition_end": 200,
+    "total_steps": 250,
+    "learning_rate": 0.1,
+    "swaps": 2,
+    "metrics": {
+      "distance": 0.0041871673255280675,
+      "sum_error": 0.08102642705688154,
+      "int_dev": 2.7479234435773856,
+      "is_magic": false,
+      "combined_score": 0.772194455276756
+    }
+  }
+]

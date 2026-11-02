@@ -1,0 +1,61 @@
+method,trial,time_ms,memory_mb,success
+Geometric Gradient Descent,0,8.47482681274414,0.15625,False
+Geometric Gradient Descent,1,7.319927215576172,0.015625,False
+Geometric Gradient Descent,2,10.866165161132812,0.0,False
+Geometric Gradient Descent,3,8.257865905761719,0.0,False
+Geometric Gradient Descent,4,6.252050399780273,0.0625,False
+Geometric Gradient Descent,5,6.693124771118164,0.015625,False
+Geometric Gradient Descent,6,9.855985641479492,0.015625,False
+Geometric Gradient Descent,7,10.947942733764648,0.015625,False
+Geometric Gradient Descent,8,11.144876480102539,0.015625,False
+Geometric Gradient Descent,9,10.342836380004883,0.0,False
+Geometric Gradient Descent,10,13.782978057861328,0.015625,False
+Geometric Gradient Descent,11,11.900901794433594,0.0,False
+Geometric Gradient Descent,12,9.572982788085938,0.0,False
+Geometric Gradient Descent,13,13.018131256103516,0.0,False
+Geometric Gradient Descent,14,9.327173233032227,0.0,False
+Geometric Gradient Descent,15,8.040189743041992,0.0,False
+Geometric Gradient Descent,16,10.79106330871582,0.0,False
+Geometric Gradient Descent,17,5.876064300537109,0.0,False
+Geometric Gradient Descent,18,13.36812973022461,0.09375,False
+Geometric Gradient Descent,19,5.491971969604492,0.0,False
+Classical Backtracking,0,872.7812767028809,0.015625,True
+Classical Backtracking,1,868.384838104248,0.0,True
+Classical Backtracking,2,875.7820129394531,0.0625,True
+Classical Backtracking,3,865.9369945526123,0.0,True
+Classical Backtracking,4,863.8420104980469,0.0,True
+Classical Backtracking,5,863.2340431213379,0.0,True
+Classical Backtracking,6,866.5008544921875,0.0,True
+Classical Backtracking,7,860.496997833252,0.0,True
+Classical Backtracking,8,859.0998649597168,0.0,True
+Classical Backtracking,9,865.7758235931396,0.0,True
+Classical Backtracking,10,868.5917854309082,0.0,True
+Classical Backtracking,11,872.3068237304688,0.0625,True
+Classical Backtracking,12,870.502233505249,0.0,True
+Classical Backtracking,13,869.6639537811279,0.0,True
+Classical Backtracking,14,874.9871253967285,0.0,True
+Classical Backtracking,15,865.0891780853271,0.0,True
+Classical Backtracking,16,866.0058975219727,0.0,True
+Classical Backtracking,17,865.7069206237793,0.0,True
+Classical Backtracking,18,873.5330104827881,0.0,True
+Classical Backtracking,19,863.7659549713135,0.0,True
+Simulated Annealing,0,124.57418441772461,0.078125,True
+Simulated Annealing,1,122.45798110961914,0.0,True
+Simulated Annealing,2,125.76508522033691,0.0,False
+Simulated Annealing,3,124.4509220123291,0.0,False
+Simulated Annealing,4,28.244972229003906,0.0,False
+Simulated Annealing,5,20.537853240966797,0.0,False
+Simulated Annealing,6,126.44505500793457,0.0,False
+Simulated Annealing,7,125.27203559875488,0.0,False
+Simulated Annealing,8,124.8178482055664,0.0,False
+Simulated Annealing,9,124.45998191833496,0.0,False
+Simulated Annealing,10,128.43990325927734,0.0,False
+Simulated Annealing,11,124.40896034240723,0.0,False
+Simulated Annealing,12,126.87802314758301,0.0,False
+Simulated Annealing,13,127.44426727294922,0.0,False
+Simulated Annealing,14,126.93119049072266,0.0,False
+Simulated Annealing,15,124.8466968536377,0.0,False
+Simulated Annealing,16,126.17301940917969,0.0,False
+Simulated Annealing,17,125.45514106750488,0.0,False
+Simulated Annealing,18,124.59421157836914,0.0,False
+Simulated Annealing,19,125.36382675170898,0.0,False

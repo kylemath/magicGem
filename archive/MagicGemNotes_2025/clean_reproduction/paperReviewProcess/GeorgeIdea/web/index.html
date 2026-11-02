@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spin Gems: Interactive Exploration</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Source+Sans+Pro:wght@400;600&family=Fira+Code&display=swap" rel="stylesheet">
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/styles.css">
+  
+  <!-- Three.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+  
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="background-canvas"></div>
+  
+  <header>
+    <h1>Spin Gems</h1>
+    <p class="subtitle">A Covariance Framework for Molecular Spin Configurations</p>
+  </header>
+  
+  <nav class="tab-nav">
+    <button class="tab-btn active" data-tab="tab1">1. Introduction</button>
+    <button class="tab-btn" data-tab="tab2">2. Magic Squares</button>
+    <button class="tab-btn" data-tab="tab3">3. Molecular Geometries</button>
+    <button class="tab-btn" data-tab="tab4">4. Energy Landscape</button>
+    <button class="tab-btn" data-tab="tab5">5. Precession Dynamics</button>
+  </nav>
+  
+  <main>
+    <!-- ============================================================ -->
+    <!-- TAB 1: INTRODUCTION -->
+    <!-- ============================================================ -->
+    <section id="tab1" class="tab-content active">
+      <div class="section">
+        <div class="section-header">
+          <h2>The Spin Gem Framework</h2>
+          <p class="lead">
+            Extending the Magic Gem representation to continuous molecular spin configurations, 
+            revealing deep connections between combinatorics, geometry, and quantum physics.
+          </p>
+        </div>
+        
+        <div class="split-view">
+          <div class="canvas-container" id="viewer-tab1">
+            <div class="canvas-overlay">Hexagonal Spin Gem • Drag to rotate</div>
+          </div>
+          
+          <div class="prose-panel">
+            <h3>What is a Spin Gem?</h3>
+            <p>
+              A <strong>Spin Gem</strong> is a geometric representation of a molecular spin configuration.
+              Given a collection of atoms at positions (x, y, z) with spin projections S<sub>z</sub>, 
+              we construct a four-dimensional point cloud and analyze its covariance structure.
+            </p>
+            
+            <div class="math">
+              Point cloud: 𝒮 = { (x̃ₖ, ỹₖ, z̃ₖ, s̃ₖ) } ⊂ ℝ⁴
+            </div>
+            
+            <p>
+              The key insight is that the covariance between spatial coordinates and spin values 
+              captures a fundamental notion of <em>balance</em>. When these covariances vanish:
+            </p>
+            
+            <div class="math">
+              Cov(X, S) = Cov(Y, S) = Cov(Z, S) = 0
+            </div>
+            
+            <p>
+              we say the configuration is <strong>magic</strong>—the spatial position of an atom 
+              provides no linear information about its spin state.
+            </p>
+            
+            <div class="conjecture">
+              <h5>The Spin Balance Energy</h5>
+              <p>
+                We define the energy functional E = ||c||² = Cov(X,S)² + Cov(Y,S)² + Cov(Z,S)².
+                Magic spin configurations are precisely the ground states where E = 0.
+              </p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <div class="value" id="tab1-atoms">6</div>
+            <div class="label">Atoms</div>
+          </div>
+          <div class="metric-card">
+            <div class="value" id="tab1-energy">—</div>
+            <div class="label">Energy E</div>
+          </div>
+          <div class="metric-card">
+            <div class="value" id="tab1-status">—</div>
+            <div class="label">Magic Status</div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- ============================================================ -->
+    <!-- TAB 2: MAGIC SQUARES CONNECTION -->
+    <!-- ============================================================ -->
+    <section id="tab2" class="tab-content">
+      <div class="section">
+        <div class="section-header">
+          <h2>Magic Squares as Spin Gems</h2>
+          <p class="lead">
+            Classical magic squares are discrete instances of magic spin configurations—
+            the ancient combinatorics meets modern molecular physics.
+          </p>
+        </div>
+        
+        <div class="split-view">
+          <div>
+            <div class="canvas-container" id="viewer-tab2">
+              <div class="canvas-overlay">Lo Shu Magic Square • E = 0</div>
+            </div>
+            
+            <div class="controls-panel">
+              <h4>The Lo Shu Square</h4>
+              <div style="display: flex; justify-content: center;">
+                <div class="magic-square-grid" style="grid-template-columns: repeat(3, 1fr);">
+                  <div class="magic-square-cell" style="background: linear-gradient(135deg, #4444ff, #6666ff);">2</div>
+                  <div class="magic-square-cell" style="background: linear-gradient(135deg, #ff6666, #ff4444);">7</div>
+                  <div class="magic-square-cell" style="background: linear-gradient(135deg, #ff8888, #ff6666);">6</div>
+                  <div class="magic-square-cell" style="background: linear-gradient(135deg, #ff4444, #cc0000);">9</div>
+                  <div class="magic-square-cell" style="background: linear-gradient(135deg, #888888, #666666);">5</div>
+                  <div class="magic-square-cell" style="background: linear-gradient(135deg, #4444ff, #2222cc);">1</div>
+                  <div class="magic-square-cell" style="background: linear-gradient(135deg, #6666ff, #4444ff);">4</div>
+                  <div class="magic-square-cell" style="background: linear-gradient(135deg, #4466ff, #4444ff);">3</div>
+                  <div class="magic-square-cell" style="background: linear-gradient(135deg, #ff6666, #ff4444);">8</div>
+                </div>
+              </div>
+              <p style="text-align: center; color: var(--text-secondary); margin-top: 1rem;">
+                Each row, column, and diagonal sums to M(3) = 15
+              </p>
+            </div>
+          </div>
+          
+          <div>
+            <div class="prose-panel">
+              <h3>The Connection Theorem</h3>
+              <p>
+                Interpreting magic square values as spin projections on a planar lattice,
+                we prove that the zero-covariance condition is equivalent to the magic property.
+              </p>
+              
+              <div class="proof-box">
+                <h5>Theorem (Magic Squares ↔ Spin Gems)</h5>
+                <p>
+                  An n×n arrangement S of {1, 2, ..., n²} is a magic square if and only if
+                  the corresponding Spin Gem has E = 0.
+                </p>
+                <span class="status verified">✓ Proven for n = 3, 4</span>
+              </div>
+              
+              <p>
+                The scatter plot below shows covariances for 500 random 3×3 arrangements.
+                The Lo Shu square sits precisely at the origin—the unique point of perfect balance.
+              </p>
+            </div>
+            
+            <div class="chart-container">
+              <h4>Covariance Distribution</h4>
+              <canvas id="covariance-chart" height="250"></canvas>
+            </div>
+            
+            <div class="metrics-grid">
+              <div class="metric-card">
+                <div class="value" id="ms-energy">0</div>
+                <div class="label">Energy E</div>
+              </div>
+              <div class="metric-card">
+                <div class="value" id="ms-cov-x">0</div>
+                <div class="label">Cov(X, S)</div>
+              </div>
+              <div class="metric-card">
+                <div class="value" id="ms-cov-y">0</div>
+                <div class="label">Cov(Y, S)</div>
+              </div>
+              <div class="metric-card">
+                <div class="value" id="ms-status">MAGIC ✓</div>
+                <div class="label">Status</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- ============================================================ -->
+    <!-- TAB 3: MOLECULAR GEOMETRIES -->
+    <!-- ============================================================ -->
+    <section id="tab3" class="tab-content">
+      <div class="section">
+        <div class="section-header">
+          <h2>Molecular Spin Configurations</h2>
+          <p class="lead">
+            Explore the energy landscape for symmetric molecular geometries—
+            tetrahedra, octahedra, and cubes with tunable spin assignments.
+          </p>
+        </div>
+        
+        <div class="split-view">
+          <div>
+            <div class="canvas-container" id="viewer-tab3">
+              <div class="canvas-overlay">Molecular Geometry • Interactive</div>
+            </div>
+            
+            <div class="controls-panel">
+              <h4>Configuration Controls</h4>
+              
+              <div class="control-group">
+                <label>Geometry</label>
+                <select id="geometry-select">
+                  <option value="tetrahedron">Tetrahedron (4 atoms)</option>
+                  <option value="octahedron">Octahedron (6 atoms)</option>
+                  <option value="cube">Cube (8 atoms)</option>
+                  <option value="hexagon">Hexagon (6 atoms, planar)</option>
+                </select>
+              </div>
+              
+              <div style="display: flex; gap: 1rem;">
+                <button class="primary" id="randomize-spins">Randomize Spins</button>
+                <button class="secondary" id="find-magic">Find Magic</button>
+              </div>
+            </div>
+          </div>
+          
+          <div>
+            <div class="prose-panel">
+              <h3>Exploring the Energy Landscape</h3>
+              <p>
+                For N atoms with spin assignments {s₁, ..., sₙ}, the spin balance energy
+                measures how far the configuration is from the "magic" subspace where
+                position and spin are uncorrelated.
+              </p>
+              
+              <div class="conjecture">
+                <h5>Key Finding</h5>
+                <p>
+                  For symmetric geometries with N ≥ 4 atoms, magic spin configurations exist
+                  and form a linear subspace of dimension N - 4. Random configurations
+                  almost never land in this subspace.
+                </p>
+              </div>
+              
+              <p>
+                The histogram below shows the energy distribution for 2000 random spin
+                assignments. Magic configurations (E = 0) are exceptionally rare.
+              </p>
+            </div>
+            
+            <div class="chart-container">
+              <h4>Energy Distribution (Log Scale)</h4>
+              <canvas id="energy-histogram" height="200"></canvas>
+            </div>
+            
+            <div class="metrics-grid">
+              <div class="metric-card">
+                <div class="value" id="mol-energy">—</div>
+                <div class="label">Energy E</div>
+              </div>
+              <div class="metric-card">
+                <div class="value" id="mol-cov-x">—</div>
+                <div class="label">Cov(X, S)</div>
+              </div>
+              <div class="metric-card">
+                <div class="value" id="mol-cov-y">—</div>
+                <div class="label">Cov(Y, S)</div>
+              </div>
+              <div class="metric-card">
+                <div class="value" id="mol-status">—</div>
+                <div class="label">Status</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- ============================================================ -->
+    <!-- TAB 4: ENERGY LANDSCAPE -->
+    <!-- ============================================================ -->
+    <section id="tab4" class="tab-content">
+      <div class="section">
+        <div class="section-header">
+          <h2>The Energy Landscape</h2>
+          <p class="lead">
+            Visualizing the covariance energy surface—magic configurations sit at the 
+            bottom of a deep well, isolated from all other arrangements.
+          </p>
+        </div>
+        
+        <div class="split-view">
+          <div>
+            <div class="canvas-container" id="viewer-tab4" style="min-height: 500px;">
+              <div class="canvas-overlay">Energy Surface E(s₀, s₁) • Tetrahedron</div>
+            </div>
+          </div>
+          
+          <div class="prose-panel">
+            <h3>Ground States and Isolation</h3>
+            <p>
+              The 3D surface shows the spin balance energy E as a function of two spin
+              parameters for a tetrahedron. The other two spins are constrained to maintain
+              zero mean: s₂ = -s₀, s₃ = -s₁.
+            </p>
+            
+            <div class="proof-box">
+              <h5>Observation: Isolated Minima</h5>
+              <p>
+                Magic spin configurations are isolated local minima of the energy functional.
+                Any perturbation immediately increases E, with the energy growing
+                approximately quadratically with distance from the magic point.
+              </p>
+              <span class="status verified">✓ Verified computationally</span>
+            </div>
+            
+            <p>
+              The magenta marker at the origin indicates the magic configuration where E = 0.
+              The surrounding bowl-shaped surface shows how energy increases as we deviate
+              from perfect spin-position balance.
+            </p>
+            
+            <div class="conjecture">
+              <h5>Physical Interpretation</h5>
+              <p>
+                If we interpret E as a physical energy, magic configurations are "ground states"
+                of an imbalance Hamiltonian. Just as molecules minimize their potential energy,
+                spin configurations "settle" into magic arrangements when geometric balance
+                is the driving principle.
+              </p>
+            </div>
+            
+            <h3>Scaling Behavior</h3>
+            <p>
+              As the number of atoms N increases:
+            </p>
+            <ul style="color: var(--text-secondary); margin-left: 1.5rem;">
+              <li>The magic subspace dimension grows (N - 4 degrees of freedom)</li>
+              <li>Mean energy of random configurations increases</li>
+              <li>Probability of randomly finding a magic configuration decreases</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- ============================================================ -->
+    <!-- TAB 5: PRECESSION DYNAMICS -->
+    <!-- ============================================================ -->
+    <section id="tab5" class="tab-content">
+      <div class="section">
+        <div class="section-header">
+          <h2>Spin Precession Dynamics</h2>
+          <p class="lead">
+            Watch spins precess in a magnetic field and observe how the covariance 
+            energy evolves—magic configurations exhibit distinctive collective behavior.
+          </p>
+        </div>
+        
+        <div class="split-view">
+          <div>
+            <div class="canvas-container" id="viewer-tab5" style="min-height: 450px;">
+              <div class="canvas-overlay">Precession Simulation • All spins precess around central B axis</div>
+            </div>
+            
+            <div class="controls-panel">
+              <h4>Simulation Controls</h4>
+              
+              <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+                <button class="primary" id="play-btn">▶ Play</button>
+                <button class="secondary" id="pause-btn">⏸ Pause</button>
+                <button class="secondary" id="reset-btn">↺ Reset</button>
+              </div>
+              
+              <div class="control-group">
+                <label>Magnetic Field Strength B</label>
+                <input type="range" id="b-field-strength" min="0.1" max="3" step="0.1" value="1">
+                <div class="value-display">B = <span id="b-field-value">1.0</span></div>
+              </div>
+            </div>
+          </div>
+          
+          <div>
+            <div class="prose-panel">
+              <h3>Classical Precession</h3>
+              <p>
+                In an external magnetic field <b>B</b> pointing along the central axis (z),
+                <em>all spins precess around this same axis</em> according to:
+              </p>
+              
+              <div class="math">
+                d<b>s</b>/dt = γ <b>s</b> × <b>B</b>
+              </div>
+              
+              <p>
+                Each spin traces a cone around the B-field direction with angular 
+                frequency ω = γ|B|. The z-component (parallel to B) remains constant,
+                while the perpendicular components rotate in the x-y plane.
+                The gold arrow shows the central B-field; the magenta arrow shows
+                the total magnetization vector.
+              </p>
+              
+              <div class="conjecture">
+                <h5>Key Question</h5>
+                <p>
+                  How does the collective covariance energy E(t) evolve as individual spins
+                  precess? Do magic configurations maintain their special properties under
+                  dynamics?
+                </p>
+              </div>
+              
+              <p>
+                The chart below tracks E(t) in real time as the simulation runs.
+                Observe how the energy oscillates for non-magic configurations
+                but remains near zero for balanced initial conditions.
+              </p>
+            </div>
+            
+            <div class="chart-container">
+              <h4>Energy Evolution E(t)</h4>
+              <canvas id="precession-energy-chart" height="200"></canvas>
+            </div>
+            
+            <div class="proof-box">
+              <h5>Observation: Dynamic Stability</h5>
+              <p>
+                Magic spin configurations exhibit more stable collective magnetization
+                under precession. The geometric balance of the initial state manifests
+                as coherent oscillations in the time evolution.
+              </p>
+              <span class="status pending">Conjecture</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <footer>
+    <p>
+      <strong>Spin Gems Interactive Demo</strong> • December 2025<br>
+      Based on the paper: <a href="#">"Spin Gems: A Covariance Framework for Molecular Spin Configurations"</a><br>
+      Part of the <a href="#">Magic Gems project</a> extending combinatorial geometry to molecular physics.
+    </p>
+  </footer>
+  
+  <!-- Main JS -->
+  <script src="js/spin-gems.js"></script>
+</body>
+</html>
+

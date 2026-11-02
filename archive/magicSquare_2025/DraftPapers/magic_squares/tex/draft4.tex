@@ -1,0 +1,100 @@
+% Main document class
+\documentclass[11pt,a4paper]{article}
+
+% Required packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage[left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm]{geometry}
+\usepackage{amsthm}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{float}
+
+% PGFPlots configuration
+\pgfplotsset{compat=1.18}
+
+% TikZ libraries
+\usetikzlibrary{3d,calc,arrows.meta,positioning,shapes,fit,backgrounds}
+
+% Theorem-like environments
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}[section]
+
+% Code listing configuration
+\lstset{
+    basicstyle=\ttfamily\footnotesize,
+    breaklines=true,
+    breakatwhitespace=true,
+    commentstyle=\color{green!50!black},
+    keywordstyle=\color{blue!70!black}\bfseries,
+    stringstyle=\color{purple!70!black},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    frame=leftline,
+    framesep=5pt,
+    framerule=2pt,
+    xleftmargin=15pt,
+    backgroundcolor=\color{gray!5},
+    showstringspaces=false,
+    tabsize=4,
+    captionpos=b,
+    keepspaces=true,
+    columns=flexible,
+    emphstyle=\color{red!60!black}\bfseries,
+    emph={self,def,class,return,None,True,False},
+    morekeywords={import,from,as,if,for,while,with,try,except,finally,raise,assert},
+    belowskip=1.5em,
+    aboveskip=1.5em
+}
+
+% Hyperref configuration
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,
+    urlcolor=cyan,
+    pdftitle={Geometric and Topological Analysis of Magic Squares},
+    pdfauthor={Kyle Elliott Mathewson},
+    pdfsubject={Mathematics},
+    pdfkeywords={magic squares, geometry, topology, persistent homology}
+}
+
+% Title information
+\title{Geometric and Topological Analysis of Magic Squares: \\ A Novel Framework for Discrete Structure Analysis}
+\author{Kyle Elliott Mathewson \\ \small{Associate Professor} \\ \small{Department of Psychology} \\ \small{University of Alberta}}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+% Include sections
+\input{sections/abstract}
+\input{sections/introduction}
+\input{sections/methods}
+\input{sections/results}
+\input{sections/discussion}
+\input{sections/conclusion}
+\input{sections/acknowledgments}
+
+% Bibliography
+\bibliographystyle{plain}
+\bibliography{bib/references}
+
+\end{document} 

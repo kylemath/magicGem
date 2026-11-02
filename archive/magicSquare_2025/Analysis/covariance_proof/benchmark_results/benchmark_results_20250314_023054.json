@@ -1,0 +1,522 @@
+[
+  {
+    "trial_id": 1,
+    "parameters": {
+      "transition_start": 60,
+      "transition_end": 120,
+      "total_steps": 300,
+      "learning_rate": 0.1,
+      "swaps": 1,
+      "enforce_monotonic": true
+    },
+    "initial_metrics": {
+      "distance": 0.0897005864769978,
+      "sum_error": 0.1907221955030373,
+      "int_dev": 1.1758542413824646,
+      "monotonic_error": 42.5
+    },
+    "final_metrics": {
+      "distance": 1.1102230246251565e-16,
+      "sum_error": 0.0,
+      "int_dev": 0.0,
+      "monotonic_error": 38.5,
+      "is_magic": true,
+      "is_monotonic": false
+    },
+    "computation_time": 0.04883408546447754,
+    "final_square": [
+      [
+        16.0,
+        4.0,
+        2.0,
+        12.0
+      ],
+      [
+        5.0,
+        9.0,
+        13.0,
+        7.0
+      ],
+      [
+        9.0,
+        5.0,
+        7.0,
+        13.0
+      ],
+      [
+        4.0,
+        16.0,
+        12.0,
+        2.0
+      ]
+    ]
+  },
+  {
+    "trial_id": 2,
+    "parameters": {
+      "transition_start": 90,
+      "transition_end": 210,
+      "total_steps": 300,
+      "learning_rate": 0.1,
+      "swaps": 1,
+      "enforce_monotonic": true
+    },
+    "initial_metrics": {
+      "distance": 0.02874411351918114,
+      "sum_error": 0.1265416912033345,
+      "int_dev": 1.4873379720853144,
+      "monotonic_error": 42.5
+    },
+    "final_metrics": {
+      "distance": 7.850462293418876e-17,
+      "sum_error": 0.0,
+      "int_dev": 2.0000000000000018,
+      "monotonic_error": 42.5,
+      "is_magic": true,
+      "is_monotonic": true
+    },
+    "computation_time": 0.05162310600280762,
+    "final_square": [
+      [
+        16.25,
+        1.0000000000000004,
+        3.9999999999999996,
+        12.75
+      ],
+      [
+        6.0,
+        10.25,
+        10.75,
+        7.0
+      ],
+      [
+        9.0,
+        7.75,
+        5.25,
+        12.0
+      ],
+      [
+        2.7499999999999996,
+        15.0,
+        14.0,
+        2.2500000000000004
+      ]
+    ]
+  },
+  {
+    "trial_id": 3,
+    "parameters": {
+      "transition_start": 150,
+      "transition_end": 240,
+      "total_steps": 300,
+      "learning_rate": 0.1,
+      "swaps": 1,
+      "enforce_monotonic": true
+    },
+    "initial_metrics": {
+      "distance": 0.0629695316783995,
+      "sum_error": 0.16212583822457205,
+      "int_dev": 1.438387461525197,
+      "monotonic_error": 42.5
+    },
+    "final_metrics": {
+      "distance": 5.79553433516819e-16,
+      "sum_error": 0.0,
+      "int_dev": 3.9999999999999956,
+      "monotonic_error": 41.375,
+      "is_magic": true,
+      "is_monotonic": false
+    },
+    "computation_time": 0.047005414962768555,
+    "final_square": [
+      [
+        16.25,
+        3.7500000000000013,
+        1.4999999999999987,
+        12.5
+      ],
+      [
+        5.000000000000001,
+        10.0,
+        11.25,
+        7.750000000000001
+      ],
+      [
+        8.75,
+        6.249999999999999,
+        6.500000000000001,
+        12.5
+      ],
+      [
+        3.9999999999999987,
+        14.0,
+        14.75,
+        1.2499999999999987
+      ]
+    ]
+  },
+  {
+    "trial_id": 4,
+    "parameters": {
+      "transition_start": 60,
+      "transition_end": 120,
+      "total_steps": 300,
+      "learning_rate": 0.1,
+      "swaps": 2,
+      "enforce_monotonic": true
+    },
+    "initial_metrics": {
+      "distance": 0.048188826653773276,
+      "sum_error": 0.18012560720790632,
+      "int_dev": 1.410431166867136,
+      "monotonic_error": 42.5
+    },
+    "final_metrics": {
+      "distance": 1.3877787807814457e-16,
+      "sum_error": 0.0,
+      "int_dev": 0.0,
+      "monotonic_error": 42.5,
+      "is_magic": true,
+      "is_monotonic": true
+    },
+    "computation_time": 0.05283403396606445,
+    "final_square": [
+      [
+        15.0,
+        3.0,
+        2.0,
+        14.0
+      ],
+      [
+        6.0,
+        10.0,
+        11.0,
+        7.0
+      ],
+      [
+        9.0,
+        5.0,
+        8.0,
+        12.0
+      ],
+      [
+        4.0,
+        16.0,
+        13.0,
+        1.0
+      ]
+    ]
+  },
+  {
+    "trial_id": 5,
+    "parameters": {
+      "transition_start": 90,
+      "transition_end": 210,
+      "total_steps": 300,
+      "learning_rate": 0.1,
+      "swaps": 2,
+      "enforce_monotonic": true
+    },
+    "initial_metrics": {
+      "distance": 0.037956543116090605,
+      "sum_error": 0.10401789889661543,
+      "int_dev": 1.4143720067226715,
+      "monotonic_error": 42.5
+    },
+    "final_metrics": {
+      "distance": 4.577566798522237e-16,
+      "sum_error": 0.0,
+      "int_dev": 3.0000000000000013,
+      "monotonic_error": 39.875,
+      "is_magic": true,
+      "is_monotonic": false
+    },
+    "computation_time": 0.040300846099853516,
+    "final_square": [
+      [
+        17.0,
+        3.2500000000000004,
+        2.2500000000000004,
+        11.5
+      ],
+      [
+        4.75,
+        9.0,
+        10.0,
+        10.25
+      ],
+      [
+        6.75,
+        7.0,
+        8.0,
+        12.25
+      ],
+      [
+        5.5,
+        14.75,
+        13.75,
+        -3.871149097050596e-16
+      ]
+    ]
+  },
+  {
+    "trial_id": 6,
+    "parameters": {
+      "transition_start": 150,
+      "transition_end": 240,
+      "total_steps": 300,
+      "learning_rate": 0.1,
+      "swaps": 2,
+      "enforce_monotonic": true
+    },
+    "initial_metrics": {
+      "distance": 0.043693770858284006,
+      "sum_error": 0.13119214592330977,
+      "int_dev": 1.2631019559802332,
+      "monotonic_error": 42.5
+    },
+    "final_metrics": {
+      "distance": 1.1420331686685094e-15,
+      "sum_error": 0.1,
+      "int_dev": 3.9999999999999973,
+      "monotonic_error": 40.5,
+      "is_magic": false,
+      "is_monotonic": false
+    },
+    "computation_time": 0.03947114944458008,
+    "final_square": [
+      [
+        15.75,
+        3.2499999999999987,
+        1.2499999999999987,
+        13.25
+      ],
+      [
+        5.249999999999999,
+        9.75,
+        11.25,
+        7.249999999999999
+      ],
+      [
+        8.75,
+        5.749999999999999,
+        7.250000000000001,
+        11.75
+      ],
+      [
+        3.7500000000000013,
+        14.75,
+        13.75,
+        1.2500000000000013
+      ]
+    ]
+  },
+  {
+    "trial_id": 7,
+    "parameters": {
+      "transition_start": 60,
+      "transition_end": 120,
+      "total_steps": 300,
+      "learning_rate": 0.12,
+      "swaps": 1,
+      "enforce_monotonic": true
+    },
+    "initial_metrics": {
+      "distance": 0.00689772173082719,
+      "sum_error": 0.12162438635069037,
+      "int_dev": 0.9655517390881005,
+      "monotonic_error": 42.5
+    },
+    "final_metrics": {
+      "distance": 1.2412670766236366e-16,
+      "sum_error": 0.1,
+      "int_dev": 4.0,
+      "monotonic_error": 40.5,
+      "is_magic": false,
+      "is_monotonic": false
+    },
+    "computation_time": 0.03914999961853027,
+    "final_square": [
+      [
+        15.25,
+        3.25,
+        2.25,
+        13.75
+      ],
+      [
+        5.25,
+        11.25,
+        9.75,
+        8.25
+      ],
+      [
+        9.75,
+        6.25,
+        6.75,
+        11.75
+      ],
+      [
+        4.25,
+        13.75,
+        15.75,
+        0.75
+      ]
+    ]
+  },
+  {
+    "trial_id": 8,
+    "parameters": {
+      "transition_start": 90,
+      "transition_end": 210,
+      "total_steps": 300,
+      "learning_rate": 0.12,
+      "swaps": 1,
+      "enforce_monotonic": true
+    },
+    "initial_metrics": {
+      "distance": 0.04361190638939814,
+      "sum_error": 0.11440092638706219,
+      "int_dev": 1.2499998711427325,
+      "monotonic_error": 42.5
+    },
+    "final_metrics": {
+      "distance": 2.5438405243138006e-16,
+      "sum_error": 0.05,
+      "int_dev": 3.5000000000000013,
+      "monotonic_error": 41.375,
+      "is_magic": false,
+      "is_monotonic": false
+    },
+    "computation_time": 0.03884601593017578,
+    "final_square": [
+      [
+        16.25,
+        2.4999999999999996,
+        2.9999999999999996,
+        12.5
+      ],
+      [
+        5.000000000000001,
+        10.25,
+        11.0,
+        7.999999999999999
+      ],
+      [
+        8.75,
+        6.250000000000001,
+        6.499999999999999,
+        12.75
+      ],
+      [
+        4.249999999999999,
+        15.25,
+        13.75,
+        0.9999999999999996
+      ]
+    ]
+  },
+  {
+    "trial_id": 9,
+    "parameters": {
+      "transition_start": 150,
+      "transition_end": 240,
+      "total_steps": 300,
+      "learning_rate": 0.12,
+      "swaps": 1,
+      "enforce_monotonic": true
+    },
+    "initial_metrics": {
+      "distance": 0.03387034905711685,
+      "sum_error": 0.2203302212044022,
+      "int_dev": 1.887205294261435,
+      "monotonic_error": 42.5
+    },
+    "final_metrics": {
+      "distance": 5.034405433428661e-16,
+      "sum_error": 2.1316282072803005e-15,
+      "int_dev": 1.509903313490213e-14,
+      "monotonic_error": 42.5,
+      "is_magic": true,
+      "is_monotonic": true
+    },
+    "computation_time": 0.03877115249633789,
+    "final_square": [
+      [
+        16.0,
+        4.000000000000003,
+        0.9999999999999984,
+        13.0
+      ],
+      [
+        4.999999999999997,
+        9.0,
+        12.0,
+        8.0
+      ],
+      [
+        10.0,
+        6.000000000000003,
+        6.999999999999997,
+        11.0
+      ],
+      [
+        2.9999999999999987,
+        15.0,
+        14.0,
+        1.9999999999999984
+      ]
+    ]
+  },
+  {
+    "trial_id": 10,
+    "parameters": {
+      "transition_start": 60,
+      "transition_end": 120,
+      "total_steps": 300,
+      "learning_rate": 0.12,
+      "swaps": 2,
+      "enforce_monotonic": true
+    },
+    "initial_metrics": {
+      "distance": 0.07341937330526871,
+      "sum_error": 0.14036900231203758,
+      "int_dev": 1.2283154701169012,
+      "monotonic_error": 42.5
+    },
+    "final_metrics": {
+      "distance": 1.2412670766236366e-16,
+      "sum_error": 0.0,
+      "int_dev": 2.0,
+      "monotonic_error": 42.5,
+      "is_magic": true,
+      "is_monotonic": true
+    },
+    "computation_time": 0.03914380073547363,
+    "final_square": [
+      [
+        16.25,
+        2.0,
+        3.0,
+        12.75
+      ],
+      [
+        5.0,
+        10.25,
+        10.75,
+        8.0
+      ],
+      [
+        9.0,
+        6.75,
+        6.25,
+        12.0
+      ],
+      [
+        3.75,
+        15.0,
+        14.0,
+        1.25
+      ]
+    ]
+  }
+]

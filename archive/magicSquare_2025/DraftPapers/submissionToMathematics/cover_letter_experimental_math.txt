@@ -1,0 +1,31 @@
+Dear Editor,
+
+We are pleased to submit our manuscript entitled "Geometric and Topological Analysis of Magic Squares: A Comprehensive Multi-Modal Framework" for consideration for publication in Experimental Mathematics.
+
+This paper presents novel computational and experimental approaches to understanding the geometric and topological structure of magic squares. Our work bridges discrete and continuous mathematics by embedding magic squares as point clouds in ℝ³ and applying techniques from computational topology, manifold learning, and geometric measure theory.
+
+Key contributions of our work include:
+
+1. A novel geometric embedding framework that reveals the intrinsic structure of magic squares
+2. Discovery of a fundamental zero-covariance theorem characterizing magic squares through vanishing spatial-value covariances
+3. Evidence that the space of magic squares forms a stratified manifold with distinct geometric regimes
+4. Comprehensive analysis using Earth Mover's Distance, persistent homology, and manifold learning techniques
+5. Experimental verification using all 880 unique 4×4 magic squares
+
+Our experimental approach aligns perfectly with the journal's focus on computational and experimental mathematics. We provide extensive numerical results, visualizations, and open-source code to ensure reproducibility. The paper includes algorithms that readers can implement and extend for their own research.
+
+This work opens new avenues for analyzing combinatorial structures through geometric and topological lenses, with potential applications in discrete optimization, coding theory, and quantum information processing. We believe it will be of significant interest to the journal's readership, particularly those working at the intersection of discrete mathematics, topology, and computational methods.
+
+All code and data used in this research are available at: [GitHub repository URL to be added]
+
+The manuscript has not been submitted elsewhere and all authors have approved this submission.
+
+Thank you for considering our work. We look forward to your response.
+
+Sincerely,
+
+Kyle Elliott Mathewson
+Department of Psychology
+University of Alberta
+Edmonton, AB T6G 2E9, Canada
+kyle.mathewson@ualberta.ca 

@@ -1,0 +1,22 @@
+\begin{table}[H]
+\caption{Network structure of magic squares under Earth Mover's Distance. A distance threshold $\epsilon$ is used to define edges between squares with EMD $\leq \epsilon$. The table shows connectivity metrics at the threshold where a single connected component first emerges.}
+\label{tab:manifold}
+\begin{tabular}{lr}
+\toprule
+Metric & Value \\
+\midrule
+Number of magic squares & 880 \\
+EMD threshold for connectivity ($\epsilon$) & 0.052 \\
+Connected components (at $\epsilon$) & 1 \\
+Average degree (at $\epsilon$) & 12.4 \\
+Clustering coefficient & 0.73 \\
+Average path length & 3.2 \\
+Minimum pairwise EMD & 0.021 \\
+Maximum pairwise EMD & 0.189 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{remark}
+We use ``manifold'' informally to describe the apparent low-dimensional structure of the embedded point cloud. Strictly speaking, the 880 magic squares form a discrete set; references to manifold structure describe the geometry of their embedding and the connectivity patterns observed under nearest-neighbor graphs at specified distance thresholds.
+\end{remark}

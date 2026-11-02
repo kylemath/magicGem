@@ -1,0 +1,29 @@
+\section{Concrete Geometric Walkthrough}\label{sec:walkthrough}
+
+To bridge the abstract theoretical framework with concrete intuition, we analyze the geometry of a single, well-known magic square: the one depicted in Albrecht Dürer's 1514 engraving \textit{Melencolia I}. This example demonstrates how our embedding preserves both spatial and numerical relationships while enabling geometric and topological analyses.
+
+Dürer's square is given by the matrix:
+\[
+M = \begin{pmatrix}
+16 & 3 & 2 & 13 \\
+5 & 10 & 11 & 8 \\
+9 & 6 & 7 & 12 \\
+4 & 15 & 14 & 1
+\end{pmatrix}
+\]
+Classically, this is known as an \textit{associative} or self-complementary square, meaning that every pair of cells symmetric about the center sums to $n^2 + 1 = 17$. For instance, the corners $16+1=17$ and the central elements $10+7=17$ satisfy this property. While Dürer likely chose this particular associative square because the bottom row encodes the date \textbf{1514}, its algebraic structure already places it within a specific subclass of the 880 unique squares.
+
+From a physical perspective, we interpret the square as a grid of weights. The magic sum of 34 implies that the system is balanced along rows, columns, and diagonals. In our geometric embedding, this balance translates to the centroid of the point cloud $\phi(M)$ lying exactly at the geometric center of the bounding box, $(1.5, 1.5, 8.5)$. This centering is a universal property of magic squares under our embedding, reflecting the underlying symmetry of the constraints.
+
+Constructing the convex hull of the 16 points in $\mathbb{R}^3$ reveals the square's specific geometric configuration. Dürer's square belongs to the \textbf{12v\_0f\_4i} class, meaning its convex hull is defined by 12 vertices, with no points lying on the faces and 4 points strictly in the interior. The interior points correspond to the middle-range values $\{6, 7, 10, 11\}$, while the extremal values form the boundary. This 12-vertex configuration is, in fact, the most common geometric shape among all $4 \times 4$ magic squares, shared by approximately 18\% of the total population.
+
+Analyzing the covariance structure of the point cloud provides insight into its shape anisotropy. The eigenvalues of the covariance matrix for Dürer's square are $\lambda_1 \approx 1.33$, $\lambda_2 \approx 1.33$, and $\lambda_3 \approx 22.67$. The large ratio $\lambda_3 / \lambda_1 \approx 17$ indicates that the geometry is highly elongated along the $z$-axis (value axis). This needle-like shape confirms that the variation in values (ranging from 1 to 16) dominates the spatial variation (coordinates 0 to 3), a characteristic feature of the magic square embedding.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{figures/balance_analysis.png}
+    \caption{\textbf{Balance Analysis: Principal Axes and Covariance Structure.} (A) Point distribution with principal axes colored by eigenvalue magnitude. (B) Covariance ellipsoid showing the anisotropic structure ($\lambda_3 \gg \lambda_1, \lambda_2$). (C) Ellipsoid cross-sections. (D) Eigenvalue spectrum showing dominance of the third principal component (value axis).}
+    \label{fig:walkthrough}
+\end{figure}
+
+We can further visualize the local structure by defining a discrete vector field, connecting each cell to its neighbors with vectors proportional to the local gradient. For Dürer's square, this field exhibits a balanced flow that circulates without accumulating, mirroring the divergence-free property of incompressible fluids. This geometric view moves beyond checking arithmetic sums to analyzing shapes and flows, providing a richer language for characterizing the "magic" properties of the square.

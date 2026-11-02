@@ -1,0 +1,270 @@
+\section{Methods}\label{sec:methods}
+
+This section details our comprehensive methodological framework for analyzing magic squares through geometric and topological lenses. Our approach systematically bridges discrete combinatorics with continuous mathematics, enabling powerful analytical tools from modern geometry to reveal the intrinsic structure of magic square spaces.
+
+\subsection{Geometric Embedding Framework and Justification}\label{subsec:embedding}
+
+\subsubsection{Mathematical Foundation of the $\mathbb{R}^3$ Embedding}
+
+The foundation of our analysis rests on a natural embedding of magic squares into three-dimensional Euclidean space that preserves both spatial and numerical relationships. For an $n \times n$ magic square $M$, we construct a point cloud in $\mathbb{R}^3$ by mapping each entry $M_{ij}$ to the point $(i, j, M_{ij})$, where $(i,j)$ represents the spatial position within the grid and $M_{ij}$ provides the height dimension.
+
+This embedding is formally defined as:
+\begin{equation}
+\phi(M) = \{(i, j, M_{ij}) \in \mathbb{R}^3 \mid 0 \leq i, j \leq n-1\}
+\end{equation}
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/embedding_comparison.png}
+    \caption{Comparison of different embedding approaches for magic squares. \textbf{(A)} $\mathbb{R}^3$ embedding preserving spatial and value relationships. \textbf{(B)} Spectral embedding capturing global structure but losing interpretability. \textbf{(C)} Graph-based embedding preserving adjacency but losing value magnitudes. \textbf{(D)} Quantitative comparison showing $\mathbb{R}^3$ embedding optimally balances preservation of structure with analytical tractability.}
+    \label{fig:embedding-comparison}
+\end{figure}
+
+\subsubsection{Justification for $\mathbb{R}^3$ Embedding Choice}
+
+Our choice of the $\mathbb{R}^3$ embedding over alternative approaches (Figure~\ref{fig:embedding-comparison}) is motivated by several theoretical and practical considerations:
+
+\textbf{1. Preservation of Combinatorial Properties}: The embedding maintains spatial relationships between cells, which are crucial for magic square constraints. The row, column, and diagonal sum conditions translate directly to geometric properties in the embedded space.
+
+\textbf{2. Natural Metric Structure}: The embedding creates a natural ground metric for Earth Mover's Distance computations, leveraging optimal transport theory. The Euclidean distance in $\mathbb{R}^3$ captures both spatial displacement and value differences.
+
+\textbf{3. Interpretability}: Unlike high-dimensional spectral embeddings, the $\mathbb{R}^3$ representation maintains intuitive geometric meaning. The height dimension directly corresponds to magic square values, enabling clear interpretation of geometric features.
+
+\textbf{4. Analytical Tractability}: The three-dimensional space enables efficient computation of convex hulls, persistent homology, and other geometric invariants while maintaining manageable complexity.
+
+\textbf{Alternative Embeddings Considered:}
+
+\begin{itemize}
+    \item \textbf{Spectral Embedding}: Uses eigenvalue decomposition to capture global structure but loses local spatial relationships and interpretability.
+    \item \textbf{Graph-based Embedding}: Preserves adjacency relationships but loses information about value magnitudes and creates difficulties in comparing different squares.
+    \item \textbf{High-dimensional Vector Embedding}: Treats magic squares as vectors in $\mathbb{R}^{16}$ but obscures spatial structure and geometric intuition.
+\end{itemize}
+
+Empirical validation (detailed in Section~\ref{sec:results}) confirms that the $\mathbb{R}^3$ embedding provides optimal balance between structural preservation and analytical power.
+
+\subsubsection{Connection to Geometric Measure Theory}
+
+This embedding connects magic squares to geometric measure theory through the interpretation of magic squares as discrete probability distributions over grid positions. The entry values serve as weights, and our embedding naturally captures this perspective with the third coordinate providing the density function. This connection justifies our use of the Wasserstein (Earth Mover's) distance as the natural metric, as it respects both spatial arrangement and weight distribution.
+
+\subsubsection{Point Classification and Convex Hull Analysis}
+
+For each embedded magic square, we compute its convex hull and classify points according to their geometric role:
+
+\begin{itemize}
+    \item \textbf{Vertex points}: Points forming vertices of the convex hull, representing extremal values in the geometric structure
+    \item \textbf{Face points}: Points lying on faces of the convex hull but not at vertices  
+    \item \textbf{Interior points}: Points contained within the convex hull
+\end{itemize}
+
+This classification reveals the geometric "shape" of each magic square and enables systematic comparison across the entire space of 880 unique configurations.
+
+\begin{algorithm}[H]
+\caption{Geometric Classification of Magic Square Points}
+\KwIn{Magic square $M \in \mathbb{R}^{n \times n}$}
+\KwOut{Point classification $(V, F, I)$ where $V$ = vertices, $F$ = face points, $I$ = interior points}
+$P \leftarrow \phi(M)$ \tcp{Apply $\mathbb{R}^3$ embedding}
+$H \leftarrow \text{ConvexHull}(P)$ \tcp{Compute convex hull}
+$V \leftarrow \{p_i \in P : i \in H.\text{vertices}\}$ \tcp{Extract hull vertices}
+$F \leftarrow \{p_i \in P : p_i \text{ on hull face but not vertex}\}$\;
+$I \leftarrow P \setminus (V \cup F)$ \tcp{Remaining points are interior}
+\Return{$(V, F, I)$}
+\end{algorithm}
+
+The geometric measures we compute include:
+\begin{enumerate}
+    \item \textbf{Hull volume}: Volume of the convex hull, measuring geometric extent
+    \item \textbf{Surface area}: Surface area of the convex hull
+    \item \textbf{Angular uniformity}: Measure of point distribution around the centroid
+    \item \textbf{Compactness}: Ratio of volume to surface area, indicating geometric efficiency
+\end{enumerate}
+
+Our analysis reveals that magic squares exhibit remarkably consistent patterns in point distribution, summarized in Table~\ref{tab:geom-stats}.
+
+\input{sections/geometric_stats}
+
+\subsection{Earth Mover's Distance Analysis and Implementation}
+
+\subsubsection{Theoretical Foundation}
+
+To quantify similarity between magic squares, we employ the Earth Mover's Distance (EMD), which measures the minimum cost of transforming one point cloud into another. This choice is theoretically motivated by optimal transport theory and provides a natural metric that respects both the spatial and numerical aspects of magic squares.
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/emd_analysis.png}
+    \caption{Earth Mover's Distance analysis methodology. \textbf{(A)} EMD computation process showing optimal transport between two magic square embeddings. \textbf{(B)} Distance matrix revealing clustering structure. \textbf{(C)} Multi-scale EMD analysis across different embedding resolutions. \textbf{(D)} Statistical significance of EMD differences between matrix types.}
+    \label{fig:emd-analysis}
+\end{figure}
+
+For two magic squares $M_1$ and $M_2$ with embeddings $P_1, P_2 \subset \mathbb{R}^3$, the EMD is defined as:
+
+\begin{equation}
+\text{EMD}(M_1, M_2) = \min_{\gamma \in \Pi(P_1, P_2)} \sum_{i,j} \gamma_{ij} \cdot \|p_i^{(1)} - p_j^{(2)}\|_2
+\end{equation}
+
+where $\Pi(P_1, P_2)$ is the set of all transport plans (doubly stochastic matrices) and $\|\cdot\|_2$ is the Euclidean norm in $\mathbb{R}^3$.
+
+\subsubsection{Computational Implementation}
+
+We implement EMD computation using the Hungarian algorithm for optimal assignment:
+
+\begin{algorithm}[H]
+\caption{Earth Mover's Distance Computation}
+\KwIn{Point clouds $P_1, P_2 \subset \mathbb{R}^3$, both with $|P_1| = |P_2| = n^2$}
+\KwOut{EMD distance $d \in \mathbb{R}_+$}
+Normalize point clouds: $P_1' \leftarrow \text{normalize}(P_1)$, $P_2' \leftarrow \text{normalize}(P_2)$\;
+Compute cost matrix: $C_{ij} \leftarrow \|p_i^{(1)} - p_j^{(2)}\|_2$ for all $i,j$\;
+Solve assignment: $\pi \leftarrow \text{Hungarian}(C)$\;
+Compute total cost: $d \leftarrow \sum_{i} C_{i,\pi(i)}$\;
+Normalize by number of points: $d \leftarrow d / n^2$\;
+\Return{$d$}
+\end{algorithm}
+
+The normalization step ensures fair comparison across different magic squares by scaling all point clouds to the unit cube $[0,1]^3$.
+
+\subsubsection{EMD Clustering and Distance Analysis}
+
+Our EMD analysis reveals natural clustering within the space of magic squares. The distribution of nearest-neighbor distances shows clear structure, with characteristic length scales that distinguish magic squares from random matrices.
+
+\input{sections/emd_stats}
+
+\subsection{Multi-Scale Dimension Analysis}
+
+\subsubsection{Local Intrinsic Dimension Estimation}
+
+We estimate the local intrinsic dimension of the magic square manifold using multiple complementary methods to ensure robust results:
+
+\textbf{1. Correlation Dimension Method}: For each magic square, we compute the correlation integral:
+\begin{equation}
+C(r) = \frac{1}{N^2} \sum_{i,j=1}^N \Theta(r - \|p_i - p_j\|)
+\end{equation}
+where $\Theta$ is the Heaviside function and the dimension is estimated as:
+\begin{equation}
+d = \lim_{r \to 0} \frac{\log C(r)}{\log r}
+\end{equation}
+
+\textbf{2. $k$-Nearest Neighbors Method}: We estimate dimension using the distribution of distances to $k$-th nearest neighbors:
+\begin{equation}
+d_k = \frac{1}{\langle \log(R_k / R_1) \rangle}
+\end{equation}
+where $R_k$ is the distance to the $k$-th nearest neighbor.
+
+\textbf{3. Principal Component Analysis}: We compute the effective dimension as the number of principal components needed to capture 95\% of the variance.
+
+\subsubsection{Multi-Scale Analysis Framework}
+
+To understand the structure across different scales, we apply dimension estimation at multiple length scales, revealing how the apparent dimensionality changes with the level of detail considered.
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/dimension_analysis.png}
+    \caption{Multi-scale dimension analysis of magic squares. \textbf{(A)} Local dimension estimates across different scales showing convergence to $d \approx 2.07$. \textbf{(B)} Confidence intervals and statistical validation. \textbf{(C)} Comparison with null models. \textbf{(D)} Stratification analysis revealing potential non-uniform dimension distribution.}
+    \label{fig:dimension-analysis}
+\end{figure}
+
+\subsection{Persistent Homology and Topological Analysis}
+
+\subsubsection{Theoretical Framework}
+
+We apply persistent homology to capture multi-scale topological features of magic square embeddings. For each square's point cloud $P$, we construct the Vietoris-Rips filtration:
+
+\begin{equation}
+\text{VR}_\epsilon(P) = \{\sigma \subseteq P \mid \text{diam}(\sigma) \leq \epsilon\}
+\end{equation}
+
+This creates a sequence of simplicial complexes parameterized by the scale $\epsilon$, allowing us to track topological features across multiple scales.
+
+\subsubsection{Statistical Analysis of Persistence Features}
+
+We develop comprehensive statistical measures to characterize persistence diagrams:
+
+\begin{itemize}
+    \item \textbf{Total persistence}: $\sum_i (d_i - b_i)$ where $b_i, d_i$ are birth and death times
+    \item \textbf{Maximum persistence}: $\max_i (d_i - b_i)$ for the most persistent feature
+    \item \textbf{Persistence entropy}: $-\sum_i p_i \log p_i$ where $p_i$ is the normalized persistence
+    \item \textbf{Landscape functions}: Continuous functions summarizing the persistence diagram
+\end{itemize}
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/persistence_analysis.png}
+    \caption{Persistent homology analysis of magic squares. \textbf{(A)} Representative persistence diagrams showing topological features across dimensions. \textbf{(B)} Statistical comparison with random matrices showing significant differences. \textbf{(C)} Persistence landscapes revealing consistent patterns. \textbf{(D)} Feature significance testing with multiple hypothesis correction.}
+    \label{fig:persistence-analysis}
+\end{figure}
+
+\subsection{Comprehensive Statistical Validation Framework}
+
+\subsubsection{Multiple Hypothesis Testing}
+
+To ensure statistical rigor, we apply the Benjamini-Hochberg procedure for multiple hypothesis correction when comparing geometric properties across different matrix types:
+
+\begin{algorithm}[H]
+\caption{Statistical Validation with Multiple Hypothesis Correction}
+\KwIn{Test results $\{p_1, p_2, \ldots, p_m\}$, significance level $\alpha$}
+\KwOut{Corrected significance decisions}
+Sort p-values: $p_{(1)} \leq p_{(2)} \leq \cdots \leq p_{(m)}$\;
+\For{$i = m, m-1, \ldots, 1$}{
+    \If{$p_{(i)} \leq \frac{i}{m} \alpha$}{
+        Reject hypotheses $H_{(1)}, \ldots, H_{(i)}$\;
+        \textbf{break}\;
+    }
+}
+\end{algorithm}
+
+\subsubsection{Bootstrap Confidence Intervals}
+
+For all geometric statistics, we compute bootstrap confidence intervals to quantify uncertainty:
+
+\begin{equation}
+\text{CI}_{1-\alpha} = [Q_{\alpha/2}(\hat{\theta}^*), Q_{1-\alpha/2}(\hat{\theta}^*)]
+\end{equation}
+
+where $Q_p$ denotes the $p$-th quantile of the bootstrap distribution $\hat{\theta}^*$.
+
+\subsubsection{Dual Null Model Framework}
+
+We validate findings against two carefully constructed null models:
+
+\begin{enumerate}
+    \item \textbf{Random Permutation Model}: Random arrangements of integers $1$ through $16$
+    \item \textbf{Structured Null Model}: Matrices satisfying some constraints (e.g., fixed row sums) but not the complete magic square conditions
+\end{enumerate}
+
+This dual comparison enables us to distinguish features specific to magic squares from those arising from general structural constraints.
+
+\subsection{Computational Implementation and Reproducibility}
+
+\subsubsection{Software Stack and Performance}
+
+All analyses are implemented in Python using optimized scientific computing libraries:
+
+\begin{itemize}
+    \item \textbf{NumPy/SciPy}: Core numerical computations and geometric algorithms
+    \item \textbf{scikit-learn}: Manifold learning and dimension estimation
+    \item \textbf{GUDHI}: Persistent homology computations with optimized C++ backend
+    \item \textbf{POT (Python Optimal Transport)}: EMD calculations using efficient algorithms
+    \item \textbf{NetworkX}: Graph analysis for connectivity studies
+\end{itemize}
+
+\textbf{Performance Characteristics}: The complete analysis pipeline processes all 880 unique $4 \times 4$ magic squares in approximately 30-40 seconds on an Apple M2 Ultra (24-core, 192GB RAM), making it suitable for interactive exploration and parameter studies.
+
+\subsubsection{Reproducibility Infrastructure}
+
+To ensure complete reproducibility, we provide:
+
+\begin{itemize}
+    \item \textbf{Fixed Random Seeds}: All stochastic computations use seed value 42
+    \item \textbf{Version-Pinned Dependencies}: Exact package versions specified in requirements.txt
+    \item \textbf{Docker Containerization}: Complete computational environment packaged for exact reproduction
+    \item \textbf{Comprehensive Documentation}: Step-by-step reproduction instructions
+\end{itemize}
+
+\subsubsection{Data and Code Availability}
+
+All code, data, and analysis scripts are publicly available in a comprehensive repository including:
+- Complete magic squares dataset (880 unique $4 \times 4$ squares)
+- Analysis pipeline implementation
+- Figure generation scripts
+- Statistical validation framework
+- Interactive visualization tools
+
+The repository structure follows best practices for computational reproducibility, enabling independent verification of all results presented in this work. 

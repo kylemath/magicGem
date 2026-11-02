@@ -1,0 +1,86 @@
+% Geometric and Topological Analysis of Magic Squares
+% Submission to Experimental Mathematics
+% ------------------------------------------------------
+\documentclass[11pt]{article}
+
+% Standard packages
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage[pdftex]{hyperref}
+\usepackage[ruled,vlined]{algorithm2e}
+\usepackage{booktabs}
+\usepackage{subcaption}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+% For author-year citations
+\usepackage{natbib}
+\bibliographystyle{plainnat}
+
+% Geometry for single column
+\usepackage[margin=1in]{geometry}
+
+% Define theorem-like environments
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{note}[theorem]{Note}
+
+% Title and authors
+\title{From Discrete Constraints to Continuous Geometry:\\
+A Comprehensive Analysis of Magic Squares Through\\
+Covariance, Topology, and Optimization}
+
+\author{
+Kyle Elliott Mathewson\\
+Department of Psychology\\
+University of Alberta\\
+Edmonton, AB T6G 2E9, Canada\\
+\texttt{kyle.mathewson@ualberta.ca}
+}
+
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+% Abstract (will be replaced with shortened version)
+\input{sections/abstract_short}
+
+% Main content sections
+
+% Part I: Foundation and Methods
+\input{sections/introduction}
+\input{sections/methods}
+
+% Part II: Fundamental Geometric Results
+\input{sections/results}
+
+% Part III: Theoretical Characterization
+\input{sections/vector_field}
+
+% Part IV: Advanced Geometric Analysis
+\input{sections/vector_field_analysis}
+
+% Part V: Algorithmic Applications
+\input{sections/optimization}
+
+% Part VI: Synthesis and Future Directions
+\input{sections/discussion}
+\input{sections/conclusion}
+
+\input{sections/acknowledgments}
+
+% References
+\bibliography{references}
+
+\end{document} 

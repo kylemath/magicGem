@@ -1,0 +1,30 @@
+Magic Square 6:
+[[11.  2.  8. 13.]
+ [ 6. 13.  8.  7.]
+ [ 9.  5.  8. 12.]
+ [ 8. 14. 10.  2.]]
+
+Configuration:
+  transition_start: 50
+  transition_end: 125
+  total_steps: 250
+  learning_rate: 0.075
+  swaps: 5
+  search_id: 39
+
+Properties:
+  is_magic: True
+  row_magic: True
+  col_magic: True
+  main_diag_magic: True
+  anti_diag_magic: True
+  target_sum: 34.0
+  row_sums: [34.0, 34.0, 34.0, 34.0]
+  col_sums: [34.0, 34.0, 34.0, 34.0]
+  main_diag_sum: 34.0
+  anti_diag_sum: 34.0
+  is_distinct: False
+  is_normal_form: False
+  min_value: 2.0
+  max_value: 14.0
+  size: 4

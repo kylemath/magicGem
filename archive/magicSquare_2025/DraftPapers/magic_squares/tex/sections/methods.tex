@@ -1,0 +1,343 @@
+\section{Methods}
+\label{sec:methods}
+
+\subsection{Geometric Embedding and Justification}
+\label{subsec:embedding}
+
+In this study, we develop a novel geometric approach to analyzing magic squares through a carefully constructed embedding into three-dimensional Euclidean space. Let $M$ be an $n \times n$ magic square. We construct an embedding $\phi: M \rightarrow \mathbb{R}^3$ that maps the magic square to a point cloud while preserving its essential combinatorial and geometric properties. The embedding process proceeds as follows:
+
+For each entry $M_{ij}$ in the magic square, we construct a point $p_{ij} = (i, j, M_{ij}) \in \mathbb{R}^3$. This generates a collection of $n^2$ points $\phi(M) = \{p_{ij} : 0 \leq i,j < n\}$ that form a discrete surface above the $xy$-plane. The resulting point cloud simultaneously encodes both the positional relationships between entries and their numerical values, providing a geometric representation that captures the full combinatorial structure of the magic square.
+
+% Figure 2: R³ Embedding
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=0.8\textwidth]{draft4_figures/improved_r3_embedding.png}
+    \caption{R³ embedding visualization and geometric analysis of magic squares. (A) 3D point cloud embedding of an example magic square with points classified as vertices (red), face points (blue), and interior points (green). The embedding $\phi: M \rightarrow \mathbb{R}^3$ is defined as $\phi(M) = \{(i, j, M_{ij}) \in \mathbb{R}^3 : 0 \leq i,j \leq 3\}$, preserving both spatial relationships between cells and value relationships between entries. This embedding enables the Earth Mover's Distance (EMD) between two magic squares $M^1$ and $M^2$, defined as $EMD(M^1, M^2) = \min_{\gamma \in \Gamma} \sum_{i,j,k,l} \gamma_{ijkl} \cdot d((i,j,M^1_{ij}), (k,l,M^2_{kl}))$, where $\Gamma$ is the set of all valid transport plans and $d$ is the Euclidean distance in $\mathbb{R}^3$. (B) Distribution of hull vertices across 880 magic squares in our dataset, showing the frequency of different vertex counts in the convex hulls. (C) Distribution of hull volumes, illustrating the range of geometric sizes occupied by magic squares in $\mathbb{R}^3$. (D) Distribution of volume-to-surface area ratios, providing insight into the compactness and efficiency of the geometric representations. Key properties of magic squares include constant row sums, column sums, and diagonal sums, which manifest geometrically as planar constraints in the embedding.}
+    \label{fig:r3_embedding}
+\end{figure}
+
+The choice of this particular embedding is justified by several fundamental properties that make it especially suitable for analyzing magic squares:
+
+\begin{enumerate}
+    \item \textbf{Preservation of Constraints}: The row, column, and diagonal sum constraints of magic squares manifest as geometric invariants in the embedded space. Specifically, if we consider the points as masses in a physical system, these constraints correspond to moments of force about different axes, providing an intuitive physical interpretation of the magic square properties.
+    
+    \item \textbf{Magic Constant Interpretation}: The magic constant $c$ of the square appears naturally in two forms within the embedding:
+        \begin{itemize}
+            \item As the volume beneath the surface formed by the points, given by $\int_0^n \int_0^n M(x,y) \, dx \, dy = nc$
+            \item As the total "mass" of the system when viewing the third coordinate as a weight, $\sum_{i,j} M_{ij} = n^2c$
+        \end{itemize}
+        
+    \item \textbf{Symmetry Preservation}: The discrete symmetries of magic squares (rotations, reflections) correspond to isometric transformations of the point cloud in $\mathbb{R}^3$, preserving the geometric structure while reflecting the combinatorial symmetries.
+\end{enumerate}
+
+This embedding was selected after careful consideration of several key factors that make it particularly effective for our analysis:
+
+\begin{enumerate}
+    \item \textbf{Physical Interpretation}: The embedding provides a natural physical interpretation where each point represents a mass positioned on a grid. This allows us to leverage intuitions from classical mechanics, where the magic square constraints correspond to various balance conditions. The third dimension represents the mass at each position, making the magic sum constraints equivalent to moment balance conditions.
+    
+    \item \textbf{Metric Structure}: The embedding induces a natural metric structure through the Earth Mover's Distance (EMD), defined as:
+    \[
+    EMD(M^1, M^2) = \min_{\gamma \in \Gamma} \sum_{i,j,k,l} \gamma_{ijkl} \cdot d((i,j,M^1_{ij}), (k,l,M^2_{kl}))
+    \]
+    where $\Gamma$ is the set of all valid transport plans and $d$ is the Euclidean distance in $\mathbb{R}^3$. This metric captures both spatial and value differences between magic squares in a physically meaningful way, corresponding to the minimum work required to transform one configuration into another.
+    
+    \item \textbf{Dimensionality and Information}: The embedding achieves an optimal balance between dimensionality reduction and information preservation. While the original magic square contains $n^2$ values, our embedding preserves all essential information while facilitating geometric analysis in a three-dimensional space that admits intuitive visualization and efficient computational methods.
+\end{enumerate}
+
+% Figure 3: Embedding Methods Comparison
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=0.8\textwidth]{draft4_figures/embedding_comparison.png}
+    \caption{Comparison of different embedding methods for magic squares: (A) R³ Embedding (PCA) preserves spatial relationships, maintains value magnitudes, enables intuitive visualization, and allows direct geometric analysis; (B) Spectral Embedding captures global structure but is less interpretable and may lose local relationships; (C) Graph-based Embedding preserves adjacency relationships but loses value magnitude information and is difficult to extend to comparisons between squares. The R³ embedding was chosen for our analysis because it preserves both spatial and value relationships, enables intuitive geometric analysis, allows for natural definition of the Earth Mover's Distance (EMD) metric, and maintains combinatorial properties.}
+    \label{fig:embeddings}
+\end{figure}
+
+\subsection{Enhanced Statistical Framework with Dual Null Models}
+\label{subsec:null_models}
+
+To rigorously assess the significance of our geometric findings, we develop a comprehensive statistical framework that employs two distinct null models, each capturing different aspects of random structure. This dual-null approach allows us to distinguish between features that arise from general statistical properties and those that are specific to the combinatorial constraints of magic squares.
+
+\subsubsection{Null Model Construction}
+
+Our framework employs two complementary null models:
+
+\begin{enumerate}
+    \item \textbf{Random Null Model}: We construct matrices $R$ that match the first two moments (mean and variance) of the original magic squares but are otherwise unconstrained. Specifically, for a given magic square $M$ with mean $\mu_M$ and standard deviation $\sigma_M$, we generate:
+    \[
+    R_{ij} = \mu_M + \sigma_M Z_{ij}, \quad Z_{ij} \sim \mathcal{N}(0,1)
+    \]
+    
+    \item \textbf{Structured Null Model}: We preserve the exact value distribution of the magic square while randomizing positions. For a magic square $M$, we generate:
+    \[
+    S = \Pi(M)
+    \]
+    where $\Pi$ is a random permutation of the entries that preserves certain structural properties but destroys the magic sum constraints.
+\end{enumerate}
+
+\subsubsection{Statistical Analysis Framework}
+
+Our statistical analysis proceeds through several stages:
+
+\begin{enumerate}
+    \item \textbf{Normalization}: All point clouds (original and null models) are normalized to the unit cube $[0,1]^3$ to ensure fair comparison:
+    \[
+    \hat{p} = \frac{p - \min(p)}{\max(p) - \min(p)}
+    \]
+    
+    \item \textbf{Persistence Computation}: We compute persistent homology for each point cloud up to dimension 2, yielding persistence diagrams $D_k$ for $k \in \{0,1,2\}$.
+    
+    \item \textbf{Feature Significance}: For each homological dimension $k$, we perform:
+        \begin{itemize}
+            \item Mann-Whitney U tests comparing persistence values against both null models
+            \item Computation of empirical p-values through permutation testing
+            \item Multiple hypothesis correction using the Benjamini-Hochberg procedure
+        \end{itemize}
+\end{enumerate}
+
+The implementation of this framework is detailed in the following pseudocode:
+
+\begin{lstlisting}[language=Python, caption=Enhanced Statistical Analysis Framework]
+def statistical_analysis(points, null_points, structured_null):
+    """Perform enhanced statistical analysis with dual null models."""
+    # Scale points to [0,1] cube for comparison
+    points = normalize_points(points)
+    null_points = normalize_points(null_points)
+    structured_null = normalize_points(structured_null)
+    
+    # Compute persistence diagrams
+    diagrams = compute_persistence(points)
+    null_diagrams = compute_persistence(null_points)
+    struct_diagrams = compute_persistence(structured_null)
+    
+    # Statistical tests against both nulls
+    stats = {}
+    for dim in range(3):  # H_0, H_1, H_2
+        persistence = compute_persistence_stats(diagrams[dim])
+        null_persistence = compute_persistence_stats(null_diagrams[dim])
+        struct_persistence = compute_persistence_stats(struct_diagrams[dim])
+        
+        # Mann-Whitney U tests
+        stats[f'H{dim}'] = {
+            'random_null': mannwhitneyu(persistence, null_persistence),
+            'structured_null': mannwhitneyu(persistence, struct_persistence),
+            'features': len(persistence),
+            'significant': {
+                'random': sum(persistence > np.percentile(null_persistence, 95)),
+                'structured': sum(persistence > np.percentile(struct_persistence, 95))
+            }
+        }
+    
+    return stats
+\end{lstlisting}
+
+\subsection{Multi-scale Dimension Analysis}
+\label{subsec:dimension}
+
+Our approach to dimension estimation combines correlation dimension methods with local geometric analysis to provide a robust characterization of the intrinsic dimensionality of magic square spaces. The analysis operates at multiple scales to capture both local and global geometric features.
+
+\subsubsection{Local Dimension Estimation}
+
+For a given point cloud $P = \{p_1, ..., p_n\}$, we estimate the local dimension through the following process:
+
+\begin{enumerate}
+    \item \textbf{Window Selection}: For each point $p_i$, we consider a local neighborhood defined by a window of size $w$:
+    \[
+    W_i = \{p_j : \max(0, i-w/2) \leq j \leq \min(n, i+w/2)\}
+    \]
+    
+    \item \textbf{Scale Analysis}: Within each window, we compute the correlation integral:
+    \[
+    C(\epsilon) = \frac{2}{|W_i|(|W_i|-1)} \sum_{j<k} \Theta(\epsilon - \|p_j - p_k\|)
+    \]
+    where $\Theta$ is the Heaviside step function and $\epsilon$ ranges over multiple scales.
+    
+    \item \textbf{Dimension Estimation}: The local dimension is estimated from the slope of the log-log plot:
+    \[
+    d = \lim_{\epsilon \to 0} \frac{\log C(\epsilon)}{\log \epsilon}
+    \]
+\end{enumerate}
+
+The implementation combines these theoretical aspects with practical considerations:
+
+\begin{lstlisting}[language=Python, caption=Enhanced Dimension Analysis]
+def compute_local_dimension(points, window_size=21):
+    """Estimate local dimension using multi-scale approach."""
+    dims = []
+    half_window = window_size // 2
+    
+    for i in range(len(points)):
+        # Get local neighborhood
+        start_idx = max(0, i - half_window)
+        end_idx = min(len(points), i + half_window + 1)
+        window = points[start_idx:end_idx]
+        
+        if len(window) >= 5:
+            # Compute correlation dimension
+            dists = compute_pairwise_distances(window)
+            scales = np.logspace(-2, 1, 20)
+            corr = [np.sum(dists < scale) for scale in scales]
+            
+            # Estimate dimension from log-log slope
+            slope = np.polyfit(np.log(scales), np.log(corr), 1)[0]
+            dims.append(slope)
+    
+    return np.array(dims)
+\end{lstlisting}
+
+% Figure 4: Dimension Analysis
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=\textwidth]{draft4_figures/local_dimension.png}
+    \caption{\textbf{Enhanced Local Dimension Analysis.} (A) Bimodal distribution of local dimensions across magic squares, revealing two distinct geometric regimes. (B) Box plots comparing dimension distributions between strata, with statistical significance indicated ($p < 0.001$). (C) Scatter plot of local dimensions vs. persistence, colored by stratum membership. (D) Dimension stability analysis showing consistency within each stratum. (E) Statistical panel showing confidence intervals, p-values, and effect sizes for dimension comparisons between strata. The analysis reveals a clear separation between higher-dimensional ($-5.64 \pm 0.32$) and lower-dimensional ($-10.14 \pm 0.53$) regimes.}
+    \label{fig:dimension}
+\end{figure}
+
+\subsection{Enhanced Persistence Analysis}
+\label{subsec:persistence}
+
+Our persistence analysis framework provides a comprehensive topological characterization of magic square spaces through persistent homology, enhanced with sophisticated statistical validation and multi-scale feature classification.
+
+\subsubsection{Persistence Computation}
+
+For a point cloud $P$, we compute persistent homology using the Vietoris-Rips filtration:
+
+\[
+\{\mathcal{VR}_\epsilon(P)\}_{\epsilon \geq 0}
+\]
+
+The persistence diagram $D_k$ for each homological dimension $k$ captures the birth ($b$) and death ($d$) times of $k$-dimensional topological features:
+
+\[
+D_k = \{(b_i, d_i) : \text{feature } i \text{ born at } b_i \text{ and dies at } d_i\}
+\]
+
+\subsubsection{Feature Classification}
+
+We classify persistence features based on their significance against both null models:
+
+\begin{enumerate}
+    \item \textbf{Highly Significant}: Features with persistence $p = d-b$ exceeding both null thresholds:
+    \[
+    p > \max(\theta_{\text{random}}, \theta_{\text{structured}})
+    \]
+    
+    \item \textbf{Moderately Significant}: Features exceeding only the random null threshold:
+    \[
+    \theta_{\text{random}} < p \leq \theta_{\text{structured}}
+    \]
+    
+    \item \textbf{Non-significant}: Features below both thresholds
+\end{enumerate}
+
+The implementation incorporates these theoretical aspects with practical statistical analysis:
+
+\begin{lstlisting}[language=Python, caption=Enhanced Persistence Analysis]
+def compute_persistence_with_significance(points, null_points, structured_null):
+    """Compute persistence with dual null model comparison."""
+    # Compute persistence diagrams
+    diagrams = ripser.ripser(points, maxdim=2)['dgms']
+    null_diagrams = ripser.ripser(null_points, maxdim=2)['dgms']
+    struct_diagrams = ripser.ripser(structured_null, maxdim=2)['dgms']
+    
+    results = {}
+    for dim in range(3):
+        # Get finite features
+        features = diagrams[dim][diagrams[dim][:,1] != np.inf]
+        null_features = null_diagrams[dim][null_diagrams[dim][:,1] != np.inf]
+        struct_features = struct_diagrams[dim][struct_diagrams[dim][:,1] != np.inf]
+        
+        # Compute significance thresholds
+        null_thresh = np.percentile(null_features[:,1] - null_features[:,0], 95)
+        struct_thresh = np.percentile(struct_features[:,1] - struct_features[:,0], 95)
+        
+        # Classify features
+        persistence = features[:,1] - features[:,0]
+        results[f'H{dim}'] = {
+            'features': len(features),
+            'significant_random': sum(persistence > null_thresh),
+            'significant_structured': sum(persistence > struct_thresh),
+            'mean_persistence': np.mean(persistence),
+            'max_persistence': np.max(persistence)
+        }
+    
+    return results
+\end{lstlisting}
+
+\subsection{Stratified Structure Analysis}
+\label{subsec:stratification}
+
+Our analysis of the stratified structure of magic square spaces combines geometric, topological, and statistical methods to identify and characterize distinct geometric regimes. The approach integrates several sophisticated analytical techniques:
+
+\subsubsection{Local Geometric Analysis}
+
+We analyze the local geometry through:
+
+\begin{enumerate}
+    \item \textbf{Sliding Window Analysis}: Computing local dimensions using windows of varying sizes to capture multi-scale structure
+    \item \textbf{Gaussian Mixture Modeling}: Identifying distinct geometric regimes through probabilistic clustering of local geometric invariants
+    \item \textbf{Dimensionality Reduction}: Employing t-SNE and PCA for visualization while preserving local geometric structure
+\end{enumerate}
+
+\subsubsection{Feature Hierarchy}
+
+We organize geometric features hierarchically based on:
+
+\begin{enumerate}
+    \item \textbf{Scale}: Features are analyzed at multiple spatial scales to identify hierarchical relationships
+    \item \textbf{Significance}: Statistical significance against both null models determines feature importance
+    \item \textbf{Persistence}: Topological features are organized by their persistence values
+    \item \textbf{Dimension}: Local dimension estimates provide additional stratification criteria
+\end{enumerate}
+
+% Figure 6: Stratified Analysis
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=\textwidth]{draft4_figures/stratified_analysis.png}
+    \caption{\textbf{Stratified Structure Analysis of Magic Squares.} (A) t-SNE visualization showing clear separation between geometric regimes, colored by local dimension. (B) Principal Component Analysis revealing hierarchical organization in the first three components. (C) Gaussian Mixture Model clustering results identifying two primary strata. (D) Statistical analysis panel showing stratum characteristics, including: mean dimensions, persistence features, and significance levels. (E) Multi-scale feature analysis showing the distribution of topological features across scales. The visualization demonstrates the natural stratification of magic squares into two distinct geometric regimes with different degrees of freedom and topological characteristics.}
+    \label{fig:geometry}
+\end{figure}
+
+\subsection{Algorithmic Complexity and Implementation}
+\label{subsec:complexity}
+
+The computational complexity of our framework is carefully analyzed to ensure practical applicability while maintaining theoretical guarantees. For a magic square of order $n$:
+
+\begin{enumerate}
+    \item \textbf{Embedding Complexity}: The point cloud generation requires $O(n^2)$ operations, which is optimal as it must process each entry of the magic square.
+    
+    \item \textbf{Local Dimension Estimation}: For a window size $w$, the complexity is $O(n^2w\log w)$, arising from:
+        \begin{itemize}
+            \item $O(w^2)$ pairwise distance computations per window
+            \item $O(\log w)$ operations for scale analysis
+            \item $O(n^2/w)$ windows across the dataset
+        \end{itemize}
+    
+    \item \textbf{Persistence Computation}: The worst-case complexity is $O(n^{2\omega})$ for each null model comparison, where $\omega$ is determined by the efficiency of the matrix multiplication algorithm used in the persistence computation.
+    
+    \item \textbf{Stratification Analysis}: With $k$ Gaussian mixture components, the complexity is $O(n^2k)$ per iteration of the EM algorithm.
+\end{enumerate}
+
+Our implementation includes several crucial optimizations:
+
+\begin{enumerate}
+    \item \textbf{Parallel Processing}: Persistence diagrams are computed in parallel across multiple cores
+    \item \textbf{Efficient Null Models}: Structured null models are generated using optimized permutation algorithms
+    \item \textbf{Vectorized Operations}: Statistical computations are vectorized for improved performance
+    \item \textbf{Adaptive Windows}: Window sizes are adjusted based on local point density
+\end{enumerate}
+
+These optimizations make the framework practical for analyzing magic squares up to order 16 while maintaining all theoretical guarantees. The implementation achieves this efficiency without compromising the mathematical rigor of the analysis.
+
+% Figure 7: EMD Distance Analysis
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=\textwidth]{draft4_figures/emd_distances.png}
+    \caption{Earth Mover's Distance (EMD) analysis between different matrix types. 
+    (A) Illustration of the EMD method, which measures the minimum cost required to transform one distribution into another by representing matrices as point clouds in $\mathbb{R}^3$ and solving the optimal transport problem. 
+    (B) Quantitative comparison of EMD distances between matrix pairs (Latin vs. Magic, Circulant vs. Magic, and Circulant vs. Latin) with error bars showing variance and effect size estimates ($d$). 
+    (C) Visualization of the optimal transport cost matrix, where each cell represents the cost of moving mass from a point in one matrix to a point in another. 
+    (D) Network representation showing relationships between different matrix types based on their EMD distances, with thicker edges indicating greater similarity. This analysis provides a rigorous quantification of the geometric relationships between different combinatorial structures.}
+    \label{fig:emd}
+\end{figure}
+
+In the next section, we present the results of applying this methodological framework to analyze the geometric and topological properties of magic squares, revealing their stratified structure and significant topological features. 

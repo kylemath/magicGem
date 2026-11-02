@@ -1,0 +1,25 @@
+{
+  "timestamp": "20250313_104630",
+  "most_common_params": {
+    "transition_start": 150,
+    "transition_end": 125,
+    "total_steps": 250,
+    "learning_rate": 0.15,
+    "swaps": 2
+  },
+  "best_config": {
+    "transition_start": 150,
+    "transition_end": 275,
+    "total_steps": 325,
+    "learning_rate": 0.15,
+    "swaps": 2,
+    "metrics": {
+      "distance": 8.326672684688674e-17,
+      "sum_error": 0.0,
+      "int_dev": 0.0,
+      "is_magic": true,
+      "combined_score": 8.326672684688674e-17
+    }
+  },
+  "magic_found": true
+}

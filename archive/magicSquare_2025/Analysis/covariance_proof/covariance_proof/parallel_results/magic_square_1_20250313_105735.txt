@@ -1,0 +1,25 @@
+Magic Square 1:
+[[16.  3.  2. 13.]
+ [ 5. 10. 11.  8.]
+ [ 9.  6.  7. 12.]
+ [ 4. 15. 14.  1.]]
+
+Magic Sum: 34.0
+Is Distinct: True
+Min Value: 1.0, Max Value: 16.0
+Is Monotonic 1-16: True
+
+Configuration:
+  transition_start: 150
+  transition_end: 275
+  total_steps: 350
+  learning_rate: 0.05
+  swaps: 2
+
+Metrics:
+  distance: 0.002915736672042489
+  sum_error: 0.004003603841826475
+  int_dev: 0.027284661403045862
+  monotonic_error: 42.5
+  is_magic: True
+  is_monotonic: True

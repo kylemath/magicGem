@@ -1,0 +1,522 @@
+[
+  {
+    "trial_id": 1,
+    "parameters": {
+      "transition_start": 60,
+      "transition_end": 120,
+      "total_steps": 300,
+      "learning_rate": 0.1,
+      "swaps": 1,
+      "enforce_monotonic": true
+    },
+    "initial_metrics": {
+      "distance": 0.09291002615569875,
+      "sum_error": 0.1918222177837791,
+      "int_dev": 1.603271889507317,
+      "monotonic_error": 42.5
+    },
+    "final_metrics": {
+      "distance": NaN,
+      "sum_error": NaN,
+      "int_dev": NaN,
+      "monotonic_error": 0.0,
+      "is_magic": true,
+      "is_monotonic": false
+    },
+    "computation_time": 0.057091712951660156,
+    "final_square": [
+      [
+        NaN,
+        NaN,
+        NaN,
+        NaN
+      ],
+      [
+        NaN,
+        NaN,
+        NaN,
+        NaN
+      ],
+      [
+        NaN,
+        NaN,
+        NaN,
+        NaN
+      ],
+      [
+        NaN,
+        NaN,
+        NaN,
+        NaN
+      ]
+    ]
+  },
+  {
+    "trial_id": 2,
+    "parameters": {
+      "transition_start": 90,
+      "transition_end": 210,
+      "total_steps": 300,
+      "learning_rate": 0.1,
+      "swaps": 1,
+      "enforce_monotonic": true
+    },
+    "initial_metrics": {
+      "distance": 0.07929999576745653,
+      "sum_error": 0.17155419317277776,
+      "int_dev": 1.6488390740106134,
+      "monotonic_error": 42.5
+    },
+    "final_metrics": {
+      "distance": NaN,
+      "sum_error": NaN,
+      "int_dev": NaN,
+      "monotonic_error": 0.0,
+      "is_magic": true,
+      "is_monotonic": false
+    },
+    "computation_time": 0.05136394500732422,
+    "final_square": [
+      [
+        NaN,
+        NaN,
+        NaN,
+        NaN
+      ],
+      [
+        NaN,
+        NaN,
+        NaN,
+        NaN
+      ],
+      [
+        NaN,
+        NaN,
+        NaN,
+        NaN
+      ],
+      [
+        NaN,
+        NaN,
+        NaN,
+        NaN
+      ]
+    ]
+  },
+  {
+    "trial_id": 3,
+    "parameters": {
+      "transition_start": 150,
+      "transition_end": 240,
+      "total_steps": 300,
+      "learning_rate": 0.1,
+      "swaps": 1,
+      "enforce_monotonic": true
+    },
+    "initial_metrics": {
+      "distance": 0.020423855520230346,
+      "sum_error": 0.14673198683563554,
+      "int_dev": 1.2265364435671242,
+      "monotonic_error": 42.5
+    },
+    "final_metrics": {
+      "distance": NaN,
+      "sum_error": NaN,
+      "int_dev": NaN,
+      "monotonic_error": 0.0,
+      "is_magic": true,
+      "is_monotonic": false
+    },
+    "computation_time": 0.05047035217285156,
+    "final_square": [
+      [
+        NaN,
+        NaN,
+        NaN,
+        NaN
+      ],
+      [
+        NaN,
+        NaN,
+        NaN,
+        NaN
+      ],
+      [
+        NaN,
+        NaN,
+        NaN,
+        NaN
+      ],
+      [
+        NaN,
+        NaN,
+        NaN,
+        NaN
+      ]
+    ]
+  },
+  {
+    "trial_id": 4,
+    "parameters": {
+      "transition_start": 60,
+      "transition_end": 120,
+      "total_steps": 300,
+      "learning_rate": 0.1,
+      "swaps": 2,
+      "enforce_monotonic": true
+    },
+    "initial_metrics": {
+      "distance": 0.06879619918405802,
+      "sum_error": 0.11067037218681364,
+      "int_dev": 1.0610847629468556,
+      "monotonic_error": 42.5
+    },
+    "final_metrics": {
+      "distance": NaN,
+      "sum_error": NaN,
+      "int_dev": NaN,
+      "monotonic_error": 0.0,
+      "is_magic": true,
+      "is_monotonic": false
+    },
+    "computation_time": 0.05271100997924805,
+    "final_square": [
+      [
+        NaN,
+        NaN,
+        NaN,
+        NaN
+      ],
+      [
+        NaN,
+        NaN,
+        NaN,
+        NaN
+      ],
+      [
+        NaN,
+        NaN,
+        NaN,
+        NaN
+      ],
+      [
+        NaN,
+        NaN,
+        NaN,
+        NaN
+      ]
+    ]
+  },
+  {
+    "trial_id": 5,
+    "parameters": {
+      "transition_start": 90,
+      "transition_end": 210,
+      "total_steps": 300,
+      "learning_rate": 0.1,
+      "swaps": 2,
+      "enforce_monotonic": true
+    },
+    "initial_metrics": {
+      "distance": 0.030037293002745043,
+      "sum_error": 0.12939840535935118,
+      "int_dev": 1.2012381917061883,
+      "monotonic_error": 42.5
+    },
+    "final_metrics": {
+      "distance": NaN,
+      "sum_error": NaN,
+      "int_dev": NaN,
+      "monotonic_error": 0.0,
+      "is_magic": true,
+      "is_monotonic": false
+    },
+    "computation_time": 0.04160618782043457,
+    "final_square": [
+      [
+        NaN,
+        NaN,
+        NaN,
+        NaN
+      ],
+      [
+        NaN,
+        NaN,
+        NaN,
+        NaN
+      ],
+      [
+        NaN,
+        NaN,
+        NaN,
+        NaN
+      ],
+      [
+        NaN,
+        NaN,
+        NaN,
+        NaN
+      ]
+    ]
+  },
+  {
+    "trial_id": 6,
+    "parameters": {
+      "transition_start": 150,
+      "transition_end": 240,
+      "total_steps": 300,
+      "learning_rate": 0.1,
+      "swaps": 2,
+      "enforce_monotonic": true
+    },
+    "initial_metrics": {
+      "distance": 0.04550038288144272,
+      "sum_error": 0.13746891190667299,
+      "int_dev": 1.1398229673143123,
+      "monotonic_error": 42.5
+    },
+    "final_metrics": {
+      "distance": NaN,
+      "sum_error": NaN,
+      "int_dev": NaN,
+      "monotonic_error": 0.0,
+      "is_magic": true,
+      "is_monotonic": false
+    },
+    "computation_time": 0.042224884033203125,
+    "final_square": [
+      [
+        NaN,
+        NaN,
+        NaN,
+        NaN
+      ],
+      [
+        NaN,
+        NaN,
+        NaN,
+        NaN
+      ],
+      [
+        NaN,
+        NaN,
+        NaN,
+        NaN
+      ],
+      [
+        NaN,
+        NaN,
+        NaN,
+        NaN
+      ]
+    ]
+  },
+  {
+    "trial_id": 7,
+    "parameters": {
+      "transition_start": 60,
+      "transition_end": 120,
+      "total_steps": 300,
+      "learning_rate": 0.12,
+      "swaps": 1,
+      "enforce_monotonic": true
+    },
+    "initial_metrics": {
+      "distance": 0.07683657983109628,
+      "sum_error": 0.1915839529039694,
+      "int_dev": 1.231823933407372,
+      "monotonic_error": 42.5
+    },
+    "final_metrics": {
+      "distance": NaN,
+      "sum_error": NaN,
+      "int_dev": NaN,
+      "monotonic_error": 0.0,
+      "is_magic": true,
+      "is_monotonic": false
+    },
+    "computation_time": 0.04269576072692871,
+    "final_square": [
+      [
+        NaN,
+        NaN,
+        NaN,
+        NaN
+      ],
+      [
+        NaN,
+        NaN,
+        NaN,
+        NaN
+      ],
+      [
+        NaN,
+        NaN,
+        NaN,
+        NaN
+      ],
+      [
+        NaN,
+        NaN,
+        NaN,
+        NaN
+      ]
+    ]
+  },
+  {
+    "trial_id": 8,
+    "parameters": {
+      "transition_start": 90,
+      "transition_end": 210,
+      "total_steps": 300,
+      "learning_rate": 0.12,
+      "swaps": 1,
+      "enforce_monotonic": true
+    },
+    "initial_metrics": {
+      "distance": 0.07653706055403288,
+      "sum_error": 0.12100987763501365,
+      "int_dev": 1.06267384587841,
+      "monotonic_error": 42.5
+    },
+    "final_metrics": {
+      "distance": NaN,
+      "sum_error": NaN,
+      "int_dev": NaN,
+      "monotonic_error": 0.0,
+      "is_magic": true,
+      "is_monotonic": false
+    },
+    "computation_time": 0.04216885566711426,
+    "final_square": [
+      [
+        NaN,
+        NaN,
+        NaN,
+        NaN
+      ],
+      [
+        NaN,
+        NaN,
+        NaN,
+        NaN
+      ],
+      [
+        NaN,
+        NaN,
+        NaN,
+        NaN
+      ],
+      [
+        NaN,
+        NaN,
+        NaN,
+        NaN
+      ]
+    ]
+  },
+  {
+    "trial_id": 9,
+    "parameters": {
+      "transition_start": 150,
+      "transition_end": 240,
+      "total_steps": 300,
+      "learning_rate": 0.12,
+      "swaps": 1,
+      "enforce_monotonic": true
+    },
+    "initial_metrics": {
+      "distance": 0.02591201345129724,
+      "sum_error": 0.14208827324687617,
+      "int_dev": 1.1161534275453595,
+      "monotonic_error": 42.5
+    },
+    "final_metrics": {
+      "distance": NaN,
+      "sum_error": NaN,
+      "int_dev": NaN,
+      "monotonic_error": 0.0,
+      "is_magic": true,
+      "is_monotonic": false
+    },
+    "computation_time": 0.040637969970703125,
+    "final_square": [
+      [
+        NaN,
+        NaN,
+        NaN,
+        NaN
+      ],
+      [
+        NaN,
+        NaN,
+        NaN,
+        NaN
+      ],
+      [
+        NaN,
+        NaN,
+        NaN,
+        NaN
+      ],
+      [
+        NaN,
+        NaN,
+        NaN,
+        NaN
+      ]
+    ]
+  },
+  {
+    "trial_id": 10,
+    "parameters": {
+      "transition_start": 60,
+      "transition_end": 120,
+      "total_steps": 300,
+      "learning_rate": 0.12,
+      "swaps": 2,
+      "enforce_monotonic": true
+    },
+    "initial_metrics": {
+      "distance": 0.04364498626109081,
+      "sum_error": 0.10414521304277428,
+      "int_dev": 0.9006138734257847,
+      "monotonic_error": 42.5
+    },
+    "final_metrics": {
+      "distance": NaN,
+      "sum_error": NaN,
+      "int_dev": NaN,
+      "monotonic_error": 0.0,
+      "is_magic": true,
+      "is_monotonic": false
+    },
+    "computation_time": 0.04339790344238281,
+    "final_square": [
+      [
+        NaN,
+        NaN,
+        NaN,
+        NaN
+      ],
+      [
+        NaN,
+        NaN,
+        NaN,
+        NaN
+      ],
+      [
+        NaN,
+        NaN,
+        NaN,
+        NaN
+      ],
+      [
+        NaN,
+        NaN,
+        NaN,
+        NaN
+      ]
+    ]
+  }
+]

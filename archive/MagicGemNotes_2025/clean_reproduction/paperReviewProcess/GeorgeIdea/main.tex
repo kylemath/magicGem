@@ -1,0 +1,123 @@
+\documentclass[11pt]{article}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage[margin=1in]{geometry}
+\usepackage{url}
+
+% Theorem environments
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+
+% Custom commands
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Cov}{\operatorname{Cov}}
+\newcommand{\Var}{\operatorname{Var}}
+
+% Title
+\title{\textbf{Spin Gems: A Covariance Framework for Molecular Spin Configurations}\\[0.5em]
+\large Extending the Magic Gem Representation with Interactive Visualization}
+
+\author{George R.\\
+Department of Mathematics, Yale University\\
+\texttt{george.r@yale.edu}}
+
+\date{December 2025}
+
+\begin{document}
+
+\maketitle
+
+% Abstract
+\input{sections/abstract}
+
+% Main sections
+\input{sections/introduction}
+\input{sections/theory}
+\input{sections/results}
+\input{sections/discussion}
+\input{sections/conclusion}
+
+% Bibliography
+\begin{thebibliography}{99}
+
+\bibitem{magic_gems_2025}
+Anonymous Authors.
+\newblock Magic Gems: A Polyhedral Framework for Magic Squares.
+\newblock \emph{Manuscript submitted to Experimental Mathematics}, 2025.
+
+\bibitem{bloch_1946}
+F.~Bloch.
+\newblock Nuclear induction.
+\newblock \emph{Physical Review}, 70(7-8):460--474, 1946.
+
+\bibitem{christou_2005}
+G.~Christou, D.~Gatteschi, D.~N. Hendrickson, and R.~Sessoli.
+\newblock Single-molecule magnets.
+\newblock \emph{MRS Bulletin}, 25(11):66--71, 2000.
+
+\bibitem{loss_1998}
+D.~Loss and D.~P. DiVincenzo.
+\newblock Quantum computation with quantum dots.
+\newblock \emph{Physical Review A}, 57(1):120--126, 1998.
+
+\bibitem{threejs}
+Three.js Contributors.
+\newblock Three.js: JavaScript 3D Library.
+\newblock \url{https://threejs.org/}, 2025.
+
+\bibitem{chartjs}
+Chart.js Contributors.
+\newblock Chart.js: Simple yet flexible JavaScript charting.
+\newblock \url{https://www.chartjs.org/}, 2025.
+
+\end{thebibliography}
+
+\appendix
+
+\section{Web Demo Implementation}
+\label{app:demo}
+
+The interactive demonstration is implemented using:
+
+\begin{itemize}
+    \item \textbf{Three.js} \cite{threejs}: WebGL-based 3D rendering for Spin Gem visualization, energy landscape surfaces, and precession animations.
+    \item \textbf{Chart.js} \cite{chartjs}: Canvas-based charts for energy histograms and time series.
+    \item \textbf{Vanilla JavaScript}: Core Spin Gem mathematics, including covariance computation and precession dynamics.
+\end{itemize}
+
+The demo runs entirely client-side with no server requirements, making it suitable for offline use and archival.
+
+\paragraph{File Structure:}
+\begin{verbatim}
+web/
+  index.html          # Main HTML with 5 tabs
+  css/styles.css      # Styling (cosmic/geometric theme)
+  js/spin-gems.js     # Three.js scenes, SpinGem class, charts
+\end{verbatim}
+
+\section{Python Implementation}
+\label{app:python}
+
+The core Spin Gem module (\texttt{src/spin\_gem\_core.py}) provides:
+
+\begin{itemize}
+    \item \texttt{SpinGem} dataclass: stores atoms, centered coordinates, covariance matrix, energy
+    \item \texttt{create\_spin\_gem()}: constructs a Spin Gem from positions and spins
+    \item \texttt{generate\_symmetric\_molecule()}: creates tetrahedron, octahedron, cube, hexagon
+    \item \texttt{precession\_dynamics()}: simulates classical spin precession
+    \item \texttt{magic\_square\_to\_spin\_gem()}: converts magic squares to Spin Gems
+\end{itemize}
+
+Figure generation (\texttt{src/generate\_figures.py}) produces the six main figures using Matplotlib.
+
+\end{document}

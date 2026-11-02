@@ -1,0 +1,36 @@
+{
+  "system_info": {
+    "platform": "macOS-15.5-arm64-arm-64bit",
+    "processor": "arm",
+    "python_version": "3.9.6",
+    "numpy_version": "2.0.2"
+  },
+  "results": {
+    "Geometric Gradient Descent": {
+      "success_rate": 1.0,
+      "avg_time": 0.004163908958435059,
+      "min_time": 0.0039272308349609375,
+      "max_time": 0.004711151123046875,
+      "avg_iterations": 279.5,
+      "successes": 10
+    },
+    "Optimized Backtracking": {
+      "success_rate": 1.0,
+      "avg_time": 0.30889880657196045,
+      "min_time": 0.3030400276184082,
+      "max_time": 0.3234109878540039,
+      "avg_iterations": 63523.0,
+      "successes": 10
+    },
+    "Random Search": {
+      "success_rate": 0.0,
+      "avg_time": 0,
+      "min_time": 0,
+      "max_time": 0,
+      "avg_iterations": 0,
+      "successes": 0
+    }
+  },
+  "n_trials": 10,
+  "timestamp": "20250627_163806"
+}

@@ -1,0 +1,173 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{subcaption}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+
+\geometry{margin=1in}
+\hypersetup{colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\nouppercase{\leftmark}}
+\fancyhead[R]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\title{Magic Squares: Geometric and Manifold Analysis}
+\author{Magic Squares Research Team}
+\date{March 04, 2025}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+\section{Introduction}
+
+This report presents a comprehensive analysis of magic squares, focusing on their geometric properties, 
+Earth Mover's Distance (EMD) relationships, and manifold structure. The analysis pipeline includes 
+multiple stages of data processing and visualization to extract meaningful patterns and insights.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/historical_context.png}
+    \caption{Historical context of magic squares, showing the Lo Shu square (c. 190 BCE), 
+    Dürer's magic square from Melencolia I (1514), and a timeline of major developments.}
+    \label{fig:historical_context}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/research_framework.png}
+    \caption{Research framework showing the analysis pipeline for magic squares, 
+    including geometric analysis, EMD analysis, manifold learning, and predictive modeling.}
+    \label{fig:research_framework}
+\end{figure}
+
+\section{Methodology}
+
+Our analysis follows a multi-stage pipeline that examines magic squares from different perspectives:
+
+\begin{enumerate}
+    \item \textbf{Geometric Analysis:} We represent magic squares as point clouds in 3D space and analyze 
+    their geometric properties, including convex hull characteristics, point distributions, and eigenvalue patterns.
+    \item \textbf{Earth Mover's Distance (EMD) Analysis:} We compute the optimal transport cost between magic squares 
+    to quantify their similarity and analyze the resulting distance matrix.
+    \item \textbf{Manifold Learning:} We apply dimensionality reduction techniques to explore the underlying 
+    structure of the magic square space and estimate its intrinsic dimension.
+    \item \textbf{Predictive Modeling:} We build machine learning models to predict geometric properties 
+    and identify the most important features that characterize magic squares.
+\end{enumerate}
+
+\section{Geometric Analysis}
+
+We analyze the geometric properties of magic squares by representing them as point clouds in 3D space. 
+Each point corresponds to a cell in the magic square, with its position determined by the cell's coordinates 
+and value. We then compute various geometric measures, including convex hull volume, surface area, and point distributions.
+
+\section{Earth Mover's Distance Analysis}
+
+Earth Mover's Distance (EMD) provides a natural way to measure the similarity between magic squares 
+by computing the optimal transport cost between them. We analyze the pairwise EMD distances between 
+magic squares and explore the resulting distance matrix to identify clusters and patterns.
+
+\section{Manifold Analysis}
+
+We explore the manifold structure of the magic square space using dimensionality reduction techniques 
+such as t-SNE. We estimate the intrinsic dimension of the manifold and analyze its local neighborhood 
+structure to gain insights into the underlying geometry of magic squares.
+
+
+## Manifold Analysis
+
+### Dimension Estimates
+
+
+### Local Structure
+
+
+### Curvature Analysis
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/manifold_structure.png}
+    \caption{Analysis of the manifold structure of magic squares, including intrinsic dimension estimates, 
+    local neighborhood structure, and persistence diagrams.}
+    \label{fig:manifold_structure}
+\end{figure}
+
+\section{Predictive Modeling}
+
+We build machine learning models to predict geometric properties of magic squares based on their structural features. 
+We use random forests, gradient boosting, and Lasso regression to identify the most important features and evaluate 
+their predictive performance.
+
+
+## Predictive Modeling Results
+
+Our predictive modeling analysis reveals several key findings:
+
+1. Best Performance: The model achieved the highest accuracy in predicting volume, with an R² score of 0.924 and mean squared error of 5.998.
+
+2. Model Performance by Target:
+   - volume: R² = 0.924, MSE = 5.998
+   - area: R² = 0.864, MSE = 8.790
+   - mean_dist: R² = 0.364, MSE = 0.001
+   - std_dist: R² = 0.356, MSE = 0.003
+
+The moderate predictive performance indicates consistent but complex relationships between geometric features and target properties.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/feature_importance_0.png}
+    \caption{Feature importance for predicting geometric properties of magic squares, 
+    showing the relative importance of different structural features.}
+    \label{fig:feature_importance_0}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/feature_importance_1.png}
+    \caption{Feature importance for predicting geometric properties of magic squares, 
+    showing the relative importance of different structural features.}
+    \label{fig:feature_importance_1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/feature_importance_2.png}
+    \caption{Feature importance for predicting geometric properties of magic squares, 
+    showing the relative importance of different structural features.}
+    \label{fig:feature_importance_2}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/feature_importance_3.png}
+    \caption{Feature importance for predicting geometric properties of magic squares, 
+    showing the relative importance of different structural features.}
+    \label{fig:feature_importance_3}
+\end{figure}
+
+\section{Conclusion}
+
+Our comprehensive analysis of magic squares reveals interesting patterns and relationships in their geometric properties, 
+EMD distances, and manifold structure. The predictive modeling results highlight the most important features that 
+characterize magic squares and provide insights into their underlying structure.
+
+Future work could explore more advanced geometric measures, apply different manifold learning techniques, 
+and investigate the relationship between magic squares and other mathematical objects.
+
+\end{document}

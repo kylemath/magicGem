@@ -1,0 +1,41 @@
+\section{Zero--Covariance Characterisation of Magic Squares}\label{sec:covariance-proof}
+
+In the vector--field representation each entry of a square is interpreted as the height of a vertical beam located at its lattice coordinate.  Centring both the spatial coordinates and the values leads to a natural covariance formulation of the classical line–sum constraints.
+
+Let $M\in\mathbb{R}^{n\times n}$, and write
+\[
+    x_i = i-\frac{n-1}{2},\quad y_j = j-\frac{n-1}{2},\quad z_{ij}=M_{ij}-\mu(M),\qquad 0\le i,j<n,
+\]
+where $\mu(M)$ is the arithmetic mean of the entries of $M$.  Consider the $n^2$ points
+\[
+    A_M=\{(x_i,y_j,z_{ij})\mid 0\le i,j<n\}\subset \mathbb{R}^3.
+\]
+
+\begin{theorem}[Axial Covariance Characterisation]\label{thm:axial-covariance}
+An $n\times n$ array $M$ is a magic square if and only if the following four covariances vanish
+\begin{align}
+    \operatorname{Cov}(x,z) &= 0, & \operatorname{Cov}(y,z) &= 0,\\
+    \operatorname{Cov}\!\bigl(\tfrac{x+y}{\sqrt2},z\bigr) &= 0, & \operatorname{Cov}\!\bigl(\tfrac{x-y}{\sqrt2},z\bigr) &= 0.
+\end{align}
+These correspond, respectively, to the row, column, main–diagonal and anti–diagonal constraints.
+\end{theorem}
+
+\begin{proof}
+The centred coordinates guarantee that any affine linear relation among the rows, columns or diagonals translates into a covariance condition between $z$ and a linear form in $(x,y)$.  Writing $\langle\cdot\rangle$ for the average over all $n^2$ points we have, for example,
+\[
+    \operatorname{Cov}(x,z)=\langle xz\rangle-\langle x\rangle\langle z\rangle=\frac{1}{n^2}\sum_{i,j}x_i z_{ij},
+\]
+where $\langle x\rangle=0$ by construction.  But
+\[
+    \sum_{i,j}x_i z_{ij}=\sum_{i}x_i\Bigl(\sum_j(M_{ij}-\mu)\Bigr)=\sum_{i}x_i\bigl(S_i - n\mu\bigr),
+\]
+with $S_i$ the sum of row $i$.  Because $x_i$ takes each value $-(n-1)/2,\dots,(n-1)/2$ exactly $n$ times, the term $\sum_i x_i\,n\mu$ vanishes.  Hence $\operatorname{Cov}(x,z)=0$ iff all row sums $S_i$ equal the common value $n\mu$.  The remaining equalities are obtained by replacing $x$ with $y$ and the rotated coordinates $\tfrac{x\pm y}{\sqrt2}$, giving the column and diagonal constraints.
+
+Conversely, if $M$ is magic all four line–sum constraints hold, and the covariances are zero by the same computation.\end{proof}
+
+\paragraph{Corollaries.}  The theorem yields a \\*vector–space description\\* of the magic–square manifold: the map
+\[\Phi:M\mapsto \bigl(\operatorname{Cov}(x,z),\operatorname{Cov}(y,z),\operatorname{Cov}(\tfrac{x+y}{\sqrt2},z),\operatorname{Cov}(\tfrac{x-y}{\sqrt2},z)\bigr)\]
+identifies the magic–square locus with the kernel of $\Phi$.
+
+\medskip
+The covariance view integrates seamlessly with the Earth Mover–Distance and persistent–homology pipelines used in the rest of the paper: each numerical perturbation of a square induces a small displacement in $\mathbb{R}^4$ under $\Phi$, providing a continuous "distance to magicness'' that our optimisation experiments exploit (Section~\ref{sec:optimization}). 

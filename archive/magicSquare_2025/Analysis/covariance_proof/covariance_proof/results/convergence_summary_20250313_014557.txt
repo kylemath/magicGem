@@ -1,0 +1,39 @@
+Magic Square Convergence Analysis
+================================
+
+Number of Experiments: 3
+Number of Swaps: 3
+Number of Steps: 500
+
+Results Summary:
+Successful Convergence: 0/3 (0.0%)
+
+Average Initial Distance: 45.88020833
+Average Final Distance: 0.00000000
+Average Initial Sum Error: 365.00000000
+Average Final Sum Error: 0.00000000
+Average Initial Int Dev: 0.00000000
+Average Final Int Dev: 0.00000000
+
+Detailed Results:
+Experiment 1:
+  Initial Distance: 37.40625000
+  Final Distance: 0.00000000
+  Initial Sum Error: 694.00000000
+  Final Sum Error: 0.00000000
+  Converged to Magic: False
+
+Experiment 2:
+  Initial Distance: 51.79687500
+  Final Distance: 0.00000000
+  Initial Sum Error: 141.00000000
+  Final Sum Error: 0.00000000
+  Converged to Magic: False
+
+Experiment 3:
+  Initial Distance: 48.43750000
+  Final Distance: 0.00000000
+  Initial Sum Error: 260.00000000
+  Final Sum Error: 0.00000000
+  Converged to Magic: False
+

@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magic Gems: Geometric Analysis of Magic Squares</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: #000;
+            color: #e8e8e8;
+            line-height: 1.8;
+            font-size: 17px;
+        }
+        
+        a {
+            color: #8ecae6;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: #000;
+            border-bottom: 1px solid #333;
+            padding: 0.75rem 2rem;
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            z-index: 100;
+        }
+        nav .logo {
+            font-weight: bold;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+        }
+        nav .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        nav button {
+            background: none;
+            border: none;
+            color: #888;
+            font-family: inherit;
+            font-size: 0.95rem;
+            cursor: pointer;
+            padding: 0.25rem 0;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+        nav button:hover, nav button.active {
+            color: #e8e8e8;
+            border-bottom-color: #e8e8e8;
+        }
+        
+        /* Main content */
+        main {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 5rem 1.5rem 4rem;
+        }
+        
+        .tab-pane {
+            display: none;
+        }
+        .tab-pane.active {
+            display: block;
+        }
+        
+        /* Typography */
+        h1 {
+            font-size: 2.2rem;
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+        h2 {
+            font-size: 1.4rem;
+            font-weight: normal;
+            margin: 2.5rem 0 1rem;
+            border-bottom: 1px solid #333;
+            padding-bottom: 0.5rem;
+        }
+        h3 {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin: 2rem 0 0.75rem;
+        }
+        
+        .subtitle {
+            color: #888;
+            font-style: italic;
+            margin-bottom: 2rem;
+        }
+        
+        p {
+            margin-bottom: 1.25rem;
+        }
+        
+        /* Magic square grids */
+        .squares-row {
+            display: flex;
+            gap: 3rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+        .square-block {
+            text-align: center;
+        }
+        .square-label {
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            color: #aaa;
+        }
+        .grid-3x3, .grid-4x4 {
+            display: inline-grid;
+            gap: 2px;
+            background: #333;
+            padding: 2px;
+            margin-bottom: 0.5rem;
+        }
+        .grid-3x3 {
+            grid-template-columns: repeat(3, 40px);
+        }
+        .grid-4x4 {
+            grid-template-columns: repeat(4, 36px);
+        }
+        .cell {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #111;
+            color: #e8e8e8;
+            font-size: 1rem;
+            height: 40px;
+            font-family: 'Courier New', monospace;
+        }
+        .grid-4x4 .cell {
+            height: 36px;
+            font-size: 0.9rem;
+        }
+        .magic-sum {
+            font-size: 0.85rem;
+            color: #888;
+        }
+        
+        /* Code and math */
+        code {
+            font-family: 'Courier New', monospace;
+            background: #1a1a1a;
+            padding: 0.15rem 0.4rem;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+        
+        /* Lists */
+        ul, ol {
+            margin: 1rem 0 1.5rem 1.5rem;
+        }
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Blockquote for abstract */
+        blockquote {
+            border-left: 3px solid #444;
+            padding-left: 1.25rem;
+            margin: 1.5rem 0;
+            color: #bbb;
+            font-style: italic;
+        }
+        
+        /* Links section */
+        .links-list {
+            list-style: none;
+            margin-left: 0;
+        }
+        .links-list li {
+            margin-bottom: 0.4rem;
+        }
+        .links-list a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .links-list i {
+            width: 1rem;
+            color: #666;
+        }
+        
+        /* Button */
+        .btn {
+            display: inline-block;
+            padding: 0.6rem 1.2rem;
+            background: #e8e8e8;
+            color: #000;
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin: 0.5rem 0.5rem 0.5rem 0;
+            transition: background 0.2s;
+        }
+        .btn:hover {
+            background: #fff;
+            text-decoration: none;
+        }
+        
+        /* Visualization tabs */
+        .viz-container {
+            background: #111;
+            border: 1px solid #333;
+            height: 80vh;
+            min-height: 500px;
+        }
+        .viz-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+            font-size: 0.85rem;
+            border-top: 1px solid #222;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">MAGIC GEMS</div>
+        <div class="nav-links">
+            <button class="active" onclick="switchTab('research', this)">Research</button>
+            <button onclick="switchTab('gem', this)">3D Explorer</button>
+            <button onclick="switchTab('manifold', this)">Manifold</button>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Research Tab -->
+        <div id="research" class="tab-pane active">
+            <h1>From Discrete Constraints to Continuous Geometry</h1>
+            <p class="subtitle">A geometric analysis of 4×4 magic squares through covariance, topology, and optimization</p>
+
+            <blockquote>
+                We present a framework that embeds magic squares as point clouds in ℝ³, revealing that they are uniquely characterized by <strong>zero spatial-value covariance</strong>. This provides a continuous formulation of discrete constraints and enables polynomial-time generation algorithms.
+            </blockquote>
+
+            <h2>The Classic Examples</h2>
+            
+            <p>
+                Magic squares have fascinated mathematicians for millennia. The <a href="https://en.wikipedia.org/wiki/Lo_Shu_Square">Lo Shu</a> (~650 BCE) emerged from Chinese legend, while <a href="https://en.wikipedia.org/wiki/Albrecht_D%C3%BCrer">Dürer</a> embedded one in his 1514 engraving <a href="https://en.wikipedia.org/wiki/Melencolia_I">Melencolia I</a>.
+            </p>
+
+            <div class="squares-row">
+                <div class="square-block">
+                    <div class="square-label">Lo Shu (3×3)</div>
+                    <div class="grid-3x3">
+                        <div class="cell">4</div><div class="cell">9</div><div class="cell">2</div>
+                        <div class="cell">3</div><div class="cell">5</div><div class="cell">7</div>
+                        <div class="cell">8</div><div class="cell">1</div><div class="cell">6</div>
+                    </div>
+                    <div class="magic-sum">Sum = 15</div>
+                </div>
+                
+                <div class="square-block">
+                    <div class="square-label">Dürer's Square (4×4)</div>
+                    <div class="grid-4x4">
+                        <div class="cell">16</div><div class="cell">3</div><div class="cell">2</div><div class="cell">13</div>
+                        <div class="cell">5</div><div class="cell">10</div><div class="cell">11</div><div class="cell">8</div>
+                        <div class="cell">9</div><div class="cell">6</div><div class="cell">7</div><div class="cell">12</div>
+                        <div class="cell">4</div><div class="cell">15</div><div class="cell">14</div><div class="cell">1</div>
+                    </div>
+                    <div class="magic-sum">Sum = 34</div>
+                </div>
+            </div>
+
+            <h2>The Geometric Insight</h2>
+            
+            <p>
+                Consider stacking coins on a 4×4 grid, with the number of coins at position (i, j) equal to the magic square entry M<sub>ij</sub>. Suspend this weighted grid from its center—it balances perfectly. This physical intuition leads to our key construction:
+            </p>
+            
+            <p>
+                Map each cell to a point in ℝ³: the position (i, j) becomes the x and y coordinates, the value M<sub>ij</sub> becomes the z coordinate. The 16 points form a point cloud whose <a href="https://en.wikipedia.org/wiki/Convex_hull">convex hull</a> is a 3D polyhedron—what we call a <strong>Magic Gem</strong>.
+            </p>
+
+            <h2>The Zero-Covariance Theorem</h2>
+            
+            <p>
+                The central result: a 4×4 arrangement of distinct integers 1–16 is a magic square <em>if and only if</em> four specific covariances vanish:
+            </p>
+            
+            <ul>
+                <li>Cov(row position, value) = 0</li>
+                <li>Cov(column position, value) = 0</li>
+                <li>Cov(main diagonal position, value) = 0</li>
+                <li>Cov(anti-diagonal position, value) = 0</li>
+            </ul>
+            
+            <p>
+                This provides a continuous characterization of the discrete constraint. Moreover, this property is <em>fragile</em>: testing 100,000 single-swap perturbations, the minimum covariance observed was 0.2—never zero. Magic squares are the unique solutions.
+            </p>
+
+            <h2>Key Findings</h2>
+            
+            <p>
+                Analysis of all 880 unique 4×4 magic squares (enumerated by <a href="https://en.wikipedia.org/wiki/Bernard_Fr%C3%A9nicle_de_Bessy">Frénicle de Bessy</a> in 1693) reveals:
+            </p>
+            
+            <ul>
+                <li><strong>21 geometric configurations</strong> based on convex hull structure (vertices, face points, interior points)</li>
+                <li><strong>Polynomial-time generation</strong>: gradient descent on the covariance objective achieves O(n⁴) complexity, ~73× faster than backtracking</li>
+                <li><strong>Manifold structure</strong>: the 880 squares form a single connected component in <a href="https://en.wikipedia.org/wiki/Earth_mover%27s_distance">EMD</a> space</li>
+            </ul>
+
+            <h2>Paper & Code</h2>
+            
+            <p>
+                The full paper with proofs and the complete reproducible codebase:
+            </p>
+            
+            <a href="assets/pdf/paper.pdf" class="btn" target="_blank">
+                <i class="fas fa-file-pdf"></i> Read Paper (PDF)
+            </a>
+            <a href="https://github.com" class="btn" target="_blank">
+                <i class="fab fa-github"></i> View Code
+            </a>
+            
+            <p style="margin-top: 1rem; font-size: 0.9rem; color: #888;">
+                Run <code>python reproduce_all.py</code> to regenerate all results.
+            </p>
+
+            <h2>References</h2>
+            
+            <ul class="links-list">
+                <li><a href="https://en.wikipedia.org/wiki/Magic_square"><i class="fab fa-wikipedia-w"></i> Magic square</a></li>
+                <li><a href="https://en.wikipedia.org/wiki/Lo_Shu_Square"><i class="fab fa-wikipedia-w"></i> Lo Shu square</a></li>
+                <li><a href="https://en.wikipedia.org/wiki/Melencolia_I"><i class="fab fa-wikipedia-w"></i> Melencolia I (Dürer)</a></li>
+                <li><a href="https://en.wikipedia.org/wiki/Convex_hull"><i class="fab fa-wikipedia-w"></i> Convex hull</a></li>
+                <li><a href="https://en.wikipedia.org/wiki/Earth_mover%27s_distance"><i class="fab fa-wikipedia-w"></i> Earth mover's distance</a></li>
+                <li><a href="https://en.wikipedia.org/wiki/Persistent_homology"><i class="fab fa-wikipedia-w"></i> Persistent homology</a></li>
+                <li><a href="https://oeis.org/A006052"><i class="fas fa-calculator"></i> OEIS A006052 (enumeration)</a></li>
+            </ul>
+        </div>
+
+        <!-- 3D Explorer Tab -->
+        <div id="gem" class="tab-pane">
+            <h1>Magic Gems Explorer</h1>
+            <p class="subtitle">Interactive 3D visualization of magic square convex hulls</p>
+            <div class="viz-container">
+                <iframe src="visualization/gem_viewer.html" title="Magic Gems Explorer"></iframe>
+            </div>
+        </div>
+
+        <!-- Manifold Tab -->
+        <div id="manifold" class="tab-pane">
+            <h1>Manifold Navigator</h1>
+            <p class="subtitle">t-SNE projection of all 880 magic squares</p>
+            <div class="viz-container">
+                <iframe src="visualization/manifold_viewer.html" title="Manifold Navigator"></iframe>
+            </div>
+        </div>
+
+        <footer>
+            Kyle Elliott Mathewson · University of Alberta · 2025
+        </footer>
+    </main>
+
+    <script>
+        function switchTab(tabId, btn) {
+            document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            btn.classList.add('active');
+        }
+    </script>
+</body>
+</html>

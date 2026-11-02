@@ -1,0 +1,93 @@
+\section{Theoretical Framework}
+\label{sec:theory}
+
+We formalize the Spin Gem construction, define the covariance-based energy functional, and establish the connection to classical magic squares.
+
+\subsection{Spin Gem Construction}
+\label{sec:construction}
+
+Consider a molecule consisting of $N$ atoms with positions $\{\mathbf{r}_k\}_{k=1}^N \subset \mathbb{R}^3$ and spin projections $\{s_k\}_{k=1}^N \subset \mathbb{R}$.
+
+\begin{definition}[Centered Coordinates]
+\label{def:centered}
+Define the \emph{centered position} and \emph{centered spin} as
+\begin{align}
+\tilde{\mathbf{r}}_k &= \mathbf{r}_k - \bar{\mathbf{r}}, \quad \text{where } \bar{\mathbf{r}} = \frac{1}{N} \sum_{k=1}^N \mathbf{r}_k, \\
+\tilde{s}_k &= s_k - \bar{s}, \quad \text{where } \bar{s} = \frac{1}{N} \sum_{k=1}^N s_k.
+\end{align}
+\end{definition}
+
+\begin{definition}[Spin Gem]
+\label{def:spin_gem}
+The \emph{Spin Gem} is the four-dimensional point cloud
+\begin{equation}
+\mathcal{S} = \left\{ \mathbf{p}_k = (\tilde{x}_k, \tilde{y}_k, \tilde{z}_k, \tilde{s}_k) : k = 1, \ldots, N \right\} \subset \mathbb{R}^4,
+\end{equation}
+together with its $4 \times 4$ covariance matrix $\Sigma$.
+\end{definition}
+
+The covariance matrix has the block structure
+\begin{equation}
+\Sigma = \begin{pmatrix}
+\Sigma_{\text{pos}} & \mathbf{c} \\
+\mathbf{c}^T & \sigma_s^2
+\end{pmatrix},
+\end{equation}
+where $\mathbf{c} = (\text{Cov}(X, S), \text{Cov}(Y, S), \text{Cov}(Z, S))^T$ is the \emph{spin-position covariance vector}.
+
+\subsection{Spin Balance Energy}
+\label{sec:energy}
+
+\begin{definition}[Spin Balance Energy]
+\label{def:energy}
+The \emph{spin balance energy} is
+\begin{equation}
+E(\{s_k\}) = \text{Cov}(X, S)^2 + \text{Cov}(Y, S)^2 + \text{Cov}(Z, S)^2 = \|\mathbf{c}\|^2.
+\end{equation}
+\end{definition}
+
+\begin{definition}[Magic Spin Configuration]
+A spin assignment is \emph{magic} if $E = 0$, i.e., $\text{Cov}(X, S) = \text{Cov}(Y, S) = \text{Cov}(Z, S) = 0$.
+\end{definition}
+
+\begin{proposition}[Existence]
+\label{prop:existence}
+For $N \geq 4$ atoms in general position, infinitely many magic spin configurations exist.
+\end{proposition}
+
+\begin{proof}
+The zero-covariance conditions constitute four linear constraints on $N$ spin values. For $N > 4$, these define a subspace of dimension at least $N - 4$.
+\end{proof}
+
+\subsection{Connection to Magic Squares}
+\label{sec:connection}
+
+\begin{theorem}[Magic Squares as Spin Gems]
+\label{thm:connection}
+Let $S = (s_{ij})$ be an $n \times n$ arrangement of $\{1, 2, \ldots, n^2\}$. Place atoms at lattice points $(x_{ij}, y_{ij}, 0)$ with
+\[
+x_{ij} = j - \frac{n-1}{2}, \quad y_{ij} = \frac{n-1}{2} - i,
+\]
+and assign spin $s_{ij}$ to each. Then $S$ is a magic square if and only if the corresponding Spin Gem has $E = 0$.
+\end{theorem}
+
+\begin{proof}
+Since all atoms have $z = 0$, we have $\text{Cov}(Z, S) = 0$ automatically. The conditions $\text{Cov}(X, S) = 0$ and $\text{Cov}(Y, S) = 0$ are equivalent to equal column sums and equal row sums respectively, as shown in \cite{magic_gems_2025}. For $n \in \{3, 4\}$, these conditions combined with integrality constraints force the diagonal sums to equal $M(n)$.
+\end{proof}
+
+This theorem reveals that magic squares are \emph{discrete} magic spin configurations on planar lattices.
+
+\subsection{Interactive Visualization}
+\label{sec:demo}
+
+The web demonstration (supplementary materials) provides interactive exploration of these concepts:
+
+\paragraph{Tab 1: Spin Gem Concept.} Visualizes a hexagonal Spin Gem with real-time covariance calculation. Users can observe how the energy varies with spin assignments.
+
+\paragraph{Tab 2: Magic Square Connection.} Displays the Lo Shu square as a Spin Gem, with a scatter plot comparing its covariance (at the origin) to 500 random arrangements.
+
+\paragraph{Tab 3: Molecular Geometries.} Allows selection among tetrahedron, octahedron, cube, and hexagon geometries. Includes energy histogram from 2000 random samples.
+
+\paragraph{Tab 4: Energy Landscape.} Renders the 3D energy surface $E(s_0, s_1)$ for a tetrahedron, showing the magic point as an isolated minimum.
+
+\paragraph{Tab 5: Precession Dynamics.} Animates spin precession in a magnetic field with real-time energy tracking.

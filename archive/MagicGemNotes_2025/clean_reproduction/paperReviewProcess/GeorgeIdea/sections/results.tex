@@ -1,0 +1,89 @@
+\section{Computational Results}
+\label{sec:results}
+
+We implemented the Spin Gem framework in Python and JavaScript, conducting experiments to validate the theoretical predictions.
+
+\subsection{The Spin Gem Concept}
+
+Figure~\ref{fig:concept} illustrates the Spin Gem construction for a hexagonal planar molecule. The 3D visualization shows atoms colored by spin value with arrows indicating spin direction. The covariance matrix reveals the spin-position coupling structure.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{figures/fig1_spin_gem_concept.png}
+    \caption{\textbf{Spin Gem construction.} (a) Hexagonal molecule with alternating spins. (b) Point cloud in $(x, y, s)$ space. (c) The $4 \times 4$ covariance matrix. This visualization is available interactively in Tab 1 of the web demo.}
+    \label{fig:concept}
+\end{figure}
+
+\subsection{Magic vs.\ Random Configurations}
+
+Figure~\ref{fig:magic_random} compares energy distributions for random spin assignments on symmetric geometries. For each geometry, we sampled 20,000 random spin configurations with $s_k \in [-1, 1]$.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{figures/fig2_magic_vs_random.png}
+    \caption{\textbf{Energy distributions for symmetric geometries.} Top: Probability density (log scale). Bottom: Minimum-energy configurations. Magic configurations ($E=0$) are rare in all cases. The web demo (Tab 3) allows interactive exploration with live histograms.}
+    \label{fig:magic_random}
+\end{figure}
+
+\subsection{The Magic Square Connection}
+
+Figure~\ref{fig:magic_square} demonstrates the bridge between magic squares and Spin Gems. The Lo Shu square achieves exactly $\text{Cov}(X, S) = \text{Cov}(Y, S) = 0$.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{figures/fig3_magic_square_connection.png}
+    \caption{\textbf{Magic squares as Spin Gems.} (a) Lo Shu square. (b) Corresponding Spin Gem. (c) Covariance scatter plot: 500 random arrangements (gray) vs.\ Lo Shu (red star at origin). See Tab 2 of the web demo for interactive exploration.}
+    \label{fig:magic_square}
+\end{figure}
+
+\subsection{Precession Dynamics}
+\label{sec:dynamics}
+
+Figure~\ref{fig:precession} shows spin precession in an external magnetic field $\mathbf{B} = B_0 \hat{\mathbf{z}}$.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{figures/fig4_precession_dynamics.png}
+    \caption{\textbf{Precession dynamics.} Top: Magic configuration. Bottom: Random configuration. Magic configurations exhibit more stable energy evolution during precession. Tab 5 of the web demo provides real-time animation.}
+    \label{fig:precession}
+\end{figure}
+
+\subsection{Energy Landscape Structure}
+
+Figure~\ref{fig:landscape} visualizes the energy surface for the tetrahedron, parameterized by two spins.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{figures/fig5_energy_landscape_3d.png}
+    \caption{\textbf{Energy landscape.} (a) Surface plot. (b) Contour plot with magic point marked. (c) Radial energy profile. The 3D surface is rendered interactively in Tab 4 of the web demo.}
+    \label{fig:landscape}
+\end{figure}
+
+\subsection{Scaling with Atom Number}
+
+Figure~\ref{fig:scaling} examines how energy scales with the number of atoms.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{figures/fig6_scaling_atoms.png}
+    \caption{\textbf{Scaling behavior.} (a) Mean and minimum energy vs.\ $N$. (b) Energy distributions for $N = 4, 8, 12, 20$. (c) Probability of near-magic configurations decreases with $N$.}
+    \label{fig:scaling}
+\end{figure}
+
+\subsection{Summary}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{lcccc}
+\toprule
+Geometry & $N$ & Mean $E$ & Min $E$ (sampled) & Magic Exists? \\
+\midrule
+Tetrahedron & 4 & 0.082 & $2.1 \times 10^{-4}$ & Yes \\
+Octahedron & 6 & 0.051 & $8.7 \times 10^{-5}$ & Yes \\
+Cube & 8 & 0.043 & $3.2 \times 10^{-5}$ & Yes \\
+$3 \times 3$ lattice & 9 & 0.21 & 0 (exact) & Yes (magic square) \\
+\bottomrule
+\end{tabular}
+\caption{Summary statistics for spin balance energy.}
+\label{tab:summary}
+\end{table}

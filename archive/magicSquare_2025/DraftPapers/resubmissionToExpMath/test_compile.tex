@@ -1,0 +1,53 @@
+\documentclass[11pt]{article}
+
+% Standard packages
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{natbib}
+\bibliographystyle{plainnat}
+\usepackage[margin=1in]{geometry}
+
+\title{Test Compilation}
+\author{Test Author}
+
+\begin{document}
+
+\maketitle
+
+\section{Test Section}
+
+This is a test document to check basic compilation.
+
+\subsection{Mathematics Test}
+
+Here's a simple equation:
+\begin{equation}
+E = mc^2
+\end{equation}
+
+\subsection{Citation Test}
+
+This is a test citation \citep{test2023}.
+
+\subsection{Figure Test}
+
+% Commenting out figure to test without it
+% \begin{figure}[h]
+% \centering
+% \includegraphics[width=0.5\textwidth]{test.png}
+% \caption{Test figure}
+% \end{figure}
+
+\section{Conclusion}
+
+Test completed.
+
+\begin{thebibliography}{9}
+\bibitem{test2023}
+Test Author,
+\textit{Test Title},
+Test Journal, 2023.
+\end{thebibliography}
+
+\end{document} 

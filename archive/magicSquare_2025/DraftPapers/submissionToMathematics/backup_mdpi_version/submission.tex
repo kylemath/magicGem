@@ -1,0 +1,98 @@
+% Magic Square Gems – Submission to Mathematics (MDPI)
+% ------------------------------------------------------
+%
+% This master file follows the official MDPI LaTeX template.  Auxiliary files
+% (mdpi.cls, mdpi.bst, etc.) will be added to the folder automatically by the
+% build script in `submissionToMathematics/tools/fetch_mdpi_template.py`.
+% -----------------------------------------------------------------------------
+
+\documentclass[article,submit,moreauthors,pdftex]{mdpi}
+
+%=================================================================
+% MDPI internal commands — do not modify these unless necessary
+%=================================================================
+\firstpage{1}
+\makeatletter
+\setcounter{page}{\@firstpage}
+\makeatother
+\pubvolume{xx}
+\issuenum{1}
+\articlenumber{0}
+\pubyear{2025}
+\copyrightyear{2025}
+\externaleditor{Academic Editor: XXX}
+\datereceived{} % Leave date blank if you do not have this information.
+\dateaccepted{} % Leave date blank if you do not have this information.
+\datepublished{}
+\hreflink{https://doi.org/} % If needed use \href{https://doi.org/}{doi:xxx}
+%------------------------------------------------------------------
+
+%=================================================================
+% Packages specific to this manuscript
+%=================================================================
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{booktabs}
+\usepackage{subcaption}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+% Define theorem-like environments
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{note}[theorem]{Note}
+
+%=================================================================
+% Frontmatter
+%=================================================================
+\Title{Geometric and Topological Analysis of Magic Squares:\ A Comprehensive Multi‐Modal Framework}
+
+% Author Orchid IDs are recommended: add \orcid{} behind the author's name
+\Author{Kyle Elliott Mathewson $^{1,}$* and \textbf{YourAI Assistant}$^{2}$}
+\AuthorNames{Kyle Elliott Mathewson and YourAI Assistant}
+
+\address{\noindent$^{1}$ \quad Department of Psychology, University of Alberta, Edmonton, AB T6G 2E9, Canada; kyle.mathewson@ualberta.ca\\
+$^{2}$ \quad OpenAI Research Co‐Author; assistant@openai.com}
+
+\corres{* Correspondence: kyle.mathewson@ualberta.ca}
+
+\abstract{\input{sections/abstract}}
+
+% MDPI requires keywords after abstract
+\keyword{magic squares; computational topology; geometric data analysis; manifold learning; earth mover distance; persistent homology}
+
+%=================================================================
+% Main content (sections stored separately for readability)
+%=================================================================
+\begin{document}
+
+% Local sections with real data and enhanced content
+\input{sections/introduction}
+\input{sections/methods}
+\input{sections/results}
+\input{sections/vector_field}
+\input{sections/vector_field_analysis}
+\input{sections/optimization}
+\input{sections/discussion}
+\input{sections/conclusion}
+\input{sections/acknowledgments}
+
+%=================================================================
+% References
+%=================================================================
+\bibliographystyle{plain}
+\bibliography{../magic_squares/tex/bib/references}
+
+\end{document} 

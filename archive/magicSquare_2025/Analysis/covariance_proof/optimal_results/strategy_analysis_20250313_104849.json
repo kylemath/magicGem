@@ -1,0 +1,26 @@
+{
+  "direct": {
+    "count": 4,
+    "magic_count": 0,
+    "avg_distance": 0.006564413969292974,
+    "avg_sum_error": 0.06521710509560492,
+    "avg_int_dev": 2.4691606057922986,
+    "success_rate": 0.0
+  },
+  "variation": {
+    "count": 4,
+    "magic_count": 1,
+    "avg_distance": 0.0038721626938213356,
+    "avg_sum_error": 0.0364072573278893,
+    "avg_int_dev": 1.5811010209702185,
+    "success_rate": 25.0
+  },
+  "exploration": {
+    "count": 2,
+    "magic_count": 0,
+    "avg_distance": 0.005088586698682672,
+    "avg_sum_error": 0.05651621417928396,
+    "avg_int_dev": 2.0399883936121714,
+    "success_rate": 0.0
+  }
+}
