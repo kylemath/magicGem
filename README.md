@@ -24,13 +24,14 @@ lifts its $N = n^2$ entries into three-dimensional points $\mathbf{p}_{ij}(\lamb
 
 $$\mathcal{G}_\lambda(S) := \operatorname{conv}\bigl\{\mathbf{p}_{ij}(\lambda) : 0 \le i,j < n\bigr\} \subset \mathbb{R}^3$$
 
-is a polyhedral sculpture—the **Magic Gem** of $S$. This repository is the canonical monorepo containing the complete LaTeX manuscripts, figure-generation scripts, exact rational verification suites (`fractions.Fraction`), interactive web simulators, and historical research archives for the three-paper *Magic Gems* series:
+is a polyhedral sculpture—the **Magic Gem** of $S$. This repository is the canonical monorepo containing the complete LaTeX manuscripts, figure-generation scripts, exact rational verification suites (`fractions.Fraction`), interactive web simulators, and historical research archives for the four-paper *Magic Gems* series:
 
 | Paper | Title & Directory | Venues & Status | Compiled PDF | Exact Verification Suite |
 | :--- | :--- | :--- | :--- | :--- |
 | **Paper A** | *Magic Gems: Convex Hulls of Lifted Magic Squares* (`paper_A_gems/`) | `arXiv:2512.09170` · *Experimental Mathematics* (`263179413`) | [`paperA.pdf`](paperA.pdf) | `python3 paper_A_gems/anc/verify_paper_a.py` |
 | **Paper B** | *Bivariate Polynomial Moments and Prouhet–Tarry–Escott Identities of Semi-Magic Squares* (`paper_B_orthogonality/`) | arXiv (`submit/8306568`) · *Discrete Applied Mathematics* | [`paperB.pdf`](paperB.pdf) | `python3 paper_B_orthogonality/anc/verify_paper_b.py` |
 | **Paper C** | *Balance in Inequality: Testing the Physical Equilibrium, Precession, and Structural Stability of Magic Gems* (`paper_C_mechanics/`) | arXiv (`submit/8319388`) · *Journal of Mathematics and the Arts* (`263584067`) | [`paperC.pdf`](paperC.pdf) | `python3 paper_C_mechanics/anc/verify_paper_c.py` |
+| **Paper D** | *Spectral Energy Landscapes, Multiscale Window Entropies, and Continuous Bubble Relaxation of Magic Squares* (`paper_D_solver/`) | Manuscript & arXiv Archive Ready | [`paperD.pdf`](paperD.pdf) | `python3 paper_D_solver/anc/verify_paper_d.py` |
 
 ---
 
@@ -41,9 +42,11 @@ magicGem/
 ├── paperA.pdf                        # Compiled Manuscript — Paper A (Convex Hulls & Face Lattices)
 ├── paperB.pdf                        # Compiled Manuscript — Paper B (Polynomial Moments & PTE Hierarchy)
 ├── paperC.pdf                        # Compiled Manuscript — Paper C (Mechanics, Fabrication & Stacking)
+├── paperD.pdf                        # Compiled Manuscript — Paper D (Spectral Landscapes, Entropies & Bubble Relaxation)
 ├── paperA_arxiv.tar.gz               # Self-contained arXiv upload archive for Paper A
 ├── paperB_arxiv.tar.gz               # Self-contained arXiv upload archive for Paper B
 ├── paperC_arxiv.tar.gz               # Self-contained arXiv upload archive for Paper C
+├── paperD_arxiv.tar.gz               # Self-contained arXiv upload archive for Paper D
 ├── index.html                        # Interactive Web Essay for Paper C (GitHub Pages root)
 ├── simulators.js                     # Interactive 2D/3D Physics, Wireframe, Papercraft & Tower Simulators
 ├── gems_data.js                      # Precomputed exact geometry & mechanics dataset for all 880 order-4 gems
@@ -55,6 +58,7 @@ magicGem/
 ├── paper_A_gems/                     # Paper A LaTeX sources, figures, and ancillary verification suite
 ├── paper_B_orthogonality/            # Paper B LaTeX sources, figures, and ancillary verification suite
 ├── paper_C_mechanics/                # Paper C LaTeX sources, figures, web essay, and verification suite
+├── paper_D_solver/                   # Paper D LaTeX sources, figures, and ancillary verification suite
 ├── Analysis/                         # Shared computational scripts, Lean 4 proofs, and census datasets
 └── archive/                          # Historical 2025 research archives (magicSquare, MagicGemNotes, pre-split drafts)
 ```
@@ -63,7 +67,7 @@ magicGem/
 
 ## Reproducing All Verification Suites & Figures
 
-Every theorem, census count, and extremal example across Papers A, B, and C is certified in exact integer and rational arithmetic (`fractions.Fraction`):
+Every theorem, census count, and extremal example across Papers A, B, C, and D is certified in exact integer and rational arithmetic (`fractions.Fraction`):
 
 ```bash
 # Install dependencies (NumPy, SciPy, Matplotlib)
@@ -78,8 +82,12 @@ python3 paper_B_orthogonality/anc/verify_paper_b.py
 # Verify Paper C (Radial Vector Laws, Precession, Nested Cores, Wireframes/Nets & Stacking)
 python3 paper_C_mechanics/anc/verify_paper_c.py
 
-# Regenerate all 7 publication figures for Paper C
+# Verify Paper D (Spectral Rationalization, Window Entropies, S9/S16 Landscapes & Bubble Relaxation)
+python3 paper_D_solver/anc/verify_paper_d.py
+
+# Regenerate all publication figures for Papers C and D
 python3 paper_C_mechanics/anc/make_figures_c.py
+python3 paper_D_solver/anc/make_figures_d.py
 ```
 
 ---

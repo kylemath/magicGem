@@ -1,0 +1,57 @@
+\section{Continuous ``Bubble Trinity'' Langevin Relaxation and Hybrid Settling}
+\label{sec:bubble}
+
+To overcome the discrete local-minimum traps identified in \Cref{sec:landscape}, the \emph{Bubble Trinity} architecture in \texttt{physicalSolver} \cite{mathewson2026physicalsolver} relaxes the rigid permutation assignment by embedding the $n^2$ numbers as mobile viscoelastic particles (``bubbles'') in continuous $\R^2$ plane coordinates $\mathbf{r}_a(t) = (x_a(t), y_a(t)) \in \R^2$ ($a=1,\dots,n^2$) anchored near the lattice cell centers $\mathbf{r}_a^{(0)} = (c_a - \frac{n+1}{2}, r_a - \frac{n+1}{2})$.
+
+\subsection{Continuous Kernel-Induced Line Field and Langevin Equations of Motion}
+
+At any continuous configuration $\{\mathbf{r}_a(t)\}_{a=1}^{n^2}$, each lattice cell $b \in \{1,\dots,n^2\}$ samples a soft Gaussian kernel interpolation of the bubble heights $Z_a$:
+\begin{equation}
+  W_{ab}(t) = \frac{\exp\bigl(-2\|\mathbf{r}_a(t) - \mathbf{r}_b^{(0)}\|_2^2\bigr)}{\sum_{a'=1}^{n^2} \exp\bigl(-2\|\mathbf{r}_{a'}(t) - \mathbf{r}_b^{(0)}\|_2^2\bigr)}, \qquad
+  \widetilde{\mathbf{z}}(t) = W(t)^\top \mathbf{z}, \qquad
+  \Hind(t) = \|A_n \widetilde{\mathbf{z}}(t)\|_2^2.
+  \label{eq:kernel_induced_H}
+\end{equation}
+When every bubble sits at its home lattice site ($\mathbf{r}_a = \mathbf{r}_a^{(0)}$), $\Hind(t)$ approaches the discrete line Hamiltonian $\Hline(S)$. Away from the lattice, the continuous cell-stress vector $\widetilde{\mathbf{g}}(t) = A_n^\top A_n \widetilde{\mathbf{z}}(t)$ defines a smooth target attraction field $\mathbf{r}_a^{\mathrm{target}}(t) = \sum_{b=1}^{n^2} \sigma_{ab}(t)\mathbf{r}_b^{(0)}$ via the Boltzmann-weighted stress pairing $\sigma_{ab}(t) \propto \exp(-Z_a \widetilde{g}_b(t) / T_{\mathrm{field}})$, which pulls positive-height bubbles ($Z_a > 0$) toward cells with negative line residual ($\widetilde{g}_b < 0$) and vice versa. Each bubble evolves under the damped Langevin equation
+\begin{equation}
+  \mathbf{v}_a(t+\Delta t) = \gamma_m \mathbf{v}_a(t) + \Delta t\Bigl[\mathbf{F}_a^{\mathrm{well}} + \mathbf{F}_a^{\mathrm{cont}} + \mathbf{F}_a^{\mathrm{rep}} + \mathbf{F}_a^{\mathrm{field}}\Bigr] + \sqrt{2 D_T}\,\Delta\mathbf{W}_a(t),
+  \label{eq:langevin_sde}
+\end{equation}
+where $\gamma_m \in [0,1)$ is the velocity memory factor, $\mathbf{F}_a^{\mathrm{well}} = -k_w(\mathbf{r}_a - \mathbf{r}_a^{(0)})$ is the harmonic lattice restoring force, $\mathbf{F}_a^{\mathrm{cont}} = -k_c \mathbf{r}_a$ is global radial containment, $\mathbf{F}_a^{\mathrm{rep}} = k_r \sum_{b\ne a} (\mathbf{r}_a - \mathbf{r}_b)/(\|\mathbf{r}_a - \mathbf{r}_b\|^2 + \epsilon_0)^{3/2}$ is softened core repulsion preventing bubble collapse, and $\mathbf{F}_a^{\mathrm{field}} = (c_f k_f + c_s k_s)(\mathbf{r}_a^{\mathrm{target}} - \mathbf{r}_a)$ combines the line-residual drift $k_f$ and centrifugal snap $k_s$. Simultaneously, each bubble's visual outer shell radius $R_a^{\mathrm{shell}}(t) = R_0 + \alpha_R |Z_a| + \beta_R |\widetilde{g}_a(t)|$ dilates in proportion to local line stress and contracts smoothly onto the static core radius $R_0 + \alpha_R |Z_a|$ as $\Hind(t) \to 0$.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\textwidth]{figures/fig6_bubble_trinity_regimes.pdf}
+  \caption{\textbf{Continuous Bubble-Trinity Langevin relaxation regimes and hybrid ground-state synthesis benchmarks.} \textbf{(a)} Trajectories of the kernel-induced line Hamiltonian $\Hind(t)$ across $250$ integration steps ($\Delta t = 0.025$) for the four canonical dynamical regimes of \Cref{tab:bubble_regimes}, starting from a $4$-swap perturbation of D\"urer's $4\times 4$ square ($\Hind(0) = 1{,}681.89$). \textbf{(b)} Order-$4$ magic ground-state recovery rate ($\Hline = 0$, $\%$, $300$ trials per budget) comparing standard unbiased $2$-cycle Simulated Annealing against Field-Guided $2+3$-Cycle Hybrid Settling across step budgets $B \in \{200, 500, 1{,}000, 2{,}500, 5{,}000\}$.}
+  \label{fig:bubble_trinity}
+\end{figure}
+
+\subsection{The Four Dynamical Regimes and Hybrid Field-Guided Settling}
+
+\Cref{fig:bubble_trinity}a and \Cref{tab:bubble_regimes} quantify the continuous trajectory of $\Hind(t)$ and the root-mean-square (RMS) lattice displacement $\Delta r_{\mathrm{rms}}(t) = \bigl(\frac{1}{n^2}\sum_a \|\mathbf{r}_a(t) - \mathbf{r}_a^{(0)}\|^2\bigr)^{1/2}$ across the four canonical parameter regimes of \texttt{bubbleTrinityApp.js}:
+\begin{enumerate}
+  \item \textbf{Regime~I (\emph{Frozen Lattice}, $k_w=7.0, k_f=0$):} Stiff lattice wells lock every bubble at $\mathbf{r}_a^{(0)}$ ($\Delta r_{\mathrm{rms}} = 0.000$), keeping $\Hind(t) = 1{,}681.89$ completely static.
+  \item \textbf{Regime~II (\emph{Slow Drift}, $k_w=2.6, k_f=1.0, T=0.5$):} Moderate field coupling induces small elastic displacements ($\langle\Delta r_{\mathrm{rms}}\rangle = 0.0774$ cell units), smoothly lowering $\Hind(t)$ by $8.5\%$ to $1{,}539.22$ while preserving crystal order.
+  \item \textbf{Regime~III (\emph{Field Storm}, $k_w=0.8, k_f=3.2, k_r=1.0, T=1.2$):} Strong line-field driving overcomes the local wells ($\max \Delta r_{\mathrm{rms}} = 0.4646$), melting the lattice into a convective fluid that drops $\Hind(t)$ by $29.0\%$ to $1{,}194.88$.
+  \item \textbf{Regime~IV (\emph{Centrifugal Balance}, $k_w=1.8, k_f=2.2, k_s=0.85, T=0.4$):} Adding targeted snap attraction $k_s = 0.85$ drives displaced bubbles directly toward stress-canceling partner cells ($\max \Delta r_{\mathrm{rms}} = 0.6381$), achieving the deepest continuous energy reduction ($\Hind(t) = 1{,}050.55$, a $37.5\%$ drop).
+\end{enumerate}
+
+\begin{table}[t]
+\centering
+\caption{Parameters and trajectory invariants across the four canonical Bubble-Trinity Langevin regimes at order $n=4$ ($250$ steps, $\Delta t=0.025$), verified by \texttt{verify\_paper\_d.py}.}
+\label{tab:bubble_regimes}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}lccccccc@{}}
+\toprule
+Dynamical Regime & $(k_f, k_r, k_w, k_c)$ & $(\gamma_m, k_s, T)$ & $\Hind(0)$ & $\Hind(250)$ & Min $\Hind$ & Mean $\Delta r_{\mathrm{rms}}$ & Max $\Delta r_{\mathrm{rms}}$ \\
+\midrule
+I. Frozen Lattice      & $(0.0, 0.0, 7.0, 0.0)$ & $(0.94, 0.00, 0.0)$ & $1681.89$ & $1681.89$ & $1681.89$ & $0.0000$ & $0.0000$ \\
+II. Slow Drift         & $(1.0, 0.4, 2.6, 0.0)$ & $(0.82, 0.00, 0.5)$ & $1681.89$ & $1539.22$ & $1539.22$ & $0.0774$ & $0.1134$ \\
+III. Field Storm       & $(3.2, 1.0, 0.8, 0.4)$ & $(0.60, 0.00, 1.2)$ & $1681.89$ & $1194.88$ & $1194.88$ & $0.2654$ & $0.4646$ \\
+IV. Centrifugal Bal.   & $(2.2, 0.5, 1.8, 0.5)$ & $(0.75, 0.85, 0.4)$ & $1681.89$ & $1050.55$ & $1050.55$ & $0.4281$ & $0.6381$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Finally, to snap the continuous field back onto an exact integer permutation $S \in S_{16}$ with $\Hline(S) = 0$, the Bubble-Trinity \emph{Settle} operator combines two mechanisms inspired by \Cref{sec:spectral} and \Cref{sec:landscape}: (i) \emph{cell-stress prioritization}, which selects the highest-stress cell $a^* = \arg\max_a |g_a(S)|$ with probability $1/2$ at each step rather than sampling blind random pairs, and (ii) \emph{multi-cycle mixing}, which proposes a directed $3$-cycle with probability $1/4$ and a $2$-cycle transposition with probability $3/4$ under a quadratic annealing schedule $T(t) = T_0(1 - t/B)^2$. As shown in \Cref{fig:bubble_trinity}b across $300$ independent random starts per budget $B \in \{200, 500, 1{,}000, 2{,}500, 5{,}000\}$, Field-Guided $2+3$-Cycle Hybrid Settling consistently outperforms standard unbiased $2$-cycle Simulated Annealing, raising the ground-state synthesis rate from $0.3\%$ to $4.7\%$ at $B=200$, from $5.3\%$ to $18.3\%$ ($3.45\times$) at $B=500$, from $18.3\%$ to $31.0\%$ at $B=1{,}000$, from $33.7\%$ to $50.0\%$ at $B=2{,}500$, and from $48.7\%$ to \textbf{$69.0\%$} at $B=5{,}000$.

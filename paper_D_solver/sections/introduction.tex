@@ -1,0 +1,65 @@
+\section{Introduction}
+\label{sec:intro}
+
+A magic square of order $n$ is a bijection $S : \{1,\dots,n\}^2 \to \{1,\dots,n^2\}$ whose $n$ rows, $n$ columns, and two main diagonals each sum to the magic constant $M_n = \frac{1}{2}n(n^2+1)$ \cite{frenicle1693,loubere1693,dudeney1917amusements,andrews1960magic}. When lifted into three-dimensional Euclidean space via centred integer coordinates
+\begin{equation}
+  X_j = 2j - (n+1), \qquad Y_i = (n+1) - 2i, \qquad Z_{ij} = 2s_{ij} - (n^2+1),
+  \label{eq:centred_coords}
+\end{equation}
+each permutation $S \in S_{n^2}$ defines an $n^2$-point configuration $\mathcal{P}(S) = \{(X_j, Y_i, Z_{ij})\} \subset \Z^3$ whose convex hull $K(S) = \conv\mathcal{P}(S)$ is a \emph{Magic Gem}. Across the first three papers of this series, we investigated the forward map from magic squares to geometric and mechanical invariants:
+\begin{enumerate}
+  \item \textbf{Paper~I (\emph{Polytopal Geometry})} \cite{mathewson2026gems} classified the facial structure, vertex counts $V$, surface areas, volumes, and discrete symmetry groups of Magic Gems across the $880$ Fr\'enicle order-$4$ squares and higher-order families.
+  \item \textbf{Paper~II (\emph{Bivariate Moments \& Orthogonality})} \cite{mathewson2026moments} proved that semi-magic balance forces $\langle X^j, Z\rangle = \langle Y^j, Z\rangle = 0$ for all $j \ge 0$, diagonalizing the $3\times 3$ inertia and covariance tensors of every magic square and generating universal Prouhet--Tarry--Escott power-sum identities.
+  \item \textbf{Paper~III (\emph{Rigid-Body Mechanics \& Structural Stability})} \cite{mathewson2026mechanics} tested these algebraic invariants in physical rigid-body mechanics, proving that every equal-vertex-mass Magic Gem is an oblate symmetric top ($I_{xx}=I_{yy} < I_{zz}$) free of intermediate-axis Dzhanibekov tumbling, while continuous bulk polyhedra break covariance isotropy yet preserve exact static stability across all $50{,}334$ facets of the $880$ order-$4$ gems.
+\end{enumerate}
+
+Despite this complete characterization of the \emph{ground states}, a central statistical-mechanical and algorithmic question remained open: \emph{how are the magic ground states embedded within the ambient $n^2!$-state permutation space $S_{n^2}$, and what physical or combinatorial dynamics can relax an arbitrary disordered permutation into a magic square?} Treating magic square synthesis as energy minimization on a frustrated discrete lattice connects classical combinatorics to spin-glass theory \cite{mezard1987spin}, rugged potential energy landscapes \cite{wales2003energy}, and stochastic annealing \cite{kirkpatrick1983optimization}. In an interactive companion laboratory (\texttt{physicalSolver} \cite{mathewson2026physicalsolver}), we prototyped four complementary physical representations of this inverse problem: a spectral operator decomposition of line residuals, a multiscale sliding-window entropy analyzer, a discrete permutation-cycle descent engine, and a continuous ``Bubble Trinity'' Langevin particle simulator.
+
+Following Whitesides's blueprint-driven methodology for connecting mathematical structure to quantitative experiments \cite{whitesides2004writing}, this fourth paper formalizes the mathematical operators underlying \texttt{physicalSolver} and establishes exact theorems and exhaustive computational censuses for each stage of the relaxation hierarchy. Let $\mathcal{L}_n$ denote the set of $2n+2$ magic lines ($n$ rows, $n$ columns, and $2$ main diagonals), and let $R_L(S) = \sum_{(i,j)\in L} Z_{ij}$ be the centred residual of line $L \in \mathcal{L}_n$. Collecting the $2n+2$ line indicator vectors as rows of the incidence matrix $A_n \in \{0,1\}^{(2n+2)\times n^2}$, the \emph{line-indicator Hamiltonian} takes the quadratic form
+\begin{equation}
+  \Hline(S) = \sum_{L\in\mathcal{L}_n} R_L(S)^2 = \|A_n \mathbf{z}\|_2^2 = \mathbf{z}^\top L_n \mathbf{z}, \qquad L_n = A_n^\top A_n \in \Z^{n^2 \times n^2}.
+  \label{eq:hamiltonian_def}
+\end{equation}
+By construction, $\Hline(S) \ge 0$ for all $S \in S_{n^2}$, and $\Hline(S) = 0$ if and only if $S$ is a magic square.
+
+\subsection*{Summary of Main Results}
+
+Our investigation proceeds from global linear operators on $\R^{n^2}$ to local multiscale sub-windows, discrete swap-graph topology on $S_{n^2}$, and continuous Langevin relaxation (\Cref{tab:overview_results}):
+
+\begin{table}[t]
+\centering
+\caption{Overview of the four-scale physical solver hierarchy and principal theorems established in Paper~D.}
+\label{tab:overview_results}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}llll@{}}
+\toprule
+\textbf{Scale / Section} & \textbf{Operator / Observable} & \textbf{Exact Theorem / Census} & \textbf{Key Quantitative Invariant} \\
+\midrule
+\textbf{Sec.~\ref{sec:spectral}:} Spectral & Line Laplacian $L_n = A_n^\top A_n$ & \Cref{thm:spectral_rationalization} ($\mathbf{1}^\perp$ rationalization) & $\spec(\Ltilde_n) \subset \Z$, $\ker = n^2-2n-1$ \\
+Operator on $\mathbf{1}^\perp$ & Random ensemble $\mathbb{E}[\Hline]$ & \Cref{thm:ensemble_mean} (universal mean $\bar{\mu}=2$) & $\mathbb{E}[\Hline] = 2\|\mathbf{z}\|^2 = \frac{2}{3}n^2(n^4-1)$ \\
+ & Dipole + diag energy $E_{\mathrm{low}}$ & \Cref{prop:low_mode_insufficiency} (low-mode insufficiency) & $S_{\mathrm{low}}$: $E_{\mathrm{low}}=0$, $\Hline = 1{,}584$ \\
+\midrule
+\textbf{Sec.~\ref{sec:windows}:} Multiscale & $2\times 2$ quartet energy $W_{2\times 2}$ & \Cref{thm:quartet_equivalence} (interior $\Leftrightarrow$ toroidal) & $W_{2\times 2}^{\mathrm{int}}=0 \iff$ Group~I ($48/880$) \\
+Windows \& Parity & Complement breaks $B_{\mathrm{comp}}$, $M_{xyz}$ & \Cref{prop:octupole_census} (octupole zero census) & $M_{xyz}=0$ on $48$ Grp~III $+ 8$ Grp~IX/X \\
+ & Window entropy $\widetilde{H}_p(k)$ & Constructive census ($n=3\dots 8$) & Max $\widetilde{H}_1(2)=0.99967$ (\texttt{\#123}, Grp~VI) \\
+\midrule
+\textbf{Sec.~\ref{sec:landscape}:} Swap & Transposition cost $\Delta\Hline(\tau_{ab})$ & \Cref{prop:swap_law} (exact quadratic law) & $\Delta\Hline = -2d(g_a-g_b) + c_{ab}d^2$ \\
+Landscape on $S_{n^2}$ & $S_9$ exhaustive basin census & \Cref{thm:s9_traps} ($8$ antipodal traps $S_{\mathrm{trap}}^{(3)}$) & $74.53\%$ Lo Shu vs.\ $25.47\%$ trapped \\
+ & $S_{16}$ descent ($2{,}000$ starts) & Order-$4$ local-minimum spectrum & $18.25\%$ ground state; $81.75\%$ trapped \\
+\midrule
+\textbf{Sec.~\ref{sec:bubble}:} Continuous & Bubble-Trinity Langevin SDE & Regimes I--IV & $\Hind: 1681.9 \to 1050.6$ (Regime~IV) \\
+Bubble Relaxation & Field-guided $2+3$-cycle settle & Solver benchmark ($B=200\dots 5{,}000$) & $48.7\% \to 69.0\%$ recovery at $B=5{,}000$ \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+\begin{enumerate}
+  \item \textbf{Spectral Rationalization \& Low-Mode Insufficiency (\Cref{sec:spectral}):} In \Cref{thm:spectral_rationalization}, we prove that while the unprojected Laplacian $L_n$ on $\R^{n^2}$ has irrational eigenvalues $\lambda_\pm(n)$ caused by the coupling between the constant vector $\mathbf{1}$ and the two main diagonals, restricting $L_n$ to the zero-mean hyperplane $\mathbf{1}^\perp$ via $\Ltilde_n = P_{\mathbf{1}^\perp} L_n P_{\mathbf{1}^\perp}$ collapses all eigenvalues into exact integers: $\{0^{[n^2-2n-1]}, (n-2)^{[1]}, n^{[2n-1]}\}$ for even $n \ge 4$ and $\{0^{[n^2-2n-1]}, (n-1)^{[2]}, n^{[2n-2]}\}$ for odd $n \ge 3$. In \Cref{thm:ensemble_mean}, we show that $\tr(\Ltilde_n) = 2(n^2-1)$ for all $n \ge 3$, so the mean eigenvalue of $\Ltilde_n$ on $\mathbf{1}^\perp$ is \emph{identically $2$}, yielding the exact random-permutation expectation $\mathbb{E}[\Hline(S)] = 2\|\mathbf{z}\|^2 = \frac{2}{3}n^2(n^4-1)$ (\Cref{fig:spectral}a). In \Cref{prop:low_mode_insufficiency}, we prove that enforcing Paper~II's dipole orthogonality $\langle X,Z\rangle = \langle Y,Z\rangle = 0$ together with diagonal balance $R_{D_+} = R_{D_-} = 0$ constrains only a $4$-dimensional subspace of the $(2n+1)$-dimensional active image of $\Ltilde_n$, leaving a $(2n-3)$-dimensional high-frequency residual subspace exemplified at $n=4$ by an explicit permutation $S_{\mathrm{low}}$ with $\Hline(S_{\mathrm{low}}) = 1{,}584$ (\Cref{fig:spectral}b).
+
+  \item \textbf{Multiscale Window Entropies, Quartet Equivalence \& Octupole Census (\Cref{sec:windows}):} Moving beyond $1\mathrm{D}$ line sums to $2\mathrm{D}$ local patches, we analyze sliding $k\times k$ sub-window energies and normalized Shannon entropies $\widetilde{H}_p(k)$ across constructive families ($n=3,4,5,6,8$) and all $880$ order-$4$ squares (\Cref{fig:window_entropy}). In \Cref{thm:quartet_equivalence}, we prove that for any $4\times 4$ magic square, vanishing of the $9$ interior $2\times 2$ quartet sums ($W_{2\times 2}^{\mathrm{int}}(S) = 0$) automatically forces all $7$ boundary-wrapping toroidal $2\times 2$ quartets to vanish ($W_{2\times 2}^{\mathrm{tor}}(S) = 0$), isolating the $48$ panmagic squares of Dudeney Group~I. In \Cref{prop:octupole_census}, we show that the centrosymmetric complement-break count $B_{\mathrm{comp}}(S) \in \{0,8\}$ is binary across all $880$ squares and that the mixed octupole moment $M_{xyz}(S) = \sum_{i,j} X_j Y_i Z_{ij}$ vanishes on all $48$ Group~III associative squares plus exactly $8$ non-associative squares in Groups~IX and~X (\Cref{fig:octupole}).
+
+  \item \textbf{Combinatorial Swap Landscape \& The 8 Antipodal Traps of $S_9$ (\Cref{sec:landscape}):} In \Cref{prop:swap_law}, we derive the exact closed-form energy change $\Delta\Hline(\tau_{ab}) = -2d(g_a-g_b) + c_{ab}d^2$ under any $2$-cycle transposition $\tau_{ab}$. Exhaustive evaluation across all $9! = 362{,}880$ permutations of $S_9$ (\Cref{thm:s9_traps} and \Cref{fig:s9_landscape}) reveals a striking topological obstruction: besides the $8$ Lo Shu ground states ($\Hline = 0$), $S_9$ contains \emph{exactly $8$ spurious strict local minima} forming a single $D_4$ orbit $S_{\mathrm{trap}}^{(3)}$ at $\Hline = 8$ ($E_{\mathrm{std}}=2$). Every single $2$-cycle AND every single $3$-cycle on $S_{\mathrm{trap}}^{(3)}$ strictly increases $\Hline$; escaping to Lo Shu requires a simultaneous $(2,2)$ double swap. Under steepest descent, $74.53\%$ ($270{,}442$) of $S_9$ flows to Lo Shu while $25.47\%$ ($92{,}438$) is captured by $S_{\mathrm{trap}}^{(3)}$. At order $n=4$ ($S_{16}$), pure $2$-cycle steepest descent reaches $\Hline=0$ on only $18.25\%$ of random starts (\Cref{fig:s16_descent}).
+
+  \item \textbf{Continuous ``Bubble Trinity'' Langevin Relaxation \& Hybrid Settling (\Cref{sec:bubble}):} Finally, we embed the discrete grid into $\R^2$ by treating the $n^2$ integers as mobile viscoelastic ``bubbles'' coupled to home lattice wells, pairwise core repulsion, and a continuous line-residual force field (\Cref{fig:bubble_trinity}). Across four dynamical regimes (\emph{Frozen Lattice}, \emph{Slow Drift}, \emph{Field Storm}, and \emph{Centrifugal Balance}), we show how continuous stress-field pre-sorting combined with discrete $2+3$-cycle settling increases the order-$4$ ground-state recovery rate from $48.7\%$ to $69.0\%$ at $B=5{,}000$ steps (and by $3.5\times$ at $B=500$ steps).
+\end{enumerate}
