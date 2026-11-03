@@ -1,7 +1,7 @@
 \section{Multiscale Window Entropies and \texorpdfstring{$2\times 2$}{2x2} Quartet Equivalence}
 \label{sec:windows}
 
-Once a permutation reaches the magic ground-state manifold $\ker(\Ltilde_n)$ where $\Hline(S) = 0$, all $2n+2$ global $1\mathrm{D}$ line sums are identical. However, distinct magic squares of the same order exhibit vastly different local $2\mathrm{D}$ spatial organization \cite{dudeney1917amusements,ollerenshaw1998most,cameron2013signatura}. To resolve this internal structure across scales, we introduce sliding $k\times k$ sub-window energies and Shannon entropies, and evaluate them exhaustively across all $880$ Fr\'enicle order-$4$ magic squares and higher-order constructive families.
+Once a permutation reaches the magic ground-state manifold $\ker(\Ltilde_n)$ where $\Hline(S) = 0$, all $2n+2$ global $1\mathrm{D}$ line sums are identical. However, distinct magic squares of the same order exhibit markedly different local $2\mathrm{D}$ spatial organization \cite{dudeney1917amusements,ollerenshaw1998most,cameron2013signatura}. To resolve this internal structure across scales, we evaluate sliding $k\times k$ sub-window energies and Shannon entropies exhaustively across all $880$ Fr\'enicle order-$4$ magic squares and higher-order constructive families.
 
 \subsection{Sliding-Window Shannon Entropy and Constructive Family Scaling}
 
@@ -17,11 +17,11 @@ Here $\widetilde{H}_p(k) \in (0,1]$ measures the spatial uniformity of height ma
 \begin{figure}[t]
   \centering
   \includegraphics[width=\textwidth]{figures/fig2_window_entropy_880.pdf}
-  \caption{\textbf{Multiscale sliding-window Shannon entropy and $2\times 2$ quartet energy census.} \textbf{(a)} Normalized $\ell_1$ window entropy $\widetilde{H}_1(k)$ versus relative scale $k/n$ across five constructive magic-square families ($n=3$ Lo Shu, $n=4,8$ Doubly-Even, $n=5$ Siamese, and $n=6$ Conway LUX). \textbf{(b)} Joint distribution of interior $2\times 2$ quartet residual energy $W_{2\times 2}^{\mathrm{int}}(S)$ and window entropy $\widetilde{H}_1(2)$ across all $880$ Fr\'enicle order-$4$ magic squares partitioned by Dudeney Groups~I--XII, illustrating \Cref{thm:quartet_equivalence}: $W_{2\times 2}^{\mathrm{int}}(S) = 0$ holds if and only if $W_{2\times 2}^{\mathrm{tor}}(S) = 0$, isolating the $48$ panmagic squares of Group~I.}
+  \caption{\textbf{Multiscale sliding-window Shannon entropy and $2\times 2$ quartet energy census.} \textbf{(a)} Normalized $\ell_1$ window entropy $\widetilde{H}_1(k)$ versus relative scale $k/n$ across five constructive magic-square families ($n=3$ Lo Shu, $n=4,8$ Doubly-Even, $n=5$ Siamese, and $n=6$ Conway LUX). \textbf{(b)} Joint distribution of interior $2\times 2$ quartet residual energy $W_{2\times 2}^{\mathrm{int}}(S)$ and window entropy $\widetilde{H}_1(2)$ across all $880$ Fr\'enicle order-$4$ magic squares partitioned by Dudeney Groups~I--XII, illustrating \Cref{lem:quartet_equivalence}: $W_{2\times 2}^{\mathrm{int}}(S) = 0$ holds if and only if $W_{2\times 2}^{\mathrm{tor}}(S) = 0$, isolating the $48$ panmagic squares of Group~I.}
   \label{fig:window_entropy}
 \end{figure}
 
-\Cref{fig:window_entropy}a and \Cref{tab:constructive_families} compare the multiscale entropy profile $\widetilde{H}_p(k)$ across five classical constructive families: odd-order de~La~Loub\`ere (Siamese) squares ($n=3,5$) \cite{loubere1693}, doubly-even $4\times 4$ diagonal-mask squares ($n=4,8$) \cite{andrews1960magic}, and Conway's LUX singly-even construction ($n=6$) \cite{berlekamp2004winning}. At $k=2$, the $3\times 3$ Lo Shu square achieves the highest local uniformity ($\widetilde{H}_1(2) = 0.99435$, $\widetilde{H}_2(2) = 0.99073$), whereas doubly-even mask constructions at $n=4,8$ concentrate extreme values symmetrically in corner and central blocks, lowering $\widetilde{H}_2(2)$ to $0.91498$ ($n=4$) and $0.90598$ ($n=8$). Crucially, while $n=3,4,5,8$ constructions are centrosymmetric ($B_{\mathrm{comp}}=0$ complement breaks and $M_{xyz}=0$), Conway's $n=6$ LUX method breaks all $18/18$ antipodal complement pairs and generates a non-zero mixed octupole moment $M_{xyz} = -132$.
+\Cref{fig:window_entropy}a and \Cref{tab:constructive_families} compare the multiscale entropy profile $\widetilde{H}_p(k)$ across five classical constructive families: odd-order de~La~Loub\`ere (Siamese) squares ($n=3,5$) \cite{loubere1693}, doubly-even $4\times 4$ diagonal-mask squares ($n=4,8$) \cite{andrews1960magic}, and Conway's LUX singly-even construction ($n=6$) \cite{berlekamp2004winning}. At $k=2$, the $3\times 3$ Lo Shu square achieves the highest local uniformity ($\widetilde{H}_1(2) = 0.99435$, $\widetilde{H}_2(2) = 0.99073$), whereas doubly-even mask constructions at $n=4,8$ concentrate extreme values symmetrically in corner and central blocks, lowering $\widetilde{H}_2(2)$ to $0.91498$ ($n=4$) and $0.90598$ ($n=8$). While the $n=3,4,5,8$ constructions are centrosymmetric ($B_{\mathrm{comp}}=0$ complement breaks and $M_{xyz}=0$), Conway's $n=6$ LUX method breaks all $18/18$ antipodal complement pairs and generates a non-zero mixed octupole moment $M_{xyz} = -132$.
 
 \begin{table}[t]
 \centering
@@ -42,7 +42,7 @@ Doubly-Even Mask & $n=8$ ($4k$) & $0.96123$ & $0.90598$ & $112{,}320$ & $149{,}7
 \end{tabular}
 \end{table}
 
-\subsection{Equivalence of Interior and Toroidal \texorpdfstring{$2\times 2$}{2x2} Quartet Balance at Order 4}
+\subsection{Equivalence of Interior and Toroidal \texorpdfstring{$2\times 2$}{2x2} Quartet Balance at Even Orders}
 
 Beyond magnitude entropy, the signed sum of each $2\times 2$ quartet $Q_{r,c}(S) = Z_{r,c} + Z_{r+1,c} + Z_{r,c+1} + Z_{r+1,c+1}$ (with indices taken modulo $n$ in the toroidal case) defines the \emph{interior} and \emph{toroidal $2\times 2$ quartet energies}:
 \begin{equation}
@@ -50,25 +50,25 @@ Beyond magnitude entropy, the signed sum of each $2\times 2$ quartet $Q_{r,c}(S)
   W_{2\times 2}^{\mathrm{tor}}(S) = \sum_{r=1}^{n}\sum_{c=1}^{n} Q_{r,c}(S)^2.
   \label{eq:quartet_energies}
 \end{equation}
-At order $n=4$, $W_{2\times 2}^{\mathrm{int}}$ sums over the $9$ interior $2\times 2$ blocks, whereas $W_{2\times 2}^{\mathrm{tor}}$ includes the $7$ boundary-wrapping blocks. We prove that on the order-$4$ magic manifold, interior quartet balance automatically implies full toroidal quartet balance:
+At even orders $n = 2m$, an elementary row- and column-pair partition shows that interior quartet balance automatically forces toroidal boundary-wrapping quartet balance:
 
-\begin{theorem}[Interior--Toroidal $2\times 2$ Quartet Equivalence]
-\label{thm:quartet_equivalence}
+\begin{lemma}[Interior--Toroidal $2\times 2$ Quartet Equivalence]
+\label{lem:quartet_equivalence}
 Let $S$ be any magic square of even order $n = 2m \ge 4$. Then its $(2m-1)^2$ interior $2\times 2$ blocks have zero centred sum ($W_{2\times 2}^{\mathrm{int}}(S) = 0$) \emph{if and only if} all $4m^2$ toroidal $2\times 2$ blocks have zero centred sum ($W_{2\times 2}^{\mathrm{tor}}(S) = 0$). In particular, across the $880$ Fr\'enicle magic squares of order $n=4$, vanishing of the $9$ interior quartets ($W_{2\times 2}^{\mathrm{int}}(S) = 0$) is equivalent to vanishing of all $16$ toroidal quartets ($W_{2\times 2}^{\mathrm{tor}}(S) = 0$) and holds on \emph{exactly the $48$ panmagic (diabolic) squares of Dudeney Group~I} (\Cref{fig:window_entropy}b and \Cref{tab:dudeney_groups}).
-\end{theorem}
+\end{lemma}
 
 \begin{proof}
-Clearly $W_{2\times 2}^{\mathrm{tor}}(S) = 0 \implies W_{2\times 2}^{\mathrm{int}}(S) = 0$. Conversely, suppose $S$ is a magic square of even order $n = 2m$ ($\Hline(S) = 0$) with $Q_{r,c}(S) = 0$ for all interior blocks $1 \le r,c \le 2m-1$. For any horizontally wrapping $2\times 2$ block $Q_{r,2m}(S)$ ($1 \le r \le 2m-1$), the sum of rows $r$ and $r+1$ vanishes by magic row balance and partitions into $m$ disjoint $2\times 2$ blocks starting at even columns:
+Clearly $W_{2\times 2}^{\mathrm{tor}}(S) = 0 \implies W_{2\times 2}^{\mathrm{int}}(S) = 0$. Conversely, suppose $S$ is a magic square of even order $n = 2m$ ($\Hline(S) = 0$) with $Q_{r,c}(S) = 0$ for all interior blocks $1 \le r,c \le 2m-1$. For any horizontally wrapping $2\times 2$ block $Q_{r,2m}(S)$ ($1 \le r \le 2m-1$), the sum of rows $r$ and $r+1$ vanishes by magic row balance and partitions into $m-1$ interior $2\times 2$ blocks starting at even columns plus $Q_{r,2m}(S)$:
 \begin{equation}
-  0 = R_{r_r}(S) + R_{r_{r+1}}(S) = \sum_{j=1}^{m-1} Q_{r,2j-1}(S) + Q_{r,2m-1}(S) = \sum_{j=1}^{m-1} Q_{r,2j}(S) + Q_{r,2m}(S).
+  0 = R_{r_r}(S) + R_{r_{r+1}}(S) = \sum_{j=1}^{m-1} Q_{r,2j}(S) + Q_{r,2m}(S).
   \label{eq:row_pair_partition}
 \end{equation}
-Since $Q_{r,2j}(S) = 0$ for all $1 \le j \le m-1$ by interior balance, \Cref{eq:row_pair_partition} forces $Q_{r,2m}(S) = 0$ for all $1 \le r \le 2m-1$. Symmetrically, summing columns $c$ and $c+1$ gives $0 = R_{c_c}(S) + R_{c_{c+1}}(S) = \sum_{i=1}^{m-1} Q_{2i,c}(S) + Q_{2m,c}(S)$, so $Q_{2m,c}(S) = 0$ for all $1 \le c \le 2m-1$. Finally, the corner-wrapping quartet $Q_{2m,2m}(S)$ satisfies $Q_{2m,2m}(S) = (R_{r_1}(S) + R_{r_{2m}}(S)) - \sum_{j=1}^{m-1} Q_{2m,2j}(S) = 0 - 0 = 0$. Thus all $4m^2$ toroidal quartets vanish. At $n=4$ ($m=2$), it is a classical theorem of Fr\'enicle and Dudeney \cite{dudeney1917amusements,ollerenshaw1998most} that $W_{2\times 2}^{\mathrm{tor}}(S) = 0$ holds if and only if $S$ is panmagic, isolating the $48$ squares of Dudeney Group~I.
+Since $Q_{r,2j}(S) = 0$ for $1 \le j \le m-1$, \Cref{eq:row_pair_partition} forces $Q_{r,2m}(S) = 0$. By the same argument on columns $c$ and $c+1$, $Q_{2m,c}(S) = 0$ for $1 \le c \le 2m-1$, and finally $Q_{2m,2m}(S) = (R_{r_1}(S) + R_{r_{2m}}(S)) - \sum_{j=1}^{m-1} Q_{2m,2j}(S) = 0$. At $n=4$ ($m=2$), $W_{2\times 2}^{\mathrm{tor}}(S) = 0$ is a classical characterization of the $48$ panmagic squares of Dudeney Group~I \cite{dudeney1917amusements,ollerenshaw1998most}.
 \end{proof}
 
 \subsection{Complement Parity and the Concentric Shell Quadrupole Identity}
 
-In Paper~II \cite{mathewson2026moments} and Paper~III \cite{mathewson2026mechanics}, the mixed third-order moment (octupole) $M_{xyz}(S) = \sum_{i,j=1}^n X_j Y_i Z_{ij}$ governed the asymmetry between static and dynamic axes. To connect $M_{xyz}(S)$ to discrete cell pairing, define the \emph{complement-break count} $B_{\mathrm{comp}}(S)$ as the number of antipodal cell pairs $\{(i,j), (n+1-i, n+1-j)\}$ that fail the associative condition $Z_{ij} + Z_{n+1-i, n+1-j} = 0$ ($s_{ij} + s_{n+1-i, n+1-j} = n^2+1$). We now prove an exact Diophantine decomposition that explains both the symmetry-protected and accidental octupole zeros at order $4$:
+In Paper~II \cite{mathewson2026moments} and Paper~III \cite{mathewson2026mechanics}, the mixed third-order moment (octupole) $M_{xyz}(S) = \sum_{i,j=1}^n X_j Y_i Z_{ij}$ governed the asymmetry between static and dynamic axes. To connect $M_{xyz}(S)$ to discrete cell pairing, define the \emph{complement-break count} $B_{\mathrm{comp}}(S)$ as the number of antipodal cell pairs $\{(i,j), (n+1-i, n+1-j)\}$ that fail the associative condition $Z_{ij} + Z_{n+1-i, n+1-j} = 0$ ($s_{ij} + s_{n+1-i, n+1-j} = n^2+1$). We now establish an exact Diophantine decomposition that explains both the symmetry-protected and accidental octupole zeros at order $4$:
 
 \begin{figure}[t]
   \centering

@@ -15,6 +15,11 @@ Steven~T. Bramwell and Michel J.~P. Gingras.
 \newblock Spin ice state in frustrated magnetic pyrochlore materials.
 \newblock {\em Science}, 294(5546):1495--1501, 2001.
 
+\bibitem{brouwer2012spectra}
+Andries~E. Brouwer and Willem~H. Haemers.
+\newblock {\em Spectra of Graphs}.
+\newblock Springer, New York, 2012.
+
 \bibitem{calladine1978buckminster}
 C.~R. Calladine.
 \newblock Buckminster {F}uller's ``tensegrity'' structures and clerk
@@ -28,6 +33,13 @@ Ian Cameron, Adam Rogers, and Peter~D. Loly.
   indexing.
 \newblock {\em Discussiones Mathematicae Probability and Statistics},
   33(1-2):121--149, 2013.
+
+\bibitem{codognet2001yet}
+Philippe Codognet and Daniel Diaz.
+\newblock Yet another local search method for constraint solving.
+\newblock In {\em International Symposium on Stochastic Algorithms: Foundations
+  and Applications (SAGA 2001)}, volume 2264 of {\em Lecture Notes in Computer
+  Science}, pages 73--90. Springer, 2001.
 
 \bibitem{loubere1693}
 Simon de~La~Loub{\`e}re.
@@ -46,17 +58,17 @@ Henry~E. Dudeney.
 \newblock {\em Amusements in Mathematics}.
 \newblock Thomas Nelson and Sons, London, 1917.
 
-\bibitem{falk1998dynamics}
-Michael~L. Falk and James~S. Langer.
-\newblock Dynamics of viscoplastic deformation in amorphous solids.
-\newblock {\em Physical Review E}, 57(6):7192--7205, 1998.
-
 \bibitem{frenicle1693}
 Bernard Fr{\'e}nicle~de Bessy.
 \newblock Des quarrez ou tables magiques.
 \newblock In {\em Divers ouvrages de math{\'e}matique et de physique, par
   Messieurs de l'Acad{\'e}mie Royale des Sciences}. Imprimerie Royale, Paris,
   1693.
+
+\bibitem{godsil2001algebraic}
+Chris Godsil and Gordon Royle.
+\newblock {\em Algebraic Graph Theory}.
+\newblock Springer, New York, 2001.
 
 \bibitem{kawasaki1966diffusion}
 Kyozi Kawasaki.
@@ -68,6 +80,16 @@ Kyozi Kawasaki.
 Scott Kirkpatrick, C.~Daniel Gelatt, and Mario~P. Vecchi.
 \newblock Optimization by simulated annealing.
 \newblock {\em Science}, 220(4598):671--680, 1983.
+
+\bibitem{lee1996linear}
+Michael~J. Lee.
+\newblock Linear algebra and magic squares.
+\newblock {\em The College Mathematics Journal}, 27(3):198--202, 1996.
+
+\bibitem{loly2009magic}
+Peter~D. Loly, Ian Cameron, Walter Trump, and Dan Schindel.
+\newblock Magic square spectra.
+\newblock {\em Linear Algebra and its Applications}, 430(10):2659--2680, 2009.
 
 \bibitem{mathewson2026mechanics}
 Kyle~Elliott Mathewson.
@@ -129,11 +151,10 @@ Adam Rogers and Peter~D. Loly.
 \newblock The electric multipole expansion for a magic cube.
 \newblock {\em European Journal of Physics}, 26(5):809--813, 2005.
 
-\bibitem{thirumalai2001chaperonin}
-D.~Thirumalai and George~H. Lorimer.
-\newblock Chaperonin-mediated protein folding.
-\newblock {\em Annual Review of Biophysics and Biomolecular Structure},
-  30:245--269, 2001.
+\bibitem{vanhentenryck2005constraint}
+Pascal Van~Hentenryck and Laurent Michel.
+\newblock {\em Constraint-Based Local Search}.
+\newblock MIT Press, Cambridge, MA, 2005.
 
 \bibitem{wales2003energy}
 David~J. Wales.
@@ -147,19 +168,14 @@ David~J. Wales and Jonathan P.~K. Doye.
   of {L}ennard-{J}ones clusters containing up to 110 atoms.
 \newblock {\em The Journal of Physical Chemistry A}, 101(28):5111--5116, 1997.
 
-\bibitem{weaire1984soap}
-Denis Weaire and Nicolas Rivier.
-\newblock Soap, cells and statistics---random patterns in two dimensions.
-\newblock {\em Contemporary Physics}, 25(1):59--99, 1984.
+\bibitem{ward1980vector}
+James~F. Ward.
+\newblock Vector spaces of magic squares.
+\newblock {\em Mathematics Magazine}, 53(2):108--111, 1980.
 
 \bibitem{whitesides2004writing}
 George~M. Whitesides.
 \newblock Whitesides' group: Writing a paper.
 \newblock {\em Advanced Materials}, 16(15):1375--1377, 2004.
-
-\bibitem{zener1950ring}
-Clarence Zener.
-\newblock Ring diffusion in metals.
-\newblock {\em Acta Crystallographica}, 3(5):346--354, 1950.
 
 \end{thebibliography}

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Exact rational and numerical verification suite for Paper D:
-'Spectral Energy Landscapes, Multiscale Window Entropies, and Continuous
-Bubble Relaxation of Magic Squares' (Kyle Elliott Mathewson).
+'Spectral Structure, Multiscale Window Entropies, and Multi-Exchange
+Energy Landscapes of Magic Squares' (Kyle Elliott Mathewson).
 
 Verifies:
   1. Section 2: Exact spectrum of the unprojected Line-Incidence Laplacian
@@ -1185,13 +1185,17 @@ def verify_section5_bubble_trinity() -> dict:
             f"Upgraded 2+3+(2,2) Polish={100*hits_upgraded_22/trials:5.1f}%"
         )
 
-    # Multi-order benchmark (n = 3..8) for the Re-Anchored Hierarchical Multi-Cycle Settler
+    # Multi-order benchmark (n = 3..10) for Multi-Exchange Iterated Local Search (ME-ILS)
     def solve_reanchored_hierarchical(
         n_ord, max_restarts=80, kicks_per_restart=18, seed=0,
         use_plane_glide=True, use_lp22=True, use_topk22=True, use_reanchor=True
     ):
         rng_h = random.Random(seed)
         N_ord = n_ord * n_ord
+        s_fac = max(1, int((n_ord / 4.0) ** 2))
+        leash = 24 * s_fac
+        c_lim = 48 * s_fac
+        lp_lim = 80 * s_fac
         base_vals = [2 * s - (N_ord + 1) for s in range(1, N_ord + 1)]
         cell_lines = [[] for _ in range(N_ord)]
         for r in range(n_ord):
@@ -1294,7 +1298,7 @@ def verify_section5_bubble_trinity() -> dict:
                     best_state_E = E
                     best_state_z = z[:]
                     best_state_R = R[:]
-                elif use_reanchor and E > best_state_E + 24:
+                elif use_reanchor and E > best_state_E + leash:
                     z = best_state_z[:]
                     R = best_state_R[:]
                     E = best_state_E
@@ -1333,7 +1337,7 @@ def verify_section5_bubble_trinity() -> dict:
                     for r1 in range(n_ord):
                         for p1 in row_pair_indices[r1]:
                             dE1 = swap_dE(p1)
-                            if dE1 > 80:
+                            if dE1 > lp_lim:
                                 continue
                             do_swap(p1)
                             for r2 in range(r1 + 1, n_ord):
@@ -1347,7 +1351,7 @@ def verify_section5_bubble_trinity() -> dict:
                         for c1 in range(n_ord):
                             for p1 in col_pair_indices[c1]:
                                 dE1 = swap_dE(p1)
-                                if dE1 > 80:
+                                if dE1 > lp_lim:
                                     continue
                                 do_swap(p1)
                                 for c2 in range(c1 + 1, n_ord):
@@ -1364,7 +1368,7 @@ def verify_section5_bubble_trinity() -> dict:
                 cand = []
                 for p_idx in range(num_pairs):
                     dE1 = swap_dE(p_idx)
-                    if dE1 <= 48:
+                    if dE1 <= c_lim:
                         cand.append((dE1, p_idx))
                 cand.sort()
                 cand = cand[:40]
@@ -1569,7 +1573,7 @@ def verify_section5_bubble_trinity() -> dict:
 
     import time
     multi_order = {}
-    for n_ord, tr in [(3, 200), (4, 200), (5, 100), (6, 100), (7, 100), (8, 100)]:
+    for n_ord, tr in [(3, 200), (4, 200), (5, 100), (6, 100), (7, 100), (8, 100), (9, 50), (10, 50)]:
         t0 = time.time()
         succ_up = 0
         tot_desc = 0
@@ -1587,12 +1591,14 @@ def verify_section5_bubble_trinity() -> dict:
         num_pairs_ord = N_sq * (N_sq - 1) // 2
         num_lp22_ord = 2 * ((n_ord * (n_ord - 1) // 2) ** 3)
         diag_free_frac = round(null_dim / ((n_ord - 1) ** 2), 4)
+        s_fac_ord = max(1, int((n_ord / 4.0) ** 2))
         multi_order[f"n{n_ord}"] = {
             "n": n_ord,
             "trials": tr,
             "nullspace_dim": null_dim,
             "constraint_rank": rank_dim,
             "maxwell_calladine_ratio": round(null_dim / rank_dim, 3),
+            "threshold_scale_factor": s_fac_ord,
             "num_2cycle_pairs": num_pairs_ord,
             "num_lp22_moves": num_lp22_ord,
             "diag_free_lp22_fraction": diag_free_frac,
@@ -1604,8 +1610,8 @@ def verify_section5_bubble_trinity() -> dict:
             "mean_ms": round(1000.0 * dt / tr, 2),
         }
         print(
-            f"  Multi-Order Hierarchical Settler n={n_ord} ({tr} trials): {succ_up}/{tr} ({100*succ_up/tr:.1f}%), "
-            f"eta_MC={null_dim/rank_dim:.2f}, mean_descents={tot_desc/tr:.1f}, mean_restarts={tot_rest/tr:.2f}, {1000*dt/tr:.1f} ms/trial"
+            f"  Multi-Exchange Local Search n={n_ord} ({tr} trials): {succ_up}/{tr} ({100*succ_up/tr:.1f}%), "
+            f"eta={null_dim/rank_dim:.2f}, mean_descents={tot_desc/tr:.1f}, mean_restarts={tot_rest/tr:.2f}, {1000*dt/tr:.1f} ms/trial"
         )
 
     return {
@@ -1623,7 +1629,7 @@ def main() -> None:
     sec5 = verify_section5_bubble_trinity()
 
     payload = {
-        "paper": "Paper D: Spectral Energy Landscapes, Multiscale Window Entropies, and Continuous Bubble Relaxation of Magic Squares",
+        "paper": "Paper D: Spectral Structure, Multiscale Window Entropies, and Multi-Exchange Energy Landscapes of Magic Squares",
         "author": "Kyle Elliott Mathewson",
         "section2_spectral": sec2,
         "section3_multiscale": sec3,

@@ -1,5 +1,5 @@
 {
-  "paper": "Paper D: Spectral Energy Landscapes, Multiscale Window Entropies, and Continuous Bubble Relaxation of Magic Squares",
+  "paper": "Paper D: Spectral Structure, Multiscale Window Entropies, and Multi-Exchange Energy Landscapes of Magic Squares",
   "author": "Kyle Elliott Mathewson",
   "section2_spectral": {
     "spectral_table": {
@@ -10616,6 +10616,7 @@
         "nullspace_dim": 2,
         "constraint_rank": 6,
         "maxwell_calladine_ratio": 0.333,
+        "threshold_scale_factor": 1,
         "num_2cycle_pairs": 36,
         "num_lp22_moves": 54,
         "diag_free_lp22_fraction": 0.5,
@@ -10624,7 +10625,7 @@
         "mean_descents": 5.1,
         "mean_pair_evaluations": 182,
         "mean_restarts": 0.0,
-        "mean_ms": 0.14
+        "mean_ms": 0.1
       },
       "n4": {
         "n": 4,
@@ -10632,6 +10633,7 @@
         "nullspace_dim": 7,
         "constraint_rank": 8,
         "maxwell_calladine_ratio": 0.875,
+        "threshold_scale_factor": 1,
         "num_2cycle_pairs": 120,
         "num_lp22_moves": 432,
         "diag_free_lp22_fraction": 0.7778,
@@ -10640,7 +10642,7 @@
         "mean_descents": 52.9,
         "mean_pair_evaluations": 6349,
         "mean_restarts": 0.7,
-        "mean_ms": 5.54
+        "mean_ms": 4.99
       },
       "n5": {
         "n": 5,
@@ -10648,6 +10650,7 @@
         "nullspace_dim": 14,
         "constraint_rank": 10,
         "maxwell_calladine_ratio": 1.4,
+        "threshold_scale_factor": 1,
         "num_2cycle_pairs": 300,
         "num_lp22_moves": 2000,
         "diag_free_lp22_fraction": 0.875,
@@ -10656,7 +10659,7 @@
         "mean_descents": 466.6,
         "mean_pair_evaluations": 139986,
         "mean_restarts": 8.03,
-        "mean_ms": 120.18
+        "mean_ms": 108.99
       },
       "n6": {
         "n": 6,
@@ -10664,15 +10667,16 @@
         "nullspace_dim": 23,
         "constraint_rank": 12,
         "maxwell_calladine_ratio": 1.917,
+        "threshold_scale_factor": 2,
         "num_2cycle_pairs": 630,
         "num_lp22_moves": 6750,
         "diag_free_lp22_fraction": 0.92,
         "success_count": 100,
         "success_pct": 100.0,
-        "mean_descents": 439.6,
-        "mean_pair_evaluations": 276942,
-        "mean_restarts": 7.16,
-        "mean_ms": 216.4
+        "mean_descents": 446.8,
+        "mean_pair_evaluations": 281459,
+        "mean_restarts": 7.28,
+        "mean_ms": 211.18
       },
       "n7": {
         "n": 7,
@@ -10680,15 +10684,16 @@
         "nullspace_dim": 34,
         "constraint_rank": 14,
         "maxwell_calladine_ratio": 2.429,
+        "threshold_scale_factor": 3,
         "num_2cycle_pairs": 1176,
         "num_lp22_moves": 18522,
         "diag_free_lp22_fraction": 0.9444,
         "success_count": 100,
         "success_pct": 100.0,
-        "mean_descents": 299.3,
-        "mean_pair_evaluations": 352024,
-        "mean_restarts": 4.58,
-        "mean_ms": 237.83
+        "mean_descents": 267.5,
+        "mean_pair_evaluations": 314615,
+        "mean_restarts": 4.02,
+        "mean_ms": 224.79
       },
       "n8": {
         "n": 8,
@@ -10696,15 +10701,50 @@
         "nullspace_dim": 47,
         "constraint_rank": 16,
         "maxwell_calladine_ratio": 2.938,
+        "threshold_scale_factor": 4,
         "num_2cycle_pairs": 2016,
         "num_lp22_moves": 43904,
         "diag_free_lp22_fraction": 0.9592,
         "success_count": 100,
         "success_pct": 100.0,
-        "mean_descents": 335.3,
-        "mean_pair_evaluations": 675945,
-        "mean_restarts": 5.0,
-        "mean_ms": 423.92
+        "mean_descents": 294.5,
+        "mean_pair_evaluations": 593772,
+        "mean_restarts": 4.32,
+        "mean_ms": 411.45
+      },
+      "n9": {
+        "n": 9,
+        "trials": 50,
+        "nullspace_dim": 62,
+        "constraint_rank": 18,
+        "maxwell_calladine_ratio": 3.444,
+        "threshold_scale_factor": 5,
+        "num_2cycle_pairs": 3240,
+        "num_lp22_moves": 93312,
+        "diag_free_lp22_fraction": 0.9688,
+        "success_count": 50,
+        "success_pct": 100.0,
+        "mean_descents": 293.0,
+        "mean_pair_evaluations": 949255,
+        "mean_restarts": 4.06,
+        "mean_ms": 668.6
+      },
+      "n10": {
+        "n": 10,
+        "trials": 50,
+        "nullspace_dim": 79,
+        "constraint_rank": 20,
+        "maxwell_calladine_ratio": 3.95,
+        "threshold_scale_factor": 6,
+        "num_2cycle_pairs": 4950,
+        "num_lp22_moves": 182250,
+        "diag_free_lp22_fraction": 0.9753,
+        "success_count": 50,
+        "success_pct": 100.0,
+        "mean_descents": 258.5,
+        "mean_pair_evaluations": 1279575,
+        "mean_restarts": 3.34,
+        "mean_ms": 910.45
       }
     }
   }
