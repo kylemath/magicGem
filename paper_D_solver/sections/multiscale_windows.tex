@@ -1,18 +1,18 @@
-\section{Multiscale Window Entropies and \texorpdfstring{$2\times 2$}{2x2} Quartet Equivalence}
+\section{Inside the Magic Manifold: Window Entropies, Panmagic Quartets, and the 56 Octupole Zeros}
 \label{sec:windows}
 
-Once a permutation reaches the magic ground-state manifold $\ker(\Ltilde_n)$ where $\Hline(S) = 0$, all $2n+2$ global $1\mathrm{D}$ line sums are identical. However, distinct magic squares of the same order exhibit markedly different local $2\mathrm{D}$ spatial organization \cite{dudeney1917amusements,ollerenshaw1998most,cameron2013signatura}. To resolve this internal structure across scales, we evaluate sliding $k\times k$ sub-window energies and Shannon entropies exhaustively across all $880$ Fr\'enicle order-$4$ magic squares and higher-order constructive families.
+Once a permutation reaches the magic ground-state manifold $\ker(\Ltilde_n)$ where $\Hline(S) = 0$, all $2n+2$ global $1\mathrm{D}$ line sums are identical. Yet anyone who cycles through the $880$ Fr\'enicle order-$4$ magic squares in the interactive \emph{Energy Decomposition Explorer} (\texttt{energy-decomposition.html}) notices immediately that different magic squares look and behave very differently as $2\mathrm{D}$ textures and $3\mathrm{D}$ Magic Gems \cite{dudeney1917amusements,ollerenshaw1998most,cameron2013signatura}. Some squares distribute high and low numbers in a crisp, uniform checkerboard across every $2\times 2$ neighborhood, whereas others cluster extreme heights into corner blocks or exhibit a pronounced three-dimensional octupole twist. To quantify what the eye perceives in the browser explorer, we evaluate sliding $k\times k$ sub-window energies and Shannon entropies exhaustively across all $880$ Fr\'enicle order-$4$ magic squares and higher-order constructive families.
 
 \subsection{Sliding-Window Shannon Entropy and Constructive Family Scaling}
 
-For any scale $k \in \{1,\dots,n\}$, an $n\times n$ grid contains $M_k = (n-k+1)^2$ interior contiguous $k\times k$ sub-windows $W_{r,c}^{(k)} = \{r,\dots,r+k-1\}\times\{c,\dots,c+k-1\}$ ($1 \le r,c \le n-k+1$). For any exponent $p \in \{1,2,4\}$, define the local $\ell_p^p$ window weight and normalized Shannon window entropy by
+For any window width $k \in \{1,\dots,n\}$, an $n\times n$ grid contains $M_k = (n-k+1)^2$ interior contiguous $k\times k$ sub-windows $W_{r,c}^{(k)} = \{r,\dots,r+k-1\}\times\{c,\dots,c+k-1\}$ ($1 \le r,c \le n-k+1$). In \texttt{energy-decomposition.html}, the user can toggle the window size $k$ and norm exponent $p \in \{1,2,4\}$ to inspect how evenly the centred heights $Z_{ij}$ are spread across local patches. Formally, the local $\ell_p^p$ window weight and normalized Shannon window entropy are defined by
 \begin{equation}
   w_p\bigl(W_{r,c}^{(k)}\bigr) = \sum_{(i,j)\in W_{r,c}^{(k)}} |Z_{ij}|^p, \qquad
   p_{r,c}^{(k)} = \frac{w_p(W_{r,c}^{(k)})}{\sum_{r',c'} w_p(W_{r',c'}^{(k)})}, \qquad
   \widetilde{H}_p(k) = \frac{-\sum_{r,c} p_{r,c}^{(k)} \log_2 p_{r,c}^{(k)}}{\log_2\bigl((n-k+1)^2\bigr)}.
   \label{eq:window_entropy_def}
 \end{equation}
-Here $\widetilde{H}_p(k) \in (0,1]$ measures the spatial uniformity of height magnitude across all $k\times k$ sub-windows ($\widetilde{H}_p(k) = 1$ if and only if every $k\times k$ window carries identical $\ell_p^p$ weight).
+Here $\widetilde{H}_p(k) \in (0,1]$ measures the spatial uniformity of height magnitude across all $k\times k$ sub-windows, reaching $\widetilde{H}_p(k) = 1$ if and only if every $k\times k$ window carries the exact same $\ell_p^p$ weight.
 
 \begin{figure}[t]
   \centering
@@ -21,7 +21,7 @@ Here $\widetilde{H}_p(k) \in (0,1]$ measures the spatial uniformity of height ma
   \label{fig:window_entropy}
 \end{figure}
 
-\Cref{fig:window_entropy}a and \Cref{tab:constructive_families} compare the multiscale entropy profile $\widetilde{H}_p(k)$ across five classical constructive families: odd-order de~La~Loub\`ere (Siamese) squares ($n=3,5$) \cite{loubere1693}, doubly-even $4\times 4$ diagonal-mask squares ($n=4,8$) \cite{andrews1960magic}, and Conway's LUX singly-even construction ($n=6$) \cite{berlekamp2004winning}. At $k=2$, the $3\times 3$ Lo Shu square achieves the highest local uniformity ($\widetilde{H}_1(2) = 0.99435$, $\widetilde{H}_2(2) = 0.99073$), whereas doubly-even mask constructions at $n=4,8$ concentrate extreme values symmetrically in corner and central blocks, lowering $\widetilde{H}_2(2)$ to $0.91498$ ($n=4$) and $0.90598$ ($n=8$). While the $n=3,4,5,8$ constructions are centrosymmetric ($B_{\mathrm{comp}}=0$ complement breaks and $M_{xyz}=0$), Conway's $n=6$ LUX method breaks all $18/18$ antipodal complement pairs and generates a non-zero mixed octupole moment $M_{xyz} = -132$.
+\Cref{fig:window_entropy}a and \Cref{tab:constructive_families} compare the multiscale entropy profile $\widetilde{H}_p(k)$ across five classical constructive presets included in the interactive explorer: odd-order de~La~Loub\`ere (Siamese) squares ($n=3,5$) \cite{loubere1693}, doubly-even $4\times 4$ diagonal-mask squares ($n=4,8$) \cite{andrews1960magic}, and Conway's LUX singly-even construction ($n=6$) \cite{berlekamp2004winning}. At $k=2$, the $3\times 3$ Lo Shu square achieves the highest local uniformity ($\widetilde{H}_1(2) = 0.99435$, $\widetilde{H}_2(2) = 0.99073$), whereas doubly-even mask constructions at $n=4,8$ concentrate extreme values symmetrically in corner and central blocks, lowering $\widetilde{H}_2(2)$ to $0.91498$ ($n=4$) and $0.90598$ ($n=8$). While the $n=3,4,5,8$ constructions are centrosymmetric ($B_{\mathrm{comp}}=0$ complement breaks and $M_{xyz}=0$), Conway's $n=6$ LUX method breaks all $18/18$ antipodal complement pairs and generates a non-zero mixed octupole moment $M_{xyz} = -132$.
 
 \begin{table}[t]
 \centering
@@ -42,15 +42,15 @@ Doubly-Even Mask & $n=8$ ($4k$) & $0.96123$ & $0.90598$ & $112{,}320$ & $149{,}7
 \end{tabular}
 \end{table}
 
-\subsection{Equivalence of Interior and Toroidal \texorpdfstring{$2\times 2$}{2x2} Quartet Balance at Even Orders}
+\subsection{Why Interior \texorpdfstring{$2\times 2$}{2x2} Balance Forces Toroidal Panmagic Balance}
 
-Beyond magnitude entropy, the signed sum of each $2\times 2$ quartet $Q_{r,c}(S) = Z_{r,c} + Z_{r+1,c} + Z_{r,c+1} + Z_{r+1,c+1}$ (with indices taken modulo $n$ in the toroidal case) defines the \emph{interior} and \emph{toroidal $2\times 2$ quartet energies}:
+Beyond magnitude entropy, the signed sum of each $2\times 2$ quartet $Q_{r,c}(S) = Z_{r,c} + Z_{r+1,c} + Z_{r,c+1} + Z_{r+1,c+1}$ (with indices taken modulo $n$ in the toroidal case) defines the \emph{interior} and \emph{toroidal $2\times 2$ quartet energies} displayed in \texttt{energy-decomposition.html}:
 \begin{equation}
   W_{2\times 2}^{\mathrm{int}}(S) = \sum_{r=1}^{n-1}\sum_{c=1}^{n-1} Q_{r,c}(S)^2, \qquad
   W_{2\times 2}^{\mathrm{tor}}(S) = \sum_{r=1}^{n}\sum_{c=1}^{n} Q_{r,c}(S)^2.
   \label{eq:quartet_energies}
 \end{equation}
-At even orders $n = 2m$, an elementary row- and column-pair partition shows that interior quartet balance automatically forces toroidal boundary-wrapping quartet balance:
+When exploring even-order magic squares in the browser, one observes a striking phenomenon: whenever the $(n-1)^2$ interior $2\times 2$ windows are balanced ($W_{2\times 2}^{\mathrm{int}}(S) = 0$), the $2n-1$ boundary-wrapping windows across the edges and corners of the torus automatically balance as well ($W_{2\times 2}^{\mathrm{tor}}(S) = 0$). An elementary row- and column-pair partition explains why:
 
 \begin{lemma}[Interior--Toroidal $2\times 2$ Quartet Equivalence]
 \label{lem:quartet_equivalence}
@@ -66,9 +66,9 @@ Clearly $W_{2\times 2}^{\mathrm{tor}}(S) = 0 \implies W_{2\times 2}^{\mathrm{int
 Since $Q_{r,2j}(S) = 0$ for $1 \le j \le m-1$, \Cref{eq:row_pair_partition} forces $Q_{r,2m}(S) = 0$. By the same argument on columns $c$ and $c+1$, $Q_{2m,c}(S) = 0$ for $1 \le c \le 2m-1$, and finally $Q_{2m,2m}(S) = (R_{r_1}(S) + R_{r_{2m}}(S)) - \sum_{j=1}^{m-1} Q_{2m,2j}(S) = 0$. At $n=4$ ($m=2$), $W_{2\times 2}^{\mathrm{tor}}(S) = 0$ is a classical characterization of the $48$ panmagic squares of Dudeney Group~I \cite{dudeney1917amusements,ollerenshaw1998most}.
 \end{proof}
 
-\subsection{Complement Parity and the Concentric Shell Quadrupole Identity}
+\subsection{Complement Parity and the Puzzle of the 56 Octupole Zeros}
 
-In Paper~II \cite{mathewson2026moments} and Paper~III \cite{mathewson2026mechanics}, the mixed third-order moment (octupole) $M_{xyz}(S) = \sum_{i,j=1}^n X_j Y_i Z_{ij}$ governed the asymmetry between static and dynamic axes. To connect $M_{xyz}(S)$ to discrete cell pairing, define the \emph{complement-break count} $B_{\mathrm{comp}}(S)$ as the number of antipodal cell pairs $\{(i,j), (n+1-i, n+1-j)\}$ that fail the associative condition $Z_{ij} + Z_{n+1-i, n+1-j} = 0$ ($s_{ij} + s_{n+1-i, n+1-j} = n^2+1$). We now establish an exact Diophantine decomposition that explains both the symmetry-protected and accidental octupole zeros at order $4$:
+In Paper~II \cite{mathewson2026moments} and Paper~III \cite{mathewson2026mechanics}, the mixed third-order moment (octupole) $M_{xyz}(S) = \sum_{i,j=1}^n X_j Y_i Z_{ij}$ governed the three-dimensional chiral twist of a Magic Gem and the asymmetry between its static and dynamic axes. To connect $M_{xyz}(S)$ to discrete cell pairing, define the \emph{complement-break count} $B_{\mathrm{comp}}(S)$ as the number of antipodal cell pairs $\{(i,j), (n+1-i, n+1-j)\}$ that fail the associative condition $Z_{ij} + Z_{n+1-i, n+1-j} = 0$ ($s_{ij} + s_{n+1-i, n+1-j} = n^2+1$). When we scanned $M_{xyz}(S)$ across all $880$ order-$4$ squares in \texttt{energy-decomposition.html}, we expected $M_{xyz}(S) = 0$ to occur on the $48$ centrosymmetric (associative) squares of Dudeney Group~III. Surprisingly, the census returned $56$ zeros instead of $48$: $8$ non-associative squares in Groups~IX and~X also had $M_{xyz}(S) = 0$! Decomposing the $4\times 4$ grid into concentric shells resolves this puzzle completely:
 
 \begin{figure}[t]
   \centering

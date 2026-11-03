@@ -513,10 +513,10 @@ def make_fig6_bubble_trinity(data: dict) -> None:
     # Panel (a): Continuous 2D spatial kernel induced energy decay across Regimes I-IV
     ax0 = fig.add_subplot(gs[0, 0])
     styles = {
-        "I_Frozen_Lattice": ("Regime I: Stiff Lattice ($k_w=7.0, k_f=0$)", "#7570b3", "--", "s"),
-        "II_Slow_Drift": ("Regime II: Weak Drift ($k_w=2.6, k_f=1.0$)", "#2b5c8f", "-.", "^"),
-        "III_Field_Storm": ("Regime III: Strong Field ($k_w=0.8, k_f=3.2$)", "#d95f02", "-", "o"),
-        "IV_Centrifugal_Balance": ("Regime IV: Target-Biased ($k_s=0.85$)", "#1b9e77", "-", "D"),
+        "I_Frozen_Lattice": ("I. Frozen Lattice ($k_w=7.0, k_f=0$)", "#7570b3", "--", "s"),
+        "II_Slow_Drift": ("II. Slow Drift ($k_w=2.6, k_f=1.0$)", "#2b5c8f", "-.", "^"),
+        "III_Field_Storm": ("III. Field Storm ($k_w=0.8, k_f=3.2$)", "#d95f02", "-", "o"),
+        "IV_Centrifugal_Balance": ("IV. Centrifugal Balance ($k_s=0.85$)", "#1b9e77", "-", "D"),
     }
     steps = [10 * i for i in range(25)]
     for key, (label, col, ls, mk) in styles.items():
