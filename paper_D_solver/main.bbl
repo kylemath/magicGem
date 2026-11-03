@@ -10,6 +10,18 @@ Elwyn~R. Berlekamp, John~H. Conway, and Richard~K. Guy.
 \newblock {\em Winning Ways for Your Mathematical Plays, Volume 4}.
 \newblock A K Peters, Wellesley, MA, 2nd edition, 2004.
 
+\bibitem{bramwell2001spin}
+Steven~T. Bramwell and Michel J.~P. Gingras.
+\newblock Spin ice state in frustrated magnetic pyrochlore materials.
+\newblock {\em Science}, 294(5546):1495--1501, 2001.
+
+\bibitem{calladine1978buckminster}
+C.~R. Calladine.
+\newblock Buckminster {F}uller's ``tensegrity'' structures and clerk
+  {M}axwell's rules for the construction of stiff frames.
+\newblock {\em International Journal of Solids and Structures}, 14(2):161--172,
+  1978.
+
 \bibitem{cameron2013signatura}
 Ian Cameron, Adam Rogers, and Peter~D. Loly.
 \newblock Signatura of magic and {L}atin integer squares: isentropic clans and
@@ -34,12 +46,23 @@ Henry~E. Dudeney.
 \newblock {\em Amusements in Mathematics}.
 \newblock Thomas Nelson and Sons, London, 1917.
 
+\bibitem{falk1998dynamics}
+Michael~L. Falk and James~S. Langer.
+\newblock Dynamics of viscoplastic deformation in amorphous solids.
+\newblock {\em Physical Review E}, 57(6):7192--7205, 1998.
+
 \bibitem{frenicle1693}
 Bernard Fr{\'e}nicle~de Bessy.
 \newblock Des quarrez ou tables magiques.
 \newblock In {\em Divers ouvrages de math{\'e}matique et de physique, par
   Messieurs de l'Acad{\'e}mie Royale des Sciences}. Imprimerie Royale, Paris,
   1693.
+
+\bibitem{kawasaki1966diffusion}
+Kyozi Kawasaki.
+\newblock Diffusion constants near the critical point for time-dependent
+  {I}sing models. {I}.
+\newblock {\em Physical Review}, 145(1):224--230, 1966.
 
 \bibitem{kirkpatrick1983optimization}
 Scott Kirkpatrick, C.~Daniel Gelatt, and Mario~P. Vecchi.
@@ -73,6 +96,11 @@ Kyle~Elliott Mathewson.
 \newblock \url{https://kylemath.github.io/magicGem/web/physicalSolver/} and
   \url{https://github.com/kylemath/magicGem}, 2026.
 
+\bibitem{maxwell1864calculation}
+James~Clerk Maxwell.
+\newblock On the calculation of the equilibrium and stiffness of frames.
+\newblock {\em Philosophical Magazine}, 27(182):294--299, 1864.
+
 \bibitem{mezard1987spin}
 Marc M{\'e}zard, Giorgio Parisi, and Miguel~Angel Virasoro.
 \newblock {\em Spin Glass Theory and Beyond}.
@@ -84,6 +112,13 @@ Kathleen Ollerenshaw and David~S. Br{\'e}e.
   Enumeration}.
 \newblock Institute of Mathematics and its Applications, Southend-on-Sea, 1998.
 
+\bibitem{pauling1935structure}
+Linus Pauling.
+\newblock The structure and entropy of ice and of other crystals with some
+  randomness of atomic arrangement.
+\newblock {\em Journal of the American Chemical Society}, 57(12):2680--2684,
+  1935.
+
 \bibitem{rogers2004inertia}
 Adam Rogers and Peter~D. Loly.
 \newblock The inertia tensor of a magic cube.
@@ -94,15 +129,37 @@ Adam Rogers and Peter~D. Loly.
 \newblock The electric multipole expansion for a magic cube.
 \newblock {\em European Journal of Physics}, 26(5):809--813, 2005.
 
+\bibitem{thirumalai2001chaperonin}
+D.~Thirumalai and George~H. Lorimer.
+\newblock Chaperonin-mediated protein folding.
+\newblock {\em Annual Review of Biophysics and Biomolecular Structure},
+  30:245--269, 2001.
+
 \bibitem{wales2003energy}
 David~J. Wales.
 \newblock {\em Energy Landscapes: With Applications to Clusters, Biomolecules
   and Glasses}.
 \newblock Cambridge University Press, Cambridge, 2003.
 
+\bibitem{wales1997global}
+David~J. Wales and Jonathan P.~K. Doye.
+\newblock Global optimization by basin-hopping and the lowest energy structures
+  of {L}ennard-{J}ones clusters containing up to 110 atoms.
+\newblock {\em The Journal of Physical Chemistry A}, 101(28):5111--5116, 1997.
+
+\bibitem{weaire1984soap}
+Denis Weaire and Nicolas Rivier.
+\newblock Soap, cells and statistics---random patterns in two dimensions.
+\newblock {\em Contemporary Physics}, 25(1):59--99, 1984.
+
 \bibitem{whitesides2004writing}
 George~M. Whitesides.
 \newblock Whitesides' group: Writing a paper.
 \newblock {\em Advanced Materials}, 16(15):1375--1377, 2004.
+
+\bibitem{zener1950ring}
+Clarence Zener.
+\newblock Ring diffusion in metals.
+\newblock {\em Acta Crystallographica}, 3(5):346--354, 1950.
 
 \end{thebibliography}

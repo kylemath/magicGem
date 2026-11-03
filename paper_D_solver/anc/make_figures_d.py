@@ -94,8 +94,8 @@ def make_fig1_spectral(data: dict) -> None:
                     label=r"Unprojected $L_n$ ($\lambda_{\pm} \notin \mathbb{Z}$)" if idx == 0 and ev > n else None,
                 )
                 ax0.annotate(
-                    f"{ev:.2f}", (n - 0.18, ev), xytext=(-26, -3 if ev < n else 3),
-                    textcoords="offset points", fontsize=7.2, color="#b34800",
+                    f"{ev:.2f}", (n - 0.14, ev), xytext=(-6, -11 if ev < n else 6),
+                    textcoords="offset points", ha="center", fontsize=6.9, color="#b34800",
                 )
 
         # Plot rationalized zero-mean eigenvalues (filled navy circles)
@@ -154,8 +154,8 @@ def make_fig1_spectral(data: dict) -> None:
         1.5, -0.72,
         r"Macroscopic Torque/Dipole Balance: $\langle X,Z\rangle = \langle Y,Z\rangle = R_{D_\pm} = 0$ ($E_{\mathrm{low}}=0$)"
         + "\n"
-        + r"Fails via Optical-Phonon Blindness: $\mathcal{H}_{\mathrm{line}}(S_{\mathrm{low}}) = 1,584 > 0$ ($2n-3=5\mathrm{D}$ residual)",
-        ha="center", va="center", fontsize=7.7,
+        + r"Fails via Optical-Phonon Blindness: $\mathcal{H}_{\mathrm{line}}(S_{\mathrm{low}}) = 1,584 > 0$ ($2n-4=4\mathrm{D}$ zero-mean residual)",
+        ha="center", va="center", fontsize=7.5,
         bbox=dict(boxstyle="round,pad=0.3", facecolor="#f8f9fa", edgecolor="#adb5bd"),
     )
     ax1.set_xticks(range(4))
@@ -200,7 +200,7 @@ def make_fig2_window_entropy(data: dict) -> None:
     ax0.set_xlabel(r"Relative window scale $k / n$ ($1 \leq k \leq n-1$)")
     ax0.set_ylabel(r"Normalized window entropy $\widetilde{H}_1(k)$")
     ax0.set_ylim(0.89, 1.005)
-    ax0.set_title(r"(a) Multiscale Window Entropy ($n=3..8$)", fontweight="bold", pad=8)
+    ax0.set_title(r"(a) Multiscale Window Entropy ($n=3\text{--}8$)", fontweight="bold", pad=8)
     ax0.grid(True, linestyle=":", alpha=0.45)
     ax0.legend(loc="lower right", frameon=True, framealpha=0.94, fontsize=7.8)
 
@@ -328,21 +328,24 @@ def make_fig4_s9_landscape() -> None:
 
     # Panel (a): Exhaustive S_9 energy distribution
     ax0 = fig.add_subplot(gs[0, 0])
-    bins = np.linspace(0, 1400, 45)
+    bins = np.linspace(0, 760, 39)
     ax0.hist(H_all, bins=bins, color="#2b5c8f", edgecolor="white", linewidth=0.4, alpha=0.88)
     ax0.axvline(480.0, color="#d95f02", linestyle="--", linewidth=1.6,
                 label=r"Exact ensemble mean $\mathbb{E}[\mathcal{H}_{\mathrm{line}}] = 2\|\mathbf{z}\|^2 = 480$")
     ax0.axvline(0.0, color="#1b9e77", linestyle="-", linewidth=1.8,
-                label=r"8 Lo Shu ground states ($\mathcal{H}_{\mathrm{line}}=0$, $74.53\%$ 2-cycle $\to 100\%$ w/ $(2,2)$)")
+                label=r"8 Lo Shu ground states ($\mathcal{H}_{\mathrm{line}}=0$, $74.53\% \to 100\%$ w/ $(2,2)$)")
     ax0.axvline(8.0, color="#e7298a", linestyle=":", linewidth=1.8,
-                label=r"8 Antipodal trap states $S_{\mathrm{trap}}^{(3)}$ ($\mathcal{H}_{\mathrm{line}}=8$, $25.47\%$ basin)")
+                label=r"8 Antipodal traps $S_{\mathrm{trap}}^{(3)}$ ($\mathcal{H}_{\mathrm{line}}=8$, $25.47\%$ basin)")
+    ax0.axvline(720.0, color="#7570b3", linestyle="-.", linewidth=1.4,
+                label=r"Global maximum $\max_{S\in S_9}\mathcal{H}_{\mathrm{line}}(S) = 720$")
 
     ax0.set_xlabel(r"Centred line-indicator Hamiltonian $\mathcal{H}_{\mathrm{line}}(S) = \mathbf{z}^\top L_3 \mathbf{z}$")
     ax0.set_ylabel(r"Number of permutations in $S_9$ ($9! = 362,880$)")
-    ax0.set_ylim(0, 42000)
+    ax0.set_xlim(-22, 790)
+    ax0.set_ylim(0, 36000)
     ax0.set_title(r"(a) Exhaustive $S_9$ Energy Landscape & Basin Partition", fontweight="bold", pad=8)
     ax0.grid(True, linestyle=":", alpha=0.45)
-    ax0.legend(loc="upper right", frameon=True, framealpha=0.92, fontsize=7.6)
+    ax0.legend(loc="upper left", frameon=True, framealpha=0.92, fontsize=7.2)
 
     # Panel (b): Side-by-side comparison of S_trap^(3) vs Lo Shu and the unique (2,2)-double swap escape
     ax1 = fig.add_subplot(gs[0, 1])
@@ -522,10 +525,10 @@ def make_fig6_bubble_trinity(data: dict) -> None:
                  markevery=3, linewidth=1.7, label=label)
 
     ax0.annotate(
-        "Kernel energy drops $37.5\\%$,\nyet greedy snapping fails ($0\\%$)\nvia hard-core eviction cascades",
-        xy=(90, 1258), xytext=(102, 1385),
+        "Kernel energy drops $37.5\\%$,\nyet both greedy & Hungarian\nsnapping fail ($0\\%$, $\\mathcal{H}_{\\mathrm{line}}\\geq 1,480$)",
+        xy=(90, 1258), xytext=(98, 1385),
         arrowprops=dict(arrowstyle="->", color="#b2182b", lw=1.2),
-        fontsize=7.1, fontweight="bold", color="#8c1120",
+        fontsize=7.0, fontweight="bold", color="#8c1120",
         bbox=dict(boxstyle="round,pad=0.22", facecolor="#fff5f5", edgecolor="#b2182b"),
     )
 
@@ -538,13 +541,13 @@ def make_fig6_bubble_trinity(data: dict) -> None:
     # Panel (b): Contrasting Failed vs. Successful Physical Relaxation Mechanisms (Ablation Hierarchy)
     ax1 = fig.add_subplot(gs[0, 1])
     tiers = [
-        ("0_continuous_2d_greedy_snap_pct", "0. Colloidal Drift + Snap\n(Hard-core eviction cascade)"),
+        ("0_continuous_2d_greedy_snap_pct", "0. Colloidal Drift + Snap\n(Greedy & Hungarian: $0\\%$)"),
         ("1_kawasaki_2cycle_quench_pct", "1. Kawasaki 2-Spin Quench\n(Trapped by $c_{ab}d^2$ barrier)"),
         ("2_vacancy_3cycle_sa_pct", "2. Zener 3-Ring Vacancy SA\n(Monopole defect + thermal drift)"),
         ("3_spin_ice_lp22_quench_pct", "3. Spin-Ice $(2,2)$ Loop Quench\n($100\\%$ $S_9$; 1-pass quench)"),
-        ("4_t1_eshelby_6kicks_pct", "4. $T1$ Foam / Eshelby STZ\n(Top-$40$ quadrupoles, 1 restart)"),
-        ("5_plane_glide_18kicks_pct", "5. + Crystallographic Slip Glide\n(Row/col plane glide, 1 restart)"),
-        ("6_wales_doye_reanchored_full_pct", "6. Wales-Doye / Chaperonin\nRe-Anchored Basin-Hopping"),
+        ("4_t1_eshelby_6kicks_pct", "4. $+$ Quadrupole $(2,2)$ & Glide\n(Top-$40$ + row/col, unanchored)"),
+        ("5_plane_glide_18kicks_pct", "5. $+$ Re-Anchored Funnel Leash\n($\\mathcal{H}_{\\min}+24$ leash, 1 restart)"),
+        ("6_wales_doye_reanchored_full_pct", "6. Wales-Doye / Chaperonin\nMulti-Restart Basin-Hopping"),
     ]
     y_pos = np.arange(len(tiers))
     n4_rates = [ablation["n4"][k] for k, _ in tiers]
@@ -661,9 +664,10 @@ def make_fig7_dimensional_relief(data: dict) -> None:
     l_time = ax1_r.plot(x, times_ms, color="#d95f02", marker="D", markersize=5.5,
                         linewidth=2.0, label="Mean synthesis time (ms, right axis)")
 
-    for rect, eta in zip(b_null, eta_mc):
+    for idx_b, (rect, eta) in enumerate(zip(b_null, eta_mc)):
         h = rect.get_height()
-        ax1.text(rect.get_x() + rect.get_width() / 2, h + 0.8, f"{int(h)}\n({eta:.1f}x)",
+        y_pad = 3.2 if orders[idx_b] == 6 else 0.8
+        ax1.text(rect.get_x() + rect.get_width() / 2, h + y_pad, f"{int(h)}\n({eta:.1f}x)",
                  ha="center", va="bottom", fontsize=6.6, fontweight="bold", color="#0f6648")
 
     ax1.set_xticks(x)

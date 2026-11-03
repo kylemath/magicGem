@@ -340,8 +340,33 @@ def verify_section3_multiscale() -> dict:
         if st["w2_tor"] == 0:
             w2_tor_zero_count += 1
 
-    # Panmagic (Group VII, 48 squares) has w2_tor == 0; how many have w2_non_tor == 0?
+    # Panmagic (Group I, 48 squares) has w2_tor == 0; Theorem 3.1 proves w2_non_tor == 0 <=> w2_tor == 0
     print(f"  Order-4 2x2 window residual energy: w2_tor==0 on {w2_tor_zero_count}/880 squares; w2_non_tor==0 on {w2_non_tor_zero_count}/880 squares")
+    assert w2_tor_zero_count == 48 and w2_non_tor_zero_count == 48
+
+    # Verify Concentric Shell Quadrupole Identity for M_xyz across all 880 order-4 magic squares:
+    # Q_inner(S) == -Q_corner(S) and M_xyz(S) == -8 * Q_corner(S) - 3 * Q_edge(S)
+    anomalous_octupole_zeros = []
+    for rec, st in zip(records, all_stats):
+        sq = rec["square"]
+        Z = [[centered_height(sq[i][j], 4) for j in range(4)] for i in range(4)]
+        q_corner = (Z[0][0] + Z[3][3]) - (Z[0][3] + Z[3][0])
+        q_inner = (Z[1][1] + Z[2][2]) - (Z[1][2] + Z[2][1])
+        q_edge = ((Z[0][1] + Z[3][2]) - (Z[0][2] + Z[3][1])) + ((Z[1][0] + Z[2][3]) - (Z[2][0] + Z[1][3]))
+        assert q_inner == -q_corner, f"Q_inner != -Q_corner on square #{rec['id']}"
+        assert st["m_xyz"] == -8 * q_corner - 3 * q_edge, f"Quadrupole identity failed on #{rec['id']}"
+        if rec["dudeneyGroup"] in (1, 2, 4, 5):
+            assert q_edge == 0 and q_corner != 0
+        if st["m_xyz"] == 0 and rec["dudeneyGroup"] != 3:
+            anomalous_octupole_zeros.append({
+                "id": rec["id"],
+                "group": rec["dudeneyGroup"],
+                "Q_corner": q_corner,
+                "Q_edge": q_edge,
+                "resonance_k": q_edge // 8,
+            })
+    assert len(anomalous_octupole_zeros) == 8
+    print(f"  Verified Concentric Shell Quadrupole Identity M_xyz = -8*Q_corner - 3*Q_edge on all 880 squares; 8 non-associative zeros: {[x['id'] for x in anomalous_octupole_zeros]}")
 
     group_summary = {}
     for g in sorted(by_group.keys()):
@@ -414,6 +439,7 @@ def verify_section3_multiscale() -> dict:
             "min_Hnorm_p1_k2": {"id": min_h1_rec["id"], "group": min_h1_rec["group"], "val": round(min_h1_rec["entropies"]["Hnorm_p1_k2"], 6)},
             "max_w2_non_tor": {"id": max_w2_rec["id"], "group": max_w2_rec["group"], "val": max_w2_rec["w2_non_tor"]},
         },
+        "anomalous_octupole_zeros": anomalous_octupole_zeros,
         "per_square_metrics": [
             {
                 "id": x["id"],
@@ -821,9 +847,71 @@ def verify_section5_bubble_trinity() -> dict:
         z_cur = z_pert.copy()
         traj_H = []
         traj_disp = []
+        min_greedy_H = 999999
+        min_hungarian_H = 999999
         for step in range(n_steps):
-            # Assign each bubble to closest cell by Hungarian/greedy distance to evaluate induced line residuals
+            # Evaluate pairwise distance matrix between mobile bubbles and lattice cell centers
             dists = np.linalg.norm(pos[:, None, :] - cell_xy[None, :, :], axis=2)
+            # 1) Greedy nearest-cell snapping (as in inducedSquareFromBubbles)
+            pairs_dist = sorted((dists[b_i, c_j], b_i, c_j) for b_i in range(N) for c_j in range(N))
+            used_b = set()
+            used_c = set()
+            z_greedy = np.zeros(N, dtype=float)
+            for _, b_i, c_j in pairs_dist:
+                if b_i not in used_b and c_j not in used_c:
+                    used_b.add(b_i)
+                    used_c.add(c_j)
+                    z_greedy[c_j] = z_cur[b_i]
+            h_greedy = int(round(float(np.sum((A4 @ z_greedy) ** 2))))
+            if h_greedy < min_greedy_H:
+                min_greedy_H = h_greedy
+            # 2) Exact Hungarian minimum-weight bipartite matching (metric projection onto Birkhoff vertices)
+            cost_mat = dists ** 2
+            u = [0.0] * (N + 1)
+            v = [0.0] * (N + 1)
+            p_match = [0] * (N + 1)
+            way = [0] * (N + 1)
+            for i_h in range(1, N + 1):
+                p_match[0] = i_h
+                j0 = 0
+                minv = [1e18] * (N + 1)
+                used = [False] * (N + 1)
+                while True:
+                    used[j0] = True
+                    i0 = p_match[j0]
+                    delta_h = 1e18
+                    j1 = 0
+                    for j_h in range(1, N + 1):
+                        if not used[j_h]:
+                            cur_h = float(cost_mat[i0 - 1, j_h - 1]) - u[i0] - v[j_h]
+                            if cur_h < minv[j_h]:
+                                minv[j_h] = cur_h
+                                way[j_h] = j0
+                            if minv[j_h] < delta_h:
+                                delta_h = minv[j_h]
+                                j1 = j_h
+                    for j_h in range(N + 1):
+                        if used[j_h]:
+                            u[p_match[j_h]] += delta_h
+                            v[j_h] -= delta_h
+                        else:
+                            minv[j_h] -= delta_h
+                    j0 = j1
+                    if p_match[j0] == 0:
+                        break
+                while True:
+                    j1 = way[j0]
+                    p_match[j0] = p_match[j1]
+                    j0 = j1
+                    if j0 == 0:
+                        break
+            z_hung = np.zeros(N, dtype=float)
+            for j_h in range(1, N + 1):
+                z_hung[j_h - 1] = z_cur[p_match[j_h] - 1]
+            h_hung = int(round(float(np.sum((A4 @ z_hung) ** 2))))
+            if h_hung < min_hungarian_H:
+                min_hungarian_H = h_hung
+
             # Compute soft cell residuals using Gaussian kernel around each cell
             weights = np.exp(-2.0 * (dists ** 2))
             weights /= np.sum(weights, axis=0, keepdims=True) + 1e-9
@@ -859,6 +947,8 @@ def verify_section5_bubble_trinity() -> dict:
             "initial_induced_H": round(traj_H[0], 2),
             "final_induced_H": round(traj_H[-1], 2),
             "min_induced_H": round(min(traj_H), 2),
+            "min_discrete_greedy_H": min_greedy_H,
+            "min_discrete_hungarian_H": min_hungarian_H,
             "mean_rms_displacement": round(float(np.mean(traj_disp)), 4),
             "max_rms_displacement": round(float(np.max(traj_disp)), 4),
             "trajectory_H_decimated": [round(x, 2) for x in traj_H[::10]],
@@ -866,7 +956,7 @@ def verify_section5_bubble_trinity() -> dict:
         }
         print(
             f"  Regime {r_name:22s}: H_ind {traj_H[0]:7.1f} -> {traj_H[-1]:7.1f} (min {min(traj_H):7.1f}), "
-            f"mean RMS disp={np.mean(traj_disp):.3f}"
+            f"min_greedy_H={min_greedy_H}, min_hungarian_H={min_hungarian_H}, mean RMS disp={np.mean(traj_disp):.3f}"
         )
 
     # Compare discrete Simulated Annealing tiers at n=4 across budgets
@@ -1096,7 +1186,10 @@ def verify_section5_bubble_trinity() -> dict:
         )
 
     # Multi-order benchmark (n = 3..8) for the Re-Anchored Hierarchical Multi-Cycle Settler
-    def solve_reanchored_hierarchical(n_ord, max_restarts=80, kicks_per_restart=18, seed=0):
+    def solve_reanchored_hierarchical(
+        n_ord, max_restarts=80, kicks_per_restart=18, seed=0,
+        use_plane_glide=True, use_lp22=True, use_topk22=True, use_reanchor=True
+    ):
         rng_h = random.Random(seed)
         N_ord = n_ord * n_ord
         base_vals = [2 * s - (N_ord + 1) for s in range(1, N_ord + 1)]
@@ -1201,71 +1294,73 @@ def verify_section5_bubble_trinity() -> dict:
                     best_state_E = E
                     best_state_z = z[:]
                     best_state_R = R[:]
-                elif E > best_state_E + 24:
+                elif use_reanchor and E > best_state_E + 24:
                     z = best_state_z[:]
                     R = best_state_R[:]
                     E = best_state_E
-                E0 = E
-                best_rc_dE = 0
-                best_rc = None
-                for i1 in range(n_ord):
-                    for i2 in range(i1 + 1, n_ord):
-                        for c in range(n_ord):
-                            swap_cells(i1 * n_ord + c, i2 * n_ord + c)
-                        if E - E0 < best_rc_dE:
-                            best_rc_dE = E - E0
-                            best_rc = (0, i1, i2)
-                        for c in range(n_ord):
-                            swap_cells(i1 * n_ord + c, i2 * n_ord + c)
-                        for r in range(n_ord):
-                            swap_cells(r * n_ord + i1, r * n_ord + i2)
-                        if E - E0 < best_rc_dE:
-                            best_rc_dE = E - E0
-                            best_rc = (1, i1, i2)
-                        for r in range(n_ord):
-                            swap_cells(r * n_ord + i1, r * n_ord + i2)
-                if best_rc is not None:
-                    kind, i1, i2 = best_rc
-                    if kind == 0:
-                        for c in range(n_ord):
-                            swap_cells(i1 * n_ord + c, i2 * n_ord + c)
-                    else:
-                        for r in range(n_ord):
-                            swap_cells(r * n_ord + i1, r * n_ord + i2)
-                    continue
+                if use_plane_glide:
+                    E0 = E
+                    best_rc_dE = 0
+                    best_rc = None
+                    for i1 in range(n_ord):
+                        for i2 in range(i1 + 1, n_ord):
+                            for c in range(n_ord):
+                                swap_cells(i1 * n_ord + c, i2 * n_ord + c)
+                            if E - E0 < best_rc_dE:
+                                best_rc_dE = E - E0
+                                best_rc = (0, i1, i2)
+                            for c in range(n_ord):
+                                swap_cells(i1 * n_ord + c, i2 * n_ord + c)
+                            for r in range(n_ord):
+                                swap_cells(r * n_ord + i1, r * n_ord + i2)
+                            if E - E0 < best_rc_dE:
+                                best_rc_dE = E - E0
+                                best_rc = (1, i1, i2)
+                            for r in range(n_ord):
+                                swap_cells(r * n_ord + i1, r * n_ord + i2)
+                    if best_rc is not None:
+                        kind, i1, i2 = best_rc
+                        if kind == 0:
+                            for c in range(n_ord):
+                                swap_cells(i1 * n_ord + c, i2 * n_ord + c)
+                        else:
+                            for r in range(n_ord):
+                                swap_cells(r * n_ord + i1, r * n_ord + i2)
+                        continue
                 best_22 = None
                 best_22_dE = 0
-                for r1 in range(n_ord):
-                    for p1 in row_pair_indices[r1]:
-                        dE1 = swap_dE(p1)
-                        if dE1 > 80:
-                            continue
-                        do_swap(p1)
-                        for r2 in range(r1 + 1, n_ord):
-                            for p2 in row_pair_indices[r2]:
-                                tot = dE1 + swap_dE(p2)
-                                if tot < best_22_dE:
-                                    best_22_dE = tot
-                                    best_22 = (p1, p2)
-                        do_swap(p1)
-                if best_22 is None:
-                    for c1 in range(n_ord):
-                        for p1 in col_pair_indices[c1]:
+                if use_lp22:
+                    for r1 in range(n_ord):
+                        for p1 in row_pair_indices[r1]:
                             dE1 = swap_dE(p1)
                             if dE1 > 80:
                                 continue
                             do_swap(p1)
-                            for c2 in range(c1 + 1, n_ord):
-                                for p2 in col_pair_indices[c2]:
+                            for r2 in range(r1 + 1, n_ord):
+                                for p2 in row_pair_indices[r2]:
                                     tot = dE1 + swap_dE(p2)
                                     if tot < best_22_dE:
                                         best_22_dE = tot
                                         best_22 = (p1, p2)
                             do_swap(p1)
-                if best_22 is not None:
-                    do_swap(best_22[0])
-                    do_swap(best_22[1])
-                    continue
+                    if best_22 is None:
+                        for c1 in range(n_ord):
+                            for p1 in col_pair_indices[c1]:
+                                dE1 = swap_dE(p1)
+                                if dE1 > 80:
+                                    continue
+                                do_swap(p1)
+                                for c2 in range(c1 + 1, n_ord):
+                                    for p2 in col_pair_indices[c2]:
+                                        tot = dE1 + swap_dE(p2)
+                                        if tot < best_22_dE:
+                                            best_22_dE = tot
+                                            best_22 = (p1, p2)
+                                do_swap(p1)
+                    if best_22 is not None:
+                        do_swap(best_22[0])
+                        do_swap(best_22[1])
+                        continue
                 cand = []
                 for p_idx in range(num_pairs):
                     dE1 = swap_dE(p_idx)
@@ -1273,24 +1368,25 @@ def verify_section5_bubble_trinity() -> dict:
                         cand.append((dE1, p_idx))
                 cand.sort()
                 cand = cand[:40]
-                for idx1 in range(len(cand)):
-                    dE1, p1 = cand[idx1]
-                    a1, b1 = pairs_h[p1]
-                    do_swap(p1)
-                    for idx2 in range(idx1 + 1, len(cand)):
-                        _, p2 = cand[idx2]
-                        a2, b2 = pairs_h[p2]
-                        if a1 == a2 or a1 == b2 or b1 == a2 or b1 == b2:
-                            continue
-                        tot = dE1 + swap_dE(p2)
-                        if tot < best_22_dE:
-                            best_22_dE = tot
-                            best_22 = (p1, p2)
-                    do_swap(p1)
-                if best_22 is not None:
-                    do_swap(best_22[0])
-                    do_swap(best_22[1])
-                    continue
+                if use_topk22:
+                    for idx1 in range(len(cand)):
+                        dE1, p1 = cand[idx1]
+                        a1, b1 = pairs_h[p1]
+                        do_swap(p1)
+                        for idx2 in range(idx1 + 1, len(cand)):
+                            _, p2 = cand[idx2]
+                            a2, b2 = pairs_h[p2]
+                            if a1 == a2 or a1 == b2 or b1 == a2 or b1 == b2:
+                                continue
+                            tot = dE1 + swap_dE(p2)
+                            if tot < best_22_dE:
+                                best_22_dE = tot
+                                best_22 = (p1, p2)
+                        do_swap(p1)
+                    if best_22 is not None:
+                        do_swap(best_22[0])
+                        do_swap(best_22[1])
+                        continue
                 if len(cand) >= 2:
                     _, p1 = cand[rng_h.randrange(min(12, len(cand)))]
                     _, p2 = cand[rng_h.randrange(min(12, len(cand)))]
@@ -1435,18 +1531,27 @@ def verify_section5_bubble_trinity() -> dict:
             if int(np.sum((A_ab @ z_lp) ** 2)) == 0:
                 c_spin_ice_lp22 += 1
 
-            # 4. Single-restart (no restarts, max_restarts=1, 6 kicks) with T1 / Eshelby Top-40 (2,2) swaps
-            e_t1, _, _ = solve_reanchored_hierarchical(n_ab, max_restarts=1, kicks_per_restart=6, seed=40000 + s_idx)
+            # 4. Single-restart with Top-40 General (2,2) Quadrupoles + Crystallographic Slip-Plane Glide (5 unanchored kicks, use_reanchor=False)
+            e_t1, _, _ = solve_reanchored_hierarchical(
+                n_ab, max_restarts=1, kicks_per_restart=5, seed=40000 + s_idx,
+                use_plane_glide=True, use_lp22=True, use_topk22=True, use_reanchor=False
+            )
             if e_t1 == 0:
                 c_t1_eshelby += 1
 
-            # 5. Single-restart (max_restarts=1, 18 kicks) with Plane Glide + Re-Anchoring
-            e_pg, _, _ = solve_reanchored_hierarchical(n_ab, max_restarts=1, kicks_per_restart=18, seed=40000 + s_idx)
+            # 5. Single-restart (max_restarts=1, 18 kicks) adding +24 Funnel Re-Anchoring (use_reanchor=True)
+            e_pg, _, _ = solve_reanchored_hierarchical(
+                n_ab, max_restarts=1, kicks_per_restart=18, seed=40000 + s_idx,
+                use_plane_glide=True, use_lp22=True, use_topk22=True, use_reanchor=True
+            )
             if e_pg == 0:
                 c_plane_glide += 1
 
             # 6. Full Wales-Doye Multi-Restart Re-Anchored Hierarchical Settler
-            e_full, _, _ = solve_reanchored_hierarchical(n_ab, max_restarts=80, kicks_per_restart=18, seed=40000 + s_idx)
+            e_full, _, _ = solve_reanchored_hierarchical(
+                n_ab, max_restarts=80, kicks_per_restart=18, seed=40000 + s_idx,
+                use_plane_glide=True, use_lp22=True, use_topk22=True, use_reanchor=True
+            )
             if e_full == 0:
                 c_basin_hop_full += 1
 
@@ -1478,15 +1583,23 @@ def verify_section5_bubble_trinity() -> dict:
         dt = time.time() - t0
         null_dim = n_ord * n_ord - 2 * n_ord - 1
         rank_dim = 2 * n_ord
+        N_sq = n_ord * n_ord
+        num_pairs_ord = N_sq * (N_sq - 1) // 2
+        num_lp22_ord = 2 * ((n_ord * (n_ord - 1) // 2) ** 3)
+        diag_free_frac = round(null_dim / ((n_ord - 1) ** 2), 4)
         multi_order[f"n{n_ord}"] = {
             "n": n_ord,
             "trials": tr,
             "nullspace_dim": null_dim,
             "constraint_rank": rank_dim,
             "maxwell_calladine_ratio": round(null_dim / rank_dim, 3),
+            "num_2cycle_pairs": num_pairs_ord,
+            "num_lp22_moves": num_lp22_ord,
+            "diag_free_lp22_fraction": diag_free_frac,
             "success_count": succ_up,
             "success_pct": round(100.0 * succ_up / tr, 1),
             "mean_descents": round(tot_desc / tr, 1),
+            "mean_pair_evaluations": int(round((tot_desc / tr) * num_pairs_ord)),
             "mean_restarts": round(tot_rest / tr, 2),
             "mean_ms": round(1000.0 * dt / tr, 2),
         }

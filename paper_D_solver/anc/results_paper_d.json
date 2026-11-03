@@ -478,6 +478,64 @@
         "val": 2624
       }
     },
+    "anomalous_octupole_zeros": [
+      {
+        "id": 200,
+        "group": 9,
+        "Q_corner": -24,
+        "Q_edge": 64,
+        "resonance_k": 8
+      },
+      {
+        "id": 208,
+        "group": 9,
+        "Q_corner": -12,
+        "Q_edge": 32,
+        "resonance_k": 4
+      },
+      {
+        "id": 390,
+        "group": 9,
+        "Q_corner": -24,
+        "Q_edge": 64,
+        "resonance_k": 8
+      },
+      {
+        "id": 492,
+        "group": 10,
+        "Q_corner": -12,
+        "Q_edge": 32,
+        "resonance_k": 4
+      },
+      {
+        "id": 494,
+        "group": 10,
+        "Q_corner": -12,
+        "Q_edge": 32,
+        "resonance_k": 4
+      },
+      {
+        "id": 711,
+        "group": 9,
+        "Q_corner": 12,
+        "Q_edge": -32,
+        "resonance_k": -4
+      },
+      {
+        "id": 794,
+        "group": 10,
+        "Q_corner": -24,
+        "Q_edge": 64,
+        "resonance_k": 8
+      },
+      {
+        "id": 811,
+        "group": 10,
+        "Q_corner": -24,
+        "Q_edge": 64,
+        "resonance_k": 8
+      }
+    ],
     "per_square_metrics": [
       {
         "id": 1,
@@ -10243,6 +10301,8 @@
         "initial_induced_H": 1681.89,
         "final_induced_H": 1681.89,
         "min_induced_H": 1681.89,
+        "min_discrete_greedy_H": 2336,
+        "min_discrete_hungarian_H": 2336,
         "mean_rms_displacement": 0.0,
         "max_rms_displacement": 0.0,
         "trajectory_H_decimated": [
@@ -10304,6 +10364,8 @@
         "initial_induced_H": 1681.89,
         "final_induced_H": 1539.22,
         "min_induced_H": 1539.22,
+        "min_discrete_greedy_H": 2336,
+        "min_discrete_hungarian_H": 2336,
         "mean_rms_displacement": 0.0774,
         "max_rms_displacement": 0.1134,
         "trajectory_H_decimated": [
@@ -10365,6 +10427,8 @@
         "initial_induced_H": 1681.89,
         "final_induced_H": 1194.88,
         "min_induced_H": 1194.88,
+        "min_discrete_greedy_H": 2336,
+        "min_discrete_hungarian_H": 2336,
         "mean_rms_displacement": 0.2654,
         "max_rms_displacement": 0.4646,
         "trajectory_H_decimated": [
@@ -10426,6 +10490,8 @@
         "initial_induced_H": 1681.89,
         "final_induced_H": 1050.55,
         "min_induced_H": 1050.55,
+        "min_discrete_greedy_H": 1480,
+        "min_discrete_hungarian_H": 2336,
         "mean_rms_displacement": 0.4281,
         "max_rms_displacement": 0.6381,
         "trajectory_H_decimated": [
@@ -10528,7 +10594,7 @@
         "1_kawasaki_2cycle_quench_pct": 20.0,
         "2_vacancy_3cycle_sa_pct": 32.5,
         "3_spin_ice_lp22_quench_pct": 29.0,
-        "4_t1_eshelby_6kicks_pct": 44.0,
+        "4_t1_eshelby_6kicks_pct": 42.5,
         "5_plane_glide_18kicks_pct": 58.0,
         "6_wales_doye_reanchored_full_pct": 100.0
       },
@@ -10550,11 +10616,15 @@
         "nullspace_dim": 2,
         "constraint_rank": 6,
         "maxwell_calladine_ratio": 0.333,
+        "num_2cycle_pairs": 36,
+        "num_lp22_moves": 54,
+        "diag_free_lp22_fraction": 0.5,
         "success_count": 200,
         "success_pct": 100.0,
         "mean_descents": 5.1,
+        "mean_pair_evaluations": 182,
         "mean_restarts": 0.0,
-        "mean_ms": 0.12
+        "mean_ms": 0.14
       },
       "n4": {
         "n": 4,
@@ -10562,11 +10632,15 @@
         "nullspace_dim": 7,
         "constraint_rank": 8,
         "maxwell_calladine_ratio": 0.875,
+        "num_2cycle_pairs": 120,
+        "num_lp22_moves": 432,
+        "diag_free_lp22_fraction": 0.7778,
         "success_count": 200,
         "success_pct": 100.0,
         "mean_descents": 52.9,
+        "mean_pair_evaluations": 6349,
         "mean_restarts": 0.7,
-        "mean_ms": 5.67
+        "mean_ms": 5.54
       },
       "n5": {
         "n": 5,
@@ -10574,11 +10648,15 @@
         "nullspace_dim": 14,
         "constraint_rank": 10,
         "maxwell_calladine_ratio": 1.4,
+        "num_2cycle_pairs": 300,
+        "num_lp22_moves": 2000,
+        "diag_free_lp22_fraction": 0.875,
         "success_count": 100,
         "success_pct": 100.0,
         "mean_descents": 466.6,
+        "mean_pair_evaluations": 139986,
         "mean_restarts": 8.03,
-        "mean_ms": 122.88
+        "mean_ms": 120.18
       },
       "n6": {
         "n": 6,
@@ -10586,11 +10664,15 @@
         "nullspace_dim": 23,
         "constraint_rank": 12,
         "maxwell_calladine_ratio": 1.917,
+        "num_2cycle_pairs": 630,
+        "num_lp22_moves": 6750,
+        "diag_free_lp22_fraction": 0.92,
         "success_count": 100,
         "success_pct": 100.0,
         "mean_descents": 439.6,
+        "mean_pair_evaluations": 276942,
         "mean_restarts": 7.16,
-        "mean_ms": 216.8
+        "mean_ms": 216.4
       },
       "n7": {
         "n": 7,
@@ -10598,11 +10680,15 @@
         "nullspace_dim": 34,
         "constraint_rank": 14,
         "maxwell_calladine_ratio": 2.429,
+        "num_2cycle_pairs": 1176,
+        "num_lp22_moves": 18522,
+        "diag_free_lp22_fraction": 0.9444,
         "success_count": 100,
         "success_pct": 100.0,
         "mean_descents": 299.3,
+        "mean_pair_evaluations": 352024,
         "mean_restarts": 4.58,
-        "mean_ms": 242.61
+        "mean_ms": 237.83
       },
       "n8": {
         "n": 8,
@@ -10610,11 +10696,15 @@
         "nullspace_dim": 47,
         "constraint_rank": 16,
         "maxwell_calladine_ratio": 2.938,
+        "num_2cycle_pairs": 2016,
+        "num_lp22_moves": 43904,
+        "diag_free_lp22_fraction": 0.9592,
         "success_count": 100,
         "success_pct": 100.0,
         "mean_descents": 335.3,
+        "mean_pair_evaluations": 675945,
         "mean_restarts": 5.0,
-        "mean_ms": 426.26
+        "mean_ms": 423.92
       }
     }
   }
