@@ -32,36 +32,29 @@ At order $n=3$, the symmetric group $S_9$ has $9! = 362{,}880$ states, permittin
 
 \begin{theorem}[Exhaustive $S_9$ Landscape, $8$ Strict Local Minima, and Unique $(2,2)$ Escape]
 \label{thm:s9_traps}
-Across all $9! = 362{,}880$ permutations of $S_9$ under the line-indicator Hamiltonian $\Hline(S)$:
-\begin{enumerate}
-  \item \textbf{Complete Classification of Local Minima:} There are \textbf{exactly $16$ local minima} in $S_9$ under the $\binom{9}{2} = 36$ elementary $2$-cycle transpositions, all $16$ of which are strict local minima ($\Delta\Hline(\tau_{ab}) > 0$ for all $a \ne b$):
-  \begin{itemize}
-    \item The \textbf{$8$ global ground states} ($\Hline = 0$), forming the single dihedral orbit $D_4 \cdot S_{\mathrm{LoShu}}$.
-    \item \textbf{Exactly $8$ spurious strict local minima} at $\Hline = 8$ ($E_{\mathrm{std}} = 2$), forming the single dihedral $D_4$ orbit of the antipodal trap
-    \begin{equation}
-      S_{\mathrm{trap}}^{(3)} = \begin{bmatrix}
-        2 & 6 & 7 \\
-        9 & 5 & 1 \\
-        3 & 4 & 8
-      \end{bmatrix}, \qquad
-      \mathbf{Z}\bigl(S_{\mathrm{trap}}^{(3)}\bigr) = \begin{bmatrix}
-        -6 & +2 & +4 \\
-        +8 & 0 & -8 \\
-        -4 & -2 & +6
-      \end{bmatrix}, \qquad \Hline\bigl(S_{\mathrm{trap}}^{(3)}\bigr) = 8.
-      \label{eq:S_trap_3}
-    \end{equation}
-  \end{itemize}
-  \item \textbf{Immunity to $2$-Cycles and $3$-Cycles, and Unique $(2,2)$-Cycle Escape:} In $S_{\mathrm{trap}}^{(3)}$, six of the eight magic lines (all three rows, the middle column, and both main diagonals) have zero residual ($R_L = 0$), while the two outer columns have residuals $R_{c_1} = -2$ ($\Sigma=14$) and $R_{c_3} = +2$ ($\Sigma=16$). Every single $2$-cycle transposition strictly increases $\Hline$ by at least $+4$ ($\min_{\tau_{ab}} \Delta\Hline = +4$), \textbf{and every single $3$-cycle permutation among all $2\binom{9}{3} = 168$ directed $3$-cycles also strictly increases $\Hline$ by at least $+8$}. Furthermore, across all $\frac{1}{2}\binom{9}{2}\binom{7}{2} = 378$ disjoint $(2,2)$ double transpositions on $S_{\mathrm{trap}}^{(3)}$, \textbf{one and only one} strictly decreases $\Hline$: the row-preserving double swap $(6\leftrightarrow 7)(3\leftrightarrow 4)$ at cells $(1,2)\leftrightarrow(1,3)$ and $(3,1)\leftrightarrow(3,2)$, which maps $S_{\mathrm{trap}}^{(3)}$ directly to the Lo Shu ground state
-  \begin{equation}
-    S_{\mathrm{LoShu}} = \begin{bmatrix}
-      2 & 7 & 6 \\
-      9 & 5 & 1 \\
-      4 & 3 & 8
-    \end{bmatrix}, \qquad \Hline(S_{\mathrm{LoShu}}) = 0.
-  \end{equation}
-  \item \textbf{Exact Steepest-Descent Basin Partition and $100\%$ Restoration:} Under deterministic $2$-cycle steepest descent (choosing the lexicographically first pair $(a,b)$ minimizing $\Delta\Hline(\tau_{ab})$), \textbf{$270{,}442$ of the $362{,}880$ states ($74.5266\%$) converge to the $8$ Lo Shu ground states}, while the remaining \textbf{$92{,}438$ states ($25.4734\%$) are captured by the $8$ antipodal traps $D_4 \cdot S_{\mathrm{trap}}^{(3)}$}. Augmenting steepest descent with the $18$ line-preserving $(2,2)$ double swaps whenever a $2$-cycle local minimum is reached expands the deterministic ground-state basin to \textbf{$362{,}880 / 362{,}880$ ($100.00\%$)}, independent of the tie-breaking rule.
-\end{enumerate}
+Across all $9! = 362{,}880$ permutations of $S_9$ under the line-indicator Hamiltonian $\Hline(S)$, there are \emph{exactly $16$ local minima} under the $\binom{9}{2} = 36$ elementary $2$-cycle transpositions, all $16$ of which are strict local minima ($\Delta\Hline(\tau_{ab}) > 0$ for all $a \ne b$). These $16$ attractors partition into two dihedral orbits of size $8$: the $8$ global ground states ($\Hline = 0$) forming the dihedral orbit $D_4 \cdot S_{\mathrm{LoShu}}$, and \emph{exactly $8$ spurious strict local minima} at $\Hline = 8$ ($E_{\mathrm{std}} = 2$) forming the single dihedral $D_4$ orbit of the antipodal trap
+\begin{equation}
+  S_{\mathrm{trap}}^{(3)} = \begin{bmatrix}
+    2 & 6 & 7 \\
+    9 & 5 & 1 \\
+    3 & 4 & 8
+  \end{bmatrix}, \qquad
+  \mathbf{Z}\bigl(S_{\mathrm{trap}}^{(3)}\bigr) = \begin{bmatrix}
+    -6 & +2 & +4 \\
+    +8 & 0 & -8 \\
+    -4 & -2 & +6
+  \end{bmatrix}, \qquad \Hline\bigl(S_{\mathrm{trap}}^{(3)}\bigr) = 8.
+  \label{eq:S_trap_3}
+\end{equation}
+In $S_{\mathrm{trap}}^{(3)}$, six of the eight magic lines (all three rows, the middle column, and both main diagonals) have zero residual ($R_L = 0$), while the two outer columns have residuals $R_{c_1} = -2$ ($\Sigma=14$) and $R_{c_3} = +2$ ($\Sigma=16$). Every single $2$-cycle transposition strictly increases $\Hline$ by at least $+4$ ($\min_{\tau_{ab}} \Delta\Hline = +4$), and \emph{every single $3$-cycle permutation among all $2\binom{9}{3} = 168$ directed $3$-cycles also strictly increases $\Hline$ by at least $+8$}. Furthermore, across all $\frac{1}{2}\binom{9}{2}\binom{7}{2} = 378$ disjoint $(2,2)$ double transpositions on $S_{\mathrm{trap}}^{(3)}$, \emph{one and only one} strictly decreases $\Hline$: the row-preserving double swap $(6\leftrightarrow 7)(3\leftrightarrow 4)$ at cells $(1,2)\leftrightarrow(1,3)$ and $(3,1)\leftrightarrow(3,2)$, which maps $S_{\mathrm{trap}}^{(3)}$ directly to the Lo Shu ground state
+\begin{equation}
+  S_{\mathrm{LoShu}} = \begin{bmatrix}
+    2 & 7 & 6 \\
+    9 & 5 & 1 \\
+    4 & 3 & 8
+  \end{bmatrix}, \qquad \Hline(S_{\mathrm{LoShu}}) = 0.
+\end{equation}
+Consequently, under deterministic $2$-cycle steepest descent (choosing the lexicographically first pair $(a,b)$ minimizing $\Delta\Hline(\tau_{ab})$), $270{,}442$ of the $362{,}880$ states ($74.5266\%$) converge to the $8$ Lo Shu ground states, while the remaining $92{,}438$ states ($25.4734\%$) are captured by the $8$ antipodal traps $D_4 \cdot S_{\mathrm{trap}}^{(3)}$. Augmenting steepest descent with the $18$ line-preserving $(2,2)$ double swaps whenever a $2$-cycle local minimum is reached expands the deterministic ground-state basin to $362{,}880 / 362{,}880$ ($100.00\%$), independent of the tie-breaking rule.
 \end{theorem}
 
 \begin{proof}
@@ -81,7 +74,7 @@ At order $n=4$, the state space $S_{16}$ grows to $16! \approx 2.09 \times 10^{1
   \label{fig:s16_descent}
 \end{figure}
 
-As shown in \Cref{fig:s16_descent}b and \Cref{tab:s9_s16_landscape}, pure $2$-cycle steepest descent in $S_{16}$ reaches a magic ground state ($\Hline = 0$) in $365 / 2{,}000$ trials ($18.25\%$), terminating in a mean of $8.18$ steps at a mean residual energy $\langle\Hline(S_\infty)\rangle = 14.43$ (median $12.0$). The trapped configurations cluster heavily in the lowest frustration band $\Hline \in \{8, 12, 16\}$, which accounts for $470 + 305 + 367 = 1{,}142 / 2{,}000$ ($57.1\%$) of all random starts. Across the $1{,}635$ trapped $2$-cycle local minima, testing all $2\binom{16}{3} = 1{,}120$ directed $3$-cycles escapes only $56 / 1{,}635$ ($3.43\%$). By contrast, testing the $432$ line-preserving $(2,2)$ double swaps immediately escapes \textbf{$271 / 1{,}635$ ($16.57\%$)} of the trapped states---nearly $5\times$ the escape rate of $3$-cycles despite searching $2.6\times$ fewer candidates ($432$ vs.\ $1{,}120$)---and raises pure zero-temperature steepest-descent ground-state convergence from $18.25\%$ to \textbf{$25.45\%$} ($509 / 2{,}000$).
+As shown in \Cref{fig:s16_descent}b and \Cref{tab:s9_s16_landscape}, pure $2$-cycle steepest descent in $S_{16}$ reaches a magic ground state ($\Hline = 0$) in $365 / 2{,}000$ trials ($18.25\%$), terminating in a mean of $8.18$ steps at a mean residual energy $\langle\Hline(S_\infty)\rangle = 14.43$ (median $12.0$). The trapped configurations cluster heavily in the lowest frustration band $\Hline \in \{8, 12, 16\}$, which accounts for $470 + 305 + 367 = 1{,}142 / 2{,}000$ ($57.1\%$) of all random starts. Across the $1{,}635$ trapped $2$-cycle local minima, testing all $2\binom{16}{3} = 1{,}120$ directed $3$-cycles escapes only $56 / 1{,}635$ ($3.43\%$). By contrast, testing the $432$ line-preserving $(2,2)$ double swaps immediately escapes $271 / 1{,}635$ ($16.57\%$) of the trapped states---nearly $5\times$ the escape rate of $3$-cycles despite searching $2.6\times$ fewer candidates ($432$ vs.\ $1{,}120$)---and raises pure zero-temperature steepest-descent ground-state convergence from $18.25\%$ to $25.45\%$ ($509 / 2{,}000$).
 
 \begin{table}[t]
 \centering

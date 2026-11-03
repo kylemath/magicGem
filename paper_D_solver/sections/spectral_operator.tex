@@ -19,39 +19,32 @@ For every order $n \ge 3$, the line-incidence matrix $A_n \in \{0,1\}^{(2n+2)\ti
   \dim \ker(L_n) = n^2 - 2n - 1,
   \label{eq:magic_nullity}
 \end{equation}
-all of whose basis vectors lie in the zero-mean hyperplane $\mathbf{1}^\perp$. Furthermore:
-\begin{enumerate}
-  \item \textbf{Unprojected Spectrum on $\R^{n^2}$:} The $2n+1$ non-zero eigenvalues of $L_n$ on $\R^{n^2}$ consist of two irrational roots $\lambda_\pm(n)$ together with integer eigenvalues:
-  \begin{equation}
-    \spec(L_n) = \begin{cases}
-      \Bigl\{0^{[n^2-2n-1]},\; \lambda_-(n)^{[1]},\; n^{[2n-1]},\; \lambda_+(n)^{[1]}\Bigr\}, & \text{even } n \ge 4,\\
-      \Bigl\{0^{[n^2-2n-1]},\; \lambda_-(n)^{[1]},\; (n-1)^{[1]},\; n^{[2n-2]},\; \lambda_+(n)^{[1]}\Bigr\}, & \text{odd } n \ge 3,
-    \end{cases}
-    \label{eq:unprojected_spectrum}
-  \end{equation}
-  where $\lambda_\pm(n) = \frac{1}{2}\bigl(3n \pm \sqrt{n(n+16)}\bigr)$ for even $n$ and $\lambda_\pm(n) = \frac{1}{2}\bigl(3n+1 \pm \sqrt{n^2+14n+1}\bigr)$ for odd $n$.
-  \item \textbf{Rationalized Zero-Mean Spectrum on $\mathbf{1}^\perp$:} Let $P_{\mathbf{1}^\perp} = I_{n^2} - \frac{1}{n^2}\mathbf{1}\mathbf{1}^\top$ denote the orthogonal projector onto $\mathbf{1}^\perp$, and let $\Ltilde_n = P_{\mathbf{1}^\perp} L_n P_{\mathbf{1}^\perp}\big|_{\mathbf{1}^\perp}$ be the restricted Laplacian on the $(n^2-1)$-dimensional zero-mean subspace. On $\mathbf{1}^\perp$, the irrational roots $\lambda_\pm(n)$ collapse into exact integers:
-  \begin{equation}
-    \spec\bigl(\Ltilde_n\big|_{\mathbf{1}^\perp}\bigr) = \begin{cases}
-      \Bigl\{0^{[n^2-2n-1]},\; (n-2)^{[1]},\; n^{[2n-1]}\Bigr\}, & \text{if } n \ge 4 \text{ is even}, \\[0.8ex]
-      \Bigl\{0^{[n^2-2n-1]},\; (n-1)^{[2]},\; n^{[2n-2]}\Bigr\}, & \text{if } n \ge 3 \text{ is odd}.
-    \end{cases}
-    \label{eq:rationalized_spectrum}
-  \end{equation}
-\end{enumerate}
+all of whose basis vectors lie in the zero-mean hyperplane $\mathbf{1}^\perp$. On the ambient space $\R^{n^2}$, the $2n+1$ non-zero eigenvalues of $L_n$ consist of two irrational roots $\lambda_\pm(n)$ together with integer eigenvalues:
+\begin{equation}
+  \spec(L_n) = \begin{cases}
+    \Bigl\{0^{[n^2-2n-1]},\; \lambda_-(n)^{[1]},\; n^{[2n-1]},\; \lambda_+(n)^{[1]}\Bigr\}, & \text{even } n \ge 4,\\
+    \Bigl\{0^{[n^2-2n-1]},\; \lambda_-(n)^{[1]},\; (n-1)^{[1]},\; n^{[2n-2]},\; \lambda_+(n)^{[1]}\Bigr\}, & \text{odd } n \ge 3,
+  \end{cases}
+  \label{eq:unprojected_spectrum}
+\end{equation}
+where $\lambda_\pm(n) = \frac{1}{2}\bigl(3n \pm \sqrt{n(n+16)}\bigr)$ for even $n$ and $\lambda_\pm(n) = \frac{1}{2}\bigl(3n+1 \pm \sqrt{n^2+14n+1}\bigr)$ for odd $n$. By contrast, let $P_{\mathbf{1}^\perp} = I_{n^2} - \frac{1}{n^2}\mathbf{1}\mathbf{1}^\top$ denote the orthogonal projector onto $\mathbf{1}^\perp$, and let $\Ltilde_n = P_{\mathbf{1}^\perp} L_n P_{\mathbf{1}^\perp}\big|_{\mathbf{1}^\perp}$ be the restricted Laplacian on the $(n^2-1)$-dimensional zero-mean subspace. On $\mathbf{1}^\perp$, the irrational roots $\lambda_\pm(n)$ collapse into exact integers:
+\begin{equation}
+  \spec\bigl(\Ltilde_n\big|_{\mathbf{1}^\perp}\bigr) = \begin{cases}
+    \Bigl\{0^{[n^2-2n-1]},\; (n-2)^{[1]},\; n^{[2n-1]}\Bigr\}, & \text{if } n \ge 4 \text{ is even}, \\[0.8ex]
+    \Bigl\{0^{[n^2-2n-1]},\; (n-1)^{[2]},\; n^{[2n-2]}\Bigr\}, & \text{if } n \ge 3 \text{ is odd}.
+  \end{cases}
+  \label{eq:rationalized_spectrum}
+\end{equation}
 \end{theorem}
 
 \begin{proof}
 Write $L_n = L_{\mathrm{rc}} + D$, where $L_{\mathrm{rc}} = \sum_{i=1}^n \mathbf{r}_i \mathbf{r}_i^\top + \sum_{j=1}^n \mathbf{c}_j \mathbf{c}_j^\top$ and $D = \mathbf{d}_+ \mathbf{d}_+^\top + \mathbf{d}_- \mathbf{d}_-^\top$. As the Cartesian product of two complete graphs $K_n \square K_n$, the operator $L_{\mathrm{rc}}$ has eigenvalues $2n$ (multiplicity $1$, spanned by $\mathbf{1}$), $n$ (multiplicity $2n-2$, spanned by zero-mean pure row functions $\mathcal{V}_{\mathrm{row}} = \{\mathbf{u}\otimes \mathbf{1}_n : \mathbf{u}^\top \mathbf{1}_n = 0\}$ and pure column functions $\mathcal{V}_{\mathrm{col}} = \{\mathbf{1}_n \otimes \mathbf{v} : \mathbf{v}^\top \mathbf{1}_n = 0\}$), and $0$ (multiplicity $(n-1)^2$, the tensor-product subspace $\mathcal{V}_{\mathrm{row}}\otimes \mathcal{V}_{\mathrm{col}}$).
 
-Because every row and every column intersects $\mathbf{d}_+$ and $\mathbf{d}_-$ in exactly one cell, $\mathbf{r}_i^\top \mathbf{d}_\pm = \mathbf{c}_j^\top \mathbf{d}_\pm = 1$ for all $i,j$. Thus for any zero-mean row or column mode $\mathbf{w} \in \mathcal{V}_{\mathrm{row}} \oplus \mathcal{V}_{\mathrm{col}} \subset \mathbf{1}^\perp$, we have $\mathbf{d}_+^\top \mathbf{w} = \mathbf{d}_-^\top \mathbf{w} = 0$. Consequently, the $(2n-2)$-dimensional subspace $\mathcal{V}_{\mathrm{row}} \oplus \mathcal{V}_{\mathrm{col}}$ is in the kernel of $D$ and remains an exact eigenspace of both $L_n$ and $\Ltilde_n$ with eigenvalue $n$ and multiplicity $2n-2$.
+Because every row and every column intersects $\mathbf{d}_+$ and $\mathbf{d}_-$ in exactly one cell, $\mathbf{r}_i^\top \mathbf{d}_\pm = \mathbf{c}_j^\top \mathbf{d}_\pm = 1$ for all $i,j$. Thus for any zero-mean row or column mode $\mathbf{w} \in \mathcal{V}_{\mathrm{row}} \oplus \mathcal{V}_{\mathrm{col}} \subset \mathbf{1}^\perp$, we have $\mathbf{d}_+^\top \mathbf{w} = \mathbf{d}_-^\top \mathbf{w} = 0$. Consequently, the $(2n-2)$-dimensional subspace $\mathcal{V}_{\mathrm{row}} \oplus \mathcal{V}_{\mathrm{col}}$ lies in the kernel of $D$ and remains an exact eigenspace of both $L_n$ and $\Ltilde_n$ with eigenvalue $n$ and multiplicity $2n-2$.
 
-It remains to analyze the action of $L_n$ on the $3$-dimensional subspace $\mathcal{S}_3 = \operatorname{span}\{\mathbf{1}, \mathbf{d}_+, \mathbf{d}_-\}$, which is orthogonal to $\mathcal{V}_{\mathrm{row}}\oplus\mathcal{V}_{\mathrm{col}}$. Introduce the symmetric and antisymmetric diagonal combinations $\mathbf{s}_d = \mathbf{d}_+ + \mathbf{d}_-$ and $\mathbf{a}_d = \mathbf{d}_+ - \mathbf{d}_-$. By symmetry, $\mathbf{1}^\top \mathbf{a}_d = 0$ and $L_{\mathrm{rc}}\mathbf{a}_d = 0$, so $\mathbf{a}_d \in \mathbf{1}^\perp$ is an exact eigenvector of both $L_n$ and $\Ltilde_n$:
-\begin{itemize}
-  \item For even $n$, $\mathbf{d}_+^\top \mathbf{d}_- = 0$, so $D\mathbf{a}_d = n\mathbf{a}_d$, contributing $+1$ to the multiplicity of eigenvalue $n$ (giving $2n-1$ in total). For the symmetric mode $\mathbf{s}_d$, since $\mathbf{1}$ and $\mathbf{s}_d$ are linearly independent and every row and column intersects $\mathbf{s}_d$ in $2$ cells, we have $L_{\mathrm{rc}}\mathbf{s}_d = 4\mathbf{1}$, $L_{\mathrm{rc}}\mathbf{1} = 2n\mathbf{1}$, $D\mathbf{1} = n\mathbf{s}_d$, and $D\mathbf{s}_d = n\mathbf{s}_d$. In the ordered basis $\mathcal{B} = (\mathbf{1}, \mathbf{s}_d)$, the coordinate matrix of $L_n$ on $\operatorname{span}\{\mathbf{1}, \mathbf{s}_d\}$ is $[L_n]_{\mathcal{B}} = \bigl[\begin{smallmatrix} 2n & 4 \\ n & n \end{smallmatrix}\bigr]$, whose characteristic polynomial is $\lambda^2 - 3n\lambda + 2n(n-2) = 0$, yielding $\lambda_\pm(n) = \frac{3n \pm \sqrt{n(n+16)}}{2}$. Projecting onto $\mathbf{1}^\perp$ replaces $\mathbf{s}_d$ by $\widetilde{\mathbf{s}}_d = P_{\mathbf{1}^\perp}\mathbf{s}_d = \mathbf{s}_d - \frac{2}{n}\mathbf{1}$. Since $\mathbf{r}_i^\top \widetilde{\mathbf{s}}_d = \mathbf{c}_j^\top \widetilde{\mathbf{s}}_d = 2 - \frac{2}{n}(n) = 0$ for all $i,j$, we have $\widetilde{\mathbf{s}}_d \in \mathcal{V}_{\mathrm{row}}\otimes\mathcal{V}_{\mathrm{col}} = \ker(L_{\mathrm{rc}})$, so $L_{\mathrm{rc}}\widetilde{\mathbf{s}}_d = 0$. Moreover, $D\widetilde{\mathbf{s}}_d = D\mathbf{s}_d - \frac{2}{n}D\mathbf{1} = n\mathbf{s}_d - 2\mathbf{s}_d = (n-2)\mathbf{s}_d$, so $P_{\mathbf{1}^\perp} D \widetilde{\mathbf{s}}_d = (n-2)\widetilde{\mathbf{s}}_d$, yielding the exact integer eigenvalue $\mu = n-2$ with multiplicity $1$.
-  \item For odd $n$, $\mathbf{d}_+^\top \mathbf{d}_- = 1$ (shared central cell), so $\|\mathbf{a}_d\|^2 = 2(n-1)$ and $D\mathbf{a}_d = (n-1)\mathbf{a}_d$, giving eigenvalue $n-1$ for both $L_n$ and $\Ltilde_n$. For the symmetric mode $\mathbf{s}_d$, $\mathbf{s}_d^\top \mathbf{s}_d = 2n+2$, so $D\mathbf{s}_d = (n+1)\mathbf{s}_d$ and the coordinate matrix of $L_n$ in the basis $\mathcal{B} = (\mathbf{1}, \mathbf{s}_d)$ is $[L_n]_{\mathcal{B}} = \bigl[\begin{smallmatrix} 2n & 4 \\ n & n+1 \end{smallmatrix}\bigr]$ with characteristic polynomial $\lambda^2 - (3n+1)\lambda + 2n(n-1) = 0$, giving $\lambda_\pm(n) = \frac{3n+1 \pm \sqrt{n^2+14n+1}}{2}$. Projecting onto $\mathbf{1}^\perp$ gives $\widetilde{\mathbf{s}}_d = \mathbf{s}_d - \frac{2}{n}\mathbf{1} \in \ker(L_{\mathrm{rc}})$, on which $D\widetilde{\mathbf{s}}_d = (n+1)\mathbf{s}_d - 2\mathbf{s}_d = (n-1)\mathbf{s}_d$ and thus $\Ltilde_n \widetilde{\mathbf{s}}_d = (n-1)\widetilde{\mathbf{s}}_d$, contributing a second integer eigenvalue $\mu = n-1$ (total multiplicity $2$).
-\end{itemize}
-Finally, the orthogonal complement of $\operatorname{span}\{\widetilde{\mathbf{s}}_d, \mathbf{a}_d\}$ inside the $(n-1)^2$-dimensional subspace $\mathcal{V}_{\mathrm{row}}\otimes\mathcal{V}_{\mathrm{col}}$ has dimension $(n-1)^2 - 2 = n^2 - 2n - 1$ and is annihilated by both $L_{\mathrm{rc}}$ and $D$, establishing \Cref{eq:magic_nullity}, \Cref{eq:unprojected_spectrum}, and \Cref{eq:rationalized_spectrum}.
+It remains to analyze the action of $L_n$ on the $3$-dimensional subspace $\mathcal{S}_3 = \operatorname{span}\{\mathbf{1}, \mathbf{d}_+, \mathbf{d}_-\}$, which is orthogonal to $\mathcal{V}_{\mathrm{row}}\oplus\mathcal{V}_{\mathrm{col}}$. Introduce the symmetric and antisymmetric diagonal combinations $\mathbf{s}_d = \mathbf{d}_+ + \mathbf{d}_-$ and $\mathbf{a}_d = \mathbf{d}_+ - \mathbf{d}_-$. By symmetry, $\mathbf{1}^\top \mathbf{a}_d = 0$ and $L_{\mathrm{rc}}\mathbf{a}_d = 0$, so $\mathbf{a}_d \in \mathbf{1}^\perp$ is an exact eigenvector of both $L_n$ and $\Ltilde_n$. When $n$ is even, $\mathbf{d}_+^\top \mathbf{d}_- = 0$, so $D\mathbf{a}_d = n\mathbf{a}_d$, contributing $+1$ to the multiplicity of eigenvalue $n$ (giving $2n-1$ in total). For the symmetric mode $\mathbf{s}_d$ at even $n$, since $\mathbf{1}$ and $\mathbf{s}_d$ are linearly independent and every row and column intersects $\mathbf{s}_d$ in $2$ cells, we have $L_{\mathrm{rc}}\mathbf{s}_d = 4\mathbf{1}$, $L_{\mathrm{rc}}\mathbf{1} = 2n\mathbf{1}$, $D\mathbf{1} = n\mathbf{s}_d$, and $D\mathbf{s}_d = n\mathbf{s}_d$. In the ordered basis $\mathcal{B} = (\mathbf{1}, \mathbf{s}_d)$, the coordinate matrix of $L_n$ on $\operatorname{span}\{\mathbf{1}, \mathbf{s}_d\}$ is $[L_n]_{\mathcal{B}} = \bigl[\begin{smallmatrix} 2n & 4 \\ n & n \end{smallmatrix}\bigr]$, whose characteristic polynomial is $\lambda^2 - 3n\lambda + 2n(n-2) = 0$, yielding $\lambda_\pm(n) = \frac{3n \pm \sqrt{n(n+16)}}{2}$. Projecting onto $\mathbf{1}^\perp$ replaces $\mathbf{s}_d$ by $\widetilde{\mathbf{s}}_d = P_{\mathbf{1}^\perp}\mathbf{s}_d = \mathbf{s}_d - \frac{2}{n}\mathbf{1}$. Since $\mathbf{r}_i^\top \widetilde{\mathbf{s}}_d = \mathbf{c}_j^\top \widetilde{\mathbf{s}}_d = 2 - \frac{2}{n}(n) = 0$ for all $i,j$, we have $\widetilde{\mathbf{s}}_d \in \mathcal{V}_{\mathrm{row}}\otimes\mathcal{V}_{\mathrm{col}} = \ker(L_{\mathrm{rc}})$, so $L_{\mathrm{rc}}\widetilde{\mathbf{s}}_d = 0$. Moreover, $D\widetilde{\mathbf{s}}_d = D\mathbf{s}_d - \frac{2}{n}D\mathbf{1} = n\mathbf{s}_d - 2\mathbf{s}_d = (n-2)\mathbf{s}_d$, so $P_{\mathbf{1}^\perp} D \widetilde{\mathbf{s}}_d = (n-2)\widetilde{\mathbf{s}}_d$, yielding the exact integer eigenvalue $\mu = n-2$ with multiplicity $1$.
+
+When $n$ is odd, $\mathbf{d}_+^\top \mathbf{d}_- = 1$ at the shared central cell, so $\|\mathbf{a}_d\|^2 = 2(n-1)$ and $D\mathbf{a}_d = (n-1)\mathbf{a}_d$, giving eigenvalue $n-1$ for both $L_n$ and $\Ltilde_n$. For the symmetric mode $\mathbf{s}_d$ at odd $n$, $\mathbf{s}_d^\top \mathbf{s}_d = 2n+2$, so $D\mathbf{s}_d = (n+1)\mathbf{s}_d$ and the coordinate matrix of $L_n$ in the basis $\mathcal{B} = (\mathbf{1}, \mathbf{s}_d)$ is $[L_n]_{\mathcal{B}} = \bigl[\begin{smallmatrix} 2n & 4 \\ n & n+1 \end{smallmatrix}\bigr]$ with characteristic polynomial $\lambda^2 - (3n+1)\lambda + 2n(n-1) = 0$, giving $\lambda_\pm(n) = \frac{3n+1 \pm \sqrt{n^2+14n+1}}{2}$. Projecting onto $\mathbf{1}^\perp$ gives $\widetilde{\mathbf{s}}_d = \mathbf{s}_d - \frac{2}{n}\mathbf{1} \in \ker(L_{\mathrm{rc}})$, on which $D\widetilde{\mathbf{s}}_d = (n+1)\mathbf{s}_d - 2\mathbf{s}_d = (n-1)\mathbf{s}_d$ and thus $\Ltilde_n \widetilde{\mathbf{s}}_d = (n-1)\widetilde{\mathbf{s}}_d$, contributing a second integer eigenvalue $\mu = n-1$ (total multiplicity $2$). Finally, for both parities, the orthogonal complement of $\operatorname{span}\{\widetilde{\mathbf{s}}_d, \mathbf{a}_d\}$ inside the $(n-1)^2$-dimensional subspace $\mathcal{V}_{\mathrm{row}}\otimes\mathcal{V}_{\mathrm{col}}$ has dimension $(n-1)^2 - 2 = n^2 - 2n - 1$ and is annihilated by both $L_{\mathrm{rc}}$ and $D$, establishing \Cref{eq:magic_nullity}, \Cref{eq:unprojected_spectrum}, and \Cref{eq:rationalized_spectrum}.
 \end{proof}
 
 \begin{figure}[t]
@@ -72,7 +65,7 @@ For every integer $n \ge 3$ (both odd and even), the trace of the zero-mean rest
   \tr\bigl(\Ltilde_n\big|_{\mathbf{1}^\perp}\bigr) = 2(n^2 - 1),
   \label{eq:trace_Ltilde}
 \end{equation}
-so the mean eigenvalue of $\Ltilde_n$ on $\mathbf{1}^\perp$ is \textbf{identically $2$}:
+so the mean eigenvalue of $\Ltilde_n$ on $\mathbf{1}^\perp$ is \emph{identically $2$}:
 \begin{equation}
   \bar{\mu}(\Ltilde_n) = \frac{\tr(\Ltilde_n|_{\mathbf{1}^\perp})}{n^2 - 1} = 2.
   \label{eq:mean_eigenvalue_two}
