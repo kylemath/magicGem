@@ -154,6 +154,9 @@ const elements = {
   resetParamsButton: document.querySelector("#resetParamsButton"),
   pauseButton: document.querySelector("#pauseButton"),
   settleButton: document.querySelector("#settleButton"),
+  solverTierSelect: document.querySelector("#solverTierSelect"),
+  presetTrap3Button: document.querySelector("#presetTrap3Button"),
+  presetSlow4Button: document.querySelector("#presetSlow4Button"),
   regimeBar: document.querySelector("#regimeBar"),
   regimeEyebrow: document.querySelector("#regimeEyebrow"),
   regimeTitle: document.querySelector("#regimeTitle"),
@@ -259,6 +262,25 @@ function installGlobalListeners() {
   elements.settleButton.addEventListener("click", () => {
     settleBubbles(visualization);
   });
+  if (elements.presetTrap3Button) {
+    elements.presetTrap3Button.addEventListener("click", () => {
+      loadCustomPresetSquare(3, [
+        [6, 7, 2],
+        [1, 5, 9],
+        [8, 3, 4],
+      ]);
+    });
+  }
+  if (elements.presetSlow4Button) {
+    elements.presetSlow4Button.addEventListener("click", () => {
+      loadCustomPresetSquare(4, [
+        [9, 4, 12, 3],
+        [16, 1, 14, 7],
+        [10, 15, 11, 8],
+        [2, 5, 6, 13],
+      ]);
+    });
+  }
   elements.runBatchButton.addEventListener("click", () => {
     const count = clampBatchCount(elements.batchCountInput.value);
     elements.batchCountInput.value = String(count);
@@ -305,7 +327,9 @@ function runBatchAndRender(count) {
     renderBatchTable();
     const magicCount = results.filter((r) => r.magic).length;
     const minE = results.reduce((acc, r) => Math.min(acc, r.finalE), Infinity);
-    elements.batchStatus.textContent = `${count} trials in ${(elapsed / 1000).toFixed(2)}s · best E = ${formatEnergy(minE)} · magic ${magicCount}/${count}`;
+    const tierTag = (elements.solverTierSelect?.value || "tier6").toUpperCase();
+    const pct = ((100 * magicCount) / Math.max(1, count)).toFixed(1);
+    elements.batchStatus.textContent = `[${tierTag}] ${count} trials in ${(elapsed / 1000).toFixed(2)}s · best E = ${formatEnergy(minE)} · magic ${magicCount}/${count} (${pct}%)`;
     elements.runBatchButton.disabled = false;
   }, 16);
 }
@@ -783,6 +807,28 @@ function syncSourceSquare() {
   }
 }
 
+function loadCustomPresetSquare(order, matrix) {
+  globalState.order = order;
+  if (elements.orderSelect) elements.orderSelect.value = String(order);
+  refreshClassOptions();
+  visualization.square = cloneSquare(matrix);
+  seedBubbles(visualization);
+  for (const b of visualization.bubbles) {
+    const r = Math.floor(b.y);
+    const c = Math.floor(b.x);
+    b.x = c + 0.5;
+    b.y = r + 0.5;
+    b.vx = 0;
+    b.vy = 0;
+  }
+  visualization.inducedSquare = inducedSquareFromBubbles(visualization, order);
+  visualization.analysis = lineEnergy(visualization.inducedSquare);
+  rebuildThreeBodies(visualization);
+  resizeVariation(visualization);
+  globalState.paused = true;
+  if (elements.pauseButton) elements.pauseButton.textContent = "Resume";
+}
+
 function seedBubbles(variation) {
   if (!variation.square) return;
   const n = variation.square.length;
@@ -831,16 +877,19 @@ function settleBubbles(variation) {
 
   const initialE = lineEnergy(startSquare).completeEnergy;
   const defaultIters = n <= 3 ? 600 : n === 4 ? 1500 : 2500;
+  const selectedTier = elements.solverTierSelect?.value || "tier6";
   const result = runSimulatedAnneal(startSquare, n, {
     iterations: defaultIters,
     startTemperature: Math.max(40, initialE * 0.35),
+    tier: selectedTier,
   });
 
   applySquareToBubbles(variation, result.bestSquare, n);
   variation.inducedSquare = inducedSquareFromBubbles(variation, n);
-  variation.analysis = lineEnergy(variation.inducedSquare);
+  visualization.analysis = lineEnergy(variation.inducedSquare);
   logSettleEvent({
     action: "settle",
+    tier: selectedTier,
     initialE,
     finalE: result.bestE,
     iterations: defaultIters,
@@ -961,6 +1010,7 @@ function getSolverTables(n) {
 //   (4) Re-anchored best-local-minimum plateau hopping across restarts.
 // Achieves 100.0% ground-state synthesis across all orders n = 3..8.
 function runSimulatedAnneal(square, n, opts = {}) {
+  const tier = opts.tier || elements.solverTierSelect?.value || "tier6";
   const tables = getSolverTables(n);
   const {
     N,
@@ -973,8 +1023,25 @@ function runSimulatedAnneal(square, n, opts = {}) {
     colPairIndices,
   } = tables;
   const numPairs = pairs.length;
-  const maxRestarts = opts.maxRestarts ?? (n <= 3 ? 4 : n === 4 ? 12 : 60);
-  const kicksPerRestart = opts.kicksPerRestart ?? (n <= 3 ? 8 : 18);
+
+  // Tier 0: Colloidal Drift + Cell Snap Only (no cooperative permutation moves)
+  if (tier === "tier0") {
+    const snapE = lineEnergy(square).completeEnergy;
+    return { bestSquare: square.map((row) => row.slice()), bestE: snapE };
+  }
+
+  const maxRestarts =
+    tier === "tier6"
+      ? (opts.maxRestarts ?? (n <= 3 ? 4 : n === 4 ? 16 : 60))
+      : 1;
+  const kicksPerRestart =
+    tier === "tier1" || tier === "tier2" || tier === "tier3"
+      ? (n <= 4 ? 8 : 12)
+      : (opts.kicksPerRestart ?? (n <= 3 ? 8 : 18));
+  const useSlip = tier === "tier4" || tier === "tier5" || tier === "tier6";
+  const useLP22 = tier === "tier3" || tier === "tier4" || tier === "tier5" || tier === "tier6";
+  const useGen22 = tier === "tier4" || tier === "tier5" || tier === "tier6";
+  const useReanchor = tier === "tier5" || tier === "tier6";
 
   const flatValues0 = [];
   const flatZ0 = [];
@@ -1095,12 +1162,68 @@ function runSimulatedAnneal(square, n, opts = {}) {
         if (globalBestE === 0) break;
       }
 
+      // Tier 1: Kawasaki 2-Spin Steepest Quench stops at the 2-cycle local minimum
+      if (tier === "tier1") break;
+
+      // Tier 2: Zener 3-Ring Vacancy Descent (checks directed 3-cycles (a,b,c) via two swaps)
+      if (tier === "tier2") {
+        let best3 = null;
+        let best3DE = 0;
+        const max3Samples = n <= 3 ? 168 : 400;
+        if (n === 3) {
+          for (let a = 0; a < N; a += 1) {
+            for (let b = a + 1; b < N; b += 1) {
+              for (let c = b + 1; c < N; c += 1) {
+                const E0_3 = E;
+                swapCells(a, b);
+                swapCells(b, c);
+                if (E - E0_3 < best3DE) {
+                  best3DE = E - E0_3;
+                  best3 = [a, b, b, c];
+                }
+                swapCells(b, c);
+                swapCells(a, b);
+
+                swapCells(a, c);
+                swapCells(b, c);
+                if (E - E0_3 < best3DE) {
+                  best3DE = E - E0_3;
+                  best3 = [a, c, b, c];
+                }
+                swapCells(b, c);
+                swapCells(a, c);
+              }
+            }
+          }
+        } else {
+          for (let s = 0; s < max3Samples; s += 1) {
+            const p1 = Math.floor(Math.random() * numPairs);
+            const p2 = Math.floor(Math.random() * numPairs);
+            if (p1 === p2) continue;
+            const dE1 = swapDelta(p1);
+            doSwap(p1);
+            const tot = dE1 + swapDelta(p2);
+            if (tot < best3DE) {
+              best3DE = tot;
+              best3 = [pairs[p1][0], pairs[p1][1], pairs[p2][0], pairs[p2][1]];
+            }
+            doSwap(p1);
+          }
+        }
+        if (best3 !== null) {
+          swapCells(best3[0], best3[1]);
+          swapCells(best3[2], best3[3]);
+          continue;
+        }
+        break;
+      }
+
       if (E < bestStateE) {
         bestStateE = E;
         bestStateZ = z.slice();
         bestStateV = vArr.slice();
         bestStateR = R.slice();
-      } else if (E > bestStateE + 24) {
+      } else if (useReanchor && E > bestStateE + 24) {
         for (let i = 0; i < N; i += 1) {
           z[i] = bestStateZ[i];
           vArr[i] = bestStateV[i];
@@ -1110,72 +1233,53 @@ function runSimulatedAnneal(square, n, opts = {}) {
       }
 
       // 2. Whole-row / whole-column swap (for diagonal-only or near-semi-magic traps)
-      const E0 = E;
-      let bestRcDE = 0;
-      let bestRc = null;
-      for (let i1 = 0; i1 < n; i1 += 1) {
-        for (let i2 = i1 + 1; i2 < n; i2 += 1) {
-          for (let c = 0; c < n; c += 1) swapCells(i1 * n + c, i2 * n + c);
-          if (E - E0 < bestRcDE) {
-            bestRcDE = E - E0;
-            bestRc = [0, i1, i2];
-          }
-          for (let c = 0; c < n; c += 1) swapCells(i1 * n + c, i2 * n + c);
+      if (useSlip) {
+        const E0 = E;
+        let bestRcDE = 0;
+        let bestRc = null;
+        for (let i1 = 0; i1 < n; i1 += 1) {
+          for (let i2 = i1 + 1; i2 < n; i2 += 1) {
+            for (let c = 0; c < n; c += 1) swapCells(i1 * n + c, i2 * n + c);
+            if (E - E0 < bestRcDE) {
+              bestRcDE = E - E0;
+              bestRc = [0, i1, i2];
+            }
+            for (let c = 0; c < n; c += 1) swapCells(i1 * n + c, i2 * n + c);
 
-          for (let r = 0; r < n; r += 1) swapCells(r * n + i1, r * n + i2);
-          if (E - E0 < bestRcDE) {
-            bestRcDE = E - E0;
-            bestRc = [1, i1, i2];
+            for (let r = 0; r < n; r += 1) swapCells(r * n + i1, r * n + i2);
+            if (E - E0 < bestRcDE) {
+              bestRcDE = E - E0;
+              bestRc = [1, i1, i2];
+            }
+            for (let r = 0; r < n; r += 1) swapCells(r * n + i1, r * n + i2);
           }
-          for (let r = 0; r < n; r += 1) swapCells(r * n + i1, r * n + i2);
         }
-      }
-      if (bestRc !== null) {
-        const [kind, i1, i2] = bestRc;
-        if (kind === 0) {
-          for (let c = 0; c < n; c += 1) swapCells(i1 * n + c, i2 * n + c);
-        } else {
-          for (let r = 0; r < n; r += 1) swapCells(r * n + i1, r * n + i2);
+        if (bestRc !== null) {
+          const [kind, i1, i2] = bestRc;
+          if (kind === 0) {
+            for (let c = 0; c < n; c += 1) swapCells(i1 * n + c, i2 * n + c);
+          } else {
+            for (let r = 0; r < n; r += 1) swapCells(r * n + i1, r * n + i2);
+          }
+          continue;
         }
-        continue;
       }
 
       // 3. Pruned line-preserving (2,2) double swap (dE1 <= 80)
       let best22 = null;
       let best22DE = 0;
-      for (let r1 = 0; r1 < n; r1 += 1) {
-        const rp1 = rowPairIndices[r1];
-        for (let idx1 = 0; idx1 < rp1.length; idx1 += 1) {
-          const p1 = rp1[idx1];
-          const dE1 = swapDelta(p1);
-          if (dE1 > 80) continue;
-          doSwap(p1);
-          for (let r2 = r1 + 1; r2 < n; r2 += 1) {
-            const rp2 = rowPairIndices[r2];
-            for (let idx2 = 0; idx2 < rp2.length; idx2 += 1) {
-              const p2 = rp2[idx2];
-              const tot = dE1 + swapDelta(p2);
-              if (tot < best22DE) {
-                best22DE = tot;
-                best22 = [p1, p2];
-              }
-            }
-          }
-          doSwap(p1);
-        }
-      }
-      if (best22 === null) {
-        for (let c1 = 0; c1 < n; c1 += 1) {
-          const cp1 = colPairIndices[c1];
-          for (let idx1 = 0; idx1 < cp1.length; idx1 += 1) {
-            const p1 = cp1[idx1];
+      if (useLP22) {
+        for (let r1 = 0; r1 < n; r1 += 1) {
+          const rp1 = rowPairIndices[r1];
+          for (let idx1 = 0; idx1 < rp1.length; idx1 += 1) {
+            const p1 = rp1[idx1];
             const dE1 = swapDelta(p1);
             if (dE1 > 80) continue;
             doSwap(p1);
-            for (let c2 = c1 + 1; c2 < n; c2 += 1) {
-              const cp2 = colPairIndices[c2];
-              for (let idx2 = 0; idx2 < cp2.length; idx2 += 1) {
-                const p2 = cp2[idx2];
+            for (let r2 = r1 + 1; r2 < n; r2 += 1) {
+              const rp2 = rowPairIndices[r2];
+              for (let idx2 = 0; idx2 < rp2.length; idx2 += 1) {
+                const p2 = rp2[idx2];
                 const tot = dE1 + swapDelta(p2);
                 if (tot < best22DE) {
                   best22DE = tot;
@@ -1186,44 +1290,73 @@ function runSimulatedAnneal(square, n, opts = {}) {
             doSwap(p1);
           }
         }
+        if (best22 === null) {
+          for (let c1 = 0; c1 < n; c1 += 1) {
+            const cp1 = colPairIndices[c1];
+            for (let idx1 = 0; idx1 < cp1.length; idx1 += 1) {
+              const p1 = cp1[idx1];
+              const dE1 = swapDelta(p1);
+              if (dE1 > 80) continue;
+              doSwap(p1);
+              for (let c2 = c1 + 1; c2 < n; c2 += 1) {
+                const cp2 = colPairIndices[c2];
+                for (let idx2 = 0; idx2 < cp2.length; idx2 += 1) {
+                  const p2 = cp2[idx2];
+                  const tot = dE1 + swapDelta(p2);
+                  if (tot < best22DE) {
+                    best22DE = tot;
+                    best22 = [p1, p2];
+                  }
+                }
+              }
+              doSwap(p1);
+            }
+          }
+        }
+        if (best22 !== null) {
+          doSwap(best22[0]);
+          doSwap(best22[1]);
+          continue;
+        }
       }
-      if (best22 !== null) {
-        doSwap(best22[0]);
-        doSwap(best22[1]);
-        continue;
-      }
+
+      // Tier 3 (Pauling Spin-Ice (2,2) Quench) stops once no 2-cycle or line-preserving (2,2) lowers E
+      if (tier === "tier3") break;
 
       // 4. General disjoint (2,2) double-swap search among top-40 lowest-dE single swaps
       const cand = [];
-      for (let pIdx = 0; pIdx < numPairs; pIdx += 1) {
-        const dE1 = swapDelta(pIdx);
-        if (dE1 <= 48) cand.push([dE1, pIdx]);
-      }
-      cand.sort((x, y) => x[0] - y[0]);
-      const topK = Math.min(cand.length, 40);
-      for (let idx1 = 0; idx1 < topK; idx1 += 1) {
-        const [dE1, p1] = cand[idx1];
-        const [a1, b1] = pairs[p1];
-        doSwap(p1);
-        for (let idx2 = idx1 + 1; idx2 < topK; idx2 += 1) {
-          const p2 = cand[idx2][1];
-          const [a2, b2] = pairs[p2];
-          if (a1 === a2 || a1 === b2 || b1 === a2 || b1 === b2) continue;
-          const tot = dE1 + swapDelta(p2);
-          if (tot < best22DE) {
-            best22DE = tot;
-            best22 = [p1, p2];
-          }
+      if (useGen22) {
+        for (let pIdx = 0; pIdx < numPairs; pIdx += 1) {
+          const dE1 = swapDelta(pIdx);
+          if (dE1 <= 48) cand.push([dE1, pIdx]);
         }
-        doSwap(p1);
-      }
-      if (best22 !== null) {
-        doSwap(best22[0]);
-        doSwap(best22[1]);
-        continue;
+        cand.sort((x, y) => x[0] - y[0]);
+        const topK = Math.min(cand.length, 40);
+        for (let idx1 = 0; idx1 < topK; idx1 += 1) {
+          const [dE1, p1] = cand[idx1];
+          const [a1, b1] = pairs[p1];
+          doSwap(p1);
+          for (let idx2 = idx1 + 1; idx2 < topK; idx2 += 1) {
+            const p2 = cand[idx2][1];
+            const [a2, b2] = pairs[p2];
+            if (a1 === a2 || a1 === b2 || b1 === a2 || b1 === b2) continue;
+            const tot = dE1 + swapDelta(p2);
+            if (tot < best22DE) {
+              best22DE = tot;
+              best22 = [p1, p2];
+            }
+          }
+          doSwap(p1);
+        }
+        if (best22 !== null) {
+          doSwap(best22[0]);
+          doSwap(best22[1]);
+          continue;
+        }
       }
 
       // 5. Re-anchored plateau/barrier hop
+      const topK = Math.min(cand.length, 40);
       if (topK >= 2) {
         const lim = Math.min(12, topK);
         const p1 = cand[Math.floor(Math.random() * lim)][1];
@@ -1294,6 +1427,7 @@ function runSettleBatch(variation, count) {
   const values = variation.bubbles.map((b) => b.value);
   const startedAt = performance.now();
   const results = [];
+  const selectedTier = elements.solverTierSelect?.value || "tier6";
   for (let trial = 0; trial < count; trial += 1) {
     const startSquare = randomPermutationSquare(values, n);
     const initialE = lineEnergy(startSquare).completeEnergy;
@@ -1301,6 +1435,7 @@ function runSettleBatch(variation, count) {
     const sa = runSimulatedAnneal(startSquare, n, {
       iterations: defaultIters,
       startTemperature: Math.max(40, initialE * 0.35),
+      tier: selectedTier,
     });
     const finalAnalysis = lineEnergy(sa.bestSquare);
     const rowsE = sum(finalAnalysis.rows.map((v) => v * v));

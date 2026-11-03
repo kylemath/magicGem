@@ -17,14 +17,10 @@
   <body>
     <header class="topbar">
       <div class="brand">
-        <p class="eyebrow">Trinity lab</p>
+        <p class="eyebrow">Companion to Paper D · Bubble Trinity &amp; Multi-Cycle Settler Lab</p>
         <h1>Bubble field paired with shell geometry</h1>
         <p>
-          The same magic-square state is shown two ways at once. The left pane
-          is the live bubble field; the right pane lifts every bubble onto its
-          shell of radius <code>|v|</code>, with a neon hot-patch lighting up
-          the surface around each vector terminal. Pick a regime to switch the
-          physics, then tune its two knobs.
+          The same magic-square state is shown two ways at once: the live viscoelastic bubble field (left) and 3D radial shell terminals <code>|v|</code> (right). Switch between continuous Langevin regimes (Regimes I–IV), test Paper D's canonical trap counterexamples (<code>S_trap^(3)</code> at <code>E=8</code> and <code>S_low</code> at <code>E=1584</code>), or compare the 7 physical mechanism ablation tiers from greedy/Hungarian snapping (0%) up to the 100% Re-Anchored Hierarchical Multi-Cycle Settler across <code>n = 3..8</code>.
         </p>
       </div>
       <div class="global-controls">
@@ -53,17 +49,35 @@
           <input id="swapSlider" type="range" min="0" max="32" value="0" />
           <span id="swapLabel">0</span>
         </label>
+        <label>
+          Physical Settler Mechanism (Paper D Table 6)
+          <select id="solverTierSelect" title="Select which physical relaxation mechanism tier is used by Settle and Run batch (Paper D, Section 5.3 &amp; Table 6).">
+            <option value="tier6" selected>Tier 6 · Full Re-Anchored Multi-Cycle Settler (100% n=3..8)</option>
+            <option value="tier5">Tier 5 · Single-Restart Re-Anchored Funnel Leash (58% n=4)</option>
+            <option value="tier4">Tier 4 · + T1 / Eshelby Quadrupolar (2,2) &amp; Slip Glide (42.5% n=4)</option>
+            <option value="tier3">Tier 3 · + Pauling Spin-Ice (2,2) Loop Quench (100% n=3, 29% n=4)</option>
+            <option value="tier2">Tier 2 · Zener 3-Ring Vacancy SA (0% on S_trap, 32.5% n=4)</option>
+            <option value="tier1">Tier 1 · Kawasaki 2-Spin Steepest Quench (74.5% n=3, 20% n=4)</option>
+            <option value="tier0">Tier 0 · Colloidal Drift + Cell Snap Only (0%)</option>
+          </select>
+        </label>
         <div class="button-row">
           <button id="resetRunButton" type="button">Reset run</button>
           <button id="resetParamsButton" type="button">Reset params</button>
           <button id="pauseButton" type="button">Pause</button>
-          <button id="settleButton" type="button" title="Run a directed simulated-annealing search over discrete cell assignments using 2-cycle and 3-cycle swaps. Lands the bubbles in the lowest line-energy configuration it can reach (often magic for small n). Continuous physics resumes immediately afterward, so pause or switch to Frozen lattice to lock in the result.">Settle</button>
+          <button id="settleButton" type="button" title="Run the selected Paper D physical settler mechanism (Tiers 0–6). Tier 6 combines O(1) incremental Kawasaki 2-cycle steepest descent, crystallographic slip-plane glide, Pauling spin-ice (2,2) loops, T1/Eshelby quadrupolar (2,2) moves, and Wales–Doye/chaperonin re-anchored basin-hopping to reach H_line = 0 with 100% reliability across n = 3..8.">Settle</button>
+        </div>
+        <div class="button-row" style="margin-top:0.35rem;">
+          <button id="presetTrap3Button" type="button" title="Load Paper D Theorem 4.2 Antipodal Trap S_trap^(3) (n=3, H_line=8). 100% immune to all 36 2-cycles (Tier 1) and all 168 3-cycles (Tier 2), but escapes in 1 step via the unique Pauling spin-ice (2,2) loop (6<->7)(3<->4) in Tier 3+!">Preset: S_trap^(3) (E=8)</button>
+          <button id="presetSlow4Button" type="button" title="Load Paper D Proposition 2.3 Optical-Phonon Counterexample S_low (n=4, H_line=1584). Has zero 3D dipole torque (<X,Z>=<Y,Z>=0) and zero diagonal residual (R_D+=R_D-=0), yet fails line balance via the 2n-4 = 4D optical-phonon modes.">Preset: S_low (E=1584)</button>
         </div>
         <nav class="cross-links">
-          <a href="./physics-lab.html">Physics lab</a>
-          <a href="./vector-physics.html">Vector physics</a>
-          <a href="./energy-decomposition.html">Line energy</a>
-          <a href="./index.html">Spectral paper</a>
+          <a href="../../paperD.pdf" target="_blank" rel="noopener">📄 Paper D (PDF)</a>
+          <a href="../../index.html">Magic Gems Portal</a>
+          <a href="./index.html">Spectral &amp; Window Lab</a>
+          <a href="./energy-decomposition.html">Line Energy</a>
+          <a href="./physics-lab.html">Physics Lab</a>
+          <a href="./vector-physics.html">Vector Physics</a>
         </nav>
       </div>
     </header>
@@ -96,12 +110,10 @@
         <section class="batch-panel" id="batchPanel">
           <header class="batch-head">
             <div>
-              <p class="eyebrow">Settle batch</p>
-              <h3>Basin distribution</h3>
+              <p class="eyebrow">Settle batch · Paper D Physical Mechanism Ablation</p>
+              <h3>Basin distribution across physical relaxation tiers</h3>
               <p class="muted">
-                Run Settle from many random starts and watch which line-energy
-                plateaus the system lands on. Click any bar or row to replay
-                that run's final configuration on the bubble field.
+                Run Settle from many random starts using the selected <strong>Physical Settler Mechanism (Tiers 0–6)</strong> and watch which line-energy plateaus the system lands on. Switch between <em>Tier 1 (Kawasaki 2-Spin Quench)</em>, <em>Tier 3 (+ Pauling Spin-Ice (2,2) Loops)</em>, and <em>Tier 6 (Full Re-Anchored Multi-Cycle Settler, 100%)</em> to watch frustrated local minima (<code>E ∈ {8, 12, 16}</code>) collapse into the magic ground state (<code>E = 0</code>). Click any bar or row to replay that configuration on the bubble field.
               </p>
             </div>
             <div class="batch-controls">

@@ -9,21 +9,29 @@
   <body>
     <header class="hero">
       <div>
-        <p class="eyebrow">Interactive academic note</p>
+        <p class="eyebrow">Companion to Paper D · Spectral Energy Landscapes &amp; Multiscale Window Entropies</p>
         <h1>Magic squares as spectral height fields</h1>
         <p class="lede">
-          A normal magic square is a constrained permutation of heights over a
-          lattice. Its centered 3D covariance is almost too forgiving, so this
-          paper studies multiscale energy spectra that expose local structure.
+          A normal magic square is a zero-mean permutation over a lattice in the
+          <code>(n²-2n-1)</code>-dimensional nullspace of the rationalized magic-line
+          Laplacian <code>L̃_n = P_{1^⊥} A_n^T A_n P_{1^⊥}</code>. Because its 3D spatial
+          covariance is universal across all semi-magic squares, Paper D studies
+          the exact integer spectrum of <code>L̃_n</code>, multiscale window entropies
+          <code>H̃_p(k)</code>, the Concentric Shell Quadrupole Identity, and cooperative
+          <code>(2,2)</code> relaxation.
         </p>
         <p class="lede-link">
-          <a href="./vector-physics.html">Open the 4 x 4 vector physics page</a>
+          <a href="../../paperD.pdf" target="_blank" rel="noopener"><strong>📄 Read Paper D (PDF)</strong></a>
           ·
-          <a href="./energy-decomposition.html">Open the line-energy decomposition page</a>
+          <a href="../../index.html">Magic Gems Portal</a>
           ·
-          <a href="./physics-lab.html">Open the physics simulation lab</a>
+          <a href="./bubble-trinity.html"><strong>Open Bubble Trinity &amp; Multi-Cycle Settler Lab</strong></a>
           ·
-          <a href="./bubble-trinity.html">Open the bubble trinity lab</a>
+          <a href="./energy-decomposition.html">Line-energy decomposition</a>
+          ·
+          <a href="./physics-lab.html">Physics simulation lab</a>
+          ·
+          <a href="./vector-physics.html">4 × 4 vector physics</a>
         </p>
       </div>
       <div class="hero-panel" id="heroStats"></div>
@@ -32,31 +40,35 @@
     <main>
       <section class="paper-grid">
         <article class="paper-section wide">
-          <p class="section-kicker">Formal model</p>
-          <h2>From mass balance to spectral geometry</h2>
+          <p class="section-kicker">Paper D Theorems &amp; Identities</p>
+          <h2>From spectral rationalization to multiscale window geometry</h2>
           <div class="equation-grid">
             <div class="equation-card">
-              <span>Centered coordinates</span>
-              <code>X_j = 2j-(n-1), Y_i = 2i-(n-1)</code>
+              <span>Thm 2.1 · Zero-Mean Spectrum L̃_n</span>
+              <code>{0^[n²-2n-1], n-2, n^[2n-1]} (even n) · μ̄ = 2</code>
             </div>
             <div class="equation-card">
-              <span>Centered height</span>
-              <code>Z_ij = 2a_ij-(n²+1)</code>
+              <span>Thm 3.1 · Even-Order Quartet Equivalence</span>
+              <code>W_{2×2}^int(S)=0 ∧ H_line=0 ⇒ W_{2×2}^tor(S)=0</code>
             </div>
             <div class="equation-card">
-              <span>Magic constraints</span>
-              <code>Σ_row Z = Σ_col Z = Σ_diag Z = 0</code>
+              <span>Prop 3.2 · Shell Quadrupole Identity</span>
+              <code>M_xyz(S) = -8 Q_corner(S) - 3 Q_edge(S)</code>
             </div>
             <div class="equation-card">
-              <span>Energy spectrum</span>
-              <code>H_p(k) = -Σ_W P_p(W) log P_p(W)</code>
+              <span>Sec 5.3 · Floppy-Mode Null Fraction</span>
+              <code>f_null(n) = (n²-2n-1)/(n-1)² = 1 - 2/(n-1)²</code>
             </div>
           </div>
           <p>
-            The ordinary 3D covariance is fixed by the value set and line
-            constraints. The geometric signal moves into higher-order and
-            multiscale quantities, especially local energy distributions
-            <code>E_p(W)=Σ|Z|^p</code> across all windows of scale <code>k</code>.
+            Restricting the line-incidence Laplacian <code>L_n = A_n^T A_n</code> to the
+            zero-mean hyperplane <code>1^⊥</code> collapses its irrational diagonal
+            eigenvalues into exact integers with universal mean <code>μ̄ = 2</code>
+            (<code>E[H_line] = 2/3 n²(n⁴-1)</code>). At finer spatial scales, sliding
+            <code>k × k</code> window entropies <code>H̃_p(k)</code> and concentric shell
+            quadrupoles resolve all 12 Dudeney structural groups and explain why
+            <code>M_xyz = 0</code> on the 48 associative squares plus 8 coprime-resonance
+            squares in Groups IX and X.
           </p>
         </article>
 
