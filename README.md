@@ -10,7 +10,7 @@
 | **3D Fabrication, STL & Papercraft Studio** | [kylemath.github.io/magicGem/3dModels/](https://kylemath.github.io/magicGem/3dModels/index.html) | [`3dModels/index.html`](3dModels/index.html) | All 880 order-4 Magic Gems: live STL, OpenSCAD (`.scad`), and foldable SVG papercraft generator |
 | **880 Order-4 Crystal Gallery** | [kylemath.github.io/magicGem/web/explorer880/](https://kylemath.github.io/magicGem/web/explorer880/) · [(Mirror)](https://kylemath.github.io/MagicGemWebpage/) | [`web/explorer880/index.html`](web/explorer880/index.html) | Interactive 3D browser of all 880 Frenicle $4 \times 4$ Magic Gems |
 | **Magic Gems Explorer & 4×4 Catalogue** | [kylemath.github.io/magicGem/web/app/](https://kylemath.github.io/magicGem/web/app/) · [(Mirror)](https://kylemath.github.io/magicGemWeb/) | [`web/app/index.html`](web/app/index.html) | Multi-tab Three.js & Plotly explorer for $n = 3, 4, 5$ magic squares and [`catalogue4x4.html`](web/app/catalogue4x4.html) |
-| **Magic Square Physical Solver Suite** | [kylemath.github.io/magicGem/web/physicalSolver/](https://kylemath.github.io/magicGem/web/physicalSolver/) · [(Mirror)](https://kylemath.github.io/magicSquare_physicalSolver/) | [`web/physicalSolver/index.html`](web/physicalSolver/index.html) | Interactive Bubble Trinity, Energy Decomposition, Vector Physics & Physics Lab simulators |
+| **Magic Square Physical Solver Suite (Paper D)** | [kylemath.github.io/magicGem/web/physicalSolver/bubble-trinity.html](https://kylemath.github.io/magicGem/web/physicalSolver/bubble-trinity.html) · [(Mirror)](https://kylemath.github.io/magicSquare_physicalSolver/) | [`web/physicalSolver/bubble-trinity.html`](web/physicalSolver/bubble-trinity.html) | Interactive Bubble Trinity Langevin Lab, 7-tier physical mechanism ablation selector, $S_{\mathrm{trap}}^{(3)}$ / $S_{\mathrm{low}}$ presets & 100% Multi-Cycle Settler ($n=3\dots 8$) |
 
 ---
 
@@ -31,7 +31,7 @@ is a polyhedral sculpture—the **Magic Gem** of $S$. This repository is the can
 | **Paper A** | *Magic Gems: Convex Hulls of Lifted Magic Squares* (`paper_A_gems/`) | `arXiv:2512.09170` · *Experimental Mathematics* (`263179413`) | [`paperA.pdf`](paperA.pdf) | `python3 paper_A_gems/anc/verify_paper_a.py` |
 | **Paper B** | *Bivariate Polynomial Moments and Prouhet–Tarry–Escott Identities of Semi-Magic Squares* (`paper_B_orthogonality/`) | arXiv (`submit/8306568`) · *Discrete Applied Mathematics* | [`paperB.pdf`](paperB.pdf) | `python3 paper_B_orthogonality/anc/verify_paper_b.py` |
 | **Paper C** | *Balance in Inequality: Testing the Physical Equilibrium, Precession, and Structural Stability of Magic Gems* (`paper_C_mechanics/`) | arXiv (`submit/8319388`) · *Journal of Mathematics and the Arts* (`263584067`) | [`paperC.pdf`](paperC.pdf) | `python3 paper_C_mechanics/anc/verify_paper_c.py` |
-| **Paper D** | *Spectral Energy Landscapes, Multiscale Window Entropies, and Continuous Bubble Relaxation of Magic Squares* (`paper_D_solver/`) | Manuscript & arXiv Archive Ready | [`paperD.pdf`](paperD.pdf) | `python3 paper_D_solver/anc/verify_paper_d.py` |
+| **Paper D** | *Spectral Energy Landscapes, Multiscale Window Entropies, and Continuous Bubble Relaxation of Magic Squares* ([`paper_D_solver/`](paper_D_solver/README.md)) | Manuscript, Cover Letter ([`COVER_LETTER_D.md`](paper_D_solver/COVER_LETTER_D.md)) & arXiv Archive Ready | [`paperD.pdf`](paperD.pdf) | `python3 paper_D_solver/anc/verify_paper_d.py` |
 
 ---
 

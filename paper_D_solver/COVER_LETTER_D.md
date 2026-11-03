@@ -1,0 +1,30 @@
+# Cover Letter — Paper D Submission
+
+**Date:** November 2, 2026  
+**Title:** *Spectral Energy Landscapes, Multiscale Window Entropies, and Continuous Bubble Relaxation of Magic Squares*  
+**Author:** Kyle Elliott Mathewson (Faculty of Science, University of Alberta, Edmonton, AB, Canada · `kyle.mathewson@ualberta.ca`)  
+**Target Venues:** *Physical Review E* (Statistical Physics, Nonlinear Dynamics & Frustrated Systems) / *SIAM Journal on Applied Dynamical Systems* / *Journal of Statistical Mechanics: Theory and Experiment (JSTAT)*
+
+---
+
+Dear Editors,
+
+Please find enclosed our manuscript, *"Spectral Energy Landscapes, Multiscale Window Entropies, and Continuous Bubble Relaxation of Magic Squares,"* which we submit for consideration for publication. This work forms the fourth and culminating installment of our *Magic Gems* series (following Papers I–III on polyhedral convex hulls, bivariate polynomial moments, and 3D rotational/structural mechanics), shifting the focus from the static geometry of known magic squares to the **dynamical synthesis problem**: *can a physical energy landscape discover a magic square starting from an arbitrary disordered permutation, and what multiscale physical relaxation mechanisms are required to overcome combinatorial frustration?*
+
+### Main Contributions
+
+1. **Exact Spectral Rationalization and Universal Mean Eigenvalue ($\bar{\mu}=2$):** We formulate magic-square synthesis as ground-state relaxation of the quadratic line-sum Hamiltonian $\mathcal{H}_{\mathrm{line}}(S) = \mathbf{z}^\top L_n \mathbf{z}$. We prove (Theorem 2.1) that restricting the line-incidence Laplacian $L_n = A_n^\top A_n$ to the zero-mean permutation hyperplane $\mathbf{1}^\perp$ via $\widetilde{L}_n = P_{\mathbf{1}^\perp} L_n P_{\mathbf{1}^\perp}$ collapses its irrational diagonal-coupled eigenvalues into exact integers: $\{0^{[n^2-2n-1]}, (n-2)^{[1]}, n^{[2n-1]}\}$ for even $n \ge 4$ and $\{0^{[n^2-2n-1]}, (n-1)^{[2]}, n^{[2n-2]}\}$ for odd $n \ge 3$. From the incidence trace identity $\operatorname{tr}(\widetilde{L}_n) = 2(n^2-1)$, we prove (Theorem 2.2) that the mean eigenvalue on $\mathbf{1}^\perp$ is *identically $2$* for every order $n \ge 3$, yielding the exact random-permutation expectation $\mathbb{E}[\mathcal{H}_{\mathrm{line}}(S)] = \frac{2}{3}n^2(n^4-1)$. We further prove (Proposition 2.3) why macroscopic 3D torque and diagonal balance leave a $(2n-4)$-dimensional zero-mean "optical phonon" residual subspace unconstrained.
+2. **Even-Order Quartet Equivalence and the Concentric Shell Quadrupole Identity:** At finer spatial scales, we prove (Theorem 3.1) that for any even order $n=2m$, vanishing of the $(2m-1)^2$ interior $2\times 2$ quartet sums automatically forces all $4m-1$ boundary-wrapping toroidal $2\times 2$ quartets to vanish. Across all $880$ order-$4$ magic squares, we prove the **Concentric Shell Quadrupole Identity** (Proposition 3.2), $M_{xyz}(S) = -8\,Q_{\mathrm{corner}}(S) - 3\,Q_{\mathrm{edge}}(S)$, which explains both the symmetry-protected octupole zeros on Group III and the $8$ accidental coprime-resonance zeros $(Q_{\mathrm{corner}}, Q_{\mathrm{edge}}) = (-3k, 8k)$ in Groups IX and X.
+3. **Exhaustive $S_9$ Swap Landscape and Unique Spin-Ice $(2,2)$ Loop Escape:** We derive the $O(1)$ incremental transposition law $\Delta\mathcal{H}_{\mathrm{line}}(\tau_{ab}) = -2d(g_a-g_b) + c_{ab}d^2$ ($c_{ab} \in \{2,\dots,7\}$) and map all $9! = 362{,}880$ permutations of $S_9$ (Theorem 4.2). We prove that besides the $8$ Lo Shu ground states ($\mathcal{H}_{\mathrm{line}}=0$), $S_9$ possesses *only $8$ spurious strict local minima* forming a single $D_4$ orbit $S_{\mathrm{trap}}^{(3)}$ at $\mathcal{H}_{\mathrm{line}}=8$. Every single $2$-cycle ($\min\Delta\mathcal{H}_{\mathrm{line}} = +4$) and every single $3$-cycle ($\min\Delta\mathcal{H}_{\mathrm{line}} = +8$) strictly increases energy, but **one and only one** disjoint $(2,2)$ double swap—the row-preserving Pauling spin-ice loop $(6\leftrightarrow 7)(3\leftrightarrow 4)$, crossing an intermediate single-swap saddle at $\mathcal{H}_{\mathrm{line}}^\ddagger = 12$ ($\Delta\mathcal{H}_{\mathrm{line}}^\ddagger = +4$)—escapes directly to $\mathcal{H}_{\mathrm{line}}=0$, expanding the deterministic ground-state basin of $S_9$ from $74.53\%$ to $100.00\%$.
+4. **7-Tier Physical Mechanism Ablation, $100\%$ Multi-Order Synthesis ($n=3\dots 8$), and Maxwell–Calladine Floppy-Mode Relief:** We contrast continuous "Bubble Trinity" Langevin relaxation (showing that both greedy snapping and exact $O(N^3)$ Hungarian bipartite projection yield $0\%$ magic squares due to convex amplitude averaging inside the Birkhoff polytope) against a de-confounded $7$-tier hierarchy of cooperative discrete mechanisms. Our **Re-Anchored Hierarchical Multi-Cycle Settler** achieves **$100.0\%$ ground-state synthesis across all orders $n = 3, 4, 5, 6, 7, 8$** (up to $64! \approx 1.27\times 10^{89}$ states) and uncovers a **Maxwell–Calladine Floppy-Mode Dimensional Relief Phenomenon**: because a fraction $f_{\mathrm{null}}(n) = 1 - \frac{2}{(n-1)^2}$ ($95.9\%$ at $n=8$) of the $(n-1)^2$-dimensional semi-magic $(2,2)$ plaquette subspace lies in $\ker(\widetilde{L}_n)$, discrete frustration peaks at the isostatic crossover $n=5$ ($8.03$ restarts) and drops at $n=6,7,8$.
+
+All mathematical proofs, exhaustive censuses, and numerical benchmarks are certified by the standalone Python script `verify_paper_d.py` and accompanied by an interactive browser laboratory (`bubble-trinity.html`).
+
+Thank you for your consideration.
+
+Sincerely,
+
+**Kyle Elliott Mathewson, PhD**  
+Professor, Faculty of Science  
+University of Alberta  
+`kyle.mathewson@ualberta.ca`
