@@ -19,7 +19,7 @@ Across the $880$ magic squares of order~$4$, the uniform solid $\mathcal G_0(S)$
 \end{proposition}
 
 \begin{proof}
-For every associative square $S$, $P_S=-P_S$ implies $\mathcal G_0(S)=-\mathcal G_0(S)$ and $\mathbf c_0(S)=\mathbf 0$. Each of the three Group~VI squares \#86, \#739, and \#756 satisfies $\overline S = hS$ or $\overline S = vS$, so $\mathcal G_0(S)$ is invariant under a $180^\circ$ half-turn $\iota_h\colon(x,y,z)\mapsto(x,-y,-z)$ or $\iota_v\colon(x,y,z)\mapsto(-x,y,-z)$ in $\R^3$ \cite[Prop.~4.3]{mathewson2026gems}. The half-turn forces two coordinates of $\mathbf c_0(S)$ to vanish identically, and exact simplicial integration (\Cref{sec:appendix}) certifies that the single remaining rational axial moment vanishes exclusively on \#86, \#739, and \#756 among all $832$ non-associative squares.
+For every associative square $S$, $P_S=-P_S$ implies $\mathcal G_0(S)=-\mathcal G_0(S)$ and $\mathbf c_0(S)=\mathbf 0$. Each of the three Group~VI squares \#86, \#739, and \#756 satisfies $\overline S = hS$ or $\overline S = vS$, so $\mathcal G_0(S)$ is invariant under a $180^\circ$ half-turn $\iota_h\colon(x,y,z)\mapsto(x,-y,-z)$ or $\iota_v\colon(x,y,z)\mapsto(-x,y,-z)$ in $\R^3$ \citep[Proposition~4.3]{mathewson2026gems}. The half-turn forces two coordinates of $\mathbf c_0(S)$ to vanish identically, and exact simplicial integration (\Cref{sec:appendix}) certifies that the single remaining rational axial moment vanishes exclusively on \#86, \#739, and \#756 among all $832$ non-associative squares.
 \end{proof}
 
 \begin{table}[htbp]
@@ -39,7 +39,7 @@ Gem & Dudeney & $f(\mathcal G_0)$ & $\vol(\mathcal G_0)$ & $\operatorname{Iso}(\
 \end{tabular}
 \end{table}
 
-To counter the centroid drift on the remaining $829$ squares, we peel $P_S$ into nested convex layers \cite{chazelle1985convex}:
+To counter the centroid drift on the remaining $829$ squares, we peel $P_S$ into nested convex layers \citep{chazelle1985convex}:
 \begin{equation}
 \label{eq:peeling}
 P_S^{(0)} = P_S,\qquad
@@ -120,7 +120,7 @@ Gem & $(V_0,V_1)$ & $\vol(\mathcal G_0)$ & $\vol(\mathcal G_1)$ & Axial $c_0$ & 
 
 While the eight gems in \Cref{tab:two-density} have modest excess density ratios $\Delta\rho_1/\rho_0\in[5/4,40/19]$ that print directly on a dual-extruder 3D printer (such as standard PLA around a tungsten- or bronze-filled PLA core), the remaining $25$ denser-core gems in \Cref{tab:all33} have small core volumes $\vol(\mathcal G_1)$ requiring $\Delta\rho_1/\rho_0\in[47/12,191/6]$, and $194$ gems have a four-vertex tetrahedral core whose solid centroid $\mathbf c_{\mathrm{solid}}(\mathcal G_1)=\frac14\sum\mathbf p_q=\mathbf 0$ provides no lever arm at all.
 
-Replacing solid volume with the skeletal and thin-shell architectures of \texttt{magicGemWeb} \cite{mathewson2025magicgemweb} (\Cref{fig:wireframes-nets}) overcomes both barriers. Connecting all $\binom{N}{2}$ pairs of points as a complete strut network $K_N\bigl(P_S(\lambda)\bigr)$ (\texttt{magicGem\_v2.stl}, \Cref{fig:wireframes-nets}(b)) restores equal participation of all $N$ vertices; building a nested ball-and-rod wireframe $G(\mathcal G_0)\cup G(\mathcal G_1)$ (\texttt{magicGem\_v1.stl}, \Cref{fig:wireframes-nets}(a)) replaces volumetric scaling with quadratic rod-diameter scaling ($\rho_{\mathrm{lin}}\propto d^2$) and gives four-vertex tetrahedral cores a non-zero edge-length centroid $\mathbf c_{\mathrm{wire}}(\mathcal G_1)\ne\mathbf 0$; and unfolding $\partial\mathcal G_\lambda(S)$ along a dual spanning tree produces a flat printable papercraft net (\Cref{fig:wireframes-nets}(c)).
+Replacing solid volume with the skeletal and thin-shell architectures of \texttt{magicGemWeb} \citep{mathewson2025magicgemweb} (\Cref{fig:wireframes-nets}) overcomes both barriers. Connecting all $\binom{N}{2}$ pairs of points as a complete strut network $K_N\bigl(P_S(\lambda)\bigr)$ (\texttt{magicGem\_v2.stl}, \Cref{fig:wireframes-nets}(b)) restores equal participation of all $N$ vertices; building a nested ball-and-rod wireframe $G(\mathcal G_0)\cup G(\mathcal G_1)$ (\texttt{magicGem\_v1.stl}, \Cref{fig:wireframes-nets}(a)) replaces volumetric scaling with quadratic rod-diameter scaling ($\rho_{\mathrm{lin}}\propto d^2$) and gives four-vertex tetrahedral cores a non-zero edge-length centroid $\mathbf c_{\mathrm{wire}}(\mathcal G_1)\ne\mathbf 0$; and unfolding $\partial\mathcal G_\lambda(S)$ along a dual spanning tree produces a flat printable papercraft net (\Cref{fig:wireframes-nets}(c)).
 
 \begin{theorem}[Complete $K_N$ strut networks and two-gauge nested wireframes]
 \label{thm:complete-network}
@@ -153,7 +153,7 @@ Integrating $\mathbf x(t)=(1-t)\mathbf p_u+t\mathbf p_v$ over $t\in[0,1]$ gives 
 
 \begin{proposition}[Papercraft cutout nets, glue-tab invariant, and nested thin-shell balance]
 \label{prop:papercraft-net}
-Let $\mathcal G_\lambda(S)$ be any three-dimensional Magic Gem with $f$-vector $(f_0,f_1,f_2)$. Unfolding $\partial\mathcal G_\lambda(S)$ into a connected planar net along any spanning tree $T^*$ of the dual facet graph $G^*(\mathcal G)$ \cite{durer1525underweysung,shephard1975convex,demaine2007geometric,ghomi2014durer} partitions the $f_1$ edges into $f_2-1$ interior fold creases and $N_{\mathrm{tabs}}=f_1-(f_2-1)$ cut edges joined by trapezoidal glue tabs (paired by labels \texttt{a}--\texttt{k} in \Cref{fig:wireframes-nets}(c)). Because $\partial\mathcal G_\lambda(S)\cong S^2$, the cut edges $E\setminus E(T^*)$ form a spanning tree $T$ of the primal $1$-skeleton $G(\mathcal G_\lambda)$ on the $f_0$ hull vertices, so the number of glue tabs depends solely on the hull vertex count $f_0$:
+Let $\mathcal G_\lambda(S)$ be any three-dimensional Magic Gem with $f$-vector $(f_0,f_1,f_2)$. Unfolding $\partial\mathcal G_\lambda(S)$ into a connected planar net along any spanning tree $T^*$ of the dual facet graph $G^*(\mathcal G)$ \citep{demaine2007geometric,durer1525underweysung,ghomi2014durer,shephard1975convex} partitions the $f_1$ edges into $f_2-1$ interior fold creases and $N_{\mathrm{tabs}}=f_1-(f_2-1)$ cut edges joined by trapezoidal glue tabs (paired by labels \texttt{a}--\texttt{k} in \Cref{fig:wireframes-nets}(c)). Because $\partial\mathcal G_\lambda(S)\cong S^2$, the cut edges $E\setminus E(T^*)$ form a spanning tree $T$ of the primal $1$-skeleton $G(\mathcal G_\lambda)$ on the $f_0$ hull vertices, so the number of glue tabs depends solely on the hull vertex count $f_0$:
 \begin{equation}
 \label{eq:glue-tabs}
 N_{\mathrm{tabs}} = f_1 - (f_2 - 1) = |E(T)| = f_0 - 1,
@@ -173,7 +173,7 @@ In a physical 3D print of finite rod diameter $d>0$, each cylindrical strut of l
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{figures/fig_wireframes_and_nets.pdf}
-\caption{Wireframes, complete $K_{16}$ strut networks, and unfolded papercraft cutout nets of Magic Gems \cite{mathewson2025magicgemweb}. (a)~Nested ball-and-rod wireframe $G(\mathcal G_0)\cup G(\mathcal G_1)$ of Gem \#673 ($17$ outer blue rods and $17$ inner orange rods), balanced at rod-diameter ratio $d_1/d_0=0.793$ ($\lambda=1$). (b)~Complete network $K_{16}$ of D\"urer's Gem \#175 with all $\binom{16}{2}=120$ rods ($24$ hull edges in green, $96$ internal cross-struts in slate), which satisfies $\mathbf c(K_{16})=\mathbf 0$ and $\Sigma_{\mathrm{rods}}=\frac{29}{45}\Sigma(\lambda)$ for equal-mass rods across all $880$ squares. (c)~Exact 2D unfolded papercraft net of D\"urer's Gem \#175 ($\lambda=0.20$, $f=(12,24,14)$) rooted at $\bigstar F_0$, with $f_2-1=13$ dashed fold creases and $N_{\mathrm{tabs}}=f_0-1=11$ glue tabs paired by labels \texttt{a}--\texttt{k}. (d)~Mean centroid drift $\|\mathbf c(S)\|_2$ across all $880$ squares for the five physical realizations at $\lambda=1.0$ and $\lambda=0.20$.}
+\caption{Wireframes, complete $K_{16}$ strut networks, and unfolded papercraft cutout nets of Magic Gems \citep{mathewson2025magicgemweb}. (a)~Nested ball-and-rod wireframe $G(\mathcal G_0)\cup G(\mathcal G_1)$ of Gem \#673 ($17$ outer blue rods and $17$ inner orange rods), balanced at rod-diameter ratio $d_1/d_0=0.793$ ($\lambda=1$). (b)~Complete network $K_{16}$ of D\"urer's Gem \#175 with all $\binom{16}{2}=120$ rods ($24$ hull edges in green, $96$ internal cross-struts in slate), which satisfies $\mathbf c(K_{16})=\mathbf 0$ and $\Sigma_{\mathrm{rods}}=\frac{29}{45}\Sigma(\lambda)$ for equal-mass rods across all $880$ squares. (c)~Exact 2D unfolded papercraft net of D\"urer's Gem \#175 ($\lambda=0.20$, $f=(12,24,14)$) rooted at $\bigstar F_0$, with $f_2-1=13$ dashed fold creases and $N_{\mathrm{tabs}}=f_0-1=11$ glue tabs paired by labels \texttt{a}--\texttt{k}. (d)~Mean centroid drift $\|\mathbf c(S)\|_2$ across all $880$ squares for the five physical realizations at $\lambda=1.0$ and $\lambda=0.20$.}
 \label{fig:wireframes-nets}
 \end{figure}
 

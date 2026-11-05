@@ -1,18 +1,18 @@
 \section{Rotational Dynamics: Smooth Precession and Dzhanibekov Flips}
 \label{sec:dynamics}
 
-Our second test moves from static radial equilibrium to three-dimensional rotation. Suppose a Magic Gem or radial spoke sculpture of total mass $M$ and centre of mass $\mathbf c$ is supported on a low-friction conical pivot or gimbal at the origin $O$ under uniform gravity $\mathbf g=(0,0,-g)^{\top}$ (generalizing the conical fulcrum of \texttt{weighted\_ring.stl} in \cite{mathewson2025magicgemweb}), or tossed in free space. About the pivot $O$, gravity exerts the torque
+Our second test moves from static radial equilibrium to three-dimensional rotation. Suppose a Magic Gem or radial spoke sculpture of total mass $M$ and centre of mass $\mathbf c$ is supported on a low-friction conical pivot or gimbal at the origin $O$ under uniform gravity $\mathbf g=(0,0,-g)^{\top}$ (generalizing the conical fulcrum of \texttt{weighted\_ring.stl}; see \citealp{mathewson2025magicgemweb}), or tossed in free space. About the pivot $O$, gravity exerts the torque
 \[
 \boldsymbol\tau_{\mathrm{grav}} = M\,\mathbf c \times \mathbf g,
 \]
-which vanishes identically in every 3D orientation if and only if the centre of mass lies at the pivot ($\mathbf c=\mathbf 0$). Consequently, any balanced sculpture ($\mathbf c=\mathbf 0$) supported at $O$ rotates under Earth's gravity according to Euler's exact torque-free equations \cite{arnold1989mathematical,goldstein2002classical}: in the principal body frame, the angular velocity vector $\boldsymbol\omega=(\omega_1,\omega_2,\omega_3)^{\top}$ evolves via
+which vanishes identically in every 3D orientation if and only if the centre of mass lies at the pivot ($\mathbf c=\mathbf 0$). Consequently, any balanced sculpture ($\mathbf c=\mathbf 0$) supported at $O$ rotates under Earth's gravity according to Euler's exact torque-free equations \citep{arnold1989mathematical,goldstein2002classical}: in the principal body frame, the angular velocity vector $\boldsymbol\omega=(\omega_1,\omega_2,\omega_3)^{\top}$ evolves via
 \begin{equation}
 \label{eq:euler}
 I_1\dot\omega_1 = (I_2-I_3)\omega_2\omega_3,\qquad
 I_2\dot\omega_2 = (I_3-I_1)\omega_3\omega_1,\qquad
 I_3\dot\omega_3 = (I_1-I_2)\omega_1\omega_2,
 \end{equation}
-where $I_1,I_2,I_3$ are the principal moments of inertia. For an asymmetric body with three distinct principal moments $I_1<I_2<I_3$, rotation about the intermediate axis $I_2$ is exponentially unstable: any small perturbation grows at rate $\sqrt{(I_2-I_1)(I_3-I_2)/(I_1I_3)}\,|\omega_2|$, causing the body to execute the $180^\circ$ flips of the Dzhanibekov (or tennis-racket) theorem \cite{ashbaugh1991twisting,poinsot1834theorie}.
+where $I_1,I_2,I_3$ are the principal moments of inertia. For an asymmetric body with three distinct principal moments $I_1<I_2<I_3$, rotation about the intermediate axis $I_2$ is exponentially unstable: any small perturbation grows at rate $\sqrt{(I_2-I_1)(I_3-I_2)/(I_1I_3)}\,|\omega_2|$, causing the body to execute the $180^\circ$ flips of the Dzhanibekov (or tennis-racket) theorem \citep{ashbaugh1991twisting,poinsot1834theorie}.
 
 When the sixteen unequal heights $z_{ij}$ of a magic square are set spinning in $\R^3$, do their geometric inequalities produce an asymmetric top that tumbles via Dzhanibekov flips, or does line-sum equality enforce smooth axisymmetric precession?
 
@@ -65,7 +65,7 @@ closing periodically after $(n^2+2)/2=9$ spin revolutions at $\lambda=1$ ($n=4$)
 \end{theorem}
 
 \begin{proof}
-By \cite[Lem.~3.1]{mathewson2026gems}, the empirical covariance matrix $\Sigma(\lambda)=\frac1N\sum_{i,j}\mathbf p_{ij}(\lambda)\mathbf p_{ij}(\lambda)^{\top}$ has diagonal entries $\Sigma_{xx}=\Sigma_{yy}=a_n=(n^2-1)/12$ and $\Sigma_{zz}=\lambda^2b_n=\lambda^2(n^4-1)/12=\lambda^2(n^2+1)a_n$, while $\Sigma_{xy}=0$ by grid symmetry and $\Sigma_{xz}=\Sigma_{yz}=0$ by vanishing of the first moments. Since $I(\lambda)=M\bigl(\tr(\Sigma(\lambda))I_3-\Sigma(\lambda)\bigr)$, we obtain \eqref{eq:inertia-point} and \eqref{eq:inertia-ratio}. Evaluating \eqref{eq:inertia-ratio} at $\lambda=1$, $\lambda=(n^2+1)^{-1/2}$, and $\lambda=(n+1)^{-1}$ yields \eqref{eq:ratio-lambda1}--\eqref{eq:ratio-cube}. Substituting $I_1=I_2=I_\perp(\lambda)$ and $I_3=I_{zz}$ into Euler's equations \eqref{eq:euler} gives $\dot\omega_3=0$ and $\dot\omega_1=\Omega_{\mathrm{body}}\omega_2$, $\dot\omega_2=-\Omega_{\mathrm{body}}\omega_1$ with $\Omega_{\mathrm{body}}$ as in \eqref{eq:polhode-freq}.
+By Lemma~3.1 of \citet{mathewson2026gems}, the empirical point-cloud covariance matrix $\Sigma(\lambda)=\frac1N\sum_{i,j}\mathbf p_{ij}(\lambda)\mathbf p_{ij}(\lambda)^{\top}$ has diagonal entries $\Sigma_{xx}=\Sigma_{yy}=a_n=(n^2-1)/12$ and $\Sigma_{zz}=\lambda^2b_n=\lambda^2(n^4-1)/12=\lambda^2(n^2+1)a_n$, while $\Sigma_{xy}=0$ by grid symmetry and $\Sigma_{xz}=\Sigma_{yz}=0$ by vanishing of the first moments. Since $I(\lambda)=M\bigl(\tr(\Sigma(\lambda))I_3-\Sigma(\lambda)\bigr)$, we obtain \eqref{eq:inertia-point} and \eqref{eq:inertia-ratio}. Evaluating \eqref{eq:inertia-ratio} at $\lambda=1$, $\lambda=(n^2+1)^{-1/2}$, and $\lambda=(n+1)^{-1}$ yields \eqref{eq:ratio-lambda1}--\eqref{eq:ratio-cube}. Substituting $I_1=I_2=I_\perp(\lambda)$ and $I_3=I_{zz}$ into Euler's equations \eqref{eq:euler} gives $\dot\omega_3=0$ and $\dot\omega_1=\Omega_{\mathrm{body}}\omega_2$, $\dot\omega_2=-\Omega_{\mathrm{body}}\omega_1$ with $\Omega_{\mathrm{body}}$ as in \eqref{eq:polhode-freq}.
 \end{proof}
 
 \begin{figure}[htbp]
@@ -77,7 +77,7 @@ By \cite[Lem.~3.1]{mathewson2026gems}, the empirical covariance matrix $\Sigma(\
 
 \subsection{Unequal Entry Masses Expose \texorpdfstring{$Q_{xy}$}{Qxy} and Trigger Dzhanibekov Flips}
 
-The universal axisymmetric rotation of \Cref{thm:rotor} breaks as soon as each cell is weighted by its \emph{unequal magic entry} $m_{ij}=s_{ij}$, as in the planar balancing wheel \texttt{weighted\_ring.stl} \cite{mathewson2025magicgemweb}. While Loly's theorem \cite{loly2004invariance} keeps the diagonal moments equal ($I_{xx}=I_{yy}=I_0$), the unequal masses expose a second-order quadrant inequality—the planar quadrupole moment $Q_{xy}(S)=\sum_{i,j}z_{ij}x_jy_i$—together with the cubic 3D vector resultant $\mathbf V_3(S;\lambda)$ from \Cref{sec:vectors}. On square \#46 (\Cref{fig:hero-squares}(d)), for example, the heavy entries $\{16,13,15,14\}$ concentrate in the NW/SE quadrants ($xy<0$) while the light entries $\{1,4,2,3\}$ sit in the NE/SW quadrants ($xy>0$). Flicking the board to spin about its intermediate diagonal axis $y=-x$ ($I_2=230$) places the angular velocity directly on the saddle of the Poinsot energy ellipsoid (\Cref{fig:precession}(b)), triggering a $180^\circ$ Dzhanibekov flip (\Cref{fig:precession}(c)).
+The universal axisymmetric rotation of \Cref{thm:rotor} breaks as soon as each cell is weighted by its \emph{unequal magic entry} $m_{ij}=s_{ij}$, as in the planar balancing wheel \texttt{weighted\_ring.stl} \citep{mathewson2025magicgemweb}. While Loly's theorem \citep{loly2004invariance} keeps the diagonal moments equal ($I_{xx}=I_{yy}=I_0$), the unequal masses expose a second-order quadrant inequality—the planar quadrupole moment $Q_{xy}(S)=\sum_{i,j}z_{ij}x_jy_i$—together with the cubic 3D vector resultant $\mathbf V_3(S;\lambda)$ from \Cref{sec:vectors}. On square \#46 (\Cref{fig:hero-squares}(d)), for example, the heavy entries $\{16,13,15,14\}$ concentrate in the NW/SE quadrants ($xy<0$) while the light entries $\{1,4,2,3\}$ sit in the NE/SW quadrants ($xy>0$). Flicking the board to spin about its intermediate diagonal axis $y=-x$ ($I_2=230$) places the angular velocity directly on the saddle of the Poinsot energy ellipsoid (\Cref{fig:precession}(b)), triggering a $180^\circ$ Dzhanibekov flip (\Cref{fig:precession}(c)).
 
 \begin{theorem}[Entry-weighted inertia split, quadrupole Dzhanibekov instability, and 3D lifted tensor]
 \label{thm:quadrupole-split}

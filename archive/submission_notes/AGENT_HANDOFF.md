@@ -18,9 +18,9 @@
    - **Compiled PDF & Tarball:** `paperB.pdf` (27 pages), `paperB_arxiv.tar.gz`.
 
 3. **Paper C (`paper_C_mechanics/`):** *Balance in Inequality: Testing the Physical Equilibrium, Precession, and Structural Stability of Magic Gems*
-   - **Status:** **100% finalized, verified, and ready for immediate browser submission to arXiv and *Journal of Mathematics and the Arts* (Taylor & Francis, Journal Code: `TMAA`).**
-   - **Compiled PDF:** `paperC.pdf` (and `paper_C_mechanics/main.pdf`, **23 pages**, 7 multi-panel figures, 5 tables, 0 LaTeX warnings, 0 overfull boxes, zero list environments—all flowing academic paragraph prose).
-   - **arXiv Upload Package:** `paperC_arxiv.tar.gz` (and `paper_C_mechanics/paperC_arxiv.tar.gz`), containing `main.tex`, `main.bbl`, `references.bib`, `sections/*.tex`, `figures/*.pdf`, and `anc/` (`verify_paper_c.py`, `make_figures_c.py`, `results_paper_c.json`, `squares880.txt`).
+   - **Status:** **Submitted & Resubmitted to *Journal of Mathematics and the Arts* (Taylor & Francis, Submission ID `263584067`, Nov 5, 2026) in Taylor & Francis Standard APA-7 reference style.**
+   - **Compiled PDF:** `paperC.pdf` (and `paper_C_mechanics/main.pdf`, **23 pages**, 7 multi-panel figures, 5 tables, 0 LaTeX warnings, 0 overfull boxes, formatted in Taylor & Francis Standard APA-7 author-date citation and reference list style).
+   - **arXiv & Journal Upload Packages:** `paperC_arxiv.tar.gz`, `paperC_arxiv.zip`, and `paperC_jma_source.zip` (also in `paper_C_mechanics/`), containing `main.tex`, `main.bbl`, `references.bib`, `sections/*.tex`, `figures/*.pdf`, and `anc/` (`verify_paper_c.py`, `make_figures_c.py`, `results_paper_c.json`, `squares880.txt`).
    - **Cover Letter:** `cover_letter_paperC.txt` (and `paper_C_mechanics/cover_letter_paperC.txt`).
    - **Submission Metadata & Suggested Editors/Referees:** `JOURNAL_SUBMISSION_PACKAGE.md` (Part 3) and `submit.html`.
 

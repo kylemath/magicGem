@@ -1,106 +1,57 @@
-\begin{thebibliography}{10}
+\begin{thebibliography}{}
 
-\bibitem{andrews1960magic}
-W.~S. Andrews.
-\newblock {\em Magic Squares and Cubes}.
-\newblock Dover Publications, 2nd edition, 1960.
+\bibitem[Andrews(1960)]{andrews1960magic}
+Andrews, W.~S. (1960). \emph{Magic squares and cubes} (2nd ed.). Dover Publications.
 
-\bibitem{arnold1989mathematical}
-Vladimir~I. Arnold.
-\newblock {\em Mathematical Methods of Classical Mechanics}, volume~60 of {\em
-  Graduate Texts in Mathematics}.
-\newblock Springer, New York, 2nd edition, 1989.
+\bibitem[Arnold(1989)]{arnold1989mathematical}
+Arnold, V.~I. (1989). \emph{Mathematical methods of classical mechanics} (2nd ed., Vol.~60). Springer. \href{https://doi.org/10.1007/978-1-4757-2063-1}{https://\allowbreak doi.org/\allowbreak 10.1007/\allowbreak 978-1-4757-2063-1}
 
-\bibitem{ashbaugh1991twisting}
-Mark~S. Ashbaugh, Carmen~C. Chicone, and Richard~H. Cushman.
-\newblock The twisting tennis racket.
-\newblock {\em Journal of Dynamics and Differential Equations}, 3(1):67--85,
-  1991.
+\bibitem[Ashbaugh et~al.(1991)]{ashbaugh1991twisting}
+Ashbaugh, M.~S., Chicone, C.~C., \& Cushman, R.~H. (1991). The twisting tennis racket. \emph{Journal of Dynamics and Differential Equations}, \emph{3}(1), 67--85. \href{https://doi.org/10.1007/BF01049489}{https://doi.org/10.1007/BF01049489}
 
-\bibitem{chazelle1985convex}
-Bernard Chazelle.
-\newblock On the convex layers of a planar set.
-\newblock {\em IEEE Transactions on Information Theory}, 31(4):509--517, 1985.
+\bibitem[Chazelle(1985)]{chazelle1985convex}
+Chazelle, B. (1985). On the convex layers of a planar set. \emph{IEEE Transactions on Information Theory}, \emph{31}(4), 509--517. \href{https://doi.org/10.1109/TIT.1985.1057060}{https://doi.org/10.1109/TIT.1985.1057060}
 
-\bibitem{demaine2007geometric}
-Erik~D. Demaine and Joseph O'Rourke.
-\newblock {\em Geometric Folding Algorithms: Linkages, Origami, Polyhedra}.
-\newblock Cambridge University Press, Cambridge, 2007.
+\bibitem[Demaine \& O'Rourke(2007)]{demaine2007geometric}
+Demaine, E.~D., \& O'Rourke, J. (2007). \emph{Geometric folding algorithms: Linkages, origami, polyhedra}. Cambridge University Press. \href{https://doi.org/10.1017/CBO9780511735172}{https://doi.org/10.1017/CBO9780511735172}
 
-\bibitem{dudeney1917amusements}
-Henry~E. Dudeney.
-\newblock {\em Amusements in Mathematics}.
-\newblock Thomas Nelson and Sons, London, 1917.
+\bibitem[Dudeney(1917)]{dudeney1917amusements}
+Dudeney, H.~E. (1917). \emph{Amusements in mathematics}. Thomas Nelson and Sons.
 
-\bibitem{durer1525underweysung}
-Albrecht D{\"u}rer.
-\newblock {\em Underweysung der Messung, mit dem Zirckel und Richtscheyt, in
-  Linien, Ebnen unnd gantzen Corporen}.
-\newblock Hieronymus Andreae, Nuremberg, 1525.
+\bibitem[D{\"u}rer(1525)]{durer1525underweysung}
+D{\"u}rer, A. (1525). \emph{Underweysung der Messung, mit dem Zirckel und Richtscheyt, in Linien, Ebnen unnd gantzen Corporen} [Instruction in measurement, with compass and straightedge, in lines, planes, and whole bodies]. Hieronymus Andreae.
 
-\bibitem{frenicle1693}
-Bernard Fr{\'e}nicle~de Bessy.
-\newblock Des quarrez ou tables magiques.
-\newblock In {\em Divers ouvrages de math{\'e}matique et de physique, par
-  Messieurs de l'Acad{\'e}mie Royale des Sciences}. Imprimerie Royale, Paris,
-  1693.
+\bibitem[Fr{\'e}nicle de Bessy(1693)]{frenicle1693}
+Fr{\'e}nicle de Bessy, B. (1693). Des quarrez ou tables magiques [On magic squares or tables]. In \emph{Divers ouvrages de math{\'e}matique et de physique, par Messieurs de l'Acad{\'e}mie Royale des Sciences} (pp.~423--483). Imprimerie Royale.
 
-\bibitem{ghomi2014durer}
-Mohammad Ghomi.
-\newblock D{\"u}rer's conjecture on unfoldings of convex polyhedra.
-\newblock {\em Proceedings of the American Mathematical Society},
-  142(11):3975--3985, 2014.
+\bibitem[Ghomi(2014)]{ghomi2014durer}
+Ghomi, M. (2014). D{\"u}rer's conjecture on unfoldings of convex polyhedra. \emph{Proceedings of the American Mathematical Society}, \emph{142}(11), 3975--3985. \href{https://doi.org/10.1090/S0002-9939-2014-12106-X}{https://doi.org/10.1090/S0002-9939-2014-12106-X}
 
-\bibitem{goldstein2002classical}
-Herbert Goldstein, Charles~P. Poole, and John~L. Safko.
-\newblock {\em Classical Mechanics}.
-\newblock Addison-Wesley, San Francisco, 3rd edition, 2002.
+\bibitem[Goldstein et~al.(2002)]{goldstein2002classical}
+Goldstein, H., Poole, C.~P., \& Safko, J.~L. (2002). \emph{Classical mechanics} (3rd ed.). Addison-Wesley.
 
-\bibitem{loly2004invariance}
-Peter~D. Loly.
-\newblock The invariance of the moment of inertia of magic squares.
-\newblock {\em The Mathematical Gazette}, 88(511):151--153, 2004.
-\newblock Note 88.30.
+\bibitem[Loly(2004)]{loly2004invariance}
+Loly, P.~D. (2004). The invariance of the moment of inertia of magic squares. \emph{The Mathematical Gazette}, \emph{88}(511), 151--153. \href{https://doi.org/10.1017/S002555720017456X}{https://doi.org/10.1017/S002555720017456X}
 
-\bibitem{mathewson2025magicgemweb}
-Kyle~Elliott Mathewson.
-\newblock \texttt{magicGemWeb}: Interactive {3D}-printable ball-and-rod
-  wireframes, complete {$K_{16}$} strut networks, and unfolded papercraft
-  cutout nets for magic gems.
-\newblock \url{https://kylemath.github.io/magicGem/3dModels/index.html} and
-  \url{https://github.com/kylemath/magicGemWeb}, 2025.
+\bibitem[Mathewson(2025)]{mathewson2025magicgemweb}
+Mathewson, K.~E. (2025). \emph{\texttt{magicGemWeb}: Interactive 3D-printable ball-and-rod wireframes, complete $K_{16}$ strut networks, and unfolded papercraft cutout nets for magic gems} [Computer software]. GitHub. \href{https://github.com/kylemath/magicGemWeb}{https://\allowbreak github.com/\allowbreak kylemath/\allowbreak magicGemWeb}
 
-\bibitem{mathewson2026moments}
-Kyle~Elliott Mathewson.
-\newblock Bivariate polynomial moments and {P}rouhet--{T}arry--{E}scott
-  identities of semi-magic squares, 2026.
-\newblock Companion paper~II, arXiv preprint.
+\bibitem[Mathewson(2026a)]{mathewson2026moments}
+Mathewson, K.~E. (2026a). \emph{Bivariate polynomial moments and Prouhet--Tarry--Escott identities of semi-magic squares} (Companion Paper~II, Preprint).
 
-\bibitem{mathewson2026gems}
-Kyle~Elliott Mathewson.
-\newblock Magic gems: Convex hulls of lifted magic squares.
-\newblock {\em arXiv preprint arXiv:2512.09170}, 2026.
-\newblock Companion paper~I.
+\bibitem[Mathewson(2026b)]{mathewson2026gems}
+Mathewson, K.~E. (2026b). \emph{Magic gems: Convex hulls of lifted magic squares} (Companion Paper~I, Preprint, arXiv:2512.09170). arXiv. \href{https://arxiv.org/abs/2512.09170}{https://arxiv.org/abs/2512.09170}
 
-\bibitem{poinsot1834theorie}
-Louis Poinsot.
-\newblock {\em Th{\'e}orie nouvelle de la rotation des corps}.
-\newblock Bachelier, Paris, 1834.
+\bibitem[Poinsot(1834)]{poinsot1834theorie}
+Poinsot, L. (1834). \emph{Th{\'e}orie nouvelle de la rotation des corps} [New theory of the rotation of bodies]. Bachelier.
 
-\bibitem{rogers2004inertia}
-Adam Rogers and Peter~D. Loly.
-\newblock The inertia tensor of a magic cube.
-\newblock {\em American Journal of Physics}, 72(6):786--789, 2004.
+\bibitem[Rogers \& Loly(2004)]{rogers2004inertia}
+Rogers, A., \& Loly, P.~D. (2004). The inertia tensor of a magic cube. \emph{American Journal of Physics}, \emph{72}(6), 786--789. \href{https://doi.org/10.1119/1.1701845}{https://doi.org/10.1119/1.1701845}
 
-\bibitem{rogers2005multipole}
-Adam Rogers and Peter~D. Loly.
-\newblock The electric multipole expansion for a magic cube.
-\newblock {\em European Journal of Physics}, 26(5):809--813, 2005.
+\bibitem[Rogers \& Loly(2005)]{rogers2005multipole}
+Rogers, A., \& Loly, P.~D. (2005). The electric multipole expansion for a magic cube. \emph{European Journal of Physics}, \emph{26}(5), 809--813. \href{https://doi.org/10.1088/0143-0807/26/5/013}{https://doi.org/10.1088/0143-0807/26/5/013}
 
-\bibitem{shephard1975convex}
-G.~C. Shephard.
-\newblock Convex polytopes with convex nets.
-\newblock {\em Mathematical Proceedings of the Cambridge Philosophical
-  Society}, 78(3):389--403, 1975.
+\bibitem[Shephard(1975)]{shephard1975convex}
+Shephard, G.~C. (1975). Convex polytopes with convex nets. \emph{Mathematical Proceedings of the Cambridge Philosophical Society}, \emph{78}(3), 389--403. \href{https://doi.org/10.1017/S0305004100051860}{https://doi.org/10.1017/S0305004100051860}
 
 \end{thebibliography}
