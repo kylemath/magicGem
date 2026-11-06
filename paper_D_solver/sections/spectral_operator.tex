@@ -1,100 +1,73 @@
-\section{Spectral Rationalization of the Line-Incidence Laplacian}
+\section{Why Balancing a Plate Is Not Enough: The Zero-Mean Spectrum and the Impostor Square \texorpdfstring{$S_{\mathrm{low}}$}{S\_low}}
 \label{sec:spectral}
 
-To analyze the global geometry of the line-indicator Hamiltonian $\Hline(S) = \mathbf{z}^\top L_n \mathbf{z}$ defined in \Cref{eq:hamiltonian_def}, we first determine the exact spectral decomposition of the line-incidence Laplacian $L_n = A_n^\top A_n$ both on the ambient Euclidean space $\R^{n^2}$ and on the zero-mean hyperplane $\mathbf{1}^\perp = \{\mathbf{z}\in\R^{n^2} : \mathbf{1}^\top \mathbf{z} = 0\}$ where every centred permutation vector $\mathbf{z}(S)$ resides.
+Suppose we place $n^2$ weights $Z_{ij} = 2s_{ij} - (n^2+1)$ on a rigid horizontal plate at the grid coordinates $(X_j, Y_i)$ of \Cref{eq:centred_coords}, as visualized in the \emph{Energy Decomposition Explorer} (\texttt{energy-decomposition.html}). In Papers~II and~III \cite{mathewson2026moments,mathewson2026mechanics}, we showed that if $S$ is a magic square, then its $3\mathrm{D}$ gravitational tilt moments $\langle X,Z\rangle = \sum_{i,j} X_j Z_{ij}$ and $\langle Y,Z\rangle = \sum_{i,j} Y_i Z_{ij}$ vanish identically, so the plate balances horizontally on its center of mass while its two main diagonals also balance ($R_{D_+} = R_{D_-} = 0$). When users first experiment with \texttt{physicalSolver}, a natural intuition is to ask whether the reverse is true: if we rearrange the numbers $1\dots n^2$ until the plate has zero $X$-tilt, zero $Y$-tilt, and exact magic sums along both main diagonals, does that force the square to be magic?
 
-\subsection{Incidence Structure and Spectral Rationalization on \texorpdfstring{$\mathbf{1}^\perp$}{1-perp}}
+To see why the answer is a dramatic ``no,'' we first compute the exact eigenvalue spectrum of the line-incidence operator $L_n = A_n^\top A_n$ both on the full Euclidean space $\R^{n^2}$ and on the $(n^2-1)$-dimensional zero-mean hyperplane $\mathbf{1}^\perp = \{\mathbf{z}\in\R^{n^2} : \mathbf{1}^\top \mathbf{z} = 0\}$ inhabited by every centred permutation vector $\mathbf{z}(S)$.
 
-Let $\mathbf{r}_1,\dots,\mathbf{r}_n \in \{0,1\}^{n^2}$ denote the row-indicator vectors of the $n\times n$ grid, $\mathbf{c}_1,\dots,\mathbf{c}_n \in \{0,1\}^{n^2}$ the column-indicator vectors, and $\mathbf{d}_+, \mathbf{d}_- \in \{0,1\}^{n^2}$ the main and anti-diagonal indicator vectors. Then
+\subsection{The Rook's-Graph Decomposition and Integer Spectrum on \texorpdfstring{$\mathbf{1}^\perp$}{1-perp}}
+
+Let $\mathbf{r}_1,\dots,\mathbf{r}_n \in \{0,1\}^{n^2}$ denote the row-indicator vectors of the $n\times n$ grid, $\mathbf{c}_1,\dots,\mathbf{c}_n \in \{0,1\}^{n^2}$ the column-indicator vectors, and $\mathbf{d}_+, \mathbf{d}_- \in \{0,1\}^{n^2}$ the main and anti-diagonal indicator vectors. Then the operator $L_n$ splits into a row-and-column part $L_{\mathrm{rc}}$ plus a rank-$2$ diagonal part $D$:
 \begin{equation}
-  L_n = A_n^\top A_n = \sum_{i=1}^n \mathbf{r}_i \mathbf{r}_i^\top + \sum_{j=1}^n \mathbf{c}_j \mathbf{c}_j^\top + \mathbf{d}_+ \mathbf{d}_+^\top + \mathbf{d}_- \mathbf{d}_-^\top.
+  L_n = A_n^\top A_n = L_{\mathrm{rc}} + D, \qquad
+  L_{\mathrm{rc}} = \sum_{i=1}^n \mathbf{r}_i \mathbf{r}_i^\top + \sum_{j=1}^n \mathbf{c}_j \mathbf{c}_j^\top, \qquad
+  D = \mathbf{d}_+ \mathbf{d}_+^\top + \mathbf{d}_- \mathbf{d}_-^\top.
   \label{eq:L_n_outer_sum}
 \end{equation}
-Because the $n$ rows partition the $n^2$ cells and the $n$ columns also partition the $n^2$ cells, $\sum_{i=1}^n \mathbf{r}_i = \sum_{j=1}^n \mathbf{c}_j = \mathbf{1}_{n^2}$. This single linear dependency reduces the rank of the $2n$ row and column indicators from $2n$ to $2n-1$. Since the two main diagonals $\mathbf{d}_+$ and $\mathbf{d}_-$ are linearly independent of the row and column span for all $n \ge 3$, $\operatorname{rank}(A_n) = 2n+1$. However, because $\mathbf{d}_+$ and $\mathbf{d}_-$ have non-zero inner product $\mathbf{1}^\top \mathbf{d}_\pm = n$ with the constant vector $\mathbf{1}$ (and intersect at the central cell when $n$ is odd, $\mathbf{d}_+^\top \mathbf{d}_- = 1$, or are disjoint when $n$ is even, $\mathbf{d}_+^\top \mathbf{d}_- = 0$), the unprojected operator $L_n$ on $\R^{n^2}$ mixes the constant mode $\mathbf{1}$ with the symmetric diagonal mode $\mathbf{d}_+ + \mathbf{d}_-$, producing irrational eigenvalues. Restricting to $\mathbf{1}^\perp$ eliminates this coupling completely:
+In graph theory, $L_{\mathrm{rc}} = A_{\mathrm{Rook}} + 2I_{n^2}$ is the signless incidence operator of the $n\times n$ Rook's graph $K_n \square K_n = (K_n \otimes I_n) \oplus (I_n \otimes K_n)$, whose edges connect cells in the same row or column \cite{godsil2001algebraic,brouwer2012spectra}. Because the $n$ rows partition the grid and the $n$ columns also partition the grid, $\sum_{i=1}^n \mathbf{r}_i = \sum_{j=1}^n \mathbf{c}_j = \mathbf{1}_{n^2}$, reducing the rank of $L_{\mathrm{rc}}$ from $2n$ to $2n-1$. Adding the two independent main diagonals gives $\operatorname{rank}(A_n) = 2n+1$, leaving a magic nullspace $\ker(L_n) = \ker(A_n)$ of dimension $\dim\ker(L_n) = n^2 - 2n - 1$, a classic dimension formula in the linear algebra of magic squares \cite{ward1980vector,lee1996linear,loly2009magic}.
 
-\begin{theorem}[Spectral Rationalization of the Line-Incidence Laplacian]
-\label{thm:spectral_rationalization}
-For every order $n \ge 3$, the line-incidence matrix $A_n \in \{0,1\}^{(2n+2)\times n^2}$ has rank $2n+1$, and the magic nullspace $\ker(L_n) = \ker(A_n)$ has dimension
+If we compute the eigenvalues of $L_n$ numerically on $\R^{n^2}$, two ugly irrational numbers $\lambda_\pm(n)$ appear (\Cref{fig:spectral}a, orange diamonds), because the constant vector $\mathbf{1}$ has non-zero overlap $\mathbf{1}^\top \mathbf{d}_\pm = n$ with the two diagonals. However, every centred permutation vector $\mathbf{z}(S)$ has zero sum ($\mathbf{1}^\top\mathbf{z} = 0$) and therefore lives entirely inside the zero-mean hyperplane $\mathbf{1}^\perp$. Restricting $L_n$ to $\mathbf{1}^\perp$ decouples the constant mode and confines the two diagonals entirely inside the $(n-1)^2$-dimensional kernel of the Rook's graph, causing all irrational eigenvalues to collapse into clean integers (\Cref{fig:spectral}a and \Cref{tab:spectral_census}):
+
+\begin{proposition}[Zero-Mean Integer Spectrum and Random-Shuffle Expectation of $L_n$]
+\label{prop:spectral_rationalization}
+For every order $n \ge 3$, the line-incidence matrix $A_n \in \{0,1\}^{(2n+2)\times n^2}$ has rank $2n+1$, and its magic nullspace $\ker(L_n) = \ker(A_n) \subset \mathbf{1}^\perp$ has dimension
 \begin{equation}
-  \dim \ker(L_n) = n^2 - 2n - 1,
+  \dim \ker(L_n) = n^2 - 2n - 1 = (n-1)^2 - 2.
   \label{eq:magic_nullity}
 \end{equation}
-all of whose basis vectors lie in the zero-mean hyperplane $\mathbf{1}^\perp$. Furthermore:
-\begin{enumerate}
-  \item \textbf{Unprojected Spectrum on $\R^{n^2}$:} The $2n+1$ non-zero eigenvalues of $L_n$ on $\R^{n^2}$ consist of two irrational roots $\lambda_\pm(n)$ together with integer eigenvalues:
-  \begin{equation}
-    \spec(L_n) = \begin{cases}
-      \Bigl\{0^{[n^2-2n-1]},\; \lambda_-(n)^{[1]},\; n^{[2n-1]},\; \lambda_+(n)^{[1]}\Bigr\}, & \text{even } n \ge 4,\\
-      \Bigl\{0^{[n^2-2n-1]},\; \lambda_-(n)^{[1]},\; (n-1)^{[1]},\; n^{[2n-2]},\; \lambda_+(n)^{[1]}\Bigr\}, & \text{odd } n \ge 3,
-    \end{cases}
-    \label{eq:unprojected_spectrum}
-  \end{equation}
-  where $\lambda_\pm(n) = \frac{1}{2}\bigl(3n \pm \sqrt{n(n+16)}\bigr)$ for even $n$ and $\lambda_\pm(n) = \frac{1}{2}\bigl(3n+1 \pm \sqrt{n^2+14n+1}\bigr)$ for odd $n$.
-  \item \textbf{Rationalized Zero-Mean Spectrum on $\mathbf{1}^\perp$:} Let $P_{\mathbf{1}^\perp} = I_{n^2} - \frac{1}{n^2}\mathbf{1}\mathbf{1}^\top$ denote the orthogonal projector onto $\mathbf{1}^\perp$, and let $\Ltilde_n = P_{\mathbf{1}^\perp} L_n P_{\mathbf{1}^\perp}\big|_{\mathbf{1}^\perp}$ be the restricted Laplacian on the $(n^2-1)$-dimensional zero-mean subspace. On $\mathbf{1}^\perp$, the irrational roots $\lambda_\pm(n)$ collapse into exact integers:
-  \begin{equation}
-    \spec\bigl(\Ltilde_n\big|_{\mathbf{1}^\perp}\bigr) = \begin{cases}
-      \Bigl\{0^{[n^2-2n-1]},\; (n-2)^{[1]},\; n^{[2n-1]}\Bigr\}, & \text{if } n \ge 4 \text{ is even}, \\[0.8ex]
-      \Bigl\{0^{[n^2-2n-1]},\; (n-1)^{[2]},\; n^{[2n-2]}\Bigr\}, & \text{if } n \ge 3 \text{ is odd}.
-    \end{cases}
-    \label{eq:rationalized_spectrum}
-  \end{equation}
-\end{enumerate}
-\end{theorem}
+On the ambient space $\R^{n^2}$, the $2n+1$ non-zero eigenvalues of $L_n$ consist of two irrational roots $\lambda_\pm(n)$ together with integer eigenvalues:
+\begin{equation}
+  \spec(L_n) = \begin{cases}
+    \Bigl\{0^{[n^2-2n-1]},\; \lambda_-(n)^{[1]},\; n^{[2n-1]},\; \lambda_+(n)^{[1]}\Bigr\}, & \text{even } n \ge 4,\\
+    \Bigl\{0^{[n^2-2n-1]},\; \lambda_-(n)^{[1]},\; (n-1)^{[1]},\; n^{[2n-2]},\; \lambda_+(n)^{[1]}\Bigr\}, & \text{odd } n \ge 3,
+  \end{cases}
+  \label{eq:unprojected_spectrum}
+\end{equation}
+where $\lambda_\pm(n) = \frac{1}{2}\bigl(3n \pm \sqrt{n(n+16)}\bigr)$ for even $n$ and $\lambda_\pm(n) = \frac{1}{2}\bigl(3n+1 \pm \sqrt{n^2+14n+1}\bigr)$ for odd $n$. Let $P_{\mathbf{1}^\perp} = I_{n^2} - \frac{1}{n^2}\mathbf{1}\mathbf{1}^\top$ denote the orthogonal projector onto $\mathbf{1}^\perp$, and let $\Ltilde_n = P_{\mathbf{1}^\perp} L_n P_{\mathbf{1}^\perp}\big|_{\mathbf{1}^\perp}$ be the restricted operator on $\mathbf{1}^\perp$. On $\mathbf{1}^\perp$, the irrational roots disappear and all eigenvalues are integers:
+\begin{equation}
+  \spec\bigl(\Ltilde_n\big|_{\mathbf{1}^\perp}\bigr) = \begin{cases}
+    \Bigl\{0^{[n^2-2n-1]},\; (n-2)^{[1]},\; n^{[2n-1]}\Bigr\}, & \text{if } n \ge 4 \text{ is even}, \\[0.8ex]
+    \Bigl\{0^{[n^2-2n-1]},\; (n-1)^{[2]},\; n^{[2n-2]}\Bigr\}, & \text{if } n \ge 3 \text{ is odd}.
+  \end{cases}
+  \label{eq:rationalized_spectrum}
+\end{equation}
+Moreover, for every integer $n \ge 3$ (both odd and even), $\tr(\Ltilde_n|_{\mathbf{1}^\perp}) = 2(n^2 - 1)$, so the average eigenvalue of $\Ltilde_n$ on $\mathbf{1}^\perp$ is $\bar{\mu}(\Ltilde_n) = \tr(\Ltilde_n|_{\mathbf{1}^\perp})/(n^2-1) = 2$, and the expected line-indicator energy of a uniform random shuffle $S \sim \Unif(S_{n^2})$ with $\|\mathbf{z}\|^2 = \frac{1}{3}n^2(n^4-1)$ is exactly twice the height variance sum:
+\begin{equation}
+  \mathbb{E}_{S\sim\Unif(S_{n^2})}\bigl[\Hline(S)\bigr] = 2\,\|\mathbf{z}\|^2 = \frac{2}{3}n^2(n^4 - 1).
+  \label{eq:ensemble_mean_H}
+\end{equation}
+\end{proposition}
 
 \begin{proof}
-Write $L_n = L_{\mathrm{rc}} + D$, where $L_{\mathrm{rc}} = \sum_{i=1}^n \mathbf{r}_i \mathbf{r}_i^\top + \sum_{j=1}^n \mathbf{c}_j \mathbf{c}_j^\top$ and $D = \mathbf{d}_+ \mathbf{d}_+^\top + \mathbf{d}_- \mathbf{d}_-^\top$. As the Cartesian product of two complete graphs $K_n \square K_n$, the operator $L_{\mathrm{rc}}$ has eigenvalues $2n$ (multiplicity $1$, spanned by $\mathbf{1}$), $n$ (multiplicity $2n-2$, spanned by zero-mean pure row functions $\mathcal{V}_{\mathrm{row}} = \{\mathbf{u}\otimes \mathbf{1}_n : \mathbf{u}^\top \mathbf{1}_n = 0\}$ and pure column functions $\mathcal{V}_{\mathrm{col}} = \{\mathbf{1}_n \otimes \mathbf{v} : \mathbf{v}^\top \mathbf{1}_n = 0\}$), and $0$ (multiplicity $(n-1)^2$, the tensor-product subspace $\mathcal{V}_{\mathrm{row}}\otimes \mathcal{V}_{\mathrm{col}}$).
+By the standard spectral decomposition of the Rook's graph $K_n \square K_n$ \cite{godsil2001algebraic,brouwer2012spectra}, $L_{\mathrm{rc}}$ splits $\R^{n^2}$ into three mutually orthogonal eigenspaces: the constant line $\operatorname{span}\{\mathbf{1}\}$ with eigenvalue $2n$ (multiplicity $1$), the $(2n-2)$-dimensional zero-mean row and column space $\mathcal{V}_{\mathrm{row}} \oplus \mathcal{V}_{\mathrm{col}}$ with flat eigenvalue $n$ (where $\mathcal{V}_{\mathrm{row}} = \{\mathbf{u}\otimes \mathbf{1}_n : \mathbf{u}^\top \mathbf{1}_n = 0\}$ and $\mathcal{V}_{\mathrm{col}} = \{\mathbf{1}_n \otimes \mathbf{v} : \mathbf{v}^\top \mathbf{1}_n = 0\}$), and the $(n-1)^2$-dimensional tensor-product kernel $\ker(L_{\mathrm{rc}}) = \mathcal{V}_{\mathrm{row}}\otimes \mathcal{V}_{\mathrm{col}}$ with eigenvalue $0$.
 
-Because every row and every column intersects $\mathbf{d}_+$ and $\mathbf{d}_-$ in exactly one cell, $\mathbf{r}_i^\top \mathbf{d}_\pm = \mathbf{c}_j^\top \mathbf{d}_\pm = 1$ for all $i,j$. Thus for any zero-mean row or column mode $\mathbf{w} \in \mathcal{V}_{\mathrm{row}} \oplus \mathcal{V}_{\mathrm{col}} \subset \mathbf{1}^\perp$, we have $\mathbf{d}_+^\top \mathbf{w} = \mathbf{d}_-^\top \mathbf{w} = 0$. Consequently, the $(2n-2)$-dimensional subspace $\mathcal{V}_{\mathrm{row}} \oplus \mathcal{V}_{\mathrm{col}}$ is in the kernel of $D$ and remains an exact eigenspace of both $L_n$ and $\Ltilde_n$ with eigenvalue $n$ and multiplicity $2n-2$.
+Because every row and column crosses each main diagonal in exactly one cell, $\mathbf{r}_i^\top \mathbf{d}_\pm = \mathbf{c}_j^\top \mathbf{d}_\pm = 1$ for all $i,j$. Thus the zero-mean projections $P_{\mathbf{1}^\perp}\mathbf{d}_\pm = \mathbf{d}_\pm - \frac{1}{n}\mathbf{1}$ have zero row and column sums and lie entirely inside $\ker(L_{\mathrm{rc}}) = \mathcal{V}_{\mathrm{row}}\otimes \mathcal{V}_{\mathrm{col}}$. Consequently, $\mathcal{V}_{\mathrm{row}} \oplus \mathcal{V}_{\mathrm{col}} \subset \ker(D)$ remains an exact eigenspace of both $L_n$ and $\Ltilde_n$ with eigenvalue $n$ and multiplicity $2n-2$.
 
-It remains to analyze the action of $L_n$ on the $3$-dimensional subspace $\mathcal{S}_3 = \operatorname{span}\{\mathbf{1}, \mathbf{d}_+, \mathbf{d}_-\}$, which is orthogonal to $\mathcal{V}_{\mathrm{row}}\oplus\mathcal{V}_{\mathrm{col}}$. Introduce the symmetric and antisymmetric diagonal combinations $\mathbf{s}_d = \mathbf{d}_+ + \mathbf{d}_-$ and $\mathbf{a}_d = \mathbf{d}_+ - \mathbf{d}_-$. By symmetry, $\mathbf{1}^\top \mathbf{a}_d = 0$ and $L_{\mathrm{rc}}\mathbf{a}_d = 0$, so $\mathbf{a}_d \in \mathbf{1}^\perp$ is an exact eigenvector of both $L_n$ and $\Ltilde_n$:
-\begin{itemize}
-  \item For even $n$, $\mathbf{d}_+^\top \mathbf{d}_- = 0$, so $D\mathbf{a}_d = n\mathbf{a}_d$, contributing $+1$ to the multiplicity of eigenvalue $n$ (giving $2n-1$ in total). For the symmetric mode $\mathbf{s}_d$, since $\mathbf{1}$ and $\mathbf{s}_d$ are linearly independent and every row and column intersects $\mathbf{s}_d$ in $2$ cells, we have $L_{\mathrm{rc}}\mathbf{s}_d = 4\mathbf{1}$, $L_{\mathrm{rc}}\mathbf{1} = 2n\mathbf{1}$, $D\mathbf{1} = n\mathbf{s}_d$, and $D\mathbf{s}_d = n\mathbf{s}_d$. In the ordered basis $\mathcal{B} = (\mathbf{1}, \mathbf{s}_d)$, the coordinate matrix of $L_n$ on $\operatorname{span}\{\mathbf{1}, \mathbf{s}_d\}$ is $[L_n]_{\mathcal{B}} = \bigl[\begin{smallmatrix} 2n & 4 \\ n & n \end{smallmatrix}\bigr]$, whose characteristic polynomial is $\lambda^2 - 3n\lambda + 2n(n-2) = 0$, yielding $\lambda_\pm(n) = \frac{3n \pm \sqrt{n(n+16)}}{2}$. Projecting onto $\mathbf{1}^\perp$ replaces $\mathbf{s}_d$ by $\widetilde{\mathbf{s}}_d = P_{\mathbf{1}^\perp}\mathbf{s}_d = \mathbf{s}_d - \frac{2}{n}\mathbf{1}$. Since $\mathbf{r}_i^\top \widetilde{\mathbf{s}}_d = \mathbf{c}_j^\top \widetilde{\mathbf{s}}_d = 2 - \frac{2}{n}(n) = 0$ for all $i,j$, we have $\widetilde{\mathbf{s}}_d \in \mathcal{V}_{\mathrm{row}}\otimes\mathcal{V}_{\mathrm{col}} = \ker(L_{\mathrm{rc}})$, so $L_{\mathrm{rc}}\widetilde{\mathbf{s}}_d = 0$. Moreover, $D\widetilde{\mathbf{s}}_d = D\mathbf{s}_d - \frac{2}{n}D\mathbf{1} = n\mathbf{s}_d - 2\mathbf{s}_d = (n-2)\mathbf{s}_d$, so $P_{\mathbf{1}^\perp} D \widetilde{\mathbf{s}}_d = (n-2)\widetilde{\mathbf{s}}_d$, yielding the exact integer eigenvalue $\mu = n-2$ with multiplicity $1$.
-  \item For odd $n$, $\mathbf{d}_+^\top \mathbf{d}_- = 1$ (shared central cell), so $\|\mathbf{a}_d\|^2 = 2(n-1)$ and $D\mathbf{a}_d = (n-1)\mathbf{a}_d$, giving eigenvalue $n-1$ for both $L_n$ and $\Ltilde_n$. For the symmetric mode $\mathbf{s}_d$, $\mathbf{s}_d^\top \mathbf{s}_d = 2n+2$, so $D\mathbf{s}_d = (n+1)\mathbf{s}_d$ and the coordinate matrix of $L_n$ in the basis $\mathcal{B} = (\mathbf{1}, \mathbf{s}_d)$ is $[L_n]_{\mathcal{B}} = \bigl[\begin{smallmatrix} 2n & 4 \\ n & n+1 \end{smallmatrix}\bigr]$ with characteristic polynomial $\lambda^2 - (3n+1)\lambda + 2n(n-1) = 0$, giving $\lambda_\pm(n) = \frac{3n+1 \pm \sqrt{n^2+14n+1}}{2}$. Projecting onto $\mathbf{1}^\perp$ gives $\widetilde{\mathbf{s}}_d = \mathbf{s}_d - \frac{2}{n}\mathbf{1} \in \ker(L_{\mathrm{rc}})$, on which $D\widetilde{\mathbf{s}}_d = (n+1)\mathbf{s}_d - 2\mathbf{s}_d = (n-1)\mathbf{s}_d$ and thus $\Ltilde_n \widetilde{\mathbf{s}}_d = (n-1)\widetilde{\mathbf{s}}_d$, contributing a second integer eigenvalue $\mu = n-1$ (total multiplicity $2$).
-\end{itemize}
-Finally, the orthogonal complement of $\operatorname{span}\{\widetilde{\mathbf{s}}_d, \mathbf{a}_d\}$ inside the $(n-1)^2$-dimensional subspace $\mathcal{V}_{\mathrm{row}}\otimes\mathcal{V}_{\mathrm{col}}$ has dimension $(n-1)^2 - 2 = n^2 - 2n - 1$ and is annihilated by both $L_{\mathrm{rc}}$ and $D$, establishing \Cref{eq:magic_nullity}, \Cref{eq:unprojected_spectrum}, and \Cref{eq:rationalized_spectrum}.
+On the remaining $3$-dimensional subspace $\operatorname{span}\{\mathbf{1}, \mathbf{d}_+, \mathbf{d}_-\}$, define the symmetric and antisymmetric diagonal vectors $\mathbf{s}_d = \mathbf{d}_+ + \mathbf{d}_-$ and $\mathbf{a}_d = \mathbf{d}_+ - \mathbf{d}_-$. Since $\mathbf{a}_d \in \ker(L_{\mathrm{rc}})$ and $\|\mathbf{a}_d\|^2 = 2n - 2\mathbf{d}_+^\top\mathbf{d}_-$, we have $D\mathbf{a}_d = n\mathbf{a}_d$ for even $n$ (where the two diagonals are disjoint, $\mathbf{d}_+^\top\mathbf{d}_- = 0$) and $D\mathbf{a}_d = (n-1)\mathbf{a}_d$ for odd $n$ (where the two diagonals share the center cell, $\mathbf{d}_+^\top\mathbf{d}_- = 1$). On $\operatorname{span}\{\mathbf{1}, \mathbf{s}_d\}$, $L_n$ has the $2\times 2$ matrix $[L_n]_{\mathcal{B}} = \bigl[\begin{smallmatrix} 2n & 4 \\ n & n \end{smallmatrix}\bigr]$ for even $n$ and $\bigl[\begin{smallmatrix} 2n & 4 \\ n & n+1 \end{smallmatrix}\bigr]$ for odd $n$, whose characteristic polynomials give the irrational roots $\lambda_\pm(n)$ in \Cref{eq:unprojected_spectrum}. Projecting onto $\mathbf{1}^\perp$ replaces $\mathbf{s}_d$ by $\widetilde{\mathbf{s}}_d = \mathbf{s}_d - \frac{2}{n}\mathbf{1} \in \ker(L_{\mathrm{rc}})$, which has squared norm $\|\widetilde{\mathbf{s}}_d\|^2 = \|\mathbf{s}_d\|^2 - 4 = 2(n-2)$ for even $n$ and $2(n-1)$ for odd $n$. Because $\widetilde{\mathbf{s}}_d$ and $\mathbf{a}_d$ are orthogonal vectors inside $\ker(L_{\mathrm{rc}})$, restricting $D = \frac{1}{2}(\mathbf{s}_d\mathbf{s}_d^\top + \mathbf{a}_d\mathbf{a}_d^\top)$ to $\mathbf{1}^\perp$ yields integer eigenvalues $\frac{1}{2}\|\widetilde{\mathbf{s}}_d\|^2 = n-2$ and $\frac{1}{2}\|\mathbf{a}_d\|^2 = n$ for even $n$, or $n-1$ and $n-1$ for odd $n$, while their orthogonal complement in $\mathcal{V}_{\mathrm{row}}\otimes\mathcal{V}_{\mathrm{col}}$ has dimension $(n-1)^2 - 2 = n^2 - 2n - 1$, proving \Cref{eq:magic_nullity}--\Cref{eq:rationalized_spectrum}.
+
+Finally, \Cref{eq:ensemble_mean_H} can be seen in two complementary ways. From the trace, $\tr(L_n) = (2n+2)n = 2n(n+1)$ and $\hat{\mathbf{1}}^\top L_n \hat{\mathbf{1}} = 2n+2$, so $\tr(\Ltilde_n|_{\mathbf{1}^\perp}) = 2n(n+1) - 2(n+1) = 2(n^2-1)$ and $\bar{\mu}(\Ltilde_n) = 2$. From elementary probability, any line $L \in \mathcal{L}_n$ of length $n$ in a random shuffle is a simple random sample of $n$ values drawn without replacement from a zero-sum population of $n^2$ values, whose sum has variance $\mathbb{E}[R_L(S)^2] = n\bigl(\frac{n^2-n}{n^2-1}\bigr)\frac{\|\mathbf{z}\|^2}{n^2} = \frac{\|\mathbf{z}\|^2}{n+1}$ \cite{diaconis1988group}. Multiplying by the $2n+2 = 2(n+1)$ lines cancels the $n+1$ in the denominator and gives $\mathbb{E}[\Hline(S)] = 2\|\mathbf{z}\|^2 = \frac{2}{3}n^2(n^4-1)$.
 \end{proof}
 
 \begin{figure}[t]
   \centering
   \includegraphics[width=\textwidth]{figures/fig1_spectral_operator.pdf}
-  \caption{\textbf{Spectral rationalization of the line-incidence Laplacian $L_n = A_n^\top A_n$ and low-mode insufficiency.} \textbf{(a)} Comparison of the unprojected eigenvalues $\lambda(L_n)$ on $\R^{n^2}$ (hollow orange diamonds, showing the irrational branches $\lambda_\pm(n)$) against the zero-mean restricted spectrum $\mu(\Ltilde_n|_{\mathbf{1}^\perp})$ (filled navy and green circles, labeled $\mu^{[\mathrm{mult}]}$) for orders $n=3\dots 8$. Restricting to $\mathbf{1}^\perp$ collapses all eigenvalues into exact integers with universal mean $\bar{\mu}(\Ltilde_n) = 2$ (dashed purple line). \textbf{(b)} Explicit $4\times 4$ low-mode counterexample $S_{\mathrm{low}}$ (\Cref{prop:low_mode_insufficiency}) whose dipole moments $\langle X,Z\rangle = \langle Y,Z\rangle = 0$ and main diagonals $R_{D_\pm} = 0$ vanish ($E_{\mathrm{low}}=0$), yet whose high-frequency row and column residuals produce $\Hline(S_{\mathrm{low}}) = 1{,}584 > 0$.}
+  \caption{\textbf{Zero-mean integer spectrum of the line-incidence operator $L_n = A_n^\top A_n$ and the $4\times 4$ ``impostor square'' $S_{\mathrm{low}}$.} \textbf{(a)} Comparison of the unprojected eigenvalues $\lambda(L_n)$ on $\R^{n^2}$ (hollow orange diamonds connected by dashed branch guides, showing the irrational roots $\lambda_\pm(n)$) against the zero-mean restricted spectrum $\mu(\Ltilde_n|_{\mathbf{1}^\perp})$ (filled navy and green circles, labeled $\mu^{[\mathrm{mult}]}$) for orders $n=3\dots 8$. Restricting to $\mathbf{1}^\perp$ yields exact integers with universal mean $\bar{\mu}(\Ltilde_n) = 2$ (dashed purple line). \textbf{(b)} Explicit $4\times 4$ counterexample $S_{\mathrm{low}}$ (\Cref{rem:low_mode_insufficiency}) from \texttt{energy-decomposition.html} with centred coordinates $(X_j,Y_i)$ and balanced main/anti-diagonals ($R_{D_\pm} = 0$, golden dashed lines) plus zero $3\mathrm{D}$ tilt moments $\langle X,Z\rangle = \langle Y,Z\rangle = 0$ ($E_{\mathrm{low}}=0$), yet whose alternating quadratic and cubic row/column sums produce $\Hline(S_{\mathrm{low}}) = 1{,}584 > 0$.}
   \label{fig:spectral}
 \end{figure}
 
-\subsection{Universal Mean Eigenvalue and Random Permutation Ensemble Law}
-
-\Cref{thm:spectral_rationalization} reveals a remarkable parity-independent conservation law across all orders $n \ge 3$ (\Cref{tab:spectral_census} and \Cref{fig:spectral}a):
-
-\begin{theorem}[Universal Mean Eigenvalue and Ensemble Expectation]
-\label{thm:ensemble_mean}
-For every integer $n \ge 3$ (both odd and even), the trace of the zero-mean restricted Laplacian $\Ltilde_n$ on the $(n^2-1)$-dimensional hyperplane $\mathbf{1}^\perp$ is
-\begin{equation}
-  \tr\bigl(\Ltilde_n\big|_{\mathbf{1}^\perp}\bigr) = 2(n^2 - 1),
-  \label{eq:trace_Ltilde}
-\end{equation}
-so the mean eigenvalue of $\Ltilde_n$ on $\mathbf{1}^\perp$ is \textbf{identically $2$}:
-\begin{equation}
-  \bar{\mu}(\Ltilde_n) = \frac{\tr(\Ltilde_n|_{\mathbf{1}^\perp})}{n^2 - 1} = 2.
-  \label{eq:mean_eigenvalue_two}
-\end{equation}
-Consequently, for a uniform random permutation $S \sim \Unif(S_{n^2})$ with centred height vector $\mathbf{z}(S)$ of constant squared norm $\|\mathbf{z}\|^2 = \frac{1}{3}n^2(n^4-1)$, the expected line-indicator Hamiltonian is exactly twice the height variance sum:
-\begin{equation}
-  \mathbb{E}_{S\sim\Unif(S_{n^2})}\bigl[\Hline(S)\bigr] = \bar{\mu}(\Ltilde_n)\,\|\mathbf{z}\|^2 = 2\,\|\mathbf{z}\|^2 = \frac{2}{3}n^2(n^4 - 1).
-  \label{eq:ensemble_mean_H}
-\end{equation}
-\end{theorem}
-
-\begin{proof}
-We give both a direct parity-free trace proof and a spectral verification. On $\R^{n^2}$, each of the $2n+2$ magic lines in $\mathcal{L}_n$ contains $n$ unit entries, so $\tr(L_n) = \sum_{L\in\mathcal{L}_n} \|\mathbf{1}_L\|_2^2 = (2n+2)n = 2n^2 + 2n$. Meanwhile, the normalized constant vector $\hat{\mathbf{1}} = \frac{1}{n}\mathbf{1}$ has Rayleigh quotient $\hat{\mathbf{1}}^\top L_n \hat{\mathbf{1}} = \frac{1}{n^2}\sum_{L\in\mathcal{L}_n} (\mathbf{1}_L^\top \mathbf{1})^2 = \frac{1}{n^2}(2n+2)n^2 = 2n+2$. Subtracting the constant mode on $\mathbf{1}^\perp$ immediately yields, for all $n \ge 3$ regardless of parity,
-\[
-  \tr\bigl(\Ltilde_n\big|_{\mathbf{1}^\perp}\bigr) = \tr(L_n) - \hat{\mathbf{1}}^\top L_n \hat{\mathbf{1}} = (2n^2 + 2n) - (2n + 2) = 2(n^2 - 1),
-\]
-which agrees with summing the integer eigenvalues in \Cref{thm:spectral_rationalization}: $(n-2) + (2n-1)n = 2(n^2-1)$ for even $n$ and $2(n-1) + (2n-2)n = 2(n^2-1)$ for odd $n$. Dividing by $\dim(\mathbf{1}^\perp) = n^2 - 1$ gives $\bar{\mu}(\Ltilde_n) = 2$. Under the uniform distribution on $S_{n^2}$, the covariance matrix of $\mathbf{z}(S)$ is isotropic on $\mathbf{1}^\perp$: $\mathbb{E}[\mathbf{z}\mathbf{z}^\top] = \frac{\|\mathbf{z}\|^2}{n^2-1} P_{\mathbf{1}^\perp}$ \cite{diaconis1988group}. Therefore $\mathbb{E}[\mathbf{z}^\top L_n \mathbf{z}] = \tr(L_n \mathbb{E}[\mathbf{z}\mathbf{z}^\top]) = \frac{\|\mathbf{z}\|^2}{n^2-1} \tr(\Ltilde_n|_{\mathbf{1}^\perp}) = 2\|\mathbf{z}\|^2 = \frac{2}{3}n^2(n^4-1)$.
-\end{proof}
-
 \begin{table}[t]
 \centering
-\caption{Exact spectral invariants of the unprojected Laplacian $L_n$ on $\R^{n^2}$ and rationalized zero-mean Laplacian $\Ltilde_n$ on $\mathbf{1}^\perp$ across orders $n=3\dots 8$, verified by \texttt{verify\_paper\_d.py}.}
+\caption{Spectral invariants of the unprojected operator $L_n$ on $\R^{n^2}$ and zero-mean operator $\Ltilde_n$ on $\mathbf{1}^\perp$ across orders $n=3\dots 8$, verified by \texttt{verify\_paper\_d.py}.}
 \label{tab:spectral_census}
 \footnotesize
 \setlength{\tabcolsep}{4pt}
@@ -112,43 +85,38 @@ $8$ & $64$ & $17$ & $47$ & $5.0718,\; 18.9282$ & $\{0^{[47]}, 6^{[1]}, 8^{[15]}\
 \end{tabular}
 \end{table}
 
-\subsection{Low-Mode Insufficiency and the \texorpdfstring{$(2n-4)$}{(2n-4)}-Dimensional Zero-Mean Optical-Phonon Subspace}
+\subsection{The \texorpdfstring{$4\times 4$}{4x4} Impostor Square \texorpdfstring{$S_{\mathrm{low}}$}{S\_low} and the \texorpdfstring{$2n-4$}{2n-4} Hidden Polynomial Modes}
 
-In Paper~II \cite{mathewson2026moments} and Paper~III \cite{mathewson2026mechanics}, we proved that semi-magic row and column balance implies vanishing dipole covariance $\langle X,Z\rangle = \langle Y,Z\rangle = 0$, so that every magic square has an isotropic inertia tensor. A natural physical question is whether the converse holds when supplemented by the two main diagonal constraints: if a permutation $S \in S_{n^2}$ satisfies zero dipole tilt ($\langle X,Z\rangle = \langle Y,Z\rangle = 0$) and zero diagonal residuals ($R_{D_+} = R_{D_-} = 0$), must $S$ be a magic square? By \Cref{thm:spectral_rationalization}, the answer is emphatically negative for all $n \ge 3$:
+With \Cref{prop:spectral_rationalization} in hand, we can immediately see why balancing a plate's $3\mathrm{D}$ tilt and diagonals is not enough to find a magic square:
 
-\begin{proposition}[Low-Mode Insufficiency and Explicit Order-4 Counterexample]
-\label{prop:low_mode_insufficiency}
-Define the $4$-mode dipole-plus-diagonal energy functional
+\begin{remark}[The Balanced Impostor Square $S_{\mathrm{low}}$ and the $2n-4$ Hidden Modes]
+\label{rem:low_mode_insufficiency}
+In the \emph{Energy Decomposition Explorer} (\texttt{energy-decomposition.html}), the $4$-mode tilt-plus-diagonal energy is defined as
 \begin{equation}
   E_{\mathrm{low}}(S) = \langle X,Z\rangle^2 + \langle Y,Z\rangle^2 + R_{D_+}(S)^2 + R_{D_-}(S)^2.
   \label{eq:E_low_def}
 \end{equation}
-For any order $n \ge 3$, the four zero-mean vectors $\{X, Y, \widetilde{\mathbf{d}}_+, \widetilde{\mathbf{d}}_-\}$ (where $\widetilde{\mathbf{d}}_\pm = P_{\mathbf{1}^\perp}\mathbf{d}_\pm = \mathbf{d}_\pm - \frac{1}{n}\mathbf{1}$) are linearly independent and span a $4$-dimensional subspace of the $2n$-dimensional active zero-mean image $\operatorname{im}(\Ltilde_n) \subset \mathbf{1}^\perp$ (and a $4$-dimensional subspace of the $(2n+1)$-dimensional unprojected image $\operatorname{im}(L_n) \subset \R^{n^2}$). Consequently, its orthogonal complement within $\operatorname{im}(\Ltilde_n) \subset \mathbf{1}^\perp$ has dimension
+Because the linear coordinate vectors $X \in \mathcal{V}_{\mathrm{col}}$ and $Y \in \mathcal{V}_{\mathrm{row}}$ are degree-$1$ column and row moments, they are mutually orthogonal and orthogonal to the projected diagonals $\widetilde{\mathbf{d}}_\pm \in \mathcal{V}_{\mathrm{row}}\otimes\mathcal{V}_{\mathrm{col}}$. Thus $\{X, Y, \widetilde{\mathbf{d}}_+, \widetilde{\mathbf{d}}_-\}$ spans only a $4$-dimensional slice of the $2n$-dimensional active image $\operatorname{im}(\Ltilde_n) = \mathcal{V}_{\mathrm{row}} \oplus \mathcal{V}_{\mathrm{col}} \oplus \operatorname{span}\{\widetilde{\mathbf{s}}_d, \mathbf{a}_d\} \subset \mathbf{1}^\perp$. Its orthogonal complement inside $\operatorname{im}(\Ltilde_n)$ has dimension
 \begin{equation}
-  \dim\bigl(\operatorname{im}(\Ltilde_n) \cap \ker(E_{\mathrm{low}})\bigr) = 2n - 4 = 2(n-2)
-  \quad\bigl(\text{or }(2n+1)-4 = 2n-3\text{ in }\operatorname{im}(L_n)\subset\R^{n^2}\bigr),
+  \dim\bigl(\operatorname{im}(\Ltilde_n) \cap \ker(E_{\mathrm{low}})\bigr) = 2n - 4 = 2(n-2),
   \label{eq:high_mode_dim}
 \end{equation}
-spanned by the $n-2$ higher-degree orthogonalized column polynomial modes $P_k(X) \in \mathcal{V}_{\mathrm{col}}$ and $n-2$ row polynomial modes $P_k(Y) \in \mathcal{V}_{\mathrm{row}}$ for $2 \le k \le n-1$. At order $n=4$ ($2n-4 = 4$ zero-mean optical modes), the explicit permutation
+spanned by the $n-2$ higher-degree column polynomial moments $P_k(X) \in \mathcal{V}_{\mathrm{col}}$ and $n-2$ row polynomial moments $P_k(Y) \in \mathcal{V}_{\mathrm{row}}$ of degrees $2 \le k \le n-1$, all sharing eigenvalue $\mu = n$. At order $n=4$ ($2n-4 = 4$ hidden quadratic and cubic modes $\langle X^2,Z\rangle, \langle X^3,Z\rangle, \langle Y^2,Z\rangle, \langle Y^3,Z\rangle$), loading the preset square $S_{\mathrm{low}}$ in \texttt{energy-decomposition.html} (\Cref{fig:spectral}b),
 \begin{equation}
   S_{\mathrm{low}} = \begin{bmatrix}
     9 & 4 & 12 & 3 \\
     16 & 1 & 14 & 7 \\
     10 & 15 & 11 & 8 \\
     2 & 5 & 6 & 13
-  \end{bmatrix} \in S_{16}
+  \end{bmatrix} \in S_{16},
   \label{eq:S_low_matrix}
 \end{equation}
-satisfies $\langle X,Z\rangle = 0$, $\langle Y,Z\rangle = 0$, $R_{D_+}(S_{\mathrm{low}}) = 0$, and $R_{D_-}(S_{\mathrm{low}}) = 0$ ($E_{\mathrm{low}}(S_{\mathrm{low}}) = 0$), yet exhibits non-zero row residuals $\mathbf{R}_{\mathrm{row}} = (-12, +8, +20, -16)$, column residuals $\mathbf{R}_{\mathrm{col}} = (+6, -18, +18, -6)$, and total line energy $\Hline(S_{\mathrm{low}}) = 1{,}584 > 0$ (\Cref{fig:spectral}b).
-\end{proposition}
+shows a plate that balances with zero $X$-tilt ($\langle X,Z\rangle = -3(6)-1(-18)+1(18)+3(-6) = 0$), zero $Y$-tilt ($\langle Y,Z\rangle = 3(-12)+1(8)-1(20)-3(-16) = 0$), and exact magic diagonals ($9+1+11+13 = 34$ and $3+14+15+2 = 34$, so $E_{\mathrm{low}}(S_{\mathrm{low}}) = 0$). Yet its rows sum to $(28, 38, 44, 26)$ and its columns sum to $(37, 25, 43, 31)$, hiding a massive line-sum energy $\Hline(S_{\mathrm{low}}) = (-12)^2 + 8^2 + 20^2 + (-16)^2 + 6^2 + (-18)^2 + 18^2 + (-6)^2 = 1{,}584 > 0$ entirely inside the quadratic and cubic row/column alternations!
+\end{remark}
 
-\begin{proof}
-Because $X \in \mathcal{V}_{\mathrm{col}}$ and $Y \in \mathcal{V}_{\mathrm{row}}$ are non-zero pure column and pure row vectors, they are orthogonal to each other and to $\widetilde{\mathbf{d}}_+, \widetilde{\mathbf{d}}_- \in \mathcal{V}_{\mathrm{row}}\otimes\mathcal{V}_{\mathrm{col}}$. Since $\widetilde{\mathbf{d}}_+$ and $\widetilde{\mathbf{d}}_-$ are linearly independent for all $n \ge 3$, $\{X, Y, \widetilde{\mathbf{d}}_+, \widetilde{\mathbf{d}}_-\}$ spans a $4$-dimensional subspace of $\operatorname{im}(\Ltilde_n) = \mathcal{V}_{\mathrm{row}} \oplus \mathcal{V}_{\mathrm{col}} \oplus \operatorname{span}\{\widetilde{\mathbf{s}}_d, \mathbf{a}_d\}$. Because $\dim\operatorname{im}(\Ltilde_n) = \operatorname{rank}(\Ltilde_n) = 2n$ on $\mathbf{1}^\perp$ by \Cref{thm:spectral_rationalization} (while $\operatorname{rank}(L_n) = 2n+1$ on $\R^{n^2}$ when including the constant vector $\mathbf{1}$), the zero-mean high-frequency residual subspace inside $\operatorname{im}(\Ltilde_n)$ has dimension $2n - 4 = 2(n-2)$, consisting of the $(n-2)$-dimensional complement of $\operatorname{span}\{Y\}$ in $\mathcal{V}_{\mathrm{row}}$ plus the $(n-2)$-dimensional complement of $\operatorname{span}\{X\}$ in $\mathcal{V}_{\mathrm{col}}$. Direct evaluation on $S_{\mathrm{low}}$ in \Cref{eq:S_low_matrix} yields row sums $(28, 38, 44, 26)$ (centred residuals $(-12, 8, 20, -16)$), column sums $(37, 25, 43, 31)$ (centred residuals $(6, -18, 18, -6)$), and diagonal sums $(34, 34)$ (centred residuals $(0,0)$). Taking inner products with $X = (-3,-1,1,3)$ and $Y = (3,1,-1,-3)$ gives $\langle X,Z\rangle = -3(6) - 1(-18) + 1(18) + 3(-6) = 0$ and $\langle Y,Z\rangle = 3(-12) + 1(8) - 1(20) - 3(-16) = 0$, while $\Hline(S_{\mathrm{low}}) = (-12)^2 + 8^2 + 20^2 + (-16)^2 + 6^2 + (-18)^2 + 18^2 + (-6)^2 = 1{,}584$.
-\end{proof}
-
-From a physical standpoint, \Cref{prop:low_mode_insufficiency} explains why \emph{macroscopic rigid-body torque and moment-of-inertia solvers fail} to synthesize magic squares: a physical solver that couples only to global center-of-mass tilt ($\langle X,Z\rangle, \langle Y,Z\rangle$) and principal diagonal moments ($R_{D_\pm}$) constrains only the $4$ long-wavelength ``acoustic'' modes in $\mathbf{1}^\perp$ and is completely blind to the $2n-4$ short-wavelength zero-mean ``optical phonon'' modes ($\langle X^k,Z\rangle, \langle Y^k,Z\rangle$ for $2 \le k \le n-1$). Conversely, \Cref{thm:spectral_rationalization} also governs the \emph{Maxwell--Calladine constraint-counting ratio} \cite{maxwell1864calculation,calladine1978buckminster} on the zero-mean hyperplane $\mathbf{1}^\perp$:
+\Cref{prop:spectral_rationalization} also defines a geometric ratio that will prove decisive when we compare different grid sizes $n$ in \Cref{sec:bubble}, namely the \emph{nullspace-to-constraint ratio} on $\mathbf{1}^\perp$:
 \begin{equation}
   \eta_{\mathrm{MC}}(n) = \frac{\dim\ker(\Ltilde_n)}{\operatorname{rank}(\Ltilde_n)} = \frac{n^2 - 2n - 1}{2n},
   \label{eq:maxwell_calladine_ratio}
 \end{equation}
-which measures the ratio of internal zero-energy ``floppy modes'' ($\dim\ker(\Ltilde_n)$) to active zero-mean linear constraints ($\operatorname{rank}(\Ltilde_n) = \operatorname{rank}(A_n) - 1 = 2n$). For $n=3$ ($\eta_{\mathrm{MC}} = 2/6 = 0.33$) and $n=4$ ($\eta_{\mathrm{MC}} = 7/8 = 0.88$), the system is \emph{overconstrained} ($\eta_{\mathrm{MC}} < 1$). The isostatic crossover $\eta_{\mathrm{MC}} \approx 1$ occurs between $n=4$ and $n=5$ ($\eta_{\mathrm{MC}}(5) = 14/10 = 1.40$), where discrete permutation frustration reaches its maximum, before entering an \emph{underconstrained floppy regime} at $n \ge 6$ ($\eta_{\mathrm{MC}}(6)=1.92$, $\eta_{\mathrm{MC}}(7)=2.43$, $\eta_{\mathrm{MC}}(8)=2.94$) that drives the Dimensional Relief Phenomenon in \Cref{sec:bubble}.
+analogous to the ratio of internal zero-energy ``floppy'' degrees of freedom to active linear constraints in Maxwell--Calladine frame counting \cite{maxwell1864calculation,calladine1978buckminster}. In continuous linear algebra on $\mathbf{1}^\perp$, $\dim\ker(\Ltilde_n) = n^2-2n-1$ is already positive ($2, 7, 14, \dots$) for all $n \ge 3$. What makes small magic squares ($n=3,4,5$) hard to find by random swapping is the \emph{discrete permutation constraint} $\mathbf{z} \in S_{n^2}$: we must land on a discrete corner of the permutahedron that happens to lie inside $\ker(\Ltilde_n)$ when the nullspace dimension is smaller than or comparable to the number of constraints ($\eta_{\mathrm{MC}}(3)=0.33$, $\eta_{\mathrm{MC}}(4)=0.88$, $\eta_{\mathrm{MC}}(5)=1.40$). As $n \ge 6$ grows, the magic nullspace expands quadratically ($\dim\ker = 79$ at $n=10$) while the constraint rank grows only linearly ($2n = 20$ at $n=10$, $\eta_{\mathrm{MC}}(10) = 3.95$), giving discrete multi-exchange search room to maneuver without breaking the diagonals.
