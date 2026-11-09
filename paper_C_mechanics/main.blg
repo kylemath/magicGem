@@ -1,46 +1,55 @@
 This is BibTeX, Version 0.99e (TeX Live 2026)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: main.aux
-The style file: plain.bst
+The style file: tfapacite.bst
+Reallocated glb_str_ptr (elt_size=4) to 20 items from 10.
+Reallocated global_strs (elt_size=200001) to 20 items from 10.
+Reallocated glb_str_end (elt_size=4) to 20 items from 10.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
 Database file #1: references.bib
+apacite.bst [2013/07/21 v6.03 APA bibliography style]
 You've used 18 entries,
-            2118 wiz_defined-function locations,
-            612 strings with 6587 characters,
-and the built_in function-call counts, 4813 in all, are:
-= -- 478
-> -- 166
-< -- 1
-+ -- 72
-- -- 50
-* -- 292
-:= -- 828
-add.period$ -- 57
+            8136 wiz_defined-function locations,
+            1585 strings with 14792 characters,
+and the built_in function-call counts, 30065 in all, are:
+= -- 3856
+> -- 220
+< -- 1277
++ -- 1286
+- -- 37
+* -- 1823
+:= -- 5232
+add.period$ -- 73
 call.type$ -- 18
-change.case$ -- 75
+change.case$ -- 326
 chr.to.int$ -- 0
-cite$ -- 18
-duplicate$ -- 201
-empty$ -- 434
-format.name$ -- 50
-if$ -- 1004
+cite$ -- 36
+duplicate$ -- 776
+empty$ -- 1296
+format.name$ -- 312
+if$ -- 5968
 int.to.chr$ -- 0
-int.to.str$ -- 18
-missing$ -- 23
-newline$ -- 95
-num.names$ -- 36
-pop$ -- 93
+int.to.str$ -- 58
+missing$ -- 0
+newline$ -- 432
+num.names$ -- 146
+pop$ -- 605
 preamble$ -- 1
-purify$ -- 61
+purify$ -- 72
 quote$ -- 0
-skip$ -- 119
+skip$ -- 2076
 stack$ -- 0
-substring$ -- 269
-swap$ -- 20
-text.length$ -- 1
+substring$ -- 1437
+swap$ -- 477
+text.length$ -- 45
 text.prefix$ -- 0
-top$ -- 0
-type$ -- 58
+top$ -- 1
+type$ -- 1576
 warning$ -- 0
-while$ -- 50
-width$ -- 20
-write$ -- 205
+while$ -- 114
+width$ -- 0
+write$ -- 489

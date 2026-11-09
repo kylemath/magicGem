@@ -1,4 +1,4 @@
-\section{Convex Hulls and ``Diamond-in-a-Diamond'' Counterweighting}
+\section{Convex Hulls and `Diamond-in-a-Diamond' Counterweighting}
 \label{sec:nested}
 
 Why does passing from the discrete point cloud $P_S$ ($\sum_{i,j}\mathbf p_{ij}=\mathbf 0$) to its uniform-density solid convex hull $\mathcal G_0(S):=\mathcal G(S)=\conv P_S$ shift the solid centre of mass
@@ -19,7 +19,7 @@ Across the $880$ magic squares of order~$4$, the uniform solid $\mathcal G_0(S)$
 \end{proposition}
 
 \begin{proof}
-For every associative square $S$, $P_S=-P_S$ implies $\mathcal G_0(S)=-\mathcal G_0(S)$ and $\mathbf c_0(S)=\mathbf 0$. Each of the three Group~VI squares \#86, \#739, and \#756 satisfies $\overline S = hS$ or $\overline S = vS$, so $\mathcal G_0(S)$ is invariant under a $180^\circ$ half-turn $\iota_h\colon(x,y,z)\mapsto(x,-y,-z)$ or $\iota_v\colon(x,y,z)\mapsto(-x,y,-z)$ in $\R^3$ \citep[Proposition~4.3]{mathewson2026gems}. The half-turn forces two coordinates of $\mathbf c_0(S)$ to vanish identically, and exact simplicial integration (\Cref{sec:appendix}) certifies that the single remaining rational axial moment vanishes exclusively on \#86, \#739, and \#756 among all $832$ non-associative squares.
+For every associative square $S$, $P_S=-P_S$ implies $\mathcal G_0(S)=-\mathcal G_0(S)$ and $\mathbf c_0(S)=\mathbf 0$. Each of the three Group~VI squares \#86, \#739, and \#756 satisfies $\overline S = hS$ or $\overline S = vS$, so $\mathcal G_0(S)$ is invariant under a $180^\circ$ half-turn $\iota_h\colon(x,y,z)\mapsto(x,-y,-z)$ or $\iota_v\colon(x,y,z)\mapsto(-x,y,-z)$ in $\R^3$ \citep{mathewson2026gems}. The half-turn forces two coordinates of $\mathbf c_0(S)$ to vanish identically, and exact simplicial integration (\Cref{sec:appendix}) certifies that the single remaining rational axial moment vanishes exclusively on \#86, \#739, and \#756 among all $832$ non-associative squares.
 \end{proof}
 
 \begin{table}[htbp]
@@ -46,7 +46,7 @@ P_S^{(0)} = P_S,\qquad
 \mathcal G_k(S) = \conv P_S^{(k)},\qquad
 P_S^{(k+1)} = P_S^{(k)} \setminus \vertset\mathcal G_k(S)\quad (k\ge0),
 \end{equation}
-calling $\mathcal G_0(S)$ the \emph{outer gem} and $\mathcal G_1(S)=\conv P_S^{(1)}\subset\mathcal G_0(S)$ the \emph{inner core gem}—``a diamond inside a diamond'' (\Cref{fig:nested-diamonds}(a,b)).
+calling $\mathcal G_0(S)$ the \emph{outer gem} and $\mathcal G_1(S)=\conv P_S^{(1)}\subset\mathcal G_0(S)$ the \emph{inner core gem}—`a diamond inside a diamond' (\Cref{fig:nested-diamonds}(a,b)).
 
 \begin{proposition}[Vertex-centroid opposition and order-four onion hierarchy]
 \label{prop:opposition}
@@ -65,15 +65,15 @@ Equation~\eqref{eq:opposition} follows immediately from $\sum_{\mathbf p\in P_S}
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{figures/fig_nested_diamonds.pdf}
-\caption{Nested ``diamond-in-a-diamond'' convex layers $\mathcal G_0(S)\supset\mathcal G_1(S)$ and centre-of-mass restoration. (a)~Denser-core Gem \#673 ($(V_0,V_1)=(8,8)$) and (b)~hollow-cavity Gem \#54 ($(V_0,V_1)=(10,6)$, $1$-swap sibling of \#45), showing the translucent outer hull $\mathcal G_0(S)$ around the inner core $\mathcal G_1(S)$ with 2D fulcrum lever diagrams below. On \#673, $\mathbf c_0$ (green circle) and $\mathbf c_1$ (gold diamond) lie on opposite sides of $O$, balancing via a heavier inner core ($\Delta\rho_1/\rho_0=+5/4$). On \#54, volumetric simplex weighting pulls $\mathbf c_0=(0,19/324,0)$ onto the $+y$ side alongside $\mathbf c_1=(0,29/68,0)$, so a $98.3\%$ hollow core cavity ($\Delta\rho_1/\rho_0=-57/58$) restores balance at $O$. (c)~Census of nested layer dimensions and solid balance mechanisms across all $880$ order-four magic squares.}
+\caption{Nested `diamond-in-a-diamond' convex layers $\mathcal G_0(S)\supset\mathcal G_1(S)$ and centre-of-mass restoration. (a)~Denser-core Gem \#673 ($(V_0,V_1)=(8,8)$) and (b)~hollow-cavity Gem \#54 ($(V_0,V_1)=(10,6)$, $1$-swap sibling of \#45), showing the translucent outer hull $\mathcal G_0(S)$ around the inner core $\mathcal G_1(S)$ with 2D fulcrum lever diagrams below. On \#673, $\mathbf c_0$ (green circle) and $\mathbf c_1$ (gold diamond) lie on opposite sides of $O$, balancing via a heavier inner core ($\Delta\rho_1/\rho_0=+5/4$). On \#54, volumetric simplex weighting pulls $\mathbf c_0=(0,19/324,0)$ onto the $+y$ side alongside $\mathbf c_1=(0,29/68,0)$, so a $98.3\%$ hollow core cavity ($\Delta\rho_1/\rho_0=-57/58$) restores balance at $O$. (c)~Census of nested layer dimensions and solid balance mechanisms across all $880$ order-four magic squares.}
 \label{fig:nested-diamonds}
 \end{figure}
 
-\subsection{Restoring Solid Balance via ``Diamond-in-a-Diamond'' Core Inclusions}
+\subsection{Restoring Solid Balance via `Diamond-in-a-Diamond' Core Inclusions}
 
 Guided by the opposition identity \eqref{eq:opposition}, our first restoration method plays the inner core $\mathcal G_1(S)$ directly against the outer solid hull $\mathcal G_0(S)$. For a two-density composite solid to balance via a single scalar density increment $\Delta\rho_1$, the 3D vectors $\mathbf c_0(S)$ and $\mathbf c_1(S)$ must be collinear—which occurs in Dudeney's Group~VI, where $C_2$ half-turn symmetry locks both centroids onto the same coordinate axis.
 
-\begin{theorem}[Composite ``diamond-in-a-diamond'' solid balancing]
+\begin{theorem}[Composite `diamond-in-a-diamond' solid balancing]
 \label{thm:diamond-balance}
 Let $S$ be an order-four magic square with $\dim\mathcal G_1(S)=3$ ($511$ squares), and fabricate $\mathcal G_0(S)$ with baseline density $\rho_0>0$ and inner core inclusion $\mathcal G_1(S)\subset\mathcal G_0(S)$ of excess density $\Delta\rho_1=\rho_1-\rho_0$. The composite centre of mass
 \[
@@ -95,7 +95,7 @@ Setting $\rho_0\vol(\mathcal G_0)\mathbf c_0+\Delta\rho_1\vol(\mathcal G_1)\math
 
 \begin{table}[htbp]
 \centering
-\caption{The eight order-four Magic Gems with the smallest balancing excess density ratios $\Delta\rho_1/\rho_0\in[5/4,40/19]\approx[1.25,2.11]$ in a two-density ``diamond-in-a-diamond'' solid inclusion $(\mathcal G_0(S),\mathcal G_1(S))$ (\Cref{thm:diamond-balance}), all achievable with standard dual-material 3D printing. All $33$ denser-core gems belong to Dudeney's Group~VI; the full list of $33$ is given in \Cref{tab:all33}.}
+\caption{The eight order-four Magic Gems with the smallest balancing excess density ratios $\Delta\rho_1/\rho_0\in[5/4,40/19]\approx[1.25,2.11]$ in a two-density `diamond-in-a-diamond' solid inclusion $(\mathcal G_0(S),\mathcal G_1(S))$ (\Cref{thm:diamond-balance}), all achievable with standard dual-material 3D printing. All $33$ denser-core gems belong to Dudeney's Group~VI; the full list of $33$ is given in \Cref{tab:all33}.}
 \label{tab:two-density}
 \small
 \setlength{\tabcolsep}{5.0pt}

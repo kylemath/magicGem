@@ -7,12 +7,11 @@
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{array}
-\usepackage[sort]{natbib}
-\bibpunct[, ]{(}{)}{;}{a}{,}{,}
-\setlength{\bibhang}{12pt}
-\setlength{\bibsep}{3pt}
-\renewcommand\bibfont{\fontsize{10}{12}\selectfont}
-\usepackage[hypertexnames=false,colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue,pdfauthor={Kyle Elliott Mathewson},pdftitle={Balance in Inequality: Testing the Physical Equilibrium, Precession, and Structural Stability of Magic Gems}]{hyperref}
+\usepackage[natbibapa]{tfapastyle}
+\setlength\bibhang{12pt}
+\renewcommand\bibliographytypesize{\fontsize{10}{12}\selectfont}
+\usepackage[hypertexnames=false,hidelinks,pdfauthor={Kyle Elliott Mathewson},pdftitle={Balance in Inequality: Testing the Physical Equilibrium, Precession, and Structural Stability of Magic Gems}]{hyperref}
+\usepackage{url}
 \urlstyle{same}
 \usepackage{geometry}
 \usepackage{float}
@@ -151,7 +150,8 @@
 \input{sections/discussion}
 \input{sections/ai_statement}
 
-\input{main.bbl}
+\bibliographystyle{tfapacite}
+\bibliography{references}
 
 \appendix
 \input{sections/appendix}

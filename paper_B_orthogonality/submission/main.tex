@@ -6,6 +6,7 @@
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{mathtools}
 \usepackage{graphicx}
+\graphicspath{{figures/}{./}}
 \usepackage{booktabs}
 \usepackage{array}
 \usepackage[hypertexnames=false,hidelinks,pdfauthor={Kyle Elliott Mathewson},pdftitle={Moments of Magic Squares: Line-Sum Conditions, a Permutation Threshold, and Random Energies}]{hyperref}
@@ -127,8 +128,9 @@
 \title{\textbf{Moments of Magic Squares:\\ Line-Sum Conditions, a Permutation Threshold,\\ and Random Energies}}
 
 \author{Kyle Elliott Mathewson\\
-\textit{Faculty of Science, University of Alberta}\\
-\texttt{kyle.mathewson@ualberta.ca}}
+\textit{Department of Psychology, Faculty of Science, University of Alberta,}\\
+\textit{Edmonton, Alberta T6G 2E9, Canada}\\
+\textit{Corresponding author email:} \texttt{kyle.mathewson@ualberta.ca}}
 
 \date{\today}
 
@@ -140,7 +142,7 @@
 Every semi-magic square of order $n$ satisfies the axial moment identities $\sum_{i,j}s_{ij}j^m=\sum_{i,j}s_{ij}i^m=M(n)\sum_jj^m$ for all $m\ge1$, where $M(n)=n(n^2+1)/2$. For real matrices the converse requires $1\le m\le n-1$, whereas for arrangements of $\{1,\dots,n^2\}$ fewer moments suffice once $n\ge14$. We define the \emph{permutation threshold} $k^*(n)$ as the least $k$ such that every arrangement satisfying these identities for $1\le m\le k$ is semi-magic. In terms of the column-sum deviations $\gamma_j$, the degree-$k$ conditions state that $\sum_j\gamma_jt^j$ is divisible by $(t-1)^{k+1}$, linking $k^*(n)$ to the Prouhet--Tarry--Escott problem. While Schur's bound on real zeros gives $k^*(n)\le\sqrt{2(n-1)\log(n^4/4)}$, we prove the converse realisability bound $k^*(n)\ge(\sqrt2-o(1))\sqrt n$ (and $k^*(n)\ge(\sqrt6-o(1))\sqrt n$ when $4\mid n$) by perturbing semi-magic squares with complementary row pairs via horizontal swaps. We also show that $k^*(n)=n-1$ for $3\le n\le13$, $k^*(n)=n-2$ for $14\le n\le17$, and $k^*(n)\le n-3$ for $n\ge18$, and determine $k^*(n)$ for $18\le n\le40$ with computer assistance. Finally, at the $k=1$ level of the hierarchy, we specialise the Mantel--Hubert quadratic assignment variance formula to obtain exact means, variances, and limit laws under a uniform random arrangement for the full line-sum energy $\Efull$, for the four-term energy $\Efour$ combining the first moments and the two diagonals, and for Loly's moment of inertia, and find that $|L_4|=14{,}639{,}440$ arrangements of order $4$ satisfy $\Efour=0$.
 
 \medskip
-\noindent\textbf{Keywords:} magic squares, Prouhet--Tarry--Escott problem, polynomials with integer coefficients, permutation statistics, combinatorial central limit theorem, moment of inertia
+\noindent\textbf{Keywords:} magic squares; Prouhet--Tarry--Escott problem; integer polynomials; permutation threshold; permutation statistics; combinatorial central limit theorem; quadratic assignment
 
 \noindent\textbf{MSC 2020:} 05B20 (primary); 05A05, 11C08, 60C05, 60F05
 \end{abstract}
@@ -308,7 +310,7 @@ Hence $|\sum_cz_c\varphi_c|=N|\langle\varphi,P_Wz\rangle|\le N\|\varphi\|\sqrt{\
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=\textwidth]{figures/fig_decomposition.pdf}
+\includegraphics[width=\textwidth]{fig_decomposition.pdf}
 \caption{The line space for $n=4$. $W$ is the $2n$-dimensional span of the centred line indicators, and $W^{\perp}\cap\mathbf 1^{\perp}$ (dimension $N-1-2n$) is its orthogonal complement among the zero-mean functions. (a)~The arrangement of \Cref{rem:four_term_insufficient}, shaded by $z$, with its row and column deviations (both diagonal deviations are $0$). (b)~Schematic of the orthogonal splitting $z=P_Wz+(z-P_Wz)$; the arrangement is magic if and only if $P_Wz=0$. (c)~The squared norms $\|P_{W_R}z\|^2,\|P_{W_C}z\|^2,\|P_{W_D}z\|^2$ and that of the complement, for the arrangement of (a) ($3.38+2.81+0+15.06$) and for D\"urer's magic square (all of $\|z\|^2=21.25$ lies in the complement).}
 \label{fig:decomposition}
 \end{figure}
@@ -735,7 +737,7 @@ $n^2(n-1)/2$ & 10584&11774&13050&14415&15872&17424&19074&20825&22680&24642&26714
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=\textwidth]{figures/fig_kstar.pdf}
+\includegraphics[width=\textwidth]{fig_kstar.pdf}
 \caption{The permutation threshold. (a) Exact values of $k^*(n)$ for $3\le n\le40$ (dots), computer-assisted upper bounds $U(n)$ for $41\le n\le100$ (two independent implementations agree, not certified; open circles), the linear-algebra threshold $n-1$, the bound of \Cref{thm:perm_threshold}(a), the lower bounds given by \eqref{eq:box} with $|F_q|\ge\lceil r_q/2\rceil+1$ (open squares, shown where they give $K\ge2$) and for $4\mid n$ with the square of \Cref{prop:subset} (crosses), and $\sqrt{6n}$, the asymptotic order of (b) for $4\mid n$. (b) The same exact values and upper bounds divided by $\sqrt n$ and by $\sqrt{n\log n}$.}
 \label{fig:kstar}
 \end{figure}
@@ -951,7 +953,7 @@ $n$ & energy & $\E[E]$ & $\sqrt{\Var E}$ & $\chi^2$-mixture sd & variance ratio 
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.92\textwidth]{figures/fig_random_energy.pdf}
+\includegraphics[width=0.92\textwidth]{fig_random_energy.pdf}
 \caption{Energy of a uniformly random arrangement. (a)~Distribution of $\Efour/\E[\Efour]$ for $n=3$ (all $9!$ arrangements) and $n=5,8$ ($10^8$ Monte Carlo samples each), with the densities of the $\chi^2$-mixture approximation (dashed) and the limit $\mathrm{Exp}(1)$ of \Cref{cor:random_energy_clt} (dotted). (b)~The same for $\Efull$, where the $\chi^2$-mixture approximation improves slowly (\Cref{rem:gauss_mixture}). (c)~Exact mean (solid) and standard deviation (dashed) of both energies for $3\le n\le40$, with Monte Carlo values for $3\le n\le8$ (open markers).}
 \label{fig:random_energy}
 \end{figure}
@@ -1090,14 +1092,274 @@ Our constructions realise vectors with a zero of order $(\sqrt2-o(1))\sqrt n$ at
 \end{enumerate}
 
 
-\section*{Acknowledgments}
+\paragraph{Funding.} This research did not receive any specific grant from funding agencies in the public, commercial, or not-for-profit sectors.
+
+\paragraph{Declaration of competing interest.} The author declares that he has no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.
+
+\paragraph{Data availability.} All verification scripts, witness arrangements, lattice enumeration certificates, and source code supporting the findings of this study are included in the ancillary directory and are openly available at \url{https://github.com/kylemath/magicGem}.
+
+\section*{Declaration of generative AI and AI-assisted technologies in the manuscript preparation process}
 \label{sec:ai_statement}
+During the preparation of this work the author used Anthropic's Claude and Google's Gemini to assist with mathematical exploration, software implementation, and manuscript editing. After using these tools, the author reviewed and edited the content as needed, verified all proofs and exact computational certificates, and takes full responsibility for the content of the published article.
 
-Large language models (Anthropic's Claude and Google's Gemini) were used to assist with mathematical exploration, software implementation, and manuscript editing; all proofs and exact computational certificates have been verified by the author, who takes full responsibility for the content.
 
+\begin{thebibliography}{10}
 
-\bibliographystyle{plain}
-\bibliography{references}
+\bibitem{ahmed2003polyhedral}
+Maya~M. Ahmed, Jes{\'u}s~A. De~Loera, and Raymond Hemmecke.
+\newblock Polyhedral cones of magic cubes and squares.
+\newblock In {\em Discrete and Computational Geometry}, volume~25 of {\em
+  Algorithms and Combinatorics}, pages 25--41. Springer, 2003.
+
+\bibitem{allouche1999ubiquitous}
+Jean-Paul Allouche and Jeffrey Shallit.
+\newblock The ubiquitous {P}rouhet--{T}hue--{M}orse sequence.
+\newblock In {\em Sequences and Their Applications (Singapore, 1998)}, Springer
+  Ser. Discrete Math. Theor. Comput. Sci., pages 1--16. Springer, London, 1999.
+
+\bibitem{amoroso1995}
+Francesco Amoroso.
+\newblock Polynomials with prescribed vanishing at roots of unity.
+\newblock {\em Bollettino della Unione Matematica Italiana B (7)},
+  9(4):1021--1042, 1995.
+
+\bibitem{andrews1960magic}
+W.~S. Andrews.
+\newblock {\em Magic Squares and Cubes}.
+\newblock Dover Publications, 2nd edition, 1960.
+
+\bibitem{beck2010enumeration}
+Matthias Beck and Andrew van Herick.
+\newblock Enumeration of 4 $\times$ 4 magic squares.
+\newblock {\em Mathematics of Computation}, 80(273):617--621, 2011.
+
+\bibitem{beck2006insideout}
+Matthias Beck and Thomas Zaslavsky.
+\newblock Inside-out polytopes.
+\newblock {\em Advances in Mathematics}, 205(1):134--162, 2006.
+
+\bibitem{bloemena1964}
+A.~R. Bloemena.
+\newblock {\em Sampling from a Graph}, volume~2 of {\em Mathematical Centre
+  Tracts}.
+\newblock Mathematisch Centrum, Amsterdam, 1964.
+
+\bibitem{bolthausen1984}
+Erwin Bolthausen.
+\newblock An estimate of the remainder in a combinatorial central limit
+  theorem.
+\newblock {\em Zeitschrift f{\"u}r Wahrscheinlichkeitstheorie und Verwandte
+  Gebiete}, 66:379--386, 1984.
+
+\bibitem{bombieri1987low}
+E.~Bombieri and J.~D. Vaaler.
+\newblock Polynomials with low height and prescribed vanishing.
+\newblock In {\em Analytic Number Theory and Diophantine Problems (Stillwater,
+  1984)}, volume~70 of {\em Progress in Mathematics}, pages 53--73.
+  Birkh{\"a}user, Boston, 1987.
+
+\bibitem{borwein2002computational}
+Peter Borwein.
+\newblock {\em Computational Excursions in Analysis and Number Theory}.
+\newblock CMS Books in Mathematics. Springer, New York, 2002.
+
+\bibitem{BEK1999}
+Peter Borwein, Tam{\'a}s Erd{\'e}lyi, and G{\'e}za K{\'o}s.
+\newblock Littlewood-type problems on $[0,1]$.
+\newblock {\em Proceedings of the London Mathematical Society (3)},
+  79(1):22--46, 1999.
+
+\bibitem{borwein2000height}
+Peter Borwein and Michael~J. Mossinghoff.
+\newblock Polynomials with height 1 and prescribed vanishing at 1.
+\newblock {\em Experimental Mathematics}, 9(3):425--433, 2000.
+
+\bibitem{cameron2013signatura}
+Ian Cameron, Adam Rogers, and Peter~D. Loly.
+\newblock Signatura of magic and {L}atin integer squares: isentropic clans and
+  indexing.
+\newblock {\em Discussiones Mathematicae Probability and Statistics},
+  33(1-2):121--149, 2013.
+
+\bibitem{canfield2010asymptotic}
+E.~Rodney Canfield and Brendan~D. McKay.
+\newblock Asymptotic enumeration of integer matrices with large equal row and
+  column sums.
+\newblock {\em Combinatorica}, 30:655--680, 2010.
+
+\bibitem{daniels1944}
+H.~E. Daniels.
+\newblock The relation between measures of correlation in the universe of
+  sample permutations.
+\newblock {\em Biometrika}, 33(2):129--135, 1944.
+
+\bibitem{eberhard2019additive}
+Sean Eberhard, Freddie Manners, and Rudi Mrazovi{\'c}.
+\newblock Additive triples of bijections, or the toroidal semiqueens problem.
+\newblock {\em Journal of the European Mathematical Society}, 21:441--463,
+  2019.
+
+\bibitem{ehrhart1973magic}
+Eug{\`e}ne Ehrhart.
+\newblock Sur les carr{\'e}s magiques.
+\newblock {\em Comptes Rendus de l'Acad{\'e}mie des Sciences, S{\'e}rie A},
+  277:651--654, 1973.
+
+\bibitem{erdelyi2016}
+Tam{\'a}s Erd{\'e}lyi.
+\newblock Coppersmith--{R}ivlin type inequalities and the order of vanishing of
+  polynomials at 1.
+\newblock {\em Acta Arithmetica}, 172(3):271--284, 2016.
+
+\bibitem{erdosturan1950}
+P.~Erd{\H o}s and P.~Tur{\'a}n.
+\newblock On the distribution of roots of polynomials.
+\newblock {\em Annals of Mathematics (2)}, 51(1):105--119, 1950.
+
+\bibitem{frenicle1693}
+Bernard Fr{\'e}nicle~de Bessy.
+\newblock Des quarrez ou tables magiques.
+\newblock In {\em Divers ouvrages de math{\'e}matique et de physique, par
+  Messieurs de l'Acad{\'e}mie Royale des Sciences}, pages 423--483. Imprimerie
+  Royale, Paris, 1693.
+
+\bibitem{gardner1976}
+Martin Gardner.
+\newblock Mathematical games: A breakthrough in magic squares, and the first
+  perfect magic cube.
+\newblock {\em Scientific American}, 234(1):118--123, 1976.
+
+\bibitem{hoeffding1951}
+Wassily Hoeffding.
+\newblock A combinatorial central limit theorem.
+\newblock {\em Annals of Mathematical Statistics}, 22(4):558--566, 1951.
+
+\bibitem{hubert1987assignment}
+Lawrence Hubert.
+\newblock {\em Assignment Methods in Combinatorial Data Analysis}.
+\newblock Marcel Dekker, New York, 1987.
+
+\bibitem{imhof1961}
+J.~P. Imhof.
+\newblock Computing the distribution of quadratic forms in normal variables.
+\newblock {\em Biometrika}, 48(3/4):419--426, 1961.
+
+\bibitem{kuperberg2017probabilistic}
+Greg Kuperberg, Shachar Lovett, and Ron Peled.
+\newblock Probabilistic existence of regular combinatorial structures.
+\newblock {\em Geometric and Functional Analysis}, 27:919--972, 2017.
+
+\bibitem{loly2004invariance}
+Peter~D. Loly.
+\newblock The invariance of the moment of inertia of magic squares.
+\newblock {\em The Mathematical Gazette}, 88(511):151--153, 2004.
+\newblock Note 88.30.
+
+\bibitem{loly2007franklin}
+Peter~D. Loly.
+\newblock Franklin squares: A chapter in the scientific studies of magical
+  squares.
+\newblock {\em Complex Systems}, 17(2):143--161, 2007.
+
+\bibitem{loly2009spectra}
+Peter~D. Loly, Ian Cameron, Walter Trump, and Daniel Schindel.
+\newblock Magic square spectra.
+\newblock {\em Linear Algebra and its Applications}, 430(10):2659--2680, 2009.
+
+\bibitem{mantel1967}
+Nathan Mantel.
+\newblock The detection of disease clustering and a generalized regression
+  approach.
+\newblock {\em Cancer Research}, 27:209--220, 1967.
+
+\bibitem{mathewson_gems}
+Kyle~Elliott Mathewson.
+\newblock Magic gems: Convex hulls of lifted magic squares.
+\newblock arXiv:2512.09170, 2025.
+
+\bibitem{mignotte1982}
+Maurice Mignotte.
+\newblock Estimations {\'e}l{\'e}mentaires effectives sur les nombres
+  alg{\'e}briques.
+\newblock In J.~V. Armitage, editor, {\em Journ{\'e}es Arithm{\'e}tiques 1980},
+  volume~56 of {\em London Mathematical Society Lecture Note Series}, pages
+  364--371. Cambridge University Press, Cambridge, 1982.
+
+\bibitem{motoo1957}
+Minoru Motoo.
+\newblock On the {H}oeffding's combinatorial central limit theorem.
+\newblock {\em Annals of the Institute of Statistical Mathematics}, 8:145--154,
+  1957.
+
+\bibitem{noether1949}
+Gottfried~E. Noether.
+\newblock On a theorem by {W}ald and {W}olfowitz.
+\newblock {\em Annals of Mathematical Statistics}, 20:455--458, 1949.
+
+\bibitem{nordgren2012properties}
+R.~P. Nordgren.
+\newblock On properties of special magic square matrices.
+\newblock {\em Linear Algebra and its Applications}, 437(8):2009--2025, 2012.
+
+\bibitem{nordgren2014spectra}
+R.~P. Nordgren.
+\newblock Spectra of order-4 special magic squares.
+\newblock {\em Linear Algebra and its Applications}, 458:80--98, 2014.
+
+\bibitem{pickover2002zen}
+Clifford~A. Pickover.
+\newblock {\em The Zen of Magic Squares, Circles, and Stars}.
+\newblock Princeton University Press, 2002.
+
+\bibitem{pinn1998number}
+K.~Pinn and C.~Wieczerkowski.
+\newblock Number of magic squares from parallel tempering {M}onte {C}arlo.
+\newblock {\em International Journal of Modern Physics C}, 9(4):541--546, 1998.
+
+\bibitem{rogers2004inertia}
+Adam Rogers and Peter~D. Loly.
+\newblock The inertia tensor of a magic cube.
+\newblock {\em American Journal of Physics}, 72(6):786--789, 2004.
+
+\bibitem{rogers2005multipole}
+Adam Rogers and Peter~D. Loly.
+\newblock The electric multipole expansion for a magic cube.
+\newblock {\em European Journal of Physics}, 26(5):809--813, 2005.
+
+\bibitem{schur1933}
+Issai Schur.
+\newblock Untersuchungen {\"u}ber algebraische {G}leichungen.
+\newblock {\em Sitzungsberichte der Preu{\ss}ischen Akademie der
+  Wissenschaften, Physikalisch-Mathematische Klasse}, pages 403--428, 1933.
+
+\bibitem{stanley1973magic}
+Richard~P. Stanley.
+\newblock Linear homogeneous {D}iophantine equations and magic labelings of
+  graphs.
+\newblock {\em Duke Mathematical Journal}, 40:607--632, 1973.
+
+\bibitem{trump2012enumeration}
+Walter Trump.
+\newblock Notes on magic squares and cubes.
+\newblock \url{https://www.trump.de/magic-squares/}.
+\newblock Accessed 7 October 2026.
+
+\bibitem{waldwolfowitz1944}
+Abraham Wald and Jacob Wolfowitz.
+\newblock Statistical tests based on permutations of the observations.
+\newblock {\em Annals of Mathematical Statistics}, 15(4):358--372, 1944.
+
+\bibitem{ward1980vector}
+James~E. Ward, III.
+\newblock Vector spaces of magic squares.
+\newblock {\em Mathematics Magazine}, 53(2):108--111, 1980.
+
+\bibitem{wright1959prouhet}
+E.~M. Wright.
+\newblock Prouhet's 1851 solution of the {T}arry--{E}scott problem of 1910.
+\newblock {\em American Mathematical Monthly}, 66:199--201, 1959.
+
+\end{thebibliography}
 
 \appendix
 \section{Computational methods}

@@ -1,0 +1,36 @@
+November 9, 2026
+
+Professor Eva-Maria Feichtner
+Editor-in-Chief, Advances in Applied Mathematics
+Elsevier
+
+Subject: Manuscript Submission — "Moments of Magic Squares: Line-Sum Conditions, a Permutation Threshold, and Random Energies"
+MSC 2020: Primary 05B20; Secondary 05A05, 11C08, 60C05, 60F05
+
+Dear Professor Feichtner,
+
+Please find enclosed my manuscript titled "Moments of Magic Squares: Line-Sum Conditions, a Permutation Threshold, and Random Energies" (28 pages, 3 figures, 4 tables), which I am submitting for consideration for publication as a Full Length Article in Advances in Applied Mathematics.
+
+In accordance with the journal's submission checklist, the Mathematics Subject Classification (MSC 2020) codes for this manuscript are:
+- Primary MSC 2020: 05B20 (Combinatorial aspects of matrices)
+- Secondary MSC 2020: 05A05 (Permutations, words, matrices), 11C08 (Polynomials in number theory), 60C05 (Combinatorial probability), 60F05 (Central limit and other weak theorems)
+
+An n x n arrangement S = (s_{ij}) of {1, ..., n^2} is semi-magic if all its row and column sums equal the magic constant M(n) = n(n^2 + 1)/2. Every semi-magic square satisfies the axial moment identities sum_{i,j} s_{ij} j^m = sum_{i,j} s_{ij} i^m = M(n) sum_j j^m for all m >= 1. For real matrices, Vandermonde invertibility requires these identities for 1 <= m <= n - 1 to force equal row and column sums; however, for permutations of {1, ..., n^2}, integrality and bounded line sums cause the required degree to drop once n >= 14. Defining the permutation threshold k*(n) as the least k such that every arrangement of order n satisfying the axial moment identities of degrees 1 <= m <= k is semi-magic, this manuscript establishes a hierarchy of extremal, number-theoretic, and probabilistic results at the intersection of enumerative combinatorics, integer polynomials, and asymptotic permutation statistics:
+
+1. Prouhet-Tarry-Escott equivalence and two-sided asymptotic bounds for k*(n): In terms of the column-sum deviations gamma_j, the degree-k moment conditions state that the generating polynomial P_gamma(t) = sum_j gamma_j t^j is divisible by (t - 1)^{k+1}, linking k*(n) to the Prouhet-Tarry-Escott problem and integer polynomials with a zero of high multiplicity at t = 1. Applying Schur's bound on real zeros with the majorization bound ||gamma||_1 <= n^4 / 4 yields the universal upper bound k*(n) <= floor(sqrt(2(n - 1) log(n^4 / 4))) <= 2 sqrt(2) sqrt(n log n) (Theorem 3.7(a)). Our main theorem establishes the converse realizability direction: by constructing semi-magic squares with many pairs of complementary rows and perturbing them via matched horizontal swaps combined with a pigeonhole box principle, we prove k*(n) >= (sqrt(2) - o(1)) sqrt(n) for all n, and k*(n) >= (sqrt(6) - o(1)) sqrt(n) when 4 | n (Theorem 3.7(b)).
+
+2. Exact threshold values for small and intermediate orders: Using explicit witness arrangements and elementary lattice bounds, we prove unconditionally that k*(n) = n - 1 for 3 <= n <= 13, k*(n) = n - 2 for 14 <= n <= 17, and k*(n) <= n - 3 for all n >= 18 (Theorem 3.7(c)). Furthermore, via exact lattice enumeration backed by a standalone arithmetic certificate and computer-discovered witness arrangements, we determine the exact value of k*(n) for every order 18 <= n <= 40 (Theorem 3.7(d) and Table 2), showing that k*(n) coincides with the column-feasibility lattice threshold U(n) throughout this range (Conjecture 3.15).
+
+3. Random permutation energies and exact zero-set enumeration at k = 1: At the lowest level k = 1 of the moment hierarchy, we analyze uniformly random arrangements across S_{n^2}. Specializing the Mantel-Hubert variance formula for quadratic assignment statistics to symmetric matrices with zero row sums via Mobius inversion on the partition lattice Pi_4 (Proposition 4.3), we derive exact closed-form rational variances for both the full line-sum energy E_full and the four-term relaxation E_4 (combining the two degree-1 axial moments with the two main diagonals; Theorem 4.4), as well as the exact null mean and variance of Loly's moment-of-inertia invariant (Corollary 4.2). Hoeffding's combinatorial central limit theorem shows that E_4 / E[E_4] converges in distribution to Exp(1) as n -> infinity (Corollary 4.5). Finally, whereas E_4 = 0 at n = 3 collapses strictly to the 8 magic squares (proved elementarily in Proposition 5.1), a meet-in-the-middle enumeration at n = 4 shows that exactly |L_4| = 14,639,440 of the 16! arrangements satisfy E_4 = 0, of which 7,040 are magic (Proposition 5.3), in close agreement with a Gaussian local-limit heuristic.
+
+For complete transparency, this manuscript is algebraically and probabilistically self-contained. Companion preprints by the author examine separate geometric and physical questions on three-dimensional convex hulls ("Magic Gems", arXiv:2512.09170, submitted to Experimental Mathematics) and mechanical equilibria (submitted to the Journal of Mathematics and the Arts) of lifted magic squares; there is no overlap in theorems, proofs, or figures. All verification scripts, exact witness arrangements, C enumerators, and lattice certificates are included in the ancillary directory and publicly available at https://github.com/kylemath/magicGem.
+
+This manuscript is original, is my sole work, has not been published previously, and is not under consideration for publication elsewhere. Thank you very much for considering this submission for Advances in Applied Mathematics.
+
+Sincerely,
+
+Kyle Elliott Mathewson, Ph.D.
+Associate Professor, Department of Psychology, Faculty of Science
+University of Alberta
+Edmonton, Alberta T6G 2E9, Canada
+Email: kyle.mathewson@ualberta.ca

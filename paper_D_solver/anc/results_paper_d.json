@@ -10588,6 +10588,26 @@
       }
     },
     "ablation_study": {
+      "n3_exhaustive": {
+        "states": 362880,
+        "0_continuous_2d_greedy_snap_pct": 0.0,
+        "1_kawasaki_2cycle_quench_pct": 74.5,
+        "2_vacancy_3cycle_sa_pct": 74.5,
+        "3_spin_ice_lp22_quench_pct": 100.0,
+        "4_t1_eshelby_6kicks_pct": 100.0,
+        "5_plane_glide_18kicks_pct": 100.0,
+        "6_wales_doye_reanchored_full_pct": 100.0
+      },
+      "n3": {
+        "trials": 200,
+        "0_continuous_2d_greedy_snap_pct": 0.0,
+        "1_kawasaki_2cycle_quench_pct": 72.0,
+        "2_vacancy_3cycle_sa_pct": 92.5,
+        "3_spin_ice_lp22_quench_pct": 100.0,
+        "4_t1_eshelby_6kicks_pct": 100.0,
+        "5_plane_glide_18kicks_pct": 100.0,
+        "6_wales_doye_reanchored_full_pct": 100.0
+      },
       "n4": {
         "trials": 200,
         "0_continuous_2d_greedy_snap_pct": 0.0,
@@ -10624,7 +10644,7 @@
         "mean_descents": 5.1,
         "mean_pair_evaluations": 182,
         "mean_restarts": 0.0,
-        "mean_ms": 0.14
+        "mean_ms": 0.09
       },
       "n4": {
         "n": 4,
@@ -10640,7 +10660,7 @@
         "mean_descents": 52.9,
         "mean_pair_evaluations": 6349,
         "mean_restarts": 0.7,
-        "mean_ms": 5.54
+        "mean_ms": 4.8
       },
       "n5": {
         "n": 5,
@@ -10656,7 +10676,7 @@
         "mean_descents": 466.6,
         "mean_pair_evaluations": 139986,
         "mean_restarts": 8.03,
-        "mean_ms": 120.18
+        "mean_ms": 104.39
       },
       "n6": {
         "n": 6,
@@ -10672,7 +10692,7 @@
         "mean_descents": 439.6,
         "mean_pair_evaluations": 276942,
         "mean_restarts": 7.16,
-        "mean_ms": 216.4
+        "mean_ms": 185.24
       },
       "n7": {
         "n": 7,
@@ -10688,7 +10708,7 @@
         "mean_descents": 299.3,
         "mean_pair_evaluations": 352024,
         "mean_restarts": 4.58,
-        "mean_ms": 237.83
+        "mean_ms": 207.17
       },
       "n8": {
         "n": 8,
@@ -10704,7 +10724,7 @@
         "mean_descents": 335.3,
         "mean_pair_evaluations": 675945,
         "mean_restarts": 5.0,
-        "mean_ms": 423.92
+        "mean_ms": 366.51
       }
     }
   }

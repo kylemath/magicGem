@@ -1,7 +1,7 @@
 \section{Rotational Dynamics: Smooth Precession and Dzhanibekov Flips}
 \label{sec:dynamics}
 
-Our second test moves from static radial equilibrium to three-dimensional rotation. Suppose a Magic Gem or radial spoke sculpture of total mass $M$ and centre of mass $\mathbf c$ is supported on a low-friction conical pivot or gimbal at the origin $O$ under uniform gravity $\mathbf g=(0,0,-g)^{\top}$ (generalizing the conical fulcrum of \texttt{weighted\_ring.stl}; see \citealp{mathewson2025magicgemweb}), or tossed in free space. About the pivot $O$, gravity exerts the torque
+Our second test moves from static radial equilibrium to three-dimensional rotation. Suppose a Magic Gem or radial spoke sculpture of total mass $M$ and centre of mass $\mathbf c$ is supported on a low-friction conical pivot or gimbal at the origin $O$ under uniform gravity $\mathbf g=(0,0,-g)^{\top}$—generalizing the conical fulcrum of \texttt{weighted\_ring.stl} \citep{mathewson2025magicgemweb}—or tossed in free space. About the pivot $O$, gravity exerts the torque
 \[
 \boldsymbol\tau_{\mathrm{grav}} = M\,\mathbf c \times \mathbf g,
 \]
@@ -65,7 +65,7 @@ closing periodically after $(n^2+2)/2=9$ spin revolutions at $\lambda=1$ ($n=4$)
 \end{theorem}
 
 \begin{proof}
-By Lemma~3.1 of \citet{mathewson2026gems}, the empirical point-cloud covariance matrix $\Sigma(\lambda)=\frac1N\sum_{i,j}\mathbf p_{ij}(\lambda)\mathbf p_{ij}(\lambda)^{\top}$ has diagonal entries $\Sigma_{xx}=\Sigma_{yy}=a_n=(n^2-1)/12$ and $\Sigma_{zz}=\lambda^2b_n=\lambda^2(n^4-1)/12=\lambda^2(n^2+1)a_n$, while $\Sigma_{xy}=0$ by grid symmetry and $\Sigma_{xz}=\Sigma_{yz}=0$ by vanishing of the first moments. Since $I(\lambda)=M\bigl(\tr(\Sigma(\lambda))I_3-\Sigma(\lambda)\bigr)$, we obtain \eqref{eq:inertia-point} and \eqref{eq:inertia-ratio}. Evaluating \eqref{eq:inertia-ratio} at $\lambda=1$, $\lambda=(n^2+1)^{-1/2}$, and $\lambda=(n+1)^{-1}$ yields \eqref{eq:ratio-lambda1}--\eqref{eq:ratio-cube}. Substituting $I_1=I_2=I_\perp(\lambda)$ and $I_3=I_{zz}$ into Euler's equations \eqref{eq:euler} gives $\dot\omega_3=0$ and $\dot\omega_1=\Omega_{\mathrm{body}}\omega_2$, $\dot\omega_2=-\Omega_{\mathrm{body}}\omega_1$ with $\Omega_{\mathrm{body}}$ as in \eqref{eq:polhode-freq}.
+As shown by \citet{mathewson2026gems}, the empirical point-cloud covariance matrix $\Sigma(\lambda)=\frac1N\sum_{i,j}\mathbf p_{ij}(\lambda)\mathbf p_{ij}(\lambda)^{\top}$ has diagonal entries $\Sigma_{xx}=\Sigma_{yy}=a_n=(n^2-1)/12$ and $\Sigma_{zz}=\lambda^2b_n=\lambda^2(n^4-1)/12=\lambda^2(n^2+1)a_n$, while $\Sigma_{xy}=0$ by grid symmetry and $\Sigma_{xz}=\Sigma_{yz}=0$ by vanishing of the first moments. Since $I(\lambda)=M\bigl(\tr(\Sigma(\lambda))I_3-\Sigma(\lambda)\bigr)$, we obtain \eqref{eq:inertia-point} and \eqref{eq:inertia-ratio}. Evaluating \eqref{eq:inertia-ratio} at $\lambda=1$, $\lambda=(n^2+1)^{-1/2}$, and $\lambda=(n+1)^{-1}$ yields \eqref{eq:ratio-lambda1}--\eqref{eq:ratio-cube}. Substituting $I_1=I_2=I_\perp(\lambda)$ and $I_3=I_{zz}$ into Euler's equations \eqref{eq:euler} gives $\dot\omega_3=0$ and $\dot\omega_1=\Omega_{\mathrm{body}}\omega_2$, $\dot\omega_2=-\Omega_{\mathrm{body}}\omega_1$ with $\Omega_{\mathrm{body}}$ as in \eqref{eq:polhode-freq}.
 \end{proof}
 
 \begin{figure}[htbp]

@@ -9,8 +9,8 @@
   "degree1": 760,
   "degree1_and_diag": 8,
   "mean_full": 1.4814814814814814,
-  "mean_low": 1.4814814814814814,
-  "std_full": 0.4265963590906418,
+  "mean_low": 1.4814814814814807,
+  "std_full": 0.4265963590906419,
   "std_low": 0.8369605558853478,
   "var_full_exact": "398/2187",
   "var_low_exact": "1532/2187",
@@ -50,8 +50,8 @@
    "poly_var_full_match": true,
    "std_full": 0.42659635909064186,
    "std_low": 0.8369605558853478,
-   "gauss_std_low": 1.1712139482105108,
-   "gauss_std_full": 0.8685955110784129
+   "gauss_std_low": 1.171213948210511,
+   "gauss_std_full": 0.8685955110784128
   },
   "4": {
    "mean_full": "85/32",
