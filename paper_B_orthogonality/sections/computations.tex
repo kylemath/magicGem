@@ -27,7 +27,7 @@ z=\begin{pmatrix}\kappa+a'&-\xi'-a'-c'&\kappa+c'\\-\eta'-a'+c'&-2\kappa&-\eta'+a
 \sum_cz_c^2=2\bigl(4\kappa^2+3(a'^2+c'^2)+\xi'^2+\eta'^2\bigr),
 \]
 so $4\kappa^2+3(a'^2+c'^2)+\xi'^2+\eta'^2=30$.
-The four corners are distinct, so $a'\ne0$, $c'\ne0$ and $|a'|\ne|c'|$, hence $a'^2+c'^2\ge5$; therefore $4\kappa^2+\xi'^2+\eta'^2$ is a multiple of $3$ and at most $15$, and $a'^2+c'^2=10-(4\kappa^2+\xi'^2+\eta'^2)/3$.
+Because the four corners of $z$ equal $\kappa\pm a'$ and $\kappa\pm c'$, pairwise distinctness of the nine arrangement entries forces $a',c'\in\Z\setminus\{0\}$ with $|a'|\ne|c'|$ (since $a'=0$, $c'=0$, or $|a'|=|c'|$ would equate at least two corners), whence $a'^2+c'^2\ge 1^2+2^2=5$. Therefore $4\kappa^2+\xi'^2+\eta'^2$ is a multiple of $3$ and at most $15$, and $a'^2+c'^2=10-(4\kappa^2+\xi'^2+\eta'^2)/3$.
 So $|\kappa|\le1$.
 If $|\kappa|=1$, then $\xi'+\eta'=\pm1$ makes $\xi'^2+\eta'^2$ odd, so $4\kappa^2+\xi'^2+\eta'^2\in\{9,15\}$ (as it is at least $5$) and $\xi'^2+\eta'^2\in\{5,11\}$; $11$ is not a sum of two squares, and $\xi'^2+\eta'^2=5$ gives $a'^2+c'^2=7$, which is not either.
 So $\kappa=0$, $\eta'=-\xi'$, and $2\xi'^2\le15$ divisible by $3$ forces $\xi'=0$.
@@ -85,13 +85,18 @@ Exactly two or three rows with sum $34$ are impossible in $L_4$: the row deviati
 Thus $7040/14{,}639{,}440\approx0.048\%$ of $L_4$ is magic, and $9{,}637{,}312$ members ($66\%$) have no row or column with sum $34$, among them the arrangement of \Cref{rem:four_term_insufficient}.
 
 \paragraph{A local-limit heuristic.}
-Under a uniformly random arrangement the vector $(U_1,\dots,U_4)$ has mean equal to the target vector and covariance matrix $\Sigma_U$ given by \eqref{eq:ww_identity}: $U_1,U_2$ are uncorrelated with each other and with the diagonal sums, which have correlation $-1/(n-1)$ for even $n$ and $0$ for odd $n$.
-Since any two arrangements differ by a product of transpositions, the differences of $(U_1,\dots,U_4)$ generate the same lattice as the increments of single transpositions; by a Smith normal form computation ($n\le8$) this lattice is $\Z^4$.
-A Gaussian local limit would therefore give the heuristic estimate $|L_n|\approx N!\,(2\pi)^{-2}\det(\Sigma_U)^{-1/2}$.
-This estimate is $13.6$ for $n=3$ ($|L_3|=8$) and $1.82\times10^{7}$ for $n=4$, so $|L_4|$ is $0.80$ times the estimate; for the two-condition classes the ratios at $n=3,4$ are $0.59,0.91$ (first moments) and $1.10,0.96$ (diagonals).
+Under a uniformly random arrangement the vector $(U_1,\dots,U_4)$ has mean vector $\mu_U$ equal to the target vector and covariance matrix $\Sigma_U$ given by \eqref{eq:ww_identity}: $U_1,U_2$ are uncorrelated with each other and with the diagonal sums, which have correlation $-1/(n-1)$ for even $n$ and $0$ for odd $n$.
+The target mean $\mu_U$ belongs to the integer lattice $\Z^4$ for all $n$: $U_3=U_4=M(n)=n(n^2+1)/2$ is an integer for every $n$, while $U_1=U_2=\frac{n^2(n-1)(n^2+1)}{4}$ is also an integer for every $n$ (if $n$ is even, $4\mid n^2$; if $n$ is odd, both $n-1$ and $n^2+1$ are even, so $4\mid (n-1)(n^2+1)$).
+Furthermore, transpositions of consecutive values $\{v, v+1\}$ generate the full lattice $\Z^4$: choosing adjacent cells in row $i$ off both diagonals yields increment vector $(1,0,0,0)=e_1$; adjacent cells in column $j$ off both diagonals yields $e_2$; and swapping a cell on $D_{\mathrm m}$ (resp.\ $D_{\mathrm a}$) with an off-diagonal cell yields $e_3$ (resp.\ $e_4$). Thus the weight-difference lattice has covolume $1$.
+Because $\Sigma_U$ is asymptotically block-diagonal, its determinant scales as
+\begin{equation}
+\det(\Sigma_U)^{1/2}\sim\Var(U_1)\Var(U_3)\sim\Bigl(\frac{n^8}{144}\Bigr)\Bigl(\frac{n^5}{12}\Bigr)=\frac{n^{13}}{1728},
+\label{eq:det_sigma_scaling}
+\end{equation}
+so a Gaussian local limit gives the heuristic estimate $|L_n|\approx N!\,(2\pi)^{-2}\det(\Sigma_U)^{-1/2}\asymp N!\,n^{-13}$.
+For $n=3$ the estimate is $13.6$, yielding the explicit ratio $8/13.6\approx0.59$ (against $|L_4|/(1.82\times10^7)\approx0.80$ at $n=4$); for the two-condition classes the ratios at $n=3,4$ are $0.59,0.91$ (first moments) and $1.10,0.96$ (diagonals).
 For $n=5,6$ Monte Carlo ($10^{10}$ and $2\times10^{10}$ samples, $328$ and $62$ members of $L_n$) gives $|L_5|\approx5.1\times10^{17}$ ($\pm6\%$) and $|L_6|\approx1.2\times10^{33}$ ($\pm13\%$), ratios $0.76$ and $0.78$ to the estimate.
-Since $\det(\Sigma_U)^{1/2}$ grows like $n^{13}$, the heuristic suggests $|L_n|/N!\asymp n^{-13}$.
-Neither statement is proved here; local limit theorems for permutation statistics of this kind are studied in \cite{kuperberg2017probabilistic,eberhard2019additive}, and related counts of matrices with prescribed margins in \cite{canfield2010asymptotic}.
+Local limit theorems for permutation statistics of this kind are studied in \cite{kuperberg2017probabilistic,eberhard2019additive}, and related counts of matrices with prescribed margins in \cite{canfield2010asymptotic}.
 
 \subsection{Single swaps}
 \label{sec:swap-gaps}

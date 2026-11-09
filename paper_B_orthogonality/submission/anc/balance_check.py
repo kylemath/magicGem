@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Numerical checks for Section `Balance of the signed mass`.  Writes balance_results.json.
+"""Numerical checks for Remark 2.6.  Writes balance_results.json.
 Run: python3 balance_check.py    (about 20 s)"""
 import itertools, json, math, os
 import numpy as np

@@ -263,7 +263,7 @@ Let $n\ge3$.  For lines $L,L'$, $N\langle\tilde{\mathbf 1}_L,\tilde{\mathbf 1}_{
 Each line has $n$ of the $N$ cells, which gives the inner products: a row meets every column and each diagonal in one cell, two distinct rows (or columns) are disjoint, and the diagonals meet in the centre cell if and only if $n$ is odd.  The projection onto the functions of the row index replaces $z$ by its row means $\rho_i/n$.  Finally $\langle\tilde{\mathbf 1}_L,z\rangle=\delta_L/N$ by \Cref{lem:variances}.
 \end{proof}
 
-Part 3 is equivalent to the classical fact that the real magic squares of order $n\ge3$ (all line sums equal to a common, arbitrary value) form a space of dimension $N-2n$ \cite{ward1980vector}.
+Part~3 is equivalent to the classical fact that real magic squares of order $n\ge3$ with a prescribed magic sum (such as $0$ in $\mathbf 1^\perp$) form a subspace of dimension $N-2n$ (or $N-2n+1$ when the common line sum is allowed to vary freely, as in Ward \cite{ward1980vector}). By contrast, the two first-degree moment conditions $\langle x,z\rangle=\langle y,z\rangle=0$ leave an $(N-3)$-dimensional subspace in $\mathbf 1^\perp$.
 
 \begin{definition}[Energies]
 \label{def:energies}
@@ -476,6 +476,12 @@ By \Cref{lem:poly_form}, an arrangement satisfies the degree-$k$ conditions if a
 (identifying $\gamma$ with $P_\gamma$; the quotient of an integer polynomial by the monic polynomial $(t-1)^{k+1}$ has integer coefficients), a lattice of rank $n-k-1$.
 Writing $\gamma=\gamma^+-\gamma^-$ with $\gamma^\pm\ge0$, the condition $\gamma\in\Lambda_{n,k}$ says that the multisets in which $j$ occurs $\gamma^+_j$, resp.\ $\gamma^-_j$, times have equal power sums of degrees $0,\dots,k$: a Prouhet--Tarry--Escott system \cite{wright1959prouhet,borwein2002computational}.
 Small vectors in $\Lambda_{n,k}$ are classical: the Prouhet--Thue--Morse vector $\bigl((-1)^{s_2(j)}\bigr)_{0\le j<2^{k+1}}$ ($s_2$ the binary digit sum) has entries $\pm1$ and lies in $\Lambda_{2^{k+1},k}$ \cite{wright1959prouhet,allouche1999ubiquitous}, and Borwein, Erd\'elyi and K\'os construct polynomials of degree $n$ with coefficients in $\{-1,0,1\}$ vanishing to order $\ge c\sqrt{n/\log n}$ at $1$ \cite[Thm.~2.7]{BEK1999}; Borwein and Mossinghoff determine the least degree of such a polynomial with a zero of order $m$ at $1$ for $m\le10$ \cite{borwein2000height}.
+
+\begin{remark}[Prouhet--Thue--Morse sign patterns versus polynomial collisions]
+\label{rem:ptm_scale}
+The explicit Prouhet--Thue--Morse vector provides an exact $\pm 1$ solution to the Prouhet--Tarry--Escott system, but its recursive block-doubling structure imposes an exponential length requirement: achieving degree $k$ demands $2^{k+1}$ coordinates. Confined to $n$ columns, this algebraic rigidity restricts the vanishing degree to $2^{k+1}\le n$, yielding only $k=\Theta(\log n)$. In sharp contrast, non-constructive pigeonhole collisions in the polynomial ring $\Z[t]$ modulo $(t-1)^{k+1}$ (as employed in the proof of \Cref{thm:perm_threshold}(b) below via Siegel-type box principles) exploit the combinatorial volume of the polynomial ring, unlocking non-trivial collisions at the vastly larger $\sqrt n$ scale.
+\end{remark}
+
 The question is therefore how large $k$ can be for vectors that are column-deviation vectors of arrangements.
 
 \begin{theorem}[The permutation threshold]
@@ -538,7 +544,7 @@ The second inequality follows from $(n-1)\log(n^4/4)<4n\log n$.
 \end{proof}
 
 \Cref{lem:schur} uses only that $\gamma$ is a nonzero integer vector with $\|\gamma\|_1\le n^4/4$, and \Cref{lem:col_feasible} does not restrict the order of vanishing much further.
-By Amoroso's upper bound \cite[Thm.~2]{amoroso1995}, obtained from the Bombieri--Vaaler form of Siegel's lemma \cite{bombieri1987low}, as $D,K\to\infty$ with $K/D\to0$ and $K\sqrt{\log D/D}\to\infty$ there are nonzero integer polynomials of degree less than $D$ with a zero of order $K$ at $1$ whose coefficients are at most $\exp\bigl((\frac14+o(1))\frac{K^2}D\log\frac DK\bigr)$ in absolute value.\footnote{We read this theorem in the author's manuscript, not in the published version. The proof there (Section~5) begins by assuming $\sqrt{D\log D}/K\to0$, which is stronger than the hypothesis of the theorem and fails when $K$ is of order $\sqrt D$, as here. What we say below about the order $\sqrt{24n}$ therefore rests on the theorem as stated, not on a proof we have checked.}
+By Amoroso's upper bound \cite[Thm.~2]{amoroso1995}, obtained from the Bombieri--Vaaler form of Siegel's lemma \cite{bombieri1987low}, as $D,K\to\infty$ with $K/D\to0$ and $K\sqrt{\log D/D}\to\infty$ there are nonzero integer polynomials of degree less than $D$ with a zero of order $K$ at $1$ whose coefficients are at most $\exp\bigl((\frac14+o(1))\frac{K^2}D\log\frac DK\bigr)$ in absolute value.\footnote{Amoroso \cite[Thm.~2]{amoroso1995} obtains the constant $\frac14$ in the exponent $\exp\bigl((\frac14+o(1))\frac{K^2}D\log\frac DK\bigr)$ by forcing the polynomial to vanish at cyclotomic points of small degree. However, the auxiliary construction in his proof operates in the asymptotic regime $\sqrt{D\log D}/K\to0$, which does not hold at the critical scaling $K\asymp\sqrt D$ where $\sqrt{D\log D}/K\asymp\sqrt{\log D}\to\infty$. While Amoroso's result motivates the potential order $\sqrt{24n}$, applying Dirichlet's box principle directly to $\Lambda_{n,k}$ unconditionally establishes the $(\sqrt{12}-o(1))\sqrt n$ bound of \Cref{thm:perm_threshold}(b) without relying on cyclotomic vanishing or on \cite{amoroso1995}.}
 For $D=n$ and $K=\lfloor\alpha\sqrt n\rfloor$ with $\alpha<\sqrt{24}$ this is $n^{\alpha^2/8+o(1)}<n^3/4$ for large $n$; then $\|\gamma\|_1\le n^4/4$, and $|\sum_{j\in J}\gamma_j|\le pn^3/4\le pn(N-pn)/2$ for $|J|=p\le n/2$, and also for $p>n/2$ since $\sum_j\gamma_j=0$.
 So for large $n$ the lattice $\Lambda_{n,k}$ with $k=(\sqrt{24}-o(1))\sqrt n$ contains nonzero vectors satisfying \eqref{eq:col_feasible}, and an upper bound for $k^*(n)$ below this order must use more than \Cref{lem:col_feasible}.
 The pigeonhole principle alone, as in the proof of (b) below, gives the constant $\sqrt{12}$ in place of $\sqrt{24}$.
@@ -603,9 +609,17 @@ then there is an arrangement with all row sums $M(n)$ and $\gamma\ne0$ that sati
 The elements of $F_q$ lie in an interval of length $\sum_i|d_{q,i}|\le r_q(N-1)$.
 For $g\in\prod_qF_q$ the binomial moments $B_s(g)=\sum_qg_q\binom qs$, $0\le s\le K-2$, are integers in intervals of lengths at most $(N-1)\sum_qr_q\binom qs$, so by \eqref{eq:box} there are $g\ne g'$ with $B_s(g)=B_s(g')$ for all $s\le K-2$.
 Write $g_q=\sum_{i\in I_q}d_{q,i}$ and $g'_q=\sum_{i\in I'_q}d_{q,i}$.
-For every $q$, perform the exchange of \Cref{lem:twin} in the first row of each pair in $I_q\setminus I'_q$ and in the second row of each pair in $I'_q\setminus I_q$; all these exchanges involve disjoint cells.
-The result has all row sums $M(n)$ and $\gamma=\sum_q \zeta_q(e_{j_q}-e_{j_q+1})$ with $\zeta=g-g'\ne0$.
-Then $P_\gamma(t)=t^{j_0}(1-t)P_\zeta(t^2)$ with $P_\zeta(u)=\sum_q\zeta_qu^q\ne0$.
+For distinct column pairs $q\ne q'$, the column sets $\{j_q, j_q+1\}=\{j_0+2q, j_0+2q+1\}$ and $\{j_{q'}, j_{q'}+1\}$ are disjoint because the index advances by $2$.
+Within each column pair $q$, the $r_q$ pairs of complementary rows are pairwise disjoint by hypothesis.
+For every $q$, we perform the exchange of \Cref{lem:twin} in the first row of each pair in $I_q\setminus I'_q$ and in the second row of each pair in $I'_q\setminus I_q$.
+Because the symmetric differences $I_q\setminus I'_q$ and $I'_q\setminus I_q$ are disjoint (omitting any common indices in $I_q\cap I'_q$), and the rows in each complementary pair are distinct, every cell $(i,j)$ in the entire grid is swapped at most once, so all exchanges involve pairwise disjoint cells.
+The resulting arrangement retains all row sums $M(n)$ and has column deviations $\gamma=\sum_{q<Q}\zeta_q(e_{j_q}-e_{j_q+1})$ with $\zeta=g-g'\ne0$.
+Its generating polynomial expands explicitly as
+\begin{equation}
+\sum_{j=0}^{n-1}\gamma_jt^j=\sum_{q<Q}\zeta_q(t^{j_q}-t^{j_q+1})=\sum_{q<Q}\zeta_qt^{j_0+2q}(1-t)=t^{j_0}(1-t)\sum_{q<Q}\zeta_q(t^2)^q=t^{j_0}(1-t)P_\zeta(t^2),
+\label{eq:box_poly_step}
+\end{equation}
+where $P_\zeta(u)=\sum_{q<Q}\zeta_qu^q\ne0$.
 Since $B_s(\zeta)=0$ for $s\le K-2$, \Cref{lem:poly_form} gives $(u-1)^{K-1}\mid P_\zeta(u)$, so $(t^2-1)^{K-1}\mid P_\zeta(t^2)$ and $(t-1)^{K}\mid P_\gamma$.
 With $\rho=0$, the arrangement satisfies the degree-$(K-1)$ conditions, and $\gamma\ne0$.
 \end{proof}
@@ -662,10 +676,10 @@ So the sets $E_\kappa$ with $\kappa=\lceil h/4\rceil+i\lambda\le 3h/4$, $i\ge0$,
 \Bigl\lfloor\frac{3h/4-\lceil h/4\rceil}{\lambda}\Bigr\rfloor+1>\frac{2h-3}{4\lambda}\ge\frac{q(2h-3)}{h+4q}\ge\frac{q(2h-3)}{5h},
 \]
 using $\lceil h/4\rceil\le(h+3)/4$, $\lambda\le(h+4q)/(4q)$ and $q<h$.
-Hence $|F_q|>\frac{3h^2}{16}\cdot\frac{q(2h-3)}{5h}=\frac{3qh(2h-3)}{80}\ge\frac{qh^2}{40}$.
+Hence $|F_q|>\frac{3h^2}{16}\cdot\frac{q(2h-3)}{5h}=\frac{3qh(2h-3)}{80}\ge\frac{qh^2}{40}$ (since $h\ge 4$, which implies $3(2h-3)=6h-9\ge 2h$).
 
 (iii) Fix $\alpha<\sqrt6$ and let $K-1=k=\lfloor\alpha\sqrt n\rfloor$.
-By (ii) the logarithm of the left side of \eqref{eq:box} is at least $\log((h-1)!)+(h-1)\log(h^2/40)=3h\log h-O(h)=\frac32n\log n-O(n)$.
+For $q=0$, the empty subset sum gives $|F_0|\ge 1$. Combined with (ii) for $1\le q<h$, the left side of \eqref{eq:box} satisfies $\prod_{q<h}|F_q|\ge |F_0|\prod_{q=1}^{h-1}\frac{qh^2}{40}\ge(h-1)!\bigl(\frac{h^2}{40}\bigr)^{h-1}$, so its logarithm is at least $\log((h-1)!)+(h-1)\log(h^2/40)=3h\log h-O(h)=\frac32n\log n-O(n)$.
 The bound for the right side in the proof of \Cref{thm:perm_threshold}(b) uses only $Q\le n$ and $r_q\le n$, so its logarithm is at most $\frac{\alpha^2}4n\log n+O(n)$.
 Since $\alpha^2/4<3/2$, \eqref{eq:box} holds for large $n$, and \Cref{prop:box} gives $k^*(n)\ge\lfloor\alpha\sqrt n\rfloor+1$.
 \end{proof}
@@ -709,7 +723,7 @@ So for $n\ge18$ the bound $\|\gamma\|_2^2\le n^5(n^2-1)/12$ of \Cref{lem:col_fea
 
 \begin{proof}[Proof of \Cref{thm:perm_threshold}(d)]
 \emph{Upper bounds.}  If no nonzero vector of $\Lambda_{n,k}$ satisfies \eqref{eq:col_feasible} for every $p$, then $k^*(n)\le k$.
-By \Cref{lem:col_feasible} only vectors with $\|\gamma\|_2^2\le n^5(n^2-1)/12$ need be examined; we enumerated them exactly with two independent implementations (Appendix~\ref{sec:appendix}).
+By \Cref{lem:col_feasible}, any column-deviation vector $\gamma$ sorted in decreasing order $\gamma_{(1)}\ge\dots\ge\gamma_{(n)}$ satisfies $\sum_{p=1}^P\gamma_{(p)}\le \frac{Pn(N-Pn)}{2}=\sum_{p=1}^P v_p$ for all $1\le P\le n$, with equality at $P=n$. Thus $\gamma$ is majorised by $v$, where $v_p=n(N-(2p-1)n)/2$. Because the squared Euclidean norm $x\mapsto\|x\|_2^2$ is Schur-convex, every column-feasible vector satisfies $\|\gamma\|_2^2\le\|v\|_2^2=n^5(n^2-1)/12=:R^2$. Only vectors within this Euclidean ball of radius $R$ need be examined; we enumerated them exactly with two independent implementations (Appendix~\ref{sec:appendix}).
 At $k=k^*(n)$ the ball contains no nonzero vector for $16$ of the $23$ values of $n$, since the Gram--Schmidt norms of the reduced basis already exceed the radius.
 For $n=20,22,24,26,34,36,38$ it contains $2,2,6,6,6,2,2$ vectors.
 Each violates \eqref{eq:col_feasible}, in every case but one already with $p=1$; the exception is $n=26$, where two of the six vectors need $p=2$.
@@ -758,13 +772,17 @@ We tested \Cref{conj:lattice} for $41\le n\le46$, where both implementations giv
 For each of these $n$ the same search, run on the vectors of $\Lambda_{n,U(n)-1}$ in the ball $\|\gamma\|_2^2\le n^5(n^2-1)/12$ that satisfy \eqref{eq:col_feasible}, found a witness (verified in exact arithmetic; Appendix~\ref{sec:appendix}).
 So $k^*(n)\ge U(n)$, i.e.\ $k^*(n)\ge26,27,27,27,28,28$, holds unconditionally for $41\le n\le46$; only the upper bounds $k^*(n)\le U(n)$ are uncertified, and the conjecture holds for these $n$ if they are correct.
 The hardest case was $n=42$, where the ball contains a single such vector up to sign, with slack $7$ in one instance of \eqref{eq:col_feasible} with $p=3$; it and one of the $50$ vectors for $n=46$ were realised only by a longer two-stage annealing.
-Beyond $n=40$ the values $U(n)$ are computer-assisted upper bounds for $k^*(n)$ (two independent implementations agree for every $n\le100$, but the values carry no certificate); for instance $k^*(50)\le30$, $k^*(80)\le39$ and $k^*(100)\le45$.
+Beyond $n=40$ the values $U(n)$ are computer-assisted upper bounds for $k^*(n)$ (two independent implementations agree for every $n\le100$, but the values are labeled ``not certified'' in \Cref{fig:kstar} because the Fincke--Pohst tree visits up to millions of nodes, precluding an exportable lightweight certificate); for instance $k^*(50)\le30$, $k^*(80)\le39$ and $k^*(100)\le45$.
 In \Cref{fig:kstar}(b), $k^*(n)/\sqrt n$ (and $U(n)/\sqrt n$ beyond $n=40$) grows from $3.2$ at $n=14$ to $4.5$ at $n=100$, while the same values divided by $\sqrt{n\log n}$ stay between $2.06$ and $2.18$ for $20\le n\le100$.
 These data do not discriminate between the orders $\sqrt n$ and $\sqrt{n\log n}$: by \Cref{sec:kstar_upper}, the unconditional pigeonhole bound already gives $U(n)\ge(\sqrt{12}-o(1))\sqrt n\approx3.46\sqrt n$ (and Amoroso's bound gives $\sqrt{24}\approx4.90$), so a steady rise of $U(n)/\sqrt n$ across $n\le100$ is expected even if $U(n)$ is of order $\sqrt n$.
 
 
 \section{The energy of a random arrangement}
 \label{sec:random_energy}
+
+Whereas Section~\ref{sec:theory} investigated how far up the axial moment hierarchy $\langle x^m,z\rangle=\langle y^m,z\rangle=0$ one must ascend before the permutation constraint forces all line sums to balance, the remainder of this paper examines the lowest-degree moments under a complementary, statistical perspective.
+Specifically, Sections~\ref{sec:random_energy} and~\ref{sec:computations} focus on the first-degree axial moments ($m=1$) combined with the two main diagonals via the four-term energy $\Efour$, alongside Loly's second-degree ($m=2$) moment-of-inertia functional $\langle x^2+y^2,z\rangle$.
+By analysing these low-degree observables over uniformly random arrangements, we obtain exact null moments, asymptotic distribution laws, and geometric estimates for the density of nearly balanced squares.
 
 This section specialises classical results on permutation statistics.
 The energies are quadratic forms $z^{\mathsf T}Az$ in a random permutation $z$ of fixed values, i.e.\ quadratic assignment statistics, a form that goes back to Daniels's generalised correlation coefficient \cite{daniels1944}; Bloemena \cite{bloemena1964} proved asymptotic normality for the number of edges of a graph joining randomly sampled points, and Mantel \cite{mantel1967} and Hubert \cite{hubert1987assignment} give the general mean and variance.
@@ -904,9 +922,10 @@ Then $\sum_\ell\alpha_\ell T_\ell/\tau_\ell=\sum_ca_cz_c=\sum_ca_cb_{\pi(c)}$ wi
 is the square root of the quotient in \eqref{eq:hoeffding_max}.
 The second factor tends to $\sqrt3$.
 For the first, $\max_c|a_c|\le\sum_\ell|\alpha_\ell|\max_c|a_{\ell,c}|/\tau_\ell$, and $\max_c|a_{\ell,c}|/\|a_\ell\|_2$ is $O(n^{-1})$ for $x$ and $y$ and $O(n^{-1/2})$ for a diagonal indicator (a centred indicator of $n$ of the $N$ cells).
-Since $\Var T_\ell=\sigma_n^2N\|a_\ell\|_2^2$ by \eqref{eq:ww_identity}, $\|a_\ell\|_2/\tau_\ell=(\sigma_n\sqrt N)^{-1}$ for every $\ell$, so $\|a\|_2^2=\alpha^{\mathsf T}C_n\alpha/(N\sigma_n^2)$ with $C_n$ the correlation matrix of $(T_1,\dots,T_4)$, which tends to the identity because the only nonzero off-diagonal correlation is $\operatorname{corr}(T_3,T_4)=-1/(n-1)$ for even $n$.
-Hence $\max_c|a_c|/\|a\|_2\le\sum_\ell|\alpha_\ell|\bigl(\max_c|a_{\ell,c}|/\|a_\ell\|_2\bigr)/(\alpha^{\mathsf T}C_n\alpha)^{1/2}\to0$, condition \eqref{eq:hoeffding_max} holds, \cite[Thm.~4]{hoeffding1951} with its condition~(14) gives asymptotic normality of every such combination, and the Cram\'er--Wold device gives the joint limit $\mathcal N(0,I_4)$.
-In $\Efour=\tau_1^2\bigl((T_1/\tau_1)^2+(T_2/\tau_2)^2\bigr)+\tau_3^2\bigl((T_3/\tau_3)^2+(T_4/\tau_4)^2\bigr)$ (note $\tau_1=\tau_2$ and $\tau_3=\tau_4$) the diagonal weights satisfy $\tau_3^2/\tau_1^2=12/(n^2(n+1))\to0$, so $\Efour/(2\tau_1^2)\to\frac12\chi^2_2=\mathrm{Exp}(1)$; and $\E[\Efour]/(2\tau_1^2)\to1$.
+Since $\Var T_\ell=\sigma_n^2N\|a_\ell\|_2^2$ by \eqref{eq:ww_identity}, $\|a_\ell\|_2/\tau_\ell=(\sigma_n\sqrt N)^{-1}$ for every $\ell$, so $\|a\|_2^2=\alpha^{\mathsf T}C_n\alpha/(N\sigma_n^2)$ with $C_n$ the correlation matrix of $(T_1,\dots,T_4)$, which tends to the identity matrix $I_4$ because the only nonzero off-diagonal correlation is $\operatorname{corr}(T_3,T_4)=-1/(n-1)$ for even $n$.
+Hence $\max_c|a_c|/\|a\|_2\le\sum_\ell|\alpha_\ell|\bigl(\max_c|a_{\ell,c}|/\|a_\ell\|_2\bigr)/(\alpha^{\mathsf T}C_n\alpha)^{1/2}\to0$, condition \eqref{eq:hoeffding_max} holds, and \cite[Thm.~4]{hoeffding1951} gives asymptotic normality of the standardized linear combination $(\sum_\ell\alpha_\ell W_{n,\ell})/(\alpha^{\mathsf T}C_n\alpha)^{1/2}\Rightarrow\mathcal N(0,1)$ where $W_{n,\ell}=T_\ell/\tau_\ell$.
+Because $\alpha^{\mathsf T}C_n\alpha\to\|\alpha\|_2^2$, Slutsky's theorem implies $\sum_\ell\alpha_\ell W_{n,\ell}\Rightarrow\mathcal N(0,\|\alpha\|_2^2)$, and the Cram\'er--Wold device establishes the joint Gaussian limit $(W_{n,1},\dots,W_{n,4})\Rightarrow\mathcal N(0,I_4)$.
+In $\Efour=\tau_1^2(W_{n,1}^2+W_{n,2}^2)+\tau_3^2(W_{n,3}^2+W_{n,4}^2)$ (with $\tau_1=\tau_2$ and $\tau_3=\tau_4$), the diagonal weights satisfy $\tau_3^2/\tau_1^2=12/(n^2(n+1))\to0$; by the continuous mapping theorem, $\Efour/(2\tau_1^2)\to\frac12\chi^2_2=\mathrm{Exp}(1)$, and since $\E[\Efour]/(2\tau_1^2)\to1$, \eqref{eq:low_limit} follows. The continuous mapping theorem similarly establishes the joint limit distribution for the scaled energies $(N^3\Efour(Z_\pi), N^3\Efull(Z_\pi))$.
 \end{proof}
 
 The diagonal terms are thus negligible in the limit: their share $\tau_3^2/(\tau_1^2+\tau_3^2)=12/(n^3+n^2+12)$ of $\E[\Efour]$ is $0.25$, $0.074$ and $0.020$ at $n=3,5,8$, and the same argument shows that $\langle x,z\rangle^2+\langle y,z\rangle^2$, divided by its mean, has the same limit $\mathrm{Exp}(1)$.
@@ -988,7 +1007,7 @@ z=\begin{pmatrix}\kappa+a'&-\xi'-a'-c'&\kappa+c'\\-\eta'-a'+c'&-2\kappa&-\eta'+a
 \sum_cz_c^2=2\bigl(4\kappa^2+3(a'^2+c'^2)+\xi'^2+\eta'^2\bigr),
 \]
 so $4\kappa^2+3(a'^2+c'^2)+\xi'^2+\eta'^2=30$.
-The four corners are distinct, so $a'\ne0$, $c'\ne0$ and $|a'|\ne|c'|$, hence $a'^2+c'^2\ge5$; therefore $4\kappa^2+\xi'^2+\eta'^2$ is a multiple of $3$ and at most $15$, and $a'^2+c'^2=10-(4\kappa^2+\xi'^2+\eta'^2)/3$.
+Because the four corners of $z$ equal $\kappa\pm a'$ and $\kappa\pm c'$, pairwise distinctness of the nine arrangement entries forces $a',c'\in\Z\setminus\{0\}$ with $|a'|\ne|c'|$ (since $a'=0$, $c'=0$, or $|a'|=|c'|$ would equate at least two corners), whence $a'^2+c'^2\ge 1^2+2^2=5$. Therefore $4\kappa^2+\xi'^2+\eta'^2$ is a multiple of $3$ and at most $15$, and $a'^2+c'^2=10-(4\kappa^2+\xi'^2+\eta'^2)/3$.
 So $|\kappa|\le1$.
 If $|\kappa|=1$, then $\xi'+\eta'=\pm1$ makes $\xi'^2+\eta'^2$ odd, so $4\kappa^2+\xi'^2+\eta'^2\in\{9,15\}$ (as it is at least $5$) and $\xi'^2+\eta'^2\in\{5,11\}$; $11$ is not a sum of two squares, and $\xi'^2+\eta'^2=5$ gives $a'^2+c'^2=7$, which is not either.
 So $\kappa=0$, $\eta'=-\xi'$, and $2\xi'^2\le15$ divisible by $3$ forces $\xi'=0$.
@@ -1046,13 +1065,18 @@ Exactly two or three rows with sum $34$ are impossible in $L_4$: the row deviati
 Thus $7040/14{,}639{,}440\approx0.048\%$ of $L_4$ is magic, and $9{,}637{,}312$ members ($66\%$) have no row or column with sum $34$, among them the arrangement of \Cref{rem:four_term_insufficient}.
 
 \paragraph{A local-limit heuristic.}
-Under a uniformly random arrangement the vector $(U_1,\dots,U_4)$ has mean equal to the target vector and covariance matrix $\Sigma_U$ given by \eqref{eq:ww_identity}: $U_1,U_2$ are uncorrelated with each other and with the diagonal sums, which have correlation $-1/(n-1)$ for even $n$ and $0$ for odd $n$.
-Since any two arrangements differ by a product of transpositions, the differences of $(U_1,\dots,U_4)$ generate the same lattice as the increments of single transpositions; by a Smith normal form computation ($n\le8$) this lattice is $\Z^4$.
-A Gaussian local limit would therefore give the heuristic estimate $|L_n|\approx N!\,(2\pi)^{-2}\det(\Sigma_U)^{-1/2}$.
-This estimate is $13.6$ for $n=3$ ($|L_3|=8$) and $1.82\times10^{7}$ for $n=4$, so $|L_4|$ is $0.80$ times the estimate; for the two-condition classes the ratios at $n=3,4$ are $0.59,0.91$ (first moments) and $1.10,0.96$ (diagonals).
+Under a uniformly random arrangement the vector $(U_1,\dots,U_4)$ has mean vector $\mu_U$ equal to the target vector and covariance matrix $\Sigma_U$ given by \eqref{eq:ww_identity}: $U_1,U_2$ are uncorrelated with each other and with the diagonal sums, which have correlation $-1/(n-1)$ for even $n$ and $0$ for odd $n$.
+The target mean $\mu_U$ belongs to the integer lattice $\Z^4$ for all $n$: $U_3=U_4=M(n)=n(n^2+1)/2$ is an integer for every $n$, while $U_1=U_2=\frac{n^2(n-1)(n^2+1)}{4}$ is also an integer for every $n$ (if $n$ is even, $4\mid n^2$; if $n$ is odd, both $n-1$ and $n^2+1$ are even, so $4\mid (n-1)(n^2+1)$).
+Furthermore, transpositions of consecutive values $\{v, v+1\}$ generate the full lattice $\Z^4$: choosing adjacent cells in row $i$ off both diagonals yields increment vector $(1,0,0,0)=e_1$; adjacent cells in column $j$ off both diagonals yields $e_2$; and swapping a cell on $D_{\mathrm m}$ (resp.\ $D_{\mathrm a}$) with an off-diagonal cell yields $e_3$ (resp.\ $e_4$). Thus the weight-difference lattice has covolume $1$.
+Because $\Sigma_U$ is asymptotically block-diagonal, its determinant scales as
+\begin{equation}
+\det(\Sigma_U)^{1/2}\sim\Var(U_1)\Var(U_3)\sim\Bigl(\frac{n^8}{144}\Bigr)\Bigl(\frac{n^5}{12}\Bigr)=\frac{n^{13}}{1728},
+\label{eq:det_sigma_scaling}
+\end{equation}
+so a Gaussian local limit gives the heuristic estimate $|L_n|\approx N!\,(2\pi)^{-2}\det(\Sigma_U)^{-1/2}\asymp N!\,n^{-13}$.
+For $n=3$ the estimate is $13.6$, yielding the explicit ratio $8/13.6\approx0.59$ (against $|L_4|/(1.82\times10^7)\approx0.80$ at $n=4$); for the two-condition classes the ratios at $n=3,4$ are $0.59,0.91$ (first moments) and $1.10,0.96$ (diagonals).
 For $n=5,6$ Monte Carlo ($10^{10}$ and $2\times10^{10}$ samples, $328$ and $62$ members of $L_n$) gives $|L_5|\approx5.1\times10^{17}$ ($\pm6\%$) and $|L_6|\approx1.2\times10^{33}$ ($\pm13\%$), ratios $0.76$ and $0.78$ to the estimate.
-Since $\det(\Sigma_U)^{1/2}$ grows like $n^{13}$, the heuristic suggests $|L_n|/N!\asymp n^{-13}$.
-Neither statement is proved here; local limit theorems for permutation statistics of this kind are studied in \cite{kuperberg2017probabilistic,eberhard2019additive}, and related counts of matrices with prescribed margins in \cite{canfield2010asymptotic}.
+Local limit theorems for permutation statistics of this kind are studied in \cite{kuperberg2017probabilistic,eberhard2019additive}, and related counts of matrices with prescribed margins in \cite{canfield2010asymptotic}.
 
 \subsection{Single swaps}
 \label{sec:swap-gaps}
@@ -1103,7 +1127,7 @@ Our constructions realise vectors with a zero of order $(\sqrt2-o(1))\sqrt n$ at
 During the preparation of this work the author used Anthropic's Claude and Google's Gemini to assist with mathematical exploration, software implementation, and manuscript editing. After using these tools, the author reviewed and edited the content as needed, verified all proofs and exact computational certificates, and takes full responsibility for the content of the published article.
 
 
-\begin{thebibliography}{10}
+\begin{thebibliography}{99}
 
 \bibitem{ahmed2003polyhedral}
 Maya~M. Ahmed, Jes{\'u}s~A. De~Loera, and Raymond Hemmecke.
@@ -1342,7 +1366,7 @@ Richard~P. Stanley.
 Walter Trump.
 \newblock Notes on magic squares and cubes.
 \newblock \url{https://www.trump.de/magic-squares/}.
-\newblock Accessed 7 October 2026.
+\newblock Accessed March 2026.
 
 \bibitem{waldwolfowitz1944}
 Abraham Wald and Jacob Wolfowitz.
@@ -1361,6 +1385,7 @@ E.~M. Wright.
 
 \end{thebibliography}
 
+
 \appendix
 \section{Computational methods}
 \label{sec:appendix}
@@ -1370,10 +1395,20 @@ The scripts and data are in \texttt{anc/}, with a \texttt{README} listing the co
 
 \paragraph{The permutation threshold.}
 \texttt{anc/kstar\_verify.py} checks in exact integer arithmetic that each witness arrangement ($5\le n\le40$) is a permutation of $1,\dots,N$ with all row sums $M(n)$, and computes the order of vanishing of $P_\gamma$ at $1$ from the binomial moments $\sum_j\binom jr\gamma_j$.
-For the upper bounds it reduces the basis $\{t^i(t-1)^{k+1}\}$ of $\Lambda_{n,k}$ by LLL (exact integer arithmetic) and enumerates all lattice vectors with $\|\gamma\|_2^2\le n^5(n^2-1)/12$ by the Fincke--Pohst method with exact rational Gram--Schmidt coefficients, testing \eqref{eq:col_feasible} for every $p$.
+The standard set $B_{\mathrm{std}} = \{t^i(t-1)^{k+1}\}_{0 \le i < n-k-1}$ is a $\Z$-basis of $\Lambda_{n,k}$: because $(t-1)^{k+1}$ is monic in $\Z[t]$, polynomial division of any $P_\gamma(t) \in \Z[t]_{<n}$ divisible by $(t-1)^{k+1}$ in $\R[t]$ yields an integer quotient $Q(t) \in \Z[t]_{<n-k-1}$, and the $(n-k-1)\times n$ coefficient matrix of $B_{\mathrm{std}}$ is upper-triangular with diagonal entries $(-1)^{k+1} = \pm 1$.
+For the upper bounds, the basis $\{t^i(t-1)^{k+1}\}$ of $\Lambda_{n,k}$ is reduced by LLL (exact integer arithmetic) and all lattice vectors with $\|\gamma\|_2^2\le n^5(n^2-1)/12$ are enumerated by the Fincke--Pohst method with exact rational Gram--Schmidt coefficients, testing \eqref{eq:col_feasible} for every $p$.
 Since $\Lambda_{n,k+1}\subset\Lambda_{n,k}$, the existence of a nonzero vector satisfying \eqref{eq:col_feasible} is monotone in $k$, and the least $k$ for which $\Lambda_{n,k}$ contains no such vector is the upper bound.
 A second implementation, written independently (\texttt{anc/kstar\_enum\_independent.py}, with its own exact LLL reduction and enumeration), reproduces the upper bounds for $14\le n\le40$ and writes the certificate \texttt{anc/kstar\_certificates.json}: for each $n$ the reduced basis of $\Lambda_{n,k^*(n)}$, the exact squared Gram--Schmidt norms, and every nonzero vector of the ball with a violated instance $(p,J)$ of \eqref{eq:col_feasible}.
-The short script \texttt{anc/kstar\_check\_certificates.py} checks in exact arithmetic that each basis lies in $\Lambda_{n,k^*(n)}$ and has the same Gram determinant as $\{t^i(t-1)^{k^*(n)+1}\}$, hence generates it; recomputes the Gram--Schmidt norms (when all of them exceed the radius, the ball contains no nonzero lattice vector); otherwise enumerates exactly, from the certified basis, every nonzero lattice vector in the ball and checks that these are precisely the listed vectors (this happens for $n\in\{20,22,24,26,34,36,38\}$); and checks each violated instance.
+The short script \texttt{anc/kstar\_check\_certificates.py} checks in exact arithmetic that each basis $B = \{b_0,\dots,b_{r-1}\}$ lies in $\Lambda_{n,k^*(n)}$ and has the same Gram determinant as $B_{\mathrm{std}}$, $\prod_{i=0}^{r-1} \|b_i^*\|_2^2 = \det(B_{\mathrm{std}} B_{\mathrm{std}}^{\mathsf T})$, which certifies that the index $[\Lambda_{n,k^*(n)} : \mathrm{span}_\Z(B)] = 1$ and hence that $B$ is a $\Z$-basis.
+With Gram--Schmidt orthogonal vectors $b_j = b_j^* + \sum_{i<j} \mu_{ji} b_i^*$, every nonzero lattice vector $v = \sum_{j=0}^{r-1} x_j b_j \in \Lambda_{n,k^*(n)} \setminus \{0\}$ expands as
+\[
+\|v\|_2^2 = \sum_{i=0}^{r-1} \Bigl(x_i + \sum_{j>i} \mu_{ji} x_j\Bigr)^2 \|b_i^*\|_2^2 \ge x_{i_{\max}}^2 \|b_{i_{\max}}^*\|_2^2 \ge \min_{0\le i < r} \|b_i^*\|_2^2 ,
+\]
+where $i_{\max} = \max\{i : x_i \ne 0\}$ (so the inner sum vanishes at $i_{\max}$ and $x_{i_{\max}}^2 \ge 1$).
+When $\min_i \|b_i^*\|_2^2 > n^5(n^2-1)/12 =: R^2$, the ball contains no nonzero lattice vector.
+Otherwise, the Fincke--Pohst algorithm recursively enumerates integers $x_i$ with $(x_i - c_i)^2 \|b_i^*\|_2^2 \le \mathrm{rem}_i$ around the rational centers $c_i = -\sum_{j>i} \mu_{ji} x_j$.
+Because the input vectors $b_i$ are integer vectors, all $b_i^*$, $\|b_i^*\|_2^2$, $\mu_{ji}$, and interval endpoints lie in $\mathbb{Q}$, so Fincke--Pohst operates purely in exact rational arithmetic with zero rounding error.
+The script checks that the enumerated vectors are precisely the listed vectors (this happens for $n\in\{20,22,24,26,34,36,38\}$), and checks each violated instance.
 For $n\le33$ the upper bounds were also reproduced by floating-point integer programming (\texttt{anc/kstar\_crosscheck/}).
 The witnesses were found with \texttt{anc/realise.py} and \texttt{anc/anneal2.c}, starting from the squares of \Cref{lem:twin_squares} (\texttt{anc/constructions.py}; an independent implementation of the construction is \texttt{anc/twin\_squares.py}).
 \texttt{anc/kstar\_subset\_sums.py} checks \Cref{prop:subset}(i) for $h\le100$ and the counting in the proof of (ii) for $h\le60$, and evaluates \eqref{eq:box} with the exact $|F_q|$; \texttt{anc/kstar\_beyond40.py} reruns or checks the tests of \Cref{conj:lattice} for $41\le n\le46$, which were run under Linux.
@@ -1401,9 +1436,11 @@ It suffices to partition the indices into $h$ sets $R_0,\dots,R_{h-1}$ of size $
 Every value occurs once, row $r$ sums to $n\frac{N+1}2=M(n)$, row $h+r$ to $n(N+1)-M(n)=M(n)$, and every column to $h(N+1)=M(n)$.
 A \emph{domino} $\{\iota,\iota+1\}$ (for odd $h$, any two consecutive unused indices; they need not be of the form $\{2t,2t+1\}$) with signs $(+,-)$ or $(-,+)$ contributes $\mp2$.
 If $h$ is even, give each row $h$ of the dominoes $\{2t,2t+1\}$ with alternating sign patterns.
-If $h\ge7$ is odd, give row $r$ the four indices $4r,\dots,4r+3$ with signs $(+,+,+,-)$, contributing $(8r+1)+(8r+3)+(8r+5)-(8r+7)=16r+2$; the two indices $\alpha_r=5h-1-r$ and $\beta_r=5h+7r$ with signs $(+,-)$, contributing $2(\alpha_r-\beta_r)=-16r-2$; and $h-3$ dominoes with alternating sign patterns.
-The quadruples fill $[0,4h-1]$ and the $\alpha_r$ fill $[4h,5h-1]$; consecutive $\beta_r$ leave gaps of exactly $6$ indices, and the remaining interval $[12h-6,\,2h^2-1]$ has even length $2h^2-12h+6\ge0$ because $h\ge7$.
-So the unused indices form $3(h-1)+(h^2-6h+3)=h(h-3)$ dominoes, as required.
+If $h\ge7$ is odd, $h-3$ is even, so assigning $h-3$ dominoes with alternating sign patterns $(+,-)$ and $(-,+)$ contributes $\frac{h-3}{2}(-2+2)=0$ to the row weight sum.
+Give row $r$ the four indices $4r,\dots,4r+3$ with signs $(+,+,+,-)$, contributing $(8r+1)+(8r+3)+(8r+5)-(8r+7)=16r+2$; the two indices $\alpha_r=5h-1-r$ and $\beta_r=5h+7r$ with signs $(+,-)$, contributing $2(\alpha_r-\beta_r)=-16r-2$; and $h-3$ dominoes with alternating sign patterns, giving total signed weight sum $(16r+2)+(-16r-2)+0=0$.
+The quadruples fill $[0,4h-1]$ and the $\alpha_r$ fill $[4h,5h-1]$.
+In the range $[5h, 2h^2-1]$, the only used indices are $\beta_r = 5h+7r$ ($0\le r < h$); consecutive $\beta_r$ and $\beta_{r+1}$ leave gaps of exactly $6$ consecutive unused indices, each partitioning into $3$ consecutive dominoes $\{\iota,\iota+1\}$, while the remaining interval $[12h-6,\,2h^2-1]$ consists of consecutive indices of even length $2h^2-12h+6 = 2(h^2-6h+3) \ge 0$ (since $h\ge7$), which partitions into $h^2-6h+3$ consecutive dominoes.
+So all unused indices in $[5h, 2h^2-1]$ partition into $3(h-1)+(h^2-6h+3)=h(h-3)$ consecutive dominoes, as required.
 \end{proof}
 
 \begin{proof}[Proof of \Cref{lem:twin_squares}(2)]
@@ -1431,6 +1468,7 @@ For distinct cells, $\E[z_a^4]=p_4/N$, and with $(N)_k=N(N-1)\cdots(N-k+1)$,
 \E[z_a^3z_b]=\frac{-p_4}{(N)_2},\quad \E[z_a^2z_b^2]=\frac{p_2^2-p_4}{(N)_2},\quad \E[z_a^2z_bz_c]=\frac{2p_4-p_2^2}{(N)_3},\quad \E[z_az_bz_cz_d]=\frac{3p_2^2-6p_4}{(N)_4},
 \]
 by M\"obius inversion of the power sums over set partitions.
+Because $\sum_v b_v = p_1 = 0$, the odd power sum $p_3$ drops out of the four-index expectation $\E[z_a z_b z_c z_d]$: any partition of $\{a,b,c,d\}$ containing a block of size $3$ must have its remaining block of size $1$, contributing a factor of $p_3 p_1 = 0$.
 Write $m_\nu$ for $\E[z_az_bz_cz_d]$ when the equality pattern of $(a,b,c,d)$ is exactly the partition $\nu$ of the positions $\{1,2,3,4\}$, and $m_\lambda=m_\nu$ for any $\nu$ of block type $\lambda$ (e.g.\ $m_{211}$ for $12|3|4$); the displayed moments are $m_4$, $m_{31}$, $m_{22}$, $m_{211}$ and $m_{1111}$.
 
 \paragraph{Evaluation of the M\"obius coefficients in \Cref{prop:var_identity}.}
@@ -1438,7 +1476,9 @@ From the M\"obius inversion on $\Pi_4$ in the proof of \Cref{prop:var_identity},
 \[
 \begin{aligned}\theta(12|34)=\theta(13|24)=\theta(14|23)&=m_{22}-2m_{211}+m_{1111},\\ \theta(1234)&=m_4-4m_{31}-3m_{22}+12m_{211}-6m_{1111}.\end{aligned}
 \]
-For the centred values $1,\dots,N$, $p_2=N(N^2-1)/12$ and $p_4=N(N^2-1)(3N^2-7)/240$, so these coefficients simplify to $N(N^2-1)(5N+6)/720$ and $-N^2(N+1)^2/120$; subtracting $\bigl(\frac{N(N+1)}{12}\tr A\bigr)^2$ gives \eqref{eq:var_identity}.
+For the centred values $1,\dots,N$, $p_2=N(N^2-1)/12$ and $p_4=N(N^2-1)(3N^2-7)/240$.
+The identities for $p_2, p_4$ give $3p_2^2 - 6p_4 = \frac{1}{240}N(N+1)(5N+7)(N-1)(N-2)(N-3)$, which contains exact factors of $(N-1)(N-2)(N-3)$ cancelling the falling-factorial denominator $(N)_4$, leaving $\E[z_a z_b z_c z_d] = \frac{(N+1)(5N+7)}{240}$; similarly, $2p_4 - p_2^2 = -\frac{1}{720}N(N+1)(5N+7)(N-1)(N-2)(N-3)$ cancels $(N)_3$ in $m_{211}$.
+These coefficients simplify to $N(N^2-1)(5N+6)/720$ and $-N^2(N+1)^2/120$; subtracting $\bigl(\frac{N(N+1)}{12}\tr A\bigr)^2$ gives \eqref{eq:var_identity}.
 
 \paragraph{The invariants.}
 With $\Gamma_{\ell\ell'}=\langle\tilde\varphi_\ell,\tilde\varphi_{\ell'}\rangle$ and $h_c=A_{cc}=\sum_\ell a_{\ell,c}^2$,

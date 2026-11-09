@@ -36,4 +36,5 @@ yarn-error.log*
 # Logs
 *.log
 logs/
+.agents/
 

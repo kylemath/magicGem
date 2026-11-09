@@ -244,7 +244,9 @@ if __name__ == '__main__':
                                      'trA2': str(sp.factor(inv[1])), 'd2': str(sp.factor(inv[2])),
                                      'minus_paper': str(diff), 'leading_coeff': str(lead)}
             # next-order term
-            ser = sp.series(V.subs(n, 1 / sp.Symbol('t')), sp.Symbol('t'), 0, -(8 if which == 'low' else 3) + 3)
+            deg = 8 if which == 'low' else 3
+            t = sp.Symbol('t')
+            ser = (sp.series((V / n**deg).subs(n, 1 / t), t, 0, 5) / t**deg).expand()
             out[f'{which}_{par}']['expansion_large_n'] = str(ser)
     # invariants vs explicit matrices
     for n_ in range(3, 26):
@@ -294,7 +296,7 @@ def compact_and_gauss():
             print(f'{which} {par}: Var_gauss =', Vg)
             print('   exact/gauss ratio expansion:', sp.series(ratio.subs(n, 1 / t), t, 0, 3).removeO(), ' values:', vals)
             lead = 8 if which == 'low' else 3
-            print('   Var expansion:', sp.expand(sp.series(V.subs(n, 1 / t), t, 0, -lead + 3).removeO().subs(t, 1 / n)))
+            print('   Var expansion:', sp.expand((sp.series((V / n**lead).subs(n, 1 / t), t, 0, 4).removeO() / t**lead).subs(t, 1 / n)))
 
 if __name__ == '__main__':
     compact_and_gauss()

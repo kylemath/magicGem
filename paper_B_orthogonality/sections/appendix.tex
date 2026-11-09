@@ -6,10 +6,20 @@ The scripts and data are in \texttt{anc/}, with a \texttt{README} listing the co
 
 \paragraph{The permutation threshold.}
 \texttt{anc/kstar\_verify.py} checks in exact integer arithmetic that each witness arrangement ($5\le n\le40$) is a permutation of $1,\dots,N$ with all row sums $M(n)$, and computes the order of vanishing of $P_\gamma$ at $1$ from the binomial moments $\sum_j\binom jr\gamma_j$.
-For the upper bounds it reduces the basis $\{t^i(t-1)^{k+1}\}$ of $\Lambda_{n,k}$ by LLL (exact integer arithmetic) and enumerates all lattice vectors with $\|\gamma\|_2^2\le n^5(n^2-1)/12$ by the Fincke--Pohst method with exact rational Gram--Schmidt coefficients, testing \eqref{eq:col_feasible} for every $p$.
+The standard set $B_{\mathrm{std}} = \{t^i(t-1)^{k+1}\}_{0 \le i < n-k-1}$ is a $\Z$-basis of $\Lambda_{n,k}$: because $(t-1)^{k+1}$ is monic in $\Z[t]$, polynomial division of any $P_\gamma(t) \in \Z[t]_{<n}$ divisible by $(t-1)^{k+1}$ in $\R[t]$ yields an integer quotient $Q(t) \in \Z[t]_{<n-k-1}$, and the $(n-k-1)\times n$ coefficient matrix of $B_{\mathrm{std}}$ is upper-triangular with diagonal entries $(-1)^{k+1} = \pm 1$.
+For the upper bounds, the basis $\{t^i(t-1)^{k+1}\}$ of $\Lambda_{n,k}$ is reduced by LLL (exact integer arithmetic) and all lattice vectors with $\|\gamma\|_2^2\le n^5(n^2-1)/12$ are enumerated by the Fincke--Pohst method with exact rational Gram--Schmidt coefficients, testing \eqref{eq:col_feasible} for every $p$.
 Since $\Lambda_{n,k+1}\subset\Lambda_{n,k}$, the existence of a nonzero vector satisfying \eqref{eq:col_feasible} is monotone in $k$, and the least $k$ for which $\Lambda_{n,k}$ contains no such vector is the upper bound.
 A second implementation, written independently (\texttt{anc/kstar\_enum\_independent.py}, with its own exact LLL reduction and enumeration), reproduces the upper bounds for $14\le n\le40$ and writes the certificate \texttt{anc/kstar\_certificates.json}: for each $n$ the reduced basis of $\Lambda_{n,k^*(n)}$, the exact squared Gram--Schmidt norms, and every nonzero vector of the ball with a violated instance $(p,J)$ of \eqref{eq:col_feasible}.
-The short script \texttt{anc/kstar\_check\_certificates.py} checks in exact arithmetic that each basis lies in $\Lambda_{n,k^*(n)}$ and has the same Gram determinant as $\{t^i(t-1)^{k^*(n)+1}\}$, hence generates it; recomputes the Gram--Schmidt norms (when all of them exceed the radius, the ball contains no nonzero lattice vector); otherwise enumerates exactly, from the certified basis, every nonzero lattice vector in the ball and checks that these are precisely the listed vectors (this happens for $n\in\{20,22,24,26,34,36,38\}$); and checks each violated instance.
+The short script \texttt{anc/kstar\_check\_certificates.py} checks in exact arithmetic that each basis $B = \{b_0,\dots,b_{r-1}\}$ lies in $\Lambda_{n,k^*(n)}$ and has the same Gram determinant as $B_{\mathrm{std}}$, $\prod_{i=0}^{r-1} \|b_i^*\|_2^2 = \det(B_{\mathrm{std}} B_{\mathrm{std}}^{\mathsf T})$, which certifies that the index $[\Lambda_{n,k^*(n)} : \mathrm{span}_\Z(B)] = 1$ and hence that $B$ is a $\Z$-basis.
+With Gram--Schmidt orthogonal vectors $b_j = b_j^* + \sum_{i<j} \mu_{ji} b_i^*$, every nonzero lattice vector $v = \sum_{j=0}^{r-1} x_j b_j \in \Lambda_{n,k^*(n)} \setminus \{0\}$ expands as
+\[
+\|v\|_2^2 = \sum_{i=0}^{r-1} \Bigl(x_i + \sum_{j>i} \mu_{ji} x_j\Bigr)^2 \|b_i^*\|_2^2 \ge x_{i_{\max}}^2 \|b_{i_{\max}}^*\|_2^2 \ge \min_{0\le i < r} \|b_i^*\|_2^2 ,
+\]
+where $i_{\max} = \max\{i : x_i \ne 0\}$ (so the inner sum vanishes at $i_{\max}$ and $x_{i_{\max}}^2 \ge 1$).
+When $\min_i \|b_i^*\|_2^2 > n^5(n^2-1)/12 =: R^2$, the ball contains no nonzero lattice vector.
+Otherwise, the Fincke--Pohst algorithm recursively enumerates integers $x_i$ with $(x_i - c_i)^2 \|b_i^*\|_2^2 \le \mathrm{rem}_i$ around the rational centers $c_i = -\sum_{j>i} \mu_{ji} x_j$.
+Because the input vectors $b_i$ are integer vectors, all $b_i^*$, $\|b_i^*\|_2^2$, $\mu_{ji}$, and interval endpoints lie in $\mathbb{Q}$, so Fincke--Pohst operates purely in exact rational arithmetic with zero rounding error.
+The script checks that the enumerated vectors are precisely the listed vectors (this happens for $n\in\{20,22,24,26,34,36,38\}$), and checks each violated instance.
 For $n\le33$ the upper bounds were also reproduced by floating-point integer programming (\texttt{anc/kstar\_crosscheck/}).
 The witnesses were found with \texttt{anc/realise.py} and \texttt{anc/anneal2.c}, starting from the squares of \Cref{lem:twin_squares} (\texttt{anc/constructions.py}; an independent implementation of the construction is \texttt{anc/twin\_squares.py}).
 \texttt{anc/kstar\_subset\_sums.py} checks \Cref{prop:subset}(i) for $h\le100$ and the counting in the proof of (ii) for $h\le60$, and evaluates \eqref{eq:box} with the exact $|F_q|$; \texttt{anc/kstar\_beyond40.py} reruns or checks the tests of \Cref{conj:lattice} for $41\le n\le46$, which were run under Linux.
@@ -37,9 +47,11 @@ It suffices to partition the indices into $h$ sets $R_0,\dots,R_{h-1}$ of size $
 Every value occurs once, row $r$ sums to $n\frac{N+1}2=M(n)$, row $h+r$ to $n(N+1)-M(n)=M(n)$, and every column to $h(N+1)=M(n)$.
 A \emph{domino} $\{\iota,\iota+1\}$ (for odd $h$, any two consecutive unused indices; they need not be of the form $\{2t,2t+1\}$) with signs $(+,-)$ or $(-,+)$ contributes $\mp2$.
 If $h$ is even, give each row $h$ of the dominoes $\{2t,2t+1\}$ with alternating sign patterns.
-If $h\ge7$ is odd, give row $r$ the four indices $4r,\dots,4r+3$ with signs $(+,+,+,-)$, contributing $(8r+1)+(8r+3)+(8r+5)-(8r+7)=16r+2$; the two indices $\alpha_r=5h-1-r$ and $\beta_r=5h+7r$ with signs $(+,-)$, contributing $2(\alpha_r-\beta_r)=-16r-2$; and $h-3$ dominoes with alternating sign patterns.
-The quadruples fill $[0,4h-1]$ and the $\alpha_r$ fill $[4h,5h-1]$; consecutive $\beta_r$ leave gaps of exactly $6$ indices, and the remaining interval $[12h-6,\,2h^2-1]$ has even length $2h^2-12h+6\ge0$ because $h\ge7$.
-So the unused indices form $3(h-1)+(h^2-6h+3)=h(h-3)$ dominoes, as required.
+If $h\ge7$ is odd, $h-3$ is even, so assigning $h-3$ dominoes with alternating sign patterns $(+,-)$ and $(-,+)$ contributes $\frac{h-3}{2}(-2+2)=0$ to the row weight sum.
+Give row $r$ the four indices $4r,\dots,4r+3$ with signs $(+,+,+,-)$, contributing $(8r+1)+(8r+3)+(8r+5)-(8r+7)=16r+2$; the two indices $\alpha_r=5h-1-r$ and $\beta_r=5h+7r$ with signs $(+,-)$, contributing $2(\alpha_r-\beta_r)=-16r-2$; and $h-3$ dominoes with alternating sign patterns, giving total signed weight sum $(16r+2)+(-16r-2)+0=0$.
+The quadruples fill $[0,4h-1]$ and the $\alpha_r$ fill $[4h,5h-1]$.
+In the range $[5h, 2h^2-1]$, the only used indices are $\beta_r = 5h+7r$ ($0\le r < h$); consecutive $\beta_r$ and $\beta_{r+1}$ leave gaps of exactly $6$ consecutive unused indices, each partitioning into $3$ consecutive dominoes $\{\iota,\iota+1\}$, while the remaining interval $[12h-6,\,2h^2-1]$ consists of consecutive indices of even length $2h^2-12h+6 = 2(h^2-6h+3) \ge 0$ (since $h\ge7$), which partitions into $h^2-6h+3$ consecutive dominoes.
+So all unused indices in $[5h, 2h^2-1]$ partition into $3(h-1)+(h^2-6h+3)=h(h-3)$ consecutive dominoes, as required.
 \end{proof}
 
 \begin{proof}[Proof of \Cref{lem:twin_squares}(2)]
@@ -67,6 +79,7 @@ For distinct cells, $\E[z_a^4]=p_4/N$, and with $(N)_k=N(N-1)\cdots(N-k+1)$,
 \E[z_a^3z_b]=\frac{-p_4}{(N)_2},\quad \E[z_a^2z_b^2]=\frac{p_2^2-p_4}{(N)_2},\quad \E[z_a^2z_bz_c]=\frac{2p_4-p_2^2}{(N)_3},\quad \E[z_az_bz_cz_d]=\frac{3p_2^2-6p_4}{(N)_4},
 \]
 by M\"obius inversion of the power sums over set partitions.
+Because $\sum_v b_v = p_1 = 0$, the odd power sum $p_3$ drops out of the four-index expectation $\E[z_a z_b z_c z_d]$: any partition of $\{a,b,c,d\}$ containing a block of size $3$ must have its remaining block of size $1$, contributing a factor of $p_3 p_1 = 0$.
 Write $m_\nu$ for $\E[z_az_bz_cz_d]$ when the equality pattern of $(a,b,c,d)$ is exactly the partition $\nu$ of the positions $\{1,2,3,4\}$, and $m_\lambda=m_\nu$ for any $\nu$ of block type $\lambda$ (e.g.\ $m_{211}$ for $12|3|4$); the displayed moments are $m_4$, $m_{31}$, $m_{22}$, $m_{211}$ and $m_{1111}$.
 
 \paragraph{Evaluation of the M\"obius coefficients in \Cref{prop:var_identity}.}
@@ -74,7 +87,9 @@ From the M\"obius inversion on $\Pi_4$ in the proof of \Cref{prop:var_identity},
 \[
 \begin{aligned}\theta(12|34)=\theta(13|24)=\theta(14|23)&=m_{22}-2m_{211}+m_{1111},\\ \theta(1234)&=m_4-4m_{31}-3m_{22}+12m_{211}-6m_{1111}.\end{aligned}
 \]
-For the centred values $1,\dots,N$, $p_2=N(N^2-1)/12$ and $p_4=N(N^2-1)(3N^2-7)/240$, so these coefficients simplify to $N(N^2-1)(5N+6)/720$ and $-N^2(N+1)^2/120$; subtracting $\bigl(\frac{N(N+1)}{12}\tr A\bigr)^2$ gives \eqref{eq:var_identity}.
+For the centred values $1,\dots,N$, $p_2=N(N^2-1)/12$ and $p_4=N(N^2-1)(3N^2-7)/240$.
+The identities for $p_2, p_4$ give $3p_2^2 - 6p_4 = \frac{1}{240}N(N+1)(5N+7)(N-1)(N-2)(N-3)$, which contains exact factors of $(N-1)(N-2)(N-3)$ cancelling the falling-factorial denominator $(N)_4$, leaving $\E[z_a z_b z_c z_d] = \frac{(N+1)(5N+7)}{240}$; similarly, $2p_4 - p_2^2 = -\frac{1}{720}N(N+1)(5N+7)(N-1)(N-2)(N-3)$ cancels $(N)_3$ in $m_{211}$.
+These coefficients simplify to $N(N^2-1)(5N+6)/720$ and $-N^2(N+1)^2/120$; subtracting $\bigl(\frac{N(N+1)}{12}\tr A\bigr)^2$ gives \eqref{eq:var_identity}.
 
 \paragraph{The invariants.}
 With $\Gamma_{\ell\ell'}=\langle\tilde\varphi_\ell,\tilde\varphi_{\ell'}\rangle$ and $h_c=A_{cc}=\sum_\ell a_{\ell,c}^2$,

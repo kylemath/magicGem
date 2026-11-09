@@ -1,4 +1,4 @@
-"""Balance functionals of Section `Balance of the signed mass` (exact definitions).
+"""Balance functionals of Remark 2.6 (exact definitions).
 
 Cells are flattened row-major; x=j-(n-1)/2, y=(n-1)/2-i, z=s-(N+1)/2, N=n^2.
 Models (masses are always the signed heights z_c):

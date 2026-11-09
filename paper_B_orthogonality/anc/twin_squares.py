@@ -1,4 +1,4 @@
-# independent implementation of the twin-row squares (Lemma 3 even n, Lemma 5/Cor 6 odd n)
+# independent implementation of the twin-row squares (Lemma 3.12 and Appendix B)
 from itertools import combinations
 def check_semimagic(S):
     n=len(S);N=n*n;M=n*(N+1)//2

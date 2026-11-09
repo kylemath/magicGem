@@ -144,27 +144,27 @@
   "V_3D": 59.98365751353142
  },
  "projection_bound_n3": {
-  "max_ratio_PWz2_over_Efull": 4.500000000000008,
+  "max_ratio_PWz2_over_Efull": 4.500000000000003,
   "min_ratio": 2.9999999999999964,
   "bound_n2_over_n_minus_2": 9.0
  },
  "projection_bound_n4": {
-  "max_ratio_PWz2_over_Efull": 7.380191693290726,
-  "min_ratio": 3.9999999999999747,
+  "max_ratio_PWz2_over_Efull": 7.380191693290744,
+  "min_ratio": 3.999999999999948,
   "bound_n2_over_n_minus_2": 8.0
  },
  "flow_limit_n4": {
-  "E_full": 6.424594145684717e-29,
-  "B_lin": 1.0525007962736208e-13,
+  "E_full": 1.210716600239592e-28,
+  "B_lin": 2.3323479053832607e-13,
   "B_ring_start_mean": 17.142347824397298,
-  "B_ring_end_mean": 3.9148635563252117,
+  "B_ring_end_mean": 3.9148635563252263,
   "B_3D_xy_start_mean": 4.899980629003398,
-  "B_3D_xy_end_mean": 1.4805710492965236,
+  "B_3D_xy_end_mean": 1.4805710492965238,
   "norm_ratio_z_end_over_start_mean": 0.6687731878054272
  },
  "projection_bound_n5": {
-  "max_ratio_PWz2_over_Efull": 6.15809736711376,
-  "min_ratio": 4.999999999999985,
+  "max_ratio_PWz2_over_Efull": 6.158097367113755,
+  "min_ratio": 4.99999999999999,
   "bound_n2_over_n_minus_2": 8.333333333333334
  }
 }
