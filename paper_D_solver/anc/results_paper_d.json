@@ -10642,7 +10642,7 @@
         "mean_descents": 52.9,
         "mean_pair_evaluations": 6349,
         "mean_restarts": 0.7,
-        "mean_ms": 4.99
+        "mean_ms": 5.93
       },
       "n5": {
         "n": 5,
@@ -10659,7 +10659,7 @@
         "mean_descents": 466.6,
         "mean_pair_evaluations": 139986,
         "mean_restarts": 8.03,
-        "mean_ms": 108.99
+        "mean_ms": 129.39
       },
       "n6": {
         "n": 6,
@@ -10676,7 +10676,7 @@
         "mean_descents": 446.8,
         "mean_pair_evaluations": 281459,
         "mean_restarts": 7.28,
-        "mean_ms": 211.18
+        "mean_ms": 248.0
       },
       "n7": {
         "n": 7,
@@ -10693,7 +10693,7 @@
         "mean_descents": 267.5,
         "mean_pair_evaluations": 314615,
         "mean_restarts": 4.02,
-        "mean_ms": 224.79
+        "mean_ms": 261.98
       },
       "n8": {
         "n": 8,
@@ -10710,7 +10710,7 @@
         "mean_descents": 294.5,
         "mean_pair_evaluations": 593772,
         "mean_restarts": 4.32,
-        "mean_ms": 411.45
+        "mean_ms": 484.6
       },
       "n9": {
         "n": 9,
@@ -10727,7 +10727,7 @@
         "mean_descents": 293.0,
         "mean_pair_evaluations": 949255,
         "mean_restarts": 4.06,
-        "mean_ms": 668.6
+        "mean_ms": 785.8
       },
       "n10": {
         "n": 10,
@@ -10744,7 +10744,949 @@
         "mean_descents": 258.5,
         "mean_pair_evaluations": 1279575,
         "mean_restarts": 3.34,
-        "mean_ms": 910.45
+        "mean_ms": 1044.94
+      }
+    }
+  },
+  "section6_large_scale_competition": {
+    "theorem_6_1_exactness": {
+      "improving_swaps_outside_active_set": 0,
+      "bilinear_formula_max_abs_error": 0.0,
+      "consecutive_value_relay_false_negative_pct": 0.0,
+      "live_synthesis_n10_H_line": 0,
+      "live_synthesis_n10_time_s": 0.0117
+    },
+    "scan_10_to_50": {
+      "n10": {
+        "n": 10,
+        "trials": 10,
+        "success_pct": 100.0,
+        "null_dim": 79,
+        "eta_mc": 3.95,
+        "f_null_pct": 97.53,
+        "num_pairs": 4950,
+        "mean_restarts": 4.1,
+        "mean_descents": 307.9,
+        "mean_ms": 166.4
+      },
+      "n11": {
+        "n": 11,
+        "trials": 10,
+        "success_pct": 100.0,
+        "null_dim": 98,
+        "eta_mc": 4.45,
+        "f_null_pct": 98.0,
+        "num_pairs": 7260,
+        "mean_restarts": 2.1,
+        "mean_descents": 185.5,
+        "mean_ms": 116.5
+      },
+      "n12": {
+        "n": 12,
+        "trials": 10,
+        "success_pct": 100.0,
+        "null_dim": 119,
+        "eta_mc": 4.96,
+        "f_null_pct": 98.35,
+        "num_pairs": 10296,
+        "mean_restarts": 1.6,
+        "mean_descents": 160.1,
+        "mean_ms": 122.7
+      },
+      "n13": {
+        "n": 13,
+        "trials": 10,
+        "success_pct": 100.0,
+        "null_dim": 142,
+        "eta_mc": 5.46,
+        "f_null_pct": 98.61,
+        "num_pairs": 14196,
+        "mean_restarts": 2.2,
+        "mean_descents": 216.2,
+        "mean_ms": 209.8
+      },
+      "n14": {
+        "n": 14,
+        "trials": 10,
+        "success_pct": 100.0,
+        "null_dim": 167,
+        "eta_mc": 5.96,
+        "f_null_pct": 98.82,
+        "num_pairs": 19110,
+        "mean_restarts": 3.2,
+        "mean_descents": 296.9,
+        "mean_ms": 327.9
+      },
+      "n15": {
+        "n": 15,
+        "trials": 10,
+        "success_pct": 100.0,
+        "null_dim": 194,
+        "eta_mc": 6.47,
+        "f_null_pct": 98.98,
+        "num_pairs": 25200,
+        "mean_restarts": 3.9,
+        "mean_descents": 366.4,
+        "mean_ms": 498.0
+      },
+      "n16": {
+        "n": 16,
+        "trials": 10,
+        "success_pct": 100.0,
+        "null_dim": 223,
+        "eta_mc": 6.97,
+        "f_null_pct": 99.11,
+        "num_pairs": 32640,
+        "mean_restarts": 1.9,
+        "mean_descents": 218.5,
+        "mean_ms": 340.5
+      },
+      "n17": {
+        "n": 17,
+        "trials": 5,
+        "success_pct": 100.0,
+        "null_dim": 254,
+        "eta_mc": 7.47,
+        "f_null_pct": 99.22,
+        "num_pairs": 41616,
+        "mean_restarts": 5.0,
+        "mean_descents": 495.0,
+        "mean_ms": 965.9
+      },
+      "n18": {
+        "n": 18,
+        "trials": 5,
+        "success_pct": 100.0,
+        "null_dim": 287,
+        "eta_mc": 7.97,
+        "f_null_pct": 99.31,
+        "num_pairs": 52326,
+        "mean_restarts": 2.0,
+        "mean_descents": 237.8,
+        "mean_ms": 541.1
+      },
+      "n19": {
+        "n": 19,
+        "trials": 5,
+        "success_pct": 100.0,
+        "null_dim": 322,
+        "eta_mc": 8.47,
+        "f_null_pct": 99.38,
+        "num_pairs": 64980,
+        "mean_restarts": 3.6,
+        "mean_descents": 400.6,
+        "mean_ms": 1070.7
+      },
+      "n20": {
+        "n": 20,
+        "trials": 5,
+        "success_pct": 100.0,
+        "null_dim": 359,
+        "eta_mc": 8.97,
+        "f_null_pct": 99.45,
+        "num_pairs": 79800,
+        "mean_restarts": 4.6,
+        "mean_descents": 514.6,
+        "mean_ms": 1630.1
+      },
+      "n21": {
+        "n": 21,
+        "trials": 5,
+        "success_pct": 100.0,
+        "null_dim": 398,
+        "eta_mc": 9.48,
+        "f_null_pct": 99.5,
+        "num_pairs": 97020,
+        "mean_restarts": 3.8,
+        "mean_descents": 460.6,
+        "mean_ms": 1825.4
+      },
+      "n22": {
+        "n": 22,
+        "trials": 5,
+        "success_pct": 100.0,
+        "null_dim": 439,
+        "eta_mc": 9.98,
+        "f_null_pct": 99.55,
+        "num_pairs": 116886,
+        "mean_restarts": 4.0,
+        "mean_descents": 489.2,
+        "mean_ms": 2400.0
+      },
+      "n23": {
+        "n": 23,
+        "trials": 5,
+        "success_pct": 100.0,
+        "null_dim": 482,
+        "eta_mc": 10.48,
+        "f_null_pct": 99.59,
+        "num_pairs": 139656,
+        "mean_restarts": 4.4,
+        "mean_descents": 541.2,
+        "mean_ms": 3156.7
+      },
+      "n24": {
+        "n": 24,
+        "trials": 5,
+        "success_pct": 100.0,
+        "null_dim": 527,
+        "eta_mc": 10.98,
+        "f_null_pct": 99.62,
+        "num_pairs": 165600,
+        "mean_restarts": 2.8,
+        "mean_descents": 387.8,
+        "mean_ms": 2779.6
+      },
+      "n25": {
+        "n": 25,
+        "trials": 5,
+        "success_pct": 100.0,
+        "null_dim": 574,
+        "eta_mc": 11.48,
+        "f_null_pct": 99.65,
+        "num_pairs": 195000,
+        "mean_restarts": 3.8,
+        "mean_descents": 510.6,
+        "mean_ms": 4526.5
+      },
+      "n26": {
+        "n": 26,
+        "trials": 3,
+        "success_pct": 100.0,
+        "null_dim": 623,
+        "eta_mc": 11.98,
+        "f_null_pct": 99.68,
+        "num_pairs": 228150,
+        "mean_restarts": 7.33,
+        "mean_descents": 942.7,
+        "mean_ms": 10734.6
+      },
+      "n27": {
+        "n": 27,
+        "trials": 3,
+        "success_pct": 100.0,
+        "null_dim": 674,
+        "eta_mc": 12.48,
+        "f_null_pct": 99.7,
+        "num_pairs": 265356,
+        "mean_restarts": 1.0,
+        "mean_descents": 216.7,
+        "mean_ms": 2522.3
+      },
+      "n28": {
+        "n": 28,
+        "trials": 3,
+        "success_pct": 100.0,
+        "null_dim": 727,
+        "eta_mc": 12.98,
+        "f_null_pct": 99.73,
+        "num_pairs": 306936,
+        "mean_restarts": 2.33,
+        "mean_descents": 389.7,
+        "mean_ms": 6009.5
+      },
+      "n29": {
+        "n": 29,
+        "trials": 3,
+        "success_pct": 100.0,
+        "null_dim": 782,
+        "eta_mc": 13.48,
+        "f_null_pct": 99.74,
+        "num_pairs": 353220,
+        "mean_restarts": 11.33,
+        "mean_descents": 1486.3,
+        "mean_ms": 27946.1
+      },
+      "n30": {
+        "n": 30,
+        "trials": 3,
+        "success_pct": 100.0,
+        "null_dim": 839,
+        "eta_mc": 13.98,
+        "f_null_pct": 99.76,
+        "num_pairs": 404550,
+        "mean_restarts": 1.0,
+        "mean_descents": 237.7,
+        "mean_ms": 4529.9
+      },
+      "n31": {
+        "n": 31,
+        "trials": 3,
+        "success_pct": 100.0,
+        "null_dim": 898,
+        "eta_mc": 14.48,
+        "f_null_pct": 99.78,
+        "num_pairs": 461280,
+        "mean_restarts": 8.67,
+        "mean_descents": 1260.7,
+        "mean_ms": 31771.8
+      },
+      "n32": {
+        "n": 32,
+        "trials": 3,
+        "success_pct": 100.0,
+        "null_dim": 959,
+        "eta_mc": 14.98,
+        "f_null_pct": 99.79,
+        "num_pairs": 523776,
+        "mean_restarts": 8.0,
+        "mean_descents": 1187.3,
+        "mean_ms": 35006.8
+      },
+      "n33": {
+        "n": 33,
+        "trials": 3,
+        "success_pct": 100.0,
+        "null_dim": 1022,
+        "eta_mc": 15.48,
+        "f_null_pct": 99.8,
+        "num_pairs": 592416,
+        "mean_restarts": 1.0,
+        "mean_descents": 261.0,
+        "mean_ms": 9374.8
+      },
+      "n34": {
+        "n": 34,
+        "trials": 3,
+        "success_pct": 100.0,
+        "null_dim": 1087,
+        "eta_mc": 15.99,
+        "f_null_pct": 99.816,
+        "num_pairs": 667590,
+        "mean_restarts": 10.67,
+        "restarts_list": [
+          1,
+          26,
+          5
+        ],
+        "mean_descents": 1646.7,
+        "mean_ms": 51580.8
+      },
+      "n35": {
+        "n": 35,
+        "trials": 3,
+        "success_pct": 100.0,
+        "null_dim": 1154,
+        "eta_mc": 16.49,
+        "f_null_pct": 99.827,
+        "num_pairs": 749700,
+        "mean_restarts": 10.67,
+        "restarts_list": [
+          18,
+          5,
+          9
+        ],
+        "mean_descents": 1678.3,
+        "mean_ms": 69566.5
+      },
+      "n36": {
+        "n": 36,
+        "trials": 3,
+        "success_pct": 100.0,
+        "null_dim": 1223,
+        "eta_mc": 16.99,
+        "f_null_pct": 99.837,
+        "num_pairs": 839160,
+        "mean_restarts": 2.33,
+        "restarts_list": [
+          3,
+          1,
+          3
+        ],
+        "mean_descents": 479.0,
+        "mean_ms": 21842.1
+      },
+      "n37": {
+        "n": 37,
+        "trials": 3,
+        "success_pct": 100.0,
+        "null_dim": 1294,
+        "eta_mc": 17.49,
+        "f_null_pct": 99.846,
+        "num_pairs": 936396,
+        "mean_restarts": 12.33,
+        "restarts_list": [
+          0,
+          16,
+          21
+        ],
+        "mean_descents": 2033.0,
+        "mean_ms": 112051.5
+      },
+      "n38": {
+        "n": 38,
+        "trials": 3,
+        "success_pct": 100.0,
+        "null_dim": 1367,
+        "eta_mc": 17.99,
+        "f_null_pct": 99.854,
+        "num_pairs": 1041846,
+        "mean_restarts": 16.0,
+        "restarts_list": [
+          9,
+          35,
+          4
+        ],
+        "mean_descents": 2646.3,
+        "mean_ms": 168377.3
+      },
+      "n39": {
+        "n": 39,
+        "trials": 3,
+        "success_pct": 100.0,
+        "null_dim": 1442,
+        "eta_mc": 18.49,
+        "f_null_pct": 99.861,
+        "num_pairs": 1155960,
+        "mean_restarts": 10.33,
+        "restarts_list": [
+          9,
+          2,
+          20
+        ],
+        "mean_descents": 1790.7,
+        "mean_ms": 119121.0
+      },
+      "n40": {
+        "n": 40,
+        "trials": 3,
+        "success_pct": 100.0,
+        "null_dim": 1519,
+        "eta_mc": 18.99,
+        "f_null_pct": 99.869,
+        "num_pairs": 1279200,
+        "mean_restarts": 8.33,
+        "restarts_list": [
+          3,
+          3,
+          19
+        ],
+        "mean_descents": 1510.0,
+        "mean_ms": 113127.1
+      },
+      "n41": {
+        "n": 41,
+        "trials": 3,
+        "success_pct": 100.0,
+        "null_dim": 1598,
+        "eta_mc": 19.49,
+        "f_null_pct": 99.875,
+        "num_pairs": 1412040,
+        "mean_restarts": 19.0,
+        "restarts_list": [
+          12,
+          40,
+          5
+        ],
+        "mean_descents": 3389.7,
+        "mean_ms": 286886.3
+      },
+      "n42": {
+        "n": 42,
+        "trials": 3,
+        "success_pct": 100.0,
+        "null_dim": 1679,
+        "eta_mc": 19.99,
+        "f_null_pct": 99.881,
+        "num_pairs": 1554966,
+        "mean_restarts": 5.0,
+        "restarts_list": [
+          10,
+          4,
+          1
+        ],
+        "mean_descents": 1008.7,
+        "mean_ms": 92676.3
+      },
+      "n43": {
+        "n": 43,
+        "trials": 3,
+        "success_pct": 100.0,
+        "null_dim": 1762,
+        "eta_mc": 20.49,
+        "f_null_pct": 99.887,
+        "num_pairs": 1708476,
+        "mean_restarts": 5.0,
+        "restarts_list": [
+          4,
+          6,
+          5
+        ],
+        "mean_descents": 1028.3,
+        "mean_ms": 93774.0
+      },
+      "n44": {
+        "n": 44,
+        "trials": 3,
+        "success_pct": 100.0,
+        "null_dim": 1847,
+        "eta_mc": 20.99,
+        "f_null_pct": 99.892,
+        "num_pairs": 1873080,
+        "mean_restarts": 2.33,
+        "restarts_list": [
+          3,
+          2,
+          2
+        ],
+        "mean_descents": 571.0,
+        "mean_ms": 56566.2
+      },
+      "n45": {
+        "n": 45,
+        "trials": 3,
+        "success_pct": 100.0,
+        "null_dim": 1934,
+        "eta_mc": 21.49,
+        "f_null_pct": 99.897,
+        "num_pairs": 2049300,
+        "mean_restarts": 7.0,
+        "restarts_list": [
+          8,
+          5,
+          8
+        ],
+        "mean_descents": 1472.0,
+        "mean_ms": 168366.5
+      },
+      "n46": {
+        "n": 46,
+        "trials": 3,
+        "success_pct": 100.0,
+        "null_dim": 2023,
+        "eta_mc": 21.99,
+        "f_null_pct": 99.901,
+        "num_pairs": 2237670,
+        "mean_restarts": 15.67,
+        "restarts_list": [
+          7,
+          24,
+          16
+        ],
+        "mean_descents": 3071.0,
+        "mean_ms": 386127.9
+      },
+      "n47": {
+        "n": 47,
+        "trials": 3,
+        "success_pct": 100.0,
+        "null_dim": 2114,
+        "eta_mc": 22.49,
+        "f_null_pct": 99.905,
+        "num_pairs": 2438736,
+        "mean_restarts": 14.67,
+        "restarts_list": [
+          26,
+          5,
+          13
+        ],
+        "mean_descents": 2961.7,
+        "mean_ms": 397318.6
+      },
+      "n48": {
+        "n": 48,
+        "trials": 3,
+        "success_pct": 100.0,
+        "null_dim": 2207,
+        "eta_mc": 22.99,
+        "f_null_pct": 99.909,
+        "num_pairs": 2653056,
+        "mean_restarts": 9.67,
+        "restarts_list": [
+          1,
+          27,
+          1
+        ],
+        "mean_descents": 2023.0,
+        "mean_ms": 280946.5
+      },
+      "n49": {
+        "n": 49,
+        "trials": 3,
+        "success_pct": 100.0,
+        "null_dim": 2302,
+        "eta_mc": 23.49,
+        "f_null_pct": 99.913,
+        "num_pairs": 2881200,
+        "mean_restarts": 2.67,
+        "restarts_list": [
+          0,
+          4,
+          4
+        ],
+        "mean_descents": 711.7,
+        "mean_ms": 97053.0
+      },
+      "n50": {
+        "n": 50,
+        "trials": 3,
+        "success_pct": 100.0,
+        "null_dim": 2399,
+        "eta_mc": 23.99,
+        "f_null_pct": 99.917,
+        "num_pairs": 3123750,
+        "mean_restarts": 11.67,
+        "restarts_list": [
+          12,
+          7,
+          16
+        ],
+        "mean_descents": 2559.3,
+        "mean_ms": 368293.2
+      }
+    },
+    "bilinear_scaling": {
+      "n10": {
+        "n": 10,
+        "trials": 3,
+        "success_pct": 100.0,
+        "restarts_list": [
+          0,
+          2,
+          0
+        ],
+        "mean_restarts": 0.67,
+        "mean_descents": 95.7,
+        "mean_evals": 346039,
+        "mean_s": 0.017
+      },
+      "n20": {
+        "n": 20,
+        "trials": 3,
+        "success_pct": 100.0,
+        "restarts_list": [
+          2,
+          3,
+          3
+        ],
+        "mean_restarts": 2.67,
+        "mean_descents": 336.0,
+        "mean_evals": 8397143,
+        "mean_s": 0.139
+      },
+      "n30": {
+        "n": 30,
+        "trials": 3,
+        "success_pct": 100.0,
+        "restarts_list": [
+          8,
+          5,
+          13
+        ],
+        "mean_restarts": 8.67,
+        "mean_descents": 1205.3,
+        "mean_evals": 99357728,
+        "mean_s": 1.371
+      },
+      "n40": {
+        "n": 40,
+        "trials": 3,
+        "success_pct": 100.0,
+        "restarts_list": [
+          36,
+          12,
+          3
+        ],
+        "mean_restarts": 17.0,
+        "mean_descents": 2891.7,
+        "mean_evals": 537863398,
+        "mean_s": 6.574
+      },
+      "n46": {
+        "n": 46,
+        "trials": 3,
+        "success_pct": 100.0,
+        "restarts_list": [
+          32,
+          9,
+          17
+        ],
+        "mean_restarts": 19.33,
+        "mean_descents": 3737.7,
+        "mean_evals": 1021216654,
+        "mean_s": 11.12,
+        "seed_times_s": [
+          18.34,
+          5.29,
+          9.73
+        ]
+      },
+      "n48": {
+        "n": 48,
+        "trials": 3,
+        "success_pct": 100.0,
+        "restarts_list": [
+          11,
+          10,
+          14
+        ],
+        "mean_restarts": 11.67,
+        "mean_descents": 2396.0,
+        "mean_evals": 733233011,
+        "mean_s": 8.02,
+        "seed_times_s": [
+          7.12,
+          6.9,
+          10.03
+        ]
+      },
+      "n50": {
+        "n": 50,
+        "trials": 3,
+        "success_pct": 100.0,
+        "restarts_list": [
+          30,
+          12,
+          26
+        ],
+        "mean_restarts": 22.67,
+        "mean_descents": 4719.7,
+        "mean_evals": 1624560515,
+        "mean_s": 16.992
+      },
+      "n100": {
+        "n": 100,
+        "trials": 3,
+        "success_pct": 100.0,
+        "restarts_list": [
+          7,
+          41,
+          3
+        ],
+        "mean_restarts": 17.0,
+        "mean_descents": 7559.7,
+        "mean_evals": 18790411798,
+        "mean_s": 147.7,
+        "seed_times_s": [
+          62.02,
+          347.02,
+          34.06
+        ]
+      }
+    },
+    "competition_46_48_100": {
+      "n46": {
+        "simulated_annealing": {
+          "solved": 0,
+          "trials": 3,
+          "final_E": [
+            152,
+            108,
+            112
+          ],
+          "mean_E": 124.0,
+          "mean_evals": 3000000,
+          "mean_s": 3.02
+        },
+        "defective_line_cbls": {
+          "solved": 0,
+          "trials": 3,
+          "final_E": [
+            24,
+            40,
+            28
+          ],
+          "mean_E": 30.7,
+          "mean_restarts": 80.0,
+          "mean_descents": 14765.3,
+          "mean_evals": 15820000000,
+          "mean_s": 168.06
+        },
+        "baseline_all_pairs_me_ils": {
+          "solved": 3,
+          "trials": 3,
+          "final_E": [
+            0,
+            0,
+            0
+          ],
+          "mean_E": 0.0,
+          "restarts_list": [
+            7,
+            24,
+            16
+          ],
+          "mean_restarts": 15.67,
+          "mean_descents": 3071.0,
+          "mean_evals": 18480000000,
+          "mean_s": 386.13,
+          "seed_times_s": [
+            176.4,
+            588.1,
+            393.9
+          ]
+        },
+        "bilinear_active_set_me_ils": {
+          "solved": 3,
+          "trials": 3,
+          "final_E": [
+            0,
+            0,
+            0
+          ],
+          "mean_E": 0.0,
+          "restarts_list": [
+            32,
+            9,
+            17
+          ],
+          "mean_restarts": 19.33,
+          "mean_descents": 3737.7,
+          "mean_evals": 1021216654,
+          "mean_s": 11.12,
+          "seed_times_s": [
+            18.34,
+            5.29,
+            9.73
+          ],
+          "speedup_vs_baseline": 34.7
+        }
+      },
+      "n48": {
+        "simulated_annealing": {
+          "solved": 0,
+          "trials": 3,
+          "final_E": [
+            132,
+            124,
+            116
+          ],
+          "mean_E": 124.0,
+          "mean_evals": 3000000,
+          "mean_s": 2.99
+        },
+        "defective_line_cbls": {
+          "solved": 2,
+          "trials": 3,
+          "final_E": [
+            32,
+            0,
+            0
+          ],
+          "mean_E": 10.7,
+          "restarts_list": [
+            80,
+            70,
+            38
+          ],
+          "mean_restarts": 62.67,
+          "mean_descents": 11636.7,
+          "mean_evals": 14880000000,
+          "mean_s": 152.89,
+          "seed_times_s": [
+            195.3,
+            161.4,
+            102.0
+          ]
+        },
+        "baseline_all_pairs_me_ils": {
+          "solved": 3,
+          "trials": 3,
+          "final_E": [
+            0,
+            0,
+            0
+          ],
+          "mean_E": 0.0,
+          "restarts_list": [
+            1,
+            27,
+            1
+          ],
+          "mean_restarts": 9.67,
+          "mean_descents": 2023.0,
+          "mean_evals": 13790000000,
+          "mean_s": 280.95,
+          "seed_times_s": [
+            38.9,
+            765.1,
+            38.8
+          ]
+        },
+        "bilinear_active_set_me_ils": {
+          "solved": 3,
+          "trials": 3,
+          "final_E": [
+            0,
+            0,
+            0
+          ],
+          "mean_E": 0.0,
+          "restarts_list": [
+            11,
+            10,
+            14
+          ],
+          "mean_restarts": 11.67,
+          "mean_descents": 2396.0,
+          "mean_evals": 733233011,
+          "mean_s": 8.02,
+          "seed_times_s": [
+            7.12,
+            6.9,
+            10.03
+          ],
+          "speedup_vs_baseline": 35.0
+        }
+      },
+      "n100": {
+        "simulated_annealing": {
+          "solved": 0,
+          "trials": 3,
+          "final_E": [
+            2880,
+            3392,
+            3172
+          ],
+          "mean_E": 3148.0,
+          "mean_evals": 3000000,
+          "mean_s": 3.04
+        },
+        "defective_line_cbls": {
+          "solved": 0,
+          "trials": 3,
+          "final_E": [
+            48,
+            48,
+            56
+          ],
+          "mean_E": 50.7,
+          "mean_restarts": 80.0,
+          "mean_descents": 30154.0,
+          "mean_evals": 348400000000,
+          "mean_s": 3582.92
+        },
+        "baseline_all_pairs_me_ils": {
+          "solved_est": 3,
+          "trials": 3,
+          "mean_evals_est": 360000000000,
+          "mean_s_est": 7420.0
+        },
+        "bilinear_active_set_me_ils": {
+          "solved": 3,
+          "trials": 3,
+          "final_E": [
+            0,
+            0,
+            0
+          ],
+          "mean_E": 0.0,
+          "restarts_list": [
+            7,
+            41,
+            3
+          ],
+          "mean_restarts": 17.0,
+          "mean_descents": 7559.7,
+          "mean_evals": 18790411798,
+          "mean_s": 147.7,
+          "seed_times_s": [
+            62.02,
+            347.02,
+            34.06
+          ],
+          "speedup_vs_baseline": 50.2
+        }
       }
     }
   }

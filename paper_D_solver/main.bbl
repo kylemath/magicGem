@@ -65,6 +65,11 @@ Bernard Fr{\'e}nicle~de Bessy.
   Messieurs de l'Acad{\'e}mie Royale des Sciences}. Imprimerie Royale, Paris,
   1693.
 
+\bibitem{glover1989tabu}
+Fred Glover.
+\newblock Tabu search---{P}art {I}.
+\newblock {\em ORSA Journal on Computing}, 1(3):190--206, 1989.
+
 \bibitem{godsil2001algebraic}
 Chris Godsil and Gordon Royle.
 \newblock {\em Algebraic Graph Theory}.
@@ -76,15 +81,30 @@ Kyozi Kawasaki.
   {I}sing models. {I}.
 \newblock {\em Physical Review}, 145(1):224--230, 1966.
 
+\bibitem{kempe1879geographical}
+Alfred~Bray Kempe.
+\newblock On the geographical problem of the four colours.
+\newblock {\em American Journal of Mathematics}, 2(3):193--200, 1879.
+
 \bibitem{kirkpatrick1983optimization}
 Scott Kirkpatrick, C.~Daniel Gelatt, and Mario~P. Vecchi.
 \newblock Optimization by simulated annealing.
 \newblock {\em Science}, 220(4598):671--680, 1983.
 
+\bibitem{kuhn1955hungarian}
+Harold~W. Kuhn.
+\newblock The {H}ungarian method for the assignment problem.
+\newblock {\em Naval Research Logistics Quarterly}, 2(1-2):83--97, 1955.
+
 \bibitem{lee1996linear}
 Michael~J. Lee.
 \newblock Linear algebra and magic squares.
 \newblock {\em The College Mathematics Journal}, 27(3):198--202, 1996.
+
+\bibitem{lin1973effective}
+Shen Lin and Brian~W. Kernighan.
+\newblock An effective heuristic algorithm for the traveling-salesman problem.
+\newblock {\em Operations Research}, 21(2):498--516, 1973.
 
 \bibitem{loly2004invariance}
 Peter~D. Loly.
@@ -96,6 +116,14 @@ Peter~D. Loly.
 Peter~D. Loly, Ian Cameron, Walter Trump, and Dan Schindel.
 \newblock Magic square spectra.
 \newblock {\em Linear Algebra and its Applications}, 430(10):2659--2680, 2009.
+
+\bibitem{lourenco2003iterated}
+Helena~R. Louren{\c{c}}o, Olivier~C. Martin, and Thomas St{\"u}tzle.
+\newblock Iterated local search.
+\newblock In Fred Glover and Gary~A. Kochenberger, editors, {\em Handbook of
+  Metaheuristics}, volume~57 of {\em International Series in Operations
+  Research \& Management Science}, pages 321--353. Kluwer Academic Publishers,
+  Boston, MA, 2003.
 
 \bibitem{mathewson2026mechanics}
 Kyle~Elliott Mathewson.
@@ -133,6 +161,17 @@ James~Clerk Maxwell.
 Marc M{\'e}zard, Giorgio Parisi, and Miguel~Angel Virasoro.
 \newblock {\em Spin Glass Theory and Beyond}.
 \newblock World Scientific, Singapore, 1987.
+
+\bibitem{mladenovic1997variable}
+Nenad Mladenovi{\'c} and Pierre Hansen.
+\newblock Variable neighborhood search.
+\newblock {\em Computers \& Operations Research}, 24(11):1097--1100, 1997.
+
+\bibitem{munkres1957algorithms}
+James Munkres.
+\newblock Algorithms for the assignment and transportation problems.
+\newblock {\em Journal of the Society for Industrial and Applied Mathematics},
+  5(1):32--38, 1957.
 
 \bibitem{ollerenshaw1998most}
 Kathleen Ollerenshaw and David~S. Br{\'e}e.

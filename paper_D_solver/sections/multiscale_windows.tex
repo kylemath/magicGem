@@ -17,7 +17,10 @@ Here $\widetilde{H}_p(k) \in (0,1]$ measures the spatial uniformity of height ma
 \begin{figure}[t]
   \centering
   \includegraphics[width=\textwidth]{figures/fig2_window_entropy_880.pdf}
-  \caption{\textbf{Multiscale sliding-window Shannon entropy, $2\times 2$ quartet energy census, and extreme board textures.} \textbf{(a)} Normalized $\ell_1$ window entropy $\widetilde{H}_1(k)$ versus relative scale $k/n$ across five constructive magic-square families ($n=3$ Lo Shu, $n=4,8$ Doubly-Even, $n=5$ Siamese, and $n=6$ Conway LUX), alongside the $\ell_2$ entropy $\widetilde{H}_2(2)$ at $k=2$ (hollow markers), which captures corner/center magnitude clustering in doubly-even masks. \textbf{(b)} Joint distribution of interior $2\times 2$ quartet residual energy $W_{2\times 2}^{\mathrm{int}}(S)$ and window entropy $\widetilde{H}_1(2)$ across all $880$ Fr\'enicle order-$4$ magic squares, illustrating \Cref{lem:quartet_equivalence}: $W_{2\times 2}^{\mathrm{int}}(S) = 0 \iff W_{2\times 2}^{\mathrm{tor}}(S) = 0$, isolating the $48$ panmagic squares of Group~I. \textbf{(c1, c2)} Visual comparison of the global entropy maximum (\texttt{\#123}, $\widetilde{H}_1(2)=0.99967$, uniform $2\times 2$ $\ell_1$ weights $w_1=32$) against the global entropy minimum (\texttt{\#599}, $\widetilde{H}_1(2)=0.94035$, corner clustering $w_1=48$ vs.\ $16$).}
+  \caption{\textbf{Multiscale sliding-window Shannon entropy, $2\times 2$ quartet energy census, and extreme board textures.} 
+  \textbf{(a)} Normalized $\ell_1$ window entropy $\widetilde{H}_1(k)$ versus relative scale $k/n$ across five constructive magic-square families ($n=3$ Lo Shu, $n=4,8$ Doubly-Even, $n=5$ Siamese, and $n=6$ Conway LUX). Dotted vertical drop lines connect $\widetilde{H}_1(2)$ to hollow markers representing the $\ell_2$ window entropy $\widetilde{H}_2(2)$ at $k=2$, which drops sharply to $0.91498$ ($n=4$) and $0.90598$ ($n=8$) due to extreme corner/center magnitude clustering in doubly-even diagonal masks, while odd-order Siamese squares retain high local uniformity ($\widetilde{H}_2(2) \ge 0.94254$). 
+  \textbf{(b)} Joint census of interior $2\times 2$ quartet energy $W_{2\times 2}^{\mathrm{int}}(S)$ and window entropy $\widetilde{H}_1(2)$ across all $880$ Fr\'enicle order-$4$ magic squares. In accordance with \Cref{lem:quartet_equivalence}, vanishing of interior quartet energy forces vanishing of toroidal quartet energy ($W_{2\times 2}^{\mathrm{int}} = W_{2\times 2}^{\mathrm{tor}} = 0$, vertical dashed line), uniquely isolating the $48$ panmagic squares of Dudeney Group~I. Extremal boards are highlighted: global maximum entropy Square~\texttt{\#123} ($\widetilde{H}_1(2)=0.99967$, $W_{2\times 2}^{\mathrm{int}}=512$, $W_{2\times 2}^{\mathrm{tor}}=1{,}024$, magenta star) and global minimum entropy Square~\texttt{\#599} ($\widetilde{H}_1(2)=0.94035$, $W_{2\times 2}^{\mathrm{int}}=512$, $W_{2\times 2}^{\mathrm{tor}}=1{,}024$, dark red triangle), whereas global interior quartet extrema across the census are realized by Square~\texttt{\#145} ($W_{2\times 2}^{\mathrm{int}}=384$) and Square~\texttt{\#219} ($W_{2\times 2}^{\mathrm{int}}=2{,}816$). 
+  \textbf{(c1, c2)} Texture heatmaps of $|Z_{ij}|$ for the extremal squares. Square~\texttt{\#123} exhibits perfectly balanced $2\times 2$ $\ell_1$ weights ($w_1 = 32$ for both the top-left and bottom-right blocks), whereas Square~\texttt{\#599} exhibits severe spatial concentration, with $w_1 = 48$ in the top-left block versus $w_1 = 16$ in the bottom-right block.}
   \label{fig:window_entropy}
 \end{figure}
 
@@ -25,13 +28,12 @@ Here $\widetilde{H}_p(k) \in (0,1]$ measures the spatial uniformity of height ma
 
 \begin{table}[t]
 \centering
-\caption{Multiscale window entropy $\widetilde{H}_p(2)$, interior and toroidal $2\times 2$ quartet energies $W_{2\times 2}$, complement breaks $B_{\mathrm{comp}}$, and mixed octupole moment $M_{xyz}$ across constructive magic square families ($n=3\dots 8$).}
+\caption{\textbf{Multiscale window entropy $\widetilde{H}_p(2)$, interior and toroidal $2\times 2$ quartet energies $W_{2\times 2}$, complement breaks $B_{\mathrm{comp}}$, and mixed octupole moment $M_{xyz}$ across constructive magic square families ($n=3\dots 8$).}}
 \label{tab:constructive_families}
-\footnotesize
-\setlength{\tabcolsep}{4pt}
+\resizebox{\textwidth}{!}{%
 \begin{tabular}{@{}llcccccc@{}}
 \toprule
-Family & Order / Class & $\widetilde{H}_1(2)$ & $\widetilde{H}_2(2)$ & $W_{2\times 2}^{\mathrm{int}}(S)$ & $W_{2\times 2}^{\mathrm{tor}}(S)$ & Breaks $B_{\mathrm{comp}}$ & Octupole $M_{xyz}$ \\
+\textbf{Family} & \textbf{Order / Class} & \textbf{$\widetilde{H}_1(2)$} & \textbf{$\widetilde{H}_2(2)$} & \textbf{$W_{2\times 2}^{\mathrm{int}}(S)$} & \textbf{$W_{2\times 2}^{\mathrm{tor}}(S)$} & \textbf{Breaks $B_{\mathrm{comp}}$} & \textbf{Octupole $M_{xyz}$} \\
 \midrule
 Lo Shu (Siamese) & $n=3$ (odd) & $0.99435$ & $0.99073$ & $80$ & $240$ & $0 / 4$ & $0$ \\
 Doubly-Even Mask & $n=4$ ($4k$) & $0.97245$ & $0.91498$ & $544$ & $1{,}088$ & $0 / 8$ & $0$ \\
@@ -39,7 +41,8 @@ Siamese (de La Loub\`ere) & $n=5$ (odd) & $0.97438$ & $0.94254$ & $16{,}320$ & $
 Conway LUX Method & $n=6$ ($4k+2$) & $0.97011$ & $0.93161$ & $84{,}640$ & $97{,}440$ & $18 / 18$ & $-132$ \\
 Doubly-Even Mask & $n=8$ ($4k$) & $0.96123$ & $0.90598$ & $112{,}320$ & $149{,}760$ & $0 / 32$ & $0$ \\
 \bottomrule
-\end{tabular}
+\end{tabular}%
+}
 \end{table}
 
 \subsection{Why Interior \texorpdfstring{$2\times 2$}{2x2} Balance Forces Toroidal Panmagic Balance}
@@ -73,7 +76,10 @@ In Paper~II \cite{mathewson2026moments} and Paper~III \cite{mathewson2026mechani
 \begin{figure}[t]
   \centering
   \includegraphics[width=\textwidth]{figures/fig3_octupole_complement.pdf}
-  \caption{\textbf{Group-resolved $2\times 2$ quartet energies, mixed octupole census, and concentric shell resonance across Dudeney Groups~I--XII.} \textbf{(a)} Mean interior $W_{2\times 2}^{\mathrm{int}}$ ($9$ windows, navy bars with min--max range) and toroidal $W_{2\times 2}^{\mathrm{tor}}$ ($16$ windows, green bars) across the $12$ Dudeney groups, showing the invariant group means $\|\mathbf{z}\|^2 = 1{,}360$ and $2\|\mathbf{z}\|^2 = 2{,}720$ on Groups~II, III, and~V. \textbf{(b)} Magnitude of the mixed octupole moment $|M_{xyz}(S)| = |\sum X_j Y_i Z_{ij}|$ across all $880$ squares (\Cref{prop:octupole_census}), highlighting the $48$ associative squares of Group~III ($B_{\mathrm{comp}}=0 \implies M_{xyz}=0$, green circle) and the $8$ anomalous non-associative octupole-zero squares in Groups~IX and~X ($B_{\mathrm{comp}}=8$ yet $M_{xyz}=0$, magenta stars). \textbf{(c)} Concentric shell decomposition on anomalous Square~\texttt{\#208} (Group~IX), showing how diagonal balance forces $Q_{\mathrm{inner}} = -Q_{\mathrm{corner}} = +12$ while $Q_{\mathrm{corner}}=-12$ and $Q_{\mathrm{edge}}=+32$ cancel in $M_{xyz} = -8Q_{\mathrm{corner}} - 3Q_{\mathrm{edge}} = 0$.}
+  \caption{\textbf{Group-resolved $2\times 2$ quartet energies, mixed octupole census, and concentric shell resonance across Dudeney Groups~I--XII.} 
+  \textbf{(a)} Group-mean interior $W_{2\times 2}^{\mathrm{int}}$ ($9$ windows, navy bars) and toroidal $W_{2\times 2}^{\mathrm{tor}}$ ($16$ windows, olive bars) across the $12$ Dudeney groups. Reference lines indicate the universal group-mean invariants $\|\mathbf{z}\|^2 = 1{,}360$ (interior) and $2\|\mathbf{z}\|^2 = 2{,}720$ (toroidal) shared by Groups~II, III, and~V, while Group~I vanishes identically ($W_{2\times 2} = 0$). 
+  \textbf{(b)} Magnitude of the mixed octupole moment $|M_{xyz}(S)| = |\sum X_j Y_i Z_{ij}|$ across all $880$ squares (\Cref{prop:octupole_census}). Exactly $56$ squares achieve $M_{xyz}=0$: the $48$ associative squares of Group~III ($B_{\mathrm{comp}}=0$, green circles at $y=0$), where antipodal centrosymmetry enforces $Q_{\mathrm{corner}} = Q_{\mathrm{edge}} = 0$, and $8$ anomalous non-associative squares in Groups~IX and~X ($B_{\mathrm{comp}}=8$, magenta stars at $y=0$), where coprime shell resonance satisfies $8\,Q_{\mathrm{corner}} = -3\,Q_{\mathrm{edge}}$. 
+  \textbf{(c)} Concentric shell quadrupole decomposition of anomalous Square~\texttt{\#208} (Group~IX, $B_{\mathrm{comp}}=8$). Main-diagonal balance forces $Q_{\mathrm{inner}} = -Q_{\mathrm{corner}} = +12$, while outer corners ($|XY|=9$) yield $Q_{\mathrm{corner}} = -12$ and boundary edges ($|XY|=3$) yield $Q_{\mathrm{edge}} = +32$, canceling exactly via Diophantine balance $M_{xyz} = -8(-12) - 3(32) = 96 - 96 = 0$.}
   \label{fig:octupole}
 \end{figure}
 
@@ -91,7 +97,7 @@ Across all $880$ Fr\'enicle magic squares of order $4$, the complement-break cou
   M_{xyz}(S) = -9\,Q_{\mathrm{corner}}(S) - 3\,Q_{\mathrm{edge}}(S) - Q_{\mathrm{inner}}(S) = -8\,Q_{\mathrm{corner}}(S) - 3\,Q_{\mathrm{edge}}(S).
   \label{eq:octupole_shell_identity}
 \end{equation}
-Consequently, $M_{xyz}(S) = 0$ holds if and only if $8\,Q_{\mathrm{corner}}(S) = -3\,Q_{\mathrm{edge}}(S)$, which is satisfied on \emph{exactly $56$ of the $880$ squares} (\Cref{fig:octupole}b and \Cref{tab:dudeney_groups}). First, on the $48$ associative squares of Group~III, centrosymmetric parity $Z_{5-i,5-j} = -Z_{ij}$ forces $Q_{\mathrm{corner}}(S) = Q_{\mathrm{edge}}(S) = 0$ identically, yielding $48$ symmetry-protected zeros. Second, across the $288$ squares of Groups~I, II, IV, and~V, the complement pairings along rows, columns, or $2\times 2$ blocks force $Q_{\mathrm{edge}}(S) = 0$ while $Q_{\mathrm{corner}}(S) \ne 0$, so $M_{xyz}(S) = -8\,Q_{\mathrm{corner}}(S) \ne 0$ can never vanish in those groups. Third, the remaining $8$ octupole zeros arise from coprime shell resonances among non-associative squares ($B_{\mathrm{comp}}=8$): specifically, $4$ squares in Group~IX (Fr\'enicle \texttt{\#200, \#208, \#390, \#711}) and $4$ squares in Group~X (\texttt{\#492, \#494, \#794, \#811}) satisfy $\bigl(Q_{\mathrm{corner}}(S), Q_{\mathrm{edge}}(S)\bigr) = (-3k, 8k)$ at $k = \pm 4$ (\texttt{\#208, \#711, \#492, \#494}) and $k = -8$ (\texttt{\#200, \#390, \#794, \#811}), mapped bijectively between Groups~IX and~X by the simultaneous row/column parity permutation $\pi = (2,4,1,3)$ and paired within each group by complementation $S \leftrightarrow 17\mathbf{1} - S$.
+Consequently, $M_{xyz}(S) = 0$ holds if and only if $8\,Q_{\mathrm{corner}}(S) = -3\,Q_{\mathrm{edge}}(S)$, which is satisfied on \emph{exactly $56$ of the $880$ squares} (\Cref{fig:octupole}b and \Cref{tab:dudeney_groups}). First, on the $48$ associative squares of Group~III, centrosymmetric parity $Z_{5-i,5-j} = -Z_{ij}$ forces $Q_{\mathrm{corner}}(S) = Q_{\mathrm{edge}}(S) = 0$ identically, yielding $48$ symmetry-protected zeros. Second, across the $288$ squares of Groups~I, II, IV, and~V, the complement pairings along rows, columns, or $2\times 2$ blocks force $Q_{\mathrm{edge}}(S) = 0$ while $Q_{\mathrm{corner}}(S) \ne 0$, so $M_{xyz}(S) = -8\,Q_{\mathrm{corner}}(S) \ne 0$ can never vanish in those groups. Third, the remaining $8$ octupole zeros arise from coprime shell resonances among non-associative squares ($B_{\mathrm{comp}}=8$): specifically, $4$ squares in Group~IX (Fr\'enicle \texttt{\#200, \#208, \#390, \#711}) and $4$ squares in Group~X (\texttt{\#492, \#494, \#794, \#811}) satisfy $\bigl(Q_{\mathrm{corner}}(S), Q_{\mathrm{edge}}(S)\bigr) = (-3k, 8k)$ at $k = \pm 4$ (\texttt{\#208, \#711, \#492, \#494}) and $k = -8$ (\texttt{\#200, \#390, \#794, \#811}), mapped bijectively between Groups~IX and~X by the simultaneous row/column parity permutation $\pi = (2,4,1,3)$ and paired within each group by complementation $S \leftrightarrow 17\mathbf{1} - S$. Here, the permutation $\pi = (2,4,1,3) \in S_4$ acts symmetrically on rows and columns via $P_\pi S P_\pi^\top$ as the inside-out Cousin--Ollerenshaw involution \cite{ollerenshaw1998most}: it preserves row sums, column sums, and both main diagonals (thus commuting with $\Hline=0$), but permutes the concentric radial shells $(|XY|=9, 3, 1)$ while interchanging the Dudeney group signatures of Groups~IX and~X and flipping the sign of $W_{2\times 2}^{\mathrm{int}} - 1{,}360$.
 \end{proposition}
 
 \begin{proof}
@@ -100,12 +106,12 @@ Since $R_{D_+}(S) = (Z_{11}+Z_{44}) + (Z_{22}+Z_{33}) = 0$ and $R_{D_-}(S) = (Z_
 
 \begin{table}[t]
 \centering
-\caption{Complete multiscale window and multipole census across the $12$ Dudeney groups of the $880$ order-$4$ magic squares, verified by \texttt{verify\_paper\_d.py}.}
+\caption{\textbf{Complete multiscale window and multipole census across the $12$ Dudeney groups of the $880$ order-$4$ magic squares.} Group sizes $N_g$, complement-break counts $B_{\mathrm{comp}}$, mean window entropies $\widetilde{H}_p(2)$, interior and toroidal $2\times 2$ quartet energies, and mixed octupole magnitudes $|M_{xyz}|$ are certified by \texttt{verify\_paper\_d.py}.}
 \label{tab:dudeney_groups}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{@{}cccccccc@{}}
 \toprule
-Dudeney Group & $N_g$ & $B_{\mathrm{comp}}$ & Mean $\widetilde{H}_1(2)$ & Mean $\widetilde{H}_2(2)$ & $W_{2\times 2}^{\mathrm{int}}$ (mean $[\min,\max]$) & $W_{2\times 2}^{\mathrm{tor}}$ (mean) & $|M_{xyz}|$ (mean, $\#=0$) \\
+\textbf{Dudeney Group} & \textbf{$N_g$} & \textbf{$B_{\mathrm{comp}}$} & \textbf{Mean $\widetilde{H}_1(2)$} & \textbf{Mean $\widetilde{H}_2(2)$} & \textbf{$W_{2\times 2}^{\mathrm{int}}$ (mean $[\min,\max]$)} & \textbf{$W_{2\times 2}^{\mathrm{tor}}$ (mean)} & \textbf{$|M_{xyz}|$ (mean, $\#=0$)} \\
 \midrule
 I (Panmagic)     & $48$  & $8$ & $0.98722$ & $0.96742$ & $0.0\;[0,0]$         & $0.0$     & $181.3\;(0/48)$ \\
 II (Semi-pan.)   & $48$  & $8$ & $0.98148$ & $0.95260$ & $1360.0\;[160,2560]$ & $2720.0$  & $181.3\;(0/48)$ \\
@@ -124,4 +130,4 @@ XII              & $8$   & $8$ & $0.97871$ & $0.94441$ & $1920.0\;[1440,2400]$& 
 }
 \end{table}
 
-Across all $880$ squares, the global maximum of $2\times 2$ window entropy is achieved by Fr\'enicle square \texttt{\#123} in Group~VI ($\widetilde{H}_1(2) = 0.999669$), while the global minimum occurs at square \texttt{\#599} in Group~VI ($\widetilde{H}_1(2) = 0.940345$). Notice also in \Cref{tab:dudeney_groups} and \Cref{fig:octupole}a that Groups~II, III, and~V share the exact same mean interior quartet energy $\langle W_{2\times 2}^{\mathrm{int}}\rangle = 1{,}360 = \|\mathbf{z}\|^2$ and mean toroidal quartet energy $\langle W_{2\times 2}^{\mathrm{tor}}\rangle = 2{,}720 = 2\|\mathbf{z}\|^2$.
+Across all $880$ squares, the global maximum of $2\times 2$ window entropy is achieved by Fr\'enicle square \texttt{\#123} in Group~VI ($\widetilde{H}_1(2) = 0.999669$, with balanced corner weights $w_1(W_{1,1}) = w_1(W_{3,3}) = 32$ and quartet energies $W_{2\times 2}^{\mathrm{int}} = 512$, $W_{2\times 2}^{\mathrm{tor}} = 1{,}024$), while the global minimum occurs at square \texttt{\#599} in Group~VI ($\widetilde{H}_1(2) = 0.940345$, with pronounced corner concentration $w_1(W_{1,1}) = 48$ versus $w_1(W_{3,3}) = 16$ and quartet energies $W_{2\times 2}^{\mathrm{int}} = 512$, $W_{2\times 2}^{\mathrm{tor}} = 1{,}024$). Note that the global interior quartet extrema across the entire $880$-square census are realized by Square~\texttt{\#145} ($W_{2\times 2}^{\mathrm{int}} = 384$) and Square~\texttt{\#219} ($W_{2\times 2}^{\mathrm{int}} = 2{,}816$). Notice also in \Cref{tab:dudeney_groups} and \Cref{fig:octupole}a that Groups~II, III, and~V share the exact same mean interior quartet energy $\langle W_{2\times 2}^{\mathrm{int}}\rangle = 1{,}360 = \|\mathbf{z}\|^2$ and mean toroidal quartet energy $\langle W_{2\times 2}^{\mathrm{tor}}\rangle = 2{,}720 = 2\|\mathbf{z}\|^2$. This universal invariant holds because under the row, column, and complementation symmetries preserving Groups~II, III, and~V, all cross-terms $Z_{ij} Z_{i'j'}$ within each $2\times 2$ window cancel to zero on average due to pairwise antipodal balance, while each grid cell participates in exactly $4$ toroidal $2\times 2$ windows, producing the exact ensemble mean $\frac{1}{2}\cdot 4\|\mathbf{z}\|^2 = 2\|\mathbf{z}\|^2 = 2{,}720$ and an interior quartet average of $\|\mathbf{z}\|^2 = 1{,}360$.

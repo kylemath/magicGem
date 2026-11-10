@@ -3,7 +3,7 @@
 'Can Physical Forces Find a Magic Square? Spectral Energy Landscapes,
 Window Entropies, and Interactive Relaxation Dynamics' (Kyle Elliott Mathewson).
 
-Generates 7 300-DPI publication figures (.pdf and .png) in paper_D_solver/figures/:
+Generates 9 300-DPI publication figures (.pdf and .png) in paper_D_solver/figures/:
   - fig1_spectral_operator.pdf/.png
   - fig2_window_entropy_880.pdf/.png
   - fig3_octupole_complement.pdf/.png
@@ -11,6 +11,8 @@ Generates 7 300-DPI publication figures (.pdf and .png) in paper_D_solver/figure
   - fig5_s16_descent_basins.pdf/.png
   - fig6_bubble_trinity_regimes.pdf/.png
   - fig7_multi_order_dimensional_relief.pdf/.png
+  - fig8_scan_3_to_50.pdf/.png
+  - fig9_competition_46_48_100.pdf/.png
 """
 
 from __future__ import annotations
@@ -60,8 +62,6 @@ plt.rcParams.update({
     "axes.spines.right": False,
 })
 
-HALO = dict(boxstyle="round,pad=0.12", facecolor="white", edgecolor="none", alpha=0.88)
-
 
 def save_fig(fig: plt.Figure, stem: str) -> None:
     FIG_DIR.mkdir(parents=True, exist_ok=True)
@@ -104,13 +104,7 @@ def make_fig1_spectral(data: dict) -> None:
                 ax0.scatter(
                     n - 0.15, ev, s=52, marker="D", facecolors="white",
                     edgecolors="#d95f02", linewidths=1.5, zorder=4,
-                    label=r"Unprojected $L_n$ ($\lambda_{\pm} \notin \mathbb{Z}$)" if idx == 0 and ev > n else None,
-                )
-                y_off = 8 if ev > n else -12
-                ax0.annotate(
-                    f"{ev:.2f}", (n - 0.15, ev), xytext=(0, y_off),
-                    textcoords="offset points", ha="center", va="center",
-                    fontsize=6.8, color="#b34800", fontweight="bold", bbox=HALO, zorder=6,
+                    label=r"Unprojected spectrum ($L_n$)" if idx == 0 and ev > n else None,
                 )
 
         # Plot rationalized zero-mean eigenvalues (filled navy/green circles)
@@ -120,31 +114,13 @@ def make_fig1_spectral(data: dict) -> None:
             ax0.scatter(
                 n + 0.10, ev, s=s_size, marker="o", color=color,
                 edgecolors="white", linewidths=0.7, zorder=5,
-                label=(r"Zero-mean $\widetilde{L}_n|_{\mathbf{1}^\perp}$ ($\mu \in \mathbb{Z}$)" if idx == 0 and ev == n else
-                       (r"Magic kernel ($\mu=0$, mult $n^2-2n-1$)" if idx == 0 and ev == 0 else None)),
-            )
-            ev_int = int(round(ev))
-            if n == 3 and ev_int == 2:
-                xy_off = (6, -6)
-            elif n == 3 and ev_int == 3:
-                xy_off = (6, 5)
-            elif ev_int == 2:
-                xy_off = (6, 6)
-            elif ev_int == 0:
-                xy_off = (6, 0)
-            elif n in (7, 8) and ev_int == 6:
-                xy_off = (6, -5)
-            else:
-                xy_off = (6, 3)
-            ax0.annotate(
-                f"{ev_int}$^{{[{mult}]}}$", (n + 0.13, ev),
-                xytext=xy_off, textcoords="offset points", va="center", fontsize=7.3,
-                color="#0f3c66" if ev > 0 else "#0f6648", fontweight="bold", bbox=HALO, zorder=6,
+                label=(r"Zero-mean spectrum ($\widetilde{L}_n|_{\mathbf{1}^\perp}$)" if idx == 0 and ev == n else
+                       (r"Kernel ($\mu=0$)" if idx == 0 and ev == 0 else None)),
             )
 
     # Mean eigenvalue line \bar{\mu} = 2
     ax0.axhline(2.0, color="#7570b3", linestyle="--", linewidth=1.4, zorder=2,
-                label=r"Universal mean eigenvalue $\bar{\mu}(\widetilde{L}_n) = 2$")
+                label=r"Mean eigenvalue ($\bar{\mu}=2$)")
     ax0.set_xticks(orders)
     ax0.set_xticklabels([f"$n={n}$\n($N={n*n}$)" for n in orders])
     ax0.set_xlim(2.35, 8.85)
@@ -161,8 +137,8 @@ def make_fig1_spectral(data: dict) -> None:
     ax1.imshow(z_sq, cmap="RdBu_r", vmin=-17, vmax=17, aspect="equal", alpha=0.88)
 
     # Draw golden diagonal balance guides along D_+ and D_-
-    ax1.plot([-0.38, 3.38], [-0.38, 3.38], color="#ffd166", linestyle="--", linewidth=2.0, alpha=0.85, zorder=2)
-    ax1.plot([3.38, -0.38], [-0.38, 3.38], color="#ffd166", linestyle="--", linewidth=2.0, alpha=0.85, zorder=2)
+    ax1.plot([-0.38, 3.38], [-0.38, 3.38], color="#ffd166", linestyle="--", linewidth=1.2, alpha=0.45, zorder=2)
+    ax1.plot([3.38, -0.38], [-0.38, 3.38], color="#ffd166", linestyle="--", linewidth=1.2, alpha=0.45, zorder=2)
 
     for r in range(4):
         for c in range(4):
@@ -178,27 +154,12 @@ def make_fig1_spectral(data: dict) -> None:
     cols_z = low_ex["cols_Z"]
     for r, rz in enumerate(rows_z):
         s_row = int(np.sum(sq[r, :]))
-        ax1.text(3.60, r, f"$\\Sigma={s_row}$\n($R_{{r{r+1}}}={rz:+d}$)", va="center", ha="left",
-                 fontsize=7.3, color="#b2182b", fontweight="bold")
+        ax1.text(3.55, r, f"$\\Sigma={s_row}$", va="center", ha="left",
+                 fontsize=7.8, color="#333333", fontweight="bold")
     for c, cz in enumerate(cols_z):
         s_col = int(np.sum(sq[:, c]))
-        ax1.text(c, 3.60, f"$\\Sigma={s_col}$\n($R_{{c{c+1}}}={cz:+d}$)", va="top", ha="center",
-                 fontsize=7.2, color="#b2182b", fontweight="bold")
-
-    # Unified diagonal sum badge in bottom-right corner (zero overlap with top banner!)
-    ax1.text(3.60, 3.60, "$D_\\pm: \\Sigma=34$\n($R_{D_\\pm}=0$)", va="top", ha="left",
-             fontsize=7.1, color="#0f6648", fontweight="bold",
-             bbox=dict(boxstyle="round,pad=0.18", facecolor="#eefaf4", edgecolor="#1b9e77"))
-
-    # Top banner summarizing low-mode balance vs hidden polynomial waves
-    ax1.text(
-        1.5, -0.82,
-        r"Balanced Tilt & Diagonals: $\langle X,Z\rangle = \langle Y,Z\rangle = R_{D_\pm} = 0 \Rightarrow E_{\mathrm{low}} = 0$"
-        + "\n"
-        + r"Unchecked Quadratic/Cubic Waves ($2n-4=4\mathrm{D}$): $\mathcal{H}_{\mathrm{line}}(S_{\mathrm{low}}) = 1,584 > 0$",
-        ha="center", va="center", fontsize=7.1, fontweight="bold",
-        bbox=dict(boxstyle="round,pad=0.25", facecolor="#fff5f5", edgecolor="#b2182b"),
-    )
+        ax1.text(c, 3.55, f"$\\Sigma={s_col}$", va="top", ha="center",
+                 fontsize=7.8, color="#333333", fontweight="bold")
 
     x_coords = [-3, -1, +1, +3]
     y_coords = [+3, +1, -1, -3]
@@ -206,11 +167,11 @@ def make_fig1_spectral(data: dict) -> None:
     ax1.set_yticks(range(4))
     ax1.set_xticklabels([f"Col {j+1}\n($X={x_coords[j]:+d}$)" for j in range(4)], fontsize=7.4)
     ax1.set_yticklabels([f"Row {i+1}\n($Y={y_coords[i]:+d}$)" for i in range(4)], fontsize=7.4)
-    ax1.set_xlim(-0.55, 4.75)
-    ax1.set_ylim(4.32, -1.22)
+    ax1.set_xlim(-0.55, 4.35)
+    ax1.set_ylim(4.35, -0.55)
     for sp in ("top", "right", "bottom", "left"):
         ax1.spines[sp].set_visible(False)
-    ax1.set_title(r"(b) The Balanced $4\times 4$ Impostor Square $S_{\mathrm{low}}$", fontweight="bold", pad=10)
+    ax1.set_title(r"(b) Balanced $4\times 4$ Impostor Square $S_{\mathrm{low}}$", fontweight="bold", pad=8)
 
     save_fig(fig, "fig1_spectral_operator")
 
@@ -226,11 +187,11 @@ def make_fig2_window_entropy(data: dict) -> None:
     # Panel (a): Multiscale normalized window entropy \widetilde{H}_1(k) & \widetilde{H}_2(2)
     ax0 = fig.add_subplot(gs[0, 0])
     families = [
-        ("Lo Shu ($n=3$, odd)", siamese_magic(3), "#1b9e77", "o"),
-        ("Doubly-Even ($n=4$, $4k$)", doubly_even_magic(4), "#2b5c8f", "s"),
-        ("Siamese ($n=5$, odd)", siamese_magic(5), "#d95f02", "^"),
-        ("Conway LUX ($n=6$, $4k+2$)", lux_singly_even_magic(6), "#e7298a", "D"),
-        ("Doubly-Even ($n=8$, $4k$)", doubly_even_magic(8), "#7570b3", "v"),
+        ("Lo Shu ($n=3$)", siamese_magic(3), "#1b9e77", "o"),
+        ("Doubly-Even ($n=4$)", doubly_even_magic(4), "#2b5c8f", "s"),
+        ("Siamese ($n=5$)", siamese_magic(5), "#d95f02", "^"),
+        ("Conway LUX ($n=6$)", lux_singly_even_magic(6), "#e7298a", "D"),
+        ("Doubly-Even ($n=8$)", doubly_even_magic(8), "#7570b3", "v"),
     ]
     for label, sq, col, mk in families:
         n = len(sq)
@@ -245,14 +206,6 @@ def make_fig2_window_entropy(data: dict) -> None:
         ax0.plot([2 / n, 2 / n], [h2_k2, h1_k2], color=col, linestyle=":", linewidth=1.1, alpha=0.75)
         ax0.scatter([2 / n], [h2_k2], s=36, marker=mk, facecolors="white", edgecolors=col, linewidths=1.4, zorder=5)
 
-    # Place callout in the open upper-left region of Panel (a) so it never collides with the lower-right legend
-    ax0.annotate(
-        "Hollow markers at $k=2$:\n$\\widetilde{H}_2(2)$ drops to $0.915$ ($n=4$)\n& $0.906$ ($n=8$) from corner clustering",
-        xy=(0.25, 0.906), xytext=(0.12, 0.980),
-        arrowprops=dict(arrowstyle="->", color="#7570b3", lw=1.1),
-        fontsize=6.6, color="#0f3c66", fontweight="bold",
-        bbox=dict(boxstyle="round,pad=0.20", facecolor="#f0f4f8", edgecolor="#2b5c8f"),
-    )
     ax0.set_xlabel(r"Relative window scale $k / n$ ($1 \leq k \leq n-1$)")
     ax0.set_ylabel(r"Normalized window entropy $\widetilde{H}_1(k)$ (solid) & $\widetilde{H}_2(2)$ (hollow)")
     ax0.set_ylim(0.892, 1.006)
@@ -269,61 +222,40 @@ def make_fig2_window_entropy(data: dict) -> None:
 
     ax1.scatter([x["w2_non_tor"] for x in pts_other], [x["Hnorm_p1_k2"] for x in pts_other],
                 s=18, marker="D", color="#9e9ac8", alpha=0.55, zorder=2,
-                label="Groups II, IV–V, VII–XII ($N=480$)")
+                label="Groups II, IV–V, VII–XII")
     ax1.scatter([x["w2_non_tor"] for x in pts_g6], [x["Hnorm_p1_k2"] for x in pts_g6],
                 s=18, marker="o", color="#6baed6", alpha=0.60, zorder=3,
-                label="Group VI ($N=304$, generic)")
+                label="Group VI")
     ax1.scatter([x["w2_non_tor"] for x in pts_g3], [x["Hnorm_p1_k2"] for x in pts_g3],
                 s=30, marker="s", color="#1b9e77", alpha=0.88, zorder=5,
-                label=r"Group III (Associative, $N=48$, $B_{\mathrm{comp}}=0$)")
+                label="Group III (Associative)")
     ax1.scatter([x["w2_non_tor"] for x in pts_g1], [x["Hnorm_p1_k2"] for x in pts_g1],
                 s=38, marker="o", color="#d95f02", edgecolors="black", linewidths=0.6, zorder=6,
-                label=r"Group I (Panmagic, $N=48$, $W_{2\times 2}=0$)")
+                label="Group I (Panmagic)")
 
     # Highlight extremal squares #123 (max entropy) and #599 (min entropy)
     sq123_meta = next(x for x in per_sq if x["id"] == 123)
     sq599_meta = next(x for x in per_sq if x["id"] == 599)
     ax1.scatter([sq123_meta["w2_non_tor"]], [sq123_meta["Hnorm_p1_k2"]],
-                s=75, marker="*", color="#e7298a", edgecolors="black", linewidths=0.6, zorder=8)
+                s=75, marker="*", color="#e7298a", edgecolors="black", linewidths=0.6, zorder=8,
+                label="Max entropy (#123)")
     ax1.scatter([sq599_meta["w2_non_tor"]], [sq599_meta["Hnorm_p1_k2"]],
-                s=65, marker="v", color="#b2182b", edgecolors="black", linewidths=0.6, zorder=8)
-
-    ax1.annotate(
-        f"Max #123 ($\\widetilde{{H}}_1(2)=0.9997$)",
-        xy=(sq123_meta["w2_non_tor"], sq123_meta["Hnorm_p1_k2"]),
-        xytext=(820, 0.9990),
-        arrowprops=dict(arrowstyle="->", color="#e7298a", lw=1.1),
-        fontsize=6.8, fontweight="bold", color="#a8135d", bbox=HALO, zorder=9,
-    )
-    # Place Min #599 label in the bottom-left space so it never touches the lower-right legend!
-    ax1.annotate(
-        f"Min #599\n($\\widetilde{{H}}_1(2)=0.9403$)",
-        xy=(sq599_meta["w2_non_tor"], sq599_meta["Hnorm_p1_k2"]),
-        xytext=(35, 0.9415),
-        arrowprops=dict(arrowstyle="->", color="#b2182b", lw=1.1),
-        fontsize=6.8, fontweight="bold", color="#8c1120", bbox=HALO, zorder=9,
-    )
+                s=65, marker="v", color="#b2182b", edgecolors="black", linewidths=0.6, zorder=8,
+                label="Min entropy (#599)")
 
     ax1.axvline(0, color="#d95f02", linestyle="--", linewidth=1.2, alpha=0.85)
-    ax1.annotate(
-        "Lemma 3.1: 48 Panmagic\n$W_{2\\times 2}^{\\mathrm{int}} = W_{2\\times 2}^{\\mathrm{tor}} = 0$",
-        xy=(10, 0.971), xytext=(80, 0.956),
-        arrowprops=dict(arrowstyle="->", color="#d95f02", lw=1.2),
-        fontsize=6.8, fontweight="bold", color="#b34800",
-        bbox=dict(boxstyle="round,pad=0.20", facecolor="#fff5eb", edgecolor="#d95f02"),
-    )
     ax1.set_xlabel(r"Interior $2\times 2$ quartet energy $W_{2\times 2}^{\mathrm{int}}(S) = \sum_{r,c=1}^{3} Q_{rc}(S)^2$")
     ax1.set_ylabel(r"Normalized $2\times 2$ window entropy $\widetilde{H}_1(2)$")
-    ax1.set_ylim(0.936, 1.004)
+    ax1.set_ylim(0.936, 1.022)
     ax1.set_title(r"(b) $2\times 2$ Quartet Energy vs. Entropy ($880$ Squares)", fontweight="bold", pad=8)
     ax1.grid(True, linestyle=":", alpha=0.45)
-    ax1.legend(loc="lower right", frameon=True, framealpha=0.94, fontsize=6.6)
+    ax1.legend(loc="upper right", ncol=2, frameon=True, framealpha=0.94, fontsize=6.5)
 
     # Panel (c): Visual 4x4 board textures comparing Max Entropy #123 vs Min Entropy #599
     gs_c = gs[0, 2].subgridspec(2, 1, hspace=0.38)
     for sub_idx, (sq_id, title_tag, border_col) in enumerate([
-        (123, r"(c1) Max Entropy #123 ($\widetilde{H}_1(2)=0.9997$)", "#1b9e77"),
-        (599, r"(c2) Min Entropy #599 ($\widetilde{H}_1(2)=0.9403$)", "#b2182b"),
+        (123, r"(c1) Maximum Entropy Square (#123)", "#1b9e77"),
+        (599, r"(c2) Minimum Entropy Square (#599)", "#b2182b"),
     ]):
         ax_c = fig.add_subplot(gs_c[sub_idx, 0])
         sq_grid = np.array(raw_880[sq_id - 1]["square"], dtype=int)
@@ -336,21 +268,15 @@ def make_fig2_window_entropy(data: dict) -> None:
                 ax_c.text(c, r, f"{v}\n$|Z|={za}$", ha="center", va="center",
                           fontsize=5.8, fontweight="bold", color="white" if za >= 13 else "#1a1a1a")
 
-        # Annotate corner 2x2 window L1 weights w_1(W_{1,1}) and w_1(W_{3,3})
-        w_tl = int(np.sum(z_abs[0:2, 0:2]))
-        w_br = int(np.sum(z_abs[2:4, 2:4]))
+        # Outline corner 2x2 window L1 weights
         rect_tl = mpatches.Rectangle((-0.46, -0.46), 1.92, 1.92, fill=False, edgecolor=border_col, linewidth=1.8, linestyle="-")
         rect_br = mpatches.Rectangle((1.54, 1.54), 1.92, 1.92, fill=False, edgecolor="#2b5c8f", linewidth=1.8, linestyle="--")
         ax_c.add_patch(rect_tl)
         ax_c.add_patch(rect_br)
-        ax_c.text(3.62, 0.5, f"Top-L $2\\times 2$:\n$w_1={w_tl}$", va="center", ha="left",
-                  fontsize=6.8, fontweight="bold", color=border_col)
-        ax_c.text(3.62, 2.5, f"Bot-R $2\\times 2$:\n$w_1={w_br}$", va="center", ha="left",
-                  fontsize=6.8, fontweight="bold", color="#2b5c8f")
 
         ax_c.set_xticks([])
         ax_c.set_yticks([])
-        ax_c.set_xlim(-0.55, 5.35)
+        ax_c.set_xlim(-0.55, 3.55)
         ax_c.set_ylim(3.55, -0.55)
         for sp in ("top", "right", "bottom", "left"):
             ax_c.spines[sp].set_visible(False)
@@ -377,25 +303,19 @@ def make_fig3_octupole_complement(data: dict) -> None:
 
     x = np.arange(len(groups))
     w = 0.38
-    ax0.bar(x - w / 2, mean_int, width=w, color="#2b5c8f", label=r"Mean Interior $W_{2\times 2}^{\mathrm{int}}$ (9 windows)")
-    ax0.bar(x + w / 2, mean_tor, width=w, color="#66a61e", alpha=0.88, label=r"Mean Toroidal $W_{2\times 2}^{\mathrm{tor}}$ (16 windows)")
+    ax0.bar(x - w / 2, mean_int, width=w, color="#2b5c8f", label=r"Mean interior ($W_{2\times 2}^{\mathrm{int}}$)")
+    ax0.bar(x + w / 2, mean_tor, width=w, color="#66a61e", alpha=0.88, label=r"Mean toroidal ($W_{2\times 2}^{\mathrm{tor}}$)")
 
     # Reference lines at ||z||^2 = 1360 and 2||z||^2 = 2720
     ax0.axhline(1360, color="#1a3a5c", linestyle="--", linewidth=1.1, alpha=0.8,
-                label=r"$\|\mathbf{z}\|^2 = 1,360$ (Groups II, III, V)")
+                label=r"$\|\mathbf{z}\|^2 = 1,360$ baseline")
     ax0.axhline(2720, color="#3d6611", linestyle=":", linewidth=1.2, alpha=0.8,
-                label=r"$2\|\mathbf{z}\|^2 = 2,720$ (Groups II, III, V)")
-    ax0.annotate(
-        "Group I:\n$W_{2\\times 2}=0$",
-        xy=(0, 20), xytext=(0.4, 620),
-        arrowprops=dict(arrowstyle="->", color="#d95f02", lw=1.1),
-        fontsize=6.9, fontweight="bold", color="#b34800", bbox=HALO,
-    )
+                label=r"$2\|\mathbf{z}\|^2 = 2,720$ baseline")
 
     ax0.set_xticks(x)
     ax0.set_xticklabels(roman, fontsize=7.6)
-    ax0.set_ylim(0, 4100)
-    ax0.set_xlabel("Dudeney Group (I--XII)")
+    ax0.set_ylim(0, 4400)
+    ax0.set_xlabel("Dudeney Group (I–XII)")
     ax0.set_ylabel(r"Group-mean $2\times 2$ quartet energy")
     ax0.set_title(r"(a) Interior & Toroidal $2\times 2$ Energy by Group", fontweight="bold", pad=8)
     ax0.grid(True, axis="y", linestyle=":", alpha=0.45)
@@ -415,31 +335,20 @@ def make_fig3_octupole_complement(data: dict) -> None:
         ax1.plot([g - 1 - 0.26, g - 1 + 0.26], [np.mean(vals)] * 2, color="black", lw=1.5, zorder=4)
 
     # Highlight the 48 Group III zeros and 8 Group IX/X zeros explicitly at y=0
-    ax1.scatter([2], [0], s=75, marker="o", color="#1b9e77", edgecolors="black", linewidths=0.8, zorder=6)
-    ax1.scatter([8, 9], [0, 0], s=75, marker="*", color="#e7298a", edgecolors="black", linewidths=0.7, zorder=6)
+    ax1.scatter([2], [0], s=75, marker="o", color="#1b9e77", edgecolors="black", linewidths=0.8, zorder=6,
+                label="Associative zeros (Group III)")
+    ax1.scatter([8, 9], [0, 0], s=75, marker="*", color="#e7298a", edgecolors="black", linewidths=0.7, zorder=6,
+                label="Shell-resonance zeros (Groups IX–X)")
 
     ax1.axhline(0, color="#1b9e77", linestyle="--", lw=1.1)
-    ax1.annotate(
-        "48 Associative Zeros (Group III):\n$B_{\\mathrm{comp}}=0 \\Rightarrow Q_{\\mathrm{corner}}=Q_{\\mathrm{edge}}=0$",
-        xy=(2, 6), xytext=(0.05, 415),
-        arrowprops=dict(arrowstyle="->", color="#1b9e77", lw=1.2),
-        fontsize=6.7, fontweight="bold", color="#0f6648",
-        bbox=dict(boxstyle="round,pad=0.20", facecolor="#eefaf4", edgecolor="#1b9e77"),
-    )
-    ax1.annotate(
-        "8 Non-Assoc. Zeros (IX & X):\n$B_{\\mathrm{comp}}=8, 8Q_{\\mathrm{corner}} = -3Q_{\\mathrm{edge}}$",
-        xy=(8.5, 6), xytext=(3.8, 330),
-        arrowprops=dict(arrowstyle="->", color="#e7298a", lw=1.2),
-        fontsize=6.7, fontweight="bold", color="#a8135d",
-        bbox=dict(boxstyle="round,pad=0.20", facecolor="#fdf0f6", edgecolor="#e7298a"),
-    )
     ax1.set_xticks(x)
     ax1.set_xticklabels(roman, fontsize=7.6)
-    ax1.set_xlabel("Dudeney Group (I--XII)")
+    ax1.set_xlabel("Dudeney Group (I–XII)")
     ax1.set_ylabel(r"Octupole magnitude $|M_{xyz}(S)| = |\sum X_j Y_i Z_{ij}|$")
-    ax1.set_ylim(-24, 485)
-    ax1.set_title(r"(b) Octupole Census & the $48+8=56$ Zeros", fontweight="bold", pad=8)
+    ax1.set_ylim(-24, 600)
+    ax1.set_title(r"(b) Mixed Octupole Magnitude by Group", fontweight="bold", pad=8)
     ax1.grid(True, axis="y", linestyle=":", alpha=0.45)
+    ax1.legend(loc="upper right", frameon=True, framealpha=0.92, fontsize=6.8)
 
     # Panel (c): Concentric Shell Quadrupole Identity on Non-Associative Square #208 (Group IX)
     ax2 = fig.add_subplot(gs[0, 2])
@@ -473,23 +382,15 @@ def make_fig3_octupole_complement(data: dict) -> None:
     rect_inner = mpatches.Rectangle((0.5, 0.5), 2.0, 2.0, fill=False, edgecolor="#4a2c82", linewidth=1.6, linestyle="--")
     ax2.add_patch(rect_inner)
 
-    ax2.text(
-        1.5, 4.18,
-        r"Prop. 3.2 on #208 (Group IX, $B_{\mathrm{comp}}=8$):" + "\n"
-        + r"Corners ($\pm 9$): $Q_{\mathrm{corner}} = -12$, Inner ($\pm 1$): $Q_{\mathrm{inner}} = +12$" + "\n"
-        + r"Edges ($\pm 3$): $Q_{\mathrm{edge}} = +32 \Rightarrow M_{xyz} = -8(-12) - 3(32) = 0$",
-        ha="center", va="top", fontsize=6.4, fontweight="bold",
-        bbox=dict(boxstyle="round,pad=0.22", facecolor="#fdf0f6", edgecolor="#e7298a"),
-    )
     ax2.set_xticks(range(4))
     ax2.set_yticks(range(4))
     ax2.set_xticklabels([f"$X={x:+d}$" for x in X_c], fontsize=7.0)
     ax2.set_yticklabels([f"$Y={y:+d}$" for y in Y_r], fontsize=7.0)
     ax2.set_xlim(-0.55, 3.55)
-    ax2.set_ylim(5.15, -0.55)
+    ax2.set_ylim(3.55, -0.55)
     for sp in ("top", "right", "bottom", "left"):
         ax2.spines[sp].set_visible(False)
-    ax2.set_title("(c) Concentric Shell Identity (#208)", fontweight="bold", pad=8)
+    ax2.set_title("(c) Concentric Shell Decomposition (Square #208)", fontweight="bold", pad=8)
 
     save_fig(fig, "fig3_octupole_complement")
 
@@ -509,24 +410,24 @@ def make_fig4_s9_landscape() -> None:
     bins = np.linspace(0, 760, 39)
     ax0.hist(H_all, bins=bins, color="#2b5c8f", edgecolor="white", linewidth=0.4, alpha=0.88)
     ax0.axvline(480.0, color="#d95f02", linestyle="--", linewidth=1.6,
-                label=r"Ensemble mean $\mathbb{E}[\mathcal{H}_{\mathrm{line}}] = 2\|\mathbf{z}\|^2 = 480$")
+                label=r"Ensemble mean ($2\|\mathbf{z}\|^2 = 480$)")
     ax0.axvline(0.0, color="#1b9e77", linestyle="-", linewidth=1.8,
-                label=r"8 Lo Shu ground states ($\mathcal{H}_{\mathrm{line}}=0$, $74.53\%$)")
+                label=r"Lo Shu ground state ($\mathcal{H}=0$)")
     ax0.axvline(8.0, color="#e7298a", linestyle=":", linewidth=1.8,
-                label=r"8 Antipodal traps $S_{\mathrm{trap}}^{(3)}$ ($\mathcal{H}_{\mathrm{line}}=8$, $25.47\%$)")
+                label=r"Antipodal trap ($\mathcal{H}=8$)")
     ax0.axvline(720.0, color="#7570b3", linestyle="-.", linewidth=1.4,
-                label=r"Global maximum $\max_{S\in S_9}\mathcal{H}_{\mathrm{line}}(S) = 720$")
+                label=r"Global maximum")
 
     ax0.set_xlabel(r"Centred line-indicator Hamiltonian $\mathcal{H}_{\mathrm{line}}(S) = \mathbf{z}^\top L_3 \mathbf{z}$")
     ax0.set_ylabel(r"Number of permutations in $S_9$ ($9! = 362,880$)")
     ax0.set_xlim(-22, 790)
-    ax0.set_ylim(0, 37500)
+    ax0.set_ylim(0, 39500)
     ax0.set_title(r"(a) Exhaustive $S_9$ Energy Landscape ($362,880$ States)", fontweight="bold", pad=8)
     ax0.grid(True, linestyle=":", alpha=0.45)
     ax0.legend(loc="upper left", frameon=True, framealpha=0.94, fontsize=6.9)
 
     # Inset zooming in on low-energy states H_line in {0, 4, 8, 12, 16, 20, 24} with white background card
-    ax_ins = ax0.inset_axes([0.14, 0.36, 0.42, 0.32])
+    ax_ins = ax0.inset_axes([0.10, 0.43, 0.38, 0.30])
     ax_ins.patch.set_facecolor("white")
     ax_ins.patch.set_alpha(0.96)
     low_H_vals = [0, 4, 8, 12, 16, 20, 24]
@@ -536,40 +437,39 @@ def make_fig4_s9_landscape() -> None:
     ax_ins.bar(x_ins, low_counts, color=bar_cols, edgecolor="white", width=0.68)
     ax_ins.set_xticks(x_ins)
     ax_ins.set_xticklabels([str(h) for h in low_H_vals])
-    for idx_h, (h_v, cnt) in enumerate(zip(low_H_vals, low_counts)):
-        ax_ins.text(idx_h, cnt + 6, f"{cnt}", ha="center", va="bottom", fontsize=6.2, fontweight="bold")
-    ax_ins.set_ylim(0, 195)
+    ax_ins.set_ylim(0, 60)
     ax_ins.set_title(r"Low-Energy Zoom ($\mathcal{H}_{\mathrm{line}} \leq 24$)", fontsize=6.8, fontweight="bold", pad=2)
-    ax_ins.set_xlabel(r"$\mathcal{H}_{\mathrm{line}}$ (0 states at $\mathcal{H}=4$)", fontsize=6.2, labelpad=1, bbox=HALO)
+    ax_ins.set_xlabel(r"$\mathcal{H}_{\mathrm{line}}$", fontsize=6.8, labelpad=2)
     ax_ins.tick_params(labelsize=6.0)
 
     # Panel (b): 3-Stage Unlocking Transition S_trap^(3) (H=8) -> Saddle (H=12) -> S_LoShu (H=0)
+    ax_b_head = fig.add_subplot(gs[0, 1])
+    ax_b_head.set_axis_off()
+    ax_b_head.set_title(r"(b) 3-Stage Combination-Lock Escape Pathway", fontweight="bold", pad=8)
+
     gs_b = gs[0, 1].subgridspec(2, 3, height_ratios=[1.35, 0.55], wspace=0.28, hspace=0.28)
     boards = [
         (
             np.array([[2, 6, 7], [9, 5, 1], [3, 4, 8]], dtype=int),
-            r"1. Trap $S_{\mathrm{trap}}^{(3)}$ ($\mathcal{H}_{\mathrm{line}}=8$)",
+            r"1. Trap State",
             "#e7298a",
             [(0, 1), (0, 2)],
-            "Cols: $14, 15, 16$\nAll $2$- & $3$-cycles fail",
         ),
         (
             np.array([[2, 7, 6], [9, 5, 1], [3, 4, 8]], dtype=int),
-            r"2. Saddle $\tau_1 S_{\mathrm{trap}}^{(3)}$ ($\mathcal{H}^\ddagger=12$)",
+            r"2. Saddle State",
             "#d95f02",
             [(2, 0), (2, 1)],
-            "After $\\tau_1=(6\\leftrightarrow 7)$:\n$C_1=14, C_2=16, D_-=14$",
         ),
         (
             np.array([[2, 7, 6], [9, 5, 1], [4, 3, 8]], dtype=int),
-            r"3. Ground State $S_{\mathrm{LoShu}}$ ($\mathcal{H}=0$)",
+            r"3. Ground State",
             "#1b9e77",
             [],
-            "After $\\tau_2=(3\\leftrightarrow 4)$:\nAll 8 lines sum to $15$",
         ),
     ]
 
-    for b_idx, (b_mat, b_title, b_col, swap_cells, b_sub) in enumerate(boards):
+    for b_idx, (b_mat, b_title, b_col, swap_cells) in enumerate(boards):
         ax_b = fig.add_subplot(gs_b[0, b_idx])
         z_mat = 2 * b_mat - 10
         ax_b.imshow(z_mat, cmap="YlOrRd", vmin=-12, vmax=12, aspect="equal", alpha=0.24)
@@ -581,24 +481,25 @@ def make_fig4_s9_landscape() -> None:
                     c, r, f"{v}", ha="center", va="center",
                     fontsize=10.5, fontweight="bold",
                     color=b_col if is_hi else "#1a1a1a",
-                    bbox=dict(boxstyle="circle,pad=0.18", facecolor="white", edgecolor=b_col, lw=1.6) if is_hi else None,
                 )
+                if is_hi:
+                    rect = mpatches.Rectangle((c - 0.44, r - 0.44), 0.88, 0.88, fill=False,
+                                             edgecolor=b_col, linewidth=1.8, linestyle="-")
+                    ax_b.add_patch(rect)
         for c in range(3):
             csum = int(np.sum(b_mat[:, c]))
             ccol = "#1b9e77" if csum == 15 else "#d95f02"
             ax_b.text(c, 2.68, f"$\\Sigma={csum}$", ha="center", va="top", fontsize=7.0, fontweight="bold", color=ccol)
 
-        ax_b.text(1.0, 3.35, b_sub, ha="center", va="top", fontsize=6.8, color="#222222",
-                  bbox=dict(boxstyle="round,pad=0.20", facecolor="#f8f9fa", edgecolor=b_col, lw=1.1))
         ax_b.set_xticks([])
         ax_b.set_yticks([])
         ax_b.set_xlim(-0.55, 2.55)
-        ax_b.set_ylim(4.25, -0.55)
+        ax_b.set_ylim(3.25, -0.55)
         for sp in ("top", "right", "bottom", "left"):
             ax_b.spines[sp].set_visible(True)
             ax_b.spines[sp].set_color(b_col)
             ax_b.spines[sp].set_linewidth(1.3)
-        ax_b.set_title(b_title, fontsize=8.0, fontweight="bold", color=b_col, pad=5)
+        ax_b.set_title(b_title, fontsize=8.2, fontweight="bold", color=b_col, pad=5)
 
     # Bottom reaction-coordinate energy profile across the (2,2) double swap
     ax_rc = fig.add_subplot(gs_b[1, :])
@@ -611,15 +512,8 @@ def make_fig4_s9_landscape() -> None:
     ax_rc.plot(rc_x, rc_y, color="#2b5c8f", linewidth=2.0)
     ax_rc.fill_between(rc_x, 0, rc_y, color="#2b5c8f", alpha=0.10)
     ax_rc.scatter([0, 1, 2], [8, 12, 0], s=55, color=["#e7298a", "#d95f02", "#1b9e77"], zorder=5)
-    ax_rc.annotate(r"Trap $\mathcal{H}=8$", (0, 8), xytext=(10, 4), textcoords="offset points",
-                   fontsize=7.2, fontweight="bold", color="#a8135d", bbox=HALO)
-    ax_rc.annotate(r"Single-Swap Saddle $\mathcal{H}^\ddagger=12$ ($\Delta\mathcal{H}^\ddagger=+4$)",
-                   (1, 12), xytext=(0, 5), textcoords="offset points", ha="center",
-                   fontsize=7.2, fontweight="bold", color="#b34800", bbox=HALO)
-    ax_rc.annotate(r"Lo Shu $\mathcal{H}=0$ ($100\%$ basin)", (2, 0), xytext=(-10, 6), textcoords="offset points",
-                   ha="right", fontsize=7.2, fontweight="bold", color="#0f6648", bbox=HALO)
     ax_rc.set_xlim(-0.2, 2.2)
-    ax_rc.set_ylim(-1.5, 17.5)
+    ax_rc.set_ylim(-1.5, 14.5)
     ax_rc.set_xticks([0, 1, 2])
     ax_rc.set_xticklabels([
         r"Start: $S_{\mathrm{trap}}^{(3)}$",
@@ -716,35 +610,33 @@ def make_fig5_s16_descent(data: dict) -> None:
 
     ax0.fill_between(
         steps_arr, np.percentile(mat_trapped, 20, axis=0), np.percentile(mat_trapped, 80, axis=0),
-        color="#d95f02", alpha=0.18, label=r"Trapped 20%–80% envelope ($81.75\%$ of starts)"
+        color="#d95f02", alpha=0.18, label=r"Trapped envelope ($20\%–80\%$)"
     )
     ax0.fill_between(
         steps_arr, np.percentile(mat_magic, 20, axis=0), np.percentile(mat_magic, 80, axis=0),
-        color="#1b9e77", alpha=0.18, label=r"Ground-state 20%–80% envelope ($18.25\%$ of starts)"
+        color="#1b9e77", alpha=0.18, label=r"Ground-state envelope ($20\%–80\%$)"
     )
 
     for i, c in enumerate(trajs_trapped[:6]):
         y_c = np.array(c) + 4.0
         ax0.plot(range(len(c)), y_c, color="#d95f02", alpha=0.80, lw=1.3)
         ax0.scatter([len(c) - 1], [y_c[-1]], s=28, marker="o", color="#b34800", edgecolors="white", linewidths=0.6, zorder=6,
-                    label=r"Trapped local minimum halt ($\Delta\mathcal{H}_{\mathrm{line}} > 0$)" if i == 0 else None)
+                    label=r"Local minimum halt" if i == 0 else None)
 
     for i, c in enumerate(trajs_magic[:6]):
         y_c = np.array(c) + 4.0
         ax0.plot(range(len(c)), y_c, color="#1b9e77", alpha=0.88, lw=1.5)
         ax0.scatter([len(c) - 1], [y_c[-1]], s=34, marker="*", color="#0f6648", zorder=6,
-                    label=r"Magic ground state reached ($\mathcal{H}_{\mathrm{line}} = 0$)" if i == 0 else None)
+                    label=r"Ground-state termination" if i == 0 else None)
 
     ax0.axhspan(12.0, 20.0, color="#ffd166", alpha=0.22, zorder=1)
     ax0.axhline(4.0, color="#1b9e77", linestyle="--", linewidth=1.3, zorder=2)
-    ax0.text(0.3, 4.35, r"Magic Ground State $\mathcal{H}_{\mathrm{line}} = 0$", fontsize=7.1, fontweight="bold", color="#0f6648", bbox=HALO)
-    ax0.text(0.3, 14.5, r"Dominant Trap Band $\mathcal{H}_{\mathrm{line}} \in \{8,12,16\}$", fontsize=7.0, fontweight="bold", color="#9c2f00")
 
     ax0.set_yscale("log")
     ax0.set_yticks([4, 12, 20, 104, 1004, 2724])
     ax0.set_yticklabels([r"$0$", r"$8$", r"$16$", r"$100$", r"$1,000$", r"$2,720$"])
     ax0.set_xlim(-0.2, 14.5)
-    ax0.set_ylim(3.2, 5500)
+    ax0.set_ylim(3.2, 6000)
     ax0.set_xlabel("Steepest-descent $2$-cycle transposition step $t$")
     ax0.set_ylabel(r"Line-indicator energy $\mathcal{H}_{\mathrm{line}}(S_t)$ (log scale)")
     ax0.set_title(r"(a) Order-4 ($S_{16}$) Steepest-Descent Envelopes & Halting", fontweight="bold", pad=8)
@@ -762,33 +654,15 @@ def make_fig5_s16_descent(data: dict) -> None:
 
     x_idx = np.arange(len(ks))
     colors = ["#1b9e77" if k == 0 else "#d95f02" for k in ks]
-    ax1.bar(x_idx, vs, color=colors, edgecolor="white", width=0.74, label=r"Terminal $2$-cycle local minima ($2,000$ trials)")
+    ax1.bar(x_idx, vs, color=colors, edgecolor="white", width=0.74, label=r"$2$-Cycle local minima")
     ax1.bar(x_idx, esc_vs, color="#2b5c8f", edgecolor="white", width=0.74, hatch="//", alpha=0.85,
-            label=r"Unlocked by a single $(2,2)$ plaquette move ($16.6\%$ of traps)")
+            label=r"$(2,2)$ Plaquette escape yield")
 
-    for idx, (k, v) in enumerate(zip(ks, vs)):
-        if v >= 30:
-            ax1.text(idx, v + 7, f"{v}", ha="center", va="bottom", fontsize=7.1, fontweight="bold", bbox=HALO)
-
-    ax1.annotate(
-        "Ground-state basin:\n$365/2,000$ ($18.25\\%$)\n$\\to 509/2,000$ ($25.45\\%$)\nwith $(2,2)$ plaquettes",
-        xy=(0, 365), xytext=(3.8, 395),
-        arrowprops=dict(arrowstyle="->", color="#1b9e77", lw=1.3),
-        fontsize=7.2, fontweight="bold", color="#0f6648",
-        bbox=dict(boxstyle="round,pad=0.24", facecolor="#eefaf4", edgecolor="#1b9e77"),
-    )
-    ax1.annotate(
-        "Frustration band $\\mathcal{H}_{\\mathrm{line}} \\in \\{8, 12, 16\\}$:\n$1,142/2,000$ ($57.1\\%$) of starts;\n$(2,2)$ escapes $4.8\\times$ more traps than $3$-cycles",
-        xy=(2, 305), xytext=(4.3, 245),
-        arrowprops=dict(arrowstyle="->", color="#d95f02", lw=1.3),
-        fontsize=7.1, fontweight="bold", color="#b34800",
-        bbox=dict(boxstyle="round,pad=0.24", facecolor="#fff5eb", edgecolor="#d95f02"),
-    )
     ax1.set_xticks(x_idx)
     ax1.set_xticklabels([str(k) for k in ks], fontsize=7.6)
-    ax1.set_ylim(0, 545)
+    ax1.set_ylim(0, 520)
     ax1.set_xlabel(r"Terminal $2$-cycle local-minimum energy $\mathcal{H}_{\mathrm{line}}(S_\infty)$")
-    ax1.set_ylabel("Count out of $2,000$ uniform random starts")
+    ax1.set_ylabel("Count out of 2,000 uniform random starts")
     ax1.set_title(r"(b) $S_{16}$ Local-Minimum Spectrum & $(2,2)$ Escape Yield", fontweight="bold", pad=8)
     ax1.grid(True, axis="y", linestyle=":", alpha=0.45)
     ax1.legend(loc="upper right", frameon=True, framealpha=0.94, fontsize=6.8)
@@ -807,10 +681,10 @@ def make_fig6_bubble_trinity(data: dict) -> None:
     # Panel (a): Continuous kernel energy H_ind(t) vs Discrete Snapped Energy H_line
     ax0 = fig.add_subplot(gs[0, 0])
     styles = {
-        "I_Frozen_Lattice": ("I. Frozen Lattice ($k_w=7.0, k_f=0$)", "#7570b3", "--", "s"),
-        "II_Slow_Drift": ("II. Slow Drift ($k_w=2.6, k_f=1.0$)", "#2b5c8f", "-.", "^"),
-        "III_Field_Storm": ("III. Field Storm ($k_w=0.8, k_f=3.2$)", "#d95f02", "-", "o"),
-        "IV_Centrifugal_Balance": ("IV. Centrifugal Balance ($k_s=0.85$)", "#1b9e77", "-", "D"),
+        "I_Frozen_Lattice": ("I. Frozen Lattice", "#7570b3", "--", "s"),
+        "II_Slow_Drift": ("II. Slow Drift", "#2b5c8f", "-.", "^"),
+        "III_Field_Storm": ("III. Field Storm", "#d95f02", "-", "o"),
+        "IV_Centrifugal_Balance": ("IV. Centrifugal Balance", "#1b9e77", "-", "D"),
     }
     steps = [10 * i for i in range(25)]
     for key, (label, col, ls, mk) in styles.items():
@@ -820,25 +694,17 @@ def make_fig6_bubble_trinity(data: dict) -> None:
 
     y_iv = np.array(regimes["IV_Centrifugal_Balance"]["trajectory_H_decimated"])
     ax0.axhline(2336, color="#b2182b", linestyle="--", linewidth=1.4,
-                label=r"Discrete Hungarian snap $\mathcal{H}_{\mathrm{line}} = 2,336$ ($0\%$)")
+                label=r"Hungarian discrete snap")
     ax0.axhline(1480, color="#e7298a", linestyle=":", linewidth=1.3,
-                label=r"Min greedy snap $\min\mathcal{H}_{\mathrm{line}} = 1,480$ ($0\%$)")
+                label=r"Greedy discrete snap")
     ax0.fill_between(steps, y_iv, 2336, color="#b2182b", alpha=0.08)
 
-    ax0.annotate(
-        "Amplitude-Averaging Gap:\n$\\mathcal{H}_{\\mathrm{ind}}(t)$ drops $37.5\\%$ via border blending,\nyet discrete Hungarian snap stays at $2,336$",
-        xy=(160, 1125), xytext=(15, 1850),
-        arrowprops=dict(arrowstyle="->", color="#b2182b", lw=1.2),
-        fontsize=6.5, fontweight="bold", color="#8c1120",
-        bbox=dict(boxstyle="round,pad=0.20", facecolor="#fff5f5", edgecolor="#b2182b"),
-    )
-
-    ax0.set_ylim(980, 2500)
+    ax0.set_ylim(950, 2550)
     ax0.set_xlabel(r"Continuous integration step $t$ ($\Delta t = 0.025$)")
     ax0.set_ylabel(r"Continuous $\mathcal{H}_{\mathrm{ind}}(t)$ vs. Discrete $\mathcal{H}_{\mathrm{line}}$")
     ax0.set_title(r"(a) Kernel Drift vs. Discrete Snap Reality", fontweight="bold", pad=8)
     ax0.grid(True, linestyle=":", alpha=0.45)
-    ax0.legend(loc="lower left", frameon=True, framealpha=0.92, fontsize=6.3)
+    ax0.legend(loc="upper right", frameon=True, framealpha=0.92, fontsize=6.3)
 
     # Panel (b): Spatial 2D Bubble Border-Parking Diagram in Preset IV (Centrifugal Balance)
     ax_b = fig.add_subplot(gs[0, 1])
@@ -900,20 +766,20 @@ def make_fig6_bubble_trinity(data: dict) -> None:
     ax_b.set_yticks([-1.5, -0.5, 0.5, 1.5])
     ax_b.set_xticklabels(["Col 1", "Col 2", "Col 3", "Col 4"], fontsize=7.2)
     ax_b.set_yticklabels(["Row 1", "Row 2", "Row 3", "Row 4"], fontsize=7.2)
-    ax_b.set_xlabel("Bubbles park on cell borders to blend\n$+Z$ (red) & $-Z$ (blue) without swapping",
-                    fontsize=6.8, fontweight="bold", color="#8c1120", labelpad=6)
+    ax_b.set_xlabel("Grid column $x$", fontsize=7.2, labelpad=6)
+    ax_b.set_ylabel("Grid row $y$", fontsize=7.2, labelpad=6)
     ax_b.set_title("(b) Preset IV Border-Parking", fontweight="bold", pad=8)
 
     # Panel (c): Operator Ablation Hierarchy with concise labels so there is zero cross-panel overlap
     ax1 = fig.add_subplot(gs[0, 2])
     tiers = [
-        ("0_continuous_2d_greedy_snap_pct", "Tier 0: 2D Bubble Drift\n(Greedy & Hungarian)"),
-        ("1_kawasaki_2cycle_quench_pct", "Tier 1: $2$-Exchange Quench\n(Pair swaps)"),
-        ("2_vacancy_3cycle_sa_pct", "Tier 2: $(2+3)$-Cycle SA\n(Thermal walk)"),
-        ("3_spin_ice_lp22_quench_pct", "Tier 3: $+$ $(2,2)$ Plaquette\n(Row/col 4-loops)"),
-        ("4_t1_eshelby_6kicks_pct", "Tier 4: $+$ Cand. $(2,2)$\n(& Row/col swaps)"),
-        ("5_plane_glide_18kicks_pct", "Tier 5: $+$ Funnel Leash\n(Tethered kicks)"),
-        ("6_wales_doye_reanchored_full_pct", "Tier 6: $+$ ME-ILS\n($\\leq 80$ restarts)"),
+        ("0_continuous_2d_greedy_snap_pct", "Tier 0: 2D Bubble Drift"),
+        ("1_kawasaki_2cycle_quench_pct", "Tier 1: 2-Exchange Quench"),
+        ("2_vacancy_3cycle_sa_pct", "Tier 2: (2+3)-Cycle SA"),
+        ("3_spin_ice_lp22_quench_pct", "Tier 3: + (2,2) Plaquette"),
+        ("4_t1_eshelby_6kicks_pct", "Tier 4: + Candidate Swaps"),
+        ("5_plane_glide_18kicks_pct", "Tier 5: + Funnel Leash"),
+        ("6_wales_doye_reanchored_full_pct", "Tier 6: + ME-ILS Restarts"),
     ]
     y_pos = np.arange(len(tiers))
     n4_rates = [ablation["n4"][k] for k, _ in tiers]
@@ -924,32 +790,21 @@ def make_fig6_bubble_trinity(data: dict) -> None:
 
     h = 0.36
     ax1.barh(y_pos - h / 2, n4_rates, height=h, color="#2b5c8f", edgecolor="white",
-             label="Order $n=4$ ($S_{16}$, $200$ trials)", zorder=3)
+             label="Order $n=4$", zorder=3)
     ax1.barh(y_pos + h / 2, n5_rates, height=h, color="#1b9e77", edgecolor="white",
-             label="Order $n=5$ ($S_{25}$, $100$ trials)", zorder=3)
-
-    for idx, (r4, r5) in enumerate(zip(n4_rates, n5_rates)):
-        c4 = "#8c1120" if r4 == 0 else ("#0f3c66" if r4 < 100 else "#0f6648")
-        fw = "bold" if r4 in (0.0, 100.0) else "normal"
-        ax1.text(r4 + 1.4, idx - h / 2, f"{r4:.1f}%", va="center", ha="left",
-                 fontsize=7.0, color=c4, fontweight=fw, bbox=HALO, zorder=4)
-        ax1.text(r5 + 1.4, idx + h / 2, f"{r5:.1f}%", va="center", ha="left",
-                 fontsize=7.0, color="#0f6648" if r5 == 100 else "#b34800",
-                 fontweight="bold" if r5 == 100 else "normal", bbox=HALO, zorder=4)
+             label="Order $n=5$", zorder=3)
 
     ax1.axhline(2.5, color="#d95f02", linestyle="--", linewidth=1.2, alpha=0.85, zorder=4)
-    ax1.text(118, 1.85, "Tiers 0–2: Baselines", fontsize=6.7, color="#b34800", fontweight="bold", ha="right")
-    ax1.text(118, 3.15, "Tiers 3–6: Multi-Exchange", fontsize=6.7, color="#0f6648", fontweight="bold", ha="right")
 
     ax1.set_yticks(y_pos)
     ax1.set_yticklabels([lbl for _, lbl in tiers], fontsize=6.9)
     ax1.invert_yaxis()
-    ax1.set_xlim(0, 122)
+    ax1.set_xlim(0, 105)
     ax1.set_ylim(6.5, -0.5)
     ax1.set_xlabel(r"Ground-state synthesis rate ($\mathcal{H}_{\mathrm{line}}=0$, %)")
     ax1.set_title(r"(c) 6-Tier Operator Ablation ($n=4,5$)", fontweight="bold", pad=8)
     ax1.grid(True, axis="x", linestyle=":", alpha=0.45)
-    ax1.legend(loc="upper right", frameon=True, framealpha=0.94, fontsize=6.7)
+    ax1.legend(loc="upper right", frameon=True, framealpha=0.94, fontsize=6.8)
 
     save_fig(fig, "fig6_bubble_trinity_regimes")
 
@@ -975,47 +830,16 @@ def make_fig7_dimensional_relief(data: dict) -> None:
     ax0.axvspan(6.3, 10.3, color="#eefaf4", alpha=0.65, zorder=0)
 
     l1 = ax0.plot(orders, restarts, color="#e7298a", marker="o", markersize=6.0,
-                  linewidth=2.1, label="Mean restarts to $\\mathcal{H}_{\\mathrm{line}}=0$ (left axis)", zorder=4)
+                  linewidth=2.1, label="Restarts", zorder=4)
     l2 = ax0_r.plot(orders, descents, color="#2b5c8f", linestyle="--", marker="s", markersize=5.2,
-                    linewidth=1.8, label="Mean $2$-exchange descents to $\\mathcal{H}_{\\mathrm{line}}=0$ (right axis)", zorder=3)
-
-    for n_val, r_val in zip(orders, restarts):
-        if n_val == 3:
-            xy_o = (0, 8)
-        elif n_val == 4:
-            xy_o = (12, -8)
-        elif n_val == 5:
-            xy_o = (-14, 6)
-        elif n_val == 6:
-            xy_o = (-14, -10)
-        else:
-            xy_o = (0, -13)
-        ax0.annotate(
-            f"{r_val:.2f}", (n_val, r_val), xytext=xy_o, textcoords="offset points",
-            ha="center", va="center", fontsize=7.2, fontweight="bold", color="#a8135d", bbox=HALO, zorder=6,
-        )
-
-    ax0.annotate(
-        "Frustration Peak ($n=5$)\n$\\eta_{\\mathrm{MC}}=1.40$: $8.03$ restarts",
-        xy=(5, 8.03), xytext=(5.8, 9.25),
-        arrowprops=dict(arrowstyle="->", color="#e7298a", lw=1.2),
-        fontsize=6.9, fontweight="bold", color="#a8135d",
-        bbox=dict(boxstyle="round,pad=0.22", facecolor="#fdf0f6", edgecolor="#e7298a"),
-    )
-    ax0.annotate(
-        "Nullspace Dimensional Relief ($n\\geq 6$):\n$f_{\\mathrm{null}}(n) = 1 - 2/(n-1)^2 \\to 97.5\\%$\ndrops restarts to $3.34$ at $n=10$",
-        xy=(10, 3.34), xytext=(5.5, 0.95),
-        arrowprops=dict(arrowstyle="->", color="#1b9e77", lw=1.2),
-        fontsize=6.9, fontweight="bold", color="#0f6648",
-        bbox=dict(boxstyle="round,pad=0.22", facecolor="#eefaf4", edgecolor="#1b9e77"),
-    )
+                    linewidth=1.8, label="Descent loops", zorder=3)
 
     ax0.set_xticks(orders)
     ax0.set_xticklabels([f"$n={n}$\n(${eta:.1f}$)" for n, eta in zip(orders, eta_mc)], fontsize=7.4)
     ax0.set_xlim(2.6, 10.4)
-    ax0.set_ylim(-0.6, 11.4)
-    ax0_r.set_ylim(-35, 630)
-    ax0.set_xlabel("Order $n$ and nullspace-to-constraint ratio $\\eta_{\\mathrm{MC}} = (n^2-2n-1)/(2n)$")
+    ax0.set_ylim(0, 10.5)
+    ax0_r.set_ylim(0, 550)
+    ax0.set_xlabel(r"Grid order $n$ (Maxwell–Calladine ratio $\eta_{\mathrm{MC}}$)")
     ax0.set_ylabel("Mean restarts required to reach $\\mathcal{H}_{\\mathrm{line}}=0$", color="#a8135d")
     ax0_r.set_ylabel("Mean $O(1)$ $2$-exchange descent loops", color="#2b5c8f")
     ax0.set_title("(a) Frustration Peak ($n=5$) & Nullspace Relief ($n=6$–$10$)", fontweight="bold", pad=8)
@@ -1034,37 +858,21 @@ def make_fig7_dimensional_relief(data: dict) -> None:
     rank_vals = [2 * n for n in orders]
     # Place Magic Nullspace on left (x - w/2) and Constraint Rank on right (x + w/2), with runtime plotted over right bars (x + w/2)
     b_null = ax1.bar(x - w / 2, null_dims, width=w, color="#1b9e77", edgecolor="white",
-                     label=r"Magic nullspace $\dim\ker(\widetilde{L}_n) = n^2-2n-1$", zorder=3)
+                     label=r"Magic nullspace $\dim\ker(\widetilde{L}_n)$", zorder=3)
     b_rank = ax1.bar(x + w / 2, rank_vals, width=w, color="#8da0cb", edgecolor="white",
-                     label=r"Constraint rank $\mathrm{rank}(\widetilde{L}_n) = 2n$", zorder=3)
+                     label=r"Constraint rank $\operatorname{rank}(\widetilde{L}_n)$", zorder=3)
 
     l_time = ax1_r.plot(x + w / 2, times_ms, color="#d95f02", marker="D", markersize=5.0,
-                        linewidth=1.9, label="Mean synthesis time per square (ms, right axis)", zorder=5)
-
-    for idx_b, (rect, f_pct) in enumerate(zip(b_null, f_null_pct)):
-        h = rect.get_height()
-        ax1.text(
-            rect.get_x() + rect.get_width() / 2 - 0.04, h + 1.5,
-            f"{int(h)}\n({f_pct:.0f}%)",
-            ha="center", va="bottom", fontsize=6.2, fontweight="bold", color="#0f6648", bbox=HALO, zorder=6,
-        )
-
-    ax1.annotate(
-        "Labels on green bars:\n$\\dim\\ker(\\widetilde{L}_n)$ and diagonal-free\n$(2,2)$ fraction $f_{\\mathrm{null}}(n)$ ($50\\%\\to 98\\%$)",
-        xy=(4 - w / 2, null_dims[4]), xytext=(0.05, 58),
-        arrowprops=dict(arrowstyle="->", color="#1b9e77", lw=1.1),
-        fontsize=6.7, fontweight="bold", color="#0f6648",
-        bbox=dict(boxstyle="round,pad=0.20", facecolor="#eefaf4", edgecolor="#1b9e77"),
-    )
+                        linewidth=1.9, label="Runtime (ms)", zorder=5)
 
     ax1.set_xticks(x)
     ax1.set_xticklabels([f"$n={n}$" for n in orders], fontsize=7.8)
-    ax1.set_ylim(0, 102)
-    ax1_r.set_ylim(0, 1080)
-    ax1.set_xlabel("Magic square order $n$ ($100.0\\%$ synthesis across all $n=3\\dots 10$)")
+    ax1.set_ylim(0, 95)
+    ax1_r.set_ylim(0, 1120)
+    ax1.set_xlabel("Magic square order $n$")
     ax1.set_ylabel("Subspace dimension in $\\mathbf{1}^\\perp \\subset \\mathbb{R}^{n^2-1}$")
     ax1_r.set_ylabel("Mean synthesis time per square (ms)", color="#b34800")
-    ax1.set_title("(b) Quadratic Nullspace Expansion & $f_{\\mathrm{null}}(n)$", fontweight="bold", pad=8)
+    ax1.set_title("(b) Quadratic Nullspace Expansion, Constraint Rank & Runtime", fontweight="bold", pad=8)
     ax1.grid(True, axis="y", linestyle=":", alpha=0.45)
 
     handles1, labels1 = ax1.get_legend_handles_labels()
@@ -1072,6 +880,175 @@ def make_fig7_dimensional_relief(data: dict) -> None:
     ax1.legend(handles1 + handles2, labels1 + labels2, loc="upper left", frameon=True, framealpha=0.94, fontsize=6.7)
 
     save_fig(fig, "fig7_multi_order_dimensional_relief")
+
+
+def make_fig8_scan_3_to_50(data: dict) -> None:
+    d_base = data["section5_bubble_trinity"]["multi_order_upgraded"]
+    sec6 = data["section6_large_scale_competition"]
+    d_scan = sec6["scan_10_to_50"]
+    bili = sec6["bilinear_scaling"]
+
+    orders = list(range(3, 51))
+    restarts = []
+    descents = []
+    times_s = []
+    for n in orders:
+        row = d_base[f"n{n}"] if n < 10 else d_scan[f"n{n}"]
+        restarts.append(row["mean_restarts"])
+        descents.append(row["mean_descents"])
+        times_s.append(row["mean_ms"] / 1000.0)
+
+    restarts_arr = np.array(restarts, dtype=float)
+    descents_arr = np.array(descents, dtype=float)
+    desc_per_run = descents_arr / (restarts_arr + 1.0)
+
+    mov_avg_n = orders[4:-2]
+    mov_avg_r = [float(np.mean(restarts_arr[i - 2:i + 3])) for i in range(4, len(orders) - 2)]
+
+    fig = plt.figure(figsize=(13.4, 4.6))
+    gs = fig.add_gridspec(1, 2, width_ratios=[1.14, 1.02], wspace=0.32)
+
+    # Panel (a): Complete Order-by-Order Scan n = 3..50 (48 consecutive orders, 100% solved)
+    ax0 = fig.add_subplot(gs[0, 0])
+    ax0_r = ax0.twinx()
+
+    ax0.axvspan(4.5, 6.5, color="#fdf0f6", alpha=0.65, zorder=0)
+    ax0.axvspan(6.5, 50.8, color="#eefaf4", alpha=0.50, zorder=0)
+
+    l_raw = ax0.plot(orders, restarts_arr, color="#e7298a", marker="o", markersize=3.6,
+                     linewidth=1.0, alpha=0.48, label="Per-order restarts", zorder=3)
+    l_ma = ax0.plot(mov_avg_n, mov_avg_r, color="#a8135d", linewidth=2.3,
+                    label="5-order moving average", zorder=5)
+    l_desc = ax0_r.plot(orders, desc_per_run, color="#2b5c8f", linestyle="--", marker="s", markersize=3.2,
+                        markevery=2, linewidth=1.8,
+                        label="Descents per restart", zorder=4)
+
+    ax0.set_xlim(2.0, 51.2)
+    ax0.set_ylim(0, 21.0)
+    ax0_r.set_ylim(0, 220)
+    ax0.set_xticks([3, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50])
+    ax0.set_xlabel("Magic square order $n$")
+    ax0.set_ylabel("Mean restarts required to reach $\\mathcal{H}_{\\mathrm{line}}=0$", color="#a8135d")
+    ax0_r.set_ylabel("Mean $2$-exchange descents per restart", color="#2b5c8f")
+    ax0.set_title("(a) Full Order-by-Order Scaling Census ($n=3\\dots 50$)", fontweight="bold", pad=8)
+    ax0.grid(True, linestyle=":", alpha=0.45)
+
+    lines = l_raw + l_ma + l_desc
+    labels = [l.get_label() for l in lines]
+    ax0.legend(lines, labels, loc="upper left", frameon=True, framealpha=0.94, fontsize=6.4)
+
+    # Panel (b): Measured All-Pairs ME-ILS (n=10..50) vs Bilinear-Identity + Active-Set ME-ILS (n=10..100)
+    ax1 = fig.add_subplot(gs[0, 1])
+    n_meas = np.array(orders[7:], dtype=float)
+    t_meas = np.array(times_s[7:], dtype=float)
+
+    n_bili = np.array([10, 20, 30, 40, 46, 48, 50, 100], dtype=float)
+    t_bili = np.array([bili[f"n{int(k)}"]["mean_s"] for k in n_bili], dtype=float)
+    r_bili = np.array([bili[f"n{int(k)}"]["mean_restarts"] for k in n_bili], dtype=float)
+    t_bili_per_run = t_bili / (r_bili + 1.0)
+
+    n_grid = np.logspace(1.0, 2.05, 120)
+    c_allpairs = np.median(t_meas[-15:] / (n_meas[-15:] ** 5.92))
+    t_allpairs_ext = c_allpairs * (n_grid ** 5.92)
+
+    ax1.loglog(n_meas, t_meas, "o-", color="#d95f02", markersize=3.5, linewidth=1.3, alpha=0.85,
+               label="Baseline All-Pairs (measured)")
+    ax1.loglog(n_grid[n_grid >= 50], t_allpairs_ext[n_grid >= 50], "--", color="#d95f02", linewidth=1.3,
+               label="Baseline All-Pairs (extrapolated)")
+    ax1.loglog(n_bili, t_bili, "D-", color="#1b9e77", markersize=5.0, linewidth=2.0,
+               label="Bilinear + Active-Set (total time)")
+    ax1.loglog(n_bili, t_bili_per_run, "s-.", color="#2b5c8f", markersize=4.2, linewidth=1.6,
+               label="Bilinear + Active-Set (time/restart)")
+
+    ax1.set_xlim(8.5, 125.0)
+    ax1.set_ylim(0.005, 4e4)
+    ax1.set_xticks([10, 20, 30, 50, 70, 100])
+    ax1.get_xaxis().set_major_formatter(matplotlib.ticker.ScalarFormatter())
+    ax1.set_xlabel("Magic square order $n$ (log scale)")
+    ax1.set_ylabel("Wall-clock synthesis time (seconds, log scale)")
+    ax1.set_title("(b) Algebraic $O(n^3)$ Per-Restart Scaling up to $n=100$", fontweight="bold", pad=8)
+    ax1.grid(True, which="both", linestyle=":", alpha=0.45)
+    ax1.legend(loc="upper left", frameon=True, framealpha=0.94, fontsize=6.3)
+
+    save_fig(fig, "fig8_scan_3_to_50")
+
+
+def make_fig9_competition_46_48_100(data: dict) -> None:
+    fig = plt.figure(figsize=(14.4, 4.6))
+    gs = fig.add_gridspec(1, 3, width_ratios=[1.14, 1.10, 1.00], wspace=0.34)
+
+    orders_lbl = ["$n = 46$\n(2,116 cells)\nsingly-even", "$n = 48$\n(2,304 cells)\ndoubly-even", "$n = 100$\n(10,000 cells)\ndoubly-even"]
+    x = np.arange(3)
+    w = 0.19
+
+    t_sa = [3.02, 2.99, 3.04]
+    t_cbls = [168.06, 152.89, 3582.92]
+    t_base = [386.13, 280.95, 7420.0]
+    t_bili = [11.12, 8.02, 147.70]
+    bili_seeds = [[18.34, 5.29, 9.73], [7.12, 6.90, 10.03], [62.02, 347.02, 34.06]]
+
+    # Panel (a): Wall-Clock Time
+    ax0 = fig.add_subplot(gs[0, 0])
+    ax0.bar(x - 1.5 * w, t_sa, w, label="Simulated Annealing", color="#cbd5e1", edgecolor="#475569", hatch="//")
+    ax0.bar(x - 0.5 * w, t_cbls, w, label="Defective-Line CBLS", color="#fdae61", edgecolor="#9c2f00", hatch="..")
+    ax0.bar(x + 0.5 * w, t_base, w, label="Baseline All-Pairs ME-ILS", color="#2b5c8f", edgecolor="#16324f")
+    ax0.bar(x + 1.5 * w, t_bili, w, label="Bilinear + Active-Set ME-ILS", color="#1b9e77", edgecolor="#0f6648", linewidth=1.2)
+
+    for i in range(3):
+        ax0.scatter([x[i] + 1.5 * w] * 3, bili_seeds[i], color="#0a3d2a", zorder=6, s=18, alpha=0.88)
+
+    ax0.set_yscale("log")
+    ax0.set_ylim(0.8, 80000.0)
+    ax0.set_xticks(x)
+    ax0.set_xticklabels(orders_lbl, fontsize=7.6)
+    ax0.set_ylabel("Mean wall-clock time (seconds, log scale)")
+    ax0.set_title("(a) Speed Competition: Time to Ground State", fontweight="bold", pad=8)
+    ax0.grid(True, axis="y", linestyle=":", alpha=0.45)
+    ax0.legend(loc="upper left", frameon=True, framealpha=0.94, fontsize=6.3)
+
+    # Panel (b): Total Operator Evaluations
+    ax1 = fig.add_subplot(gs[0, 1])
+    ev_sa = [3.0e6, 3.0e6, 3.0e6]
+    ev_cbls = [1.582e10, 1.488e10, 3.484e11]
+    ev_base = [1.848e10, 1.379e10, 3.600e11]
+    ev_bili = [1.021e9, 7.332e8, 1.879e10]
+
+    ax1.bar(x - 1.5 * w, ev_sa, w, color="#cbd5e1", edgecolor="#475569", hatch="//")
+    ax1.bar(x - 0.5 * w, ev_cbls, w, color="#fdae61", edgecolor="#9c2f00", hatch="..")
+    ax1.bar(x + 0.5 * w, ev_base, w, color="#2b5c8f", edgecolor="#16324f")
+    ax1.bar(x + 1.5 * w, ev_bili, w, color="#1b9e77", edgecolor="#0f6648", linewidth=1.2)
+
+    ax1.set_yscale("log")
+    ax1.set_ylim(3e5, 3e12)
+    ax1.set_xticks(x)
+    ax1.set_xticklabels(orders_lbl, fontsize=7.6)
+    ax1.set_ylabel("Total operator evaluations")
+    ax1.set_title("(b) Compute Competition: Operator Evaluations", fontweight="bold", pad=8)
+    ax1.grid(True, axis="y", linestyle=":", alpha=0.45)
+
+    # Panel (c): Final Residual Energy H_line
+    ax2 = fig.add_subplot(gs[0, 2])
+    e_sa_m = [124.0, 124.0, 3148.0]
+    e_cbls_m = [30.7, 10.7, 50.7]
+
+    ax2.bar(x - 1.5 * w, [e + 0.5 for e in e_sa_m], w, color="#cbd5e1", edgecolor="#475569", hatch="//")
+    ax2.bar(x - 0.5 * w, [e + 0.5 for e in e_cbls_m], w, color="#fdae61", edgecolor="#9c2f00", hatch="..")
+    ax2.bar(x + 0.5 * w, [0.5, 0.5, 0.5], w, color="#2b5c8f", edgecolor="#16324f")
+    ax2.bar(x + 1.5 * w, [0.5, 0.5, 0.5], w, color="#1b9e77", edgecolor="#0f6648", linewidth=1.2)
+
+    ax2.axhline(8.0, color="#b2182b", linestyle=":", linewidth=1.4, label=r"Trap threshold ($\mathcal{H}_{\mathrm{line}} = 8$)")
+    ax2.set_yscale("log")
+    ax2.set_ylim(0.35, 8000.0)
+    ax2.set_yticks([0.5, 2, 8, 32, 128, 512, 2048])
+    ax2.set_yticklabels(["$0$ (MAGIC)", "$2$", "$8$", "$32$", "$128$", "$512$", "2,048"], fontsize=7.2)
+    ax2.set_xticks(x)
+    ax2.set_xticklabels(orders_lbl, fontsize=7.6)
+    ax2.set_ylabel("Mean final residual energy $\\mathcal{H}_{\\mathrm{line}}(S_\\infty)$")
+    ax2.set_title("(c) Endgame Trap Barrier vs. Exact Escape", fontweight="bold", pad=8)
+    ax2.grid(True, axis="y", linestyle=":", alpha=0.45)
+    ax2.legend(loc="upper left", frameon=True, framealpha=0.94, fontsize=6.3)
+
+    save_fig(fig, "fig9_competition_46_48_100")
 
 
 def main() -> None:
@@ -1084,7 +1061,9 @@ def main() -> None:
     make_fig5_s16_descent(data)
     make_fig6_bubble_trinity(data)
     make_fig7_dimensional_relief(data)
-    print("All 7 Paper D figures generated successfully!")
+    make_fig8_scan_3_to_50(data)
+    make_fig9_competition_46_48_100(data)
+    print("All 9 Paper D figures generated successfully!")
 
 
 if __name__ == "__main__":

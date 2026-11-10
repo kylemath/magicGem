@@ -14,7 +14,12 @@ Let $\mathbf{r}_1,\dots,\mathbf{r}_n \in \{0,1\}^{n^2}$ denote the row-indicator
   D = \mathbf{d}_+ \mathbf{d}_+^\top + \mathbf{d}_- \mathbf{d}_-^\top.
   \label{eq:L_n_outer_sum}
 \end{equation}
-In graph theory, $L_{\mathrm{rc}} = A_{\mathrm{Rook}} + 2I_{n^2}$ is the signless incidence operator of the $n\times n$ Rook's graph $K_n \square K_n = (K_n \otimes I_n) \oplus (I_n \otimes K_n)$, whose edges connect cells in the same row or column \cite{godsil2001algebraic,brouwer2012spectra}. Because the $n$ rows partition the grid and the $n$ columns also partition the grid, $\sum_{i=1}^n \mathbf{r}_i = \sum_{j=1}^n \mathbf{c}_j = \mathbf{1}_{n^2}$, reducing the rank of $L_{\mathrm{rc}}$ from $2n$ to $2n-1$. Adding the two independent main diagonals gives $\operatorname{rank}(A_n) = 2n+1$, leaving a magic nullspace $\ker(L_n) = \ker(A_n)$ of dimension $\dim\ker(L_n) = n^2 - 2n - 1$, a classic dimension formula in the linear algebra of magic squares \cite{ward1980vector,lee1996linear,loly2009magic}.
+In graph theory, $L_{\mathrm{rc}} = A_{\mathrm{Rook}} + 2I_{n^2}$ is the signless incidence Gram operator of the $n\times n$ Rook's graph $K_n \square K_n = (K_n \otimes I_n) \oplus (I_n \otimes K_n)$, whose edges connect cells in the same row or column \cite{godsil2001algebraic,brouwer2012spectra}. It is related to the standard combinatorial graph Laplacian $\Delta_{\mathrm{Rook}} = 2(n-1)I_{n^2} - A_{\mathrm{Rook}}$ of the Rook's graph by the exact affine spectral inversion
+\begin{equation}
+  L_{\mathrm{rc}} = 2n\,I_{n^2} - \Delta_{\mathrm{Rook}}.
+  \label{eq:L_rc_rook_inversion}
+\end{equation}
+This affine reflection directly explains why the uniform mode $\mathbf{1}$ sits at the top of the spectrum of $L_{\mathrm{rc}}$ with eigenvalue $\lambda = 2n$ rather than in its kernel, and why the $(n-1)^2$-dimensional Rook kernel $\ker(L_{\mathrm{rc}}) = \mathcal{V}_{\mathrm{row}}\otimes\mathcal{V}_{\mathrm{col}}$ corresponds to the maximal eigenspace ($\lambda = 2n$) of $\Delta_{\mathrm{Rook}}$. Because the $n$ rows partition the grid and the $n$ columns also partition the grid, $\sum_{i=1}^n \mathbf{r}_i = \sum_{j=1}^n \mathbf{c}_j = \mathbf{1}_{n^2}$, reducing the rank of $L_{\mathrm{rc}}$ from $2n$ to $2n-1$. Adding the two independent main diagonals gives $\operatorname{rank}(A_n) = 2n+1$, leaving a magic nullspace $\ker(L_n) = \ker(A_n)$ of dimension $\dim\ker(L_n) = n^2 - 2n - 1$, a classic dimension formula in the linear algebra of magic squares \cite{ward1980vector,lee1996linear,loly2009magic}.
 
 If we compute the eigenvalues of $L_n$ numerically on $\R^{n^2}$, two ugly irrational numbers $\lambda_\pm(n)$ appear (\Cref{fig:spectral}a, orange diamonds), because the constant vector $\mathbf{1}$ has non-zero overlap $\mathbf{1}^\top \mathbf{d}_\pm = n$ with the two diagonals. However, every centred permutation vector $\mathbf{z}(S)$ has zero sum ($\mathbf{1}^\top\mathbf{z} = 0$) and therefore lives entirely inside the zero-mean hyperplane $\mathbf{1}^\perp$. Restricting $L_n$ to $\mathbf{1}^\perp$ decouples the constant mode and confines the two diagonals entirely inside the $(n-1)^2$-dimensional kernel of the Rook's graph, causing all irrational eigenvalues to collapse into clean integers (\Cref{fig:spectral}a and \Cref{tab:spectral_census}):
 
@@ -41,7 +46,7 @@ where $\lambda_\pm(n) = \frac{1}{2}\bigl(3n \pm \sqrt{n(n+16)}\bigr)$ for even $
   \end{cases}
   \label{eq:rationalized_spectrum}
 \end{equation}
-Moreover, for every integer $n \ge 3$ (both odd and even), $\tr(\Ltilde_n|_{\mathbf{1}^\perp}) = 2(n^2 - 1)$, so the average eigenvalue of $\Ltilde_n$ on $\mathbf{1}^\perp$ is $\bar{\mu}(\Ltilde_n) = \tr(\Ltilde_n|_{\mathbf{1}^\perp})/(n^2-1) = 2$, and the expected line-indicator energy of a uniform random shuffle $S \sim \Unif(S_{n^2})$ with $\|\mathbf{z}\|^2 = \frac{1}{3}n^2(n^4-1)$ is exactly twice the height variance sum:
+Throughout this work, $\Ltilde_n \in \operatorname{End}(\mathbf{1}^\perp)$ denotes the $(n^2-1)\times(n^2-1)$ operator restricted to the zero-sum hyperplane $\mathbf{1}^\perp$, ensuring that $\ker(\Ltilde_n) = \ker(L_n) \subset \mathbf{1}^\perp$ has dimension $n^2 - 2n - 1$ without the spurious ambient $\mathbf{1}$-mode. Moreover, for every integer $n \ge 3$ (both odd and even), $\tr(\Ltilde_n|_{\mathbf{1}^\perp}) = 2(n^2 - 1)$, so the average eigenvalue of $\Ltilde_n$ on $\mathbf{1}^\perp$ is $\bar{\mu}(\Ltilde_n) = \tr(\Ltilde_n|_{\mathbf{1}^\perp})/(n^2-1) = 2$, and the expected line-indicator energy of a uniform random shuffle $S \sim \Unif(S_{n^2})$ with $\|\mathbf{z}\|^2 = \frac{1}{3}n^2(n^4-1)$ is exactly twice the height variance sum:
 \begin{equation}
   \mathbb{E}_{S\sim\Unif(S_{n^2})}\bigl[\Hline(S)\bigr] = 2\,\|\mathbf{z}\|^2 = \frac{2}{3}n^2(n^4 - 1).
   \label{eq:ensemble_mean_H}
@@ -61,19 +66,21 @@ Finally, \Cref{eq:ensemble_mean_H} can be seen in two complementary ways. From t
 \begin{figure}[t]
   \centering
   \includegraphics[width=\textwidth]{figures/fig1_spectral_operator.pdf}
-  \caption{\textbf{Zero-mean integer spectrum of the line-incidence operator $L_n = A_n^\top A_n$ and the $4\times 4$ ``impostor square'' $S_{\mathrm{low}}$.} \textbf{(a)} Comparison of the unprojected eigenvalues $\lambda(L_n)$ on $\R^{n^2}$ (hollow orange diamonds connected by dashed branch guides, showing the irrational roots $\lambda_\pm(n)$) against the zero-mean restricted spectrum $\mu(\Ltilde_n|_{\mathbf{1}^\perp})$ (filled navy and green circles, labeled $\mu^{[\mathrm{mult}]}$) for orders $n=3\dots 8$. Restricting to $\mathbf{1}^\perp$ yields exact integers with universal mean $\bar{\mu}(\Ltilde_n) = 2$ (dashed purple line). \textbf{(b)} Explicit $4\times 4$ counterexample $S_{\mathrm{low}}$ (\Cref{rem:low_mode_insufficiency}) from \texttt{energy-decomposition.html} with centred coordinates $(X_j,Y_i)$ and balanced main/anti-diagonals ($R_{D_\pm} = 0$, golden dashed lines) plus zero $3\mathrm{D}$ tilt moments $\langle X,Z\rangle = \langle Y,Z\rangle = 0$ ($E_{\mathrm{low}}=0$), yet whose alternating quadratic and cubic row/column sums produce $\Hline(S_{\mathrm{low}}) = 1{,}584 > 0$.}
+  \caption{\textbf{Zero-mean integer spectrum of the line-incidence operator $L_n = A_n^\top A_n$ and the $4\times 4$ balanced impostor square $S_{\mathrm{low}}$.} 
+  \textbf{(a)} Comparison of the unprojected eigenvalues $\lambda(L_n)$ on $\R^{n^2}$ (hollow orange diamonds connected by dashed theoretical branch guides) against the zero-mean restricted spectrum $\mu(\Ltilde_n|_{\mathbf{1}^\perp})$ (filled navy circles for $\mu > 0$; green circles for the magic kernel $\mu = 0$) across orders $n=3\dots 8$. Restricting $L_n$ to the zero-mean hyperplane $\mathbf{1}^\perp$ projects out the uniform mode, eliminating the irrational eigenvalue pair $\lambda_\pm(n)$ (reported in \Cref{tab:spectral_census}) and rationalizing the spectrum to exact integers $\{0^{[n^2-2n-1]}, (n-2)^{[1]}, n^{[2n-1]}\}$ for even $n$ and $\{0^{[n^2-2n-1]}, (n-1)^{[2]}, n^{[2n-2]}\}$ for odd $n$. The mean eigenvalue on $\mathbf{1}^\perp$ is universally $\bar{\mu}(\Ltilde_n) = 2$ (purple dashed line), yielding random-shuffle expectation $\mathbb{E}[\Hline(S)] = 2\|\mathbf{z}\|^2 = \frac{2}{3}n^2(n^4-1)$. 
+  \textbf{(b)} Explicit $4\times 4$ counterexample $S_{\mathrm{low}}$ (\Cref{rem:low_mode_insufficiency}) from \texttt{energy-decomposition.html}. The configuration satisfies perfect linear tilt balance $\langle X,Z\rangle = \langle Y,Z\rangle = 0$ ($E_{\mathrm{low}} = 0$) and balanced main/anti-diagonals ($R_{D_\pm} = 0$, $\Sigma = 34$, golden dashed guides), but harbors alternating quadratic and cubic row residuals $R_r = (-12, +8, +20, -16)$ ($\Sigma_{\mathrm{row}} = 28, 38, 44, 26$) and column residuals $R_c = (+6, -18, +18, -6)$ ($\Sigma_{\mathrm{col}} = 37, 25, 43, 31$), producing severe line frustration $\Hline(S_{\mathrm{low}}) = 1{,}584 > 0$.}
   \label{fig:spectral}
 \end{figure}
 
 \begin{table}[t]
 \centering
-\caption{Spectral invariants of the unprojected operator $L_n$ on $\R^{n^2}$ and zero-mean operator $\Ltilde_n$ on $\mathbf{1}^\perp$ across orders $n=3\dots 8$, verified by \texttt{verify\_paper\_d.py}.}
+\caption{\textbf{Spectral invariants of the unprojected operator $L_n$ on $\R^{n^2}$ and zero-mean restricted operator $\Ltilde_n$ on $\mathbf{1}^\perp$ across orders $n=3\dots 8$.} All eigenvalues, traces, and random-shuffle expectations $\mathbb{E}[\Hline(S)] = 2\|\mathbf{z}\|^2$ are certified by \texttt{verify\_paper\_d.py}.}
 \label{tab:spectral_census}
 \footnotesize
-\setlength{\tabcolsep}{4pt}
+\resizebox{\textwidth}{!}{%
 \begin{tabular}{@{}cccccccc@{}}
 \toprule
-$n$ & $N=n^2$ & $\operatorname{rank}(A_n)$ & $\dim\ker(L_n)$ & Irrational $\lambda_\pm(L_n)$ & Zero-Mean $\spec(\Ltilde_n|_{\mathbf{1}^\perp})$ & $\tr(\Ltilde_n)$ & $\mathbb{E}[\Hline(S)] = 2\|\mathbf{z}\|^2$ \\
+\textbf{$n$} & \textbf{$N=n^2$} & \textbf{$\operatorname{rank}(A_n)$} & \textbf{$\dim\ker(L_n)$} & \textbf{Irrational $\lambda_\pm(L_n)$} & \textbf{Zero-Mean $\spec(\Ltilde_n|_{\mathbf{1}^\perp})$} & \textbf{$\tr(\Ltilde_n|_{\mathbf{1}^\perp}) = 2(n^2-1)$} & \textbf{$\mathbb{E}[\Hline(S)] = 2\|\mathbf{z}\|^2$} \\
 \midrule
 $3$ & $9$  & $7$  & $2$  & $1.3944,\; 8.6056$ & $\{0^{[2]}, 2^{[2]}, 3^{[4]}\}$ & $16$  & $480$ \\
 $4$ & $16$ & $9$  & $7$  & $1.5279,\; 10.4721$ & $\{0^{[7]}, 2^{[1]}, 4^{[7]}\}$ & $30$  & $2{,}720$ \\
@@ -82,7 +89,8 @@ $6$ & $36$ & $13$ & $23$ & $3.2554,\; 14.7446$ & $\{0^{[23]}, 4^{[1]}, 6^{[11]}\
 $7$ & $49$ & $15$ & $34$ & $4.9172,\; 17.0828$ & $\{0^{[34]}, 6^{[2]}, 7^{[12]}\}$ & $96$  & $78{,}400$ \\
 $8$ & $64$ & $17$ & $47$ & $5.0718,\; 18.9282$ & $\{0^{[47]}, 6^{[1]}, 8^{[15]}\}$ & $126$ & $174{,}720$ \\
 \bottomrule
-\end{tabular}
+\end{tabular}%
+}
 \end{table}
 
 \subsection{The \texorpdfstring{$4\times 4$}{4x4} Impostor Square \texorpdfstring{$S_{\mathrm{low}}$}{S\_low} and the \texorpdfstring{$2n-4$}{2n-4} Hidden Polynomial Modes}
